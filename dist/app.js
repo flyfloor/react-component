@@ -52,7 +52,12 @@
 
 	var _appCheckBoxDemoJsx2 = _interopRequireDefault(_appCheckBoxDemoJsx);
 
+	var _appRadioDemoJsx = __webpack_require__(36);
+
+	var _appRadioDemoJsx2 = _interopRequireDefault(_appRadioDemoJsx);
+
 	React.render(React.createElement(_appCheckBoxDemoJsx2["default"], null), document.getElementById('checkbox'));
+	React.render(React.createElement(_appRadioDemoJsx2["default"], null), document.getElementById('radio'));
 
 /***/ },
 /* 1 */
@@ -551,9 +556,13 @@
 	                    React.createElement(
 	                        "h4",
 	                        null,
-	                        "checked"
+	                        "checkbox"
 	                    ),
-	                    React.createElement(_indexJs.CheckBox, { label: "checkbox1", defaultChecked: "true", onChange: this.handleChange.bind(this) })
+	                    React.createElement(
+	                        _indexJs.CheckBox,
+	                        { label: "", onChange: this.handleChange.bind(this) },
+	                        "checkbox"
+	                    )
 	                ),
 	                React.createElement(
 	                    "li",
@@ -563,7 +572,11 @@
 	                        null,
 	                        "disabled"
 	                    ),
-	                    React.createElement(_indexJs.CheckBox, { label: "checkbox", disabled: "true" })
+	                    React.createElement(
+	                        _indexJs.CheckBox,
+	                        { disabled: "true" },
+	                        "disabled checkbox"
+	                    )
 	                ),
 	                React.createElement(
 	                    "li",
@@ -571,9 +584,13 @@
 	                    React.createElement(
 	                        "h4",
 	                        null,
-	                        "default checked"
+	                        "checked checkbox"
 	                    ),
-	                    React.createElement(_indexJs.CheckBox, { label: "checkbox2", defaultChecked: "true" })
+	                    React.createElement(
+	                        _indexJs.CheckBox,
+	                        { checked: "true" },
+	                        "checked checkbox"
+	                    )
 	                )
 	            );
 	        }
@@ -601,7 +618,17 @@
 
 	var _componentCheckBoxJsx2 = _interopRequireDefault(_componentCheckBoxJsx);
 
+	var _componentRadioJsx = __webpack_require__(35);
+
+	var _componentRadioJsx2 = _interopRequireDefault(_componentRadioJsx);
+
+	var _componentRadioGroupJsx = __webpack_require__(37);
+
+	var _componentRadioGroupJsx2 = _interopRequireDefault(_componentRadioGroupJsx);
+
 	exports.CheckBox = _componentCheckBoxJsx2['default'];
+	exports.Radio = _componentRadioJsx2['default'];
+	exports.RadioGroup = _componentRadioGroupJsx2['default'];
 
 /***/ },
 /* 34 */
@@ -629,8 +656,8 @@
 
 	        _get(Object.getPrototypeOf(CheckBox.prototype), "constructor", this).call(this, props);
 	        this.state = {
-	            disabled: !!props.disabled,
-	            checked: !!props.defaultChecked
+	            disabled: props.disabled,
+	            checked: props.checked
 	        };
 	    }
 
@@ -649,7 +676,7 @@
 	                "label",
 	                null,
 	                React.createElement("input", { type: "checkbox", disabled: this.state.disabled, checked: this.state.checked, onChange: this.checkedChange.bind(this) }),
-	                this.props.label
+	                this.props.children
 	            );
 	        }
 	    }]);
@@ -659,6 +686,201 @@
 
 	exports["default"] = CheckBox;
 	module.exports = exports["default"];
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _get = __webpack_require__(3)["default"];
+
+	var _inherits = __webpack_require__(17)["default"];
+
+	var _createClass = __webpack_require__(28)["default"];
+
+	var _classCallCheck = __webpack_require__(31)["default"];
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var Radio = (function (_React$Component) {
+	    _inherits(Radio, _React$Component);
+
+	    function Radio(props) {
+	        _classCallCheck(this, Radio);
+
+	        _get(Object.getPrototypeOf(Radio.prototype), "constructor", this).call(this, props);
+	        this.state = {
+	            disabled: props.disabled,
+	            checked: props.checked
+	        };
+	    }
+
+	    _createClass(Radio, [{
+	        key: "checkedChange",
+	        value: function checkedChange(e) {
+	            this.setState({
+	                checked: e.target.checked
+	            });
+	            if (this.props.onChange) this.props.onChange(e);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return React.createElement(
+	                "label",
+	                null,
+	                React.createElement("input", { type: "radio", disabled: this.state.disabled, checked: this.state.checked, onChange: this.checkedChange.bind(this) }),
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return Radio;
+	})(React.Component);
+
+	exports["default"] = Radio;
+	module.exports = exports["default"];
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _get = __webpack_require__(3)["default"];
+
+	var _inherits = __webpack_require__(17)["default"];
+
+	var _createClass = __webpack_require__(28)["default"];
+
+	var _classCallCheck = __webpack_require__(31)["default"];
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(33);
+
+	var RadioDemo = (function (_React$Component) {
+	    _inherits(RadioDemo, _React$Component);
+
+	    function RadioDemo() {
+	        _classCallCheck(this, RadioDemo);
+
+	        _get(Object.getPrototypeOf(RadioDemo.prototype), "constructor", this).apply(this, arguments);
+	    }
+
+	    _createClass(RadioDemo, [{
+	        key: "handleChange",
+	        value: function handleChange(e) {
+	            console.log(e.target.checked);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return React.createElement(
+	                "ol",
+	                null,
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "radio"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Radio,
+	                        { onChange: this.handleChange.bind(this) },
+	                        "radio"
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "disabled"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Radio,
+	                        { disabled: "true" },
+	                        "disabled radio"
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "checked radio"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Radio,
+	                        { checked: "true" },
+	                        "checked radio"
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return RadioDemo;
+	})(React.Component);
+
+	exports["default"] = RadioDemo;
+	module.exports = exports["default"];
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(3)['default'];
+
+	var _inherits = __webpack_require__(17)['default'];
+
+	var _createClass = __webpack_require__(28)['default'];
+
+	var _classCallCheck = __webpack_require__(31)['default'];
+
+	var _interopRequireDefault = __webpack_require__(1)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _RadioJsx = __webpack_require__(35);
+
+	var _RadioJsx2 = _interopRequireDefault(_RadioJsx);
+
+	var RadioGroup = (function (_React$Component) {
+	    _inherits(RadioGroup, _React$Component);
+
+	    function RadioGroup() {
+	        _classCallCheck(this, RadioGroup);
+
+	        _get(Object.getPrototypeOf(RadioGroup.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(RadioGroup, [{
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement('div', null);
+	        }
+	    }]);
+
+	    return RadioGroup;
+	})(React.Component);
+
+	exports['default'] = RadioGroup;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

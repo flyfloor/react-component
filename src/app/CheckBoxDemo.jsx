@@ -8,16 +8,16 @@ export default class CheckBoxDemo extends React.Component {
         return (
             <ol>
                 <li>
-                    <h4>checked</h4>
-                    <CheckBox label="checkbox1" defaultChecked="true" onChange={this.handleChange.bind(this)}/>
+                    <h4>checkbox</h4>
+                    <CheckBox label="" onChange={this.handleChange.bind(this)}>checkbox</CheckBox>
                 </li>
                 <li>
                     <h4>disabled</h4>
-                    <CheckBox label="checkbox" disabled="true" />
+                    <CheckBox disabled="true">disabled checkbox</CheckBox>
                 </li>
                 <li>
-                    <h4>default checked</h4>
-                    <CheckBox label="checkbox2" defaultChecked="true"/>
+                    <h4>checked checkbox</h4>
+                    <CheckBox checked="true">checked checkbox</CheckBox>
                 </li>
             </ol>
         );

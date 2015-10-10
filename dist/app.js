@@ -48,16 +48,11 @@
 
 	var _interopRequireDefault = __webpack_require__(1)["default"];
 
-	var _componentDropdownJsx = __webpack_require__(2);
+	var _appCheckBoxDemoJsx = __webpack_require__(32);
 
-	var _componentDropdownJsx2 = _interopRequireDefault(_componentDropdownJsx);
+	var _appCheckBoxDemoJsx2 = _interopRequireDefault(_appCheckBoxDemoJsx);
 
-	var _componentButtonJsx = __webpack_require__(32);
-
-	var _componentButtonJsx2 = _interopRequireDefault(_componentButtonJsx);
-
-	React.render(React.createElement(_componentButtonJsx2["default"], null), document.getElementById('button'));
-	React.render(React.createElement(_componentDropdownJsx2["default"], null), document.getElementById('dropdown'));
+	React.render(React.createElement(_appCheckBoxDemoJsx2["default"], null), document.getElementById('checkbox'));
 
 /***/ },
 /* 1 */
@@ -74,50 +69,7 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _get = __webpack_require__(3)["default"];
-
-	var _inherits = __webpack_require__(17)["default"];
-
-	var _createClass = __webpack_require__(28)["default"];
-
-	var _classCallCheck = __webpack_require__(31)["default"];
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var Dropdown = (function (_React$Component) {
-		_inherits(Dropdown, _React$Component);
-
-		function Dropdown() {
-			_classCallCheck(this, Dropdown);
-
-			_get(Object.getPrototypeOf(Dropdown.prototype), "constructor", this).apply(this, arguments);
-		}
-
-		_createClass(Dropdown, [{
-			key: "render",
-			value: function render() {
-				return React.createElement(
-					"div",
-					null,
-					"dropdown"
-				);
-			}
-		}]);
-
-		return Dropdown;
-	})(React.Component);
-
-	exports["default"] = Dropdown;
-	module.exports = exports["default"];
-
-/***/ },
+/* 2 */,
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -568,33 +520,144 @@
 	var _classCallCheck = __webpack_require__(31)["default"];
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 
-	var Button = (function (_React$Component) {
-		_inherits(Button, _React$Component);
+	var _indexJs = __webpack_require__(33);
 
-		function Button() {
-			_classCallCheck(this, Button);
+	var CheckBoxDemo = (function (_React$Component) {
+	    _inherits(CheckBoxDemo, _React$Component);
 
-			_get(Object.getPrototypeOf(Button.prototype), "constructor", this).apply(this, arguments);
-		}
+	    function CheckBoxDemo() {
+	        _classCallCheck(this, CheckBoxDemo);
 
-		_createClass(Button, [{
-			key: "render",
-			value: function render() {
-				return React.createElement(
-					"div",
-					null,
-					"button"
-				);
-			}
-		}]);
+	        _get(Object.getPrototypeOf(CheckBoxDemo.prototype), "constructor", this).apply(this, arguments);
+	    }
 
-		return Button;
+	    _createClass(CheckBoxDemo, [{
+	        key: "handleChange",
+	        value: function handleChange(e) {
+	            console.log(e.target.checked);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return React.createElement(
+	                "ol",
+	                null,
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "checked"
+	                    ),
+	                    React.createElement(_indexJs.CheckBox, { label: "checkbox1", defaultChecked: "true", onChange: this.handleChange.bind(this) })
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "disabled"
+	                    ),
+	                    React.createElement(_indexJs.CheckBox, { label: "checkbox", disabled: "true" })
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "default checked"
+	                    ),
+	                    React.createElement(_indexJs.CheckBox, { label: "checkbox2", defaultChecked: "true" })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return CheckBoxDemo;
 	})(React.Component);
 
-	exports["default"] = Button;
+	exports["default"] = CheckBoxDemo;
+	module.exports = exports["default"];
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(1)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _componentCheckBoxJsx = __webpack_require__(34);
+
+	var _componentCheckBoxJsx2 = _interopRequireDefault(_componentCheckBoxJsx);
+
+	exports.CheckBox = _componentCheckBoxJsx2['default'];
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _get = __webpack_require__(3)["default"];
+
+	var _inherits = __webpack_require__(17)["default"];
+
+	var _createClass = __webpack_require__(28)["default"];
+
+	var _classCallCheck = __webpack_require__(31)["default"];
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var CheckBox = (function (_React$Component) {
+	    _inherits(CheckBox, _React$Component);
+
+	    function CheckBox(props) {
+	        _classCallCheck(this, CheckBox);
+
+	        _get(Object.getPrototypeOf(CheckBox.prototype), "constructor", this).call(this, props);
+	        this.state = {
+	            disabled: !!props.disabled,
+	            checked: !!props.defaultChecked
+	        };
+	    }
+
+	    _createClass(CheckBox, [{
+	        key: "checkedChange",
+	        value: function checkedChange(e) {
+	            this.setState({
+	                checked: e.target.checked
+	            });
+	            if (this.props.onChange) this.props.onChange(e);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return React.createElement(
+	                "label",
+	                null,
+	                React.createElement("input", { type: "checkbox", disabled: this.state.disabled, checked: this.state.checked, onChange: this.checkedChange.bind(this) }),
+	                this.props.label
+	            );
+	        }
+	    }]);
+
+	    return CheckBox;
+	})(React.Component);
+
+	exports["default"] = CheckBox;
 	module.exports = exports["default"];
 
 /***/ }

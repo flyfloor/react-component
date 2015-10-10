@@ -1,4 +1,4 @@
-export default class Dropdown extends React.Component {
+export class DropDown extends React.Component {
 	render() {
 		return (
 			<div>dropdown</div>

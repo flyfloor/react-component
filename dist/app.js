@@ -1,4 +1,502 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	var parentHotUpdateCallback = this["webpackHotUpdate"];
+/******/ 	this["webpackHotUpdate"] = 
+/******/ 	function webpackHotUpdateCallback(chunkId, moreModules) { // eslint-disable-line no-unused-vars
+/******/ 		hotAddUpdateChunk(chunkId, moreModules);
+/******/ 		if(parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
+/******/ 	}
+/******/ 	
+/******/ 	function hotDownloadUpdateChunk(chunkId) { // eslint-disable-line no-unused-vars
+/******/ 		var head = document.getElementsByTagName("head")[0];
+/******/ 		var script = document.createElement("script");
+/******/ 		script.type = "text/javascript";
+/******/ 		script.charset = "utf-8";
+/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
+/******/ 		head.appendChild(script);
+/******/ 	}
+/******/ 	
+/******/ 	function hotDownloadManifest(callback) { // eslint-disable-line no-unused-vars
+/******/ 		if(typeof XMLHttpRequest === "undefined")
+/******/ 			return callback(new Error("No browser support"));
+/******/ 		try {
+/******/ 			var request = new XMLHttpRequest();
+/******/ 			var requestPath = __webpack_require__.p + "" + hotCurrentHash + ".hot-update.json";
+/******/ 			request.open("GET", requestPath, true);
+/******/ 			request.timeout = 10000;
+/******/ 			request.send(null);
+/******/ 		} catch(err) {
+/******/ 			return callback(err);
+/******/ 		}
+/******/ 		request.onreadystatechange = function() {
+/******/ 			if(request.readyState !== 4) return;
+/******/ 			if(request.status === 0) {
+/******/ 				// timeout
+/******/ 				callback(new Error("Manifest request to " + requestPath + " timed out."));
+/******/ 			} else if(request.status === 404) {
+/******/ 				// no update available
+/******/ 				callback();
+/******/ 			} else if(request.status !== 200 && request.status !== 304) {
+/******/ 				// other failure
+/******/ 				callback(new Error("Manifest request to " + requestPath + " failed."));
+/******/ 			} else {
+/******/ 				// success
+/******/ 				try {
+/******/ 					var update = JSON.parse(request.responseText);
+/******/ 				} catch(e) {
+/******/ 					callback(e);
+/******/ 					return;
+/******/ 				}
+/******/ 				callback(null, update);
+/******/ 			}
+/******/ 		};
+/******/ 	}
+
+/******/ 	
+/******/ 	
+/******/ 	var hotApplyOnUpdate = true;
+/******/ 	var hotCurrentHash = "77a2a8f52df0bb089af9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentModuleData = {};
+/******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
+/******/ 	
+/******/ 	function hotCreateRequire(moduleId) { // eslint-disable-line no-unused-vars
+/******/ 		var me = installedModules[moduleId];
+/******/ 		if(!me) return __webpack_require__;
+/******/ 		var fn = function(request) {
+/******/ 			if(me.hot.active) {
+/******/ 				if(installedModules[request]) {
+/******/ 					if(installedModules[request].parents.indexOf(moduleId) < 0)
+/******/ 						installedModules[request].parents.push(moduleId);
+/******/ 					if(me.children.indexOf(request) < 0)
+/******/ 						me.children.push(request);
+/******/ 				} else hotCurrentParents = [moduleId];
+/******/ 			} else {
+/******/ 				console.warn("[HMR] unexpected require(" + request + ") from disposed module " + moduleId);
+/******/ 				hotCurrentParents = [];
+/******/ 			}
+/******/ 			return __webpack_require__(request);
+/******/ 		};
+/******/ 		for(var name in __webpack_require__) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(__webpack_require__, name)) {
+/******/ 				fn[name] = __webpack_require__[name];
+/******/ 			}
+/******/ 		}
+/******/ 		fn.e = function(chunkId, callback) {
+/******/ 			if(hotStatus === "ready")
+/******/ 				hotSetStatus("prepare");
+/******/ 			hotChunksLoading++;
+/******/ 			__webpack_require__.e(chunkId, function() {
+/******/ 				try {
+/******/ 					callback.call(null, fn);
+/******/ 				} finally {
+/******/ 					finishChunkLoading();
+/******/ 				}
+/******/ 	
+/******/ 				function finishChunkLoading() {
+/******/ 					hotChunksLoading--;
+/******/ 					if(hotStatus === "prepare") {
+/******/ 						if(!hotWaitingFilesMap[chunkId]) {
+/******/ 							hotEnsureUpdateChunk(chunkId);
+/******/ 						}
+/******/ 						if(hotChunksLoading === 0 && hotWaitingFiles === 0) {
+/******/ 							hotUpdateDownloaded();
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 			});
+/******/ 		};
+/******/ 		return fn;
+/******/ 	}
+/******/ 	
+/******/ 	function hotCreateModule(moduleId) { // eslint-disable-line no-unused-vars
+/******/ 		var hot = {
+/******/ 			// private stuff
+/******/ 			_acceptedDependencies: {},
+/******/ 			_declinedDependencies: {},
+/******/ 			_selfAccepted: false,
+/******/ 			_selfDeclined: false,
+/******/ 			_disposeHandlers: [],
+/******/ 	
+/******/ 			// Module API
+/******/ 			active: true,
+/******/ 			accept: function(dep, callback) {
+/******/ 				if(typeof dep === "undefined")
+/******/ 					hot._selfAccepted = true;
+/******/ 				else if(typeof dep === "function")
+/******/ 					hot._selfAccepted = dep;
+/******/ 				else if(typeof dep === "object")
+/******/ 					for(var i = 0; i < dep.length; i++)
+/******/ 						hot._acceptedDependencies[dep[i]] = callback;
+/******/ 				else
+/******/ 					hot._acceptedDependencies[dep] = callback;
+/******/ 			},
+/******/ 			decline: function(dep) {
+/******/ 				if(typeof dep === "undefined")
+/******/ 					hot._selfDeclined = true;
+/******/ 				else if(typeof dep === "number")
+/******/ 					hot._declinedDependencies[dep] = true;
+/******/ 				else
+/******/ 					for(var i = 0; i < dep.length; i++)
+/******/ 						hot._declinedDependencies[dep[i]] = true;
+/******/ 			},
+/******/ 			dispose: function(callback) {
+/******/ 				hot._disposeHandlers.push(callback);
+/******/ 			},
+/******/ 			addDisposeHandler: function(callback) {
+/******/ 				hot._disposeHandlers.push(callback);
+/******/ 			},
+/******/ 			removeDisposeHandler: function(callback) {
+/******/ 				var idx = hot._disposeHandlers.indexOf(callback);
+/******/ 				if(idx >= 0) hot._disposeHandlers.splice(idx, 1);
+/******/ 			},
+/******/ 	
+/******/ 			// Management API
+/******/ 			check: hotCheck,
+/******/ 			apply: hotApply,
+/******/ 			status: function(l) {
+/******/ 				if(!l) return hotStatus;
+/******/ 				hotStatusHandlers.push(l);
+/******/ 			},
+/******/ 			addStatusHandler: function(l) {
+/******/ 				hotStatusHandlers.push(l);
+/******/ 			},
+/******/ 			removeStatusHandler: function(l) {
+/******/ 				var idx = hotStatusHandlers.indexOf(l);
+/******/ 				if(idx >= 0) hotStatusHandlers.splice(idx, 1);
+/******/ 			},
+/******/ 	
+/******/ 			//inherit from previous dispose call
+/******/ 			data: hotCurrentModuleData[moduleId]
+/******/ 		};
+/******/ 		return hot;
+/******/ 	}
+/******/ 	
+/******/ 	var hotStatusHandlers = [];
+/******/ 	var hotStatus = "idle";
+/******/ 	
+/******/ 	function hotSetStatus(newStatus) {
+/******/ 		hotStatus = newStatus;
+/******/ 		for(var i = 0; i < hotStatusHandlers.length; i++)
+/******/ 			hotStatusHandlers[i].call(null, newStatus);
+/******/ 	}
+/******/ 	
+/******/ 	// while downloading
+/******/ 	var hotWaitingFiles = 0;
+/******/ 	var hotChunksLoading = 0;
+/******/ 	var hotWaitingFilesMap = {};
+/******/ 	var hotRequestedFilesMap = {};
+/******/ 	var hotAvailibleFilesMap = {};
+/******/ 	var hotCallback;
+/******/ 	
+/******/ 	// The update info
+/******/ 	var hotUpdate, hotUpdateNewHash;
+/******/ 	
+/******/ 	function toModuleId(id) {
+/******/ 		var isNumber = (+id) + "" === id;
+/******/ 		return isNumber ? +id : id;
+/******/ 	}
+/******/ 	
+/******/ 	function hotCheck(apply, callback) {
+/******/ 		if(hotStatus !== "idle") throw new Error("check() is only allowed in idle status");
+/******/ 		if(typeof apply === "function") {
+/******/ 			hotApplyOnUpdate = false;
+/******/ 			callback = apply;
+/******/ 		} else {
+/******/ 			hotApplyOnUpdate = apply;
+/******/ 			callback = callback || function(err) {
+/******/ 				if(err) throw err;
+/******/ 			};
+/******/ 		}
+/******/ 		hotSetStatus("check");
+/******/ 		hotDownloadManifest(function(err, update) {
+/******/ 			if(err) return callback(err);
+/******/ 			if(!update) {
+/******/ 				hotSetStatus("idle");
+/******/ 				callback(null, null);
+/******/ 				return;
+/******/ 			}
+/******/ 	
+/******/ 			hotRequestedFilesMap = {};
+/******/ 			hotAvailibleFilesMap = {};
+/******/ 			hotWaitingFilesMap = {};
+/******/ 			for(var i = 0; i < update.c.length; i++)
+/******/ 				hotAvailibleFilesMap[update.c[i]] = true;
+/******/ 			hotUpdateNewHash = update.h;
+/******/ 	
+/******/ 			hotSetStatus("prepare");
+/******/ 			hotCallback = callback;
+/******/ 			hotUpdate = {};
+/******/ 			var chunkId = 0;
+/******/ 			{ // eslint-disable-line no-lone-blocks
+/******/ 				/*globals chunkId */
+/******/ 				hotEnsureUpdateChunk(chunkId);
+/******/ 			}
+/******/ 			if(hotStatus === "prepare" && hotChunksLoading === 0 && hotWaitingFiles === 0) {
+/******/ 				hotUpdateDownloaded();
+/******/ 			}
+/******/ 		});
+/******/ 	}
+/******/ 	
+/******/ 	function hotAddUpdateChunk(chunkId, moreModules) { // eslint-disable-line no-unused-vars
+/******/ 		if(!hotAvailibleFilesMap[chunkId] || !hotRequestedFilesMap[chunkId])
+/******/ 			return;
+/******/ 		hotRequestedFilesMap[chunkId] = false;
+/******/ 		for(var moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				hotUpdate[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(--hotWaitingFiles === 0 && hotChunksLoading === 0) {
+/******/ 			hotUpdateDownloaded();
+/******/ 		}
+/******/ 	}
+/******/ 	
+/******/ 	function hotEnsureUpdateChunk(chunkId) {
+/******/ 		if(!hotAvailibleFilesMap[chunkId]) {
+/******/ 			hotWaitingFilesMap[chunkId] = true;
+/******/ 		} else {
+/******/ 			hotRequestedFilesMap[chunkId] = true;
+/******/ 			hotWaitingFiles++;
+/******/ 			hotDownloadUpdateChunk(chunkId);
+/******/ 		}
+/******/ 	}
+/******/ 	
+/******/ 	function hotUpdateDownloaded() {
+/******/ 		hotSetStatus("ready");
+/******/ 		var callback = hotCallback;
+/******/ 		hotCallback = null;
+/******/ 		if(!callback) return;
+/******/ 		if(hotApplyOnUpdate) {
+/******/ 			hotApply(hotApplyOnUpdate, callback);
+/******/ 		} else {
+/******/ 			var outdatedModules = [];
+/******/ 			for(var id in hotUpdate) {
+/******/ 				if(Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
+/******/ 					outdatedModules.push(toModuleId(id));
+/******/ 				}
+/******/ 			}
+/******/ 			callback(null, outdatedModules);
+/******/ 		}
+/******/ 	}
+/******/ 	
+/******/ 	function hotApply(options, callback) {
+/******/ 		if(hotStatus !== "ready") throw new Error("apply() is only allowed in ready status");
+/******/ 		if(typeof options === "function") {
+/******/ 			callback = options;
+/******/ 			options = {};
+/******/ 		} else if(options && typeof options === "object") {
+/******/ 			callback = callback || function(err) {
+/******/ 				if(err) throw err;
+/******/ 			};
+/******/ 		} else {
+/******/ 			options = {};
+/******/ 			callback = callback || function(err) {
+/******/ 				if(err) throw err;
+/******/ 			};
+/******/ 		}
+/******/ 	
+/******/ 		function getAffectedStuff(module) {
+/******/ 			var outdatedModules = [module];
+/******/ 			var outdatedDependencies = {};
+/******/ 	
+/******/ 			var queue = outdatedModules.slice();
+/******/ 			while(queue.length > 0) {
+/******/ 				var moduleId = queue.pop();
+/******/ 				var module = installedModules[moduleId];
+/******/ 				if(!module || module.hot._selfAccepted)
+/******/ 					continue;
+/******/ 				if(module.hot._selfDeclined) {
+/******/ 					return new Error("Aborted because of self decline: " + moduleId);
+/******/ 				}
+/******/ 				if(moduleId === 0) {
+/******/ 					return;
+/******/ 				}
+/******/ 				for(var i = 0; i < module.parents.length; i++) {
+/******/ 					var parentId = module.parents[i];
+/******/ 					var parent = installedModules[parentId];
+/******/ 					if(parent.hot._declinedDependencies[moduleId]) {
+/******/ 						return new Error("Aborted because of declined dependency: " + moduleId + " in " + parentId);
+/******/ 					}
+/******/ 					if(outdatedModules.indexOf(parentId) >= 0) continue;
+/******/ 					if(parent.hot._acceptedDependencies[moduleId]) {
+/******/ 						if(!outdatedDependencies[parentId])
+/******/ 							outdatedDependencies[parentId] = [];
+/******/ 						addAllToSet(outdatedDependencies[parentId], [moduleId]);
+/******/ 						continue;
+/******/ 					}
+/******/ 					delete outdatedDependencies[parentId];
+/******/ 					outdatedModules.push(parentId);
+/******/ 					queue.push(parentId);
+/******/ 				}
+/******/ 			}
+/******/ 	
+/******/ 			return [outdatedModules, outdatedDependencies];
+/******/ 		}
+/******/ 	
+/******/ 		function addAllToSet(a, b) {
+/******/ 			for(var i = 0; i < b.length; i++) {
+/******/ 				var item = b[i];
+/******/ 				if(a.indexOf(item) < 0)
+/******/ 					a.push(item);
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// at begin all updates modules are outdated
+/******/ 		// the "outdated" status can propagate to parents if they don't accept the children
+/******/ 		var outdatedDependencies = {};
+/******/ 		var outdatedModules = [];
+/******/ 		var appliedUpdate = {};
+/******/ 		for(var id in hotUpdate) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
+/******/ 				var moduleId = toModuleId(id);
+/******/ 				var result = getAffectedStuff(moduleId);
+/******/ 				if(!result) {
+/******/ 					if(options.ignoreUnaccepted)
+/******/ 						continue;
+/******/ 					hotSetStatus("abort");
+/******/ 					return callback(new Error("Aborted because " + moduleId + " is not accepted"));
+/******/ 				}
+/******/ 				if(result instanceof Error) {
+/******/ 					hotSetStatus("abort");
+/******/ 					return callback(result);
+/******/ 				}
+/******/ 				appliedUpdate[moduleId] = hotUpdate[moduleId];
+/******/ 				addAllToSet(outdatedModules, result[0]);
+/******/ 				for(var moduleId in result[1]) {
+/******/ 					if(Object.prototype.hasOwnProperty.call(result[1], moduleId)) {
+/******/ 						if(!outdatedDependencies[moduleId])
+/******/ 							outdatedDependencies[moduleId] = [];
+/******/ 						addAllToSet(outdatedDependencies[moduleId], result[1][moduleId]);
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// Store self accepted outdated modules to require them later by the module system
+/******/ 		var outdatedSelfAcceptedModules = [];
+/******/ 		for(var i = 0; i < outdatedModules.length; i++) {
+/******/ 			var moduleId = outdatedModules[i];
+/******/ 			if(installedModules[moduleId] && installedModules[moduleId].hot._selfAccepted)
+/******/ 				outdatedSelfAcceptedModules.push({
+/******/ 					module: moduleId,
+/******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
+/******/ 				});
+/******/ 		}
+/******/ 	
+/******/ 		// Now in "dispose" phase
+/******/ 		hotSetStatus("dispose");
+/******/ 		var queue = outdatedModules.slice();
+/******/ 		while(queue.length > 0) {
+/******/ 			var moduleId = queue.pop();
+/******/ 			var module = installedModules[moduleId];
+/******/ 			if(!module) continue;
+/******/ 	
+/******/ 			var data = {};
+/******/ 	
+/******/ 			// Call dispose handlers
+/******/ 			var disposeHandlers = module.hot._disposeHandlers;
+/******/ 			for(var j = 0; j < disposeHandlers.length; j++) {
+/******/ 				var cb = disposeHandlers[j];
+/******/ 				cb(data);
+/******/ 			}
+/******/ 			hotCurrentModuleData[moduleId] = data;
+/******/ 	
+/******/ 			// disable module (this disables requires from this module)
+/******/ 			module.hot.active = false;
+/******/ 	
+/******/ 			// remove module from cache
+/******/ 			delete installedModules[moduleId];
+/******/ 	
+/******/ 			// remove "parents" references from all children
+/******/ 			for(var j = 0; j < module.children.length; j++) {
+/******/ 				var child = installedModules[module.children[j]];
+/******/ 				if(!child) continue;
+/******/ 				var idx = child.parents.indexOf(moduleId);
+/******/ 				if(idx >= 0) {
+/******/ 					child.parents.splice(idx, 1);
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// remove outdated dependency from module children
+/******/ 		for(var moduleId in outdatedDependencies) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)) {
+/******/ 				var module = installedModules[moduleId];
+/******/ 				var moduleOutdatedDependencies = outdatedDependencies[moduleId];
+/******/ 				for(var j = 0; j < moduleOutdatedDependencies.length; j++) {
+/******/ 					var dependency = moduleOutdatedDependencies[j];
+/******/ 					var idx = module.children.indexOf(dependency);
+/******/ 					if(idx >= 0) module.children.splice(idx, 1);
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// Not in "apply" phase
+/******/ 		hotSetStatus("apply");
+/******/ 	
+/******/ 		hotCurrentHash = hotUpdateNewHash;
+/******/ 	
+/******/ 		// insert new code
+/******/ 		for(var moduleId in appliedUpdate) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
+/******/ 				modules[moduleId] = appliedUpdate[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// call accept handlers
+/******/ 		var error = null;
+/******/ 		for(var moduleId in outdatedDependencies) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)) {
+/******/ 				var module = installedModules[moduleId];
+/******/ 				var moduleOutdatedDependencies = outdatedDependencies[moduleId];
+/******/ 				var callbacks = [];
+/******/ 				for(var i = 0; i < moduleOutdatedDependencies.length; i++) {
+/******/ 					var dependency = moduleOutdatedDependencies[i];
+/******/ 					var cb = module.hot._acceptedDependencies[dependency];
+/******/ 					if(callbacks.indexOf(cb) >= 0) continue;
+/******/ 					callbacks.push(cb);
+/******/ 				}
+/******/ 				for(var i = 0; i < callbacks.length; i++) {
+/******/ 					var cb = callbacks[i];
+/******/ 					try {
+/******/ 						cb(outdatedDependencies);
+/******/ 					} catch(err) {
+/******/ 						if(!error)
+/******/ 							error = err;
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// Load self accepted modules
+/******/ 		for(var i = 0; i < outdatedSelfAcceptedModules.length; i++) {
+/******/ 			var item = outdatedSelfAcceptedModules[i];
+/******/ 			var moduleId = item.module;
+/******/ 			hotCurrentParents = [moduleId];
+/******/ 			try {
+/******/ 				__webpack_require__(moduleId);
+/******/ 			} catch(err) {
+/******/ 				if(typeof item.errorHandler === "function") {
+/******/ 					try {
+/******/ 						item.errorHandler(err);
+/******/ 					} catch(err) {
+/******/ 						if(!error)
+/******/ 							error = err;
+/******/ 					}
+/******/ 				} else if(!error)
+/******/ 					error = err;
+/******/ 			}
+/******/ 		}
+/******/ 	
+/******/ 		// handle errors in accept handlers and self accepted module load
+/******/ 		if(error) {
+/******/ 			hotSetStatus("fail");
+/******/ 			return callback(error);
+/******/ 		}
+/******/ 	
+/******/ 		hotSetStatus("idle");
+/******/ 		callback(null, outdatedModules);
+/******/ 	}
+
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 
@@ -13,11 +511,14 @@
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
-/******/ 			loaded: false
+/******/ 			loaded: false,
+/******/ 			hot: hotCreateModule(moduleId),
+/******/ 			parents: hotCurrentParents,
+/******/ 			children: []
 /******/ 		};
 
 /******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, hotCreateRequire(moduleId));
 
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
@@ -36,8 +537,11 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 
+/******/ 	// __webpack_hash__
+/******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
+
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
+/******/ 	return hotCreateRequire(0)(0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -48,7 +552,7 @@
 
 	var _interopRequireDefault = __webpack_require__(1)["default"];
 
-	var _appCheckBoxDemoJsx = __webpack_require__(32);
+	var _appCheckBoxDemoJsx = __webpack_require__(2);
 
 	var _appCheckBoxDemoJsx2 = _interopRequireDefault(_appCheckBoxDemoJsx);
 
@@ -56,8 +560,13 @@
 
 	var _appRadioDemoJsx2 = _interopRequireDefault(_appRadioDemoJsx);
 
-	React.render(React.createElement(_appCheckBoxDemoJsx2["default"], null), document.getElementById('checkbox'));
-	React.render(React.createElement(_appRadioDemoJsx2["default"], null), document.getElementById('radio'));
+	var _appRadioGroupDemoJsx = __webpack_require__(37);
+
+	var _appRadioGroupDemoJsx2 = _interopRequireDefault(_appRadioGroupDemoJsx);
+
+	// React.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
+	// React.render(<RadioDemo/>, document.getElementById('radio'));
+	React.render(React.createElement(_appRadioGroupDemoJsx2["default"], null), document.getElementById('radio-group'));
 
 /***/ },
 /* 1 */
@@ -74,7 +583,98 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 2 */,
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _get = __webpack_require__(3)["default"];
+
+	var _inherits = __webpack_require__(17)["default"];
+
+	var _createClass = __webpack_require__(28)["default"];
+
+	var _classCallCheck = __webpack_require__(31)["default"];
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(32);
+
+	var CheckBoxDemo = (function (_React$Component) {
+	    _inherits(CheckBoxDemo, _React$Component);
+
+	    function CheckBoxDemo() {
+	        _classCallCheck(this, CheckBoxDemo);
+
+	        _get(Object.getPrototypeOf(CheckBoxDemo.prototype), "constructor", this).apply(this, arguments);
+	    }
+
+	    _createClass(CheckBoxDemo, [{
+	        key: "handleChange",
+	        value: function handleChange(e) {
+	            console.log(e.target.checked);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return React.createElement(
+	                "ol",
+	                null,
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "checkbox"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.CheckBox,
+	                        { label: "", onChange: this.handleChange.bind(this) },
+	                        "checkbox"
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "disabled"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.CheckBox,
+	                        { disabled: "true" },
+	                        "disabled checkbox"
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "checked checkbox"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.CheckBox,
+	                        { checked: "true" },
+	                        "checked checkbox"
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return CheckBoxDemo;
+	})(React.Component);
+
+	exports["default"] = CheckBoxDemo;
+	module.exports = exports["default"];
+
+/***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -514,98 +1114,6 @@
 /* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	var _get = __webpack_require__(3)["default"];
-
-	var _inherits = __webpack_require__(17)["default"];
-
-	var _createClass = __webpack_require__(28)["default"];
-
-	var _classCallCheck = __webpack_require__(31)["default"];
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _indexJs = __webpack_require__(33);
-
-	var CheckBoxDemo = (function (_React$Component) {
-	    _inherits(CheckBoxDemo, _React$Component);
-
-	    function CheckBoxDemo() {
-	        _classCallCheck(this, CheckBoxDemo);
-
-	        _get(Object.getPrototypeOf(CheckBoxDemo.prototype), "constructor", this).apply(this, arguments);
-	    }
-
-	    _createClass(CheckBoxDemo, [{
-	        key: "handleChange",
-	        value: function handleChange(e) {
-	            console.log(e.target.checked);
-	        }
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            return React.createElement(
-	                "ol",
-	                null,
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "h4",
-	                        null,
-	                        "checkbox"
-	                    ),
-	                    React.createElement(
-	                        _indexJs.CheckBox,
-	                        { label: "", onChange: this.handleChange.bind(this) },
-	                        "checkbox"
-	                    )
-	                ),
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "h4",
-	                        null,
-	                        "disabled"
-	                    ),
-	                    React.createElement(
-	                        _indexJs.CheckBox,
-	                        { disabled: "true" },
-	                        "disabled checkbox"
-	                    )
-	                ),
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "h4",
-	                        null,
-	                        "checked checkbox"
-	                    ),
-	                    React.createElement(
-	                        _indexJs.CheckBox,
-	                        { checked: "true" },
-	                        "checked checkbox"
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return CheckBoxDemo;
-	})(React.Component);
-
-	exports["default"] = CheckBoxDemo;
-	module.exports = exports["default"];
-
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	var _interopRequireDefault = __webpack_require__(1)['default'];
@@ -614,15 +1122,15 @@
 	    value: true
 	});
 
-	var _componentCheckBoxJsx = __webpack_require__(34);
+	var _componentCheckBoxJsx = __webpack_require__(33);
 
 	var _componentCheckBoxJsx2 = _interopRequireDefault(_componentCheckBoxJsx);
 
-	var _componentRadioJsx = __webpack_require__(35);
+	var _componentRadioJsx = __webpack_require__(34);
 
 	var _componentRadioJsx2 = _interopRequireDefault(_componentRadioJsx);
 
-	var _componentRadioGroupJsx = __webpack_require__(37);
+	var _componentRadioGroupJsx = __webpack_require__(35);
 
 	var _componentRadioGroupJsx2 = _interopRequireDefault(_componentRadioGroupJsx);
 
@@ -631,7 +1139,7 @@
 	exports.RadioGroup = _componentRadioGroupJsx2['default'];
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -688,7 +1196,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -713,18 +1221,14 @@
 
 	        _get(Object.getPrototypeOf(Radio.prototype), "constructor", this).call(this, props);
 	        this.state = {
-	            disabled: props.disabled,
-	            checked: props.checked
+	            disabled: props.disabled
 	        };
 	    }
 
 	    _createClass(Radio, [{
 	        key: "checkedChange",
 	        value: function checkedChange(e) {
-	            this.setState({
-	                checked: e.target.checked
-	            });
-	            if (this.props.onChange) this.props.onChange(e);
+	            if (this.props.onChange) this.props.onChange(e, this.props.storeValue);
 	        }
 	    }, {
 	        key: "render",
@@ -732,7 +1236,7 @@
 	            return React.createElement(
 	                "label",
 	                null,
-	                React.createElement("input", { type: "radio", disabled: this.state.disabled, checked: this.state.checked, onChange: this.checkedChange.bind(this) }),
+	                React.createElement("input", { type: "radio", ref: "radioInput", disabled: this.state.disabled, checked: this.props.checked, onChange: this.checkedChange.bind(this) }),
 	                this.props.children
 	            );
 	        }
@@ -743,6 +1247,127 @@
 
 	exports["default"] = Radio;
 	module.exports = exports["default"];
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(3)['default'];
+
+	var _inherits = __webpack_require__(17)['default'];
+
+	var _createClass = __webpack_require__(28)['default'];
+
+	var _classCallCheck = __webpack_require__(31)['default'];
+
+	var _getIterator = __webpack_require__(38)['default'];
+
+	var _interopRequireDefault = __webpack_require__(1)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _RadioJsx = __webpack_require__(34);
+
+	var _RadioJsx2 = _interopRequireDefault(_RadioJsx);
+
+	var RadioGroup = (function (_React$Component) {
+	    _inherits(RadioGroup, _React$Component);
+
+	    function RadioGroup(props) {
+	        _classCallCheck(this, RadioGroup);
+
+	        _get(Object.getPrototypeOf(RadioGroup.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            options: props.options,
+	            value: props.value
+	        };
+	    }
+
+	    _createClass(RadioGroup, [{
+	        key: 'toggleChange',
+	        value: function toggleChange(e, storeValue) {
+	            var _this = this;
+
+	            this.setState({
+	                value: storeValue
+	            }, function () {
+	                if (typeof _this.props.onChange === 'function') _this.props.onChange(_this.state.value);
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.initDefault();
+	        }
+	    }, {
+	        key: 'initDefault',
+	        value: function initDefault() {
+	            if (this.props.defaultChecked && this.state.options.length > 0) {
+	                this.setState({
+	                    value: this.state.options[0][this.props.valueName]
+	                });
+	            };
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props$labelName = this.props.labelName;
+	            var labelName = _props$labelName === undefined ? 'name' : _props$labelName;
+	            var _props$valueName = this.props.valueName;
+	            var valueName = _props$valueName === undefined ? 'value' : _props$valueName;
+
+	            var optionNodes = [],
+	                itemChecked = undefined,
+	                itemNode = undefined;
+
+	            var _iteratorNormalCompletion = true;
+	            var _didIteratorError = false;
+	            var _iteratorError = undefined;
+
+	            try {
+	                for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                    var item = _step.value;
+
+	                    itemChecked = item[valueName] === this.state.value;
+	                    itemNode = React.createElement(
+	                        _RadioJsx2['default'],
+	                        { storeValue: item[valueName], checked: itemChecked, onChange: this.toggleChange.bind(this) },
+	                        item[labelName]
+	                    );
+	                    optionNodes.push(itemNode);
+	                }
+	            } catch (err) {
+	                _didIteratorError = true;
+	                _iteratorError = err;
+	            } finally {
+	                try {
+	                    if (!_iteratorNormalCompletion && _iterator['return']) {
+	                        _iterator['return']();
+	                    }
+	                } finally {
+	                    if (_didIteratorError) {
+	                        throw _iteratorError;
+	                    }
+	                }
+	            }
+
+	            return React.createElement(
+	                'div',
+	                null,
+	                optionNodes
+	            );
+	        }
+	    }]);
+
+	    return RadioGroup;
+	})(React.Component);
+
+	exports['default'] = RadioGroup;
+	module.exports = exports['default'];
 
 /***/ },
 /* 36 */
@@ -762,7 +1387,7 @@
 	    value: true
 	});
 
-	var _indexJs = __webpack_require__(33);
+	var _indexJs = __webpack_require__(32);
 
 	var RadioDemo = (function (_React$Component) {
 	    _inherits(RadioDemo, _React$Component);
@@ -850,37 +1475,428 @@
 
 	var _classCallCheck = __webpack_require__(31)['default'];
 
-	var _interopRequireDefault = __webpack_require__(1)['default'];
-
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	var _RadioJsx = __webpack_require__(35);
+	var _indexJs = __webpack_require__(32);
 
-	var _RadioJsx2 = _interopRequireDefault(_RadioJsx);
+	var options = [{ 'name': 'A', 'value': 'a' }, { 'name': 'B', 'value': 'b' }, { 'name': 'C', 'value': 'c' }, { 'name': 'D', 'value': 'd' }];
 
-	var RadioGroup = (function (_React$Component) {
-	    _inherits(RadioGroup, _React$Component);
+	var checkedVal = 'b';
 
-	    function RadioGroup() {
-	        _classCallCheck(this, RadioGroup);
+	var RadioDemo = (function (_React$Component) {
+	    _inherits(RadioDemo, _React$Component);
 
-	        _get(Object.getPrototypeOf(RadioGroup.prototype), 'constructor', this).apply(this, arguments);
+	    function RadioDemo(props, refs) {
+	        _classCallCheck(this, RadioDemo);
+
+	        _get(Object.getPrototypeOf(RadioDemo.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            displayText: checkedVal
+	        };
 	    }
 
-	    _createClass(RadioGroup, [{
+	    _createClass(RadioDemo, [{
+	        key: 'displayChange',
+	        value: function displayChange(value) {
+	            this.setState({
+	                displayText: value
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
-	            return React.createElement('div', null);
+	            return React.createElement(
+	                'ol',
+	                null,
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'radio group'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'you selected value is ',
+	                        this.state.displayText
+	                    ),
+	                    React.createElement(_indexJs.RadioGroup, { options: options, labelName: 'name', valueName: 'value', value: checkedVal, onChange: this.displayChange.bind(this) })
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'radio group with default first selected'
+	                    ),
+	                    React.createElement(_indexJs.RadioGroup, { options: options, labelName: 'name', valueName: 'value', defaultChecked: 'true' })
+	                )
+	            );
 	        }
 	    }]);
 
-	    return RadioGroup;
+	    return RadioDemo;
 	})(React.Component);
 
-	exports['default'] = RadioGroup;
+	exports['default'] = RadioDemo;
 	module.exports = exports['default'];
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(39), __esModule: true };
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(40);
+	__webpack_require__(57);
+	module.exports = __webpack_require__(60);
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(41);
+	var Iterators = __webpack_require__(44);
+	Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var setUnscope = __webpack_require__(42)
+	  , step       = __webpack_require__(43)
+	  , Iterators  = __webpack_require__(44)
+	  , toIObject  = __webpack_require__(8);
+
+	// 22.1.3.4 Array.prototype.entries()
+	// 22.1.3.13 Array.prototype.keys()
+	// 22.1.3.29 Array.prototype.values()
+	// 22.1.3.30 Array.prototype[@@iterator]()
+	__webpack_require__(45)(Array, 'Array', function(iterated, kind){
+	  this._t = toIObject(iterated); // target
+	  this._i = 0;                   // next index
+	  this._k = kind;                // kind
+	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , kind  = this._k
+	    , index = this._i++;
+	  if(!O || index >= O.length){
+	    this._t = undefined;
+	    return step(1);
+	  }
+	  if(kind == 'keys'  )return step(0, index);
+	  if(kind == 'values')return step(0, O[index]);
+	  return step(0, [index, O[index]]);
+	}, 'values');
+
+	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+	Iterators.Arguments = Iterators.Array;
+
+	setUnscope('keys');
+	setUnscope('values');
+	setUnscope('entries');
+
+/***/ },
+/* 42 */
+/***/ function(module, exports) {
+
+	module.exports = function(){ /* empty */ };
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	module.exports = function(done, value){
+	  return {value: value, done: !!done};
+	};
+
+/***/ },
+/* 44 */
+/***/ function(module, exports) {
+
+	module.exports = {};
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var LIBRARY         = __webpack_require__(46)
+	  , $def            = __webpack_require__(13)
+	  , $redef          = __webpack_require__(47)
+	  , hide            = __webpack_require__(48)
+	  , has             = __webpack_require__(51)
+	  , SYMBOL_ITERATOR = __webpack_require__(52)('iterator')
+	  , Iterators       = __webpack_require__(44)
+	  , BUGGY           = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
+	  , FF_ITERATOR     = '@@iterator'
+	  , KEYS            = 'keys'
+	  , VALUES          = 'values';
+	var returnThis = function(){ return this; };
+	module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE){
+	  __webpack_require__(55)(Constructor, NAME, next);
+	  var createMethod = function(kind){
+	    switch(kind){
+	      case KEYS: return function keys(){ return new Constructor(this, kind); };
+	      case VALUES: return function values(){ return new Constructor(this, kind); };
+	    } return function entries(){ return new Constructor(this, kind); };
+	  };
+	  var TAG      = NAME + ' Iterator'
+	    , proto    = Base.prototype
+	    , _native  = proto[SYMBOL_ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
+	    , _default = _native || createMethod(DEFAULT)
+	    , methods, key;
+	  // Fix native
+	  if(_native){
+	    var IteratorPrototype = __webpack_require__(6).getProto(_default.call(new Base));
+	    // Set @@toStringTag to native iterators
+	    __webpack_require__(56)(IteratorPrototype, TAG, true);
+	    // FF fix
+	    if(!LIBRARY && has(proto, FF_ITERATOR))hide(IteratorPrototype, SYMBOL_ITERATOR, returnThis);
+	  }
+	  // Define iterator
+	  if(!LIBRARY || FORCE)hide(proto, SYMBOL_ITERATOR, _default);
+	  // Plug for library
+	  Iterators[NAME] = _default;
+	  Iterators[TAG]  = returnThis;
+	  if(DEFAULT){
+	    methods = {
+	      keys:    IS_SET            ? _default : createMethod(KEYS),
+	      values:  DEFAULT == VALUES ? _default : createMethod(VALUES),
+	      entries: DEFAULT != VALUES ? _default : createMethod('entries')
+	    };
+	    if(FORCE)for(key in methods){
+	      if(!(key in proto))$redef(proto, key, methods[key]);
+	    } else $def($def.P + $def.F * BUGGY, NAME, methods);
+	  }
+	};
+
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
+
+	module.exports = true;
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(48);
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $          = __webpack_require__(6)
+	  , createDesc = __webpack_require__(49);
+	module.exports = __webpack_require__(50) ? function(object, key, value){
+	  return $.setDesc(object, key, createDesc(1, value));
+	} : function(object, key, value){
+	  object[key] = value;
+	  return object;
+	};
+
+/***/ },
+/* 49 */
+/***/ function(module, exports) {
+
+	module.exports = function(bitmap, value){
+	  return {
+	    enumerable  : !(bitmap & 1),
+	    configurable: !(bitmap & 2),
+	    writable    : !(bitmap & 4),
+	    value       : value
+	  };
+	};
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(16)(function(){
+	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 51 */
+/***/ function(module, exports) {
+
+	var hasOwnProperty = {}.hasOwnProperty;
+	module.exports = function(it, key){
+	  return hasOwnProperty.call(it, key);
+	};
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var store  = __webpack_require__(53)('wks')
+	  , Symbol = __webpack_require__(14).Symbol;
+	module.exports = function(name){
+	  return store[name] || (store[name] =
+	    Symbol && Symbol[name] || (Symbol || __webpack_require__(54))('Symbol.' + name));
+	};
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(14)
+	  , SHARED = '__core-js_shared__'
+	  , store  = global[SHARED] || (global[SHARED] = {});
+	module.exports = function(key){
+	  return store[key] || (store[key] = {});
+	};
+
+/***/ },
+/* 54 */
+/***/ function(module, exports) {
+
+	var id = 0
+	  , px = Math.random();
+	module.exports = function(key){
+	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+	};
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $ = __webpack_require__(6)
+	  , IteratorPrototype = {};
+
+	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+	__webpack_require__(48)(IteratorPrototype, __webpack_require__(52)('iterator'), function(){ return this; });
+
+	module.exports = function(Constructor, NAME, next){
+	  Constructor.prototype = $.create(IteratorPrototype, {next: __webpack_require__(49)(1,next)});
+	  __webpack_require__(56)(Constructor, NAME + ' Iterator');
+	};
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var has  = __webpack_require__(51)
+	  , hide = __webpack_require__(48)
+	  , TAG  = __webpack_require__(52)('toStringTag');
+
+	module.exports = function(it, tag, stat){
+	  if(it && !has(it = stat ? it : it.prototype, TAG))hide(it, TAG, tag);
+	};
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $at  = __webpack_require__(58)(true);
+
+	// 21.1.3.27 String.prototype[@@iterator]()
+	__webpack_require__(45)(String, 'String', function(iterated){
+	  this._t = String(iterated); // target
+	  this._i = 0;                // next index
+	// 21.1.5.2.1 %StringIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , index = this._i
+	    , point;
+	  if(index >= O.length)return {value: undefined, done: true};
+	  point = $at(O, index);
+	  this._i += point.length;
+	  return {value: point, done: false};
+	});
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// true  -> String#at
+	// false -> String#codePointAt
+	var toInteger = __webpack_require__(59)
+	  , defined   = __webpack_require__(11);
+	module.exports = function(TO_STRING){
+	  return function(that, pos){
+	    var s = String(defined(that))
+	      , i = toInteger(pos)
+	      , l = s.length
+	      , a, b;
+	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+	    a = s.charCodeAt(i);
+	    return a < 0xd800 || a > 0xdbff || i + 1 === l
+	      || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+	        ? TO_STRING ? s.charAt(i) : a
+	        : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+	  };
+	};
+
+/***/ },
+/* 59 */
+/***/ function(module, exports) {
+
+	// 7.1.4 ToInteger
+	var ceil  = Math.ceil
+	  , floor = Math.floor;
+	module.exports = function(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	};
+
+/***/ },
+/* 60 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var anObject = __webpack_require__(25)
+	  , get      = __webpack_require__(61);
+	module.exports = __webpack_require__(15).getIterator = function(it){
+	  var iterFn = get(it);
+	  if(typeof iterFn != 'function')throw TypeError(it + ' is not iterable!');
+	  return anObject(iterFn.call(it));
+	};
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var classof   = __webpack_require__(62)
+	  , ITERATOR  = __webpack_require__(52)('iterator')
+	  , Iterators = __webpack_require__(44);
+	module.exports = __webpack_require__(15).getIteratorMethod = function(it){
+	  if(it != undefined)return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
+	};
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// getting tag from 19.1.3.6 Object.prototype.toString()
+	var cof = __webpack_require__(10)
+	  , TAG = __webpack_require__(52)('toStringTag')
+	  // ES3 wrong here
+	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
+
+	module.exports = function(it){
+	  var O, T, B;
+	  return it === undefined ? 'Undefined' : it === null ? 'Null'
+	    // @@toStringTag case
+	    : typeof (T = (O = Object(it))[TAG]) == 'string' ? T
+	    // builtinTag case
+	    : ARG ? cof(O)
+	    // ES3 arguments fallback
+	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+	};
 
 /***/ }
 /******/ ]);

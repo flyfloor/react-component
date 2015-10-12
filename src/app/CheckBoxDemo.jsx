@@ -9,7 +9,7 @@ export default class CheckBoxDemo extends React.Component {
             <ol>
                 <li>
                     <h4>checkbox</h4>
-                    <CheckBox label="" onChange={this.handleChange.bind(this)}>checkbox</CheckBox>
+                    <CheckBox onChange={this.handleChange.bind(this)}>checkbox</CheckBox>
                 </li>
                 <li>
                     <h4>disabled</h4>

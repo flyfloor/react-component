@@ -4,7 +4,7 @@ export default class RadioGroup extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            options: props.options,
+            options: props.options || [],
             value: props.value,
         }
     }

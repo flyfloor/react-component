@@ -52,22 +52,27 @@
 
 	var _appCheckBoxDemoJsx2 = _interopRequireDefault(_appCheckBoxDemoJsx);
 
-	var _appRadioDemoJsx = __webpack_require__(61);
+	var _appRadioDemoJsx = __webpack_require__(63);
 
 	var _appRadioDemoJsx2 = _interopRequireDefault(_appRadioDemoJsx);
 
-	var _appRadioGroupDemoJsx = __webpack_require__(62);
+	var _appRadioGroupDemoJsx = __webpack_require__(64);
 
 	var _appRadioGroupDemoJsx2 = _interopRequireDefault(_appRadioGroupDemoJsx);
 
-	var _appCheckBoxGroupDemoJsx = __webpack_require__(64);
+	var _appCheckBoxGroupDemoJsx = __webpack_require__(65);
 
 	var _appCheckBoxGroupDemoJsx2 = _interopRequireDefault(_appCheckBoxGroupDemoJsx);
+
+	var _appDropDownDemoJsx = __webpack_require__(66);
+
+	var _appDropDownDemoJsx2 = _interopRequireDefault(_appDropDownDemoJsx);
 
 	// React.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 	// React.render(<RadioDemo/>, document.getElementById('radio'));
 	// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
-	React.render(React.createElement(_appCheckBoxGroupDemoJsx2["default"], null), document.getElementById('checkbox-group'));
+	// React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
+	React.render(React.createElement(_appDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
 
 /***/ },
 /* 1 */
@@ -635,14 +640,19 @@
 
 	var _componentRadioGroupJsx2 = _interopRequireDefault(_componentRadioGroupJsx);
 
-	var _componentCheckBoxGroupJsx = __webpack_require__(63);
+	var _componentCheckBoxGroupJsx = __webpack_require__(61);
 
 	var _componentCheckBoxGroupJsx2 = _interopRequireDefault(_componentCheckBoxGroupJsx);
+
+	var _componentDropDownJsx = __webpack_require__(62);
+
+	var _componentDropDownJsx2 = _interopRequireDefault(_componentDropDownJsx);
 
 	exports.CheckBox = _componentCheckBoxJsx2['default'];
 	exports.Radio = _componentRadioJsx2['default'];
 	exports.RadioGroup = _componentRadioGroupJsx2['default'];
 	exports.CheckBoxGroup = _componentCheckBoxGroupJsx2['default'];
+	exports.DropDown = _componentDropDownJsx2['default'];
 
 /***/ },
 /* 33 */
@@ -1231,183 +1241,6 @@
 /* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	var _get = __webpack_require__(3)["default"];
-
-	var _inherits = __webpack_require__(17)["default"];
-
-	var _createClass = __webpack_require__(28)["default"];
-
-	var _classCallCheck = __webpack_require__(31)["default"];
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _indexJs = __webpack_require__(32);
-
-	var RadioDemo = (function (_React$Component) {
-	    _inherits(RadioDemo, _React$Component);
-
-	    function RadioDemo() {
-	        _classCallCheck(this, RadioDemo);
-
-	        _get(Object.getPrototypeOf(RadioDemo.prototype), "constructor", this).apply(this, arguments);
-	    }
-
-	    _createClass(RadioDemo, [{
-	        key: "handleChange",
-	        value: function handleChange(e) {
-	            console.log(e.target.checked);
-	        }
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            return React.createElement(
-	                "ol",
-	                null,
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "h4",
-	                        null,
-	                        "radio"
-	                    ),
-	                    React.createElement(
-	                        _indexJs.Radio,
-	                        { onChange: this.handleChange.bind(this) },
-	                        "radio"
-	                    )
-	                ),
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "h4",
-	                        null,
-	                        "disabled"
-	                    ),
-	                    React.createElement(
-	                        _indexJs.Radio,
-	                        { disabled: "true" },
-	                        "disabled radio"
-	                    )
-	                ),
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "h4",
-	                        null,
-	                        "checked radio"
-	                    ),
-	                    React.createElement(
-	                        _indexJs.Radio,
-	                        { checked: "true" },
-	                        "checked radio"
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return RadioDemo;
-	})(React.Component);
-
-	exports["default"] = RadioDemo;
-	module.exports = exports["default"];
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _get = __webpack_require__(3)['default'];
-
-	var _inherits = __webpack_require__(17)['default'];
-
-	var _createClass = __webpack_require__(28)['default'];
-
-	var _classCallCheck = __webpack_require__(31)['default'];
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	var _indexJs = __webpack_require__(32);
-
-	var options = [{ 'name': 'A', 'value': 'a' }, { 'name': 'B', 'value': 'b' }, { 'name': 'C', 'value': 'c' }, { 'name': 'D', 'value': 'd' }];
-
-	var checkedVal = 'b';
-
-	var RadioDemo = (function (_React$Component) {
-	    _inherits(RadioDemo, _React$Component);
-
-	    function RadioDemo(props, refs) {
-	        _classCallCheck(this, RadioDemo);
-
-	        _get(Object.getPrototypeOf(RadioDemo.prototype), 'constructor', this).call(this, props);
-	        this.state = {
-	            displayText: checkedVal
-	        };
-	    }
-
-	    _createClass(RadioDemo, [{
-	        key: 'displayChange',
-	        value: function displayChange(value) {
-	            this.setState({
-	                displayText: value
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return React.createElement(
-	                'ol',
-	                null,
-	                React.createElement(
-	                    'li',
-	                    null,
-	                    React.createElement(
-	                        'h4',
-	                        null,
-	                        'radio group'
-	                    ),
-	                    React.createElement(
-	                        'p',
-	                        null,
-	                        'you selected value is ',
-	                        this.state.displayText
-	                    ),
-	                    React.createElement(_indexJs.RadioGroup, { options: options, labelName: 'name', valueName: 'value', value: checkedVal, onChange: this.displayChange.bind(this) })
-	                ),
-	                React.createElement(
-	                    'li',
-	                    null,
-	                    React.createElement(
-	                        'h4',
-	                        null,
-	                        'radio group with default first selected'
-	                    ),
-	                    React.createElement(_indexJs.RadioGroup, { options: options, labelName: 'name', valueName: 'value', defaultChecked: 'true' })
-	                )
-	            );
-	        }
-	    }]);
-
-	    return RadioDemo;
-	})(React.Component);
-
-	exports['default'] = RadioDemo;
-	module.exports = exports['default'];
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	var _get = __webpack_require__(3)['default'];
@@ -1587,7 +1420,330 @@
 	module.exports = exports['default'];
 
 /***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(3)['default'];
+
+	var _inherits = __webpack_require__(17)['default'];
+
+	var _createClass = __webpack_require__(28)['default'];
+
+	var _classCallCheck = __webpack_require__(31)['default'];
+
+	var _getIterator = __webpack_require__(36)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var DropDown = (function (_React$Component) {
+	    _inherits(DropDown, _React$Component);
+
+	    function DropDown(props) {
+	        _classCallCheck(this, DropDown);
+
+	        _get(Object.getPrototypeOf(DropDown.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            options: props.options,
+	            value: props.value,
+	            unfold: false
+	        };
+	    }
+
+	    _createClass(DropDown, [{
+	        key: 'selectChange',
+	        value: function selectChange(val) {
+	            var _this = this;
+
+	            this.setState({
+	                value: val
+	            }, function () {
+	                if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
+	                _this.setState({
+	                    unfold: false
+	                });
+	            });
+	        }
+	    }, {
+	        key: 'toggleDropDown',
+	        value: function toggleDropDown() {
+	            this.setState({
+	                unfold: !this.state.unfold
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props$labelName = this.props.labelName;
+	            var labelName = _props$labelName === undefined ? 'name' : _props$labelName;
+	            var _props$valueName = this.props.valueName;
+	            var valueName = _props$valueName === undefined ? 'value' : _props$valueName;
+
+	            var optionNodes = [],
+	                selected = undefined,
+	                label = undefined,
+	                content = null;
+
+	            var _iteratorNormalCompletion = true;
+	            var _didIteratorError = false;
+	            var _iteratorError = undefined;
+
+	            try {
+	                for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                    var pair = _step.value;
+
+	                    selected = this.state.value === pair[valueName];
+	                    if (selected) label = pair[labelName];
+	                    optionNodes.push(React.createElement(
+	                        DropDown.Option,
+	                        { key: pair[valueName], onChange: this.selectChange.bind(this), selected: selected, storeValue: pair[valueName] },
+	                        pair[labelName]
+	                    ));
+	                }
+	            } catch (err) {
+	                _didIteratorError = true;
+	                _iteratorError = err;
+	            } finally {
+	                try {
+	                    if (!_iteratorNormalCompletion && _iterator['return']) {
+	                        _iterator['return']();
+	                    }
+	                } finally {
+	                    if (_didIteratorError) {
+	                        throw _iteratorError;
+	                    }
+	                }
+	            }
+
+	            if (this.state.unfold) content = React.createElement(
+	                'ul',
+	                null,
+	                optionNodes
+	            );
+
+	            return React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'div',
+	                    { onClick: this.toggleDropDown.bind(this) },
+	                    label
+	                ),
+	                content
+	            );
+	        }
+	    }]);
+
+	    return DropDown;
+	})(React.Component);
+
+	exports['default'] = DropDown;
+
+	DropDown.Option = React.createClass({
+	    displayName: 'Option',
+
+	    handleClick: function handleClick() {
+	        this.props.onChange(this.props.storeValue);
+	    },
+
+	    render: function render() {
+	        var node = this.props.selected ? React.createElement(
+	            'i',
+	            null,
+	            '√'
+	        ) : null;
+	        return React.createElement(
+	            'div',
+	            { onClick: this.handleClick },
+	            this.props.children,
+	            node
+	        );
+	    }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _get = __webpack_require__(3)["default"];
+
+	var _inherits = __webpack_require__(17)["default"];
+
+	var _createClass = __webpack_require__(28)["default"];
+
+	var _classCallCheck = __webpack_require__(31)["default"];
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(32);
+
+	var RadioDemo = (function (_React$Component) {
+	    _inherits(RadioDemo, _React$Component);
+
+	    function RadioDemo() {
+	        _classCallCheck(this, RadioDemo);
+
+	        _get(Object.getPrototypeOf(RadioDemo.prototype), "constructor", this).apply(this, arguments);
+	    }
+
+	    _createClass(RadioDemo, [{
+	        key: "handleChange",
+	        value: function handleChange(e) {
+	            console.log(e.target.checked);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return React.createElement(
+	                "ol",
+	                null,
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "radio"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Radio,
+	                        { onChange: this.handleChange.bind(this) },
+	                        "radio"
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "disabled"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Radio,
+	                        { disabled: "true" },
+	                        "disabled radio"
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "checked radio"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Radio,
+	                        { checked: "true" },
+	                        "checked radio"
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return RadioDemo;
+	})(React.Component);
+
+	exports["default"] = RadioDemo;
+	module.exports = exports["default"];
+
+/***/ },
 /* 64 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(3)['default'];
+
+	var _inherits = __webpack_require__(17)['default'];
+
+	var _createClass = __webpack_require__(28)['default'];
+
+	var _classCallCheck = __webpack_require__(31)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(32);
+
+	var options = [{ 'name': 'A', 'value': 'a' }, { 'name': 'B', 'value': 'b' }, { 'name': 'C', 'value': 'c' }, { 'name': 'D', 'value': 'd' }];
+
+	var checkedVal = 'b';
+
+	var RadioDemo = (function (_React$Component) {
+	    _inherits(RadioDemo, _React$Component);
+
+	    function RadioDemo(props, refs) {
+	        _classCallCheck(this, RadioDemo);
+
+	        _get(Object.getPrototypeOf(RadioDemo.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            displayText: checkedVal
+	        };
+	    }
+
+	    _createClass(RadioDemo, [{
+	        key: 'displayChange',
+	        value: function displayChange(value) {
+	            this.setState({
+	                displayText: value
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'ol',
+	                null,
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'radio group'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'you selected value is ',
+	                        this.state.displayText
+	                    ),
+	                    React.createElement(_indexJs.RadioGroup, { options: options, labelName: 'name', valueName: 'value', value: checkedVal, onChange: this.displayChange.bind(this) })
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'radio group with default first selected'
+	                    ),
+	                    React.createElement(_indexJs.RadioGroup, { options: options, labelName: 'name', valueName: 'value', defaultChecked: 'true' })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return RadioDemo;
+	})(React.Component);
+
+	exports['default'] = RadioDemo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1660,6 +1816,81 @@
 	})(React.Component);
 
 	exports['default'] = CheckBoxGroupDemo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(3)['default'];
+
+	var _inherits = __webpack_require__(17)['default'];
+
+	var _createClass = __webpack_require__(28)['default'];
+
+	var _classCallCheck = __webpack_require__(31)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(32);
+
+	var options = [{ 'name': 'A', 'value': 'a' }, { 'name': 'B', 'value': 'b' }, { 'name': 'C', 'value': 'c' }, { 'name': 'D', 'value': 'd' }];
+
+	var checkedVal = 'b';
+
+	var DropDownDemo = (function (_React$Component) {
+	    _inherits(DropDownDemo, _React$Component);
+
+	    function DropDownDemo(props) {
+	        _classCallCheck(this, DropDownDemo);
+
+	        _get(Object.getPrototypeOf(DropDownDemo.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            value: checkedVal
+	        };
+	    }
+
+	    _createClass(DropDownDemo, [{
+	        key: 'displayChange',
+	        value: function displayChange(value) {
+	            this.setState({
+	                value: value
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'ol',
+	                null,
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'drop down'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'you selected option is ',
+	                        this.state.value
+	                    ),
+	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', value: checkedVal, onChange: this.displayChange.bind(this) })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DropDownDemo;
+	})(React.Component);
+
+	exports['default'] = DropDownDemo;
 	module.exports = exports['default'];
 
 /***/ }

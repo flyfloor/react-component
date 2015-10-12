@@ -27,7 +27,7 @@ export default class DropDown extends React.Component {
 
 	render() {
         const [labelName = 'name', valueName = 'value'] = [this.props.labelName, this.props.valueName];
-        let optionNodes = [], selected, label, content = null;
+        let optionNodes = [], selected, label = this.props.placeHolder, content = null;
 
         for (let pair of this.state.options){
             selected = this.state.value === pair[valueName];
@@ -45,6 +45,8 @@ export default class DropDown extends React.Component {
 		);
 	}
 }
+
+DropDown.defaultProps = { placeHolder: 'click to select...' }
 
 DropDown.Option = React.createClass({
     handleClick(){

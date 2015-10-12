@@ -7,13 +7,12 @@ const options = [
     {'name': 'D', 'value': 'd'},
 ]
 
-const checkedVal = 'b';
 
 export default class DropDownDemo extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value: checkedVal,
+            value: null,
         }
     }
 
@@ -28,8 +27,8 @@ export default class DropDownDemo extends React.Component {
             <ol>
                 <li>
                     <h4>drop down</h4>
-                    <p>you selected option is {this.state.value}</p>
-                    <DropDown options={options} labelName='name' valueName='value' value={checkedVal} onChange={this.displayChange.bind(this)} />
+                    <p>you selected option value is {this.state.value}</p>
+                    <DropDown options={options} labelName='name' valueName='value' onChange={this.displayChange.bind(this)} />
                 </li>
             </ol>
         );

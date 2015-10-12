@@ -1484,7 +1484,7 @@
 
 	            var optionNodes = [],
 	                selected = undefined,
-	                label = undefined,
+	                label = this.props.placeHolder,
 	                content = null;
 
 	            var _iteratorNormalCompletion = true;
@@ -1541,6 +1541,8 @@
 	})(React.Component);
 
 	exports['default'] = DropDown;
+
+	DropDown.defaultProps = { placeHolder: 'click to select...' };
 
 	DropDown.Option = React.createClass({
 	    displayName: 'Option',
@@ -1840,8 +1842,6 @@
 
 	var options = [{ 'name': 'A', 'value': 'a' }, { 'name': 'B', 'value': 'b' }, { 'name': 'C', 'value': 'c' }, { 'name': 'D', 'value': 'd' }];
 
-	var checkedVal = 'b';
-
 	var DropDownDemo = (function (_React$Component) {
 	    _inherits(DropDownDemo, _React$Component);
 
@@ -1850,7 +1850,7 @@
 
 	        _get(Object.getPrototypeOf(DropDownDemo.prototype), 'constructor', this).call(this, props);
 	        this.state = {
-	            value: checkedVal
+	            value: null
 	        };
 	    }
 
@@ -1878,10 +1878,10 @@
 	                    React.createElement(
 	                        'p',
 	                        null,
-	                        'you selected option is ',
+	                        'you selected option value is ',
 	                        this.state.value
 	                    ),
-	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', value: checkedVal, onChange: this.displayChange.bind(this) })
+	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', onChange: this.displayChange.bind(this) })
 	                )
 	            );
 	        }

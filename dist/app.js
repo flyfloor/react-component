@@ -1469,14 +1469,15 @@
 	        }
 	    }, {
 	        key: 'toggleDropDown',
-	        value: function toggleDropDown() {
+	        value: function toggleDropDown(e) {
 	            this.setState({
 	                unfold: !this.state.unfold
 	            });
+	            e.stopPropagation();
 	        }
 	    }, {
-	        key: 'render',
-	        value: function render() {
+	        key: 'formatDrop',
+	        value: function formatDrop() {
 	            var _props$labelName = this.props.labelName;
 	            var labelName = _props$labelName === undefined ? 'name' : _props$labelName;
 	            var _props$valueName = this.props.valueName;
@@ -1484,8 +1485,7 @@
 
 	            var optionNodes = [],
 	                selected = undefined,
-	                label = this.props.placeHolder,
-	                content = null;
+	                label = this.props.placeHolder;
 
 	            var _iteratorNormalCompletion = true;
 	            var _didIteratorError = false;
@@ -1518,22 +1518,45 @@
 	                }
 	            }
 
-	            if (this.state.unfold) content = React.createElement(
+	            return React.createElement(
+	                'div',
+	                null,
+	                this.formatDropBar(label),
+	                this.formatDropList(optionNodes)
+	            );
+	        }
+	    }, {
+	        key: 'formatDropList',
+	        value: function formatDropList(nodes) {
+	            return this.state.unfold ? React.createElement(
 	                'ul',
 	                null,
-	                optionNodes
+	                nodes
+	            ) : null;
+	        }
+	    }, {
+	        key: 'formatDropBar',
+	        value: function formatDropBar(label) {
+	            var node = !this.props.search ? React.createElement(
+	                DropDown.searchBar,
+	                { className: 'searchBar' },
+	                label
+	            ) : React.createElement(
+	                DropDown.label,
+	                null,
+	                label
 	            );
 
 	            return React.createElement(
 	                'div',
-	                null,
-	                React.createElement(
-	                    'div',
-	                    { onClick: this.toggleDropDown.bind(this) },
-	                    label
-	                ),
-	                content
+	                { onClick: this.toggleDropDown.bind(this) },
+	                node
 	            );
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return this.formatDrop();
 	        }
 	    }]);
 
@@ -1562,6 +1585,47 @@
 	            { onClick: this.handleClick },
 	            this.props.children,
 	            node
+	        );
+	    }
+	});
+
+	DropDown.label = React.createClass({
+	    displayName: 'label',
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            this.props.children
+	        );
+	    }
+	});
+
+	DropDown.searchBar = React.createClass({
+	    displayName: 'searchBar',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            searchText: null
+	        };
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            placeHolder: 'search...'
+	        };
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement('input', { type: 'text', style: { width: '200px', height: '20px' }, placeholder: this.props.placeHolder }),
+	                this.props.children
+	            )
 	        );
 	    }
 	});

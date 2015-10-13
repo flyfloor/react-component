@@ -1449,7 +1449,8 @@
 	        this.state = {
 	            options: props.options,
 	            value: props.value,
-	            unfold: false
+	            unfold: false,
+	            filterText: ''
 	        };
 	    }
 
@@ -1485,7 +1486,11 @@
 
 	            var optionNodes = [],
 	                selected = undefined,
-	                label = this.props.placeHolder;
+	                label = this.props.placeHolder,
+	                filterText = this.state.filterText,
+	                compVal = this.state.value,
+	                searchable = this.props.searchable,
+	                node = undefined;
 
 	            var _iteratorNormalCompletion = true;
 	            var _didIteratorError = false;
@@ -1495,13 +1500,21 @@
 	                for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 	                    var pair = _step.value;
 
-	                    selected = this.state.value === pair[valueName];
+	                    selected = compVal === pair[valueName];
 	                    if (selected) label = pair[labelName];
-	                    optionNodes.push(React.createElement(
-	                        DropDown.Option,
-	                        { key: pair[valueName], onChange: this.selectChange.bind(this), selected: selected, storeValue: pair[valueName] },
-	                        pair[labelName]
-	                    ));
+
+	                    node = this.formatOptionCell({
+	                        label: pair[labelName],
+	                        value: pair[valueName],
+	                        onChange: this.selectChange,
+	                        selected: selected
+	                    });
+
+	                    if (searchable) {
+	                        if (pair[valueName].indexOf(filterText) !== -1 || pair[labelName].indexOf(filterText) !== -1) optionNodes.push(node);
+	                        continue;
+	                    }
+	                    optionNodes.push(node);
 	                }
 	            } catch (err) {
 	                _didIteratorError = true;
@@ -1526,6 +1539,20 @@
 	            );
 	        }
 	    }, {
+	        key: 'formatOptionCell',
+	        value: function formatOptionCell(_ref) {
+	            var label = _ref.label;
+	            var value = _ref.value;
+	            var onChange = _ref.onChange;
+	            var selected = _ref.selected;
+
+	            return React.createElement(
+	                DropDown.Option,
+	                { key: value, onChange: onChange.bind(this), selected: selected, storeValue: value },
+	                label
+	            );
+	        }
+	    }, {
 	        key: 'formatDropList',
 	        value: function formatDropList(nodes) {
 	            return this.state.unfold ? React.createElement(
@@ -1535,11 +1562,18 @@
 	            ) : null;
 	        }
 	    }, {
+	        key: 'handleSearch',
+	        value: function handleSearch(text) {
+	            this.setState({
+	                filterText: text
+	            });
+	        }
+	    }, {
 	        key: 'formatDropBar',
 	        value: function formatDropBar(label) {
-	            var node = !this.props.search ? React.createElement(
+	            var node = this.props.searchable ? React.createElement(
 	                DropDown.searchBar,
-	                { className: 'searchBar' },
+	                { className: 'searchBar', onUserInput: this.handleSearch.bind(this) },
 	                label
 	            ) : React.createElement(
 	                DropDown.label,
@@ -1604,16 +1638,14 @@
 	DropDown.searchBar = React.createClass({
 	    displayName: 'searchBar',
 
-	    getInitialState: function getInitialState() {
-	        return {
-	            searchText: null
-	        };
-	    },
-
 	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            placeHolder: 'search...'
 	        };
+	    },
+
+	    handleChange: function handleChange() {
+	        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
 	    },
 
 	    render: function render() {
@@ -1623,7 +1655,7 @@
 	            React.createElement(
 	                'div',
 	                null,
-	                React.createElement('input', { type: 'text', style: { width: '200px', height: '20px' }, placeholder: this.props.placeHolder }),
+	                React.createElement('input', { ref: 'userInput', type: 'text', style: { width: '200px', height: '20px' }, onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder }),
 	                this.props.children
 	            )
 	        );
@@ -1945,7 +1977,7 @@
 	                        'you selected option value is ',
 	                        this.state.value
 	                    ),
-	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', onChange: this.displayChange.bind(this) })
+	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', searchable: 'true', onChange: this.displayChange.bind(this) })
 	                )
 	            );
 	        }

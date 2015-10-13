@@ -28,7 +28,7 @@ export default class DropDownDemo extends React.Component {
                 <li>
                     <h4>drop down</h4>
                     <p>you selected option value is {this.state.value}</p>
-                    <DropDown options={options} labelName='name' valueName='value' onChange={this.displayChange.bind(this)} />
+                    <DropDown options={options} labelName='name' valueName='value' searchable='true' onChange={this.displayChange.bind(this)} />
                 </li>
             </ol>
         );

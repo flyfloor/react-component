@@ -1952,7 +1952,7 @@
 
 	var _indexJs = __webpack_require__(32);
 
-	var options = [{ 'name': 'A', 'value': 'a' }, { 'name': 'B', 'value': 'b' }, { 'name': 'C', 'value': 'c' }, { 'name': 'D', 'value': 'd' }];
+	var options = [{ 'name': 'apple', 'value': 'alpha' }, { 'name': 'banana', 'value': 'beta' }, { 'name': 'cat', 'value': 'charlie' }, { 'name': 'dog', 'value': 'delta' }, { 'name': 'egg', 'value': 'echo' }];
 
 	var DropDownDemo = (function (_React$Component) {
 	    _inherits(DropDownDemo, _React$Component);

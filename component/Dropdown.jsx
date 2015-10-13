@@ -9,24 +9,6 @@ export default class DropDown extends React.Component {
         }
     }
 
-    selectChange(val){
-        this.setState({
-            value: val, 
-        }, () => {
-            if (typeof this.props.onChange === 'function') this.props.onChange(val);
-            this.setState({
-                unfold: false, 
-            });
-        });
-    }
-
-    toggleDropDown(e){
-        this.setState({
-            unfold: !this.state.unfold, 
-        });
-        e.stopPropagation();
-    }
-
     formatDrop(){
         const [labelName = 'name', valueName = 'value'] = [this.props.labelName, this.props.valueName];
         let optionNodes = [], 
@@ -70,18 +52,43 @@ export default class DropDown extends React.Component {
         return this.state.unfold ? <ul>{nodes}</ul> : null;
     }
 
+    selectChange(val){
+        this.setState({
+            value: val, 
+        }, () => {
+            if (typeof this.props.onChange === 'function') this.props.onChange(val);
+            this.setState({
+                unfold: false, 
+            });
+        });
+    }
+
+    toggleDropDown(e){
+        this.setState({
+            unfold: !this.state.unfold, 
+        });
+        e.stopPropagation();
+    }
+
     handleSearch(text){
         this.setState({
             filterText: text, 
         });
     }
 
+    handleFocus(e){
+        this.setState({
+            unfold: true, 
+        });
+        e.stopPropagation();
+    }
+
     formatDropBar(label){
         let node = this.props.searchable ? 
-                        <DropDown.searchBar className="searchBar" onUserInput={this.handleSearch.bind(this)}>{label}</DropDown.searchBar> :
-                        <DropDown.label>{label}</DropDown.label>;
+                        <DropDown.SearchBar onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)}>{label}</DropDown.SearchBar> :
+                        <DropDown.label onUserClick={this.toggleDropDown.bind(this)}>{label}</DropDown.label>;
 
-        return <div onClick={this.toggleDropDown.bind(this)}>
+        return <div>
                     {node}
                 </div>
     }
@@ -112,9 +119,13 @@ DropDown.Option = React.createClass({
 });
 
 DropDown.label = React.createClass({
+    handleClick(e){
+        this.props.onUserClick(e);
+    },
+
     render() {
         return (
-            <div>
+            <div onClick={this.handleClick.bind(this)}>
                 {this.props.children}
             </div>
         );
@@ -122,9 +133,9 @@ DropDown.label = React.createClass({
 });
 
 
-DropDown.searchBar = React.createClass({
+DropDown.SearchBar = React.createClass({
 
-    getDefaultProps: () => {
+    getDefaultProps(){
         return {
             placeHolder: 'search...'
         };
@@ -134,11 +145,15 @@ DropDown.searchBar = React.createClass({
         this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
     },
 
+    handleFocus(e){
+        this.props.onUserInputFocus(e);
+    },
+
     render() {
         return (
             <div>
                 <div>
-                    <input ref="userInput" type="text" style={{width: '200px', height:'20px'}} onChange={this.handleChange.bind(this)} placeholder={this.props.placeHolder}/>
+                    <input ref='userInput' onFocus={this.handleFocus} type='text' style={{width: '200px', height:'20px'}} onChange={this.handleChange.bind(this)} placeholder={this.props.placeHolder}/>
                     {this.props.children}
                 </div>
             </div>

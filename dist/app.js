@@ -1455,28 +1455,6 @@
 	    }
 
 	    _createClass(DropDown, [{
-	        key: 'selectChange',
-	        value: function selectChange(val) {
-	            var _this = this;
-
-	            this.setState({
-	                value: val
-	            }, function () {
-	                if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
-	                _this.setState({
-	                    unfold: false
-	                });
-	            });
-	        }
-	    }, {
-	        key: 'toggleDropDown',
-	        value: function toggleDropDown(e) {
-	            this.setState({
-	                unfold: !this.state.unfold
-	            });
-	            e.stopPropagation();
-	        }
-	    }, {
 	        key: 'formatDrop',
 	        value: function formatDrop() {
 	            var _props$labelName = this.props.labelName;
@@ -1562,6 +1540,28 @@
 	            ) : null;
 	        }
 	    }, {
+	        key: 'selectChange',
+	        value: function selectChange(val) {
+	            var _this = this;
+
+	            this.setState({
+	                value: val
+	            }, function () {
+	                if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
+	                _this.setState({
+	                    unfold: false
+	                });
+	            });
+	        }
+	    }, {
+	        key: 'toggleDropDown',
+	        value: function toggleDropDown(e) {
+	            this.setState({
+	                unfold: !this.state.unfold
+	            });
+	            e.stopPropagation();
+	        }
+	    }, {
 	        key: 'handleSearch',
 	        value: function handleSearch(text) {
 	            this.setState({
@@ -1569,21 +1569,29 @@
 	            });
 	        }
 	    }, {
+	        key: 'handleFocus',
+	        value: function handleFocus(e) {
+	            this.setState({
+	                unfold: true
+	            });
+	            e.stopPropagation();
+	        }
+	    }, {
 	        key: 'formatDropBar',
 	        value: function formatDropBar(label) {
 	            var node = this.props.searchable ? React.createElement(
-	                DropDown.searchBar,
-	                { className: 'searchBar', onUserInput: this.handleSearch.bind(this) },
+	                DropDown.SearchBar,
+	                { onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this) },
 	                label
 	            ) : React.createElement(
 	                DropDown.label,
-	                null,
+	                { onUserClick: this.toggleDropDown.bind(this) },
 	                label
 	            );
 
 	            return React.createElement(
 	                'div',
-	                { onClick: this.toggleDropDown.bind(this) },
+	                null,
 	                node
 	            );
 	        }
@@ -1626,17 +1634,21 @@
 	DropDown.label = React.createClass({
 	    displayName: 'label',
 
+	    handleClick: function handleClick(e) {
+	        this.props.onUserClick(e);
+	    },
+
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            null,
+	            { onClick: this.handleClick.bind(this) },
 	            this.props.children
 	        );
 	    }
 	});
 
-	DropDown.searchBar = React.createClass({
-	    displayName: 'searchBar',
+	DropDown.SearchBar = React.createClass({
+	    displayName: 'SearchBar',
 
 	    getDefaultProps: function getDefaultProps() {
 	        return {
@@ -1648,6 +1660,10 @@
 	        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
 	    },
 
+	    handleFocus: function handleFocus(e) {
+	        this.props.onUserInputFocus(e);
+	    },
+
 	    render: function render() {
 	        return React.createElement(
 	            'div',
@@ -1655,7 +1671,7 @@
 	            React.createElement(
 	                'div',
 	                null,
-	                React.createElement('input', { ref: 'userInput', type: 'text', style: { width: '200px', height: '20px' }, onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder }),
+	                React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, type: 'text', style: { width: '200px', height: '20px' }, onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder }),
 	                this.props.children
 	            )
 	        );

@@ -1456,15 +1456,19 @@
 
 	    _createClass(DropDown, [{
 	        key: 'formatValue',
-	        value: function formatValue(val) {
-	            var _this = this;
-
-	            this.setState({
-	                value: val
-	            }, function () {
-	                if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
-	                _this.toggleOpen(false);
-	            });
+	        value: function formatValue(val, callback) {
+	            var newVal = val,
+	                oldVal = this.state.value;
+	            if (this.props.multi) {
+	                var index = oldVal.indexOf(val);
+	                if (index > -1) {
+	                    oldVal.splice(index, 1);
+	                    this.setState({ value: oldVal }, callback);
+	                    return;
+	                }
+	                newVal = oldVal.concat(val);
+	            }
+	            this.setState({ value: newVal }, callback);
 	        }
 	    }, {
 	        key: 'formatDrop',
@@ -1485,6 +1489,7 @@
 	                selectedVals = [];
 
 	            if (multi) {
+	                // list node format(multi)
 	                var _iteratorNormalCompletion = true;
 	                var _didIteratorError = false;
 	                var _iteratorError = undefined;
@@ -1499,6 +1504,12 @@
 	                        try {
 	                            for (var _iterator2 = _getIterator(compVal), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
 	                                var val = _step2.value;
+
+	                                selected = val === pair[VALUE_NAME];
+	                                if (selected) {
+	                                    selectedVals.push(pair[LABEL_NAME]);
+	                                    break;
+	                                };
 	                            }
 	                        } catch (err) {
 	                            _didIteratorError2 = true;
@@ -1514,6 +1525,9 @@
 	                                }
 	                            }
 	                        }
+
+	                        node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
+	                        optionNodes.push(node);
 	                    }
 	                } catch (err) {
 	                    _didIteratorError = true;
@@ -1570,7 +1584,7 @@
 	            return React.createElement(
 	                'div',
 	                null,
-	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { selectedVals: selectedVals }) : React.createElement(
+	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { onClick: this.toggleOpen.bind(this), selectedVals: selectedVals }) : React.createElement(
 	                    _DropBaseJsx2['default'].label,
 	                    { onClick: this.toggleDropDown.bind(this) },
 	                    placeHolder
@@ -2050,8 +2064,18 @@
 	    },
 
 	    selectChange: function selectChange(val) {
-	        this.formatValue(val);
+	        var _this = this;
+
+	        this.formatValue(val, function () {
+	            if (typeof _this.props.onChange === 'function') _this.props.onChange(_this.state.value);
+	            _this.toggleOpen(false);
+	        });
 	    },
+
+	    // valueChangeCallback(){
+	    //     if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
+	    //     this.toggleOpen(false);
+	    // },
 
 	    toggleOpen: function toggleOpen(stat) {
 	        this.setState({
@@ -2115,7 +2139,7 @@
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { onClick: this.handleClick.bind(this) },
+	            { onClick: this.handleClick },
 	            this.props.children
 	        );
 	    }
@@ -2124,8 +2148,30 @@
 	DropBase.multiInput = React.createClass({
 	    displayName: 'multiInput',
 
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            selectedVals: []
+	        };
+	    },
+
+	    handleClick: function handleClick(e) {
+	        this.props.onClick(true);
+	    },
+
 	    render: function render() {
-	        return React.createElement('div', null);
+	        var labels = this.props.selectedVals.map(function (val) {
+	            return React.createElement(
+	                'span',
+	                null,
+	                val
+	            );
+	        });
+	        return React.createElement(
+	            'div',
+	            { onClick: this.handleClick },
+	            labels,
+	            React.createElement('input', { type: 'text', placeholder: 'search...' })
+	        );
 	    }
 	});
 

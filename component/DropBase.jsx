@@ -29,8 +29,16 @@ const DropBase = React.createClass({
     },
 
     selectChange(val){
-        this.formatValue(val);
+        this.formatValue(val, () => {
+            if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
+            this.toggleOpen(false);
+        });
     },
+
+    // valueChangeCallback(){
+    //     if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
+    //     this.toggleOpen(false);
+    // },
 
     toggleOpen(stat){
         this.setState({
@@ -85,7 +93,7 @@ DropBase.label = React.createClass({
 
     render() {
         return (
-            <div onClick={this.handleClick.bind(this)}>
+            <div onClick={this.handleClick}>
                 {this.props.children}
             </div>
         );
@@ -93,9 +101,25 @@ DropBase.label = React.createClass({
 });
 
 DropBase.multiInput = React.createClass({
+    getDefaultProps() {
+        return {
+            selectedVals: [],
+        };
+    },
+
+    handleClick(e){
+        this.props.onClick(true);
+    },
+
     render() {
+        const labels = this.props.selectedVals.map((val) => {
+            return <span>{val}</span>;
+        })
         return (
-            <div></div>
+            <div onClick={this.handleClick}>
+                {labels}
+                <input type="text" placeholder='search...'/>
+            </div>
         );
     }
 });

@@ -5,13 +5,19 @@ export default class DropDown extends DropBase {
         super(props);
     }
 
-    formatValue(val){
-        this.setState({
-            value: val, 
-        }, () => {
-            if (typeof this.props.onChange === 'function') this.props.onChange(val);
-            this.toggleOpen(false);
-        });
+    formatValue(val, callback){
+        let newVal = val, 
+            oldVal = this.state.value;
+        if (this.props.multi) {
+            let index = oldVal.indexOf(val);
+            if (index > -1) {
+                oldVal.splice(index, 1);
+                this.setState({ value: oldVal }, callback);
+                return;
+            }
+            newVal = oldVal.concat(val);
+        } 
+        this.setState({ value: newVal}, callback);
     }
 
     formatDrop(){
@@ -25,10 +31,17 @@ export default class DropDown extends DropBase {
             selectedVals = [];
         
         if (multi) {
+            // list node format(multi)
             for (let pair of this.state.options){
                 for(let val of compVal){
-                    
+                    selected = val === pair[VALUE_NAME];
+                    if (selected) {
+                        selectedVals.push(pair[LABEL_NAME]);
+                        break;
+                    };
                 }
+                node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
+                optionNodes.push(node);
             }
         } else {
             // with a searchbar
@@ -46,9 +59,9 @@ export default class DropDown extends DropBase {
                 optionNodes.push(node);
             }
         }
-        
+
         return <div>
-                    { multi ? <DropBase.multiInput selectedVals={selectedVals}></DropBase.multiInput> : 
+                    { multi ? <DropBase.multiInput onClick={this.toggleOpen.bind(this)} selectedVals={selectedVals}></DropBase.multiInput> : 
                         <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
                     {this.formatDropList(optionNodes)}
                 </div>

@@ -1859,7 +1859,8 @@
 	        _get(Object.getPrototypeOf(DropDownDemo.prototype), 'constructor', this).call(this, props);
 	        this.state = {
 	            value: null,
-	            value1: 'egg'
+	            value1: 'echo',
+	            value2: 'banana'
 	        };
 	    }
 
@@ -1875,6 +1876,13 @@
 	        value: function displayChange1(value) {
 	            this.setState({
 	                value1: value
+	            });
+	        }
+	    }, {
+	        key: 'displayChange2',
+	        value: function displayChange2(value) {
+	            this.setState({
+	                value2: value
 	            });
 	        }
 	    }, {
@@ -1905,6 +1913,16 @@
 	                    React.createElement(
 	                        'h4',
 	                        null,
+	                        'drop down got value, and selected'
+	                    ),
+	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', value: this.state.value1, valueName: 'value' })
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
 	                        'drop down with search'
 	                    ),
 	                    React.createElement(
@@ -1914,6 +1932,22 @@
 	                        this.state.value1
 	                    ),
 	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', valueName: 'value', searchable: 'true', onChange: this.displayChange1.bind(this) })
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'drop down with search'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'you selected option value is ',
+	                        this.state.value1
+	                    ),
+	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', valueName: 'value', multi: 'true', onChange: this.displayChange2.bind(this) })
 	                )
 	            );
 	        }

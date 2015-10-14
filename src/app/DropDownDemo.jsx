@@ -14,7 +14,8 @@ export default class DropDownDemo extends React.Component {
         super(props);
         this.state = {
             value: null,
-            value1: 'egg',
+            value1: 'echo',
+            value2: 'banana',
         }
     }
 
@@ -30,6 +31,12 @@ export default class DropDownDemo extends React.Component {
         });
     }
 
+    displayChange2(value){
+        this.setState({
+            value2: value, 
+        });
+    }
+
     render() {
         return (
             <ol>
@@ -39,9 +46,18 @@ export default class DropDownDemo extends React.Component {
                     <DropDown options={options} labelName='name' valueName='value' onChange={this.displayChange.bind(this)} />
                 </li>
                 <li>
+                    <h4>drop down got value, and selected</h4>
+                    <DropDown options={options} labelName='name'value={this.state.value1} valueName='value'/>
+                </li>
+                <li>
                     <h4>drop down with search</h4>
                     <p>you selected option value is {this.state.value1}</p>
-                    <DropDown options={options} ref='dropDown1' labelName='name' valueName='value' searchable='true' onChange={this.displayChange1.bind(this)}/>
+                    <DropDown options={options} ref='dropDown1' labelName='name'  valueName='value' searchable='true' onChange={this.displayChange1.bind(this)}/>
+                </li>
+                <li>
+                    <h4>drop down with search</h4>
+                    <p>you selected option value is {this.state.value1}</p>
+                    <DropDown options={options} ref='dropDown1' labelName='name' valueName='value' multi='true' onChange={this.displayChange2.bind(this)}/>
                 </li>
             </ol>
         );

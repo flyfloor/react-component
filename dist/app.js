@@ -70,9 +70,9 @@
 
 	// React.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 	// React.render(<RadioDemo/>, document.getElementById('radio'));
-	// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
+	React.render(React.createElement(_appRadioGroupDemoJsx2["default"], null), document.getElementById('radio-group'));
 	// React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-	React.render(React.createElement(_appDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
+	// React.render(<DropDownDemo/>, document.getElementById('drop-down'));
 
 /***/ },
 /* 1 */
@@ -817,7 +817,7 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            if (this.props.defaultChecked && this.state.options.length > 0) {
+	            if (this.props.defaultChecked && !this.state.value && this.state.options.length > 0) {
 	                this.setState({
 	                    value: this.state.options[0][this.props.valueName]
 	                });

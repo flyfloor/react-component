@@ -18,7 +18,7 @@ export default class RadioGroup extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.defaultChecked && this.state.options.length > 0){
+        if (this.props.defaultChecked && !this.state.value && this.state.options.length > 0){
             this.setState({
                 value: this.state.options[0][this.props.valueName] 
             });

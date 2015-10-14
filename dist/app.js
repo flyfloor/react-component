@@ -1922,7 +1922,8 @@
 	        this.state = {
 	            value: null,
 	            value1: 'echo',
-	            value2: ['beta,echo']
+	            value2: [],
+	            value3: ['beta', 'echo']
 	        };
 	    }
 
@@ -2001,7 +2002,7 @@
 	                    React.createElement(
 	                        'h4',
 	                        null,
-	                        'drop down with multiple value selected'
+	                        'drop down with multiple, not selected'
 	                    ),
 	                    React.createElement(
 	                        'p',
@@ -2010,6 +2011,16 @@
 	                        this.state.value2
 	                    ),
 	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', valueName: 'value', multi: 'true', onChange: this.displayChange2.bind(this) })
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'drop down with multiple value selected'
+	                    ),
+	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', value: this.state.value3, valueName: 'value', multi: 'true' })
 	                )
 	            );
 	        }

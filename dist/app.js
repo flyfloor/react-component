@@ -1425,189 +1425,183 @@
 
 	'use strict';
 
-	var _get = __webpack_require__(3)['default'];
-
-	var _inherits = __webpack_require__(17)['default'];
-
-	var _createClass = __webpack_require__(28)['default'];
-
-	var _classCallCheck = __webpack_require__(31)['default'];
-
 	var _getIterator = __webpack_require__(36)['default'];
 
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
+	var _interopRequireDefault = __webpack_require__(1)['default'];
 
-	var DropDown = (function (_React$Component) {
-	    _inherits(DropDown, _React$Component);
+	var _mixinDocumentClickMixin = __webpack_require__(69);
 
-	    function DropDown(props) {
-	        _classCallCheck(this, DropDown);
+	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
-	        _get(Object.getPrototypeOf(DropDown.prototype), 'constructor', this).call(this, props);
-	        this.state = {
-	            options: props.options,
-	            value: props.value,
-	            unfold: false,
+	var DropDown = React.createClass({
+	    displayName: 'DropDown',
+
+	    mixins: [_mixinDocumentClickMixin2['default']],
+	    getInitialState: function getInitialState() {
+	        return {
+	            options: this.props.options,
+	            value: this.props.value,
+	            open: false,
 	            filterText: ''
 	        };
-	    }
+	    },
 
-	    _createClass(DropDown, [{
-	        key: 'formatDrop',
-	        value: function formatDrop() {
-	            var _props$labelName = this.props.labelName;
-	            var labelName = _props$labelName === undefined ? 'name' : _props$labelName;
-	            var _props$valueName = this.props.valueName;
-	            var valueName = _props$valueName === undefined ? 'value' : _props$valueName;
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            placeHolder: 'click to select...'
+	        };
+	    },
 
-	            var optionNodes = [],
-	                selected = undefined,
-	                label = this.props.placeHolder,
-	                filterText = this.state.filterText,
-	                compVal = this.state.value,
-	                searchable = this.props.searchable,
-	                node = undefined;
+	    handleOtherClick: function handleOtherClick(e) {
+	        var BASE_NODE = React.findDOMNode(this);
+	        if (e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
+	            // er...
+	        } else {
+	                this.setState({
+	                    open: false
+	                });
+	            }
+	        e.stopPropagation();
+	    },
 
-	            var _iteratorNormalCompletion = true;
-	            var _didIteratorError = false;
-	            var _iteratorError = undefined;
+	    formatDrop: function formatDrop() {
+	        var _props$labelName = this.props.labelName;
+	        var labelName = _props$labelName === undefined ? 'name' : _props$labelName;
+	        var _props$valueName = this.props.valueName;
+	        var valueName = _props$valueName === undefined ? 'value' : _props$valueName;
 
-	            try {
-	                for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                    var pair = _step.value;
+	        var optionNodes = [],
+	            selected = undefined,
+	            label = this.props.placeHolder,
+	            filterText = this.state.filterText,
+	            compVal = this.state.value,
+	            searchable = this.props.searchable,
+	            node = undefined;
 
-	                    selected = compVal === pair[valueName];
-	                    if (selected) label = pair[labelName];
+	        var _iteratorNormalCompletion = true;
+	        var _didIteratorError = false;
+	        var _iteratorError = undefined;
 
-	                    node = this.formatOptionCell({
-	                        label: pair[labelName],
-	                        value: pair[valueName],
-	                        onChange: this.selectChange,
-	                        selected: selected
-	                    });
+	        try {
+	            for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                var pair = _step.value;
 
-	                    if (searchable) {
-	                        if (pair[valueName].indexOf(filterText) !== -1 || pair[labelName].indexOf(filterText) !== -1) optionNodes.push(node);
-	                        continue;
-	                    }
-	                    optionNodes.push(node);
+	                selected = compVal === pair[valueName];
+	                if (selected) label = pair[labelName];
+
+	                node = this.formatOptionCell({
+	                    label: pair[labelName],
+	                    value: pair[valueName],
+	                    onChange: this.selectChange,
+	                    selected: selected
+	                });
+
+	                if (searchable) {
+	                    if (pair[valueName].indexOf(filterText) !== -1 || pair[labelName].indexOf(filterText) !== -1) optionNodes.push(node);
+	                    continue;
 	                }
-	            } catch (err) {
-	                _didIteratorError = true;
-	                _iteratorError = err;
+	                optionNodes.push(node);
+	            }
+	        } catch (err) {
+	            _didIteratorError = true;
+	            _iteratorError = err;
+	        } finally {
+	            try {
+	                if (!_iteratorNormalCompletion && _iterator['return']) {
+	                    _iterator['return']();
+	                }
 	            } finally {
-	                try {
-	                    if (!_iteratorNormalCompletion && _iterator['return']) {
-	                        _iterator['return']();
-	                    }
-	                } finally {
-	                    if (_didIteratorError) {
-	                        throw _iteratorError;
-	                    }
+	                if (_didIteratorError) {
+	                    throw _iteratorError;
 	                }
 	            }
-
-	            return React.createElement(
-	                'div',
-	                null,
-	                this.formatDropBar(label),
-	                this.formatDropList(optionNodes)
-	            );
 	        }
-	    }, {
-	        key: 'formatOptionCell',
-	        value: function formatOptionCell(_ref) {
-	            var label = _ref.label;
-	            var value = _ref.value;
-	            var onChange = _ref.onChange;
-	            var selected = _ref.selected;
 
-	            return React.createElement(
-	                DropDown.Option,
-	                { key: value, onChange: onChange.bind(this), selected: selected, storeValue: value },
-	                label
-	            );
-	        }
-	    }, {
-	        key: 'formatDropList',
-	        value: function formatDropList(nodes) {
-	            return this.state.unfold ? React.createElement(
-	                'ul',
-	                null,
-	                nodes
-	            ) : null;
-	        }
-	    }, {
-	        key: 'selectChange',
-	        value: function selectChange(val) {
-	            var _this = this;
+	        return React.createElement(
+	            'div',
+	            null,
+	            this.formatSearchBar(label),
+	            this.formatDropList(optionNodes)
+	        );
+	    },
 
-	            this.setState({
-	                value: val
-	            }, function () {
-	                if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
-	                _this.setState({
-	                    unfold: false
-	                });
+	    formatOptionCell: function formatOptionCell(_ref) {
+	        var label = _ref.label;
+	        var value = _ref.value;
+	        var onChange = _ref.onChange;
+	        var selected = _ref.selected;
+
+	        return React.createElement(
+	            DropDown.Option,
+	            { key: value, onChange: onChange.bind(this), selected: selected, storeValue: value },
+	            label
+	        );
+	    },
+
+	    formatDropList: function formatDropList(nodes) {
+	        return this.state.open ? React.createElement(
+	            'ul',
+	            null,
+	            nodes
+	        ) : null;
+	    },
+
+	    formatSearchBar: function formatSearchBar(label) {
+	        var node = this.props.searchable ? React.createElement(
+	            DropDown.SearchBar,
+	            { ref: 'searchBar', onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this) },
+	            label
+	        ) : React.createElement(
+	            DropDown.label,
+	            { onClick: this.toggleDropDown.bind(this), ref: 'dropLabel' },
+	            label
+	        );
+	        return React.createElement(
+	            'div',
+	            { ref: 'dropList' },
+	            node
+	        );
+	    },
+
+	    selectChange: function selectChange(val) {
+	        var _this = this;
+
+	        this.setState({
+	            value: val
+	        }, function () {
+	            if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
+	            _this.setState({
+	                open: false
 	            });
-	        }
-	    }, {
-	        key: 'toggleDropDown',
-	        value: function toggleDropDown(e) {
-	            this.setState({
-	                unfold: !this.state.unfold
-	            });
-	            e.stopPropagation();
-	        }
-	    }, {
-	        key: 'handleSearch',
-	        value: function handleSearch(text) {
-	            this.setState({
-	                filterText: text
-	            });
-	        }
-	    }, {
-	        key: 'handleFocus',
-	        value: function handleFocus(e) {
-	            this.setState({
-	                unfold: true
-	            });
-	            e.stopPropagation();
-	        }
-	    }, {
-	        key: 'formatDropBar',
-	        value: function formatDropBar(label) {
-	            var node = this.props.searchable ? React.createElement(
-	                DropDown.SearchBar,
-	                { onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this) },
-	                label
-	            ) : React.createElement(
-	                DropDown.label,
-	                { onUserClick: this.toggleDropDown.bind(this) },
-	                label
-	            );
+	        });
+	    },
 
-	            return React.createElement(
-	                'div',
-	                null,
-	                node
-	            );
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return this.formatDrop();
-	        }
-	    }]);
+	    toggleDropDown: function toggleDropDown(e) {
+	        this.setState({
+	            open: !this.state.open
+	        });
+	        e.stopPropagation();
+	    },
 
-	    return DropDown;
-	})(React.Component);
+	    handleSearch: function handleSearch(text) {
+	        this.setState({
+	            filterText: text
+	        });
+	    },
 
-	exports['default'] = DropDown;
+	    handleFocus: function handleFocus(e) {
+	        this.setState({
+	            open: true
+	        });
+	        e.stopPropagation();
+	    },
 
-	DropDown.defaultProps = { placeHolder: 'click to select...' };
+	    render: function render() {
+	        return this.formatDrop();
+	    }
+	});
+
+	module.exports = DropDown;
 
 	DropDown.Option = React.createClass({
 	    displayName: 'Option',
@@ -1635,7 +1629,7 @@
 	    displayName: 'label',
 
 	    handleClick: function handleClick(e) {
-	        this.props.onUserClick(e);
+	        this.props.onClick(e);
 	    },
 
 	    render: function render() {
@@ -1677,7 +1671,6 @@
 	        );
 	    }
 	});
-	module.exports = exports['default'];
 
 /***/ },
 /* 63 */
@@ -1962,7 +1955,8 @@
 
 	        _get(Object.getPrototypeOf(DropDownDemo.prototype), 'constructor', this).call(this, props);
 	        this.state = {
-	            value: null
+	            value: null,
+	            value1: 'egg'
 	        };
 	    }
 
@@ -1971,6 +1965,13 @@
 	        value: function displayChange(value) {
 	            this.setState({
 	                value: value
+	            });
+	        }
+	    }, {
+	        key: 'displayChange1',
+	        value: function displayChange1(value) {
+	            this.setState({
+	                value1: value
 	            });
 	        }
 	    }, {
@@ -1993,7 +1994,23 @@
 	                        'you selected option value is ',
 	                        this.state.value
 	                    ),
-	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', searchable: 'true', onChange: this.displayChange.bind(this) })
+	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', onChange: this.displayChange.bind(this) })
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'drop down with search'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'you selected option value is ',
+	                        this.state.value1
+	                    ),
+	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', valueName: 'value', searchable: 'true', onChange: this.displayChange1.bind(this) })
 	                )
 	            );
 	        }
@@ -2003,6 +2020,34 @@
 	})(React.Component);
 
 	exports['default'] = DropDownDemo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 67 */,
+/* 68 */,
+/* 69 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var DocumentClickMixin = {
+	    componentDidMount: function componentDidMount() {
+	        document.addEventListener('click', this.onDocumentClick);
+	    },
+
+	    componentWillUnmount: function componentWillUnmount() {
+	        document.removeEventListener('click', this.onDocumentClick);
+	    },
+
+	    onDocumentClick: function onDocumentClick(e) {
+	        if (typeof this.handleOtherClick === 'function') this.handleOtherClick(e);
+	    }
+	};
+
+	exports['default'] = DocumentClickMixin;
 	module.exports = exports['default'];
 
 /***/ }

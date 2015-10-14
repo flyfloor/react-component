@@ -6,6 +6,6 @@ import DropDownDemo from "./app/DropDownDemo.jsx";
 
 // React.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 // React.render(<RadioDemo/>, document.getElementById('radio'));
-React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
+// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 // React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-// React.render(<DropDownDemo/>, document.getElementById('drop-down'));
+React.render(<DropDownDemo/>, document.getElementById('drop-down'));

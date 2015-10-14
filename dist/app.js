@@ -2138,6 +2138,10 @@
 	        };
 	    },
 
+	    componentDidMount: function componentDidMount() {
+	        React.findDOMNode(this.refs.userInput).focus();
+	    },
+
 	    handleChange: function handleChange() {
 	        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
 	    },

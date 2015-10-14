@@ -110,6 +110,10 @@ DropBase.SearchBar = React.createClass({
         };
     },
 
+    componentDidMount() {
+        React.findDOMNode(this.refs.userInput).focus();
+    },
+
     handleChange(){
         this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
     },

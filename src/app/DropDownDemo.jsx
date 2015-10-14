@@ -47,8 +47,12 @@ export default class DropDownDemo extends React.Component {
                     <DropDown options={options} labelName='name' valueName='value' onChange={this.displayChange.bind(this)} />
                 </li>
                 <li>
+                    <h4>drop down with default first item selected</h4>
+                    <DropDown options={options} labelName='name' valueName='value' defaultSelected='true'/>
+                </li>
+                <li>
                     <h4>drop down got value, and selected</h4>
-                    <DropDown options={options} labelName='name'value={this.state.value1} valueName='value'/>
+                    <DropDown options={options} labelName='name' value={this.state.value1} defaultSelected="true" valueName='value'/>
                 </li>
                 <li>
                     <h4>drop down with search</h4>

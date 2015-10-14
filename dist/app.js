@@ -817,11 +817,6 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.initDefault();
-	        }
-	    }, {
-	        key: 'initDefault',
-	        value: function initDefault() {
 	            if (this.props.defaultChecked && this.state.options.length > 0) {
 	                this.setState({
 	                    value: this.state.options[0][this.props.valueName]
@@ -1976,9 +1971,19 @@
 	                    React.createElement(
 	                        'h4',
 	                        null,
+	                        'drop down with default first item selected'
+	                    ),
+	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', defaultSelected: 'true' })
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
 	                        'drop down got value, and selected'
 	                    ),
-	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', value: this.state.value1, valueName: 'value' })
+	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', value: this.state.value1, defaultSelected: 'true', valueName: 'value' })
 	                ),
 	                React.createElement(
 	                    'li',
@@ -2048,6 +2053,7 @@
 	    displayName: 'DropBase',
 
 	    mixins: [_mixinDocumentClickMixin2['default']],
+
 	    getInitialState: function getInitialState() {
 	        var DEFAULT_VALUE = this.props.multi ? [] : '';
 	        return {
@@ -2055,6 +2061,14 @@
 	            value: this.props.value || DEFAULT_VALUE,
 	            open: false,
 	            filterText: ''
+	        };
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        if (!this.props.multi && !this.state.value && this.props.defaultSelected && this.state.options.length > 0) {
+	            this.setState({
+	                value: this.state.options[0][this.props.valueName]
+	            });
 	        };
 	    },
 
@@ -2082,11 +2096,6 @@
 	            _this.toggleOpen(false);
 	        });
 	    },
-
-	    // valueChangeCallback(){
-	    //     if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
-	    //     this.toggleOpen(false);
-	    // },
 
 	    toggleOpen: function toggleOpen(stat) {
 	        this.setState({

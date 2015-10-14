@@ -2,7 +2,8 @@ import DocumentClickMixin from '../mixin/DocumentClickMixin';
 
 const DropBase = React.createClass({
     mixins: [DocumentClickMixin],
-    getInitialState: function() {
+    
+    getInitialState() {
         const DEFAULT_VALUE = this.props.multi ? [] : '';
         return {
             options: this.props.options,
@@ -12,7 +13,15 @@ const DropBase = React.createClass({
         };
     },
 
-    getDefaultProps: function() {
+    componentDidMount() {
+        if (!this.props.multi && !this.state.value && this.props.defaultSelected && this.state.options.length > 0) {
+            this.setState({
+                value: this.state.options[0][this.props.valueName] 
+            });
+        };
+    },
+
+    getDefaultProps() {
         return {
             placeHolder: 'click to select...',
         };
@@ -34,11 +43,6 @@ const DropBase = React.createClass({
             this.toggleOpen(false);
         });
     },
-
-    // valueChangeCallback(){
-    //     if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
-    //     this.toggleOpen(false);
-    // },
 
     toggleOpen(stat){
         this.setState({

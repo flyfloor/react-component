@@ -3,9 +3,10 @@ import DocumentClickMixin from '../mixin/DocumentClickMixin';
 const DropBase = React.createClass({
     mixins: [DocumentClickMixin],
     getInitialState: function() {
+        const DEFAULT_VALUE = this.props.multi ? [] : '';
         return {
             options: this.props.options,
-            value: this.props.value,
+            value: this.props.value || DEFAULT_VALUE,
             open: false,
             filterText: '',
         };

@@ -15,31 +15,41 @@ export default class DropDown extends DropBase {
     }
 
     formatDrop(){
-        const [labelName = 'name', valueName = 'value'] = [this.props.labelName, this.props.valueName];
+        const [LABEL_NAME = 'name', VALUE_NAME = 'value'] = [this.props.labelName, this.props.valueName];
         let optionNodes = [], selected, node,
             placeHolder = this.props.placeHolder,
             filterText = this.state.filterText,
             compVal = this.state.value,
-            searchable = this.props.searchable;
+            searchable = this.props.searchable,
+            multi = this.props.multi,
+            selectedVals = [];
         
-        // with a searchbar
-        if (searchable) optionNodes.push(this.formatSearchBar());
-
-        // list node format
-        for (let pair of this.state.options){
-            selected = compVal === pair[valueName];
-            node = this.formatOptionCell({ label: pair[labelName], value: pair[valueName], selected: selected });
-
-            if(selected) placeHolder = pair[labelName];
-            if (searchable) {
-                if (pair[valueName].indexOf(filterText) !== -1 || pair[labelName].indexOf(filterText) !== -1) optionNodes.push(node);
-                continue;
+        if (multi) {
+            for (let pair of this.state.options){
+                for(let val of compVal){
+                    
+                }
             }
-            optionNodes.push(node);
-        }
+        } else {
+            // with a searchbar
+            if (searchable) optionNodes.push(this.formatSearchBar());
 
+            // list node format
+            for (let pair of this.state.options){
+                selected = compVal === pair[VALUE_NAME];
+                if(selected) placeHolder = pair[LABEL_NAME];
+                node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
+                if (searchable) {
+                    if (pair[VALUE_NAME].indexOf(filterText) !== -1 || pair[LABEL_NAME].indexOf(filterText) !== -1) optionNodes.push(node);
+                    continue;
+                }
+                optionNodes.push(node);
+            }
+        }
+        
         return <div>
-                    <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label>
+                    { multi ? <DropBase.multiInput selectedVals={selectedVals}></DropBase.multiInput> : 
+                        <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
                     {this.formatDropList(optionNodes)}
                 </div>
     }

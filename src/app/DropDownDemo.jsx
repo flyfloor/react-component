@@ -15,7 +15,7 @@ export default class DropDownDemo extends React.Component {
         this.state = {
             value: null,
             value1: 'echo',
-            value2: 'banana',
+            value2: ['beta,echo'],
         }
     }
 
@@ -55,8 +55,8 @@ export default class DropDownDemo extends React.Component {
                     <DropDown options={options} ref='dropDown1' labelName='name'  valueName='value' searchable='true' onChange={this.displayChange1.bind(this)}/>
                 </li>
                 <li>
-                    <h4>drop down with search</h4>
-                    <p>you selected option value is {this.state.value1}</p>
+                    <h4>drop down with multiple value selected</h4>
+                    <p>you selected option value is {this.state.value2}</p>
                     <DropDown options={options} ref='dropDown1' labelName='name' valueName='value' multi='true' onChange={this.displayChange2.bind(this)}/>
                 </li>
             </ol>

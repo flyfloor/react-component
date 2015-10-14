@@ -1441,7 +1441,7 @@
 	    value: true
 	});
 
-	var _DropBaseJsx = __webpack_require__(70);
+	var _DropBaseJsx = __webpack_require__(67);
 
 	var _DropBaseJsx2 = _interopRequireDefault(_DropBaseJsx);
 
@@ -1470,9 +1470,9 @@
 	        key: 'formatDrop',
 	        value: function formatDrop() {
 	            var _props$labelName = this.props.labelName;
-	            var labelName = _props$labelName === undefined ? 'name' : _props$labelName;
+	            var LABEL_NAME = _props$labelName === undefined ? 'name' : _props$labelName;
 	            var _props$valueName = this.props.valueName;
-	            var valueName = _props$valueName === undefined ? 'value' : _props$valueName;
+	            var VALUE_NAME = _props$valueName === undefined ? 'value' : _props$valueName;
 
 	            var optionNodes = [],
 	                selected = undefined,
@@ -1480,41 +1480,89 @@
 	                placeHolder = this.props.placeHolder,
 	                filterText = this.state.filterText,
 	                compVal = this.state.value,
-	                searchable = this.props.searchable;
+	                searchable = this.props.searchable,
+	                multi = this.props.multi,
+	                selectedVals = [];
 
-	            // with a searchbar
-	            if (searchable) optionNodes.push(this.formatSearchBar());
+	            if (multi) {
+	                var _iteratorNormalCompletion = true;
+	                var _didIteratorError = false;
+	                var _iteratorError = undefined;
 
-	            // list node format
-	            var _iteratorNormalCompletion = true;
-	            var _didIteratorError = false;
-	            var _iteratorError = undefined;
-
-	            try {
-	                for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                    var pair = _step.value;
-
-	                    selected = compVal === pair[valueName];
-	                    node = this.formatOptionCell({ label: pair[labelName], value: pair[valueName], selected: selected });
-
-	                    if (selected) placeHolder = pair[labelName];
-	                    if (searchable) {
-	                        if (pair[valueName].indexOf(filterText) !== -1 || pair[labelName].indexOf(filterText) !== -1) optionNodes.push(node);
-	                        continue;
-	                    }
-	                    optionNodes.push(node);
-	                }
-	            } catch (err) {
-	                _didIteratorError = true;
-	                _iteratorError = err;
-	            } finally {
 	                try {
-	                    if (!_iteratorNormalCompletion && _iterator['return']) {
-	                        _iterator['return']();
+	                    for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                        var pair = _step.value;
+	                        var _iteratorNormalCompletion2 = true;
+	                        var _didIteratorError2 = false;
+	                        var _iteratorError2 = undefined;
+
+	                        try {
+	                            for (var _iterator2 = _getIterator(compVal), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	                                var val = _step2.value;
+	                            }
+	                        } catch (err) {
+	                            _didIteratorError2 = true;
+	                            _iteratorError2 = err;
+	                        } finally {
+	                            try {
+	                                if (!_iteratorNormalCompletion2 && _iterator2['return']) {
+	                                    _iterator2['return']();
+	                                }
+	                            } finally {
+	                                if (_didIteratorError2) {
+	                                    throw _iteratorError2;
+	                                }
+	                            }
+	                        }
 	                    }
+	                } catch (err) {
+	                    _didIteratorError = true;
+	                    _iteratorError = err;
 	                } finally {
-	                    if (_didIteratorError) {
-	                        throw _iteratorError;
+	                    try {
+	                        if (!_iteratorNormalCompletion && _iterator['return']) {
+	                            _iterator['return']();
+	                        }
+	                    } finally {
+	                        if (_didIteratorError) {
+	                            throw _iteratorError;
+	                        }
+	                    }
+	                }
+	            } else {
+	                // with a searchbar
+	                if (searchable) optionNodes.push(this.formatSearchBar());
+
+	                // list node format
+	                var _iteratorNormalCompletion3 = true;
+	                var _didIteratorError3 = false;
+	                var _iteratorError3 = undefined;
+
+	                try {
+	                    for (var _iterator3 = _getIterator(this.state.options), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	                        var pair = _step3.value;
+
+	                        selected = compVal === pair[VALUE_NAME];
+	                        if (selected) placeHolder = pair[LABEL_NAME];
+	                        node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
+	                        if (searchable) {
+	                            if (pair[VALUE_NAME].indexOf(filterText) !== -1 || pair[LABEL_NAME].indexOf(filterText) !== -1) optionNodes.push(node);
+	                            continue;
+	                        }
+	                        optionNodes.push(node);
+	                    }
+	                } catch (err) {
+	                    _didIteratorError3 = true;
+	                    _iteratorError3 = err;
+	                } finally {
+	                    try {
+	                        if (!_iteratorNormalCompletion3 && _iterator3['return']) {
+	                            _iterator3['return']();
+	                        }
+	                    } finally {
+	                        if (_didIteratorError3) {
+	                            throw _iteratorError3;
+	                        }
 	                    }
 	                }
 	            }
@@ -1522,7 +1570,7 @@
 	            return React.createElement(
 	                'div',
 	                null,
-	                React.createElement(
+	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { selectedVals: selectedVals }) : React.createElement(
 	                    _DropBaseJsx2['default'].label,
 	                    { onClick: this.toggleDropDown.bind(this) },
 	                    placeHolder
@@ -1860,7 +1908,7 @@
 	        this.state = {
 	            value: null,
 	            value1: 'echo',
-	            value2: 'banana'
+	            value2: ['beta,echo']
 	        };
 	    }
 
@@ -1939,13 +1987,13 @@
 	                    React.createElement(
 	                        'h4',
 	                        null,
-	                        'drop down with search'
+	                        'drop down with multiple value selected'
 	                    ),
 	                    React.createElement(
 	                        'p',
 	                        null,
 	                        'you selected option value is ',
-	                        this.state.value1
+	                        this.state.value2
 	                    ),
 	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', valueName: 'value', multi: 'true', onChange: this.displayChange2.bind(this) })
 	                )
@@ -1960,42 +2008,14 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 67 */,
-/* 68 */,
-/* 69 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	var DocumentClickMixin = {
-	    componentDidMount: function componentDidMount() {
-	        document.addEventListener('click', this.onDocumentClick);
-	    },
-
-	    componentWillUnmount: function componentWillUnmount() {
-	        document.removeEventListener('click', this.onDocumentClick);
-	    },
-
-	    onDocumentClick: function onDocumentClick(e) {
-	        if (typeof this.handleOtherClick === 'function') this.handleOtherClick(e);
-	    }
-	};
-
-	exports['default'] = DocumentClickMixin;
-	module.exports = exports['default'];
-
-/***/ },
-/* 70 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _interopRequireDefault = __webpack_require__(1)['default'];
 
-	var _mixinDocumentClickMixin = __webpack_require__(69);
+	var _mixinDocumentClickMixin = __webpack_require__(68);
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
@@ -2004,9 +2024,10 @@
 
 	    mixins: [_mixinDocumentClickMixin2['default']],
 	    getInitialState: function getInitialState() {
+	        var DEFAULT_VALUE = this.props.multi ? [] : '';
 	        return {
 	            options: this.props.options,
-	            value: this.props.value,
+	            value: this.props.value || DEFAULT_VALUE,
 	            open: false,
 	            filterText: ''
 	        };
@@ -2137,6 +2158,32 @@
 	        );
 	    }
 	});
+
+/***/ },
+/* 68 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var DocumentClickMixin = {
+	    componentDidMount: function componentDidMount() {
+	        document.addEventListener('click', this.onDocumentClick);
+	    },
+
+	    componentWillUnmount: function componentWillUnmount() {
+	        document.removeEventListener('click', this.onDocumentClick);
+	    },
+
+	    onDocumentClick: function onDocumentClick(e) {
+	        if (typeof this.handleOtherClick === 'function') this.handleOtherClick(e);
+	    }
+	};
+
+	exports['default'] = DocumentClickMixin;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

@@ -22,29 +22,24 @@ const DropBase = React.createClass({
         if(e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
             // er...
         } else {
-            this.setState({
-                open: false,
-                filterText: '', 
-            });
+            this.toggleOpen(false);
         }
         e.stopPropagation();
     },
 
     selectChange(val){
+        this.formatValue(val);
+    },
+
+    toggleOpen(stat){
         this.setState({
-            value: val, 
-        }, () => {
-            if (typeof this.props.onChange === 'function') this.props.onChange(val);
-            this.setState({
-                open: false, 
-            });
+            open: stat,
+            filterText: '', 
         });
     },
 
     toggleDropDown(e){
-        this.setState({
-            open: !this.state.open, 
-        });
+        this.toggleOpen(!this.state.open);
         e.stopPropagation();
     },
 
@@ -55,9 +50,7 @@ const DropBase = React.createClass({
     },
 
     handleFocus(e){
-        this.setState({
-            open: true, 
-        });
+        this.toggleOpen(true);
         e.stopPropagation();
     },
 

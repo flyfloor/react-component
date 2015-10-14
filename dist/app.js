@@ -1455,6 +1455,18 @@
 	    }
 
 	    _createClass(DropDown, [{
+	        key: 'formatValue',
+	        value: function formatValue(val) {
+	            var _this = this;
+
+	            this.setState({
+	                value: val
+	            }, function () {
+	                if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
+	                _this.toggleOpen(false);
+	            });
+	        }
+	    }, {
 	        key: 'formatDrop',
 	        value: function formatDrop() {
 	            var _props$labelName = this.props.labelName;
@@ -1464,11 +1476,11 @@
 
 	            var optionNodes = [],
 	                selected = undefined,
+	                node = undefined,
 	                placeHolder = this.props.placeHolder,
 	                filterText = this.state.filterText,
 	                compVal = this.state.value,
-	                searchable = this.props.searchable,
-	                node = undefined;
+	                searchable = this.props.searchable;
 
 	            // with a searchbar
 	            if (searchable) optionNodes.push(this.formatSearchBar());
@@ -1977,31 +1989,24 @@
 	        if (e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
 	            // er...
 	        } else {
-	                this.setState({
-	                    open: false,
-	                    filterText: ''
-	                });
+	                this.toggleOpen(false);
 	            }
 	        e.stopPropagation();
 	    },
 
 	    selectChange: function selectChange(val) {
-	        var _this = this;
+	        this.formatValue(val);
+	    },
 
+	    toggleOpen: function toggleOpen(stat) {
 	        this.setState({
-	            value: val
-	        }, function () {
-	            if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
-	            _this.setState({
-	                open: false
-	            });
+	            open: stat,
+	            filterText: ''
 	        });
 	    },
 
 	    toggleDropDown: function toggleDropDown(e) {
-	        this.setState({
-	            open: !this.state.open
-	        });
+	        this.toggleOpen(!this.state.open);
 	        e.stopPropagation();
 	    },
 
@@ -2012,9 +2017,7 @@
 	    },
 
 	    handleFocus: function handleFocus(e) {
-	        this.setState({
-	            open: true
-	        });
+	        this.toggleOpen(true);
 	        e.stopPropagation();
 	    },
 

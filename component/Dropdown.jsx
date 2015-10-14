@@ -5,15 +5,22 @@ export default class DropDown extends DropBase {
         super(props);
     }
 
+    formatValue(val){
+        this.setState({
+            value: val, 
+        }, () => {
+            if (typeof this.props.onChange === 'function') this.props.onChange(val);
+            this.toggleOpen(false);
+        });
+    }
+
     formatDrop(){
         const [labelName = 'name', valueName = 'value'] = [this.props.labelName, this.props.valueName];
-        let optionNodes = [], 
-            selected, 
+        let optionNodes = [], selected, node,
             placeHolder = this.props.placeHolder,
             filterText = this.state.filterText,
             compVal = this.state.value,
-            searchable = this.props.searchable,
-            node;
+            searchable = this.props.searchable;
         
         // with a searchbar
         if (searchable) optionNodes.push(this.formatSearchBar());

@@ -21,7 +21,7 @@ export default class DropDown extends DropBase {
         // list node format
         for (let pair of this.state.options){
             selected = compVal === pair[valueName];
-            node = this.formatOptionCell({ label: pair[labelName], value: pair[valueName], onChange: this.selectChange, selected: selected });
+            node = this.formatOptionCell({ label: pair[labelName], value: pair[valueName], selected: selected });
 
             if(selected) placeHolder = pair[labelName];
             if (searchable) {
@@ -38,7 +38,7 @@ export default class DropDown extends DropBase {
     }
     
     formatOptionCell({label, value, onChange, selected}){
-        return <DropBase.Option key={value} onChange={onChange.bind(this)} selected={selected} storeValue={value}>{label}</DropBase.Option>
+        return <DropBase.Option key={value} onChange={this.selectChange.bind(this)} selected={selected} storeValue={value}>{label}</DropBase.Option>
     }
 
     formatSearchBar(){

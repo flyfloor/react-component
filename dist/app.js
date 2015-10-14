@@ -1425,252 +1425,143 @@
 
 	'use strict';
 
+	var _get = __webpack_require__(3)['default'];
+
+	var _inherits = __webpack_require__(17)['default'];
+
+	var _createClass = __webpack_require__(28)['default'];
+
+	var _classCallCheck = __webpack_require__(31)['default'];
+
 	var _getIterator = __webpack_require__(36)['default'];
 
 	var _interopRequireDefault = __webpack_require__(1)['default'];
 
-	var _mixinDocumentClickMixin = __webpack_require__(69);
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
 
-	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
+	var _DropBaseJsx = __webpack_require__(70);
 
-	var DropDown = React.createClass({
-	    displayName: 'DropDown',
+	var _DropBaseJsx2 = _interopRequireDefault(_DropBaseJsx);
 
-	    mixins: [_mixinDocumentClickMixin2['default']],
-	    getInitialState: function getInitialState() {
-	        return {
-	            options: this.props.options,
-	            value: this.props.value,
-	            open: false,
-	            filterText: ''
-	        };
-	    },
+	var DropDown = (function (_DropBase) {
+	    _inherits(DropDown, _DropBase);
 
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            placeHolder: 'click to select...'
-	        };
-	    },
+	    function DropDown(props) {
+	        _classCallCheck(this, DropDown);
 
-	    handleOtherClick: function handleOtherClick(e) {
-	        var BASE_NODE = React.findDOMNode(this);
-	        if (e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
-	            // er...
-	        } else {
-	                this.setState({
-	                    open: false
-	                });
-	            }
-	        e.stopPropagation();
-	    },
+	        _get(Object.getPrototypeOf(DropDown.prototype), 'constructor', this).call(this, props);
+	    }
 
-	    formatDrop: function formatDrop() {
-	        var _props$labelName = this.props.labelName;
-	        var labelName = _props$labelName === undefined ? 'name' : _props$labelName;
-	        var _props$valueName = this.props.valueName;
-	        var valueName = _props$valueName === undefined ? 'value' : _props$valueName;
+	    _createClass(DropDown, [{
+	        key: 'formatDrop',
+	        value: function formatDrop() {
+	            var _props$labelName = this.props.labelName;
+	            var labelName = _props$labelName === undefined ? 'name' : _props$labelName;
+	            var _props$valueName = this.props.valueName;
+	            var valueName = _props$valueName === undefined ? 'value' : _props$valueName;
 
-	        var optionNodes = [],
-	            selected = undefined,
-	            label = this.props.placeHolder,
-	            filterText = this.state.filterText,
-	            compVal = this.state.value,
-	            searchable = this.props.searchable,
-	            node = undefined;
+	            var optionNodes = [],
+	                selected = undefined,
+	                placeHolder = this.props.placeHolder,
+	                filterText = this.state.filterText,
+	                compVal = this.state.value,
+	                searchable = this.props.searchable,
+	                node = undefined;
 
-	        var _iteratorNormalCompletion = true;
-	        var _didIteratorError = false;
-	        var _iteratorError = undefined;
+	            // with a searchbar
+	            if (searchable) optionNodes.push(this.formatSearchBar());
 
-	        try {
-	            for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                var pair = _step.value;
+	            // list node format
+	            var _iteratorNormalCompletion = true;
+	            var _didIteratorError = false;
+	            var _iteratorError = undefined;
 
-	                selected = compVal === pair[valueName];
-	                if (selected) label = pair[labelName];
-
-	                node = this.formatOptionCell({
-	                    label: pair[labelName],
-	                    value: pair[valueName],
-	                    onChange: this.selectChange,
-	                    selected: selected
-	                });
-
-	                if (searchable) {
-	                    if (pair[valueName].indexOf(filterText) !== -1 || pair[labelName].indexOf(filterText) !== -1) optionNodes.push(node);
-	                    continue;
-	                }
-	                optionNodes.push(node);
-	            }
-	        } catch (err) {
-	            _didIteratorError = true;
-	            _iteratorError = err;
-	        } finally {
 	            try {
-	                if (!_iteratorNormalCompletion && _iterator['return']) {
-	                    _iterator['return']();
+	                for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                    var pair = _step.value;
+
+	                    selected = compVal === pair[valueName];
+	                    node = this.formatOptionCell({ label: pair[labelName], value: pair[valueName], onChange: this.selectChange, selected: selected });
+
+	                    if (selected) placeHolder = pair[labelName];
+	                    if (searchable) {
+	                        if (pair[valueName].indexOf(filterText) !== -1 || pair[labelName].indexOf(filterText) !== -1) optionNodes.push(node);
+	                        continue;
+	                    }
+	                    optionNodes.push(node);
 	                }
+	            } catch (err) {
+	                _didIteratorError = true;
+	                _iteratorError = err;
 	            } finally {
-	                if (_didIteratorError) {
-	                    throw _iteratorError;
+	                try {
+	                    if (!_iteratorNormalCompletion && _iterator['return']) {
+	                        _iterator['return']();
+	                    }
+	                } finally {
+	                    if (_didIteratorError) {
+	                        throw _iteratorError;
+	                    }
 	                }
 	            }
-	        }
 
-	        return React.createElement(
-	            'div',
-	            null,
-	            this.formatSearchBar(label),
-	            this.formatDropList(optionNodes)
-	        );
-	    },
-
-	    formatOptionCell: function formatOptionCell(_ref) {
-	        var label = _ref.label;
-	        var value = _ref.value;
-	        var onChange = _ref.onChange;
-	        var selected = _ref.selected;
-
-	        return React.createElement(
-	            DropDown.Option,
-	            { key: value, onChange: onChange.bind(this), selected: selected, storeValue: value },
-	            label
-	        );
-	    },
-
-	    formatDropList: function formatDropList(nodes) {
-	        return this.state.open ? React.createElement(
-	            'ul',
-	            null,
-	            nodes
-	        ) : null;
-	    },
-
-	    formatSearchBar: function formatSearchBar(label) {
-	        var node = this.props.searchable ? React.createElement(
-	            DropDown.SearchBar,
-	            { ref: 'searchBar', onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this) },
-	            label
-	        ) : React.createElement(
-	            DropDown.label,
-	            { onClick: this.toggleDropDown.bind(this), ref: 'dropLabel' },
-	            label
-	        );
-	        return React.createElement(
-	            'div',
-	            { ref: 'dropList' },
-	            node
-	        );
-	    },
-
-	    selectChange: function selectChange(val) {
-	        var _this = this;
-
-	        this.setState({
-	            value: val
-	        }, function () {
-	            if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
-	            _this.setState({
-	                open: false
-	            });
-	        });
-	    },
-
-	    toggleDropDown: function toggleDropDown(e) {
-	        this.setState({
-	            open: !this.state.open
-	        });
-	        e.stopPropagation();
-	    },
-
-	    handleSearch: function handleSearch(text) {
-	        this.setState({
-	            filterText: text
-	        });
-	    },
-
-	    handleFocus: function handleFocus(e) {
-	        this.setState({
-	            open: true
-	        });
-	        e.stopPropagation();
-	    },
-
-	    render: function render() {
-	        return this.formatDrop();
-	    }
-	});
-
-	module.exports = DropDown;
-
-	DropDown.Option = React.createClass({
-	    displayName: 'Option',
-
-	    handleClick: function handleClick() {
-	        this.props.onChange(this.props.storeValue);
-	    },
-
-	    render: function render() {
-	        var node = this.props.selected ? React.createElement(
-	            'i',
-	            null,
-	            '√'
-	        ) : null;
-	        return React.createElement(
-	            'div',
-	            { onClick: this.handleClick },
-	            this.props.children,
-	            node
-	        );
-	    }
-	});
-
-	DropDown.label = React.createClass({
-	    displayName: 'label',
-
-	    handleClick: function handleClick(e) {
-	        this.props.onClick(e);
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { onClick: this.handleClick.bind(this) },
-	            this.props.children
-	        );
-	    }
-	});
-
-	DropDown.SearchBar = React.createClass({
-	    displayName: 'SearchBar',
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            placeHolder: 'search...'
-	        };
-	    },
-
-	    handleChange: function handleChange() {
-	        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
-	    },
-
-	    handleFocus: function handleFocus(e) {
-	        this.props.onUserInputFocus(e);
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
+	            return React.createElement(
 	                'div',
 	                null,
-	                React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, type: 'text', style: { width: '200px', height: '20px' }, onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder }),
-	                this.props.children
-	            )
-	        );
-	    }
-	});
+	                React.createElement(
+	                    _DropBaseJsx2['default'].label,
+	                    { onClick: this.toggleDropDown.bind(this) },
+	                    placeHolder
+	                ),
+	                this.formatDropList(optionNodes)
+	            );
+	        }
+	    }, {
+	        key: 'formatOptionCell',
+	        value: function formatOptionCell(_ref) {
+	            var label = _ref.label;
+	            var value = _ref.value;
+	            var onChange = _ref.onChange;
+	            var selected = _ref.selected;
+
+	            return React.createElement(
+	                _DropBaseJsx2['default'].Option,
+	                { key: value, onChange: onChange.bind(this), selected: selected, storeValue: value },
+	                label
+	            );
+	        }
+	    }, {
+	        key: 'formatSearchBar',
+	        value: function formatSearchBar() {
+	            return React.createElement(
+	                DropDown.SearchBar,
+	                { onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this) },
+	                'this.props.placeHolder'
+	            );
+	        }
+	    }, {
+	        key: 'formatDropList',
+	        value: function formatDropList(nodes) {
+	            return this.state.open ? React.createElement(
+	                'ul',
+	                null,
+	                nodes
+	            ) : null;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return this.formatDrop();
+	        }
+	    }]);
+
+	    return DropDown;
+	})(_DropBaseJsx2['default']);
+
+	exports['default'] = DropDown;
+	module.exports = exports['default'];
 
 /***/ },
 /* 63 */
@@ -2049,6 +1940,166 @@
 
 	exports['default'] = DocumentClickMixin;
 	module.exports = exports['default'];
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(1)['default'];
+
+	var _mixinDocumentClickMixin = __webpack_require__(69);
+
+	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
+
+	var DropBase = React.createClass({
+	    displayName: 'DropBase',
+
+	    mixins: [_mixinDocumentClickMixin2['default']],
+	    getInitialState: function getInitialState() {
+	        return {
+	            options: this.props.options,
+	            value: this.props.value,
+	            open: false,
+	            filterText: ''
+	        };
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            placeHolder: 'click to select...'
+	        };
+	    },
+
+	    handleOtherClick: function handleOtherClick(e) {
+	        var BASE_NODE = React.findDOMNode(this);
+	        if (e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
+	            // er...
+	        } else {
+	                this.setState({
+	                    open: false,
+	                    filterText: ''
+	                });
+	            }
+	        e.stopPropagation();
+	    },
+
+	    selectChange: function selectChange(val) {
+	        var _this = this;
+
+	        this.setState({
+	            value: val
+	        }, function () {
+	            if (typeof _this.props.onChange === 'function') _this.props.onChange(val);
+	            _this.setState({
+	                open: false
+	            });
+	        });
+	    },
+
+	    toggleDropDown: function toggleDropDown(e) {
+	        this.setState({
+	            open: !this.state.open
+	        });
+	        e.stopPropagation();
+	    },
+
+	    handleSearch: function handleSearch(text) {
+	        this.setState({
+	            filterText: text
+	        });
+	    },
+
+	    handleFocus: function handleFocus(e) {
+	        this.setState({
+	            open: true
+	        });
+	        e.stopPropagation();
+	    },
+
+	    render: function render() {
+	        throw new Error('no implementation');
+	    }
+	});
+
+	module.exports = DropBase;
+
+	DropBase.Option = React.createClass({
+	    displayName: 'Option',
+
+	    handleClick: function handleClick() {
+	        this.props.onChange(this.props.storeValue);
+	    },
+
+	    render: function render() {
+	        var node = this.props.selected ? React.createElement(
+	            'i',
+	            null,
+	            '√'
+	        ) : null;
+	        return React.createElement(
+	            'div',
+	            { onClick: this.handleClick },
+	            this.props.children,
+	            node
+	        );
+	    }
+	});
+
+	DropBase.label = React.createClass({
+	    displayName: 'label',
+
+	    handleClick: function handleClick(e) {
+	        this.props.onClick(e);
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { onClick: this.handleClick.bind(this) },
+	            this.props.children
+	        );
+	    }
+	});
+
+	DropBase.multiInput = React.createClass({
+	    displayName: 'multiInput',
+
+	    render: function render() {
+	        return React.createElement('div', null);
+	    }
+	});
+
+	DropBase.SearchBar = React.createClass({
+	    displayName: 'SearchBar',
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            placeHolder: 'search...'
+	        };
+	    },
+
+	    handleChange: function handleChange() {
+	        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
+	    },
+
+	    handleFocus: function handleFocus(e) {
+	        this.props.onUserInputFocus(e);
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, type: 'text', style: { width: '200px', height: '20px' }, onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder })
+	            )
+	        );
+	    }
+	});
 
 /***/ }
 /******/ ]);

@@ -1788,7 +1788,7 @@
 	    },
 
 	    render: function render() {
-	        var labels = this.state.selectedVals.map(function (val) {
+	        var labels = this.props.selectedVals.map(function (val) {
 	            return React.createElement(
 	                'span',
 	                null,

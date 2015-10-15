@@ -131,7 +131,7 @@ DropBase.multiInput = React.createClass({
     },
 
     render() {
-        const labels = this.state.selectedVals.map((val) => {
+        const labels = this.props.selectedVals.map((val) => {
             return <span>{val}</span>;
         })
         return (

@@ -52,19 +52,19 @@
 
 	var _appCheckBoxDemoJsx2 = _interopRequireDefault(_appCheckBoxDemoJsx);
 
-	var _appRadioDemoJsx = __webpack_require__(65);
+	var _appRadioDemoJsx = __webpack_require__(67);
 
 	var _appRadioDemoJsx2 = _interopRequireDefault(_appRadioDemoJsx);
 
-	var _appRadioGroupDemoJsx = __webpack_require__(66);
+	var _appRadioGroupDemoJsx = __webpack_require__(68);
 
 	var _appRadioGroupDemoJsx2 = _interopRequireDefault(_appRadioGroupDemoJsx);
 
-	var _appCheckBoxGroupDemoJsx = __webpack_require__(67);
+	var _appCheckBoxGroupDemoJsx = __webpack_require__(69);
 
 	var _appCheckBoxGroupDemoJsx2 = _interopRequireDefault(_appCheckBoxGroupDemoJsx);
 
-	var _appDropDownDemoJsx = __webpack_require__(68);
+	var _appDropDownDemoJsx = __webpack_require__(70);
 
 	var _appDropDownDemoJsx2 = _interopRequireDefault(_appDropDownDemoJsx);
 
@@ -1640,9 +1640,13 @@
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
-	var _mixinKeyCodeMixin = __webpack_require__(69);
+	var _mixinKeyCodeMixin = __webpack_require__(65);
 
 	var _mixinKeyCodeMixin2 = _interopRequireDefault(_mixinKeyCodeMixin);
+
+	var _utilDataAccessor = __webpack_require__(66);
+
+	var _utilDataAccessor2 = _interopRequireDefault(_utilDataAccessor);
 
 	var DropBase = React.createClass({
 	    displayName: 'DropBase',
@@ -1683,10 +1687,18 @@
 	        e.stopPropagation();
 	    },
 
-	    multiBarValChange: function multiBarValChange() {
-	        this.state.value.pop();
+	    multiBarValChange: function multiBarValChange(val) {
+	        var storeVal = this.state.value;
+	        // remove specific value
+	        if (val) {
+	            var INDEX = storeVal.indexOf(val);
+	            if (INDEX > -1) storeVal.splice(INDEX, 1);
+	        } else {
+	            this.state.value.pop();
+	        }
+
 	        this.setState({
-	            value: this.state.value
+	            value: storeVal
 	        });
 	    },
 
@@ -1787,15 +1799,23 @@
 	        this.props.onUserInputFocus(e);
 	    },
 
+	    removeSelected: function removeSelected(e) {
+	        var tagVal = _utilDataAccessor2['default'].getData(e.target, 'value');
+	        this.props.onSelectChange(tagVal);
+	        e.stopPropagation();
+	    },
+
 	    render: function render() {
+	        var _this2 = this;
+
 	        var labels = this.props.selectedVals.map(function (val) {
 	            return React.createElement(
 	                'span',
-	                null,
+	                { key: val, onClick: _this2.removeSelected },
 	                val,
 	                React.createElement(
-	                    'i',
-	                    null,
+	                    'a',
+	                    { href: 'javascript:;', 'data-value': val },
 	                    'x'
 	                )
 	            );
@@ -1872,6 +1892,89 @@
 
 /***/ },
 /* 65 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var KeyCodeMixin = {
+	    _key: {
+	        ENTER: 13,
+	        SPACE: 32,
+	        SHIFT: 16,
+	        CTRL: 17,
+	        ALT: 18,
+	        BACKSPACE: 8,
+	        TAB: 9
+	    },
+	    isSpace: function isSpace(code) {
+	        return code === this._key.SPACE;
+	    },
+	    isBackSpace: function isBackSpace(code) {
+	        return code === this._key.BACKSPACE;
+	    }
+	};
+
+	exports["default"] = KeyCodeMixin;
+	module.exports = exports["default"];
+
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _createClass = __webpack_require__(28)["default"];
+
+	var _classCallCheck = __webpack_require__(31)["default"];
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var DataAccessor = (function () {
+	    function DataAccessor() {
+	        _classCallCheck(this, DataAccessor);
+	    }
+
+	    _createClass(DataAccessor, null, [{
+	        key: "getData",
+
+	        // code
+	        value: function getData(dom, attr) {
+	            if (dom && attr) {
+	                try {
+	                    return dom.dataset[attr];
+	                } catch (error) {
+	                    return dom.getAttribute("data-" + attr);
+	                }
+	            };
+	            return undefined;
+	        }
+	    }, {
+	        key: "setData",
+	        value: function setData(dom, attr, value) {
+	            if (dom) {
+	                try {
+	                    dom.dataset[attr] = value;
+	                } catch (error) {
+	                    return dom.setAttribute("data-" + attr, value);
+	                }
+	            };
+	        }
+	    }]);
+
+	    return DataAccessor;
+	})();
+
+	exports["default"] = DataAccessor;
+	exports["default"] = DataAccessor;
+	module.exports = exports["default"];
+
+/***/ },
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1963,7 +2066,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2048,7 +2151,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 67 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2124,7 +2227,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 68 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2274,36 +2377,6 @@
 
 	exports['default'] = DropDownDemo;
 	module.exports = exports['default'];
-
-/***/ },
-/* 69 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var KeyCodeMixin = {
-	    _key: {
-	        ENTER: 13,
-	        SPACE: 32,
-	        SHIFT: 16,
-	        CTRL: 17,
-	        ALT: 18,
-	        BACKSPACE: 8,
-	        TAB: 9
-	    },
-	    isSpace: function isSpace(code) {
-	        return code === this._key.SPACE;
-	    },
-	    isBackSpace: function isBackSpace(code) {
-	        return code === this._key.BACKSPACE;
-	    }
-	};
-
-	exports["default"] = KeyCodeMixin;
-	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);

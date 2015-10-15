@@ -1,5 +1,6 @@
 import DocumentClickMixin from '../mixin/DocumentClickMixin';
 import KeyCodeMixin from '../mixin/KeyCodeMixin';
+import DataAccessor from '../util/DataAccessor';
 
 const DropBase = React.createClass({
     mixins: [DocumentClickMixin],
@@ -38,10 +39,18 @@ const DropBase = React.createClass({
         e.stopPropagation();
     },
 
-    multiBarValChange(){
-        this.state.value.pop();
+    multiBarValChange(val){
+        let storeVal = this.state.value;
+        // remove specific value
+        if (val) {
+            const INDEX = storeVal.indexOf(val);
+            if (INDEX > -1) storeVal.splice(INDEX, 1);
+        } else {
+            this.state.value.pop();
+        }
+
         this.setState({
-            value: this.state.value, 
+            value: storeVal, 
         });
     },
 
@@ -131,11 +140,17 @@ DropBase.multiInput = React.createClass({
         this.props.onUserInputFocus(e);
     },
 
+    removeSelected(e){
+        const tagVal = DataAccessor.getData(e.target, 'value');
+        this.props.onSelectChange(tagVal);
+        e.stopPropagation();
+    },
+
     render() {
         const labels = this.props.selectedVals.map((val) => {
-            return <span>
+            return <span key={val} onClick={this.removeSelected}>
                         {val}
-                        <i>x</i>
+                        <a href="javascript:;" data-value={val}>x</a>
                     </span>;
         });
 

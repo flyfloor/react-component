@@ -57,7 +57,7 @@ export default class DropDown extends DropBase {
         }
 
         return <div>
-                    { multi ? <DropBase.multiInput onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedVals={compVal}></DropBase.multiInput> : 
+                    { multi ? <DropBase.multiInput onSelectChange={this.multiBarValChange.bind(this)} onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedVals={compVal}></DropBase.multiInput> : 
                         <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
                     {this.formatDropList(optionNodes)}
                 </div>

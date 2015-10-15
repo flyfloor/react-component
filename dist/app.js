@@ -1575,7 +1575,7 @@
 	            return React.createElement(
 	                'div',
 	                null,
-	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: compVal }) : React.createElement(
+	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { onSelectChange: this.multiBarValChange.bind(this), onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: compVal }) : React.createElement(
 	                    _DropBaseJsx2['default'].label,
 	                    { onClick: this.toggleDropDown.bind(this) },
 	                    placeHolder
@@ -1683,6 +1683,12 @@
 	        e.stopPropagation();
 	    },
 
+	    multiBarValChange: function multiBarValChange(val) {
+	        this.setState({
+	            value: val
+	        });
+	    },
+
 	    selectChange: function selectChange(val) {
 	        var _this = this;
 
@@ -1775,8 +1781,13 @@
 
 	    handleKeyDown: function handleKeyDown(e) {
 	        var code = e.keyCode;
-	        console.log(_mixinKeyCodeMixin2['default'].isBackSpace(code));
-	        this.props.onSelectedChange(this.state.selectedVals);
+	        if (_mixinKeyCodeMixin2['default'].isBackSpace(code)) {
+	            this.state.selectedVals.pop();
+	            this.setState({
+	                selectedVals: this.state.selectedVals
+	            });
+	            this.props.onSelectChange(this.state.selectedVals);
+	        };
 	    },
 
 	    handleChange: function handleChange() {
@@ -1788,13 +1799,19 @@
 	    },
 
 	    render: function render() {
-	        var labels = this.props.selectedVals.map(function (val) {
+	        var labels = this.state.selectedVals.map(function (val) {
 	            return React.createElement(
 	                'span',
 	                null,
-	                val
+	                val,
+	                React.createElement(
+	                    'i',
+	                    null,
+	                    'x'
+	                )
 	            );
 	        });
+
 	        return React.createElement(
 	            'div',
 	            { onClick: this.handleClick },

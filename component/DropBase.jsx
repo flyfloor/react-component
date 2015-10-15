@@ -38,6 +38,12 @@ const DropBase = React.createClass({
         e.stopPropagation();
     },
 
+    multiBarValChange(val){
+        this.setState({
+            value: val, 
+        });
+    },
+
     selectChange(val){
         this.formatValue(val, () => {
             if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
@@ -118,8 +124,13 @@ DropBase.multiInput = React.createClass({
 
     handleKeyDown(e){
         const code = e.keyCode;
-        console.log(KeyCodeMixin.isBackSpace(code));
-        this.props.onSelectedChange(this.state.selectedVals);
+        if (KeyCodeMixin.isBackSpace(code)) {
+            this.state.selectedVals.pop();
+            this.setState({
+                selectedVals: this.state.selectedVals,
+            });
+            this.props.onSelectChange(this.state.selectedVals);
+        };
     },
 
     handleChange(){
@@ -130,14 +141,19 @@ DropBase.multiInput = React.createClass({
         this.props.onUserInputFocus(e);
     },
 
+
     render() {
-        const labels = this.props.selectedVals.map((val) => {
-            return <span>{val}</span>;
-        })
+        const labels = this.state.selectedVals.map((val) => {
+            return <span>
+                        {val}
+                        <i>x</i>
+                    </span>;
+        });
+
         return (
             <div onClick={this.handleClick}>
                 {labels}
-                <input ref='userInput' onFocus={this.handleFocus} onChange={this.handleChange} type='text' placeholder='search...' onKeyDown={this.handleKeyDown}/>
+                <input ref='userInput' onFocus={this.handleFocus}  onChange={this.handleChange} type='text' placeholder='search...' onKeyDown={this.handleKeyDown}/>
             </div>
         );
     }

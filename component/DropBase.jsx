@@ -191,8 +191,8 @@ DropBase.SearchBar = React.createClass({
     render() {
         return (
             <div>
-                <div>
-                    <input ref='userInput' onFocus={this.handleFocus} type='text' onChange={this.handleChange.bind(this)} placeholder={this.props.placeHolder}/>
+                <div className='_search'>
+                    <input className='_searchbar' ref='userInput' onFocus={this.handleFocus} type='text' onChange={this.handleChange.bind(this)} placeholder={this.props.placeHolder}/>
                 </div>
             </div>
         );

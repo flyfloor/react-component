@@ -1,0 +1,14 @@
+@import url('meta');
+
+.truncate {
+    max-width: 100%;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    :after {
+        content: '';
+        background: @white;
+        width: 16px;
+    }
+}

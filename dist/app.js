@@ -1882,8 +1882,8 @@
 	            null,
 	            React.createElement(
 	                'div',
-	                null,
-	                React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, type: 'text', onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder })
+	                { className: '_search' },
+	                React.createElement('input', { className: '_searchbar', ref: 'userInput', onFocus: this.handleFocus, type: 'text', onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder })
 	            )
 	        );
 	    }
@@ -2775,7 +2775,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n", ""]);
 
 	// exports
 

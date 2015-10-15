@@ -1,3 +1,5 @@
+import resetCss from '../css/reset.less';
+
 import CheckBoxDemo from "./app/CheckBoxDemo.jsx";
 import RadioDemo from "./app/RadioDemo.jsx";
 import RadioGroupDemo from "./app/RadioGroupDemo.jsx";

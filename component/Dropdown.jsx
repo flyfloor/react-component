@@ -27,18 +27,14 @@ export default class DropDown extends DropBase {
             filterText = this.state.filterText,
             compVal = this.state.value,
             searchable = this.props.searchable,
-            multi = this.props.multi,
-            selectedVals = [];
+            multi = this.props.multi;
         
         if (multi) {
             // list node format(multi)
             for (let pair of this.state.options){
                 for(let val of compVal){
                     selected = val === pair[VALUE_NAME];
-                    if (selected) {
-                        selectedVals.push(pair[LABEL_NAME]);
-                        break;
-                    };
+                    if (selected) break;
                 }
                 node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
                 if (pair[VALUE_NAME].indexOf(filterText) !== -1 || pair[LABEL_NAME].indexOf(filterText) !== -1) optionNodes.push(node);
@@ -61,7 +57,7 @@ export default class DropDown extends DropBase {
         }
 
         return <div>
-                    { multi ? <DropBase.multiInput onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedVals={selectedVals}></DropBase.multiInput> : 
+                    { multi ? <DropBase.multiInput onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedVals={compVal}></DropBase.multiInput> : 
                         <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
                     {this.formatDropList(optionNodes)}
                 </div>

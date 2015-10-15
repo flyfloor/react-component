@@ -1480,8 +1480,7 @@
 	                filterText = this.state.filterText,
 	                compVal = this.state.value,
 	                searchable = this.props.searchable,
-	                multi = this.props.multi,
-	                selectedVals = [];
+	                multi = this.props.multi;
 
 	            if (multi) {
 	                // list node format(multi)
@@ -1501,10 +1500,7 @@
 	                                var val = _step2.value;
 
 	                                selected = val === pair[VALUE_NAME];
-	                                if (selected) {
-	                                    selectedVals.push(pair[LABEL_NAME]);
-	                                    break;
-	                                };
+	                                if (selected) break;
 	                            }
 	                        } catch (err) {
 	                            _didIteratorError2 = true;
@@ -1579,7 +1575,7 @@
 	            return React.createElement(
 	                'div',
 	                null,
-	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: selectedVals }) : React.createElement(
+	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: compVal }) : React.createElement(
 	                    _DropBaseJsx2['default'].label,
 	                    { onClick: this.toggleDropDown.bind(this) },
 	                    placeHolder
@@ -1769,12 +1765,7 @@
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            selectedVals: this.props.selectedVals
-	        };
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            selectedVals: []
+	            selectedVals: this.props.selectedVals || []
 	        };
 	    },
 
@@ -1782,7 +1773,7 @@
 	        this.props.onClick(true);
 	    },
 
-	    handleSelectedChange: function handleSelectedChange(e) {
+	    handleKeyDown: function handleKeyDown(e) {
 	        var code = e.keyCode;
 	        console.log(_mixinKeyCodeMixin2['default'].isBackSpace(code));
 	        this.props.onSelectedChange(this.state.selectedVals);
@@ -1808,7 +1799,7 @@
 	            'div',
 	            { onClick: this.handleClick },
 	            labels,
-	            React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, onChange: this.handleChange, type: 'text', placeholder: 'search...', onKeyDown: this.handleSelectedChange })
+	            React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, onChange: this.handleChange, type: 'text', placeholder: 'search...', onKeyDown: this.handleKeyDown })
 	        );
 	    }
 	});

@@ -108,12 +108,7 @@ DropBase.label = React.createClass({
 DropBase.multiInput = React.createClass({
     getInitialState() {
         return {
-            selectedVals: this.props.selectedVals, 
-        };
-    },
-    getDefaultProps() {
-        return {
-            selectedVals: [],
+            selectedVals: this.props.selectedVals || [], 
         };
     },
 
@@ -121,7 +116,7 @@ DropBase.multiInput = React.createClass({
         this.props.onClick(true);
     },
 
-    handleSelectedChange(e){
+    handleKeyDown(e){
         const code = e.keyCode;
         console.log(KeyCodeMixin.isBackSpace(code));
         this.props.onSelectedChange(this.state.selectedVals);
@@ -142,7 +137,7 @@ DropBase.multiInput = React.createClass({
         return (
             <div onClick={this.handleClick}>
                 {labels}
-                <input ref='userInput' onFocus={this.handleFocus} onChange={this.handleChange} type='text' placeholder='search...' onKeyDown={this.handleSelectedChange}/>
+                <input ref='userInput' onFocus={this.handleFocus} onChange={this.handleChange} type='text' placeholder='search...' onKeyDown={this.handleKeyDown}/>
             </div>
         );
     }

@@ -1704,19 +1704,19 @@
 
 	        this.setState({
 	            value: storeVal
-	        }, this.toggleDropValueChange());
+	        }, this.triggerDropValueChange());
 	    },
 
 	    selectChange: function selectChange(val) {
 	        var _this = this;
 
 	        this.formatValue(val, function () {
-	            _this.toggleDropValueChange();
+	            _this.triggerDropValueChange();
 	            _this.toggleOpen(false);
 	        });
 	    },
 
-	    toggleDropValueChange: function toggleDropValueChange() {
+	    triggerDropValueChange: function triggerDropValueChange() {
 	        if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
 	    },
 

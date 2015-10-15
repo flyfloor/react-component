@@ -51,17 +51,17 @@ const DropBase = React.createClass({
 
         this.setState({
             value: storeVal, 
-        }, this.toggleDropValueChange());
+        }, this.triggerDropValueChange());
     },
 
     selectChange(val){
         this.formatValue(val, () => {
-            this.toggleDropValueChange();
+            this.triggerDropValueChange();
             this.toggleOpen(false);
         });
     },
 
-    toggleDropValueChange(){
+    triggerDropValueChange(){
         if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
     },
 

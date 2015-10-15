@@ -1575,7 +1575,7 @@
 	            return React.createElement(
 	                'div',
 	                null,
-	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { onSelectChange: this.multiBarValChange.bind(this), onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: compVal }) : React.createElement(
+	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { filterText: filterText, onSelectChange: this.multiBarValChange.bind(this), onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: compVal }) : React.createElement(
 	                    _DropBaseJsx2['default'].label,
 	                    { onClick: this.toggleDropDown.bind(this) },
 	                    placeHolder
@@ -1805,7 +1805,7 @@
 	            'div',
 	            { onClick: this.handleClick },
 	            labels,
-	            React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, onChange: this.handleInputChange, type: 'text', placeholder: 'search...', onKeyDown: this.handleKeyDown })
+	            React.createElement('input', { ref: 'userInput', value: this.props.filterText, onFocus: this.handleFocus, onChange: this.handleInputChange, type: 'text', placeholder: 'search...', onKeyDown: this.handleKeyDown })
 	        );
 	    }
 	});

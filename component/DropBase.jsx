@@ -142,7 +142,7 @@ DropBase.multiInput = React.createClass({
         return (
             <div onClick={this.handleClick}>
                 {labels}
-                <input ref='userInput' onFocus={this.handleFocus}  onChange={this.handleInputChange} type='text' placeholder='search...' onKeyDown={this.handleKeyDown}/>
+                <input ref='userInput' value={this.props.filterText} onFocus={this.handleFocus} onChange={this.handleInputChange} type='text' placeholder='search...' onKeyDown={this.handleKeyDown}/>
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import DocumentClickMixin from '../mixin/DocumentClickMixin';
+import KeyCodeMixin from '../mixin/KeyCodeMixin';
 
 const DropBase = React.createClass({
     mixins: [DocumentClickMixin],
@@ -105,6 +106,11 @@ DropBase.label = React.createClass({
 });
 
 DropBase.multiInput = React.createClass({
+    getInitialState() {
+        return {
+            selectedVals: this.props.selectedVals, 
+        };
+    },
     getDefaultProps() {
         return {
             selectedVals: [],
@@ -115,14 +121,28 @@ DropBase.multiInput = React.createClass({
         this.props.onClick(true);
     },
 
+    handleSelectedChange(e){
+        const code = e.keyCode;
+        console.log(KeyCodeMixin.isBackSpace(code));
+        this.props.onSelectedChange(this.state.selectedVals);
+    },
+
+    handleChange(){
+        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
+    },
+
+    handleFocus(e){
+        this.props.onUserInputFocus(e);
+    },
+
     render() {
-        const labels = this.props.selectedVals.map((val) => {
+        const labels = this.state.selectedVals.map((val) => {
             return <span>{val}</span>;
         })
         return (
             <div onClick={this.handleClick}>
                 {labels}
-                <input type="text" placeholder='search...'/>
+                <input ref='userInput' onFocus={this.handleFocus} onChange={this.handleChange} type='text' placeholder='search...' onKeyDown={this.handleSelectedChange}/>
             </div>
         );
     }

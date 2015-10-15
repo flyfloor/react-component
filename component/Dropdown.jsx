@@ -41,7 +41,7 @@ export default class DropDown extends DropBase {
                     };
                 }
                 node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
-                optionNodes.push(node);
+                if (pair[VALUE_NAME].indexOf(filterText) !== -1 || pair[LABEL_NAME].indexOf(filterText) !== -1) optionNodes.push(node);
             }
         } else {
             // with a searchbar
@@ -61,7 +61,7 @@ export default class DropDown extends DropBase {
         }
 
         return <div>
-                    { multi ? <DropBase.multiInput onClick={this.toggleOpen.bind(this)} selectedVals={selectedVals}></DropBase.multiInput> : 
+                    { multi ? <DropBase.multiInput onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedVals={selectedVals}></DropBase.multiInput> : 
                         <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
                     {this.formatDropList(optionNodes)}
                 </div>

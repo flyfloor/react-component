@@ -1522,7 +1522,7 @@
 	                        }
 
 	                        node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
-	                        optionNodes.push(node);
+	                        if (pair[VALUE_NAME].indexOf(filterText) !== -1 || pair[LABEL_NAME].indexOf(filterText) !== -1) optionNodes.push(node);
 	                    }
 	                } catch (err) {
 	                    _didIteratorError = true;
@@ -1579,7 +1579,7 @@
 	            return React.createElement(
 	                'div',
 	                null,
-	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { onClick: this.toggleOpen.bind(this), selectedVals: selectedVals }) : React.createElement(
+	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: selectedVals }) : React.createElement(
 	                    _DropBaseJsx2['default'].label,
 	                    { onClick: this.toggleDropDown.bind(this) },
 	                    placeHolder
@@ -1643,6 +1643,10 @@
 	var _mixinDocumentClickMixin = __webpack_require__(64);
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
+
+	var _mixinKeyCodeMixin = __webpack_require__(69);
+
+	var _mixinKeyCodeMixin2 = _interopRequireDefault(_mixinKeyCodeMixin);
 
 	var DropBase = React.createClass({
 	    displayName: 'DropBase',
@@ -1763,6 +1767,11 @@
 	DropBase.multiInput = React.createClass({
 	    displayName: 'multiInput',
 
+	    getInitialState: function getInitialState() {
+	        return {
+	            selectedVals: this.props.selectedVals
+	        };
+	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            selectedVals: []
@@ -1773,8 +1782,22 @@
 	        this.props.onClick(true);
 	    },
 
+	    handleSelectedChange: function handleSelectedChange(e) {
+	        var code = e.keyCode;
+	        console.log(_mixinKeyCodeMixin2['default'].isBackSpace(code));
+	        this.props.onSelectedChange(this.state.selectedVals);
+	    },
+
+	    handleChange: function handleChange() {
+	        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
+	    },
+
+	    handleFocus: function handleFocus(e) {
+	        this.props.onUserInputFocus(e);
+	    },
+
 	    render: function render() {
-	        var labels = this.props.selectedVals.map(function (val) {
+	        var labels = this.state.selectedVals.map(function (val) {
 	            return React.createElement(
 	                'span',
 	                null,
@@ -1785,7 +1808,7 @@
 	            'div',
 	            { onClick: this.handleClick },
 	            labels,
-	            React.createElement('input', { type: 'text', placeholder: 'search...' })
+	            React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, onChange: this.handleChange, type: 'text', placeholder: 'search...', onKeyDown: this.handleSelectedChange })
 	        );
 	    }
 	});
@@ -2254,6 +2277,36 @@
 
 	exports['default'] = DropDownDemo;
 	module.exports = exports['default'];
+
+/***/ },
+/* 69 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var KeyCodeMixin = {
+	    _key: {
+	        ENTER: 13,
+	        SPACE: 32,
+	        SHIFT: 16,
+	        CTRL: 17,
+	        ALT: 18,
+	        BACKSPACE: 8,
+	        TAB: 9
+	    },
+	    isSpace: function isSpace(code) {
+	        return code === this._key.SPACE;
+	    },
+	    isBackSpace: function isBackSpace(code) {
+	        return code === this._key.BACKSPACE;
+	    }
+	};
+
+	exports["default"] = KeyCodeMixin;
+	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);

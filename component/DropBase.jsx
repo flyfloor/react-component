@@ -38,9 +38,10 @@ const DropBase = React.createClass({
         e.stopPropagation();
     },
 
-    multiBarValChange(val){
+    multiBarValChange(){
+        this.state.value.pop();
         this.setState({
-            value: val, 
+            value: this.state.value, 
         });
     },
 
@@ -112,11 +113,6 @@ DropBase.label = React.createClass({
 });
 
 DropBase.multiInput = React.createClass({
-    getInitialState() {
-        return {
-            selectedVals: this.props.selectedVals || [], 
-        };
-    },
 
     handleClick(e){
         this.props.onClick(true);
@@ -124,16 +120,10 @@ DropBase.multiInput = React.createClass({
 
     handleKeyDown(e){
         const code = e.keyCode;
-        if (KeyCodeMixin.isBackSpace(code)) {
-            this.state.selectedVals.pop();
-            this.setState({
-                selectedVals: this.state.selectedVals,
-            });
-            this.props.onSelectChange(this.state.selectedVals);
-        };
+        if (KeyCodeMixin.isBackSpace(code)) this.props.onSelectChange();
     },
 
-    handleChange(){
+    handleInputChange(){
         this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
     },
 
@@ -141,9 +131,8 @@ DropBase.multiInput = React.createClass({
         this.props.onUserInputFocus(e);
     },
 
-
     render() {
-        const labels = this.state.selectedVals.map((val) => {
+        const labels = this.props.selectedVals.map((val) => {
             return <span>
                         {val}
                         <i>x</i>
@@ -153,7 +142,7 @@ DropBase.multiInput = React.createClass({
         return (
             <div onClick={this.handleClick}>
                 {labels}
-                <input ref='userInput' onFocus={this.handleFocus}  onChange={this.handleChange} type='text' placeholder='search...' onKeyDown={this.handleKeyDown}/>
+                <input ref='userInput' onFocus={this.handleFocus}  onChange={this.handleInputChange} type='text' placeholder='search...' onKeyDown={this.handleKeyDown}/>
             </div>
         );
     }
@@ -162,7 +151,6 @@ DropBase.multiInput = React.createClass({
 
 
 DropBase.SearchBar = React.createClass({
-
     getDefaultProps(){
         return {
             placeHolder: 'search...'

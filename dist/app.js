@@ -1683,9 +1683,10 @@
 	        e.stopPropagation();
 	    },
 
-	    multiBarValChange: function multiBarValChange(val) {
+	    multiBarValChange: function multiBarValChange() {
+	        this.state.value.pop();
 	        this.setState({
-	            value: val
+	            value: this.state.value
 	        });
 	    },
 
@@ -1769,28 +1770,16 @@
 	DropBase.multiInput = React.createClass({
 	    displayName: 'multiInput',
 
-	    getInitialState: function getInitialState() {
-	        return {
-	            selectedVals: this.props.selectedVals || []
-	        };
-	    },
-
 	    handleClick: function handleClick(e) {
 	        this.props.onClick(true);
 	    },
 
 	    handleKeyDown: function handleKeyDown(e) {
 	        var code = e.keyCode;
-	        if (_mixinKeyCodeMixin2['default'].isBackSpace(code)) {
-	            this.state.selectedVals.pop();
-	            this.setState({
-	                selectedVals: this.state.selectedVals
-	            });
-	            this.props.onSelectChange(this.state.selectedVals);
-	        };
+	        if (_mixinKeyCodeMixin2['default'].isBackSpace(code)) this.props.onSelectChange();
 	    },
 
-	    handleChange: function handleChange() {
+	    handleInputChange: function handleInputChange() {
 	        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
 	    },
 
@@ -1799,7 +1788,7 @@
 	    },
 
 	    render: function render() {
-	        var labels = this.state.selectedVals.map(function (val) {
+	        var labels = this.props.selectedVals.map(function (val) {
 	            return React.createElement(
 	                'span',
 	                null,
@@ -1816,7 +1805,7 @@
 	            'div',
 	            { onClick: this.handleClick },
 	            labels,
-	            React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, onChange: this.handleChange, type: 'text', placeholder: 'search...', onKeyDown: this.handleKeyDown })
+	            React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, onChange: this.handleInputChange, type: 'text', placeholder: 'search...', onKeyDown: this.handleKeyDown })
 	        );
 	    }
 	});

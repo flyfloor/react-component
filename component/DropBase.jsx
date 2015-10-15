@@ -151,16 +151,16 @@ DropBase.multiInput = React.createClass({
     },
 
     render() {
-        const labels = this.props.selectedVals.map((val, index) => {
-            return <span key={val} onClick={this.removeSelected}>
-                        {val}
+        const tags = this.props.selectedTags.map((tag, index) => {
+            return <span key={index} onClick={this.removeSelected}>
+                        {tag}
                         <a href="javascript:;" data-index={index}>x</a>
                     </span>;
         });
 
         return (
             <div onClick={this.handleClick}>
-                {labels}
+                {tags}
                 <input ref='userInput' value={this.props.filterText} onFocus={this.handleFocus} onChange={this.handleInputChange} type='text' placeholder='search...' onKeyDown={this.handleKeyDown}/>
             </div>
         );

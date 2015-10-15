@@ -1480,7 +1480,8 @@
 	                filterText = this.state.filterText,
 	                compVal = this.state.value,
 	                searchable = this.props.searchable,
-	                multi = this.props.multi;
+	                multi = this.props.multi,
+	                tags = [];
 
 	            if (multi) {
 	                // list node format(multi)
@@ -1500,7 +1501,10 @@
 	                                var val = _step2.value;
 
 	                                selected = val === pair[VALUE_NAME];
-	                                if (selected) break;
+	                                if (selected) {
+	                                    if (tags.indexOf([pair[LABEL_NAME]]) === -1) tags.push(pair[LABEL_NAME]);
+	                                    break;
+	                                }
 	                            }
 	                        } catch (err) {
 	                            _didIteratorError2 = true;
@@ -1575,7 +1579,7 @@
 	            return React.createElement(
 	                'div',
 	                null,
-	                multi ? this.formatMultiInput(compVal) : React.createElement(
+	                multi ? this.formatMultiInput(tags) : React.createElement(
 	                    _DropBaseJsx2['default'].label,
 	                    { onClick: this.toggleDropDown.bind(this) },
 	                    placeHolder
@@ -1617,8 +1621,8 @@
 	        }
 	    }, {
 	        key: 'formatMultiInput',
-	        value: function formatMultiInput(vals) {
-	            return React.createElement(_DropBaseJsx2['default'].multiInput, { filterText: this.state.filterText, onSelectChange: this.multiBarValChangeByIndex.bind(this), onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: vals });
+	        value: function formatMultiInput(tags) {
+	            return React.createElement(_DropBaseJsx2['default'].multiInput, { filterText: this.state.filterText, onSelectChange: this.multiBarValChangeByIndex.bind(this), onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedTags: tags });
 	        }
 	    }, {
 	        key: 'render',
@@ -1817,11 +1821,11 @@
 	    render: function render() {
 	        var _this2 = this;
 
-	        var labels = this.props.selectedVals.map(function (val, index) {
+	        var tags = this.props.selectedTags.map(function (tag, index) {
 	            return React.createElement(
 	                'span',
-	                { key: val, onClick: _this2.removeSelected },
-	                val,
+	                { key: index, onClick: _this2.removeSelected },
+	                tag,
 	                React.createElement(
 	                    'a',
 	                    { href: 'javascript:;', 'data-index': index },
@@ -1833,7 +1837,7 @@
 	        return React.createElement(
 	            'div',
 	            { onClick: this.handleClick },
-	            labels,
+	            tags,
 	            React.createElement('input', { ref: 'userInput', value: this.props.filterText, onFocus: this.handleFocus, onChange: this.handleInputChange, type: 'text', placeholder: 'search...', onKeyDown: this.handleKeyDown })
 	        );
 	    }

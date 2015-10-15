@@ -27,18 +27,23 @@ export default class DropDown extends DropBase {
             filterText = this.state.filterText,
             compVal = this.state.value,
             searchable = this.props.searchable,
-            multi = this.props.multi;
+            multi = this.props.multi,
+            tags = [];
         
         if (multi) {
             // list node format(multi)
             for (let pair of this.state.options){
                 for(let val of compVal){
                     selected = val === pair[VALUE_NAME];
-                    if (selected) break;
+                    if (selected) {
+                        if(tags.indexOf([pair[LABEL_NAME]]) === -1) tags.push(pair[LABEL_NAME]);
+                        break;
+                    }
                 }
                 node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
                 if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
             }
+
         } else {
             // with a searchbar
             if (searchable) optionNodes.push(this.formatSearchBar());
@@ -57,7 +62,7 @@ export default class DropDown extends DropBase {
         }
 
         return <div>
-                    { multi ? this.formatMultiInput(compVal) : <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
+                    { multi ? this.formatMultiInput(tags) : <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
                     {this.formatDropList(optionNodes)}
                 </div>
     }
@@ -74,8 +79,8 @@ export default class DropDown extends DropBase {
         return this.state.open ? <ul>{nodes}</ul> : null;
     }
 
-    formatMultiInput(vals){
-        return <DropBase.multiInput filterText={this.state.filterText} onSelectChange={this.multiBarValChangeByIndex.bind(this)} onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedVals={vals}></DropBase.multiInput>
+    formatMultiInput(tags){
+        return <DropBase.multiInput filterText={this.state.filterText} onSelectChange={this.multiBarValChangeByIndex.bind(this)} onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedTags={tags}></DropBase.multiInput>
     }
 
     render() {

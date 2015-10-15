@@ -1440,6 +1440,10 @@
 	    value: true
 	});
 
+	var _cssDropdownLess = __webpack_require__(91);
+
+	var _cssDropdownLess2 = _interopRequireDefault(_cssDropdownLess);
+
 	var _DropBaseJsx = __webpack_require__(63);
 
 	var _DropBaseJsx2 = _interopRequireDefault(_DropBaseJsx);
@@ -1582,7 +1586,7 @@
 
 	            return React.createElement(
 	                'div',
-	                null,
+	                { className: 'ui dropdown' },
 	                multi ? this.formatMultiInput(tags) : React.createElement(
 	                    _DropBaseJsx2['default'].label,
 	                    { onClick: this.toggleDropDown.bind(this) },
@@ -1600,9 +1604,13 @@
 	            var selected = _ref.selected;
 
 	            return React.createElement(
-	                _DropBaseJsx2['default'].Option,
-	                { key: value, onChange: this.selectChange.bind(this), selected: selected, storeValue: value },
-	                label
+	                'li',
+	                { key: value },
+	                React.createElement(
+	                    _DropBaseJsx2['default'].Option,
+	                    { onChange: this.selectChange.bind(this), selected: selected, storeValue: value },
+	                    label
+	                )
 	            );
 	        }
 	    }, {
@@ -1619,7 +1627,7 @@
 	        value: function formatDropList(nodes) {
 	            return this.state.open ? React.createElement(
 	                'ul',
-	                null,
+	                { className: '_list' },
 	                nodes
 	            ) : null;
 	        }
@@ -1773,7 +1781,7 @@
 	        ) : null;
 	        return React.createElement(
 	            'div',
-	            { onClick: this.handleClick },
+	            { className: this.props.selected ? 'active' : '', onClick: this.handleClick },
 	            this.props.children,
 	            node
 	        );
@@ -1790,7 +1798,7 @@
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { onClick: this.handleClick },
+	            { className: '_label', onClick: this.handleClick },
 	            this.props.children
 	        );
 	    }
@@ -1875,7 +1883,7 @@
 	            React.createElement(
 	                'div',
 	                null,
-	                React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, type: 'text', style: { width: '200px', height: '20px' }, onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder })
+	                React.createElement('input', { ref: 'userInput', onFocus: this.handleFocus, type: 'text', onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder })
 	            )
 	        );
 	    }
@@ -2729,6 +2737,47 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ },
+/* 90 */,
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(92);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(89)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./dropdown.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./dropdown.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 92 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(88)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n", ""]);
+
+	// exports
 
 
 /***/ }

@@ -1,0 +1,38 @@
+@import url('meta.less');
+@import url('share.less');
+
+@{NS}.dropdown {
+    width: 200px;
+    position: relative;
+
+    ul {
+        padding: 0;
+        li {
+            padding: 3px 16px;
+            cursor: pointer;
+            list-style-type: none;
+        }
+    }
+
+    &.full {
+        width: 100%;
+    }
+
+    ._label {
+        cursor: pointer;
+        color: @black_c;
+        padding: 0 8px;
+        border-radius: 3px;
+        line-height: 25px;
+        border: 1px solid @gray_b;
+        margin-bottom: 2px;  
+    }
+    ._list {
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+        background: @white;
+        border-radius: 3px;
+        border: 1px solid @gray_b;
+    }
+}

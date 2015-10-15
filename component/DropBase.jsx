@@ -103,7 +103,7 @@ DropBase.Option = React.createClass({
     render(){
         let node = this.props.selected ? <i>√</i> : null;
         return (
-            <div onClick={this.handleClick}>
+            <div className={this.props.selected ? 'active' : ''} onClick={this.handleClick}>
                 {this.props.children}
                 {node}
             </div>
@@ -118,7 +118,7 @@ DropBase.label = React.createClass({
 
     render() {
         return (
-            <div onClick={this.handleClick}>
+            <div className="_label" onClick={this.handleClick}>
                 {this.props.children}
             </div>
         );
@@ -192,7 +192,7 @@ DropBase.SearchBar = React.createClass({
         return (
             <div>
                 <div>
-                    <input ref='userInput' onFocus={this.handleFocus} type='text' style={{width: '200px', height:'20px'}} onChange={this.handleChange.bind(this)} placeholder={this.props.placeHolder}/>
+                    <input ref='userInput' onFocus={this.handleFocus} type='text' onChange={this.handleChange.bind(this)} placeholder={this.props.placeHolder}/>
                 </div>
             </div>
         );

@@ -1,3 +1,5 @@
+import css from '../css/dropdown.less';
+
 import DropBase from './DropBase.jsx';
 
 export default class DropDown extends DropBase {
@@ -61,14 +63,16 @@ export default class DropDown extends DropBase {
             }
         }
 
-        return <div>
+        return <div className='ui dropdown'>
                     { multi ? this.formatMultiInput(tags) : <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
                     {this.formatDropList(optionNodes)}
                 </div>
     }
     
     formatOptionCell({label, value, onChange, selected}){
-        return <DropBase.Option key={value} onChange={this.selectChange.bind(this)} selected={selected} storeValue={value}>{label}</DropBase.Option>
+        return <li key={value}>
+                    <DropBase.Option onChange={this.selectChange.bind(this)} selected={selected} storeValue={value}>{label}</DropBase.Option>
+                </li>;
     }
 
     formatSearchBar(){
@@ -76,7 +80,7 @@ export default class DropDown extends DropBase {
     }
 
     formatDropList(nodes){
-        return this.state.open ? <ul>{nodes}</ul> : null;
+        return this.state.open ? <ul className='_list'>{nodes}</ul> : null;
     }
 
     formatMultiInput(tags){

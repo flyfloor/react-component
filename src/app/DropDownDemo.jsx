@@ -1,11 +1,11 @@
 import {DropDown} from './index.js';
 
 const options = [
-    {'name': 'apple', 'value': 'alpha'},
-    {'name': 'banana', 'value': 'beta'},
-    {'name': 'cat', 'value': 'charlie'},
-    {'name': 'dog', 'value': 'delta'},
-    {'name': 'egg', 'value': 'echo'},
+    {'name': 'apple', 'value': 1},
+    {'name': 'banana', 'value': 2},
+    {'name': 'cat', 'value': 3},
+    {'name': 'dog', 'value': 4},
+    {'name': 'egg', 'value': 5},
 ]
 
 
@@ -14,9 +14,9 @@ export default class DropDownDemo extends React.Component {
         super(props);
         this.state = {
             value: null,
-            value1: 'echo',
+            value1: 5,
             value2: [],
-            value3: ['beta', 'echo'],
+            value3: [2, 4],
         }
     }
 

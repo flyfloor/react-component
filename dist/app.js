@@ -1518,7 +1518,7 @@
 	                        }
 
 	                        node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
-	                        if (pair[VALUE_NAME].indexOf(filterText) !== -1 || pair[LABEL_NAME].indexOf(filterText) !== -1) optionNodes.push(node);
+	                        if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
 	                    }
 	                } catch (err) {
 	                    _didIteratorError = true;
@@ -1551,7 +1551,7 @@
 	                        if (selected) placeHolder = pair[LABEL_NAME];
 	                        node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
 	                        if (searchable) {
-	                            if (pair[VALUE_NAME].indexOf(filterText) !== -1 || pair[LABEL_NAME].indexOf(filterText) !== -1) optionNodes.push(node);
+	                            if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
 	                            continue;
 	                        }
 	                        optionNodes.push(node);
@@ -1575,7 +1575,7 @@
 	            return React.createElement(
 	                'div',
 	                null,
-	                multi ? React.createElement(_DropBaseJsx2['default'].multiInput, { filterText: filterText, onSelectChange: this.multiBarValChange.bind(this), onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: compVal }) : React.createElement(
+	                multi ? this.formatMultiInput(compVal) : React.createElement(
 	                    _DropBaseJsx2['default'].label,
 	                    { onClick: this.toggleDropDown.bind(this) },
 	                    placeHolder
@@ -1614,6 +1614,11 @@
 	                null,
 	                nodes
 	            ) : null;
+	        }
+	    }, {
+	        key: 'formatMultiInput',
+	        value: function formatMultiInput(vals) {
+	            return React.createElement(_DropBaseJsx2['default'].multiInput, { filterText: this.state.filterText, onSelectChange: this.multiBarValChangeByIndex.bind(this), onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedVals: vals });
 	        }
 	    }, {
 	        key: 'render',
@@ -1687,28 +1692,32 @@
 	        e.stopPropagation();
 	    },
 
-	    multiBarValChange: function multiBarValChange(val) {
+	    multiBarValChangeByIndex: function multiBarValChangeByIndex(index) {
 	        var storeVal = this.state.value;
+
 	        // remove specific value
-	        if (val) {
-	            var INDEX = storeVal.indexOf(val);
-	            if (INDEX > -1) storeVal.splice(INDEX, 1);
+	        if (index) {
+	            if (index > -1) storeVal.splice(index, 1);
 	        } else {
 	            this.state.value.pop();
 	        }
 
 	        this.setState({
 	            value: storeVal
-	        });
+	        }, this.toggleDropValueChange());
 	    },
 
 	    selectChange: function selectChange(val) {
 	        var _this = this;
 
 	        this.formatValue(val, function () {
-	            if (typeof _this.props.onChange === 'function') _this.props.onChange(_this.state.value);
+	            _this.toggleDropValueChange();
 	            _this.toggleOpen(false);
 	        });
+	    },
+
+	    toggleDropValueChange: function toggleDropValueChange() {
+	        if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
 	    },
 
 	    toggleOpen: function toggleOpen(stat) {
@@ -1800,22 +1809,22 @@
 	    },
 
 	    removeSelected: function removeSelected(e) {
-	        var tagVal = _utilDataAccessor2['default'].getData(e.target, 'value');
-	        this.props.onSelectChange(tagVal);
+	        var TAG_INDEX = _utilDataAccessor2['default'].getData(e.target, 'index');
+	        this.props.onSelectChange(TAG_INDEX);
 	        e.stopPropagation();
 	    },
 
 	    render: function render() {
 	        var _this2 = this;
 
-	        var labels = this.props.selectedVals.map(function (val) {
+	        var labels = this.props.selectedVals.map(function (val, index) {
 	            return React.createElement(
 	                'span',
 	                { key: val, onClick: _this2.removeSelected },
 	                val,
 	                React.createElement(
 	                    'a',
-	                    { href: 'javascript:;', 'data-value': val },
+	                    { href: 'javascript:;', 'data-index': index },
 	                    'x'
 	                )
 	            );
@@ -2246,7 +2255,7 @@
 
 	var _indexJs = __webpack_require__(32);
 
-	var options = [{ 'name': 'apple', 'value': 'alpha' }, { 'name': 'banana', 'value': 'beta' }, { 'name': 'cat', 'value': 'charlie' }, { 'name': 'dog', 'value': 'delta' }, { 'name': 'egg', 'value': 'echo' }];
+	var options = [{ 'name': 'apple', 'value': 1 }, { 'name': 'banana', 'value': 2 }, { 'name': 'cat', 'value': 3 }, { 'name': 'dog', 'value': 4 }, { 'name': 'egg', 'value': 5 }];
 
 	var DropDownDemo = (function (_React$Component) {
 	    _inherits(DropDownDemo, _React$Component);
@@ -2257,9 +2266,9 @@
 	        _get(Object.getPrototypeOf(DropDownDemo.prototype), 'constructor', this).call(this, props);
 	        this.state = {
 	            value: null,
-	            value1: 'echo',
+	            value1: 5,
 	            value2: [],
-	            value3: ['beta', 'echo']
+	            value3: [2, 4]
 	        };
 	    }
 

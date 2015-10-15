@@ -37,7 +37,7 @@ export default class DropDown extends DropBase {
                     if (selected) break;
                 }
                 node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
-                if (pair[VALUE_NAME].indexOf(filterText) !== -1 || pair[LABEL_NAME].indexOf(filterText) !== -1) optionNodes.push(node);
+                if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
             }
         } else {
             // with a searchbar
@@ -49,7 +49,7 @@ export default class DropDown extends DropBase {
                 if(selected) placeHolder = pair[LABEL_NAME];
                 node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
                 if (searchable) {
-                    if (pair[VALUE_NAME].indexOf(filterText) !== -1 || pair[LABEL_NAME].indexOf(filterText) !== -1) optionNodes.push(node);
+                    if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
                     continue;
                 }
                 optionNodes.push(node);
@@ -57,8 +57,7 @@ export default class DropDown extends DropBase {
         }
 
         return <div>
-                    { multi ? <DropBase.multiInput filterText={filterText} onSelectChange={this.multiBarValChange.bind(this)} onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedVals={compVal}></DropBase.multiInput> : 
-                        <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
+                    { multi ? this.formatMultiInput(compVal) : <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
                     {this.formatDropList(optionNodes)}
                 </div>
     }
@@ -73,6 +72,10 @@ export default class DropDown extends DropBase {
 
     formatDropList(nodes){
         return this.state.open ? <ul>{nodes}</ul> : null;
+    }
+
+    formatMultiInput(vals){
+        return <DropBase.multiInput filterText={this.state.filterText} onSelectChange={this.multiBarValChangeByIndex.bind(this)} onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedVals={vals}></DropBase.multiInput>
     }
 
     render() {

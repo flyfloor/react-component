@@ -39,26 +39,30 @@ const DropBase = React.createClass({
         e.stopPropagation();
     },
 
-    multiBarValChange(val){
+    multiBarValChangeByIndex(index){
         let storeVal = this.state.value;
+        
         // remove specific value
-        if (val) {
-            const INDEX = storeVal.indexOf(val);
-            if (INDEX > -1) storeVal.splice(INDEX, 1);
+        if (index) {
+            if (index > -1) storeVal.splice(index, 1);
         } else {
             this.state.value.pop();
         }
 
         this.setState({
             value: storeVal, 
-        });
+        }, this.toggleDropValueChange());
     },
 
     selectChange(val){
         this.formatValue(val, () => {
-            if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
+            this.toggleDropValueChange();
             this.toggleOpen(false);
         });
+    },
+
+    toggleDropValueChange(){
+        if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
     },
 
     toggleOpen(stat){
@@ -141,16 +145,16 @@ DropBase.multiInput = React.createClass({
     },
 
     removeSelected(e){
-        const tagVal = DataAccessor.getData(e.target, 'value');
-        this.props.onSelectChange(tagVal);
+        const TAG_INDEX = DataAccessor.getData(e.target, 'index');
+        this.props.onSelectChange(TAG_INDEX);
         e.stopPropagation();
     },
 
     render() {
-        const labels = this.props.selectedVals.map((val) => {
+        const labels = this.props.selectedVals.map((val, index) => {
             return <span key={val} onClick={this.removeSelected}>
                         {val}
-                        <a href="javascript:;" data-value={val}>x</a>
+                        <a href="javascript:;" data-index={index}>x</a>
                     </span>;
         });
 

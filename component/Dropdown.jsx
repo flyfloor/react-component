@@ -38,16 +38,15 @@ export default class DropDown extends DropBase {
                 for(let val of compVal){
                     selected = val === pair[VALUE_NAME];
                     if (selected) {
-                        if(tags.indexOf([pair[LABEL_NAME]]) === -1) tags.push(pair[LABEL_NAME]);
+                        const index = compVal.indexOf(pair[VALUE_NAME]);
+                        if(tags.indexOf([pair[LABEL_NAME]]) === -1) tags[index] = pair[LABEL_NAME];
                         break;
                     }
                 }
                 node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
                 if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
             }
-
-            console.log(compVal, tags)
-
+            console.log(tags)
         } else {
             // with a searchbar
             if (searchable) optionNodes.push(this.formatSearchBar());

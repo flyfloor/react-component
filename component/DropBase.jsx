@@ -144,8 +144,8 @@ DropBase.multiInput = React.createClass({
         this.setState({
             hasInput: hasInput, 
         });
-        console.log(VALUE)
-        if (KeyCodeMixin.isBackSpace(CODE) && this.inputField().value === '') this.props.onSelectChange();
+
+        if (KeyCodeMixin.isBackSpace(CODE) && VALUE === '') this.props.onSelectChange();
         e.target.style.width = (VALUE.length + 1) * 12 + 'px';
     },
 

@@ -1510,7 +1510,8 @@
 
 	                                selected = val === pair[VALUE_NAME];
 	                                if (selected) {
-	                                    if (tags.indexOf([pair[LABEL_NAME]]) === -1) tags.push(pair[LABEL_NAME]);
+	                                    var index = compVal.indexOf(pair[VALUE_NAME]);
+	                                    if (tags.indexOf([pair[LABEL_NAME]]) === -1) tags[index] = pair[LABEL_NAME];
 	                                    break;
 	                                }
 	                            }
@@ -1547,7 +1548,7 @@
 	                    }
 	                }
 
-	                console.log(compVal, tags);
+	                console.log(tags);
 	            } else {
 	                // with a searchbar
 	                if (searchable) optionNodes.push(this.formatSearchBar());
@@ -1829,8 +1830,8 @@
 	        this.setState({
 	            hasInput: hasInput
 	        });
-	        console.log(VALUE);
-	        if (_mixinKeyCodeMixin2['default'].isBackSpace(CODE) && this.inputField().value === '') this.props.onSelectChange();
+
+	        if (_mixinKeyCodeMixin2['default'].isBackSpace(CODE) && VALUE === '') this.props.onSelectChange();
 	        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
 	    },
 

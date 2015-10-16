@@ -1824,13 +1824,14 @@
 	        var TARGET = e.target;
 	        var VALUE = this.inputField().value;
 
-	        var hasInput = VALUE.length > 0;
 	        this.setState({
-	            hasInput: hasInput
+	            hasInput: true
 	        });
 
-	        if (_mixinKeyCodeMixin2['default'].isBackSpace(CODE) && VALUE === '') this.props.onSelectChange();
-	        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
+	        if (_mixinKeyCodeMixin2['default'].isBackSpace(CODE) && VALUE === '') {
+	            this.props.onSelectChange();
+	        }
+	        e.target.style.width = (VALUE.length + 1) * 9 + 'px';
 	    },
 
 	    handleInputChange: function handleInputChange() {
@@ -1968,22 +1969,60 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	var FUNC_KEY = {
+	    ENTER: 13,
+	    SPACE: 32,
+	    SHIFT: 16,
+	    CTRL: 17,
+	    ALT: 18,
+	    CAP: 20,
+	    BACKSPACE: 8,
+	    TAB: 9
+	};
 	var KeyCodeMixin = {
-	    _key: {
-	        ENTER: 13,
-	        SPACE: 32,
-	        SHIFT: 16,
-	        CTRL: 17,
-	        ALT: 18,
-	        BACKSPACE: 8,
-	        TAB: 9
-	    },
+
 	    isSpace: function isSpace(code) {
-	        return code === this._key.SPACE;
+	        return code === FUNC_KEY.SPACE;
 	    },
+
 	    isBackSpace: function isBackSpace(code) {
-	        return code === this._key.BACKSPACE;
+	        return code === FUNC_KEY.BACKSPACE;
+	    },
+
+	    isEnter: function isEnter(code) {
+	        return code === FUNC_KEY.ENTER;
+	    },
+
+	    isShift: function isShift(code) {
+	        return code === FUNC_KEY.BACKSPACE;
+	    },
+
+	    isCtrl: function isCtrl(code) {
+	        return code === FUNC_KEY.CTRL;
+	    },
+
+	    isAlt: function isAlt(code) {
+	        return code === FUNC_KEY.ALT;
+	    },
+
+	    isTab: function isTab(code) {
+	        return code === FUNC_KEY.BACKSPACE;
+	    },
+
+	    isCap: function isCap(code) {
+	        return code === FUNC_KEY.CAP;
+	    },
+
+	    isFNKey: function isFNKey(code) {
+	        for (var item in FUNC_KEY) {
+	            if (code === FUNC_KEY[item]) {
+	                return true;
+	                break;
+	            };
+	        }
+	        return false;
 	    }
+
 	};
 
 	exports["default"] = KeyCodeMixin;
@@ -2819,7 +2858,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  width: 8px;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  width: 9px;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
 
 	// exports
 

@@ -127,17 +127,37 @@ DropBase.label = React.createClass({
 
 DropBase.multiInput = React.createClass({
 
+    getInitialState() {
+        return {
+            hasInput: false, 
+        };
+    },
+
     handleClick(e){
+        this.inputFocus();
         this.props.onClick(true);
     },
 
     handleKeyDown(e){
-        const code = e.keyCode;
-        if (KeyCodeMixin.isBackSpace(code)) this.props.onSelectChange();
+        const [CODE, TARGET, VALUE] = [e.keyCode, e.target, e.target.value];
+        let hasInput = VALUE.length > 0;
+        console.log(this.inputField().value.length)
+        if (KeyCodeMixin.isBackSpace(CODE) && this.inputField().value.length === 0) this.props.onSelectChange();
+        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
+        this.setState({
+            hasInput: hasInput, 
+        });
     },
 
     handleInputChange(){
-        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
+        this.props.onUserInput(this.inputField().value);
+    },
+
+    handleBlur(e){
+        this.setState({
+            hasInput: false, 
+        });
+        this.inputField().style.width = '12px';
     },
 
     handleFocus(e){
@@ -147,21 +167,33 @@ DropBase.multiInput = React.createClass({
     removeSelected(e){
         const TAG_INDEX = DataAccessor.getData(e.target, 'index');
         this.props.onSelectChange(TAG_INDEX);
+        this.inputFocus();
         e.stopPropagation();
     },
 
+    inputField(){
+        return React.findDOMNode(this.refs.userInput);
+    },
+
+    inputFocus(){
+        this.inputField().focus();
+    },
+
     render() {
-        const tags = this.props.selectedTags.map((tag, index) => {
-            return <span key={index} onClick={this.removeSelected}>
+        const TAGS = this.props.selectedTags.map((tag, index) => {
+            return <span className='_tag' key={index} onClick={this.removeSelected}>
                         {tag}
                         <a href="javascript:;" data-index={index}>x</a>
                     </span>;
         });
 
+        let placeHolder = this.props.selectedTags.length === 0 && !this.state.hasInput ? <span className='_placeHolder'>search...</span> : <span className='_placeHolder'></span>;
+
         return (
-            <div onClick={this.handleClick}>
-                {tags}
-                <input ref='userInput' value={this.props.filterText} onFocus={this.handleFocus} onChange={this.handleInputChange} type='text' placeholder='search...' onKeyDown={this.handleKeyDown}/>
+            <div className='_multi' onClick={this.handleClick}>
+                {TAGS}
+                <input className='_input' ref='userInput' value={this.props.filterText} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleInputChange} type='text' onKeyDown={this.handleKeyDown}/>
+                {placeHolder}
             </div>
         );
     }

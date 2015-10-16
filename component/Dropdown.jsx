@@ -80,7 +80,7 @@ export default class DropDown extends DropBase {
     }
 
     formatDropList(nodes){
-        return this.state.open ? <ul className='_list'>{nodes}</ul> : null;
+        return this.state.open && nodes.length > 0 ? <ul className='_list'>{nodes}</ul> : null;
     }
 
     formatMultiInput(tags){

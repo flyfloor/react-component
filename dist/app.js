@@ -1625,7 +1625,7 @@
 	    }, {
 	        key: 'formatDropList',
 	        value: function formatDropList(nodes) {
-	            return this.state.open ? React.createElement(
+	            return this.state.open && nodes.length > 0 ? React.createElement(
 	                'ul',
 	                { className: '_list' },
 	                nodes
@@ -1807,17 +1807,40 @@
 	DropBase.multiInput = React.createClass({
 	    displayName: 'multiInput',
 
+	    getInitialState: function getInitialState() {
+	        return {
+	            hasInput: false
+	        };
+	    },
+
 	    handleClick: function handleClick(e) {
+	        this.inputFocus();
 	        this.props.onClick(true);
 	    },
 
 	    handleKeyDown: function handleKeyDown(e) {
-	        var code = e.keyCode;
-	        if (_mixinKeyCodeMixin2['default'].isBackSpace(code)) this.props.onSelectChange();
+	        var CODE = e.keyCode;
+	        var TARGET = e.target;
+	        var VALUE = e.target.value;
+
+	        var hasInput = VALUE.length > 0;
+	        console.log(this.inputField().value.length);
+	        if (_mixinKeyCodeMixin2['default'].isBackSpace(CODE) && this.inputField().value.length === 0) this.props.onSelectChange();
+	        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
+	        this.setState({
+	            hasInput: hasInput
+	        });
 	    },
 
 	    handleInputChange: function handleInputChange() {
-	        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
+	        this.props.onUserInput(this.inputField().value);
+	    },
+
+	    handleBlur: function handleBlur(e) {
+	        this.setState({
+	            hasInput: false
+	        });
+	        this.inputField().style.width = '12px';
 	    },
 
 	    handleFocus: function handleFocus(e) {
@@ -1827,16 +1850,25 @@
 	    removeSelected: function removeSelected(e) {
 	        var TAG_INDEX = _utilDataAccessor2['default'].getData(e.target, 'index');
 	        this.props.onSelectChange(TAG_INDEX);
+	        this.inputFocus();
 	        e.stopPropagation();
+	    },
+
+	    inputField: function inputField() {
+	        return React.findDOMNode(this.refs.userInput);
+	    },
+
+	    inputFocus: function inputFocus() {
+	        this.inputField().focus();
 	    },
 
 	    render: function render() {
 	        var _this2 = this;
 
-	        var tags = this.props.selectedTags.map(function (tag, index) {
+	        var TAGS = this.props.selectedTags.map(function (tag, index) {
 	            return React.createElement(
 	                'span',
-	                { key: index, onClick: _this2.removeSelected },
+	                { className: '_tag', key: index, onClick: _this2.removeSelected },
 	                tag,
 	                React.createElement(
 	                    'a',
@@ -1846,11 +1878,18 @@
 	            );
 	        });
 
+	        var placeHolder = this.props.selectedTags.length === 0 && !this.state.hasInput ? React.createElement(
+	            'span',
+	            { className: '_placeHolder' },
+	            'search...'
+	        ) : React.createElement('span', { className: '_placeHolder' });
+
 	        return React.createElement(
 	            'div',
-	            { onClick: this.handleClick },
-	            tags,
-	            React.createElement('input', { ref: 'userInput', value: this.props.filterText, onFocus: this.handleFocus, onChange: this.handleInputChange, type: 'text', placeholder: 'search...', onKeyDown: this.handleKeyDown })
+	            { className: '_multi', onClick: this.handleClick },
+	            TAGS,
+	            React.createElement('input', { className: '_input', ref: 'userInput', value: this.props.filterText, onBlur: this.handleBlur, onFocus: this.handleFocus, onChange: this.handleInputChange, type: 'text', onKeyDown: this.handleKeyDown }),
+	            placeHolder
 	        );
 	    }
 	});
@@ -2775,7 +2814,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  width: 8px;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n", ""]);
 
 	// exports
 

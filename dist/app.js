@@ -72,11 +72,16 @@
 
 	var _demoDropDownDemoJsx2 = _interopRequireDefault(_demoDropDownDemoJsx);
 
+	var _demoMenuDemoJsx = __webpack_require__(79);
+
+	var _demoMenuDemoJsx2 = _interopRequireDefault(_demoMenuDemoJsx);
+
 	// React.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 	// React.render(<RadioDemo/>, document.getElementById('radio'));
 	// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 	// React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-	// React.render(<DropDownDemo/>, document.getElementById('drop-down'));
+	React.render(React.createElement(_demoDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
+	// React.render(<MenuDemo/>, document.getElementById('menu'));
 
 /***/ },
 /* 1 */
@@ -975,11 +980,16 @@
 
 	var _componentDropDownJsx2 = _interopRequireDefault(_componentDropDownJsx);
 
+	var _componentMenuJsx = __webpack_require__(80);
+
+	var _componentMenuJsx2 = _interopRequireDefault(_componentMenuJsx);
+
 	exports.CheckBox = _componentCheckBoxJsx2['default'];
 	exports.Radio = _componentRadioJsx2['default'];
 	exports.RadioGroup = _componentRadioGroupJsx2['default'];
 	exports.CheckBoxGroup = _componentCheckBoxGroupJsx2['default'];
 	exports.DropDown = _componentDropDownJsx2['default'];
+	exports.Menu = _componentMenuJsx2['default'];
 
 /***/ },
 /* 39 */
@@ -1924,7 +1934,6 @@
 	        value: function formatOptionCell(_ref) {
 	            var label = _ref.label;
 	            var value = _ref.value;
-	            var onChange = _ref.onChange;
 	            var selected = _ref.selected;
 
 	            return React.createElement(
@@ -1932,7 +1941,7 @@
 	                { key: value },
 	                React.createElement(
 	                    _DropBaseJsx2['default'].Option,
-	                    { onChange: this.selectChange.bind(this), selected: selected, storeValue: value },
+	                    { onOptionSelect: this.selectChange.bind(this), selected: selected, storeValue: value },
 	                    label
 	                )
 	            );
@@ -2097,7 +2106,7 @@
 	    },
 
 	    triggerDropValueChange: function triggerDropValueChange() {
-	        if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
+	        if (typeof this.props.onSelect === 'function') this.props.onSelect(this.state.value);
 	    },
 
 	    toggleOpen: function toggleOpen(stat) {
@@ -2134,7 +2143,7 @@
 	    displayName: 'Option',
 
 	    handleClick: function handleClick() {
-	        this.props.onChange(this.props.storeValue);
+	        this.props.onOptionSelect(this.props.storeValue);
 	    },
 
 	    render: function render() {
@@ -2775,7 +2784,7 @@
 	                        'you selected option value is ',
 	                        this.state.value
 	                    ),
-	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', onChange: this.displayChange.bind(this) })
+	                    React.createElement(_indexJs.DropDown, { options: options, labelName: 'name', valueName: 'value', onSelect: this.displayChange.bind(this) })
 	                ),
 	                React.createElement(
 	                    'li',
@@ -2811,7 +2820,7 @@
 	                        'you selected option value is ',
 	                        this.state.value1
 	                    ),
-	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', valueName: 'value', searchable: 'true', onChange: this.displayChange1.bind(this) })
+	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', valueName: 'value', searchable: 'true', onSelect: this.displayChange1.bind(this) })
 	                ),
 	                React.createElement(
 	                    'li',
@@ -2827,7 +2836,7 @@
 	                        'you selected option value is ',
 	                        this.state.value2
 	                    ),
-	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', valueName: 'value', multi: 'true', onChange: this.displayChange2.bind(this) })
+	                    React.createElement(_indexJs.DropDown, { options: options, ref: 'dropDown1', labelName: 'name', valueName: 'value', multi: 'true', onSelect: this.displayChange2.bind(this) })
 	                ),
 	                React.createElement(
 	                    'li',
@@ -2848,6 +2857,58 @@
 
 	exports['default'] = DropDownDemo;
 	module.exports = exports['default'];
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _indexJs = __webpack_require__(38);
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _get = __webpack_require__(9)["default"];
+
+	var _inherits = __webpack_require__(23)["default"];
+
+	var _createClass = __webpack_require__(34)["default"];
+
+	var _classCallCheck = __webpack_require__(37)["default"];
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var Menu = (function (_React$Component) {
+	    _inherits(Menu, _React$Component);
+
+	    function Menu() {
+	        _classCallCheck(this, Menu);
+
+	        _get(Object.getPrototypeOf(Menu.prototype), "constructor", this).apply(this, arguments);
+	    }
+
+	    _createClass(Menu, [{
+	        key: "render",
+	        value: function render() {
+	            return React.createElement(
+	                "div",
+	                null,
+	                "menu"
+	            );
+	        }
+	    }]);
+
+	    return Menu;
+	})(React.Component);
+
+	exports["default"] = Menu;
+	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);

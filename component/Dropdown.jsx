@@ -69,9 +69,9 @@ export default class DropDown extends DropBase {
                 </div>
     }
     
-    formatOptionCell({label, value, onChange, selected}){
+    formatOptionCell({label, value, selected}){
         return <li key={value}>
-                    <DropBase.Option onChange={this.selectChange.bind(this)} selected={selected} storeValue={value}>{label}</DropBase.Option>
+                    <DropBase.Option onOptionSelect={this.selectChange.bind(this)} selected={selected} storeValue={value}>{label}</DropBase.Option>
                 </li>;
     }
 

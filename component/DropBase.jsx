@@ -62,7 +62,7 @@ const DropBase = React.createClass({
     },
 
     triggerDropValueChange(){
-        if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
+        if (typeof this.props.onSelect === 'function') this.props.onSelect(this.state.value);
     },
 
     toggleOpen(stat){
@@ -97,7 +97,7 @@ module.exports = DropBase;
 
 DropBase.Option = React.createClass({
     handleClick(){
-        this.props.onChange(this.props.storeValue);
+        this.props.onOptionSelect(this.props.storeValue);
     },
 
     render(){

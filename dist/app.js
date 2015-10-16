@@ -1546,6 +1546,8 @@
 	                        }
 	                    }
 	                }
+
+	                console.log(compVal, tags);
 	            } else {
 	                // with a searchbar
 	                if (searchable) optionNodes.push(this.formatSearchBar());
@@ -1821,15 +1823,15 @@
 	    handleKeyDown: function handleKeyDown(e) {
 	        var CODE = e.keyCode;
 	        var TARGET = e.target;
-	        var VALUE = e.target.value;
+	        var VALUE = this.inputField().value;
 
 	        var hasInput = VALUE.length > 0;
-	        console.log(this.inputField().value.length);
-	        if (_mixinKeyCodeMixin2['default'].isBackSpace(CODE) && this.inputField().value.length === 0) this.props.onSelectChange();
-	        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
 	        this.setState({
 	            hasInput: hasInput
 	        });
+	        console.log(VALUE);
+	        if (_mixinKeyCodeMixin2['default'].isBackSpace(CODE) && this.inputField().value === '') this.props.onSelectChange();
+	        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
 	    },
 
 	    handleInputChange: function handleInputChange() {
@@ -1840,7 +1842,7 @@
 	        this.setState({
 	            hasInput: false
 	        });
-	        this.inputField().style.width = '12px';
+	        this.inputField().style.width = '8px';
 	    },
 
 	    handleFocus: function handleFocus(e) {

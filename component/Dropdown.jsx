@@ -46,6 +46,8 @@ export default class DropDown extends DropBase {
                 if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
             }
 
+            console.log(compVal, tags)
+
         } else {
             // with a searchbar
             if (searchable) optionNodes.push(this.formatSearchBar());

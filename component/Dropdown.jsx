@@ -46,7 +46,6 @@ export default class DropDown extends DropBase {
                 node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
                 if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
             }
-            console.log(tags)
         } else {
             // with a searchbar
             if (searchable) optionNodes.push(this.formatSearchBar());

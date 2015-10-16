@@ -182,7 +182,7 @@ DropBase.multiInput = React.createClass({
     render() {
         const TAGS = this.props.selectedTags.map((tag, index) => {
             return <span className='_tag' key={index} onClick={this.removeSelected}>
-                        {tag}
+                        <san className="_text">{tag}</san>
                         <a href="javascript:;" data-index={index}>x</a>
                     </span>;
         });

@@ -144,10 +144,8 @@ DropBase.multiInput = React.createClass({
             hasInput: true, 
         });        
 
-        if (KeyCodeMixin.isBackSpace(CODE) && VALUE === '') {
-            this.props.onSelectChange();
-        }
-        e.target.style.width = (VALUE.length + 1) * 9 + 'px';
+        if (KeyCodeMixin.isBackSpace(CODE) && VALUE === '') this.props.onSelectChange();
+        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
     },
 
     handleInputChange(){
@@ -158,7 +156,7 @@ DropBase.multiInput = React.createClass({
         this.setState({
             hasInput: false, 
         });
-        this.inputField().style.width = '8px';
+        this.inputField().style.width = '9px';
     },
 
     handleFocus(e){
@@ -193,7 +191,7 @@ DropBase.multiInput = React.createClass({
         return (
             <div className='_multi' onClick={this.handleClick}>
                 {TAGS}
-                <input className='_input' ref='userInput' value={this.props.filterText} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleInputChange} type='text' onKeyDown={this.handleKeyDown}/>
+                <input className='_input' ref='userInput' style={{'width': '9px'}} value={this.props.filterText} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleInputChange} type='text' onKeyDown={this.handleKeyDown}/>
                 {placeHolder}
             </div>
         );

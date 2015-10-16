@@ -1938,7 +1938,7 @@
 
 	            return React.createElement(
 	                'li',
-	                { key: value },
+	                null,
 	                React.createElement(
 	                    _DropBaseJsx2['default'].Option,
 	                    { onOptionSelect: this.selectChange.bind(this), selected: selected, storeValue: value },
@@ -2017,7 +2017,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  width: 9px;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
 
 	// exports
 
@@ -2200,10 +2200,8 @@
 	            hasInput: true
 	        });
 
-	        if (_mixinKeyCodeMixin2['default'].isBackSpace(CODE) && VALUE === '') {
-	            this.props.onSelectChange();
-	        }
-	        e.target.style.width = (VALUE.length + 1) * 9 + 'px';
+	        if (_mixinKeyCodeMixin2['default'].isBackSpace(CODE) && VALUE === '') this.props.onSelectChange();
+	        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
 	    },
 
 	    handleInputChange: function handleInputChange() {
@@ -2214,7 +2212,7 @@
 	        this.setState({
 	            hasInput: false
 	        });
-	        this.inputField().style.width = '8px';
+	        this.inputField().style.width = '9px';
 	    },
 
 	    handleFocus: function handleFocus(e) {
@@ -2266,7 +2264,7 @@
 	            'div',
 	            { className: '_multi', onClick: this.handleClick },
 	            TAGS,
-	            React.createElement('input', { className: '_input', ref: 'userInput', value: this.props.filterText, onBlur: this.handleBlur, onFocus: this.handleFocus, onChange: this.handleInputChange, type: 'text', onKeyDown: this.handleKeyDown }),
+	            React.createElement('input', { className: '_input', ref: 'userInput', style: { 'width': '9px' }, value: this.props.filterText, onBlur: this.handleBlur, onFocus: this.handleFocus, onChange: this.handleInputChange, type: 'text', onKeyDown: this.handleKeyDown }),
 	            placeHolder
 	        );
 	    }
@@ -2862,9 +2860,120 @@
 /* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
+
+	var _get = __webpack_require__(9)["default"];
+
+	var _inherits = __webpack_require__(23)["default"];
+
+	var _createClass = __webpack_require__(34)["default"];
+
+	var _classCallCheck = __webpack_require__(37)["default"];
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
 	var _indexJs = __webpack_require__(38);
+
+	var MenuDemo = (function (_React$Component) {
+	    _inherits(MenuDemo, _React$Component);
+
+	    function MenuDemo(props) {
+	        _classCallCheck(this, MenuDemo);
+
+	        _get(Object.getPrototypeOf(MenuDemo.prototype), "constructor", this).call(this, props);
+	        this.state = {
+	            index: -1
+	        };
+	    }
+
+	    _createClass(MenuDemo, [{
+	        key: "displayChange",
+	        value: function displayChange(e) {}
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return React.createElement(
+	                "ol",
+	                null,
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "checkbox group"
+	                    ),
+	                    React.createElement(
+	                        "p",
+	                        null,
+	                        "you selected item index is ",
+	                        this.state.index
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Menu,
+	                        { onSelect: this.displayChange.bind(this) },
+	                        React.createElement(
+	                            _indexJs.Menu.Trigger,
+	                            null,
+	                            React.createElement(
+	                                "a",
+	                                { href: "javascript:;" },
+	                                "展开菜单"
+	                            )
+	                        ),
+	                        React.createElement(
+	                            _indexJs.Menu.Content,
+	                            null,
+	                            React.createElement(
+	                                _indexJs.Menu.Item,
+	                                null,
+	                                React.createElement(
+	                                    "a",
+	                                    { href: "javascript:;" },
+	                                    "菜单1"
+	                                )
+	                            ),
+	                            React.createElement(
+	                                _indexJs.Menu.Item,
+	                                null,
+	                                React.createElement(
+	                                    "a",
+	                                    { href: "javascript:;" },
+	                                    "菜单1"
+	                                )
+	                            ),
+	                            React.createElement(
+	                                _indexJs.Menu.Item,
+	                                null,
+	                                React.createElement(
+	                                    "a",
+	                                    { href: "javascript:;" },
+	                                    "菜单1"
+	                                )
+	                            ),
+	                            React.createElement(
+	                                _indexJs.Menu.Item,
+	                                null,
+	                                React.createElement(
+	                                    "a",
+	                                    { href: "javascript:;" },
+	                                    "菜单1"
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return MenuDemo;
+	})(React.Component);
+
+	exports["default"] = MenuDemo;
+	module.exports = exports["default"];
 
 /***/ },
 /* 80 */
@@ -2887,10 +2996,13 @@
 	var Menu = (function (_React$Component) {
 	    _inherits(Menu, _React$Component);
 
-	    function Menu() {
+	    function Menu(props) {
 	        _classCallCheck(this, Menu);
 
-	        _get(Object.getPrototypeOf(Menu.prototype), "constructor", this).apply(this, arguments);
+	        _get(Object.getPrototypeOf(Menu.prototype), "constructor", this).call(this, props);
+	        this.state = {
+	            open: false
+	        };
 	    }
 
 	    _createClass(Menu, [{
@@ -2899,7 +3011,7 @@
 	            return React.createElement(
 	                "div",
 	                null,
-	                "menu"
+	                this.props.children
 	            );
 	        }
 	    }]);
@@ -2908,6 +3020,57 @@
 	})(React.Component);
 
 	exports["default"] = Menu;
+
+	Menu.Trigger = React.createClass({
+	    displayName: "Trigger",
+
+	    handleClick: function handleClick(e) {
+	        this.props.onTriggerClick(e);
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            { onClick: this.handleClick },
+	            this.props.children
+	        );
+	    }
+	});
+
+	Menu.Content = React.createClass({
+	    displayName: "Content",
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            this.props.children
+	        );
+	    }
+	});
+
+	Menu.Label = React.createClass({
+	    displayName: "Label",
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            this.props.children
+	        );
+	    }
+	});
+
+	Menu.Item = React.createClass({
+	    displayName: "Item",
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            this.props.children
+	        );
+	    }
+	});
 	module.exports = exports["default"];
 
 /***/ }

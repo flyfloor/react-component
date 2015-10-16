@@ -70,7 +70,7 @@ export default class DropDown extends DropBase {
     }
     
     formatOptionCell({label, value, selected}){
-        return <li key={value}>
+        return <li>
                     <DropBase.Option onOptionSelect={this.selectChange.bind(this)} selected={selected} storeValue={value}>{label}</DropBase.Option>
                 </li>;
     }

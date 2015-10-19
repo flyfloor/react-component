@@ -3240,6 +3240,16 @@
 	    }
 
 	    _createClass(ConfirmBoxDemo, [{
+	        key: 'handleConfirm',
+	        value: function handleConfirm() {
+	            console.log('confirmed');
+	        }
+	    }, {
+	        key: 'handleCancel',
+	        value: function handleCancel() {
+	            console.log('canceled');
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return React.createElement(
@@ -3253,7 +3263,33 @@
 	                        null,
 	                        'default confirm box'
 	                    ),
-	                    React.createElement(_indexJs.ConfirmBox, null)
+	                    React.createElement(
+	                        _indexJs.ConfirmBox,
+	                        { title: 'confirm delete?', onConfirm: this.handleConfirm.bind(this), onCancel: this.handleCancel.bind(this) },
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'delete'
+	                        )
+	                    )
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'default confirm box'
+	                    ),
+	                    React.createElement(
+	                        _indexJs.ConfirmBox,
+	                        { title: 'confirm delete?' },
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'delete'
+	                        )
+	                    )
 	                ),
 	                React.createElement(
 	                    'li',
@@ -3263,7 +3299,42 @@
 	                        null,
 	                        'conform box with different direction'
 	                    ),
-	                    React.createElement(_indexJs.ConfirmBox, null)
+	                    React.createElement(
+	                        _indexJs.ConfirmBox,
+	                        { title: 'confirm delete?', direction: 'left' },
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'left'
+	                        )
+	                    ),
+	                    React.createElement(
+	                        _indexJs.ConfirmBox,
+	                        { title: 'confirm delete?', direction: 'right' },
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'right'
+	                        )
+	                    ),
+	                    React.createElement(
+	                        _indexJs.ConfirmBox,
+	                        { title: 'confirm delete?', direction: 'top' },
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'top'
+	                        )
+	                    ),
+	                    React.createElement(
+	                        _indexJs.ConfirmBox,
+	                        { title: 'confirm delete?', direction: 'bottom' },
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'bottom'
+	                        )
+	                    )
 	                )
 	            );
 	        }
@@ -3277,23 +3348,96 @@
 
 /***/ },
 /* 84 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
+
+	var _mixinDocumentClickMixin = __webpack_require__(72);
+
+	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
+
 	var ConfirmBox = React.createClass({
-	    displayName: "ConfirmBox",
+	    displayName: 'ConfirmBox',
+
+	    mixins: [_mixinDocumentClickMixin2['default']],
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            open: false
+	        };
+	    },
+
+	    onTrigger: function onTrigger(e) {
+	        this.setState({
+	            open: !this.state.open
+	        });
+	    },
+
+	    closeConfirm: function closeConfirm() {
+	        this.setState({
+	            open: false
+	        });
+	    },
+
+	    onOtherDom: function onOtherDom(e) {
+	        this.closeConfirm();
+	    },
+
+	    handleCancel: function handleCancel() {
+	        if (typeof this.props.onCancel() === 'function') this.props.onCancel();
+	        this.closeConfirm();
+	    },
+
+	    handleConfirm: function handleConfirm() {
+	        if (typeof this.props.onConfirm() === 'function') this.props.onConfirm();
+	        this.closeConfirm();
+	    },
 
 	    render: function render() {
-	        return React.createElement("div", null);
+	        var content = this.state.open ? React.createElement(
+	            'div',
+	            { className: '_content' },
+	            React.createElement(
+	                'div',
+	                { className: '_title' },
+	                this.props.title
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: '_action' },
+	                React.createElement(
+	                    'a',
+	                    { href: 'javascript:;', className: '_cancel', onClick: this.handleCancel },
+	                    '取消'
+	                ),
+	                React.createElement(
+	                    'a',
+	                    { href: 'javascript:;', className: '_confirm', onClick: this.handleConfirm },
+	                    '确认'
+	                )
+	            )
+	        ) : null;
+	        return React.createElement(
+	            'div',
+	            { 'class': 'ui confirm-box' },
+	            React.createElement(
+	                'div',
+	                { onClick: this.onTrigger },
+	                this.props.children
+	            ),
+	            content
+	        );
 	    }
 	});
 
-	exports["default"] = ConfirmBox;
-	module.exports = exports["default"];
+	exports['default'] = ConfirmBox;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

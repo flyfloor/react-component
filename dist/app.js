@@ -80,7 +80,7 @@
 	// React.render(<RadioDemo/>, document.getElementById('radio'));
 	// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 	// React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-	React.render(React.createElement(_demoDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
+	// React.render(<DropDownDemo/>, document.getElementById('drop-down'));
 	React.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
 
 /***/ },
@@ -2552,7 +2552,7 @@
 	            { className: 'ui menu', onMouseOver: this.openMenu.bind(this), onMouseLeave: this.closeMenu.bind(this) },
 	            React.createElement(
 	                Menu.Trigger,
-	                { onClick: this.toggleOpen.bind(this) },
+	                null,
 	                trigger
 	            ),
 	            content
@@ -2568,7 +2568,7 @@
 	    displayName: 'Trigger',
 
 	    handleTriggerClick: function handleTriggerClick(e) {
-	        this.props.onClick(e);
+	        if (typeof this.props.onClick === 'function') this.props.onClick(e);
 	    },
 	    render: function render() {
 	        return React.createElement(
@@ -2586,9 +2586,10 @@
 	        this.props.onItemClick(this.props.itemIndex);
 	    },
 	    render: function render() {
+	        var isActive = this.props.selected ? 'active' : '';
 	        return React.createElement(
 	            'div',
-	            { className: '_item', onClick: this.handleClick },
+	            { className: '_item ' + isActive, onClick: this.handleClick },
 	            this.props.children
 	        );
 	    }
@@ -3027,7 +3028,8 @@
 
 	        _get(Object.getPrototypeOf(MenuDemo.prototype), "constructor", this).call(this, props);
 	        this.state = {
-	            index: 1
+	            index: 1,
+	            index1: 0
 	        };
 	    }
 
@@ -3130,7 +3132,7 @@
 	                    ),
 	                    React.createElement(
 	                        _indexJs.Menu,
-	                        { selectedIndex: this.state.index, items: items, triggerOn: onNode, triggerType: "click" },
+	                        { selectedIndex: this.state.index1, items: items, triggerOn: onNode, triggerType: "click" },
 	                        React.createElement(
 	                            "a",
 	                            { href: "javascript:;" },
@@ -3183,7 +3185,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.menu {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.menu {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
 
 	// exports
 

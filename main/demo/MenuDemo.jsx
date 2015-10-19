@@ -5,6 +5,7 @@ export default class MenuDemo extends React.Component {
         super(props);
         this.state = {
             index: 1,
+            index1: 0,
         }
     }
     displayChange(index){
@@ -31,7 +32,7 @@ export default class MenuDemo extends React.Component {
                                 </a>
                             </Menu.Item>
                         </div>;
-                        
+
         const onNode = <a href="javascript:;">收起菜单</a>;
 
         return (
@@ -45,7 +46,7 @@ export default class MenuDemo extends React.Component {
                 </li>
                 <li>
                     <h4>menu, with click to trigger menu open</h4>
-                    <Menu selectedIndex={this.state.index} items={items} triggerOn={onNode} triggerType='click'>
+                    <Menu selectedIndex={this.state.index1} items={items} triggerOn={onNode} triggerType='click'>
                         <a href="javascript:;">展开菜单</a>
                     </Menu>
                 </li>

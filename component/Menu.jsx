@@ -63,7 +63,7 @@ const Menu = React.createClass ({
                             {content}
                         </div> :
                         <div className='ui menu' onMouseOver={this.openMenu.bind(this)} onMouseLeave={this.closeMenu.bind(this)}>
-                            <Menu.Trigger onClick={this.toggleOpen.bind(this)}>{trigger}</Menu.Trigger>
+                            <Menu.Trigger>{trigger}</Menu.Trigger>
                             {content}
                         </div>;
 
@@ -77,7 +77,7 @@ module.exports = Menu;
 
 Menu.Trigger = React.createClass({
     handleTriggerClick(e){
-        this.props.onClick(e);
+        if (typeof this.props.onClick === 'function') this.props.onClick(e);
     },
     render() {
         return (
@@ -93,8 +93,9 @@ Menu.Item = React.createClass({
         this.props.onItemClick(this.props.itemIndex);
     },
     render() {
+        let isActive = this.props.selected ? 'active' : '';
         return (
-            <div className='_item' onClick={this.handleClick}>
+            <div className={'_item ' + isActive} onClick={this.handleClick}>
                 {this.props.children}
             </div>
         );

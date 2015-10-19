@@ -31,6 +31,7 @@ export default class MenuDemo extends React.Component {
                                 </a>
                             </Menu.Item>
                         </div>;
+                        
         const onNode = <a href="javascript:;">收起菜单</a>;
 
         return (

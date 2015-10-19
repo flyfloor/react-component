@@ -29,14 +29,8 @@ const DropBase = React.createClass({
         };
     },
 
-    handleOtherClick(e){
-        const BASE_NODE = React.findDOMNode(this);
-        if(e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
-            // er...
-        } else {
-            this.toggleOpen(false);
-        }
-        e.stopPropagation();
+    onOtherClick(e){
+        this.toggleOpen(false);
     },
 
     multiBarValChangeByIndex(index){

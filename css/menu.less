@@ -1,0 +1,34 @@
+@import url('meta.less');
+@import url('share.less');
+
+@{NS}.menu {
+    width: 200px;
+    position: relative;
+
+    ul {
+        padding: 0;
+        li {
+            padding: 3px 16px;
+            cursor: pointer;
+            list-style-type: none;
+        }
+    }
+
+    &.full {
+        width: 100%;
+    }
+
+    ._content {
+        position: absolute;
+        width: 100%;
+        z-index: 100;
+        background: @white;
+        border-radius: 3px;
+        border: 1px solid @gray_b;
+    }
+
+    ._item {
+        padding: 3px 16px;
+        cursor: pointer;
+    }
+}

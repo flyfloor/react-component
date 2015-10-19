@@ -80,7 +80,7 @@
 	// React.render(<RadioDemo/>, document.getElementById('radio'));
 	// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 	// React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-	// React.render(<DropDownDemo/>, document.getElementById('drop-down'));
+	React.render(React.createElement(_demoDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
 	React.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
 
 /***/ },
@@ -2071,14 +2071,8 @@
 	        };
 	    },
 
-	    handleOtherClick: function handleOtherClick(e) {
-	        var BASE_NODE = React.findDOMNode(this);
-	        if (e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
-	            // er...
-	        } else {
-	                this.toggleOpen(false);
-	            }
-	        e.stopPropagation();
+	    onOtherClick: function onOtherClick(e) {
+	        this.toggleOpen(false);
 	    },
 
 	    multiBarValChangeByIndex: function multiBarValChangeByIndex(index) {
@@ -2315,15 +2309,25 @@
 	});
 	var DocumentClickMixin = {
 	    componentDidMount: function componentDidMount() {
-	        document.addEventListener('click', this.onDocumentClick);
+	        document.addEventListener('click', this.onClick);
 	    },
 
 	    componentWillUnmount: function componentWillUnmount() {
-	        document.removeEventListener('click', this.onDocumentClick);
+	        document.removeEventListener('click', this.onClick);
+	    },
+
+	    onClick: function onClick(e) {
+	        this.onDocumentClick(e);
 	    },
 
 	    onDocumentClick: function onDocumentClick(e) {
-	        if (typeof this.handleOtherClick === 'function') this.handleOtherClick(e);
+	        var BASE_NODE = React.findDOMNode(this);
+	        if (e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
+	            if (typeof this.onBaseClick === 'function') this.onBaseClick(e);
+	        } else {
+	            if (typeof this.onOtherClick === 'function') this.onOtherClick(e);
+	        }
+	        e.stopPropagation();
 	    }
 	};
 
@@ -2457,127 +2461,108 @@
 
 	'use strict';
 
-	var _get = __webpack_require__(9)['default'];
+	var _interopRequireDefault = __webpack_require__(3)['default'];
 
-	var _inherits = __webpack_require__(23)['default'];
+	var _cssMenuLess = __webpack_require__(81);
 
-	var _createClass = __webpack_require__(34)['default'];
+	var _cssMenuLess2 = _interopRequireDefault(_cssMenuLess);
 
-	var _classCallCheck = __webpack_require__(37)['default'];
+	var _mixinDocumentClickMixin = __webpack_require__(72);
 
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
+	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
-	var Menu = (function (_React$Component) {
-	    _inherits(Menu, _React$Component);
+	var Menu = React.createClass({
+	    displayName: 'Menu',
 
-	    function Menu(props) {
-	        _classCallCheck(this, Menu);
+	    mixins: [_mixinDocumentClickMixin2['default']],
 
-	        _get(Object.getPrototypeOf(Menu.prototype), 'constructor', this).call(this, props);
-	        this.state = {
+	    getInitialState: function getInitialState() {
+	        return {
 	            open: false,
 	            index: this.props.selectedIndex
 	        };
+	    },
+
+	    toggleOpen: function toggleOpen() {
+	        this.setState({
+	            open: !this.state.open
+	        });
+	    },
+
+	    openMenu: function openMenu() {
+	        this.setState({
+	            open: true
+	        });
+	    },
+
+	    closeMenu: function closeMenu() {
+	        this.setState({
+	            open: false
+	        });
+	    },
+
+	    handleItemClick: function handleItemClick(index) {
+	        if (typeof this.props.onSelect === 'function') this.props.onSelect(index);
+	        this.setState({
+	            open: false,
+	            index: index
+	        });
+	    },
+
+	    onOtherClick: function onOtherClick(e) {
+	        this.closeMenu();
+	    },
+
+	    makeMenuItems: function makeMenuItems(content) {
+	        var _this = this;
+
+	        var NODES = content.props.children,
+	            INDEX = this.state.index;
+	        var itemNodes = [];
+	        if (NODES instanceof Array) {
+	            itemNodes = NODES.map((function (node, index) {
+	                return React.createElement(
+	                    Menu.Item,
+	                    { key: index, selected: index == INDEX, itemIndex: index, onItemClick: _this.handleItemClick.bind(_this) },
+	                    node.props.children
+	                );
+	            }).bind(this));
+	        }
+	        return itemNodes;
+	    },
+
+	    render: function render() {
+	        var content = this.state.open ? React.createElement(
+	            'div',
+	            { className: '_content' },
+	            this.makeMenuItems(this.props.items)
+	        ) : null;
+	        var trigger = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
+	        var menuNode = this.props.triggerType === 'click' ? React.createElement(
+	            'div',
+	            { className: 'ui menu' },
+	            React.createElement(
+	                Menu.Trigger,
+	                { onClick: this.toggleOpen.bind(this) },
+	                trigger
+	            ),
+	            content
+	        ) : React.createElement(
+	            'div',
+	            { className: 'ui menu', onMouseOver: this.openMenu.bind(this), onMouseLeave: this.closeMenu.bind(this) },
+	            React.createElement(
+	                Menu.Trigger,
+	                { onClick: this.toggleOpen.bind(this) },
+	                trigger
+	            ),
+	            content
+	        );
+
+	        return menuNode;
 	    }
+	});
 
-	    _createClass(Menu, [{
-	        key: 'toggleOpen',
-	        value: function toggleOpen() {
-	            this.setState({
-	                open: !this.state.open
-	            });
-	        }
-	    }, {
-	        key: 'openMenu',
-	        value: function openMenu() {
-	            this.setState({
-	                open: true
-	            });
-	        }
-	    }, {
-	        key: 'closeMenu',
-	        value: function closeMenu() {
-	            this.setState({
-	                open: false
-	            });
-	        }
-	    }, {
-	        key: 'handleMouseOver',
-	        value: function handleMouseOver(e) {
-	            this.openMenu();
-	        }
-	    }, {
-	        key: 'handleMouseLeave',
-	        value: function handleMouseLeave(e) {
-	            this.closeMenu();
-	        }
-	    }, {
-	        key: 'handleItemClick',
-	        value: function handleItemClick(index) {
-	            if (typeof this.props.onSelect === 'function') this.props.onSelect(index);
-	            this.setState({
-	                open: false,
-	                index: index
-	            });
-	        }
-	    }, {
-	        key: 'makeMenuItems',
-	        value: function makeMenuItems(content) {
-	            var _this = this;
-
-	            var NODES = content.props.children,
-	                INDEX = this.state.index;
-	            var itemNodes = [];
-	            if (NODES instanceof Array) {
-	                itemNodes = NODES.map((function (node, index) {
-	                    return React.createElement(
-	                        Menu.Item,
-	                        { key: index, selected: index == INDEX, itemIndex: index, onItemClick: _this.handleItemClick.bind(_this) },
-	                        node.props.children
-	                    );
-	                }).bind(this));
-	            }
-	            return itemNodes;
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var content = this.state.open ? React.createElement(
-	                'div',
-	                { ref: 'menuContent', className: 'content' },
-	                this.makeMenuItems(this.props.items)
-	            ) : null;
-	            var trigger = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
-	            var menuNode = this.props.triggerType === 'click' ? React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    Menu.Trigger,
-	                    { onClick: this.toggleOpen.bind(this) },
-	                    trigger
-	                ),
-	                content
-	            ) : React.createElement(
-	                'div',
-	                { onMouseOver: this.handleMouseOver.bind(this), onMouseLeave: this.handleMouseLeave.bind(this) },
-	                React.createElement(
-	                    Menu.Trigger,
-	                    { onClick: this.toggleOpen.bind(this) },
-	                    trigger
-	                ),
-	                content
-	            );
-
-	            return menuNode;
-	        }
-	    }]);
-
-	    return Menu;
-	})(React.Component);
-
-	exports['default'] = Menu;
+	module.exports = Menu;
 
 	Menu.Trigger = React.createClass({
 	    displayName: 'Trigger',
@@ -2588,7 +2573,7 @@
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { onClick: this.handleTriggerClick },
+	            { className: '_trigger', onClick: this.handleTriggerClick },
 	            this.props.children
 	        );
 	    }
@@ -2603,12 +2588,11 @@
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { onClick: this.handleClick },
+	            { className: '_item', onClick: this.handleClick },
 	            this.props.children
 	        );
 	    }
 	});
-	module.exports = exports['default'];
 
 /***/ },
 /* 76 */
@@ -3102,6 +3086,7 @@
 	                    )
 	                )
 	            );
+
 	            var onNode = React.createElement(
 	                "a",
 	                { href: "javascript:;" },
@@ -3162,6 +3147,46 @@
 
 	exports["default"] = MenuDemo;
 	module.exports = exports["default"];
+
+/***/ },
+/* 81 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(82);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./menu.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./menu.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.menu {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

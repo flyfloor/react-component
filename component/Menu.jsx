@@ -1,37 +1,34 @@
-export default class Menu extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
+import css from "../css/menu.less";
+
+import DocumentClickMixin from '../mixin/DocumentClickMixin';
+
+const Menu = React.createClass ({
+    mixins: [DocumentClickMixin],
+
+    getInitialState: function() {
+        return {
             open: false,
             index: this.props.selectedIndex,
-        }
-    }
+        };
+    },
 
     toggleOpen(){
         this.setState({
             open: !this.state.open 
         });
-    }
+    },
 
     openMenu(){
         this.setState({
             open: true, 
         });
-    }
+    },
 
     closeMenu(){
         this.setState({
             open: false, 
         });
-    }
-
-    handleMouseOver(e){
-        this.openMenu();
-    }
-
-    handleMouseLeave(e){
-        this.closeMenu();
-    }
+    },
 
     handleItemClick(index){
         if (typeof this.props.onSelect === 'function') this.props.onSelect(index);
@@ -39,7 +36,11 @@ export default class Menu extends React.Component {
             open: false,
             index: index, 
         });
-    }
+    },
+
+    onOtherClick(e){
+        this.closeMenu()
+    },
 
     makeMenuItems(content){
         const NODES = content.props.children,
@@ -51,17 +52,17 @@ export default class Menu extends React.Component {
             }.bind(this))
         }
         return itemNodes;
-    }
+    },
 
     render() {
-        let content = this.state.open ? <div ref='menuContent' className="content">{this.makeMenuItems(this.props.items)}</div> : null;
+        let content = this.state.open ? <div className="_content">{this.makeMenuItems(this.props.items)}</div> : null;
         let trigger = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
         let menuNode = this.props.triggerType === 'click' ? 
-                        <div>
+                        <div className='ui menu'>
                             <Menu.Trigger onClick={this.toggleOpen.bind(this)}>{trigger}</Menu.Trigger>
                             {content}
                         </div> :
-                        <div onMouseOver={this.handleMouseOver.bind(this)} onMouseLeave={this.handleMouseLeave.bind(this)}>
+                        <div className='ui menu' onMouseOver={this.openMenu.bind(this)} onMouseLeave={this.closeMenu.bind(this)}>
                             <Menu.Trigger onClick={this.toggleOpen.bind(this)}>{trigger}</Menu.Trigger>
                             {content}
                         </div>;
@@ -70,7 +71,9 @@ export default class Menu extends React.Component {
             menuNode
         );
     }
-}
+});
+
+module.exports = Menu;
 
 Menu.Trigger = React.createClass({
     handleTriggerClick(e){
@@ -78,7 +81,7 @@ Menu.Trigger = React.createClass({
     },
     render() {
         return (
-            <div onClick={this.handleTriggerClick}>
+            <div className='_trigger' onClick={this.handleTriggerClick}>
                 {this.props.children}
             </div>
         );
@@ -91,7 +94,7 @@ Menu.Item = React.createClass({
     },
     render() {
         return (
-            <div onClick={this.handleClick}>
+            <div className='_item' onClick={this.handleClick}>
                 {this.props.children}
             </div>
         );

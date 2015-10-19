@@ -76,12 +76,17 @@
 
 	var _demoMenuDemoJsx2 = _interopRequireDefault(_demoMenuDemoJsx);
 
+	var _demoConfirmBoxDemoJsx = __webpack_require__(83);
+
+	var _demoConfirmBoxDemoJsx2 = _interopRequireDefault(_demoConfirmBoxDemoJsx);
+
 	// React.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 	// React.render(<RadioDemo/>, document.getElementById('radio'));
 	// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 	// React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
 	// React.render(<DropDownDemo/>, document.getElementById('drop-down'));
-	React.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
+	// React.render(<MenuDemo/>, document.getElementById('menu'));
+	React.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
 
 /***/ },
 /* 1 */,
@@ -984,12 +989,17 @@
 
 	var _componentMenuJsx2 = _interopRequireDefault(_componentMenuJsx);
 
+	var _componentConfirmBoxJsx = __webpack_require__(84);
+
+	var _componentConfirmBoxJsx2 = _interopRequireDefault(_componentConfirmBoxJsx);
+
 	exports.CheckBox = _componentCheckBoxJsx2['default'];
 	exports.Radio = _componentRadioJsx2['default'];
 	exports.RadioGroup = _componentRadioGroupJsx2['default'];
 	exports.CheckBoxGroup = _componentCheckBoxGroupJsx2['default'];
 	exports.DropDown = _componentDropDownJsx2['default'];
 	exports.Menu = _componentMenuJsx2['default'];
+	exports.ConfirmBox = _componentConfirmBoxJsx2['default'];
 
 /***/ },
 /* 39 */
@@ -2030,6 +2040,10 @@
 
 	var _interopRequireDefault = __webpack_require__(3)['default'];
 
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
 	var _mixinDocumentClickMixin = __webpack_require__(72);
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
@@ -2131,7 +2145,7 @@
 	    }
 	});
 
-	module.exports = DropBase;
+	exports['default'] = DropBase;
 
 	DropBase.Option = React.createClass({
 	    displayName: 'Option',
@@ -2297,6 +2311,7 @@
 	        );
 	    }
 	});
+	module.exports = exports['default'];
 
 /***/ },
 /* 72 */
@@ -2463,6 +2478,10 @@
 
 	var _interopRequireDefault = __webpack_require__(3)['default'];
 
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
 	var _cssMenuLess = __webpack_require__(81);
 
 	var _cssMenuLess2 = _interopRequireDefault(_cssMenuLess);
@@ -2562,7 +2581,7 @@
 	    }
 	});
 
-	module.exports = Menu;
+	exports['default'] = Menu;
 
 	Menu.Trigger = React.createClass({
 	    displayName: 'Trigger',
@@ -2594,6 +2613,7 @@
 	        );
 	    }
 	});
+	module.exports = exports['default'];
 
 /***/ },
 /* 76 */
@@ -3189,6 +3209,91 @@
 
 	// exports
 
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(9)['default'];
+
+	var _inherits = __webpack_require__(23)['default'];
+
+	var _createClass = __webpack_require__(34)['default'];
+
+	var _classCallCheck = __webpack_require__(37)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(38);
+
+	var ConfirmBoxDemo = (function (_React$Component) {
+	    _inherits(ConfirmBoxDemo, _React$Component);
+
+	    function ConfirmBoxDemo() {
+	        _classCallCheck(this, ConfirmBoxDemo);
+
+	        _get(Object.getPrototypeOf(ConfirmBoxDemo.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(ConfirmBoxDemo, [{
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'ol',
+	                null,
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'default confirm box'
+	                    ),
+	                    React.createElement(_indexJs.ConfirmBox, null)
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'conform box with different direction'
+	                    ),
+	                    React.createElement(_indexJs.ConfirmBox, null)
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ConfirmBoxDemo;
+	})(React.Component);
+
+	exports['default'] = ConfirmBoxDemo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 84 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var ConfirmBox = React.createClass({
+	    displayName: "ConfirmBox",
+
+	    render: function render() {
+	        return React.createElement("div", null);
+	    }
+	});
+
+	exports["default"] = ConfirmBox;
+	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);

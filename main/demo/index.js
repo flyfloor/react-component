@@ -4,6 +4,7 @@ import RadioGroup from '../../component/RadioGroup.jsx';
 import CheckBoxGroup from '../../component/CheckBoxGroup.jsx';
 import DropDown from '../../component/DropDown.jsx';
 import Menu from '../../component/Menu.jsx';
+import ConfirmBox from '../../component/ConfirmBox.jsx';
 
 export {
     CheckBox,
@@ -12,4 +13,5 @@ export {
     CheckBoxGroup,
     DropDown,
     Menu,
+    ConfirmBox,
 }

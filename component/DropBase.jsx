@@ -87,7 +87,7 @@ const DropBase = React.createClass({
     }
 });
 
-module.exports = DropBase;
+export default DropBase;
 
 DropBase.Option = React.createClass({
     handleClick(){

@@ -46,9 +46,9 @@
 
 	"use strict";
 
-	var _interopRequireDefault = __webpack_require__(1)["default"];
+	var _interopRequireDefault = __webpack_require__(3)["default"];
 
-	var _cssResetLess = __webpack_require__(2);
+	var _cssResetLess = __webpack_require__(4);
 
 	var _cssResetLess2 = _interopRequireDefault(_cssResetLess);
 
@@ -56,23 +56,23 @@
 
 	var _demoCheckBoxDemoJsx2 = _interopRequireDefault(_demoCheckBoxDemoJsx);
 
-	var _demoRadioDemoJsx = __webpack_require__(75);
+	var _demoRadioDemoJsx = __webpack_require__(76);
 
 	var _demoRadioDemoJsx2 = _interopRequireDefault(_demoRadioDemoJsx);
 
-	var _demoRadioGroupDemoJsx = __webpack_require__(76);
+	var _demoRadioGroupDemoJsx = __webpack_require__(77);
 
 	var _demoRadioGroupDemoJsx2 = _interopRequireDefault(_demoRadioGroupDemoJsx);
 
-	var _demoCheckBoxGroupDemoJsx = __webpack_require__(77);
+	var _demoCheckBoxGroupDemoJsx = __webpack_require__(78);
 
 	var _demoCheckBoxGroupDemoJsx2 = _interopRequireDefault(_demoCheckBoxGroupDemoJsx);
 
-	var _demoDropDownDemoJsx = __webpack_require__(78);
+	var _demoDropDownDemoJsx = __webpack_require__(79);
 
 	var _demoDropDownDemoJsx2 = _interopRequireDefault(_demoDropDownDemoJsx);
 
-	var _demoMenuDemoJsx = __webpack_require__(79);
+	var _demoMenuDemoJsx = __webpack_require__(80);
 
 	var _demoMenuDemoJsx2 = _interopRequireDefault(_demoMenuDemoJsx);
 
@@ -80,11 +80,13 @@
 	// React.render(<RadioDemo/>, document.getElementById('radio'));
 	// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 	// React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-	React.render(React.createElement(_demoDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
-	// React.render(<MenuDemo/>, document.getElementById('menu'));
+	// React.render(<DropDownDemo/>, document.getElementById('drop-down'));
+	React.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -98,16 +100,16 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 2 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(3);
+	var content = __webpack_require__(5);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(5)(content, {});
+	var update = __webpack_require__(7)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -124,10 +126,10 @@
 	}
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(4)();
+	exports = module.exports = __webpack_require__(6)();
 	// imports
 
 
@@ -138,7 +140,7 @@
 
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	/*
@@ -194,7 +196,7 @@
 
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -419,8 +421,6 @@
 
 
 /***/ },
-/* 6 */,
-/* 7 */,
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -954,7 +954,7 @@
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(1)['default'];
+	var _interopRequireDefault = __webpack_require__(3)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
@@ -980,7 +980,7 @@
 
 	var _componentDropDownJsx2 = _interopRequireDefault(_componentDropDownJsx);
 
-	var _componentMenuJsx = __webpack_require__(80);
+	var _componentMenuJsx = __webpack_require__(75);
 
 	var _componentMenuJsx2 = _interopRequireDefault(_componentMenuJsx);
 
@@ -1117,7 +1117,7 @@
 
 	var _getIterator = __webpack_require__(42)['default'];
 
-	var _interopRequireDefault = __webpack_require__(1)['default'];
+	var _interopRequireDefault = __webpack_require__(3)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
@@ -1585,7 +1585,7 @@
 
 	var _getIterator = __webpack_require__(42)['default'];
 
-	var _interopRequireDefault = __webpack_require__(1)['default'];
+	var _interopRequireDefault = __webpack_require__(3)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
@@ -1767,7 +1767,7 @@
 
 	var _getIterator = __webpack_require__(42)['default'];
 
-	var _interopRequireDefault = __webpack_require__(1)['default'];
+	var _interopRequireDefault = __webpack_require__(3)['default'];
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
@@ -1992,7 +1992,7 @@
 	var content = __webpack_require__(70);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(5)(content, {});
+	var update = __webpack_require__(7)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -2012,7 +2012,7 @@
 /* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(4)();
+	exports = module.exports = __webpack_require__(6)();
 	// imports
 
 
@@ -2028,7 +2028,7 @@
 
 	'use strict';
 
-	var _interopRequireDefault = __webpack_require__(1)['default'];
+	var _interopRequireDefault = __webpack_require__(3)['default'];
 
 	var _mixinDocumentClickMixin = __webpack_require__(72);
 
@@ -2455,6 +2455,165 @@
 /* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _get = __webpack_require__(9)['default'];
+
+	var _inherits = __webpack_require__(23)['default'];
+
+	var _createClass = __webpack_require__(34)['default'];
+
+	var _classCallCheck = __webpack_require__(37)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var Menu = (function (_React$Component) {
+	    _inherits(Menu, _React$Component);
+
+	    function Menu(props) {
+	        _classCallCheck(this, Menu);
+
+	        _get(Object.getPrototypeOf(Menu.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            open: false,
+	            index: this.props.selectedIndex
+	        };
+	    }
+
+	    _createClass(Menu, [{
+	        key: 'toggleOpen',
+	        value: function toggleOpen() {
+	            this.setState({
+	                open: !this.state.open
+	            });
+	        }
+	    }, {
+	        key: 'openMenu',
+	        value: function openMenu() {
+	            this.setState({
+	                open: true
+	            });
+	        }
+	    }, {
+	        key: 'closeMenu',
+	        value: function closeMenu() {
+	            this.setState({
+	                open: false
+	            });
+	        }
+	    }, {
+	        key: 'handleMouseOver',
+	        value: function handleMouseOver(e) {
+	            this.openMenu();
+	        }
+	    }, {
+	        key: 'handleMouseLeave',
+	        value: function handleMouseLeave(e) {
+	            this.closeMenu();
+	        }
+	    }, {
+	        key: 'handleItemClick',
+	        value: function handleItemClick(index) {
+	            if (typeof this.props.onSelect === 'function') this.props.onSelect(index);
+	            this.setState({
+	                open: false,
+	                index: index
+	            });
+	        }
+	    }, {
+	        key: 'makeMenuItems',
+	        value: function makeMenuItems(content) {
+	            var _this = this;
+
+	            var NODES = content.props.children,
+	                INDEX = this.state.index;
+	            var itemNodes = [];
+	            if (NODES instanceof Array) {
+	                itemNodes = NODES.map((function (node, index) {
+	                    return React.createElement(
+	                        Menu.Item,
+	                        { key: index, selected: index == INDEX, itemIndex: index, onItemClick: _this.handleItemClick.bind(_this) },
+	                        node.props.children
+	                    );
+	                }).bind(this));
+	            }
+	            return itemNodes;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var content = this.state.open ? React.createElement(
+	                'div',
+	                { ref: 'menuContent', className: 'content' },
+	                this.makeMenuItems(this.props.items)
+	            ) : null;
+	            var trigger = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
+	            var menuNode = this.props.triggerType === 'click' ? React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    Menu.Trigger,
+	                    { onClick: this.toggleOpen.bind(this) },
+	                    trigger
+	                ),
+	                content
+	            ) : React.createElement(
+	                'div',
+	                { onMouseOver: this.handleMouseOver.bind(this), onMouseLeave: this.handleMouseLeave.bind(this) },
+	                React.createElement(
+	                    Menu.Trigger,
+	                    { onClick: this.toggleOpen.bind(this) },
+	                    trigger
+	                ),
+	                content
+	            );
+
+	            return menuNode;
+	        }
+	    }]);
+
+	    return Menu;
+	})(React.Component);
+
+	exports['default'] = Menu;
+
+	Menu.Trigger = React.createClass({
+	    displayName: 'Trigger',
+
+	    handleTriggerClick: function handleTriggerClick(e) {
+	        this.props.onClick(e);
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { onClick: this.handleTriggerClick },
+	            this.props.children
+	        );
+	    }
+	});
+
+	Menu.Item = React.createClass({
+	    displayName: 'Item',
+
+	    handleClick: function handleClick(e) {
+	        this.props.onItemClick(this.props.itemIndex);
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { onClick: this.handleClick },
+	            this.props.children
+	        );
+	    }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	var _get = __webpack_require__(9)["default"];
@@ -2544,7 +2703,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2629,7 +2788,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2705,7 +2864,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2857,7 +3016,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2884,16 +3043,71 @@
 
 	        _get(Object.getPrototypeOf(MenuDemo.prototype), "constructor", this).call(this, props);
 	        this.state = {
-	            index: -1
+	            index: 1
 	        };
 	    }
 
 	    _createClass(MenuDemo, [{
 	        key: "displayChange",
-	        value: function displayChange(e) {}
+	        value: function displayChange(index) {
+	            this.setState({
+	                index: index
+	            });
+	        }
 	    }, {
 	        key: "render",
 	        value: function render() {
+	            var items = React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    _indexJs.Menu.Item,
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "javascript:;" },
+	                        "菜单1"
+	                    )
+	                ),
+	                React.createElement(
+	                    _indexJs.Menu.Item,
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "javascript:;" },
+	                        "菜单2"
+	                    )
+	                ),
+	                React.createElement(
+	                    _indexJs.Menu.Item,
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "javascript:;" },
+	                        "菜单3"
+	                    )
+	                ),
+	                React.createElement(
+	                    _indexJs.Menu.Item,
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "javascript:;" },
+	                        "菜单4",
+	                        React.createElement(
+	                            "i",
+	                            null,
+	                            "^_^"
+	                        )
+	                    )
+	                )
+	            );
+	            var onNode = React.createElement(
+	                "a",
+	                { href: "javascript:;" },
+	                "收起菜单"
+	            );
+
 	            return React.createElement(
 	                "ol",
 	                null,
@@ -2903,7 +3117,7 @@
 	                    React.createElement(
 	                        "h4",
 	                        null,
-	                        "checkbox group"
+	                        "menu, default with mouse hover"
 	                    ),
 	                    React.createElement(
 	                        "p",
@@ -2913,55 +3127,29 @@
 	                    ),
 	                    React.createElement(
 	                        _indexJs.Menu,
-	                        { onSelect: this.displayChange.bind(this) },
+	                        { onSelect: this.displayChange.bind(this), selectedIndex: this.state.index, items: items, triggerOn: onNode },
 	                        React.createElement(
-	                            _indexJs.Menu.Trigger,
-	                            null,
-	                            React.createElement(
-	                                "a",
-	                                { href: "javascript:;" },
-	                                "展开菜单"
-	                            )
-	                        ),
+	                            "a",
+	                            { href: "javascript:;" },
+	                            "展开菜单"
+	                        )
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "h4",
+	                        null,
+	                        "menu, with click to trigger menu open"
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Menu,
+	                        { selectedIndex: this.state.index, items: items, triggerOn: onNode, triggerType: "click" },
 	                        React.createElement(
-	                            _indexJs.Menu.Content,
-	                            null,
-	                            React.createElement(
-	                                _indexJs.Menu.Item,
-	                                null,
-	                                React.createElement(
-	                                    "a",
-	                                    { href: "javascript:;" },
-	                                    "菜单1"
-	                                )
-	                            ),
-	                            React.createElement(
-	                                _indexJs.Menu.Item,
-	                                null,
-	                                React.createElement(
-	                                    "a",
-	                                    { href: "javascript:;" },
-	                                    "菜单1"
-	                                )
-	                            ),
-	                            React.createElement(
-	                                _indexJs.Menu.Item,
-	                                null,
-	                                React.createElement(
-	                                    "a",
-	                                    { href: "javascript:;" },
-	                                    "菜单1"
-	                                )
-	                            ),
-	                            React.createElement(
-	                                _indexJs.Menu.Item,
-	                                null,
-	                                React.createElement(
-	                                    "a",
-	                                    { href: "javascript:;" },
-	                                    "菜单1"
-	                                )
-	                            )
+	                            "a",
+	                            { href: "javascript:;" },
+	                            "展开菜单"
 	                        )
 	                    )
 	                )
@@ -2973,104 +3161,6 @@
 	})(React.Component);
 
 	exports["default"] = MenuDemo;
-	module.exports = exports["default"];
-
-/***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _get = __webpack_require__(9)["default"];
-
-	var _inherits = __webpack_require__(23)["default"];
-
-	var _createClass = __webpack_require__(34)["default"];
-
-	var _classCallCheck = __webpack_require__(37)["default"];
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var Menu = (function (_React$Component) {
-	    _inherits(Menu, _React$Component);
-
-	    function Menu(props) {
-	        _classCallCheck(this, Menu);
-
-	        _get(Object.getPrototypeOf(Menu.prototype), "constructor", this).call(this, props);
-	        this.state = {
-	            open: false
-	        };
-	    }
-
-	    _createClass(Menu, [{
-	        key: "render",
-	        value: function render() {
-	            return React.createElement(
-	                "div",
-	                null,
-	                this.props.children
-	            );
-	        }
-	    }]);
-
-	    return Menu;
-	})(React.Component);
-
-	exports["default"] = Menu;
-
-	Menu.Trigger = React.createClass({
-	    displayName: "Trigger",
-
-	    handleClick: function handleClick(e) {
-	        this.props.onTriggerClick(e);
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            "div",
-	            { onClick: this.handleClick },
-	            this.props.children
-	        );
-	    }
-	});
-
-	Menu.Content = React.createClass({
-	    displayName: "Content",
-
-	    render: function render() {
-	        return React.createElement(
-	            "div",
-	            null,
-	            this.props.children
-	        );
-	    }
-	});
-
-	Menu.Label = React.createClass({
-	    displayName: "Label",
-
-	    render: function render() {
-	        return React.createElement(
-	            "div",
-	            null,
-	            this.props.children
-	        );
-	    }
-	});
-
-	Menu.Item = React.createClass({
-	    displayName: "Item",
-
-	    render: function render() {
-	        return React.createElement(
-	            "div",
-	            null,
-	            this.props.children
-	        );
-	    }
-	});
 	module.exports = exports["default"];
 
 /***/ }

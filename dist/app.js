@@ -2071,7 +2071,7 @@
 	        };
 	    },
 
-	    onOtherClick: function onOtherClick(e) {
+	    onOtherDomClick: function onOtherDomClick(e) {
 	        this.toggleOpen(false);
 	    },
 
@@ -2323,9 +2323,9 @@
 	    onDocumentClick: function onDocumentClick(e) {
 	        var BASE_NODE = React.findDOMNode(this);
 	        if (e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
-	            if (typeof this.onBaseClick === 'function') this.onBaseClick(e);
+	            if (typeof this.onBaseClick === 'function') this.onBaseDomClick(e);
 	        } else {
-	            if (typeof this.onOtherClick === 'function') this.onOtherClick(e);
+	            if (typeof this.onOtherClick === 'function') this.onOtherDomClick(e);
 	        }
 	        e.stopPropagation();
 	    }
@@ -2509,7 +2509,7 @@
 	        });
 	    },
 
-	    onOtherClick: function onOtherClick(e) {
+	    onOtherDomClick: function onOtherDomClick(e) {
 	        this.closeMenu();
 	    },
 

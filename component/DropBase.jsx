@@ -29,7 +29,7 @@ const DropBase = React.createClass({
         };
     },
 
-    onOtherClick(e){
+    onOtherDomClick(e){
         this.toggleOpen(false);
     },
 

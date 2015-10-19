@@ -38,7 +38,7 @@ const Menu = React.createClass ({
         });
     },
 
-    onOtherClick(e){
+    onOtherDomClick(e){
         this.closeMenu()
     },
 

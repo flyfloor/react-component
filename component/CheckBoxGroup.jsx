@@ -53,7 +53,7 @@ export default class CheckBoxGroup extends React.Component {
                     break;
                 }
             }
-            itemNode = <CheckBox storeValue={item[valueName]} checked={itemChecked} onChange={this.handleChange.bind(this)}>{item[labelName]}</CheckBox>;
+            itemNode = <CheckBox key={item[valueName]} storeValue={item[valueName]} checked={itemChecked} onChange={this.handleChange.bind(this)}>{item[labelName]}</CheckBox>;
             optionNodes.push(itemNode);
         }
 

@@ -14,7 +14,7 @@ export default class ConfirmBoxDemo extends React.Component {
             <ol>
                 <li>
                     <h4>default confirm box</h4>
-                    <ConfirmBox title='confirm delete?' onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
+                    <ConfirmBox title='confirm deleted, realy you want delete this? are you sure?' onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>
@@ -25,17 +25,17 @@ export default class ConfirmBoxDemo extends React.Component {
                     </ConfirmBox>
                 </li>
                 <li>
-                    <h4>conform box with different direction</h4>
-                    <ConfirmBox title='confirm delete?' direction='left'>
+                    <h4>conform box with different position</h4>
+                    <ConfirmBox title='confirm delete?' position='left'>
                         <a href='javascript:;'>left</a>
                     </ConfirmBox>
-                    <ConfirmBox title='confirm delete?' direction='right'>
+                    <ConfirmBox title='confirm delete?' position='right'>
                         <a href='javascript:;'>right</a>
                     </ConfirmBox>
-                    <ConfirmBox title='confirm delete?' direction='top'>
+                    <ConfirmBox title='confirm delete?' position='top'>
                         <a href='javascript:;'>top</a>
                     </ConfirmBox>
-                    <ConfirmBox title='confirm delete?' direction='bottom'>
+                    <ConfirmBox title='confirm delete?' position='bottom'>
                         <a href='javascript:;'>bottom</a>
                     </ConfirmBox>
                 </li>

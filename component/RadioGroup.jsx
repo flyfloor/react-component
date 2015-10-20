@@ -31,7 +31,7 @@ export default class RadioGroup extends React.Component {
 
         for (let item of this.state.options){
             itemChecked = item[valueName] === this.state.value;
-            itemNode = <Radio storeValue={item[valueName]} checked={itemChecked} onChange={this.toggleChange.bind(this)}>{item[labelName]}</Radio>;
+            itemNode = <Radio key={item[valueName]} storeValue={item[valueName]} checked={itemChecked} onChange={this.toggleChange.bind(this)}>{item[labelName]}</Radio>;
             optionNodes.push(itemNode);
         }
 

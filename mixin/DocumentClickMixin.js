@@ -12,11 +12,11 @@ const DocumentClickMixin = {
     }, 
 
     onDocumentClick(e) {
-        const BASE_NODE = React.findDOMNode(this);
+        const BASE_NODE = ReactDOM.findDOMNode(this);
         if(e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
-            if (typeof this.onBaseClick === 'function') this.onBaseDomClick(e);
+            if (typeof this.onBaseDomClick === 'function') this.onBaseDomClick(e);
         } else {
-            if (typeof this.onOtherClick === 'function') this.onOtherDomClick(e);
+            if (typeof this.onOtherDomClick === 'function') this.onOtherDomClick(e);
         }
         e.stopPropagation();
     }

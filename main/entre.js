@@ -8,10 +8,10 @@ import DropDownDemo from "./demo/DropDownDemo.jsx";
 import MenuDemo from "./demo/MenuDemo.jsx";
 import ConfirmBoxDemo from "./demo/ConfirmBoxDemo.jsx";
 
-// React.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
-// React.render(<RadioDemo/>, document.getElementById('radio'));
-// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
-// React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-// React.render(<DropDownDemo/>, document.getElementById('drop-down'));
-// React.render(<MenuDemo/>, document.getElementById('menu'));
-React.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
+// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
+// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
+// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
+// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
+// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
+ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
+// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));

@@ -1,0 +1,24 @@
+@import url('meta.less');
+@import url('share.less');
+
+@{NS}.confirm-box {
+    position: relative;
+    overflow: visible;
+
+    ._content {
+        position: absolute;
+        z-index: 100;
+        max-width: 300px;
+        min-width: 150px;
+        background: @white;
+        ._title {
+            .gap;
+        }
+        ._wrap {
+            border-radius: 3px;
+            min-height: 30px;
+            padding: 10px;
+            border: 1px solid @gray_b;
+        }
+    }
+}

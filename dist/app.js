@@ -56,37 +56,37 @@
 
 	var _demoCheckBoxDemoJsx2 = _interopRequireDefault(_demoCheckBoxDemoJsx);
 
-	var _demoRadioDemoJsx = __webpack_require__(76);
+	var _demoRadioDemoJsx = __webpack_require__(81);
 
 	var _demoRadioDemoJsx2 = _interopRequireDefault(_demoRadioDemoJsx);
 
-	var _demoRadioGroupDemoJsx = __webpack_require__(77);
+	var _demoRadioGroupDemoJsx = __webpack_require__(82);
 
 	var _demoRadioGroupDemoJsx2 = _interopRequireDefault(_demoRadioGroupDemoJsx);
 
-	var _demoCheckBoxGroupDemoJsx = __webpack_require__(78);
+	var _demoCheckBoxGroupDemoJsx = __webpack_require__(83);
 
 	var _demoCheckBoxGroupDemoJsx2 = _interopRequireDefault(_demoCheckBoxGroupDemoJsx);
 
-	var _demoDropDownDemoJsx = __webpack_require__(79);
+	var _demoDropDownDemoJsx = __webpack_require__(84);
 
 	var _demoDropDownDemoJsx2 = _interopRequireDefault(_demoDropDownDemoJsx);
 
-	var _demoMenuDemoJsx = __webpack_require__(80);
+	var _demoMenuDemoJsx = __webpack_require__(85);
 
 	var _demoMenuDemoJsx2 = _interopRequireDefault(_demoMenuDemoJsx);
 
-	var _demoConfirmBoxDemoJsx = __webpack_require__(83);
+	var _demoConfirmBoxDemoJsx = __webpack_require__(86);
 
 	var _demoConfirmBoxDemoJsx2 = _interopRequireDefault(_demoConfirmBoxDemoJsx);
 
-	// React.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
-	// React.render(<RadioDemo/>, document.getElementById('radio'));
-	// React.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
-	// React.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-	// React.render(<DropDownDemo/>, document.getElementById('drop-down'));
-	// React.render(<MenuDemo/>, document.getElementById('menu'));
-	React.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
+	// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
+	// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
+	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
+	// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
+	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
+	ReactDOM.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
+	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
 
 /***/ },
 /* 1 */,
@@ -989,7 +989,7 @@
 
 	var _componentMenuJsx2 = _interopRequireDefault(_componentMenuJsx);
 
-	var _componentConfirmBoxJsx = __webpack_require__(84);
+	var _componentConfirmBoxJsx = __webpack_require__(78);
 
 	var _componentConfirmBoxJsx2 = _interopRequireDefault(_componentConfirmBoxJsx);
 
@@ -1193,7 +1193,7 @@
 	                    itemChecked = item[valueName] === this.state.value;
 	                    itemNode = React.createElement(
 	                        _RadioJsx2['default'],
-	                        { storeValue: item[valueName], checked: itemChecked, onChange: this.toggleChange.bind(this) },
+	                        { key: item[valueName], storeValue: item[valueName], checked: itemChecked, onChange: this.toggleChange.bind(this) },
 	                        item[labelName]
 	                    );
 	                    optionNodes.push(itemNode);
@@ -1727,7 +1727,7 @@
 
 	                    itemNode = React.createElement(
 	                        _CheckBoxJsx2['default'],
-	                        { storeValue: item[valueName], checked: itemChecked, onChange: this.handleChange.bind(this) },
+	                        { key: item[valueName], storeValue: item[valueName], checked: itemChecked, onChange: this.handleChange.bind(this) },
 	                        item[labelName]
 	                    );
 	                    optionNodes.push(itemNode);
@@ -1767,14 +1767,6 @@
 
 	'use strict';
 
-	var _get = __webpack_require__(9)['default'];
-
-	var _inherits = __webpack_require__(23)['default'];
-
-	var _createClass = __webpack_require__(34)['default'];
-
-	var _classCallCheck = __webpack_require__(37)['default'];
-
 	var _getIterator = __webpack_require__(42)['default'];
 
 	var _interopRequireDefault = __webpack_require__(3)['default'];
@@ -1786,263 +1778,6 @@
 	var _cssDropdownLess = __webpack_require__(69);
 
 	var _cssDropdownLess2 = _interopRequireDefault(_cssDropdownLess);
-
-	var _DropBaseJsx = __webpack_require__(71);
-
-	var _DropBaseJsx2 = _interopRequireDefault(_DropBaseJsx);
-
-	var DropDown = (function (_DropBase) {
-	    _inherits(DropDown, _DropBase);
-
-	    function DropDown(props) {
-	        _classCallCheck(this, DropDown);
-
-	        _get(Object.getPrototypeOf(DropDown.prototype), 'constructor', this).call(this, props);
-	    }
-
-	    _createClass(DropDown, [{
-	        key: 'formatValue',
-	        value: function formatValue(val, callback) {
-	            var newVal = val,
-	                oldVal = this.state.value;
-	            if (this.props.multi) {
-	                var index = oldVal.indexOf(val);
-	                if (index > -1) {
-	                    oldVal.splice(index, 1);
-	                    this.setState({ value: oldVal }, callback);
-	                    return;
-	                }
-	                newVal = oldVal.concat(val);
-	            }
-	            this.setState({ value: newVal }, callback);
-	        }
-	    }, {
-	        key: 'formatDrop',
-	        value: function formatDrop() {
-	            var _props$labelName = this.props.labelName;
-	            var LABEL_NAME = _props$labelName === undefined ? 'name' : _props$labelName;
-	            var _props$valueName = this.props.valueName;
-	            var VALUE_NAME = _props$valueName === undefined ? 'value' : _props$valueName;
-
-	            var optionNodes = [],
-	                selected = undefined,
-	                node = undefined,
-	                placeHolder = this.props.placeHolder,
-	                filterText = this.state.filterText,
-	                compVal = this.state.value,
-	                searchable = this.props.searchable,
-	                multi = this.props.multi,
-	                tags = [];
-
-	            if (multi) {
-	                // list node format(multi)
-	                var _iteratorNormalCompletion = true;
-	                var _didIteratorError = false;
-	                var _iteratorError = undefined;
-
-	                try {
-	                    for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                        var pair = _step.value;
-	                        var _iteratorNormalCompletion2 = true;
-	                        var _didIteratorError2 = false;
-	                        var _iteratorError2 = undefined;
-
-	                        try {
-	                            for (var _iterator2 = _getIterator(compVal), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-	                                var val = _step2.value;
-
-	                                selected = val === pair[VALUE_NAME];
-	                                if (selected) {
-	                                    var index = compVal.indexOf(pair[VALUE_NAME]);
-	                                    if (tags.indexOf([pair[LABEL_NAME]]) === -1) tags[index] = pair[LABEL_NAME];
-	                                    break;
-	                                }
-	                            }
-	                        } catch (err) {
-	                            _didIteratorError2 = true;
-	                            _iteratorError2 = err;
-	                        } finally {
-	                            try {
-	                                if (!_iteratorNormalCompletion2 && _iterator2['return']) {
-	                                    _iterator2['return']();
-	                                }
-	                            } finally {
-	                                if (_didIteratorError2) {
-	                                    throw _iteratorError2;
-	                                }
-	                            }
-	                        }
-
-	                        node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
-	                        if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
-	                    }
-	                } catch (err) {
-	                    _didIteratorError = true;
-	                    _iteratorError = err;
-	                } finally {
-	                    try {
-	                        if (!_iteratorNormalCompletion && _iterator['return']) {
-	                            _iterator['return']();
-	                        }
-	                    } finally {
-	                        if (_didIteratorError) {
-	                            throw _iteratorError;
-	                        }
-	                    }
-	                }
-	            } else {
-	                // with a searchbar
-	                if (searchable) optionNodes.push(this.formatSearchBar());
-
-	                // list node format
-	                var _iteratorNormalCompletion3 = true;
-	                var _didIteratorError3 = false;
-	                var _iteratorError3 = undefined;
-
-	                try {
-	                    for (var _iterator3 = _getIterator(this.state.options), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-	                        var pair = _step3.value;
-
-	                        selected = compVal === pair[VALUE_NAME];
-	                        if (selected) placeHolder = pair[LABEL_NAME];
-	                        node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
-	                        if (searchable) {
-	                            if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
-	                            continue;
-	                        }
-	                        optionNodes.push(node);
-	                    }
-	                } catch (err) {
-	                    _didIteratorError3 = true;
-	                    _iteratorError3 = err;
-	                } finally {
-	                    try {
-	                        if (!_iteratorNormalCompletion3 && _iterator3['return']) {
-	                            _iterator3['return']();
-	                        }
-	                    } finally {
-	                        if (_didIteratorError3) {
-	                            throw _iteratorError3;
-	                        }
-	                    }
-	                }
-	            }
-
-	            return React.createElement(
-	                'div',
-	                { className: 'ui dropdown' },
-	                multi ? this.formatMultiInput(tags) : React.createElement(
-	                    _DropBaseJsx2['default'].label,
-	                    { onClick: this.toggleDropDown.bind(this) },
-	                    placeHolder
-	                ),
-	                this.formatDropList(optionNodes)
-	            );
-	        }
-	    }, {
-	        key: 'formatOptionCell',
-	        value: function formatOptionCell(_ref) {
-	            var label = _ref.label;
-	            var value = _ref.value;
-	            var selected = _ref.selected;
-
-	            return React.createElement(
-	                'li',
-	                null,
-	                React.createElement(
-	                    _DropBaseJsx2['default'].Option,
-	                    { onOptionSelect: this.selectChange.bind(this), selected: selected, storeValue: value },
-	                    label
-	                )
-	            );
-	        }
-	    }, {
-	        key: 'formatSearchBar',
-	        value: function formatSearchBar() {
-	            return React.createElement(
-	                DropDown.SearchBar,
-	                { onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this) },
-	                'this.props.placeHolder'
-	            );
-	        }
-	    }, {
-	        key: 'formatDropList',
-	        value: function formatDropList(nodes) {
-	            return this.state.open && nodes.length > 0 ? React.createElement(
-	                'ul',
-	                { className: '_list' },
-	                nodes
-	            ) : null;
-	        }
-	    }, {
-	        key: 'formatMultiInput',
-	        value: function formatMultiInput(tags) {
-	            return React.createElement(_DropBaseJsx2['default'].multiInput, { filterText: this.state.filterText, onSelectChange: this.multiBarValChangeByIndex.bind(this), onUserInputFocus: this.handleFocus.bind(this), onUserInput: this.handleSearch.bind(this), onClick: this.toggleOpen.bind(this), selectedTags: tags });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return this.formatDrop();
-	        }
-	    }]);
-
-	    return DropDown;
-	})(_DropBaseJsx2['default']);
-
-	exports['default'] = DropDown;
-	module.exports = exports['default'];
-
-/***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(70);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./dropdown.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./dropdown.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 71 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _interopRequireDefault = __webpack_require__(3)['default'];
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
 
 	var _mixinDocumentClickMixin = __webpack_require__(72);
 
@@ -2056,8 +1791,8 @@
 
 	var _utilDataAccessor2 = _interopRequireDefault(_utilDataAccessor);
 
-	var DropBase = React.createClass({
-	    displayName: 'DropBase',
+	var DropDown = React.createClass({
+	    displayName: 'DropDown',
 
 	    mixins: [_mixinDocumentClickMixin2['default']],
 
@@ -2083,6 +1818,193 @@
 	        return {
 	            placeHolder: 'click to select...'
 	        };
+	    },
+
+	    formatValue: function formatValue(val, callback) {
+	        var newVal = val,
+	            oldVal = this.state.value;
+	        if (this.props.multi) {
+	            var index = oldVal.indexOf(val);
+	            if (index > -1) {
+	                oldVal.splice(index, 1);
+	                this.setState({ value: oldVal }, callback);
+	                return;
+	            }
+	            newVal = oldVal.concat(val);
+	        }
+	        this.setState({ value: newVal }, callback);
+	    },
+
+	    formatDrop: function formatDrop() {
+	        var _props$labelName = this.props.labelName;
+	        var LABEL_NAME = _props$labelName === undefined ? 'name' : _props$labelName;
+	        var _props$valueName = this.props.valueName;
+	        var VALUE_NAME = _props$valueName === undefined ? 'value' : _props$valueName;
+
+	        var optionNodes = [],
+	            selected = undefined,
+	            node = undefined,
+	            placeHolder = this.props.placeHolder,
+	            filterText = this.state.filterText,
+	            compVal = this.state.value,
+	            searchable = this.props.searchable,
+	            multi = this.props.multi,
+	            tags = [];
+
+	        if (multi) {
+	            // list node format(multi)
+	            var _iteratorNormalCompletion = true;
+	            var _didIteratorError = false;
+	            var _iteratorError = undefined;
+
+	            try {
+	                for (var _iterator = _getIterator(this.state.options), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                    var pair = _step.value;
+	                    var _iteratorNormalCompletion2 = true;
+	                    var _didIteratorError2 = false;
+	                    var _iteratorError2 = undefined;
+
+	                    try {
+	                        for (var _iterator2 = _getIterator(compVal), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	                            var val = _step2.value;
+
+	                            selected = val === pair[VALUE_NAME];
+	                            if (selected) {
+	                                var index = compVal.indexOf(pair[VALUE_NAME]);
+	                                if (tags.indexOf([pair[LABEL_NAME]]) === -1) tags[index] = pair[LABEL_NAME];
+	                                break;
+	                            }
+	                        }
+	                    } catch (err) {
+	                        _didIteratorError2 = true;
+	                        _iteratorError2 = err;
+	                    } finally {
+	                        try {
+	                            if (!_iteratorNormalCompletion2 && _iterator2['return']) {
+	                                _iterator2['return']();
+	                            }
+	                        } finally {
+	                            if (_didIteratorError2) {
+	                                throw _iteratorError2;
+	                            }
+	                        }
+	                    }
+
+	                    node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
+	                    if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
+	                }
+	            } catch (err) {
+	                _didIteratorError = true;
+	                _iteratorError = err;
+	            } finally {
+	                try {
+	                    if (!_iteratorNormalCompletion && _iterator['return']) {
+	                        _iterator['return']();
+	                    }
+	                } finally {
+	                    if (_didIteratorError) {
+	                        throw _iteratorError;
+	                    }
+	                }
+	            }
+	        } else {
+	            // list node format
+	            var _iteratorNormalCompletion3 = true;
+	            var _didIteratorError3 = false;
+	            var _iteratorError3 = undefined;
+
+	            try {
+	                for (var _iterator3 = _getIterator(this.state.options), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	                    var pair = _step3.value;
+
+	                    selected = compVal === pair[VALUE_NAME];
+	                    if (selected) placeHolder = pair[LABEL_NAME];
+	                    node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
+	                    if (searchable) {
+	                        if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
+	                        continue;
+	                    }
+	                    optionNodes.push(node);
+	                }
+	            } catch (err) {
+	                _didIteratorError3 = true;
+	                _iteratorError3 = err;
+	            } finally {
+	                try {
+	                    if (!_iteratorNormalCompletion3 && _iterator3['return']) {
+	                        _iterator3['return']();
+	                    }
+	                } finally {
+	                    if (_didIteratorError3) {
+	                        throw _iteratorError3;
+	                    }
+	                }
+	            }
+	        }
+
+	        return React.createElement(
+	            'div',
+	            { className: 'ui dropdown' },
+	            multi ? this.formatMultiInput(tags) : React.createElement(
+	                DropDown.label,
+	                { onClick: this.toggleDropDown },
+	                placeHolder
+	            ),
+	            this.formatDropList(optionNodes)
+	        );
+	    },
+
+	    formatOptionCell: function formatOptionCell(_ref) {
+	        var label = _ref.label;
+	        var value = _ref.value;
+	        var selected = _ref.selected;
+
+	        return React.createElement(
+	            'li',
+	            { key: value },
+	            React.createElement(
+	                DropDown.Option,
+	                { onOptionSelect: this.selectChange, selected: selected, storeValue: value },
+	                label
+	            )
+	        );
+	    },
+
+	    formatSearchBar: function formatSearchBar() {
+	        return React.createElement(
+	            DropDown.SearchBar,
+	            { onUserInputFocus: this.handleFocus, onUserInput: this.handleSearch },
+	            'this.props.placeHolder'
+	        );
+	    },
+
+	    formatDropList: function formatDropList(nodes) {
+	        if (this.props.searchable) {
+	            return this.state.open ? React.createElement(
+	                'div',
+	                { className: '_list' },
+	                this.formatSearchBar(),
+	                React.createElement(
+	                    'ul',
+	                    null,
+	                    nodes
+	                )
+	            ) : null;
+	        } else {
+	            return this.state.open && nodes.length > 0 ? React.createElement(
+	                'div',
+	                { className: '_list' },
+	                React.createElement(
+	                    'ul',
+	                    null,
+	                    nodes
+	                )
+	            ) : null;
+	        }
+	    },
+
+	    formatMultiInput: function formatMultiInput(tags) {
+	        return React.createElement(DropDown.multiInput, { filterText: this.state.filterText, onSelectChange: this.multiBarValChangeByIndex, onUserInputFocus: this.handleFocus, onUserInput: this.handleSearch, onClick: this.toggleOpen, selectedTags: tags });
 	    },
 
 	    onOtherDomClick: function onOtherDomClick(e) {
@@ -2126,7 +2048,6 @@
 
 	    toggleDropDown: function toggleDropDown(e) {
 	        this.toggleOpen(!this.state.open);
-	        e.stopPropagation();
 	    },
 
 	    handleSearch: function handleSearch(text) {
@@ -2137,17 +2058,16 @@
 
 	    handleFocus: function handleFocus(e) {
 	        this.toggleOpen(true);
-	        e.stopPropagation();
 	    },
 
 	    render: function render() {
-	        throw new Error('no implementation');
+	        return this.formatDrop();
 	    }
 	});
 
-	exports['default'] = DropBase;
+	exports['default'] = DropDown;
 
-	DropBase.Option = React.createClass({
+	DropDown.Option = React.createClass({
 	    displayName: 'Option',
 
 	    handleClick: function handleClick() {
@@ -2169,7 +2089,7 @@
 	    }
 	});
 
-	DropBase.label = React.createClass({
+	DropDown.label = React.createClass({
 	    displayName: 'label',
 
 	    handleClick: function handleClick(e) {
@@ -2185,7 +2105,7 @@
 	    }
 	});
 
-	DropBase.multiInput = React.createClass({
+	DropDown.multiInput = React.createClass({
 	    displayName: 'multiInput',
 
 	    getInitialState: function getInitialState() {
@@ -2195,7 +2115,7 @@
 	    },
 
 	    handleClick: function handleClick(e) {
-	        this.inputFocus();
+	        this.inputFieldFocus();
 	        this.props.onClick(true);
 	    },
 
@@ -2230,16 +2150,19 @@
 	    removeSelected: function removeSelected(e) {
 	        var TAG_INDEX = _utilDataAccessor2['default'].getData(e.target, 'index');
 	        this.props.onSelectChange(TAG_INDEX);
-	        this.inputFocus();
-	        e.stopPropagation();
+	        this.inputFieldFocus();
 	    },
 
 	    inputField: function inputField() {
-	        return React.findDOMNode(this.refs.userInput);
+	        return ReactDOM.findDOMNode(this.refs.userInput);
 	    },
 
-	    inputFocus: function inputFocus() {
+	    inputFieldFocus: function inputFieldFocus() {
 	        this.inputField().focus();
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.inputFieldFocus();
 	    },
 
 	    render: function render() {
@@ -2278,7 +2201,7 @@
 	    }
 	});
 
-	DropBase.SearchBar = React.createClass({
+	DropDown.SearchBar = React.createClass({
 	    displayName: 'SearchBar',
 
 	    getDefaultProps: function getDefaultProps() {
@@ -2288,11 +2211,11 @@
 	    },
 
 	    componentDidMount: function componentDidMount() {
-	        React.findDOMNode(this.refs.userInput).focus();
+	        ReactDOM.findDOMNode(this.refs.userInput).focus();
 	    },
 
 	    handleChange: function handleChange() {
-	        this.props.onUserInput(React.findDOMNode(this.refs.userInput).value);
+	        this.props.onUserInput(ReactDOM.findDOMNode(this.refs.userInput).value);
 	    },
 
 	    handleFocus: function handleFocus(e) {
@@ -2306,7 +2229,7 @@
 	            React.createElement(
 	                'div',
 	                { className: '_search' },
-	                React.createElement('input', { className: '_searchbar', ref: 'userInput', onFocus: this.handleFocus, type: 'text', onChange: this.handleChange.bind(this), placeholder: this.props.placeHolder })
+	                React.createElement('input', { className: '_searchbar', ref: 'userInput', onFocus: this.handleFocus, type: 'text', onChange: this.handleChange, placeholder: this.props.placeHolder })
 	            )
 	        );
 	    }
@@ -2314,6 +2237,47 @@
 	module.exports = exports['default'];
 
 /***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(70);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./dropdown.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./dropdown.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 71 */,
 /* 72 */
 /***/ function(module, exports) {
 
@@ -2336,11 +2300,11 @@
 	    },
 
 	    onDocumentClick: function onDocumentClick(e) {
-	        var BASE_NODE = React.findDOMNode(this);
+	        var BASE_NODE = ReactDOM.findDOMNode(this);
 	        if (e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
-	            if (typeof this.onBaseClick === 'function') this.onBaseDomClick(e);
+	            if (typeof this.onBaseDomClick === 'function') this.onBaseDomClick(e);
 	        } else {
-	            if (typeof this.onOtherClick === 'function') this.onOtherDomClick(e);
+	            if (typeof this.onOtherDomClick === 'function') this.onOtherDomClick(e);
 	        }
 	        e.stopPropagation();
 	    }
@@ -2482,7 +2446,7 @@
 	    value: true
 	});
 
-	var _cssMenuLess = __webpack_require__(81);
+	var _cssMenuLess = __webpack_require__(76);
 
 	var _cssMenuLess2 = _interopRequireDefault(_cssMenuLess);
 
@@ -2538,14 +2502,15 @@
 	        var NODES = content.props.children,
 	            INDEX = this.state.index;
 	        var itemNodes = [];
+	        // console.log(NODES);
 	        if (NODES instanceof Array) {
-	            itemNodes = NODES.map((function (node, index) {
+	            itemNodes = NODES.map(function (node, index) {
 	                return React.createElement(
 	                    Menu.Item,
-	                    { key: index, selected: index == INDEX, itemIndex: index, onItemClick: _this.handleItemClick.bind(_this) },
+	                    { key: index, selected: index == INDEX, itemIndex: index, onItemClick: _this.handleItemClick },
 	                    node.props.children
 	                );
-	            }).bind(this));
+	            });
 	        }
 	        return itemNodes;
 	    },
@@ -2562,13 +2527,13 @@
 	            { className: 'ui menu' },
 	            React.createElement(
 	                Menu.Trigger,
-	                { onClick: this.toggleOpen.bind(this) },
+	                { onClick: this.toggleOpen.bind(null, this) },
 	                trigger
 	            ),
 	            content
 	        ) : React.createElement(
 	            'div',
-	            { className: 'ui menu', onMouseOver: this.openMenu.bind(this), onMouseLeave: this.closeMenu.bind(this) },
+	            { className: 'ui menu', onMouseOver: this.openMenu.bind(null, this), onMouseLeave: this.closeMenu.bind(null, this) },
 	            React.createElement(
 	                Menu.Trigger,
 	                null,
@@ -2617,6 +2582,194 @@
 
 /***/ },
 /* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(77);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./menu.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./menu.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 77 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.menu {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssConfirmBoxLess = __webpack_require__(79);
+
+	var _cssConfirmBoxLess2 = _interopRequireDefault(_cssConfirmBoxLess);
+
+	var _mixinDocumentClickMixin = __webpack_require__(72);
+
+	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
+
+	var ConfirmBox = React.createClass({
+	    displayName: 'ConfirmBox',
+
+	    mixins: [_mixinDocumentClickMixin2['default']],
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            open: false
+	        };
+	    },
+
+	    onTrigger: function onTrigger(e) {
+	        this.setState({
+	            open: !this.state.open
+	        });
+	        var content = ReactDOM.findDOMNode(this.refs.content);
+	        if (!content) {
+	            var dom = document.createElement('div');
+	            dom.setAttribute('id', 'confirm_box_container');
+	            document.body.appendChild(dom);
+
+	            content = React.createElement(
+	                'div',
+	                { ref: 'content', className: '_wrap' },
+	                React.createElement(
+	                    'div',
+	                    { className: '_title' },
+	                    this.props.title
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: '_action' },
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;', className: '_cancel', onClick: this.handleCancel },
+	                        '取消'
+	                    ),
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;', className: '_confirm', onClick: this.handleConfirm },
+	                        '确认'
+	                    )
+	                )
+	            );
+	            ReactDOM.render(React.createElement(
+	                'div',
+	                null,
+	                content
+	            ), document.getElementById('confirm_box_container'));
+	        };
+	    },
+
+	    closeConfirm: function closeConfirm() {
+	        this.setState({
+	            open: false
+	        });
+	    },
+
+	    onOtherDomClick: function onOtherDomClick(e) {
+	        this.closeConfirm();
+	    },
+
+	    handleCancel: function handleCancel() {
+	        if (typeof this.props.onCancel === 'function') this.props.onCancel();
+	        this.closeConfirm();
+	    },
+
+	    handleConfirm: function handleConfirm() {
+	        if (typeof this.props.onConfirm === 'function') this.props.onConfirm();
+	        this.closeConfirm();
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { className: 'ui confirm-box' },
+	            React.createElement(
+	                'span',
+	                { className: '_trigger', onClick: this.onTrigger },
+	                this.props.children
+	            )
+	        );
+	    }
+	});
+
+	exports['default'] = ConfirmBox;
+	module.exports = exports['default'];
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(80);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./confirm-box.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./confirm-box.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.confirm-box {\n  position: relative;\n  overflow: visible;\n}\n.ui.confirm-box ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n}\n.ui.confirm-box ._content ._title {\n  margin-bottom: 10px;\n}\n.ui.confirm-box ._content ._wrap {\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2708,7 +2861,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 77 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2793,7 +2946,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 78 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2869,7 +3022,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 79 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3021,20 +3174,20 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 80 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
-	var _get = __webpack_require__(9)["default"];
+	var _get = __webpack_require__(9)['default'];
 
-	var _inherits = __webpack_require__(23)["default"];
+	var _inherits = __webpack_require__(23)['default'];
 
-	var _createClass = __webpack_require__(34)["default"];
+	var _createClass = __webpack_require__(34)['default'];
 
-	var _classCallCheck = __webpack_require__(37)["default"];
+	var _classCallCheck = __webpack_require__(37)['default'];
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
@@ -3046,7 +3199,7 @@
 	    function MenuDemo(props) {
 	        _classCallCheck(this, MenuDemo);
 
-	        _get(Object.getPrototypeOf(MenuDemo.prototype), "constructor", this).call(this, props);
+	        _get(Object.getPrototypeOf(MenuDemo.prototype), 'constructor', this).call(this, props);
 	        this.state = {
 	            index: 1,
 	            index1: 0
@@ -3054,109 +3207,109 @@
 	    }
 
 	    _createClass(MenuDemo, [{
-	        key: "displayChange",
+	        key: 'displayChange',
 	        value: function displayChange(index) {
 	            this.setState({
 	                index: index
 	            });
 	        }
 	    }, {
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            var items = React.createElement(
-	                "div",
+	                'div',
 	                null,
 	                React.createElement(
 	                    _indexJs.Menu.Item,
-	                    null,
+	                    { key: '0' },
 	                    React.createElement(
-	                        "a",
-	                        { href: "javascript:;" },
-	                        "菜单1"
+	                        'a',
+	                        { href: 'javascript:;' },
+	                        '菜单1'
 	                    )
 	                ),
 	                React.createElement(
 	                    _indexJs.Menu.Item,
-	                    null,
+	                    { key: '1' },
 	                    React.createElement(
-	                        "a",
-	                        { href: "javascript:;" },
-	                        "菜单2"
+	                        'a',
+	                        { href: 'javascript:;' },
+	                        '菜单2'
 	                    )
 	                ),
 	                React.createElement(
 	                    _indexJs.Menu.Item,
-	                    null,
+	                    { key: '2' },
 	                    React.createElement(
-	                        "a",
-	                        { href: "javascript:;" },
-	                        "菜单3"
+	                        'a',
+	                        { href: 'javascript:;' },
+	                        '菜单3'
 	                    )
 	                ),
 	                React.createElement(
 	                    _indexJs.Menu.Item,
-	                    null,
+	                    { key: '3' },
 	                    React.createElement(
-	                        "a",
-	                        { href: "javascript:;" },
-	                        "菜单4",
+	                        'a',
+	                        { href: 'javascript:;' },
+	                        '菜单4',
 	                        React.createElement(
-	                            "i",
+	                            'i',
 	                            null,
-	                            "^_^"
+	                            '^_^'
 	                        )
 	                    )
 	                )
 	            );
 
 	            var onNode = React.createElement(
-	                "a",
-	                { href: "javascript:;" },
-	                "收起菜单"
+	                'a',
+	                { href: 'javascript:;' },
+	                '收起菜单'
 	            );
 
 	            return React.createElement(
-	                "ol",
+	                'ol',
 	                null,
 	                React.createElement(
-	                    "li",
+	                    'li',
 	                    null,
 	                    React.createElement(
-	                        "h4",
+	                        'h4',
 	                        null,
-	                        "menu, default with mouse hover"
+	                        'menu, default with mouse hover'
 	                    ),
 	                    React.createElement(
-	                        "p",
+	                        'p',
 	                        null,
-	                        "you selected item index is ",
+	                        'you selected item index is ',
 	                        this.state.index
 	                    ),
 	                    React.createElement(
 	                        _indexJs.Menu,
 	                        { onSelect: this.displayChange.bind(this), selectedIndex: this.state.index, items: items, triggerOn: onNode },
 	                        React.createElement(
-	                            "a",
-	                            { href: "javascript:;" },
-	                            "展开菜单"
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            '展开菜单'
 	                        )
 	                    )
 	                ),
 	                React.createElement(
-	                    "li",
+	                    'li',
 	                    null,
 	                    React.createElement(
-	                        "h4",
+	                        'h4',
 	                        null,
-	                        "menu, with click to trigger menu open"
+	                        'menu, with click to trigger menu open'
 	                    ),
 	                    React.createElement(
 	                        _indexJs.Menu,
-	                        { selectedIndex: this.state.index1, items: items, triggerOn: onNode, triggerType: "click" },
+	                        { selectedIndex: this.state.index1, items: items, triggerOn: onNode, triggerType: 'click' },
 	                        React.createElement(
-	                            "a",
-	                            { href: "javascript:;" },
-	                            "展开菜单"
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            '展开菜单'
 	                        )
 	                    )
 	                )
@@ -3167,51 +3320,11 @@
 	    return MenuDemo;
 	})(React.Component);
 
-	exports["default"] = MenuDemo;
-	module.exports = exports["default"];
+	exports['default'] = MenuDemo;
+	module.exports = exports['default'];
 
 /***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(82);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./menu.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./menu.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.menu {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 83 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3265,7 +3378,7 @@
 	                    ),
 	                    React.createElement(
 	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?', onConfirm: this.handleConfirm.bind(this), onCancel: this.handleCancel.bind(this) },
+	                        { title: 'confirm deleted, realy you want delete this? are you sure?', onConfirm: this.handleConfirm.bind(this), onCancel: this.handleCancel.bind(this) },
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
@@ -3297,11 +3410,11 @@
 	                    React.createElement(
 	                        'h4',
 	                        null,
-	                        'conform box with different direction'
+	                        'conform box with different position'
 	                    ),
 	                    React.createElement(
 	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?', direction: 'left' },
+	                        { title: 'confirm delete?', position: 'left' },
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
@@ -3310,7 +3423,7 @@
 	                    ),
 	                    React.createElement(
 	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?', direction: 'right' },
+	                        { title: 'confirm delete?', position: 'right' },
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
@@ -3319,7 +3432,7 @@
 	                    ),
 	                    React.createElement(
 	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?', direction: 'top' },
+	                        { title: 'confirm delete?', position: 'top' },
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
@@ -3328,7 +3441,7 @@
 	                    ),
 	                    React.createElement(
 	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?', direction: 'bottom' },
+	                        { title: 'confirm delete?', position: 'bottom' },
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
@@ -3344,99 +3457,6 @@
 	})(React.Component);
 
 	exports['default'] = ConfirmBoxDemo;
-	module.exports = exports['default'];
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _interopRequireDefault = __webpack_require__(3)['default'];
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	var _mixinDocumentClickMixin = __webpack_require__(72);
-
-	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
-
-	var ConfirmBox = React.createClass({
-	    displayName: 'ConfirmBox',
-
-	    mixins: [_mixinDocumentClickMixin2['default']],
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            open: false
-	        };
-	    },
-
-	    onTrigger: function onTrigger(e) {
-	        this.setState({
-	            open: !this.state.open
-	        });
-	    },
-
-	    closeConfirm: function closeConfirm() {
-	        this.setState({
-	            open: false
-	        });
-	    },
-
-	    onOtherDom: function onOtherDom(e) {
-	        this.closeConfirm();
-	    },
-
-	    handleCancel: function handleCancel() {
-	        if (typeof this.props.onCancel() === 'function') this.props.onCancel();
-	        this.closeConfirm();
-	    },
-
-	    handleConfirm: function handleConfirm() {
-	        if (typeof this.props.onConfirm() === 'function') this.props.onConfirm();
-	        this.closeConfirm();
-	    },
-
-	    render: function render() {
-	        var content = this.state.open ? React.createElement(
-	            'div',
-	            { className: '_content' },
-	            React.createElement(
-	                'div',
-	                { className: '_title' },
-	                this.props.title
-	            ),
-	            React.createElement(
-	                'div',
-	                { className: '_action' },
-	                React.createElement(
-	                    'a',
-	                    { href: 'javascript:;', className: '_cancel', onClick: this.handleCancel },
-	                    '取消'
-	                ),
-	                React.createElement(
-	                    'a',
-	                    { href: 'javascript:;', className: '_confirm', onClick: this.handleConfirm },
-	                    '确认'
-	                )
-	            )
-	        ) : null;
-	        return React.createElement(
-	            'div',
-	            { 'class': 'ui confirm-box' },
-	            React.createElement(
-	                'div',
-	                { onClick: this.onTrigger },
-	                this.props.children
-	            ),
-	            content
-	        );
-	    }
-	});
-
-	exports['default'] = ConfirmBox;
 	module.exports = exports['default'];
 
 /***/ }

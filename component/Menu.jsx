@@ -46,10 +46,11 @@ const Menu = React.createClass ({
         const NODES = content.props.children,
             INDEX = this.state.index;
         let itemNodes = [];
+        // console.log(NODES);
         if (NODES instanceof Array) {
             itemNodes = NODES.map((node, index) => {
-                return <Menu.Item key={index} selected={index == INDEX} itemIndex={index} onItemClick={this.handleItemClick.bind(this)}>{node.props.children}</Menu.Item>;
-            }.bind(this))
+                return <Menu.Item key={index} selected={ index == INDEX } itemIndex={index} onItemClick={this.handleItemClick}>{node.props.children}</Menu.Item>;
+            })
         }
         return itemNodes;
     },
@@ -59,10 +60,10 @@ const Menu = React.createClass ({
         let trigger = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
         let menuNode = this.props.triggerType === 'click' ? 
                         <div className='ui menu'>
-                            <Menu.Trigger onClick={this.toggleOpen.bind(this)}>{trigger}</Menu.Trigger>
+                            <Menu.Trigger onClick={this.toggleOpen.bind(null, this)}>{trigger}</Menu.Trigger>
                             {content}
                         </div> :
-                        <div className='ui menu' onMouseOver={this.openMenu.bind(this)} onMouseLeave={this.closeMenu.bind(this)}>
+                        <div className='ui menu' onMouseOver={this.openMenu.bind(null, this)} onMouseLeave={this.closeMenu.bind(null, this)}>
                             <Menu.Trigger>{trigger}</Menu.Trigger>
                             {content}
                         </div>;

@@ -1,11 +1,35 @@
 import css from '../css/dropdown.less';
 
-import DropBase from './DropBase.jsx';
+import DocumentClickMixin from '../mixin/DocumentClickMixin';
+import KeyCodeMixin from '../mixin/KeyCodeMixin';
+import DataAccessor from '../util/DataAccessor';
 
-export default class DropDown extends DropBase {
-    constructor(props){
-        super(props);
-    }
+const DropDown = React.createClass({
+    mixins: [DocumentClickMixin],
+    
+    getInitialState() {
+        const DEFAULT_VALUE = this.props.multi ? [] : '';
+        return {
+            options: this.props.options,
+            value: this.props.value || DEFAULT_VALUE,
+            open: false,
+            filterText: '',
+        };
+    },
+
+    componentDidMount() {
+        if (!this.props.multi && !this.state.value && this.props.defaultSelected && this.state.options.length > 0) {
+            this.setState({
+                value: this.state.options[0][this.props.valueName] 
+            });
+        };
+    },
+
+    getDefaultProps() {
+        return {
+            placeHolder: 'click to select...',
+        };
+    },
 
     formatValue(val, callback){
         let newVal = val, 
@@ -20,7 +44,7 @@ export default class DropDown extends DropBase {
             newVal = oldVal.concat(val);
         } 
         this.setState({ value: newVal}, callback);
-    }
+    },
 
     formatDrop(){
         const [LABEL_NAME = 'name', VALUE_NAME = 'value'] = [this.props.labelName, this.props.valueName];
@@ -47,9 +71,6 @@ export default class DropDown extends DropBase {
                 if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
             }
         } else {
-            // with a searchbar
-            if (searchable) optionNodes.push(this.formatSearchBar());
-
             // list node format
             for (let pair of this.state.options){
                 selected = compVal === pair[VALUE_NAME];
@@ -64,33 +85,233 @@ export default class DropDown extends DropBase {
         }
 
         return <div className='ui dropdown'>
-                    { multi ? this.formatMultiInput(tags) : <DropBase.label onClick={this.toggleDropDown.bind(this)}>{placeHolder}</DropBase.label> }
-                    {this.formatDropList(optionNodes)}
+                    { multi ? this.formatMultiInput(tags) : <DropDown.label onClick={this.toggleDropDown}>{placeHolder}</DropDown.label> }
+                    { this.formatDropList(optionNodes) }
                 </div>
-    }
+    },
     
     formatOptionCell({label, value, selected}){
-        return <li>
-                    <DropBase.Option onOptionSelect={this.selectChange.bind(this)} selected={selected} storeValue={value}>{label}</DropBase.Option>
+        return <li key={value}>
+                    <DropDown.Option onOptionSelect={this.selectChange} selected={selected} storeValue={value}>{label}</DropDown.Option>
                 </li>;
-    }
+    },
 
     formatSearchBar(){
-        return <DropDown.SearchBar onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)}>this.props.placeHolder</DropDown.SearchBar>
-    }
+        return <DropDown.SearchBar onUserInputFocus={this.handleFocus} onUserInput={this.handleSearch}>this.props.placeHolder</DropDown.SearchBar>
+    },
 
     formatDropList(nodes){
-        return this.state.open && nodes.length > 0 ? <ul className='_list'>{nodes}</ul> : null;
-    }
+        if (this.props.searchable) {
+            return this.state.open ? <div className='_list'>
+                                        {this.formatSearchBar()}
+                                        <ul>{nodes}</ul> 
+                                    </div> : null;
+        } else {
+            return this.state.open && nodes.length > 0 ? <div className='_list'>
+                                                            <ul>{nodes}</ul> 
+                                                        </div> : null;
+        }
+    },
 
     formatMultiInput(tags){
-        return <DropBase.multiInput filterText={this.state.filterText} onSelectChange={this.multiBarValChangeByIndex.bind(this)} onUserInputFocus={this.handleFocus.bind(this)} onUserInput={this.handleSearch.bind(this)} onClick={this.toggleOpen.bind(this)} selectedTags={tags}></DropBase.multiInput>
-    }
+        return <DropDown.multiInput filterText={this.state.filterText} onSelectChange={this.multiBarValChangeByIndex} onUserInputFocus={this.handleFocus} onUserInput={this.handleSearch} onClick={this.toggleOpen} selectedTags={tags}></DropDown.multiInput>
+    },
+
+    onOtherDomClick(e){
+        this.toggleOpen(false);
+    },
+
+    multiBarValChangeByIndex(index){
+        let storeVal = this.state.value;
+        
+        // remove specific value
+        if (index) {
+            if (index > -1) storeVal.splice(index, 1);
+        } else {
+            this.state.value.pop();
+        }
+
+        this.setState({
+            value: storeVal, 
+        }, this.triggerDropValueChange());
+    },
+
+    selectChange(val){
+        this.formatValue(val, () => {
+            this.triggerDropValueChange();
+            this.toggleOpen(false);
+        });
+    },
+
+    triggerDropValueChange(){
+        if (typeof this.props.onSelect === 'function') this.props.onSelect(this.state.value);
+    },
+
+    toggleOpen(stat){
+        this.setState({
+            open: stat,
+            filterText: '', 
+        });
+    },
+
+    toggleDropDown(e){
+        this.toggleOpen(!this.state.open);
+    },
+
+    handleSearch(text){
+        this.setState({
+            filterText: text, 
+        });
+    },
+
+    handleFocus(e){
+        this.toggleOpen(true);
+    },
 
     render() {
         return (
             this.formatDrop()
         );
     }
-}
+});
+
+export default DropDown;
+
+DropDown.Option = React.createClass({
+    handleClick(){
+        this.props.onOptionSelect(this.props.storeValue);
+    },
+
+    render(){
+        let node = this.props.selected ? <i>√</i> : null;
+        return (
+            <div className={this.props.selected ? 'active' : ''} onClick={this.handleClick}>
+                {this.props.children}
+                {node}
+            </div>
+        );
+    }
+});
+
+DropDown.label = React.createClass({
+    handleClick(e){
+        this.props.onClick(e);
+    },
+
+    render() {
+        return (
+            <div className="_label" onClick={this.handleClick}>
+                {this.props.children}
+            </div>
+        );
+    }
+});
+
+DropDown.multiInput = React.createClass({
+
+    getInitialState() {
+        return {
+            hasInput: false, 
+        };
+    },
+
+    handleClick(e){
+        this.inputFieldFocus();
+        this.props.onClick(true);
+    },
+
+    handleKeyDown(e){
+        const [CODE, TARGET, VALUE] = [e.keyCode, e.target, this.inputField().value];
+        this.setState({
+            hasInput: true, 
+        });        
+
+        if (KeyCodeMixin.isBackSpace(CODE) && VALUE === '') this.props.onSelectChange();
+        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
+    },
+
+    handleInputChange(){
+        this.props.onUserInput(this.inputField().value);
+    },
+
+    handleBlur(e){
+        this.setState({
+            hasInput: false, 
+        });
+        this.inputField().style.width = '9px';
+    },
+
+    handleFocus(e){
+        this.props.onUserInputFocus(e);
+    },
+
+    removeSelected(e){
+        const TAG_INDEX = DataAccessor.getData(e.target, 'index');
+        this.props.onSelectChange(TAG_INDEX);
+        this.inputFieldFocus();
+    },
+
+    inputField(){
+        return ReactDOM.findDOMNode(this.refs.userInput);
+    },
+
+    inputFieldFocus(){
+        this.inputField().focus();
+    },
+
+    componentWillReceiveProps(nextProps) {
+        this.inputFieldFocus();
+    },
+
+    render() {
+        const TAGS = this.props.selectedTags.map((tag, index) => {
+            return <span className='_tag' key={index} onClick={this.removeSelected}>
+                        <san className="_text">{tag}</san>
+                        <a href="javascript:;" data-index={index}>x</a>
+                    </span>;
+        });
+
+        let placeHolder = this.props.selectedTags.length === 0 && !this.state.hasInput ? <span className='_placeHolder'>search...</span> : <span className='_placeHolder'></span>;
+
+        return (
+            <div className='_multi' onClick={this.handleClick}>
+                {TAGS}
+                <input className='_input' ref='userInput' style={{'width': '9px'}} value={this.props.filterText} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleInputChange} type='text' onKeyDown={this.handleKeyDown}/>
+                {placeHolder}
+            </div>
+        );
+    }
+});
+
+
+
+DropDown.SearchBar = React.createClass({
+    getDefaultProps(){
+        return {
+            placeHolder: 'search...'
+        };
+    },
+
+    componentDidMount() {
+        ReactDOM.findDOMNode(this.refs.userInput).focus();
+    },
+
+    handleChange(){
+        this.props.onUserInput(ReactDOM.findDOMNode(this.refs.userInput).value);
+    },
+
+    handleFocus(e){
+        this.props.onUserInputFocus(e);
+    },
+
+    render() {
+        return (
+            <div>
+                <div className='_search'>
+                    <input className='_searchbar' ref='userInput' onFocus={this.handleFocus} type='text' onChange={this.handleChange} placeholder={this.props.placeHolder}/>
+                </div>
+            </div>
+        );
+    }
+});
 

@@ -56,27 +56,27 @@
 
 	var _demoCheckBoxDemoJsx2 = _interopRequireDefault(_demoCheckBoxDemoJsx);
 
-	var _demoRadioDemoJsx = __webpack_require__(81);
+	var _demoRadioDemoJsx = __webpack_require__(80);
 
 	var _demoRadioDemoJsx2 = _interopRequireDefault(_demoRadioDemoJsx);
 
-	var _demoRadioGroupDemoJsx = __webpack_require__(82);
+	var _demoRadioGroupDemoJsx = __webpack_require__(81);
 
 	var _demoRadioGroupDemoJsx2 = _interopRequireDefault(_demoRadioGroupDemoJsx);
 
-	var _demoCheckBoxGroupDemoJsx = __webpack_require__(83);
+	var _demoCheckBoxGroupDemoJsx = __webpack_require__(82);
 
 	var _demoCheckBoxGroupDemoJsx2 = _interopRequireDefault(_demoCheckBoxGroupDemoJsx);
 
-	var _demoDropDownDemoJsx = __webpack_require__(84);
+	var _demoDropDownDemoJsx = __webpack_require__(83);
 
 	var _demoDropDownDemoJsx2 = _interopRequireDefault(_demoDropDownDemoJsx);
 
-	var _demoMenuDemoJsx = __webpack_require__(85);
+	var _demoMenuDemoJsx = __webpack_require__(84);
 
 	var _demoMenuDemoJsx2 = _interopRequireDefault(_demoMenuDemoJsx);
 
-	var _demoConfirmBoxDemoJsx = __webpack_require__(86);
+	var _demoConfirmBoxDemoJsx = __webpack_require__(85);
 
 	var _demoConfirmBoxDemoJsx2 = _interopRequireDefault(_demoConfirmBoxDemoJsx);
 
@@ -85,8 +85,8 @@
 	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 	// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
 	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
-	ReactDOM.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
-	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
+	// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
+	ReactDOM.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
 
 /***/ },
 /* 1 */,
@@ -985,11 +985,11 @@
 
 	var _componentDropDownJsx2 = _interopRequireDefault(_componentDropDownJsx);
 
-	var _componentMenuJsx = __webpack_require__(75);
+	var _componentMenuJsx = __webpack_require__(74);
 
 	var _componentMenuJsx2 = _interopRequireDefault(_componentMenuJsx);
 
-	var _componentConfirmBoxJsx = __webpack_require__(78);
+	var _componentConfirmBoxJsx = __webpack_require__(77);
 
 	var _componentConfirmBoxJsx2 = _interopRequireDefault(_componentConfirmBoxJsx);
 
@@ -1779,15 +1779,15 @@
 
 	var _cssDropdownLess2 = _interopRequireDefault(_cssDropdownLess);
 
-	var _mixinDocumentClickMixin = __webpack_require__(72);
+	var _mixinDocumentClickMixin = __webpack_require__(71);
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
-	var _mixinKeyCodeMixin = __webpack_require__(73);
+	var _mixinKeyCodeMixin = __webpack_require__(72);
 
 	var _mixinKeyCodeMixin2 = _interopRequireDefault(_mixinKeyCodeMixin);
 
-	var _utilDataAccessor = __webpack_require__(74);
+	var _utilDataAccessor = __webpack_require__(73);
 
 	var _utilDataAccessor2 = _interopRequireDefault(_utilDataAccessor);
 
@@ -2277,8 +2277,7 @@
 
 
 /***/ },
-/* 71 */,
-/* 72 */
+/* 71 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2314,7 +2313,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 73 */
+/* 72 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2382,7 +2381,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 74 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2435,7 +2434,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 75 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2446,11 +2445,11 @@
 	    value: true
 	});
 
-	var _cssMenuLess = __webpack_require__(76);
+	var _cssMenuLess = __webpack_require__(75);
 
 	var _cssMenuLess2 = _interopRequireDefault(_cssMenuLess);
 
-	var _mixinDocumentClickMixin = __webpack_require__(72);
+	var _mixinDocumentClickMixin = __webpack_require__(71);
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
@@ -2581,13 +2580,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 76 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(77);
+	var content = __webpack_require__(76);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -2607,7 +2606,7 @@
 	}
 
 /***/ },
-/* 77 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -2621,7 +2620,7 @@
 
 
 /***/ },
-/* 78 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2632,11 +2631,11 @@
 	    value: true
 	});
 
-	var _cssConfirmBoxLess = __webpack_require__(79);
+	var _cssPopupLess = __webpack_require__(87);
 
-	var _cssConfirmBoxLess2 = _interopRequireDefault(_cssConfirmBoxLess);
+	var _cssPopupLess2 = _interopRequireDefault(_cssPopupLess);
 
-	var _mixinDocumentClickMixin = __webpack_require__(72);
+	var _mixinDocumentClickMixin = __webpack_require__(71);
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
@@ -2652,44 +2651,12 @@
 	    },
 
 	    onTrigger: function onTrigger(e) {
-	        this.setState({
-	            open: !this.state.open
-	        });
-	        var content = ReactDOM.findDOMNode(this.refs.content);
-	        if (!content) {
-	            var dom = document.createElement('div');
-	            dom.setAttribute('id', 'confirm_box_container');
-	            document.body.appendChild(dom);
-
-	            content = React.createElement(
-	                'div',
-	                { ref: 'content', className: '_wrap' },
-	                React.createElement(
-	                    'div',
-	                    { className: '_title' },
-	                    this.props.title
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: '_action' },
-	                    React.createElement(
-	                        'a',
-	                        { href: 'javascript:;', className: '_cancel', onClick: this.handleCancel },
-	                        '取消'
-	                    ),
-	                    React.createElement(
-	                        'a',
-	                        { href: 'javascript:;', className: '_confirm', onClick: this.handleConfirm },
-	                        '确认'
-	                    )
-	                )
-	            );
-	            ReactDOM.render(React.createElement(
-	                'div',
-	                null,
-	                content
-	            ), document.getElementById('confirm_box_container'));
-	        };
+	        var CONTENT = ReactDOM.findDOMNode(this.refs.content);
+	        if (CONTENT && (e.target == CONTENT || CONTENT.contains(e.target))) {} else {
+	            this.setState({
+	                open: !this.state.open
+	            });
+	        }
 	    },
 
 	    closeConfirm: function closeConfirm() {
@@ -2713,14 +2680,34 @@
 	    },
 
 	    render: function render() {
-	        return React.createElement(
+	        var content = this.state.open ? React.createElement(
 	            'div',
-	            { className: 'ui confirm-box' },
+	            { ref: 'content', className: '_content' },
 	            React.createElement(
-	                'span',
-	                { className: '_trigger', onClick: this.onTrigger },
-	                this.props.children
+	                'div',
+	                { className: '_title' },
+	                this.props.title
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: '_action' },
+	                React.createElement(
+	                    'a',
+	                    { href: 'javascript:;', className: '_cancel', onClick: this.handleCancel },
+	                    '取消'
+	                ),
+	                React.createElement(
+	                    'a',
+	                    { href: 'javascript:;', className: '_confirm', onClick: this.handleConfirm },
+	                    '确认'
+	                )
 	            )
+	        ) : null;
+	        return React.createElement(
+	            'span',
+	            { className: 'ui confirm-box', onClick: this.onTrigger },
+	            this.props.children,
+	            content
 	        );
 	    }
 	});
@@ -2729,47 +2716,9 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 79 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(80);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./confirm-box.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./confirm-box.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
+/* 78 */,
+/* 79 */,
 /* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.confirm-box {\n  position: relative;\n  overflow: visible;\n}\n.ui.confirm-box ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n}\n.ui.confirm-box ._content ._title {\n  margin-bottom: 10px;\n}\n.ui.confirm-box ._content ._wrap {\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2861,7 +2810,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 82 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2946,7 +2895,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 83 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3022,7 +2971,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 84 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3174,7 +3123,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 85 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3324,7 +3273,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 86 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3458,6 +3407,47 @@
 
 	exports['default'] = ConfirmBoxDemo;
 	module.exports = exports['default'];
+
+/***/ },
+/* 86 */,
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(88);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.confirm-box {\n  position: relative;\n  overflow: visible;\n}\n.ui.confirm-box ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  left: -100%;\n  background: #ffffff;\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.confirm-box ._content ._title {\n  margin-bottom: 10px;\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

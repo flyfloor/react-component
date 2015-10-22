@@ -1,4 +1,4 @@
-import css from '../css/confirm-box.less';
+import css from '../css/popup.less';
 
 import DocumentClickMixin from '../mixin/DocumentClickMixin';
 
@@ -12,26 +12,14 @@ const ConfirmBox = React.createClass({
     },
 
     onTrigger(e){
-        this.setState({
-            open: !this.state.open 
-        });
-        let content = ReactDOM.findDOMNode(this.refs.content);
-        if (!content) {
-            let dom = document.createElement('div');
-            dom.setAttribute('id', 'confirm_box_container');
-            document.body.appendChild(dom);
+         const CONTENT = ReactDOM.findDOMNode(this.refs.content);
+         if (CONTENT && (e.target == CONTENT || CONTENT.contains(e.target))) {
 
-            content = <div ref='content' className='_wrap'>
-                        <div className="_title">
-                            {this.props.title}
-                        </div>
-                        <div className="_action">
-                            <a href="javascript:;" className="_cancel" onClick={this.handleCancel}>取消</a>
-                            <a href="javascript:;" className="_confirm" onClick={this.handleConfirm}>确认</a>
-                        </div>
-                    </div>;
-            ReactDOM.render(<div>{content}</div>, document.getElementById('confirm_box_container'));
-        };
+         } else {
+            this.setState({
+                open: !this.state.open 
+            });
+         }
     },
 
     closeConfirm(){
@@ -55,12 +43,20 @@ const ConfirmBox = React.createClass({
     },
 
     render() {
+        let content = this.state.open ? <div ref='content' className='_content'>
+                        <div className="_title">
+                            {this.props.title}
+                        </div>
+                        <div className="_action">
+                            <a href="javascript:;" className="_cancel" onClick={this.handleCancel}>取消</a>
+                            <a href="javascript:;" className="_confirm" onClick={this.handleConfirm}>确认</a>
+                        </div>
+                    </div> : null;
         return (
-            <div className='ui confirm-box'>
-                <span className='_trigger' onClick={this.onTrigger}>
-                    {this.props.children}
-                </span>
-            </div>
+            <span className='ui confirm-box' onClick={this.onTrigger}>
+                {this.props.children}
+                {content}
+            </span>
         );
     }
 });

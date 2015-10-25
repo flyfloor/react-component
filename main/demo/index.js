@@ -6,6 +6,7 @@ import DropDown from '../../component/DropDown.jsx';
 import Menu from '../../component/Menu.jsx';
 import ConfirmBox from '../../component/ConfirmBox.jsx';
 import Tooltip from '../../component/Tooltip.jsx';
+import Modal from '../../component/Modal.jsx';
 
 export {
     CheckBox,
@@ -16,4 +17,5 @@ export {
     Menu,
     ConfirmBox,
     Tooltip,
+    Modal,
 }

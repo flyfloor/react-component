@@ -13,14 +13,14 @@ export default class ConfirmBoxDemo extends React.Component {
         return (
             <ol>
                 <li>
-                    <h4>default confirm box</h4>
-                    <ConfirmBox title='confirm deleted, realy you want delete this? are you sure?' onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
+                    <h4>default confirm box, with action handle</h4>
+                    <ConfirmBox title='confirm deleted' onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>
                 <li>
                     <h4>default confirm box</h4>
-                    <ConfirmBox title='confirm delete?'>
+                    <ConfirmBox title='confirm delete?, realy you want delete this? are you sure?'>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>

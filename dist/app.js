@@ -84,14 +84,19 @@
 
 	var _demoTooltipDemoJsx2 = _interopRequireDefault(_demoTooltipDemoJsx);
 
-	ReactDOM.render(React.createElement(_demoCheckBoxDemoJsx2["default"], null), document.getElementById('checkbox'));
-	ReactDOM.render(React.createElement(_demoRadioDemoJsx2["default"], null), document.getElementById('radio'));
-	ReactDOM.render(React.createElement(_demoRadioGroupDemoJsx2["default"], null), document.getElementById('radio-group'));
-	ReactDOM.render(React.createElement(_demoCheckBoxGroupDemoJsx2["default"], null), document.getElementById('checkbox-group'));
-	ReactDOM.render(React.createElement(_demoDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
-	ReactDOM.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
-	ReactDOM.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
-	ReactDOM.render(React.createElement(_demoTooltipDemoJsx2["default"], null), document.getElementById('tooltip'));
+	var _demoModalDemoJsx = __webpack_require__(89);
+
+	var _demoModalDemoJsx2 = _interopRequireDefault(_demoModalDemoJsx);
+
+	// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
+	// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
+	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
+	// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
+	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
+	// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
+	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
+	// ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
+	ReactDOM.render(React.createElement(_demoModalDemoJsx2["default"], null), document.getElementById('modal'));
 
 /***/ },
 /* 1 */,
@@ -1002,6 +1007,10 @@
 
 	var _componentTooltipJsx2 = _interopRequireDefault(_componentTooltipJsx);
 
+	var _componentModalJsx = __webpack_require__(90);
+
+	var _componentModalJsx2 = _interopRequireDefault(_componentModalJsx);
+
 	exports.CheckBox = _componentCheckBoxJsx2['default'];
 	exports.Radio = _componentRadioJsx2['default'];
 	exports.RadioGroup = _componentRadioGroupJsx2['default'];
@@ -1010,6 +1019,7 @@
 	exports.Menu = _componentMenuJsx2['default'];
 	exports.ConfirmBox = _componentConfirmBoxJsx2['default'];
 	exports.Tooltip = _componentTooltipJsx2['default'];
+	exports.Modal = _componentModalJsx2['default'];
 
 /***/ },
 /* 39 */
@@ -3331,11 +3341,11 @@
 	                    React.createElement(
 	                        'h4',
 	                        null,
-	                        'default confirm box'
+	                        'default confirm box, with action handle'
 	                    ),
 	                    React.createElement(
 	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm deleted, realy you want delete this? are you sure?', onConfirm: this.handleConfirm.bind(this), onCancel: this.handleCancel.bind(this) },
+	                        { title: 'confirm deleted', onConfirm: this.handleConfirm.bind(this), onCancel: this.handleCancel.bind(this) },
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
@@ -3353,7 +3363,7 @@
 	                    ),
 	                    React.createElement(
 	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?' },
+	                        { title: 'confirm delete?, realy you want delete this? are you sure?' },
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
@@ -3772,6 +3782,341 @@
 
 	exports['default'] = Tooltip;
 	module.exports = exports['default'];
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(9)['default'];
+
+	var _inherits = __webpack_require__(23)['default'];
+
+	var _createClass = __webpack_require__(34)['default'];
+
+	var _classCallCheck = __webpack_require__(37)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(38);
+
+	var ModalDemo = (function (_React$Component) {
+	    _inherits(ModalDemo, _React$Component);
+
+	    function ModalDemo(props) {
+	        _classCallCheck(this, ModalDemo);
+
+	        _get(Object.getPrototypeOf(ModalDemo.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            display: false,
+	            display1: false,
+	            display2: false
+	        };
+	    }
+
+	    _createClass(ModalDemo, [{
+	        key: 'handleConfirm',
+	        value: function handleConfirm(e) {
+	            console.log('confirmed');
+	        }
+	    }, {
+	        key: 'handleCancel',
+	        value: function handleCancel(e) {
+	            console.log('canceled');
+	        }
+	    }, {
+	        key: 'showModal',
+	        value: function showModal(e) {
+	            this.setState({
+	                display: true
+	            });
+	        }
+	    }, {
+	        key: 'showModal1',
+	        value: function showModal1(e) {
+	            this.setState({
+	                display1: true
+	            });
+	        }
+	    }, {
+	        key: 'showModal2',
+	        value: function showModal2(e) {
+	            this.setState({
+	                display2: true
+	            });
+	        }
+	    }, {
+	        key: 'handleClose',
+	        value: function handleClose(e) {
+	            this.setState({
+	                display: false
+	            });
+	        }
+	    }, {
+	        key: 'handleClose1',
+	        value: function handleClose1(e) {
+	            this.setState({
+	                display1: false
+	            });
+	        }
+	    }, {
+	        key: 'handleClose2',
+	        value: function handleClose2(e) {
+	            this.setState({
+	                display2: false
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'ol',
+	                null,
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'default modal'
+	                    ),
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;', onClick: this.showModal.bind(this) },
+	                        'open modal'
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Modal,
+	                        { title: 'confirm deleted', onClose: this.handleClose.bind(this), display: this.state.display },
+	                        React.createElement(
+	                            'h4',
+	                            null,
+	                            'this is content'
+	                        ),
+	                        React.createElement(
+	                            'p',
+	                            null,
+	                            'asdfhkjfkwlg mean no shit'
+	                        ),
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'delete user'
+	                        )
+	                    )
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'default confirm box, with confirm cancel action handle'
+	                    ),
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;', onClick: this.showModal1.bind(this) },
+	                        'open another modal'
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Modal,
+	                        { display: this.state.display1, onClose: this.handleClose1.bind(this), onConfirm: this.handleConfirm.bind(this), onCancel: this.handleCancel.bind(this) },
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'delete'
+	                        )
+	                    )
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'default confirm box, with confirm action handle'
+	                    ),
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;', onClick: this.showModal2.bind(this) },
+	                        'open another modal'
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Modal,
+	                        { display: this.state.display2, onClose: this.handleClose2.bind(this), onConfirm: this.handleConfirm.bind(this) },
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'delete'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ModalDemo;
+	})(React.Component);
+
+	exports['default'] = ModalDemo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssModalLess = __webpack_require__(91);
+
+	var _cssModalLess2 = _interopRequireDefault(_cssModalLess);
+
+	var Modal = React.createClass({
+	    displayName: 'Modal',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            open: this.props.display || false
+	        };
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            title: 'modal title',
+	            confirmText: 'confirm',
+	            cancelText: 'cancel'
+	        };
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            open: nextProps.display
+	        });
+	    },
+
+	    handleConfirm: function handleConfirm(e) {
+	        this.props.onConfirm(e);
+	        this.closeModal(e);
+	    },
+
+	    handleCancel: function handleCancel(e) {
+	        this.props.onCancel(e);
+	        this.closeModal(e);
+	    },
+
+	    closeModal: function closeModal(e) {
+	        this.props.onClose();
+	        this.setState({
+	            open: false
+	        });
+	    },
+
+	    render: function render() {
+	        var confirmDOM = this.props.onConfirm ? React.createElement(
+	            'a',
+	            { href: 'javascript:;', onClick: this.handleConfirm },
+	            this.props.confirmText
+	        ) : null;
+	        var cancelDOM = this.props.onCancel ? React.createElement(
+	            'a',
+	            { href: 'javascript:;', onClick: this.handleCancel },
+	            this.props.cancelText
+	        ) : null;
+	        var footer = confirmDOM || cancelDOM ? React.createElement(
+	            'div',
+	            { className: '_action' },
+	            React.createElement(
+	                'div',
+	                { className: '_wrap' },
+	                confirmDOM,
+	                cancelDOM
+	            )
+	        ) : null;
+
+	        var base = this.state.open ? React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'div',
+	                { className: '_body' },
+	                React.createElement(
+	                    'div',
+	                    { className: '_title' },
+	                    this.props.title
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: '_content' },
+	                    this.props.children,
+	                    footer
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: '_close', onClick: this.closeModal },
+	                    'X'
+	                )
+	            ),
+	            React.createElement('div', { className: '_overlay', onClick: this.closeModal })
+	        ) : null;
+	        return React.createElement(
+	            'div',
+	            { className: 'ui modal' },
+	            base
+	        );
+	    }
+	});
+
+	exports['default'] = Modal;
+	module.exports = exports['default'];
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(92);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./modal.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./modal.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 92 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.modal ._body {\n  z-index: 1000;\n  background: #ffffff;\n  position: relative;\n  width: 400px;\n  position: fixed;\n  top: 100px;\n  left: 0;\n  right: 0;\n  margin: auto;\n  border: 1px solid #cccccc;\n  border-radius: 3px;\n}\n.ui.modal ._body ._title {\n  padding: 10px;\n  font-size: 120%;\n}\n.ui.modal ._body ._content {\n  padding: 10px;\n}\n.ui.modal ._body ._content ._action {\n  font-size: 90%;\n  overflow: hidden;\n}\n.ui.modal ._body ._content ._action ._wrap {\n  float: right;\n}\n.ui.modal ._body ._content ._action a + a {\n  margin-left: 5px;\n}\n.ui.modal ._body ._close {\n  cursor: pointer;\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n.ui.modal ._overlay {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: rgba(0, 0, 0, 0.8);\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

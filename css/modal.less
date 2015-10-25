@@ -1,0 +1,52 @@
+@import url('meta.less');
+@import url('share.less');
+
+@{NS}.modal {
+    ._body {
+        z-index: 1000;
+        background: @white;
+        position: relative;
+        width: 400px;
+        position: fixed;
+        top: 100px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: 1px solid @gray_b;
+        border-radius: 3px;
+        
+        ._title {
+            padding: 10px;
+            font-size: 120%;
+        }
+
+        ._content {
+            padding: 10px;
+            ._action {
+                font-size: 90%;
+                overflow: hidden;
+                ._wrap {
+                    float: right;
+                }
+
+                a+a {
+                    margin-left: 5px;
+                }
+            }
+        }
+        ._close {
+            cursor: pointer;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
+    }
+    ._overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,.8);
+    }
+}

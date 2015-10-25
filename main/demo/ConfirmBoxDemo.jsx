@@ -26,18 +26,28 @@ export default class ConfirmBoxDemo extends React.Component {
                 </li>
                 <li>
                     <h4>conform box with different position</h4>
-                    <ConfirmBox title='confirm delete?' position='left'>
-                        <a href='javascript:;'>left</a>
-                    </ConfirmBox>
-                    <ConfirmBox title='confirm delete?' position='right'>
-                        <a href='javascript:;'>right</a>
-                    </ConfirmBox>
-                    <ConfirmBox title='confirm delete?' position='top'>
-                        <a href='javascript:;'>top</a>
-                    </ConfirmBox>
-                    <ConfirmBox title='confirm delete?' position='bottom'>
-                        <a href='javascript:;'>bottom</a>
-                    </ConfirmBox>
+                    <ul>
+                        <li>
+                            <ConfirmBox title='confirm delete?' position='left'>
+                                <a href='javascript:;'>left</a>
+                            </ConfirmBox>
+                        </li>
+                        <li>
+                            <ConfirmBox title='confirm delete?' position='right'>
+                                <a href='javascript:;'>right</a>
+                            </ConfirmBox>
+                        </li>
+                        <li>
+                            <ConfirmBox title='confirm delete?' position='top'>
+                                <a href='javascript:;'>top</a>
+                            </ConfirmBox>
+                        </li>
+                        <li>
+                            <ConfirmBox title='confirm delete?' position='bottom'>
+                                <a href='javascript:;'>bottom</a>
+                            </ConfirmBox>
+                        </li>
+                    </ul>
                 </li>
             </ol>
         );

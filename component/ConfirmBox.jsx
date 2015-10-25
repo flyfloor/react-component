@@ -44,14 +44,16 @@ const ConfirmBox = React.createClass({
 
     render() {
         let content = this.state.open ? <div ref='content' className='_content'>
-                        <div className="_title">
-                            {this.props.title}
-                        </div>
-                        <div className="_action">
-                            <a href="javascript:;" className="_cancel" onClick={this.handleCancel}>取消</a>
-                            <a href="javascript:;" className="_confirm" onClick={this.handleConfirm}>确认</a>
-                        </div>
-                    </div> : null;
+                                            <div className="_wrap">
+                                                <div className="_title">
+                                                    {this.props.title}
+                                                </div>
+                                                <div className="_action">
+                                                    <a href="javascript:;" className="_cancel" onClick={this.handleCancel}>取消</a>
+                                                    <a href="javascript:;" className="_confirm" onClick={this.handleConfirm}>确认</a>
+                                                </div>
+                                            </div>
+                                        </div> : null;
         return (
             <span className='ui confirm-box' onClick={this.onTrigger}>
                 {this.props.children}

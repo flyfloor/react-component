@@ -2631,7 +2631,7 @@
 	    value: true
 	});
 
-	var _cssPopupLess = __webpack_require__(87);
+	var _cssPopupLess = __webpack_require__(78);
 
 	var _cssPopupLess2 = _interopRequireDefault(_cssPopupLess);
 
@@ -2685,21 +2685,25 @@
 	            { ref: 'content', className: '_content' },
 	            React.createElement(
 	                'div',
-	                { className: '_title' },
-	                this.props.title
-	            ),
-	            React.createElement(
-	                'div',
-	                { className: '_action' },
+	                { className: '_wrap' },
 	                React.createElement(
-	                    'a',
-	                    { href: 'javascript:;', className: '_cancel', onClick: this.handleCancel },
-	                    '取消'
+	                    'div',
+	                    { className: '_title' },
+	                    this.props.title
 	                ),
 	                React.createElement(
-	                    'a',
-	                    { href: 'javascript:;', className: '_confirm', onClick: this.handleConfirm },
-	                    '确认'
+	                    'div',
+	                    { className: '_action' },
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;', className: '_cancel', onClick: this.handleCancel },
+	                        '取消'
+	                    ),
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;', className: '_confirm', onClick: this.handleConfirm },
+	                        '确认'
+	                    )
 	                )
 	            )
 	        ) : null;
@@ -2716,8 +2720,46 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 78 */,
-/* 79 */,
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(79);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.confirm-box ._content {\n  position: relative;\n  overflow: visible;\n}\n.ui.confirm-box ._content ._wrap {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.confirm-box ._content ._title {\n  margin-bottom: 10px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -3362,39 +3404,59 @@
 	                        'conform box with different position'
 	                    ),
 	                    React.createElement(
-	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?', position: 'left' },
+	                        'ul',
+	                        null,
 	                        React.createElement(
-	                            'a',
-	                            { href: 'javascript:;' },
-	                            'left'
-	                        )
-	                    ),
-	                    React.createElement(
-	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?', position: 'right' },
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                _indexJs.ConfirmBox,
+	                                { title: 'confirm delete?', position: 'left' },
+	                                React.createElement(
+	                                    'a',
+	                                    { href: 'javascript:;' },
+	                                    'left'
+	                                )
+	                            )
+	                        ),
 	                        React.createElement(
-	                            'a',
-	                            { href: 'javascript:;' },
-	                            'right'
-	                        )
-	                    ),
-	                    React.createElement(
-	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?', position: 'top' },
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                _indexJs.ConfirmBox,
+	                                { title: 'confirm delete?', position: 'right' },
+	                                React.createElement(
+	                                    'a',
+	                                    { href: 'javascript:;' },
+	                                    'right'
+	                                )
+	                            )
+	                        ),
 	                        React.createElement(
-	                            'a',
-	                            { href: 'javascript:;' },
-	                            'top'
-	                        )
-	                    ),
-	                    React.createElement(
-	                        _indexJs.ConfirmBox,
-	                        { title: 'confirm delete?', position: 'bottom' },
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                _indexJs.ConfirmBox,
+	                                { title: 'confirm delete?', position: 'top' },
+	                                React.createElement(
+	                                    'a',
+	                                    { href: 'javascript:;' },
+	                                    'top'
+	                                )
+	                            )
+	                        ),
 	                        React.createElement(
-	                            'a',
-	                            { href: 'javascript:;' },
-	                            'bottom'
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                _indexJs.ConfirmBox,
+	                                { title: 'confirm delete?', position: 'bottom' },
+	                                React.createElement(
+	                                    'a',
+	                                    { href: 'javascript:;' },
+	                                    'bottom'
+	                                )
+	                            )
 	                        )
 	                    )
 	                )
@@ -3407,47 +3469,6 @@
 
 	exports['default'] = ConfirmBoxDemo;
 	module.exports = exports['default'];
-
-/***/ },
-/* 86 */,
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(88);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.confirm-box {\n  position: relative;\n  overflow: visible;\n}\n.ui.confirm-box ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  left: -100%;\n  background: #ffffff;\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.confirm-box ._content ._title {\n  margin-bottom: 10px;\n}\n", ""]);
-
-	// exports
-
 
 /***/ }
 /******/ ]);

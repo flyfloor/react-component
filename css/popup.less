@@ -1,7 +1,7 @@
 @import url('meta.less');
 @import url('share.less');
 
-@{NS}.confirm-box {
+@{NS}.popup {
 
     ._wrap {
         position: relative;
@@ -23,6 +23,16 @@
         }
         ._title {
             .gap;
+        }
+    }
+}
+
+@{NS}.confirm-box {
+    ._action {
+        font-size: 80%;
+        text-align: center;
+        >a:first-child {
+            margin-right:5px; 
         }
     }
 }

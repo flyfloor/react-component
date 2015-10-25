@@ -2639,83 +2639,14 @@
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
+	var _mixinPopUpMixin = __webpack_require__(86);
+
+	var _mixinPopUpMixin2 = _interopRequireDefault(_mixinPopUpMixin);
+
 	var ConfirmBox = React.createClass({
 	    displayName: 'ConfirmBox',
 
-	    mixins: [_mixinDocumentClickMixin2['default']],
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            open: false
-	        };
-	    },
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            position: 'top'
-	        };
-	    },
-
-	    triggerSize: function triggerSize() {
-	        var TRG = ReactDOM.findDOMNode(this.refs.trigger);
-	        return {
-	            tr_width: TRG.offsetWidth,
-	            tr_height: TRG.offsetHeight
-	        };
-	    },
-
-	    contentSize: function contentSize() {
-	        var CONTENT = ReactDOM.findDOMNode(this.refs.content);
-	        if (!CONTENT) return { width: 0, height: 0 };
-	        return {
-	            c_width: CONTENT.offsetWidth,
-	            c_height: CONTENT.offsetHeight
-	        };
-	    },
-
-	    onTrigger: function onTrigger(e) {
-	        var _this = this;
-
-	        var contentDOM = ReactDOM.findDOMNode(this.refs.content);
-	        if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {} else {
-	            this.setState({
-	                open: !this.state.open
-	            }, function () {
-	                contentDOM = ReactDOM.findDOMNode(_this.refs.content);
-	                console.log(_this.calcPosition());
-	                contentDOM.setAttribute("style", _this.calcPosition());
-	            });
-	        }
-	    },
-
-	    calcPosition: function calcPosition() {
-	        var _triggerSize = this.triggerSize();
-
-	        var tr_width = _triggerSize.tr_width;
-	        var tr_height = _triggerSize.tr_height;
-
-	        var _contentSize = this.contentSize();
-
-	        var c_width = _contentSize.c_width;
-	        var c_height = _contentSize.c_height;
-	        var style = {};
-
-	        switch (this.props.position) {
-	            case 'left':
-	                style = 'left:' + (-10 - c_width) + 'px;top:' + -c_height / 2 + 'px';
-	                break;
-	            case 'right':
-	                style = 'left:' + (tr_width + 10) + 'px;top:' + -c_height / 2 + 'px';
-	                break;
-	            case 'bottom':
-	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;top:10px';
-	                break;
-	            default:
-	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;bottom:' + (tr_height + 10) + 'px';
-	                break;
-	        }
-	        return style;
-	    },
+	    mixins: [_mixinDocumentClickMixin2['default'], _mixinPopUpMixin2['default']],
 
 	    closeConfirm: function closeConfirm() {
 	        this.setState({
@@ -2754,20 +2685,20 @@
 	                    { className: '_action' },
 	                    React.createElement(
 	                        'a',
-	                        { href: 'javascript:;', className: '_cancel', onClick: this.handleCancel },
-	                        '取消'
+	                        { href: 'javascript:;', className: '_confirm', onClick: this.handleConfirm },
+	                        '确认'
 	                    ),
 	                    React.createElement(
 	                        'a',
-	                        { href: 'javascript:;', className: '_confirm', onClick: this.handleConfirm },
-	                        '确认'
+	                        { href: 'javascript:;', className: '_cancel', onClick: this.handleCancel },
+	                        '取消'
 	                    )
 	                )
 	            )
 	        ) : null;
 	        return React.createElement(
 	            'span',
-	            { className: 'ui confirm-box', onClick: this.onTrigger },
+	            { className: 'ui confirm-box popup', onClick: this.onTrigger },
 	            React.createElement(
 	                'span',
 	                { className: '_trigger', ref: 'trigger' },
@@ -3527,10 +3458,97 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.confirm-box ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.confirm-box ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.confirm-box ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.confirm-box ._wrap ._title {\n  margin-bottom: 10px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._title {\n  margin-bottom: 10px;\n}\n.ui.confirm-box ._action {\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
 
 	// exports
 
+
+/***/ },
+/* 86 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var PopUpMixin = {
+	    getInitialState: function getInitialState() {
+	        return {
+	            open: false
+	        };
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            position: 'top'
+	        };
+	    },
+
+	    triggerSize: function triggerSize() {
+	        var TRG = ReactDOM.findDOMNode(this.refs.trigger);
+	        return {
+	            tr_width: TRG.offsetWidth,
+	            tr_height: TRG.offsetHeight
+	        };
+	    },
+
+	    contentSize: function contentSize() {
+	        var CONTENT = ReactDOM.findDOMNode(this.refs.content);
+	        if (!CONTENT) return { width: 0, height: 0 };
+	        return {
+	            c_width: CONTENT.offsetWidth,
+	            c_height: CONTENT.offsetHeight
+	        };
+	    },
+
+	    onTrigger: function onTrigger(e) {
+	        var _this = this;
+
+	        var contentDOM = ReactDOM.findDOMNode(this.refs.content);
+	        if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {} else {
+	            this.setState({
+	                open: !this.state.open
+	            }, function () {
+	                contentDOM = ReactDOM.findDOMNode(_this.refs.content);
+	                if (contentDOM) contentDOM.setAttribute("style", _this.calcPosition());
+	            });
+	        }
+	    },
+
+	    calcPosition: function calcPosition() {
+	        var _triggerSize = this.triggerSize();
+
+	        var tr_width = _triggerSize.tr_width;
+	        var tr_height = _triggerSize.tr_height;
+
+	        var _contentSize = this.contentSize();
+
+	        var c_width = _contentSize.c_width;
+	        var c_height = _contentSize.c_height;
+	        var style = {};
+
+	        switch (this.props.position) {
+	            case 'left':
+	                style = 'left:' + (-10 - c_width) + 'px;top:' + -c_height / 2 + 'px';
+	                break;
+	            case 'right':
+	                style = 'left:' + (tr_width + 10) + 'px;top:' + -c_height / 2 + 'px';
+	                break;
+	            case 'bottom':
+	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;top:10px';
+	                break;
+	            default:
+	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;bottom:' + (tr_height + 10) + 'px';
+	                break;
+	        }
+	        return style;
+	    }
+
+	};
+
+	exports['default'] = PopUpMixin;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

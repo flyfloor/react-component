@@ -61,6 +61,7 @@ const PopUpMixin = {
                 style = `left:${ tr_width / 2 - c_width / 2 }px;bottom:${ tr_height + 10 }px`;
                 break;
         }
+        
         return style;
     },
 

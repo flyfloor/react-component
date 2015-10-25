@@ -7,6 +7,7 @@
         position: relative;
         overflow: visible;
         
+
         ._content {
             position: absolute;
             z-index: 100;
@@ -14,11 +15,33 @@
             min-width: 150px;
             background: @white;
             border-radius: 3px;
-            /*min-height: 30px;*/
+            text-align: center;
             padding: 10px;
             border: 1px solid @gray_b;
             &._hide {
                 visibility: hidden;
+            }
+            
+            ._arrow {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 8px 6px;
+                border-color: @gray_b transparent transparent transparent;
+            }
+
+            &._left ._arrow {
+                border-color: transparent transparent transparent @gray_b;
+            }
+
+            &._right ._arrow {
+                border-color: transparent @gray_b transparent transparent;
+            }
+
+            &._bottom ._arrow {
+                border-color: transparent transparent @gray_b transparent;
             }
         }
     }

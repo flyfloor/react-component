@@ -2684,7 +2684,8 @@
 	            { className: '_wrap' },
 	            React.createElement(
 	                'div',
-	                { ref: 'content', className: '_content' },
+	                { ref: 'content', className: '_content _' + this.props.position },
+	                React.createElement('span', { className: '_arrow', ref: 'arrow' }),
 	                React.createElement(
 	                    'div',
 	                    { className: '_title' },
@@ -3468,7 +3469,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  /*min-height: 30px;*/\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._content ._arrow {\n  content: '';\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  border-width: 8px 6px;\n  border-color: #cccccc transparent transparent transparent;\n}\n.ui.popup ._wrap ._content._left ._arrow {\n  border-color: transparent transparent transparent #cccccc;\n}\n.ui.popup ._wrap ._content._right ._arrow {\n  border-color: transparent #cccccc transparent transparent;\n}\n.ui.popup ._wrap ._content._bottom ._arrow {\n  border-color: transparent transparent #cccccc transparent;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
 
 	// exports
 
@@ -3552,6 +3553,7 @@
 	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;bottom:' + (tr_height + 10) + 'px';
 	                break;
 	        }
+
 	        return style;
 	    }
 

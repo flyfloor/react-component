@@ -7,6 +7,7 @@ import CheckBoxGroupDemo from "./demo/CheckBoxGroupDemo.jsx";
 import DropDownDemo from "./demo/DropDownDemo.jsx";
 import MenuDemo from "./demo/MenuDemo.jsx";
 import ConfirmBoxDemo from "./demo/ConfirmBoxDemo.jsx";
+import TooltipDemo from "./demo/TooltipDemo.jsx";
 
 // ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 // ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
@@ -15,3 +16,4 @@ import ConfirmBoxDemo from "./demo/ConfirmBoxDemo.jsx";
 // ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
 // ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
 ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
+ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));

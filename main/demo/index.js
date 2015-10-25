@@ -5,6 +5,7 @@ import CheckBoxGroup from '../../component/CheckBoxGroup.jsx';
 import DropDown from '../../component/DropDown.jsx';
 import Menu from '../../component/Menu.jsx';
 import ConfirmBox from '../../component/ConfirmBox.jsx';
+import Tooltip from '../../component/Tooltip.jsx';
 
 export {
     CheckBox,
@@ -14,4 +15,5 @@ export {
     DropDown,
     Menu,
     ConfirmBox,
+    Tooltip,
 }

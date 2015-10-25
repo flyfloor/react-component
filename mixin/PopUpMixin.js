@@ -49,16 +49,16 @@ const PopUpMixin = {
         
         switch(this.props.position){
             case 'left':
-                style = `left:${-10 - c_width}px;top:${ - c_height / 2}px`;
+                style = `left:${ -10 - c_width }px;top:${ - (tr_height + c_height) / 2}px`;
                 break;
             case 'right':
-                style = `left:${tr_width + 10}px;top:${ - c_height / 2}px`;
+                style = `left:${ tr_width + 10 }px;top:${ - (tr_height + c_height) / 2}px`;
                 break;
             case 'bottom':
-                style = `left:${tr_width / 2 - c_width / 2}px;top:10px`;
+                style = `left:${ tr_width / 2 - c_width / 2 }px;top:10px`;
                 break;
             default:
-                style = `left:${tr_width / 2 - c_width / 2}px;bottom:${tr_height + 10}px`;
+                style = `left:${ tr_width / 2 - c_width / 2 }px;bottom:${ tr_height + 10 }px`;
                 break;
         }
         return style;

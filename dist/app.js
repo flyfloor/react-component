@@ -80,6 +80,10 @@
 
 	var _demoConfirmBoxDemoJsx2 = _interopRequireDefault(_demoConfirmBoxDemoJsx);
 
+	var _demoTooltipDemoJsx = __webpack_require__(87);
+
+	var _demoTooltipDemoJsx2 = _interopRequireDefault(_demoTooltipDemoJsx);
+
 	// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 	// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
 	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
@@ -87,6 +91,7 @@
 	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
 	// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
 	ReactDOM.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
+	ReactDOM.render(React.createElement(_demoTooltipDemoJsx2["default"], null), document.getElementById('tooltip'));
 
 /***/ },
 /* 1 */,
@@ -993,6 +998,10 @@
 
 	var _componentConfirmBoxJsx2 = _interopRequireDefault(_componentConfirmBoxJsx);
 
+	var _componentTooltipJsx = __webpack_require__(88);
+
+	var _componentTooltipJsx2 = _interopRequireDefault(_componentTooltipJsx);
+
 	exports.CheckBox = _componentCheckBoxJsx2['default'];
 	exports.Radio = _componentRadioJsx2['default'];
 	exports.RadioGroup = _componentRadioGroupJsx2['default'];
@@ -1000,6 +1009,7 @@
 	exports.DropDown = _componentDropDownJsx2['default'];
 	exports.Menu = _componentMenuJsx2['default'];
 	exports.ConfirmBox = _componentConfirmBoxJsx2['default'];
+	exports.Tooltip = _componentTooltipJsx2['default'];
 
 /***/ },
 /* 39 */
@@ -2271,7 +2281,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
 
 	// exports
 
@@ -2614,7 +2624,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.menu {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.menu {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
 
 	// exports
 
@@ -3458,7 +3468,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._title {\n  margin-bottom: 10px;\n}\n.ui.confirm-box ._action {\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  /*min-height: 30px;*/\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
 
 	// exports
 
@@ -3530,10 +3540,10 @@
 
 	        switch (this.props.position) {
 	            case 'left':
-	                style = 'left:' + (-10 - c_width) + 'px;top:' + -c_height / 2 + 'px';
+	                style = 'left:' + (-10 - c_width) + 'px;top:' + -(tr_height + c_height) / 2 + 'px';
 	                break;
 	            case 'right':
-	                style = 'left:' + (tr_width + 10) + 'px;top:' + -c_height / 2 + 'px';
+	                style = 'left:' + (tr_width + 10) + 'px;top:' + -(tr_height + c_height) / 2 + 'px';
 	                break;
 	            case 'bottom':
 	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;top:10px';
@@ -3548,6 +3558,199 @@
 	};
 
 	exports['default'] = PopUpMixin;
+	module.exports = exports['default'];
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(9)['default'];
+
+	var _inherits = __webpack_require__(23)['default'];
+
+	var _createClass = __webpack_require__(34)['default'];
+
+	var _classCallCheck = __webpack_require__(37)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(38);
+
+	var TooltipDemo = (function (_React$Component) {
+	    _inherits(TooltipDemo, _React$Component);
+
+	    function TooltipDemo() {
+	        _classCallCheck(this, TooltipDemo);
+
+	        _get(Object.getPrototypeOf(TooltipDemo.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(TooltipDemo, [{
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'ol',
+	                null,
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'default confirm box'
+	                    ),
+	                    React.createElement(
+	                        _indexJs.Tooltip,
+	                        { title: 'confirm deleted, realy you want delete this? are you sure?' },
+	                        React.createElement(
+	                            'a',
+	                            { href: 'javascript:;' },
+	                            'delete'
+	                        )
+	                    )
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'conform box with different position'
+	                    ),
+	                    React.createElement(
+	                        'ul',
+	                        null,
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                _indexJs.Tooltip,
+	                                { title: 'confirm delete?', position: 'left' },
+	                                React.createElement(
+	                                    'a',
+	                                    { href: 'javascript:;' },
+	                                    'left'
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                _indexJs.Tooltip,
+	                                { title: 'confirm delete?', position: 'right' },
+	                                React.createElement(
+	                                    'a',
+	                                    { href: 'javascript:;' },
+	                                    'right'
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                _indexJs.Tooltip,
+	                                { title: 'confirm delete?', position: 'top' },
+	                                React.createElement(
+	                                    'a',
+	                                    { href: 'javascript:;' },
+	                                    'top'
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                _indexJs.Tooltip,
+	                                { title: 'confirm delete?', position: 'bottom' },
+	                                React.createElement(
+	                                    'a',
+	                                    { href: 'javascript:;' },
+	                                    'bottom'
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return TooltipDemo;
+	})(React.Component);
+
+	exports['default'] = TooltipDemo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssPopupLess = __webpack_require__(84);
+
+	var _cssPopupLess2 = _interopRequireDefault(_cssPopupLess);
+
+	var _mixinDocumentClickMixin = __webpack_require__(71);
+
+	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
+
+	var _mixinPopUpMixin = __webpack_require__(86);
+
+	var _mixinPopUpMixin2 = _interopRequireDefault(_mixinPopUpMixin);
+
+	var Tooltip = React.createClass({
+	    displayName: 'Tooltip',
+
+	    mixins: [_mixinDocumentClickMixin2['default'], _mixinPopUpMixin2['default']],
+
+	    onOtherDomClick: function onOtherDomClick(e) {
+	        this.setState({
+	            open: false
+	        });
+	    },
+
+	    render: function render() {
+	        var content = this.state.open ? React.createElement(
+	            'div',
+	            { className: '_wrap' },
+	            React.createElement(
+	                'div',
+	                { ref: 'content', className: '_content' },
+	                React.createElement(
+	                    'div',
+	                    { className: '_title' },
+	                    this.props.title
+	                )
+	            )
+	        ) : null;
+	        return React.createElement(
+	            'span',
+	            { className: 'ui confirm-box popup', onMouseOver: this.onTrigger, onMouseLeave: this.onTrigger },
+	            React.createElement(
+	                'span',
+	                { className: '_trigger', ref: 'trigger' },
+	                this.props.children
+	            ),
+	            content
+	        );
+	    }
+	});
+
+	exports['default'] = Tooltip;
 	module.exports = exports['default'];
 
 /***/ }

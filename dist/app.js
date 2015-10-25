@@ -2681,11 +2681,11 @@
 	    render: function render() {
 	        var content = this.state.open ? React.createElement(
 	            'div',
-	            { className: '_wrap' },
+	            { className: '_wrap _' + this.props.position },
+	            React.createElement('span', { className: '_arrow', ref: 'arrow' }),
 	            React.createElement(
 	                'div',
-	                { ref: 'content', className: '_content _' + this.props.position },
-	                React.createElement('span', { className: '_arrow', ref: 'arrow' }),
+	                { ref: 'content', className: '_content' },
 	                React.createElement(
 	                    'div',
 	                    { className: '_title' },
@@ -3469,7 +3469,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._content ._arrow {\n  content: '';\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  border-width: 8px 6px;\n  border-color: #cccccc transparent transparent transparent;\n}\n.ui.popup ._wrap ._content._left ._arrow {\n  border-color: transparent transparent transparent #cccccc;\n}\n.ui.popup ._wrap ._content._right ._arrow {\n  border-color: transparent #cccccc transparent transparent;\n}\n.ui.popup ._wrap ._content._bottom ._arrow {\n  border-color: transparent transparent #cccccc transparent;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._arrow {\n  content: '';\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  border-width: 8px 6px;\n  border-color: #cccccc transparent transparent transparent;\n}\n.ui.popup ._wrap._left ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent transparent transparent #cccccc;\n}\n.ui.popup ._wrap._right ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent #cccccc transparent transparent;\n}\n.ui.popup ._wrap._bottom ._arrow {\n  border-color: transparent transparent #cccccc transparent;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
 
 	// exports
 
@@ -3478,9 +3478,9 @@
 /* 86 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	var PopUpMixin = {
@@ -3522,7 +3522,18 @@
 	                open: !this.state.open
 	            }, function () {
 	                contentDOM = ReactDOM.findDOMNode(_this.refs.content);
-	                if (contentDOM) contentDOM.setAttribute("style", _this.calcPosition());
+	                var arrowDOM = ReactDOM.findDOMNode(_this.refs.arrow);
+
+	                var _calcPosition = _this.calcPosition();
+
+	                var style = _calcPosition.style;
+	                var arrowStyle = _calcPosition.arrowStyle;
+
+	                console.log(_this.calcPosition());
+	                if (contentDOM && arrowDOM) {
+	                    contentDOM.setAttribute("style", style);
+	                    arrowDOM.setAttribute("style", arrowStyle);
+	                }
 	            });
 	        }
 	    },
@@ -3537,30 +3548,34 @@
 
 	        var c_width = _contentSize.c_width;
 	        var c_height = _contentSize.c_height;
-	        var style = {};
+	        var style = undefined;var arrowStyle = undefined;
 
 	        switch (this.props.position) {
 	            case 'left':
-	                style = 'left:' + (-10 - c_width) + 'px;top:' + -(tr_height + c_height) / 2 + 'px';
+	                style = "left:" + (-10 - c_width) + "px;top:" + -(tr_height + c_height) / 2 + "px";
+	                arrowStyle = "left:-10px;top:" + (-tr_height / 2 - 6) + "px";
 	                break;
 	            case 'right':
-	                style = 'left:' + (tr_width + 10) + 'px;top:' + -(tr_height + c_height) / 2 + 'px';
+	                style = "left:" + (tr_width + 10) + "px;top:" + -(tr_height + c_height) / 2 + "px";
+	                arrowStyle = "left:" + (tr_width - 6) + "px;top:" + (-tr_height / 2 - 6) + "px";
 	                break;
 	            case 'bottom':
-	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;top:10px';
+	                style = "left:" + (tr_width / 2 - c_width / 2) + "px;top:10px";
+	                arrowStyle = "left:" + (tr_width / 2 - 8) + "px;top:-6px";
 	                break;
 	            default:
-	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;bottom:' + (tr_height + 10) + 'px';
+	                style = "left:" + (tr_width / 2 - c_width / 2) + "px;bottom:" + (tr_height + 10) + "px";
+	                arrowStyle = "left:" + (tr_width / 2 - 8) + "px;bottom:" + (tr_height - 6) + "px";
 	                break;
 	        }
 
-	        return style;
+	        return { style: style, arrowStyle: arrowStyle };
 	    }
 
 	};
 
-	exports['default'] = PopUpMixin;
-	module.exports = exports['default'];
+	exports["default"] = PopUpMixin;
+	module.exports = exports["default"];
 
 /***/ },
 /* 87 */
@@ -3728,7 +3743,8 @@
 	    render: function render() {
 	        var content = this.state.open ? React.createElement(
 	            'div',
-	            { className: '_wrap' },
+	            { className: '_wrap _' + this.props.position },
+	            React.createElement('span', { className: '_arrow', ref: 'arrow' }),
 	            React.createElement(
 	                'div',
 	                { ref: 'content', className: '_content' },

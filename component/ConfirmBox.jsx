@@ -27,9 +27,9 @@ const ConfirmBox = React.createClass({
     },
 
     render() {
-        let content = this.state.open ? <div className='_wrap'>
-                                            <div ref='content' className={'_content _' + this.props.position}>
-                                                <span className="_arrow" ref='arrow'></span>
+        let content = this.state.open ? <div className={'_wrap _' + this.props.position}>
+                                            <span className="_arrow" ref='arrow'></span>
+                                            <div ref='content' className='_content'>
                                                 <div className="_title">
                                                     {this.props.title}
                                                 </div>

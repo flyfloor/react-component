@@ -22,27 +22,30 @@
                 visibility: hidden;
             }
             
-            ._arrow {
-                content: '';
-                position: absolute;
-                width: 0;
-                height: 0;
-                border-style: solid;
-                border-width: 8px 6px;
-                border-color: @gray_b transparent transparent transparent;
-            }
+        }
 
-            &._left ._arrow {
-                border-color: transparent transparent transparent @gray_b;
-            }
+        ._arrow {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 8px 6px;
+            border-color: @gray_b transparent transparent transparent;
+        }
 
-            &._right ._arrow {
-                border-color: transparent @gray_b transparent transparent;
-            }
+        &._left ._arrow {
+            border-width: 6px 8px;
+            border-color: transparent transparent transparent @gray_b;
+        }
 
-            &._bottom ._arrow {
-                border-color: transparent transparent @gray_b transparent;
-            }
+        &._right ._arrow {
+            border-width: 6px 8px;
+            border-color: transparent @gray_b transparent transparent;
+        }
+
+        &._bottom ._arrow {
+            border-color: transparent transparent @gray_b transparent;
         }
     }
 }

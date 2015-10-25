@@ -37,7 +37,14 @@ const PopUpMixin = {
                 open: !this.state.open 
             }, () => {
                 contentDOM = ReactDOM.findDOMNode(this.refs.content);
-                if (contentDOM) contentDOM.setAttribute("style", this.calcPosition());
+                let arrowDOM = ReactDOM.findDOMNode(this.refs.arrow),
+                    {style, arrowStyle} = this.calcPosition();
+
+                console.log(this.calcPosition())
+                if (contentDOM && arrowDOM) {
+                    contentDOM.setAttribute("style", style);
+                    arrowDOM.setAttribute("style", arrowStyle);
+                }
             });
         }
     },
@@ -45,24 +52,28 @@ const PopUpMixin = {
     calcPosition(){
         let {tr_width, tr_height} = this.triggerSize(),
             {c_width, c_height} = this.contentSize(),
-            style = {};
+            style, arrowStyle;
         
         switch(this.props.position){
             case 'left':
-                style = `left:${ -10 - c_width }px;top:${ - (tr_height + c_height) / 2}px`;
+                style = `left:${ -10 - c_width }px;top:${- (tr_height + c_height) / 2}px`;
+                arrowStyle = `left:-10px;top:${ - tr_height / 2 - 6 }px`;
                 break;
             case 'right':
                 style = `left:${ tr_width + 10 }px;top:${ - (tr_height + c_height) / 2}px`;
+                arrowStyle = `left:${tr_width - 6}px;top:${ - tr_height / 2 - 6 }px`;
                 break;
             case 'bottom':
                 style = `left:${ tr_width / 2 - c_width / 2 }px;top:10px`;
+                arrowStyle = `left:${ tr_width / 2 - 8 }px;top:-6px`;
                 break;
             default:
                 style = `left:${ tr_width / 2 - c_width / 2 }px;bottom:${ tr_height + 10 }px`;
+                arrowStyle = `left:${ tr_width / 2 - 8 }px;bottom:${ tr_height - 6 }px`;
                 break;
         }
         
-        return style;
+        return {style, arrowStyle};
     },
 
 }

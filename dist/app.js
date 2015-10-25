@@ -84,12 +84,12 @@
 
 	var _demoTooltipDemoJsx2 = _interopRequireDefault(_demoTooltipDemoJsx);
 
-	// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
-	// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
-	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
-	// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
-	// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
+	ReactDOM.render(React.createElement(_demoCheckBoxDemoJsx2["default"], null), document.getElementById('checkbox'));
+	ReactDOM.render(React.createElement(_demoRadioDemoJsx2["default"], null), document.getElementById('radio'));
+	ReactDOM.render(React.createElement(_demoRadioGroupDemoJsx2["default"], null), document.getElementById('radio-group'));
+	ReactDOM.render(React.createElement(_demoCheckBoxGroupDemoJsx2["default"], null), document.getElementById('checkbox-group'));
+	ReactDOM.render(React.createElement(_demoDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
+	ReactDOM.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
 	ReactDOM.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
 	ReactDOM.render(React.createElement(_demoTooltipDemoJsx2["default"], null), document.getElementById('tooltip'));
 
@@ -2092,7 +2092,7 @@
 	        ) : null;
 	        return React.createElement(
 	            'div',
-	            { className: this.props.selected ? 'active' : '', onClick: this.handleClick },
+	            { className: this.props.selected ? 'active _item' : '_item', onClick: this.handleClick },
 	            this.props.children,
 	            node
 	        );
@@ -2172,7 +2172,7 @@
 	    },
 
 	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        this.inputFieldFocus();
+	        // this.inputFieldFocus();
 	    },
 
 	    render: function render() {
@@ -2281,7 +2281,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown ul li ._item {\n  padding: 3px 16px;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
 
 	// exports
 

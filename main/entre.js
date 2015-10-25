@@ -9,11 +9,11 @@ import MenuDemo from "./demo/MenuDemo.jsx";
 import ConfirmBoxDemo from "./demo/ConfirmBoxDemo.jsx";
 import TooltipDemo from "./demo/TooltipDemo.jsx";
 
-// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
-// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
-// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
-// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
-// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
+ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
+ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
+ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
+ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
+ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
+ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
 ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
 ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));

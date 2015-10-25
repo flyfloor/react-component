@@ -185,7 +185,7 @@ DropDown.Option = React.createClass({
     render(){
         let node = this.props.selected ? <i>√</i> : null;
         return (
-            <div className={this.props.selected ? 'active' : ''} onClick={this.handleClick}>
+            <div className={this.props.selected ? 'active _item' : '_item'} onClick={this.handleClick}>
                 {this.props.children}
                 {node}
             </div>
@@ -260,7 +260,7 @@ DropDown.multiInput = React.createClass({
     },
 
     componentWillReceiveProps(nextProps) {
-        this.inputFieldFocus();
+        // this.inputFieldFocus();
     },
 
     render() {

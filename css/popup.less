@@ -3,10 +3,11 @@
 
 @{NS}.confirm-box {
 
-    ._content {
+    ._wrap {
         position: relative;
         overflow: visible;
-        ._wrap {
+        
+        ._content {
             position: absolute;
             z-index: 100;
             max-width: 300px;
@@ -16,7 +17,9 @@
             min-height: 30px;
             padding: 10px;
             border: 1px solid @gray_b;
-
+            &._hide {
+                visibility: hidden;
+            }
         }
         ._title {
             .gap;

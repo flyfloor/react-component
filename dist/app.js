@@ -56,27 +56,27 @@
 
 	var _demoCheckBoxDemoJsx2 = _interopRequireDefault(_demoCheckBoxDemoJsx);
 
-	var _demoRadioDemoJsx = __webpack_require__(80);
+	var _demoRadioDemoJsx = __webpack_require__(78);
 
 	var _demoRadioDemoJsx2 = _interopRequireDefault(_demoRadioDemoJsx);
 
-	var _demoRadioGroupDemoJsx = __webpack_require__(81);
+	var _demoRadioGroupDemoJsx = __webpack_require__(79);
 
 	var _demoRadioGroupDemoJsx2 = _interopRequireDefault(_demoRadioGroupDemoJsx);
 
-	var _demoCheckBoxGroupDemoJsx = __webpack_require__(82);
+	var _demoCheckBoxGroupDemoJsx = __webpack_require__(80);
 
 	var _demoCheckBoxGroupDemoJsx2 = _interopRequireDefault(_demoCheckBoxGroupDemoJsx);
 
-	var _demoDropDownDemoJsx = __webpack_require__(83);
+	var _demoDropDownDemoJsx = __webpack_require__(81);
 
 	var _demoDropDownDemoJsx2 = _interopRequireDefault(_demoDropDownDemoJsx);
 
-	var _demoMenuDemoJsx = __webpack_require__(84);
+	var _demoMenuDemoJsx = __webpack_require__(82);
 
 	var _demoMenuDemoJsx2 = _interopRequireDefault(_demoMenuDemoJsx);
 
-	var _demoConfirmBoxDemoJsx = __webpack_require__(85);
+	var _demoConfirmBoxDemoJsx = __webpack_require__(83);
 
 	var _demoConfirmBoxDemoJsx2 = _interopRequireDefault(_demoConfirmBoxDemoJsx);
 
@@ -2631,7 +2631,7 @@
 	    value: true
 	});
 
-	var _cssPopupLess = __webpack_require__(78);
+	var _cssPopupLess = __webpack_require__(84);
 
 	var _cssPopupLess2 = _interopRequireDefault(_cssPopupLess);
 
@@ -2650,13 +2650,71 @@
 	        };
 	    },
 
-	    onTrigger: function onTrigger(e) {
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            position: 'top'
+	        };
+	    },
+
+	    triggerSize: function triggerSize() {
+	        var TRG = ReactDOM.findDOMNode(this.refs.trigger);
+	        return {
+	            tr_width: TRG.offsetWidth,
+	            tr_height: TRG.offsetHeight
+	        };
+	    },
+
+	    contentSize: function contentSize() {
 	        var CONTENT = ReactDOM.findDOMNode(this.refs.content);
-	        if (CONTENT && (e.target == CONTENT || CONTENT.contains(e.target))) {} else {
+	        if (!CONTENT) return { width: 0, height: 0 };
+	        return {
+	            c_width: CONTENT.offsetWidth,
+	            c_height: CONTENT.offsetHeight
+	        };
+	    },
+
+	    onTrigger: function onTrigger(e) {
+	        var _this = this;
+
+	        var contentDOM = ReactDOM.findDOMNode(this.refs.content);
+	        if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {} else {
 	            this.setState({
 	                open: !this.state.open
+	            }, function () {
+	                contentDOM = ReactDOM.findDOMNode(_this.refs.content);
+	                console.log(_this.calcPosition());
+	                contentDOM.setAttribute("style", _this.calcPosition());
 	            });
 	        }
+	    },
+
+	    calcPosition: function calcPosition() {
+	        var _triggerSize = this.triggerSize();
+
+	        var tr_width = _triggerSize.tr_width;
+	        var tr_height = _triggerSize.tr_height;
+
+	        var _contentSize = this.contentSize();
+
+	        var c_width = _contentSize.c_width;
+	        var c_height = _contentSize.c_height;
+	        var style = {};
+
+	        switch (this.props.position) {
+	            case 'left':
+	                style = 'left:' + (-10 - c_width) + 'px;top:' + -c_height / 2 + 'px';
+	                break;
+	            case 'right':
+	                style = 'left:' + (tr_width + 10) + 'px;top:' + -c_height / 2 + 'px';
+	                break;
+	            case 'bottom':
+	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;top:10px';
+	                break;
+	            default:
+	                style = 'left:' + (tr_width / 2 - c_width / 2) + 'px;bottom:' + (tr_height + 10) + 'px';
+	                break;
+	        }
+	        return style;
 	    },
 
 	    closeConfirm: function closeConfirm() {
@@ -2682,10 +2740,10 @@
 	    render: function render() {
 	        var content = this.state.open ? React.createElement(
 	            'div',
-	            { ref: 'content', className: '_content' },
+	            { className: '_wrap' },
 	            React.createElement(
 	                'div',
-	                { className: '_wrap' },
+	                { ref: 'content', className: '_content' },
 	                React.createElement(
 	                    'div',
 	                    { className: '_title' },
@@ -2710,7 +2768,11 @@
 	        return React.createElement(
 	            'span',
 	            { className: 'ui confirm-box', onClick: this.onTrigger },
-	            this.props.children,
+	            React.createElement(
+	                'span',
+	                { className: '_trigger', ref: 'trigger' },
+	                this.props.children
+	            ),
 	            content
 	        );
 	    }
@@ -2721,46 +2783,6 @@
 
 /***/ },
 /* 78 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(79);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 79 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.confirm-box ._content {\n  position: relative;\n  overflow: visible;\n}\n.ui.confirm-box ._content ._wrap {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.confirm-box ._content ._title {\n  margin-bottom: 10px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2852,7 +2874,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 81 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2937,7 +2959,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 82 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3013,7 +3035,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 83 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3165,7 +3187,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 84 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3315,7 +3337,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 85 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3469,6 +3491,46 @@
 
 	exports['default'] = ConfirmBoxDemo;
 	module.exports = exports['default'];
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(85);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.gap {\n  margin-bottom: 10px;\n}\n.ui.confirm-box ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.confirm-box ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  min-height: 30px;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.confirm-box ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.confirm-box ._wrap ._title {\n  margin-bottom: 10px;\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

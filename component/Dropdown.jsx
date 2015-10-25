@@ -215,6 +215,12 @@ DropDown.multiInput = React.createClass({
         };
     },
 
+    componentWillReceiveProps: function(nextProps) {
+        if (nextProps.selectedTags.length !== this.props.selectedTags.length) {
+            this.inputFieldFocus();
+        };
+    },
+
     handleClick(e){
         this.inputFieldFocus();
         this.props.onClick(true);
@@ -257,10 +263,6 @@ DropDown.multiInput = React.createClass({
 
     inputFieldFocus(){
         this.inputField().focus();
-    },
-
-    componentWillReceiveProps(nextProps) {
-        // this.inputFieldFocus();
     },
 
     render() {

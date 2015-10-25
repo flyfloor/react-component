@@ -2124,6 +2124,12 @@
 	        };
 	    },
 
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        if (nextProps.selectedTags.length !== this.props.selectedTags.length) {
+	            this.inputFieldFocus();
+	        };
+	    },
+
 	    handleClick: function handleClick(e) {
 	        this.inputFieldFocus();
 	        this.props.onClick(true);
@@ -2169,10 +2175,6 @@
 
 	    inputFieldFocus: function inputFieldFocus() {
 	        this.inputField().focus();
-	    },
-
-	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        // this.inputFieldFocus();
 	    },
 
 	    render: function render() {

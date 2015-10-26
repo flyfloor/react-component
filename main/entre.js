@@ -18,4 +18,4 @@ import ModalDemo from "./demo/ModalDemo.jsx";
 // ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
 // ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
 // ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
-ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
+// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));

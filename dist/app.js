@@ -56,35 +56,35 @@
 
 	var _demoCheckBoxDemoJsx2 = _interopRequireDefault(_demoCheckBoxDemoJsx);
 
-	var _demoRadioDemoJsx = __webpack_require__(78);
+	var _demoRadioDemoJsx = __webpack_require__(85);
 
 	var _demoRadioDemoJsx2 = _interopRequireDefault(_demoRadioDemoJsx);
 
-	var _demoRadioGroupDemoJsx = __webpack_require__(79);
+	var _demoRadioGroupDemoJsx = __webpack_require__(86);
 
 	var _demoRadioGroupDemoJsx2 = _interopRequireDefault(_demoRadioGroupDemoJsx);
 
-	var _demoCheckBoxGroupDemoJsx = __webpack_require__(80);
+	var _demoCheckBoxGroupDemoJsx = __webpack_require__(87);
 
 	var _demoCheckBoxGroupDemoJsx2 = _interopRequireDefault(_demoCheckBoxGroupDemoJsx);
 
-	var _demoDropDownDemoJsx = __webpack_require__(81);
+	var _demoDropDownDemoJsx = __webpack_require__(88);
 
 	var _demoDropDownDemoJsx2 = _interopRequireDefault(_demoDropDownDemoJsx);
 
-	var _demoMenuDemoJsx = __webpack_require__(82);
+	var _demoMenuDemoJsx = __webpack_require__(89);
 
 	var _demoMenuDemoJsx2 = _interopRequireDefault(_demoMenuDemoJsx);
 
-	var _demoConfirmBoxDemoJsx = __webpack_require__(83);
+	var _demoConfirmBoxDemoJsx = __webpack_require__(90);
 
 	var _demoConfirmBoxDemoJsx2 = _interopRequireDefault(_demoConfirmBoxDemoJsx);
 
-	var _demoTooltipDemoJsx = __webpack_require__(87);
+	var _demoTooltipDemoJsx = __webpack_require__(91);
 
 	var _demoTooltipDemoJsx2 = _interopRequireDefault(_demoTooltipDemoJsx);
 
-	var _demoModalDemoJsx = __webpack_require__(89);
+	var _demoModalDemoJsx = __webpack_require__(92);
 
 	var _demoModalDemoJsx2 = _interopRequireDefault(_demoModalDemoJsx);
 
@@ -96,7 +96,7 @@
 	// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
 	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
 	// ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
-	ReactDOM.render(React.createElement(_demoModalDemoJsx2["default"], null), document.getElementById('modal'));
+	// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
 
 /***/ },
 /* 1 */,
@@ -1003,11 +1003,11 @@
 
 	var _componentConfirmBoxJsx2 = _interopRequireDefault(_componentConfirmBoxJsx);
 
-	var _componentTooltipJsx = __webpack_require__(88);
+	var _componentTooltipJsx = __webpack_require__(81);
 
 	var _componentTooltipJsx2 = _interopRequireDefault(_componentTooltipJsx);
 
-	var _componentModalJsx = __webpack_require__(90);
+	var _componentModalJsx = __webpack_require__(82);
 
 	var _componentModalJsx2 = _interopRequireDefault(_componentModalJsx);
 
@@ -2653,7 +2653,7 @@
 	    value: true
 	});
 
-	var _cssPopupLess = __webpack_require__(84);
+	var _cssPopupLess = __webpack_require__(78);
 
 	var _cssPopupLess2 = _interopRequireDefault(_cssPopupLess);
 
@@ -2661,7 +2661,7 @@
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
-	var _mixinPopUpMixin = __webpack_require__(86);
+	var _mixinPopUpMixin = __webpack_require__(80);
 
 	var _mixinPopUpMixin2 = _interopRequireDefault(_mixinPopUpMixin);
 
@@ -2737,6 +2737,369 @@
 
 /***/ },
 /* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(79);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._arrow {\n  content: '';\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  border-width: 8px 6px;\n  border-color: #cccccc transparent transparent transparent;\n}\n.ui.popup ._wrap._left ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent transparent transparent #cccccc;\n}\n.ui.popup ._wrap._right ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent #cccccc transparent transparent;\n}\n.ui.popup ._wrap._bottom ._arrow {\n  border-color: transparent transparent #cccccc transparent;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 80 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var PopUpMixin = {
+	    getInitialState: function getInitialState() {
+	        return {
+	            open: false
+	        };
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            position: 'top'
+	        };
+	    },
+
+	    triggerSize: function triggerSize() {
+	        var TRG = ReactDOM.findDOMNode(this.refs.trigger);
+	        return {
+	            tr_width: TRG.offsetWidth,
+	            tr_height: TRG.offsetHeight
+	        };
+	    },
+
+	    contentSize: function contentSize() {
+	        var CONTENT = ReactDOM.findDOMNode(this.refs.content);
+	        if (!CONTENT) return { width: 0, height: 0 };
+	        return {
+	            c_width: CONTENT.offsetWidth,
+	            c_height: CONTENT.offsetHeight
+	        };
+	    },
+
+	    onTrigger: function onTrigger(e) {
+	        var _this = this;
+
+	        var contentDOM = ReactDOM.findDOMNode(this.refs.content);
+	        if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {} else {
+	            this.setState({
+	                open: !this.state.open
+	            }, function () {
+	                contentDOM = ReactDOM.findDOMNode(_this.refs.content);
+	                var arrowDOM = ReactDOM.findDOMNode(_this.refs.arrow);
+
+	                var _calcPosition = _this.calcPosition();
+
+	                var style = _calcPosition.style;
+	                var arrowStyle = _calcPosition.arrowStyle;
+
+	                console.log(_this.calcPosition());
+	                if (contentDOM && arrowDOM) {
+	                    contentDOM.setAttribute("style", style);
+	                    arrowDOM.setAttribute("style", arrowStyle);
+	                }
+	            });
+	        }
+	    },
+
+	    calcPosition: function calcPosition() {
+	        var _triggerSize = this.triggerSize();
+
+	        var tr_width = _triggerSize.tr_width;
+	        var tr_height = _triggerSize.tr_height;
+
+	        var _contentSize = this.contentSize();
+
+	        var c_width = _contentSize.c_width;
+	        var c_height = _contentSize.c_height;
+	        var style = undefined;var arrowStyle = undefined;
+
+	        switch (this.props.position) {
+	            case 'left':
+	                style = "left:" + (-10 - c_width) + "px;top:" + -(tr_height + c_height) / 2 + "px";
+	                arrowStyle = "left:-10px;top:" + (-tr_height / 2 - 6) + "px";
+	                break;
+	            case 'right':
+	                style = "left:" + (tr_width + 10) + "px;top:" + -(tr_height + c_height) / 2 + "px";
+	                arrowStyle = "left:" + (tr_width - 6) + "px;top:" + (-tr_height / 2 - 6) + "px";
+	                break;
+	            case 'bottom':
+	                style = "left:" + (tr_width / 2 - c_width / 2) + "px;top:10px";
+	                arrowStyle = "left:" + (tr_width / 2 - 8) + "px;top:-6px";
+	                break;
+	            default:
+	                style = "left:" + (tr_width / 2 - c_width / 2) + "px;bottom:" + (tr_height + 10) + "px";
+	                arrowStyle = "left:" + (tr_width / 2 - 8) + "px;bottom:" + (tr_height - 6) + "px";
+	                break;
+	        }
+
+	        return { style: style, arrowStyle: arrowStyle };
+	    }
+
+	};
+
+	exports["default"] = PopUpMixin;
+	module.exports = exports["default"];
+
+/***/ },
+/* 81 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssPopupLess = __webpack_require__(78);
+
+	var _cssPopupLess2 = _interopRequireDefault(_cssPopupLess);
+
+	var _mixinDocumentClickMixin = __webpack_require__(71);
+
+	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
+
+	var _mixinPopUpMixin = __webpack_require__(80);
+
+	var _mixinPopUpMixin2 = _interopRequireDefault(_mixinPopUpMixin);
+
+	var Tooltip = React.createClass({
+	    displayName: 'Tooltip',
+
+	    mixins: [_mixinDocumentClickMixin2['default'], _mixinPopUpMixin2['default']],
+
+	    onOtherDomClick: function onOtherDomClick(e) {
+	        this.setState({
+	            open: false
+	        });
+	    },
+
+	    render: function render() {
+	        var content = this.state.open ? React.createElement(
+	            'div',
+	            { className: '_wrap _' + this.props.position },
+	            React.createElement('span', { className: '_arrow', ref: 'arrow' }),
+	            React.createElement(
+	                'div',
+	                { ref: 'content', className: '_content' },
+	                React.createElement(
+	                    'div',
+	                    { className: '_title' },
+	                    this.props.title
+	                )
+	            )
+	        ) : null;
+	        return React.createElement(
+	            'span',
+	            { className: 'ui confirm-box popup', onMouseOver: this.onTrigger, onMouseLeave: this.onTrigger },
+	            React.createElement(
+	                'span',
+	                { className: '_trigger', ref: 'trigger' },
+	                this.props.children
+	            ),
+	            content
+	        );
+	    }
+	});
+
+	exports['default'] = Tooltip;
+	module.exports = exports['default'];
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssModalLess = __webpack_require__(83);
+
+	var _cssModalLess2 = _interopRequireDefault(_cssModalLess);
+
+	var Modal = React.createClass({
+	    displayName: 'Modal',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            open: this.props.display || false
+	        };
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            title: 'modal title',
+	            confirmText: 'confirm',
+	            cancelText: 'cancel'
+	        };
+	    },
+
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	        this.setState({
+	            open: nextProps.display
+	        });
+	    },
+
+	    handleConfirm: function handleConfirm(e) {
+	        this.props.onConfirm(e);
+	        this.closeModal(e);
+	    },
+
+	    handleCancel: function handleCancel(e) {
+	        this.props.onCancel(e);
+	        this.closeModal(e);
+	    },
+
+	    closeModal: function closeModal(e) {
+	        this.props.onClose();
+	        this.setState({
+	            open: false
+	        });
+	    },
+
+	    render: function render() {
+	        var confirmDOM = this.props.onConfirm ? React.createElement(
+	            'a',
+	            { href: 'javascript:;', onClick: this.handleConfirm },
+	            this.props.confirmText
+	        ) : null;
+	        var cancelDOM = this.props.onCancel ? React.createElement(
+	            'a',
+	            { href: 'javascript:;', onClick: this.handleCancel },
+	            this.props.cancelText
+	        ) : null;
+	        var footer = confirmDOM || cancelDOM ? React.createElement(
+	            'div',
+	            { className: '_action' },
+	            React.createElement(
+	                'div',
+	                { className: '_wrap' },
+	                confirmDOM,
+	                cancelDOM
+	            )
+	        ) : null;
+
+	        var base = this.state.open ? React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'div',
+	                { className: '_body' },
+	                React.createElement(
+	                    'div',
+	                    { className: '_title' },
+	                    this.props.title
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: '_content' },
+	                    this.props.children,
+	                    footer
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: '_close', onClick: this.closeModal },
+	                    'X'
+	                )
+	            ),
+	            React.createElement('div', { className: '_overlay', onClick: this.closeModal })
+	        ) : null;
+	        return React.createElement(
+	            'div',
+	            { className: 'ui modal' },
+	            base
+	        );
+	    }
+	});
+
+	exports['default'] = Modal;
+	module.exports = exports['default'];
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(84);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./modal.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./modal.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.modal ._body {\n  z-index: 1000;\n  background: #ffffff;\n  position: relative;\n  min-width: 400px;\n  max-width: 600px;\n  position: fixed;\n  top: 25%;\n  left: 0;\n  right: 0;\n  margin: auto;\n  border: 1px solid #cccccc;\n  border-radius: 3px;\n}\n.ui.modal ._body ._title {\n  padding: 10px;\n  font-size: 120%;\n}\n.ui.modal ._body ._content {\n  padding: 10px;\n}\n.ui.modal ._body ._content ._action {\n  font-size: 90%;\n  overflow: hidden;\n}\n.ui.modal ._body ._content ._action ._wrap {\n  float: right;\n}\n.ui.modal ._body ._content ._action a + a {\n  margin-left: 5px;\n}\n.ui.modal ._body ._close {\n  cursor: pointer;\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n.ui.modal ._overlay {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: rgba(0, 0, 0, 0.8);\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2828,7 +3191,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 79 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2913,7 +3276,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 80 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2989,7 +3352,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 81 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3141,7 +3504,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 82 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3291,7 +3654,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 83 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3447,150 +3810,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(85);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./popup.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._arrow {\n  content: '';\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  border-width: 8px 6px;\n  border-color: #cccccc transparent transparent transparent;\n}\n.ui.popup ._wrap._left ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent transparent transparent #cccccc;\n}\n.ui.popup ._wrap._right ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent #cccccc transparent transparent;\n}\n.ui.popup ._wrap._bottom ._arrow {\n  border-color: transparent transparent #cccccc transparent;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 86 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var PopUpMixin = {
-	    getInitialState: function getInitialState() {
-	        return {
-	            open: false
-	        };
-	    },
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            position: 'top'
-	        };
-	    },
-
-	    triggerSize: function triggerSize() {
-	        var TRG = ReactDOM.findDOMNode(this.refs.trigger);
-	        return {
-	            tr_width: TRG.offsetWidth,
-	            tr_height: TRG.offsetHeight
-	        };
-	    },
-
-	    contentSize: function contentSize() {
-	        var CONTENT = ReactDOM.findDOMNode(this.refs.content);
-	        if (!CONTENT) return { width: 0, height: 0 };
-	        return {
-	            c_width: CONTENT.offsetWidth,
-	            c_height: CONTENT.offsetHeight
-	        };
-	    },
-
-	    onTrigger: function onTrigger(e) {
-	        var _this = this;
-
-	        var contentDOM = ReactDOM.findDOMNode(this.refs.content);
-	        if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {} else {
-	            this.setState({
-	                open: !this.state.open
-	            }, function () {
-	                contentDOM = ReactDOM.findDOMNode(_this.refs.content);
-	                var arrowDOM = ReactDOM.findDOMNode(_this.refs.arrow);
-
-	                var _calcPosition = _this.calcPosition();
-
-	                var style = _calcPosition.style;
-	                var arrowStyle = _calcPosition.arrowStyle;
-
-	                console.log(_this.calcPosition());
-	                if (contentDOM && arrowDOM) {
-	                    contentDOM.setAttribute("style", style);
-	                    arrowDOM.setAttribute("style", arrowStyle);
-	                }
-	            });
-	        }
-	    },
-
-	    calcPosition: function calcPosition() {
-	        var _triggerSize = this.triggerSize();
-
-	        var tr_width = _triggerSize.tr_width;
-	        var tr_height = _triggerSize.tr_height;
-
-	        var _contentSize = this.contentSize();
-
-	        var c_width = _contentSize.c_width;
-	        var c_height = _contentSize.c_height;
-	        var style = undefined;var arrowStyle = undefined;
-
-	        switch (this.props.position) {
-	            case 'left':
-	                style = "left:" + (-10 - c_width) + "px;top:" + -(tr_height + c_height) / 2 + "px";
-	                arrowStyle = "left:-10px;top:" + (-tr_height / 2 - 6) + "px";
-	                break;
-	            case 'right':
-	                style = "left:" + (tr_width + 10) + "px;top:" + -(tr_height + c_height) / 2 + "px";
-	                arrowStyle = "left:" + (tr_width - 6) + "px;top:" + (-tr_height / 2 - 6) + "px";
-	                break;
-	            case 'bottom':
-	                style = "left:" + (tr_width / 2 - c_width / 2) + "px;top:10px";
-	                arrowStyle = "left:" + (tr_width / 2 - 8) + "px;top:-6px";
-	                break;
-	            default:
-	                style = "left:" + (tr_width / 2 - c_width / 2) + "px;bottom:" + (tr_height + 10) + "px";
-	                arrowStyle = "left:" + (tr_width / 2 - 8) + "px;bottom:" + (tr_height - 6) + "px";
-	                break;
-	        }
-
-	        return { style: style, arrowStyle: arrowStyle };
-	    }
-
-	};
-
-	exports["default"] = PopUpMixin;
-	module.exports = exports["default"];
-
-/***/ },
-/* 87 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3718,73 +3938,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _interopRequireDefault = __webpack_require__(3)['default'];
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	var _cssPopupLess = __webpack_require__(84);
-
-	var _cssPopupLess2 = _interopRequireDefault(_cssPopupLess);
-
-	var _mixinDocumentClickMixin = __webpack_require__(71);
-
-	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
-
-	var _mixinPopUpMixin = __webpack_require__(86);
-
-	var _mixinPopUpMixin2 = _interopRequireDefault(_mixinPopUpMixin);
-
-	var Tooltip = React.createClass({
-	    displayName: 'Tooltip',
-
-	    mixins: [_mixinDocumentClickMixin2['default'], _mixinPopUpMixin2['default']],
-
-	    onOtherDomClick: function onOtherDomClick(e) {
-	        this.setState({
-	            open: false
-	        });
-	    },
-
-	    render: function render() {
-	        var content = this.state.open ? React.createElement(
-	            'div',
-	            { className: '_wrap _' + this.props.position },
-	            React.createElement('span', { className: '_arrow', ref: 'arrow' }),
-	            React.createElement(
-	                'div',
-	                { ref: 'content', className: '_content' },
-	                React.createElement(
-	                    'div',
-	                    { className: '_title' },
-	                    this.props.title
-	                )
-	            )
-	        ) : null;
-	        return React.createElement(
-	            'span',
-	            { className: 'ui confirm-box popup', onMouseOver: this.onTrigger, onMouseLeave: this.onTrigger },
-	            React.createElement(
-	                'span',
-	                { className: '_trigger', ref: 'trigger' },
-	                this.props.children
-	            ),
-	            content
-	        );
-	    }
-	});
-
-	exports['default'] = Tooltip;
-	module.exports = exports['default'];
-
-/***/ },
-/* 89 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3963,160 +4117,6 @@
 
 	exports['default'] = ModalDemo;
 	module.exports = exports['default'];
-
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _interopRequireDefault = __webpack_require__(3)['default'];
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	var _cssModalLess = __webpack_require__(91);
-
-	var _cssModalLess2 = _interopRequireDefault(_cssModalLess);
-
-	var Modal = React.createClass({
-	    displayName: 'Modal',
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            open: this.props.display || false
-	        };
-	    },
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            title: 'modal title',
-	            confirmText: 'confirm',
-	            cancelText: 'cancel'
-	        };
-	    },
-
-	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	        this.setState({
-	            open: nextProps.display
-	        });
-	    },
-
-	    handleConfirm: function handleConfirm(e) {
-	        this.props.onConfirm(e);
-	        this.closeModal(e);
-	    },
-
-	    handleCancel: function handleCancel(e) {
-	        this.props.onCancel(e);
-	        this.closeModal(e);
-	    },
-
-	    closeModal: function closeModal(e) {
-	        this.props.onClose();
-	        this.setState({
-	            open: false
-	        });
-	    },
-
-	    render: function render() {
-	        var confirmDOM = this.props.onConfirm ? React.createElement(
-	            'a',
-	            { href: 'javascript:;', onClick: this.handleConfirm },
-	            this.props.confirmText
-	        ) : null;
-	        var cancelDOM = this.props.onCancel ? React.createElement(
-	            'a',
-	            { href: 'javascript:;', onClick: this.handleCancel },
-	            this.props.cancelText
-	        ) : null;
-	        var footer = confirmDOM || cancelDOM ? React.createElement(
-	            'div',
-	            { className: '_action' },
-	            React.createElement(
-	                'div',
-	                { className: '_wrap' },
-	                confirmDOM,
-	                cancelDOM
-	            )
-	        ) : null;
-
-	        var base = this.state.open ? React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	                'div',
-	                { className: '_body' },
-	                React.createElement(
-	                    'div',
-	                    { className: '_title' },
-	                    this.props.title
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: '_content' },
-	                    this.props.children,
-	                    footer
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: '_close', onClick: this.closeModal },
-	                    'X'
-	                )
-	            ),
-	            React.createElement('div', { className: '_overlay', onClick: this.closeModal })
-	        ) : null;
-	        return React.createElement(
-	            'div',
-	            { className: 'ui modal' },
-	            base
-	        );
-	    }
-	});
-
-	exports['default'] = Modal;
-	module.exports = exports['default'];
-
-/***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(92);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./modal.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./modal.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 92 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.modal ._body {\n  z-index: 1000;\n  background: #ffffff;\n  position: relative;\n  min-width: 400px;\n  max-width: 600px;\n  position: fixed;\n  top: 25%;\n  left: 0;\n  right: 0;\n  margin: auto;\n  border: 1px solid #cccccc;\n  border-radius: 3px;\n}\n.ui.modal ._body ._title {\n  padding: 10px;\n  font-size: 120%;\n}\n.ui.modal ._body ._content {\n  padding: 10px;\n}\n.ui.modal ._body ._content ._action {\n  font-size: 90%;\n  overflow: hidden;\n}\n.ui.modal ._body ._content ._action ._wrap {\n  float: right;\n}\n.ui.modal ._body ._content ._action a + a {\n  margin-left: 5px;\n}\n.ui.modal ._body ._close {\n  cursor: pointer;\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n.ui.modal ._overlay {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: rgba(0, 0, 0, 0.8);\n}\n", ""]);
-
-	// exports
-
 
 /***/ }
 /******/ ]);

@@ -1827,17 +1827,18 @@
 	        };
 	    },
 
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            multi: false,
+	            placeHolder: 'click to select...'
+	        };
+	    },
+
 	    componentDidMount: function componentDidMount() {
 	        if (!this.props.multi && !this.state.value && this.props.defaultSelected && this.state.options.length > 0) {
 	            this.setState({
 	                value: this.state.options[0][this.props.valueName]
 	            });
-	        };
-	    },
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            placeHolder: 'click to select...'
 	        };
 	    },
 

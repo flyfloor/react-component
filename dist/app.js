@@ -2537,25 +2537,33 @@
 	            { className: '_content' },
 	            this.makeMenuItems(this.props.items)
 	        ) : null;
-	        var trigger = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
+	        var triggerDOM = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
 	        var menuNode = this.props.triggerType === 'click' ? React.createElement(
-	            'div',
+	            'span',
 	            { className: 'ui menu' },
 	            React.createElement(
-	                Menu.Trigger,
-	                { onClick: this.toggleOpen.bind(null, this) },
-	                trigger
+	                'span',
+	                { className: '_trigger', onClick: this.toggleOpen.bind(null, this) },
+	                triggerDOM
 	            ),
-	            content
+	            React.createElement(
+	                'div',
+	                { className: '_wrap' },
+	                content
+	            )
 	        ) : React.createElement(
-	            'div',
+	            'span',
 	            { className: 'ui menu', onMouseOver: this.openMenu.bind(null, this), onMouseLeave: this.closeMenu.bind(null, this) },
 	            React.createElement(
-	                Menu.Trigger,
-	                null,
-	                trigger
+	                'span',
+	                { className: '_trigger' },
+	                triggerDOM
 	            ),
-	            content
+	            React.createElement(
+	                'div',
+	                { className: '_wrap' },
+	                content
+	            )
 	        );
 
 	        return menuNode;
@@ -2563,21 +2571,6 @@
 	});
 
 	exports['default'] = Menu;
-
-	Menu.Trigger = React.createClass({
-	    displayName: 'Trigger',
-
-	    handleTriggerClick: function handleTriggerClick(e) {
-	        if (typeof this.props.onClick === 'function') this.props.onClick(e);
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: '_trigger', onClick: this.handleTriggerClick },
-	            this.props.children
-	        );
-	    }
-	});
 
 	Menu.Item = React.createClass({
 	    displayName: 'Item',
@@ -2631,7 +2624,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.menu {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._wrap {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ._wrap ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
 
 	// exports
 

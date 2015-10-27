@@ -2,9 +2,6 @@
 @import url('share.less');
 
 @{NS}.menu {
-    width: 200px;
-    position: relative;
-
     ul {
         padding: 0;
         li {
@@ -17,14 +14,19 @@
     &.full {
         width: 100%;
     }
+    
+    ._wrap {
+        width: 200px;
+        position: relative;
 
-    ._content {
-        position: absolute;
-        width: 100%;
-        z-index: 100;
-        background: @white;
-        border-radius: 3px;
-        border: 1px solid @gray_b;
+        ._content {
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            background: @white;
+            border-radius: 3px;
+            border: 1px solid @gray_b;
+        }
     }
 
     ._item {

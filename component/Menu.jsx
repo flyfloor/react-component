@@ -56,16 +56,20 @@ const Menu = React.createClass ({
 
     render() {
         let content = this.state.open ? <div className="_content">{this.makeMenuItems(this.props.items)}</div> : null;
-        let trigger = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
+        let triggerDOM = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
         let menuNode = this.props.triggerType === 'click' ? 
-                        <div className='ui menu'>
-                            <Menu.Trigger onClick={this.toggleOpen.bind(null, this)}>{trigger}</Menu.Trigger>
-                            {content}
-                        </div> :
-                        <div className='ui menu' onMouseOver={this.openMenu.bind(null, this)} onMouseLeave={this.closeMenu.bind(null, this)}>
-                            <Menu.Trigger>{trigger}</Menu.Trigger>
-                            {content}
-                        </div>;
+                        <span className='ui menu'>
+                            <span className="_trigger" onClick={this.toggleOpen.bind(null, this)}>{triggerDOM}</span>
+                            <div className="_wrap">
+                                {content}
+                            </div>
+                        </span> :
+                        <span className='ui menu' onMouseOver={this.openMenu.bind(null, this)} onMouseLeave={this.closeMenu.bind(null, this)}>
+                            <span className="_trigger">{triggerDOM}</span>
+                            <div className="_wrap">
+                                {content}
+                            </div>
+                        </span>;
 
         return (
             menuNode
@@ -74,19 +78,6 @@ const Menu = React.createClass ({
 });
 
 export default Menu;
-
-Menu.Trigger = React.createClass({
-    handleTriggerClick(e){
-        if (typeof this.props.onClick === 'function') this.props.onClick(e);
-    },
-    render() {
-        return (
-            <div className='_trigger' onClick={this.handleTriggerClick}>
-                {this.props.children}
-            </div>
-        );
-    }
-});
 
 Menu.Item = React.createClass({
     handleClick(e){

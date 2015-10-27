@@ -2,11 +2,13 @@ import {ConfirmBox} from './index.js';
 
 export default class ConfirmBoxDemo extends React.Component {
     handleConfirm(){
-        console.log('confirmed')
+        console.log('confirmed');
+        return confirm('confirm?');
     }
 
     handleCancel(){
-        console.log('canceled')
+        console.log('canceled');
+        return true;
     }
 
     render() {

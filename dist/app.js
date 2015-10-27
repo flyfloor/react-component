@@ -2675,13 +2675,13 @@
 	    },
 
 	    handleCancel: function handleCancel() {
-	        if (typeof this.props.onCancel === 'function') this.props.onCancel();
-	        this.closeConfirm();
+	        if (typeof this.props.onCancel !== 'function') return this.closeConfirm();
+	        if (this.props.onCancel()) this.closeConfirm();
 	    },
 
 	    handleConfirm: function handleConfirm() {
-	        if (typeof this.props.onConfirm === 'function') this.props.onConfirm();
-	        this.closeConfirm();
+	        if (typeof this.props.onConfirm !== 'function') return this.closeConfirm();
+	        if (this.props.onConfirm()) this.closeConfirm();
 	    },
 
 	    render: function render() {
@@ -3684,11 +3684,13 @@
 	        key: 'handleConfirm',
 	        value: function handleConfirm() {
 	            console.log('confirmed');
+	            return confirm('confirm?');
 	        }
 	    }, {
 	        key: 'handleCancel',
 	        value: function handleCancel() {
 	            console.log('canceled');
+	            return true;
 	        }
 	    }, {
 	        key: 'render',

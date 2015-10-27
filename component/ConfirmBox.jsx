@@ -17,13 +17,13 @@ const ConfirmBox = React.createClass({
     },
 
     handleCancel(){
-        if (typeof this.props.onCancel === 'function') this.props.onCancel();
-        this.closeConfirm();
+        if (typeof this.props.onCancel !== 'function') return this.closeConfirm();
+        if(this.props.onCancel()) this.closeConfirm();
     },
 
     handleConfirm(){
-        if (typeof this.props.onConfirm === 'function') this.props.onConfirm();
-        this.closeConfirm();
+        if (typeof this.props.onConfirm !== 'function') return this.closeConfirm();
+        if (this.props.onConfirm()) this.closeConfirm();
     },
 
     render() {

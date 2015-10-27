@@ -22,17 +22,19 @@ const Modal = React.createClass({
         });
     },
 
-    handleConfirm(e){
-        this.props.onConfirm(e);
-        this.closeModal(e);
+    handleConfirm(){
+        // this.props.onConfirm();
+        // this.closeModal();
+        if (this.props.onConfirm()) this.closeModal();
     },
 
-    handleCancel(e){
-        this.props.onCancel(e);
-        this.closeModal(e);
+    handleCancel(){
+        // this.props.onCancel();
+        // this.closeModal();
+        if (this.props.onCancel()) this.closeModal();
     },
 
-    closeModal(e){
+    closeModal(){
         this.props.onClose();
         this.setState({
             open: false, 
@@ -40,13 +42,16 @@ const Modal = React.createClass({
     },
 
     render() {
-        let confirmDOM = this.props.onConfirm ? <a href='javascript:;' onClick={this.handleConfirm}>{this.props.confirmText}</a> : null;
-        let cancelDOM = this.props.onCancel ? <a href='javascript:;' onClick={this.handleCancel}>{this.props.cancelText}</a> : null;
-        let footer = confirmDOM || cancelDOM ? 
+        let actionDOM = [],
+            hasConfirm = this.props.onConfirm,
+            hasCancel = this.props.onCancel;
+        if (hasConfirm) actionDOM.push(<a href='javascript:;' key='confirm-action' onClick={this.handleConfirm}>{this.props.confirmText}</a>);
+        if (hasCancel) actionDOM.push(<a href='javascript:;' key='cancel-action' onClick={this.handleCancel}>{this.props.cancelText}</a>);
+
+        let footer = hasCancel || hasConfirm ? 
                     <div className='_action'>
                         <div className="_wrap">
-                            {confirmDOM}
-                            {cancelDOM}
+                            {actionDOM}
                         </div>
                     </div> : null; 
         

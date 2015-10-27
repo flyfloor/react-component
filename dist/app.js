@@ -2972,17 +2972,19 @@
 	        });
 	    },
 
-	    handleConfirm: function handleConfirm(e) {
-	        this.props.onConfirm(e);
-	        this.closeModal(e);
+	    handleConfirm: function handleConfirm() {
+	        // this.props.onConfirm();
+	        // this.closeModal();
+	        if (this.props.onConfirm()) this.closeModal();
 	    },
 
-	    handleCancel: function handleCancel(e) {
-	        this.props.onCancel(e);
-	        this.closeModal(e);
+	    handleCancel: function handleCancel() {
+	        // this.props.onCancel();
+	        // this.closeModal();
+	        if (this.props.onCancel()) this.closeModal();
 	    },
 
-	    closeModal: function closeModal(e) {
+	    closeModal: function closeModal() {
 	        this.props.onClose();
 	        this.setState({
 	            open: false
@@ -2990,24 +2992,27 @@
 	    },
 
 	    render: function render() {
-	        var confirmDOM = this.props.onConfirm ? React.createElement(
+	        var actionDOM = [],
+	            hasConfirm = this.props.onConfirm,
+	            hasCancel = this.props.onCancel;
+	        if (hasConfirm) actionDOM.push(React.createElement(
 	            'a',
-	            { href: 'javascript:;', onClick: this.handleConfirm },
+	            { href: 'javascript:;', key: 'confirm-action', onClick: this.handleConfirm },
 	            this.props.confirmText
-	        ) : null;
-	        var cancelDOM = this.props.onCancel ? React.createElement(
+	        ));
+	        if (hasCancel) actionDOM.push(React.createElement(
 	            'a',
-	            { href: 'javascript:;', onClick: this.handleCancel },
+	            { href: 'javascript:;', key: 'cancel-action', onClick: this.handleCancel },
 	            this.props.cancelText
-	        ) : null;
-	        var footer = confirmDOM || cancelDOM ? React.createElement(
+	        ));
+
+	        var footer = hasCancel || hasConfirm ? React.createElement(
 	            'div',
 	            { className: '_action' },
 	            React.createElement(
 	                'div',
 	                { className: '_wrap' },
-	                confirmDOM,
-	                cancelDOM
+	                actionDOM
 	            )
 	        ) : null;
 
@@ -3962,53 +3967,49 @@
 
 	    _createClass(ModalDemo, [{
 	        key: 'handleConfirm',
-	        value: function handleConfirm(e) {
+	        value: function handleConfirm() {
 	            console.log('confirmed');
+	            return confirm('close modal?');
 	        }
 	    }, {
 	        key: 'handleCancel',
-	        value: function handleCancel(e) {
+	        value: function handleCancel() {
 	            console.log('canceled');
+	            return true;
+	        }
+	    }, {
+	        key: 'handleConfirm1',
+	        value: function handleConfirm1() {
+	            console.log('another medel confirmed');
+	            return true;
 	        }
 	    }, {
 	        key: 'showModal',
-	        value: function showModal(e) {
+	        value: function showModal() {
 	            this.setState({
 	                display: true
 	            });
 	        }
 	    }, {
 	        key: 'showModal1',
-	        value: function showModal1(e) {
+	        value: function showModal1() {
 	            this.setState({
 	                display1: true
 	            });
 	        }
 	    }, {
 	        key: 'showModal2',
-	        value: function showModal2(e) {
+	        value: function showModal2() {
 	            this.setState({
 	                display2: true
 	            });
 	        }
 	    }, {
 	        key: 'handleClose',
-	        value: function handleClose(e) {
+	        value: function handleClose() {
 	            this.setState({
-	                display: false
-	            });
-	        }
-	    }, {
-	        key: 'handleClose1',
-	        value: function handleClose1(e) {
-	            this.setState({
-	                display1: false
-	            });
-	        }
-	    }, {
-	        key: 'handleClose2',
-	        value: function handleClose2(e) {
-	            this.setState({
+	                display: false,
+	                display1: false,
 	                display2: false
 	            });
 	        }
@@ -4066,7 +4067,7 @@
 	                    ),
 	                    React.createElement(
 	                        _indexJs.Modal,
-	                        { display: this.state.display1, onClose: this.handleClose1.bind(this), onConfirm: this.handleConfirm.bind(this), onCancel: this.handleCancel.bind(this) },
+	                        { display: this.state.display1, onClose: this.handleClose.bind(this), onConfirm: this.handleConfirm.bind(this), onCancel: this.handleCancel.bind(this) },
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
@@ -4089,7 +4090,7 @@
 	                    ),
 	                    React.createElement(
 	                        _indexJs.Modal,
-	                        { display: this.state.display2, onClose: this.handleClose2.bind(this), onConfirm: this.handleConfirm.bind(this) },
+	                        { display: this.state.display2, onClose: this.handleClose.bind(this), onConfirm: this.handleConfirm1.bind(this) },
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },

@@ -46,7 +46,6 @@ const Menu = React.createClass ({
         const NODES = content.props.children,
             INDEX = this.state.index;
         let itemNodes = [];
-        // console.log(NODES);
         if (NODES instanceof Array) {
             itemNodes = NODES.map((node, index) => {
                 return <Menu.Item key={index} selected={ index == INDEX } itemIndex={index} onItemClick={this.handleItemClick}>{node.props.children}</Menu.Item>;

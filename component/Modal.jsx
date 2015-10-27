@@ -3,12 +3,13 @@ import css from '../css/modal.less';
 const Modal = React.createClass({
     getInitialState() {
         return {
-            open: this.props.display || false, 
+            open: this.props.display, 
         };
     },
     
     getDefaultProps() {
         return {
+            display: false,
             title: 'modal title',
             confirmText: 'confirm',
             cancelText: 'cancel',

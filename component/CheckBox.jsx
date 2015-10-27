@@ -2,7 +2,6 @@ export default class CheckBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            disabled: props.disabled,
             checked: props.checked,
         };
     }
@@ -17,7 +16,7 @@ export default class CheckBox extends React.Component {
     render() {
         return ( 
             <label>
-                <input type="checkbox" disabled={this.state.disabled} checked={this.state.checked} onChange={this.checkedChange.bind(this)}/>
+                <input type="checkbox" disabled={this.props.disabled} checked={this.state.checked} onChange={this.checkedChange.bind(this)}/>
                 {this.props.children}
             </label>
         );

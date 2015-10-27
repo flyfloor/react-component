@@ -88,15 +88,15 @@
 
 	var _demoModalDemoJsx2 = _interopRequireDefault(_demoModalDemoJsx);
 
-	// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
-	// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
-	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
-	// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
-	// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
-	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
-	// ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
-	// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
+	ReactDOM.render(React.createElement(_demoCheckBoxDemoJsx2["default"], null), document.getElementById('checkbox'));
+	ReactDOM.render(React.createElement(_demoRadioDemoJsx2["default"], null), document.getElementById('radio'));
+	ReactDOM.render(React.createElement(_demoRadioGroupDemoJsx2["default"], null), document.getElementById('radio-group'));
+	ReactDOM.render(React.createElement(_demoCheckBoxGroupDemoJsx2["default"], null), document.getElementById('checkbox-group'));
+	ReactDOM.render(React.createElement(_demoDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
+	ReactDOM.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
+	ReactDOM.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
+	ReactDOM.render(React.createElement(_demoTooltipDemoJsx2["default"], null), document.getElementById('tooltip'));
+	ReactDOM.render(React.createElement(_demoModalDemoJsx2["default"], null), document.getElementById('modal'));
 
 /***/ },
 /* 1 */,
@@ -1047,7 +1047,6 @@
 
 	        _get(Object.getPrototypeOf(CheckBox.prototype), "constructor", this).call(this, props);
 	        this.state = {
-	            disabled: props.disabled,
 	            checked: props.checked
 	        };
 	    }
@@ -1066,7 +1065,7 @@
 	            return React.createElement(
 	                "label",
 	                null,
-	                React.createElement("input", { type: "checkbox", disabled: this.state.disabled, checked: this.state.checked, onChange: this.checkedChange.bind(this) }),
+	                React.createElement("input", { type: "checkbox", disabled: this.props.disabled, checked: this.state.checked, onChange: this.checkedChange.bind(this) }),
 	                this.props.children
 	            );
 	        }
@@ -1103,15 +1102,12 @@
 	        _classCallCheck(this, Radio);
 
 	        _get(Object.getPrototypeOf(Radio.prototype), "constructor", this).call(this, props);
-	        this.state = {
-	            disabled: props.disabled
-	        };
 	    }
 
 	    _createClass(Radio, [{
 	        key: "checkedChange",
 	        value: function checkedChange(e) {
-	            if (this.props.onChange) this.props.onChange(e, this.props.storeValue);
+	            if (this.props.onChange) this.props.onChange(this.props.storeValue);
 	        }
 	    }, {
 	        key: "render",
@@ -1119,7 +1115,7 @@
 	            return React.createElement(
 	                "label",
 	                null,
-	                React.createElement("input", { type: "radio", ref: "radioInput", disabled: this.state.disabled, checked: this.props.checked, onChange: this.checkedChange.bind(this) }),
+	                React.createElement("input", { type: "radio", ref: "radioInput", disabled: this.props.disabled, checked: this.props.checked, onChange: this.checkedChange.bind(this) }),
 	                this.props.children
 	            );
 	        }
@@ -1172,7 +1168,7 @@
 
 	    _createClass(RadioGroup, [{
 	        key: 'toggleChange',
-	        value: function toggleChange(e, storeValue) {
+	        value: function toggleChange(storeValue) {
 	            var _this = this;
 
 	            this.setState({
@@ -2523,7 +2519,6 @@
 	        var NODES = content.props.children,
 	            INDEX = this.state.index;
 	        var itemNodes = [];
-	        // console.log(NODES);
 	        if (NODES instanceof Array) {
 	            itemNodes = NODES.map(function (node, index) {
 	                return React.createElement(
@@ -2965,12 +2960,13 @@
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            open: this.props.display || false
+	            open: this.props.display
 	        };
 	    },
 
 	    getDefaultProps: function getDefaultProps() {
 	        return {
+	            display: false,
 	            title: 'modal title',
 	            confirmText: 'confirm',
 	            cancelText: 'cancel'

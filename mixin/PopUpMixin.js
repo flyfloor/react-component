@@ -31,16 +31,16 @@ const PopUpMixin = {
     onTrigger(e){
         let contentDOM = ReactDOM.findDOMNode(this.refs.content);
         if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {
-
+            // 
         } else {
             this.setState({
                 open: !this.state.open 
             }, () => {
                 contentDOM = ReactDOM.findDOMNode(this.refs.content);
+                
                 let arrowDOM = ReactDOM.findDOMNode(this.refs.arrow),
                     {style, arrowStyle} = this.calcPosition();
 
-                console.log(this.calcPosition())
                 if (contentDOM && arrowDOM) {
                     contentDOM.setAttribute("style", style);
                     arrowDOM.setAttribute("style", arrowStyle);

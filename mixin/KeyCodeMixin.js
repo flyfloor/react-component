@@ -8,6 +8,7 @@ const FUNC_KEY = {
     BACKSPACE: 8,
     TAB: 9
 }
+
 const KeyCodeMixin = {
 
     isSpace(code){
@@ -51,7 +52,6 @@ const KeyCodeMixin = {
         }
         return false;
     }
-
 }
 
 export default KeyCodeMixin;

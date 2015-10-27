@@ -2355,6 +2355,7 @@
 	    BACKSPACE: 8,
 	    TAB: 9
 	};
+
 	var KeyCodeMixin = {
 
 	    isSpace: function isSpace(code) {
@@ -2398,7 +2399,6 @@
 	        }
 	        return false;
 	    }
-
 	};
 
 	exports["default"] = KeyCodeMixin;
@@ -2812,25 +2812,27 @@
 	        var _this = this;
 
 	        var contentDOM = ReactDOM.findDOMNode(this.refs.content);
-	        if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {} else {
-	            this.setState({
-	                open: !this.state.open
-	            }, function () {
-	                contentDOM = ReactDOM.findDOMNode(_this.refs.content);
-	                var arrowDOM = ReactDOM.findDOMNode(_this.refs.arrow);
+	        if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {
+	            //
+	        } else {
+	                this.setState({
+	                    open: !this.state.open
+	                }, function () {
+	                    contentDOM = ReactDOM.findDOMNode(_this.refs.content);
 
-	                var _calcPosition = _this.calcPosition();
+	                    var arrowDOM = ReactDOM.findDOMNode(_this.refs.arrow);
 
-	                var style = _calcPosition.style;
-	                var arrowStyle = _calcPosition.arrowStyle;
+	                    var _calcPosition = _this.calcPosition();
 
-	                console.log(_this.calcPosition());
-	                if (contentDOM && arrowDOM) {
-	                    contentDOM.setAttribute("style", style);
-	                    arrowDOM.setAttribute("style", arrowStyle);
-	                }
-	            });
-	        }
+	                    var style = _calcPosition.style;
+	                    var arrowStyle = _calcPosition.arrowStyle;
+
+	                    if (contentDOM && arrowDOM) {
+	                        contentDOM.setAttribute("style", style);
+	                        arrowDOM.setAttribute("style", arrowStyle);
+	                    }
+	                });
+	            }
 	    },
 
 	    calcPosition: function calcPosition() {

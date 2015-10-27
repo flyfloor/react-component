@@ -23,14 +23,10 @@ const Modal = React.createClass({
     },
 
     handleConfirm(){
-        // this.props.onConfirm();
-        // this.closeModal();
         if (this.props.onConfirm()) this.closeModal();
     },
 
     handleCancel(){
-        // this.props.onCancel();
-        // this.closeModal();
         if (this.props.onCancel()) this.closeModal();
     },
 

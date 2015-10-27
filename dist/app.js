@@ -1629,8 +1629,8 @@
 
 	        _get(Object.getPrototypeOf(CheckBoxGroup.prototype), 'constructor', this).call(this, props);
 	        this.state = {
-	            value: props.value || [],
-	            options: props.options || []
+	            value: props.value,
+	            options: props.options
 	        };
 	    }
 
@@ -1775,6 +1775,11 @@
 	})(React.Component);
 
 	exports['default'] = CheckBoxGroup;
+
+	CheckBoxGroup.defaultProps = {
+	    value: [],
+	    options: []
+	};
 	module.exports = exports['default'];
 
 /***/ },
@@ -2973,14 +2978,10 @@
 	    },
 
 	    handleConfirm: function handleConfirm() {
-	        // this.props.onConfirm();
-	        // this.closeModal();
 	        if (this.props.onConfirm()) this.closeModal();
 	    },
 
 	    handleCancel: function handleCancel() {
-	        // this.props.onCancel();
-	        // this.closeModal();
 	        if (this.props.onCancel()) this.closeModal();
 	    },
 

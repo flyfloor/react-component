@@ -4,8 +4,8 @@ export default class CheckBoxGroup extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value: props.value || [],
-            options: props.options || [],
+            value: props.value,
+            options: props.options,
         }
     }
 
@@ -63,4 +63,9 @@ export default class CheckBoxGroup extends React.Component {
             </div>
         );
     }
+}
+
+CheckBoxGroup.defaultProps = {
+    value: [],
+    options: [], 
 }

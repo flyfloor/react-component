@@ -106,7 +106,7 @@
 	// ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
 	// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
 	// ReactDOM.render(<TabDemo/>, document.getElementById('tab'));
-	ReactDOM.render(React.createElement(_demoPinDemoJsx2["default"], null), document.getElementById('pin'));
+	// ReactDOM.render(<PinDemo/>, document.getElementById('pin'));
 
 /***/ },
 /* 1 */,

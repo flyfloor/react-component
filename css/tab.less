@@ -1,0 +1,32 @@
+@import url('meta');
+@import url('share');
+
+@{NS}.tab {
+    .clearfix;
+    &.top ._item {
+        float: left;
+        display: inline-block;
+        border-top: 1px solid transparent; 
+    }
+
+    &.bottom ._item {
+        border-bottom: 1px solid transparent;
+        float: left;
+        display: inline-block;
+    }
+
+    &.left ._item {
+        border-right: 1px solid transparent;
+    }
+
+    &.right ._item {
+        border-left: 1px solid transparent;
+    }
+
+    ._item {
+        padding: 5px 10px;
+        &.active {
+            border-color: @gray_b;
+        }
+    }
+}

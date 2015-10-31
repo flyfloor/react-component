@@ -88,15 +88,20 @@
 
 	var _demoModalDemoJsx2 = _interopRequireDefault(_demoModalDemoJsx);
 
-	ReactDOM.render(React.createElement(_demoCheckBoxDemoJsx2["default"], null), document.getElementById('checkbox'));
-	ReactDOM.render(React.createElement(_demoRadioDemoJsx2["default"], null), document.getElementById('radio'));
-	ReactDOM.render(React.createElement(_demoRadioGroupDemoJsx2["default"], null), document.getElementById('radio-group'));
-	ReactDOM.render(React.createElement(_demoCheckBoxGroupDemoJsx2["default"], null), document.getElementById('checkbox-group'));
-	ReactDOM.render(React.createElement(_demoDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
+	var _demoTabDemoJsx = __webpack_require__(96);
+
+	var _demoTabDemoJsx2 = _interopRequireDefault(_demoTabDemoJsx);
+
+	// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
+	// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
+	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
+	// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
+	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
 	ReactDOM.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
-	ReactDOM.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
-	ReactDOM.render(React.createElement(_demoTooltipDemoJsx2["default"], null), document.getElementById('tooltip'));
-	ReactDOM.render(React.createElement(_demoModalDemoJsx2["default"], null), document.getElementById('modal'));
+	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
+	// ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
+	// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
+	ReactDOM.render(React.createElement(_demoTabDemoJsx2["default"], null), document.getElementById('tab'));
 
 /***/ },
 /* 1 */,
@@ -1011,6 +1016,10 @@
 
 	var _componentModalJsx2 = _interopRequireDefault(_componentModalJsx);
 
+	var _componentTabJsx = __webpack_require__(95);
+
+	var _componentTabJsx2 = _interopRequireDefault(_componentTabJsx);
+
 	exports.CheckBox = _componentCheckBoxJsx2['default'];
 	exports.Radio = _componentRadioJsx2['default'];
 	exports.RadioGroup = _componentRadioGroupJsx2['default'];
@@ -1019,7 +1028,7 @@
 	exports.Menu = _componentMenuJsx2['default'];
 	exports.ConfirmBox = _componentConfirmBoxJsx2['default'];
 	exports.Tooltip = _componentTooltipJsx2['default'];
-	exports.Modal = _componentModalJsx2['default'];
+	exports.Tab = _componentTabJsx2['default'];
 
 /***/ },
 /* 39 */
@@ -2295,7 +2304,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown ul li ._item {\n  padding: 3px 16px;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.dropdown {\n  width: 200px;\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown ul li ._item {\n  padding: 3px 16px;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 20px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
 
 	// exports
 
@@ -2473,6 +2482,10 @@
 
 	var _cssMenuLess2 = _interopRequireDefault(_cssMenuLess);
 
+	var _ItemJsx = __webpack_require__(97);
+
+	var _ItemJsx2 = _interopRequireDefault(_ItemJsx);
+
 	var _mixinDocumentClickMixin = __webpack_require__(71);
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
@@ -2528,7 +2541,7 @@
 	        if (NODES instanceof Array) {
 	            itemNodes = NODES.map(function (node, index) {
 	                return React.createElement(
-	                    Menu.Item,
+	                    _ItemJsx2['default'],
 	                    { key: index, selected: index == INDEX, itemIndex: index, onItemClick: _this.handleItemClick },
 	                    node.props.children
 	                );
@@ -2578,21 +2591,7 @@
 
 	exports['default'] = Menu;
 
-	Menu.Item = React.createClass({
-	    displayName: 'Item',
-
-	    handleClick: function handleClick(e) {
-	        this.props.onItemClick(this.props.itemIndex);
-	    },
-	    render: function render() {
-	        var isActive = this.props.selected ? 'active' : '';
-	        return React.createElement(
-	            'div',
-	            { className: '_item ' + isActive, onClick: this.handleClick },
-	            this.props.children
-	        );
-	    }
-	});
+	Menu.Item = _ItemJsx2['default'];
 	module.exports = exports['default'];
 
 /***/ },
@@ -2630,7 +2629,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._wrap {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ._wrap ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._wrap {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ._wrap ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
 
 	// exports
 
@@ -2764,7 +2763,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._arrow {\n  content: '';\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  border-width: 8px 6px;\n  border-color: #cccccc transparent transparent transparent;\n}\n.ui.popup ._wrap._left ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent transparent transparent #cccccc;\n}\n.ui.popup ._wrap._right ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent #cccccc transparent transparent;\n}\n.ui.popup ._wrap._bottom ._arrow {\n  border-color: transparent transparent #cccccc transparent;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._arrow {\n  content: '';\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  border-width: 8px 6px;\n  border-color: #cccccc transparent transparent transparent;\n}\n.ui.popup ._wrap._left ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent transparent transparent #cccccc;\n}\n.ui.popup ._wrap._right ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent #cccccc transparent transparent;\n}\n.ui.popup ._wrap._bottom ._arrow {\n  border-color: transparent transparent #cccccc transparent;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
 
 	// exports
 
@@ -3091,7 +3090,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.ui.modal ._body {\n  z-index: 1000;\n  background: #ffffff;\n  position: relative;\n  min-width: 400px;\n  max-width: 600px;\n  position: fixed;\n  top: 25%;\n  left: 0;\n  right: 0;\n  margin: auto;\n  border: 1px solid #cccccc;\n  border-radius: 3px;\n}\n.ui.modal ._body ._title {\n  padding: 10px;\n  font-size: 120%;\n}\n.ui.modal ._body ._content {\n  padding: 10px;\n}\n.ui.modal ._body ._content ._action {\n  font-size: 90%;\n  overflow: hidden;\n}\n.ui.modal ._body ._content ._action ._wrap {\n  float: right;\n}\n.ui.modal ._body ._content ._action a + a {\n  margin-left: 5px;\n}\n.ui.modal ._body ._close {\n  cursor: pointer;\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n.ui.modal ._overlay {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: rgba(0, 0, 0, 0.8);\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.modal ._body {\n  z-index: 1000;\n  background: #ffffff;\n  position: relative;\n  min-width: 400px;\n  max-width: 600px;\n  position: fixed;\n  top: 25%;\n  left: 0;\n  right: 0;\n  margin: auto;\n  border: 1px solid #cccccc;\n  border-radius: 3px;\n}\n.ui.modal ._body ._title {\n  padding: 10px;\n  font-size: 120%;\n}\n.ui.modal ._body ._content {\n  padding: 10px;\n}\n.ui.modal ._body ._content ._action {\n  font-size: 90%;\n  overflow: hidden;\n}\n.ui.modal ._body ._content ._action ._wrap {\n  float: right;\n}\n.ui.modal ._body ._content ._action a + a {\n  margin-left: 5px;\n}\n.ui.modal ._body ._close {\n  cursor: pointer;\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n.ui.modal ._overlay {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: rgba(0, 0, 0, 0.8);\n}\n", ""]);
 
 	// exports
 
@@ -3553,7 +3552,7 @@
 	                    React.createElement(
 	                        'a',
 	                        { href: 'javascript:;' },
-	                        '菜单1'
+	                        'one'
 	                    )
 	                ),
 	                React.createElement(
@@ -3562,7 +3561,7 @@
 	                    React.createElement(
 	                        'a',
 	                        { href: 'javascript:;' },
-	                        '菜单2'
+	                        'two'
 	                    )
 	                ),
 	                React.createElement(
@@ -3571,7 +3570,7 @@
 	                    React.createElement(
 	                        'a',
 	                        { href: 'javascript:;' },
-	                        '菜单3'
+	                        'three'
 	                    )
 	                ),
 	                React.createElement(
@@ -3580,7 +3579,7 @@
 	                    React.createElement(
 	                        'a',
 	                        { href: 'javascript:;' },
-	                        '菜单4',
+	                        'four',
 	                        React.createElement(
 	                            'i',
 	                            null,
@@ -3593,7 +3592,7 @@
 	            var onNode = React.createElement(
 	                'a',
 	                { href: 'javascript:;' },
-	                '收起菜单'
+	                'slide up'
 	            );
 
 	            return React.createElement(
@@ -3619,7 +3618,7 @@
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
-	                            '展开菜单'
+	                            'slide down'
 	                        )
 	                    )
 	                ),
@@ -3637,7 +3636,7 @@
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
-	                            '展开菜单'
+	                            'slide down'
 	                        )
 	                    )
 	                )
@@ -4113,6 +4112,308 @@
 
 	exports['default'] = ModalDemo;
 	module.exports = exports['default'];
+
+/***/ },
+/* 93 */,
+/* 94 */,
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(9)['default'];
+
+	var _inherits = __webpack_require__(23)['default'];
+
+	var _createClass = __webpack_require__(34)['default'];
+
+	var _classCallCheck = __webpack_require__(37)['default'];
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssTabLess = __webpack_require__(98);
+
+	var _cssTabLess2 = _interopRequireDefault(_cssTabLess);
+
+	var _ItemJsx = __webpack_require__(97);
+
+	var _ItemJsx2 = _interopRequireDefault(_ItemJsx);
+
+	var Tab = (function (_React$Component) {
+	    _inherits(Tab, _React$Component);
+
+	    function Tab(props) {
+	        _classCallCheck(this, Tab);
+
+	        _get(Object.getPrototypeOf(Tab.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            index: this.props.selectedIndex
+	        };
+	    }
+
+	    _createClass(Tab, [{
+	        key: 'handleItemClick',
+	        value: function handleItemClick(index) {
+	            if (typeof this.props.onSelect === 'function') this.props.onSelect(index);
+	            this.setState({
+	                index: index
+	            });
+	        }
+	    }, {
+	        key: 'makeTabItems',
+	        value: function makeTabItems(content) {
+	            var _this = this;
+
+	            var NODES = content.props.children,
+	                INDEX = this.state.index;
+	            var itemNodes = [];
+	            if (NODES instanceof Array) {
+	                itemNodes = NODES.map(function (node, index) {
+	                    return React.createElement(
+	                        _ItemJsx2['default'],
+	                        { key: index, selected: index == INDEX, itemIndex: index, onItemClick: _this.handleItemClick.bind(_this) },
+	                        node.props.children
+	                    );
+	                });
+	            }
+	            return itemNodes;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var content = this.makeTabItems(this.props.items);
+	            return React.createElement(
+	                'div',
+	                { className: 'ui tab ' + this.props.position },
+	                content
+	            );
+	        }
+	    }]);
+
+	    return Tab;
+	})(React.Component);
+
+	exports['default'] = Tab;
+
+	Tab.defaultProps = {
+	    selectedIndex: 0,
+	    position: 'top'
+	};
+
+	Tab.Item = _ItemJsx2['default'];
+	module.exports = exports['default'];
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(9)['default'];
+
+	var _inherits = __webpack_require__(23)['default'];
+
+	var _createClass = __webpack_require__(34)['default'];
+
+	var _classCallCheck = __webpack_require__(37)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(38);
+
+	var TabDemo = (function (_React$Component) {
+	    _inherits(TabDemo, _React$Component);
+
+	    function TabDemo(props) {
+	        _classCallCheck(this, TabDemo);
+
+	        _get(Object.getPrototypeOf(TabDemo.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            index1: 1
+	        };
+	    }
+
+	    _createClass(TabDemo, [{
+	        key: 'displayChange',
+	        value: function displayChange(index) {
+	            this.setState({
+	                index: index
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var items = React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    _indexJs.Tab.Item,
+	                    { key: '0' },
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;' },
+	                        'first'
+	                    )
+	                ),
+	                React.createElement(
+	                    _indexJs.Tab.Item,
+	                    { key: '1' },
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;' },
+	                        'second'
+	                    )
+	                ),
+	                React.createElement(
+	                    _indexJs.Tab.Item,
+	                    { key: '2' },
+	                    React.createElement(
+	                        'a',
+	                        { target: '_blank', href: 'http://www.baidu.com' },
+	                        'third'
+	                    )
+	                ),
+	                React.createElement(
+	                    _indexJs.Tab.Item,
+	                    { key: '3' },
+	                    React.createElement(
+	                        'a',
+	                        { href: 'javascript:;' },
+	                        'fourth',
+	                        React.createElement(
+	                            'i',
+	                            null,
+	                            '^_^'
+	                        )
+	                    )
+	                )
+	            );
+
+	            return React.createElement(
+	                'ol',
+	                null,
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'tab'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'you selected item index is ',
+	                        this.state.index
+	                    ),
+	                    React.createElement(_indexJs.Tab, { onSelect: this.displayChange.bind(this), selectedIndex: this.state.index, items: items })
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'tab with selectedIndex'
+	                    ),
+	                    React.createElement(_indexJs.Tab, { selectedIndex: this.state.index1, items: items })
+	                ),
+	                React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'tabs with position'
+	                    ),
+	                    React.createElement(_indexJs.Tab, { items: items, position: 'left' }),
+	                    React.createElement(_indexJs.Tab, { items: items, position: 'right' }),
+	                    React.createElement(_indexJs.Tab, { items: items, position: 'top' }),
+	                    React.createElement(_indexJs.Tab, { items: items, position: 'bottom' })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return TabDemo;
+	})(React.Component);
+
+	exports['default'] = TabDemo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 97 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var Item = React.createClass({
+	    displayName: 'Item',
+
+	    handleClick: function handleClick(e) {
+	        this.props.onItemClick(this.props.itemIndex);
+	    },
+	    render: function render() {
+	        var isActive = this.props.selected ? 'active' : '';
+	        return React.createElement(
+	            'div',
+	            { className: '_item ' + isActive, onClick: this.handleClick },
+	            this.props.children
+	        );
+	    }
+	});
+
+	exports['default'] = Item;
+	module.exports = exports['default'];
+
+/***/ },
+/* 98 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(99);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./tab.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./tab.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.tab {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.tab.top ._item {\n  float: left;\n  display: inline-block;\n  border-top: 1px solid transparent;\n}\n.ui.tab.bottom ._item {\n  border-bottom: 1px solid transparent;\n  float: left;\n  display: inline-block;\n}\n.ui.tab.left ._item {\n  border-right: 1px solid transparent;\n}\n.ui.tab.right ._item {\n  border-left: 1px solid transparent;\n}\n.ui.tab ._item {\n  padding: 5px 10px;\n}\n.ui.tab ._item.active {\n  border-color: #cccccc;\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

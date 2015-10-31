@@ -17,23 +17,23 @@ export default class MenuDemo extends React.Component {
     render() {
         const items  =  <div>
                             <Menu.Item key='0'>
-                                <a href="javascript:;">菜单1</a>
+                                <a href="javascript:;">one</a>
                             </Menu.Item>
                             <Menu.Item key='1'>
-                                <a href="javascript:;">菜单2</a>
+                                <a href="javascript:;">two</a>
                             </Menu.Item>
                             <Menu.Item key='2'>
-                                <a href="javascript:;">菜单3</a>
+                                <a href="javascript:;">three</a>
                             </Menu.Item>
                             <Menu.Item key='3'>
                                 <a href="javascript:;">
-                                    菜单4
+                                    four
                                     <i>^_^</i>
                                 </a>
                             </Menu.Item>
                         </div>;
 
-        const onNode = <a href="javascript:;">收起菜单</a>;
+        const onNode = <a href="javascript:;">slide up</a>;
 
         return (
             <ol>
@@ -41,13 +41,13 @@ export default class MenuDemo extends React.Component {
                     <h4>menu, default with mouse hover</h4>
                     <p>you selected item index is {this.state.index}</p>
                     <Menu onSelect={this.displayChange.bind(this)} selectedIndex={this.state.index} items={items} triggerOn={onNode}>
-                        <a href="javascript:;">展开菜单</a>
+                        <a href="javascript:;">slide down</a>
                     </Menu>
                 </li>
                 <li>
                     <h4>menu, with click to trigger menu open</h4>
                     <Menu selectedIndex={this.state.index1} items={items} triggerOn={onNode} triggerType='click'>
-                        <a href="javascript:;">展开菜单</a>
+                        <a href="javascript:;">slide down</a>
                     </Menu>
                 </li>
             </ol>

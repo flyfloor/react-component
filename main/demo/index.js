@@ -1,3 +1,4 @@
+
 import CheckBox from '../../component/CheckBox.jsx';
 import Radio from '../../component/Radio.jsx';
 import RadioGroup from '../../component/RadioGroup.jsx';
@@ -7,6 +8,7 @@ import Menu from '../../component/Menu.jsx';
 import ConfirmBox from '../../component/ConfirmBox.jsx';
 import Tooltip from '../../component/Tooltip.jsx';
 import Modal from '../../component/Modal.jsx';
+import Tab from '../../component/Tab.jsx';
 
 export {
     CheckBox,
@@ -17,5 +19,5 @@ export {
     Menu,
     ConfirmBox,
     Tooltip,
-    Modal,
+    Tab,
 }

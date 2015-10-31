@@ -1,5 +1,7 @@
 import css from "../css/menu.less";
 
+import Item from './Item.jsx';
+
 import DocumentClickMixin from '../mixin/DocumentClickMixin';
 
 const Menu = React.createClass ({
@@ -48,7 +50,7 @@ const Menu = React.createClass ({
         let itemNodes = [];
         if (NODES instanceof Array) {
             itemNodes = NODES.map((node, index) => {
-                return <Menu.Item key={index} selected={ index == INDEX } itemIndex={index} onItemClick={this.handleItemClick}>{node.props.children}</Menu.Item>;
+                return <Item key={index} selected={ index == INDEX } itemIndex={index} onItemClick={this.handleItemClick}>{node.props.children}</Item>;
             })
         }
         return itemNodes;
@@ -79,17 +81,4 @@ const Menu = React.createClass ({
 
 export default Menu;
 
-Menu.Item = React.createClass({
-    handleClick(e){
-        this.props.onItemClick(this.props.itemIndex);
-    },
-    render() {
-        let isActive = this.props.selected ? 'active' : '';
-        return (
-            <div className={'_item ' + isActive} onClick={this.handleClick}>
-                {this.props.children}
-            </div>
-        );
-    }
-});
-
+Menu.Item = Item;

@@ -42,7 +42,7 @@ export default class Tab extends React.Component {
 
 Tab.defaultProps = {
     selectedIndex: 0,
-    position: 'top',
+    position: 'bottom',
 }
 
 Tab.Item = Item;

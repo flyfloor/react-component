@@ -46,10 +46,34 @@ export default class TabDemo extends React.Component {
                 </li>
                 <li>
                     <h4>tabs with position</h4>
-                    <Tab items={items} position='left'/>
-                    <Tab items={items} position='right'/>
-                    <Tab items={items} position='top'/>
-                    <Tab items={items} position='bottom'/>
+                    <ol>
+                        <li>
+                            <h5>bottom active(default)</h5>
+                            <br/>
+                            <Tab items={items} position='bottom'/>
+                            <br/>
+                        </li>
+                        <li>
+                            <h5>top active</h5>
+                            <br/>
+                            <Tab items={items} position='top'/>
+                            <br/>
+                        </li>
+                        <li>
+                            <h5>left active</h5>
+                            <br/>
+                            <div style={{'width':'200px'}}>
+                                <Tab items={items} position='left'/>
+                            </div>
+                        </li>
+                        <li>
+                            <h5>right active</h5>
+                            <br/>
+                            <div style={{'width':'200px'}}>
+                                <Tab items={items} position='right'/>
+                            </div>
+                        </li>
+                    </ol>
                 </li>
             </ol>
         );

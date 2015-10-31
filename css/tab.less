@@ -1,26 +1,34 @@
 @import url('meta');
 @import url('share');
 
+@border: 1px solid transparent;
+.layout_h {
+    float: left;
+    display: inline-block;
+}
+
 @{NS}.tab {
     .clearfix;
-    &.top ._item {
-        float: left;
-        display: inline-block;
-        border-top: 1px solid transparent; 
+    &.top {
+        ._item {
+            .layout_h;
+            border-top: @border; 
+        }
     }
 
-    &.bottom ._item {
-        border-bottom: 1px solid transparent;
-        float: left;
-        display: inline-block;
+    &.bottom {
+        ._item {
+            .layout_h;
+            border-bottom: @border;
+        }
     }
 
     &.left ._item {
-        border-right: 1px solid transparent;
+        border-right: @border;
     }
 
     &.right ._item {
-        border-left: 1px solid transparent;
+        border-left: @border;
     }
 
     ._item {

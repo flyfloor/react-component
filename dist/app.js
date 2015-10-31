@@ -4201,7 +4201,7 @@
 
 	Tab.defaultProps = {
 	    selectedIndex: 0,
-	    position: 'top'
+	    position: 'bottom'
 	};
 
 	Tab.Item = _ItemJsx2['default'];
@@ -4332,10 +4332,64 @@
 	                        null,
 	                        'tabs with position'
 	                    ),
-	                    React.createElement(_indexJs.Tab, { items: items, position: 'left' }),
-	                    React.createElement(_indexJs.Tab, { items: items, position: 'right' }),
-	                    React.createElement(_indexJs.Tab, { items: items, position: 'top' }),
-	                    React.createElement(_indexJs.Tab, { items: items, position: 'bottom' })
+	                    React.createElement(
+	                        'ol',
+	                        null,
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                'h5',
+	                                null,
+	                                'bottom active(default)'
+	                            ),
+	                            React.createElement('br', null),
+	                            React.createElement(_indexJs.Tab, { items: items, position: 'bottom' }),
+	                            React.createElement('br', null)
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                'h5',
+	                                null,
+	                                'top active'
+	                            ),
+	                            React.createElement('br', null),
+	                            React.createElement(_indexJs.Tab, { items: items, position: 'top' }),
+	                            React.createElement('br', null)
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                'h5',
+	                                null,
+	                                'left active'
+	                            ),
+	                            React.createElement('br', null),
+	                            React.createElement(
+	                                'div',
+	                                { style: { 'width': '200px' } },
+	                                React.createElement(_indexJs.Tab, { items: items, position: 'left' })
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                'h5',
+	                                null,
+	                                'right active'
+	                            ),
+	                            React.createElement('br', null),
+	                            React.createElement(
+	                                'div',
+	                                { style: { 'width': '200px' } },
+	                                React.createElement(_indexJs.Tab, { items: items, position: 'right' })
+	                            )
+	                        )
+	                    )
 	                )
 	            );
 	        }
@@ -4410,7 +4464,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.tab {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.tab.top ._item {\n  float: left;\n  display: inline-block;\n  border-top: 1px solid transparent;\n}\n.ui.tab.bottom ._item {\n  border-bottom: 1px solid transparent;\n  float: left;\n  display: inline-block;\n}\n.ui.tab.left ._item {\n  border-right: 1px solid transparent;\n}\n.ui.tab.right ._item {\n  border-left: 1px solid transparent;\n}\n.ui.tab ._item {\n  padding: 5px 10px;\n}\n.ui.tab ._item.active {\n  border-color: #cccccc;\n}\n", ""]);
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.layout_h {\n  float: left;\n  display: inline-block;\n}\n.ui.tab {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.tab.top ._item {\n  float: left;\n  display: inline-block;\n  border-top: 1px solid transparent;\n}\n.ui.tab.bottom ._item {\n  float: left;\n  display: inline-block;\n  border-bottom: 1px solid transparent;\n}\n.ui.tab.left ._item {\n  border-right: 1px solid transparent;\n}\n.ui.tab.right ._item {\n  border-left: 1px solid transparent;\n}\n.ui.tab ._item {\n  padding: 5px 10px;\n}\n.ui.tab ._item.active {\n  border-color: #cccccc;\n}\n", ""]);
 
 	// exports
 

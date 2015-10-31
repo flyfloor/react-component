@@ -4,7 +4,7 @@ export default class Radio extends React.Component {
     }
     
     checkedChange(e){
-        if(this.props.onChange) this.props.onChange(this.props.storeValue);
+        if(this.props.onChange) this.props.onChange(e, this.props.storeValue);
     }
 
     render() {

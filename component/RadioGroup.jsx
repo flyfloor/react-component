@@ -9,7 +9,7 @@ export default class RadioGroup extends React.Component {
         }
     }
 
-    toggleChange(storeValue){
+    toggleChange(e, storeValue){
         this.setState({
             value: storeValue, 
         }, () => {

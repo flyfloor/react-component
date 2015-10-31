@@ -97,7 +97,7 @@
 	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 	// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
 	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
-	ReactDOM.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
+	// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
 	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
 	// ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
 	// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
@@ -3592,7 +3592,7 @@
 	            var onNode = React.createElement(
 	                'a',
 	                { href: 'javascript:;' },
-	                'slide up'
+	                'close menu'
 	            );
 
 	            return React.createElement(
@@ -3618,7 +3618,7 @@
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
-	                            'slide down'
+	                            'show menu'
 	                        )
 	                    )
 	                ),
@@ -3636,7 +3636,7 @@
 	                        React.createElement(
 	                            'a',
 	                            { href: 'javascript:;' },
-	                            'slide down'
+	                            'show menu'
 	                        )
 	                    )
 	                )

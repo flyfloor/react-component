@@ -16,7 +16,7 @@ import TabDemo from "./demo/TabDemo.jsx";
 // ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 // ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
 // ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
-ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
+// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
 // ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
 // ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
 // ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));

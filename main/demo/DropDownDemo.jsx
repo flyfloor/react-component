@@ -40,7 +40,7 @@ export default class DropDownDemo extends React.Component {
 
     render() {
         return (
-            <ol>
+            <ol style={{'width': '300'}}>
                 <li>
                     <h4>drop down</h4>
                     <p>you selected option value is {this.state.value}</p>

@@ -1,10 +1,11 @@
 @import url('meta.less');
 @import url('share.less');
 
-@{NS}.dropdown {
-    width: 200px;
-    position: relative;
+@border_radus: 3px;
+@line_height: 25px;
 
+@{NS}.dropdown {
+    position: relative;
     ul {
         padding: 0;
         li {
@@ -24,8 +25,8 @@
         cursor: pointer;
         color: @black_c;
         padding: 0 8px;
-        border-radius: 3px;
-        line-height: 25px;
+        border-radius: @border_radus;
+        line-height: @line_height;
         border: 1px solid @gray_b;
         margin-bottom: 2px;  
     }
@@ -34,7 +35,7 @@
         width: 100%;
         z-index: 100;
         background: @white;
-        border-radius: 3px;
+        border-radius: @border_radus;
         border: 1px solid @gray_b;
     }
 
@@ -44,14 +45,14 @@
     ._searchbar {
         width: 100%;
         border: 1px solid @gray_b;
-        line-height: 20px;
-        border-radius: 3px;
+        line-height: @line_height;
+        border-radius: @border_radus;
     }
 
     ._multi {
         border: 1px solid #ccc;
-        border-radius: 3px;
-        line-height: 25px;
+        border-radius: @border_radus;
+        line-height: @line_height;
         width: 100%;
         padding: 0 5px;
         ._input {
@@ -68,7 +69,7 @@
             margin-right: 3px;
             background: @gray_b;
             color: @black;
-            border-radius: 3px;
+            border-radius: @border_radus;
             font-size: 14px;
             padding: 0 3px;
             a {

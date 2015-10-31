@@ -1,6 +1,9 @@
 @import url('meta.less');
 @import url('share.less');
 
+@short: 6px;
+@long: 8px;
+
 @{NS}.popup {
 
     ._wrap {
@@ -30,17 +33,17 @@
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 8px 6px;
+            border-width: @long @short;
             border-color: @gray_b transparent transparent transparent;
         }
 
         &._left ._arrow {
-            border-width: 6px 8px;
+            border-width: @short @long;
             border-color: transparent transparent transparent @gray_b;
         }
 
         &._right ._arrow {
-            border-width: 6px 8px;
+            border-width: @short @long;
             border-color: transparent @gray_b transparent transparent;
         }
 

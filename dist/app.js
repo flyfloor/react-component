@@ -92,16 +92,21 @@
 
 	var _demoTabDemoJsx2 = _interopRequireDefault(_demoTabDemoJsx);
 
+	var _demoPinDemoJsx = __webpack_require__(104);
+
+	var _demoPinDemoJsx2 = _interopRequireDefault(_demoPinDemoJsx);
+
 	// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 	// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
 	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
 	// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
 	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
 	// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
-	ReactDOM.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
-	ReactDOM.render(React.createElement(_demoTooltipDemoJsx2["default"], null), document.getElementById('tooltip'));
+	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
+	// ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
 	// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
 	// ReactDOM.render(<TabDemo/>, document.getElementById('tab'));
+	ReactDOM.render(React.createElement(_demoPinDemoJsx2["default"], null), document.getElementById('pin'));
 
 /***/ },
 /* 1 */,
@@ -1020,6 +1025,10 @@
 
 	var _componentTabJsx2 = _interopRequireDefault(_componentTabJsx);
 
+	var _componentPinJsx = __webpack_require__(105);
+
+	var _componentPinJsx2 = _interopRequireDefault(_componentPinJsx);
+
 	exports.CheckBox = _componentCheckBoxJsx2['default'];
 	exports.Radio = _componentRadioJsx2['default'];
 	exports.RadioGroup = _componentRadioGroupJsx2['default'];
@@ -1029,6 +1038,7 @@
 	exports.ConfirmBox = _componentConfirmBoxJsx2['default'];
 	exports.Tooltip = _componentTooltipJsx2['default'];
 	exports.Tab = _componentTabJsx2['default'];
+	exports.Pin = _componentPinJsx2['default'];
 
 /***/ },
 /* 39 */
@@ -2304,7 +2314,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.dropdown {\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown ul li ._item {\n  padding: 3px 16px;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 25px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
+	exports.push([module.id, ".ui.dropdown {\n  position: relative;\n}\n.ui.dropdown ul {\n  padding: 0;\n}\n.ui.dropdown ul li {\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.dropdown ul li ._item {\n  padding: 3px 16px;\n}\n.ui.dropdown.full {\n  width: 100%;\n}\n.ui.dropdown ._label {\n  cursor: pointer;\n  color: #555555;\n  padding: 0 8px;\n  border-radius: 3px;\n  line-height: 25px;\n  border: 1px solid #cccccc;\n  margin-bottom: 2px;\n}\n.ui.dropdown ._list {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.dropdown ._search {\n  padding: 5px;\n}\n.ui.dropdown ._searchbar {\n  width: 100%;\n  border: 1px solid #cccccc;\n  line-height: 25px;\n  border-radius: 3px;\n}\n.ui.dropdown ._multi {\n  border: 1px solid #ccc;\n  border-radius: 3px;\n  line-height: 25px;\n  width: 100%;\n  padding: 0 5px;\n}\n.ui.dropdown ._multi ._input {\n  border: none;\n  display: inline;\n  white-space: pre;\n  max-width: 100%;\n}\n.ui.dropdown ._multi ._placeHolder {\n  color: #999999;\n}\n.ui.dropdown ._multi ._tag {\n  cursor: pointer;\n  margin-right: 3px;\n  background: #cccccc;\n  color: #000000;\n  border-radius: 3px;\n  font-size: 14px;\n  padding: 0 3px;\n}\n.ui.dropdown ._multi ._tag a {\n  color: #000000;\n}\n.ui.dropdown ._multi ._tag ._text {\n  padding-right: 3px;\n}\n", ""]);
 
 	// exports
 
@@ -2629,7 +2639,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._wrap {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ._wrap ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
+	exports.push([module.id, ".ui.menu ul {\n  padding: 0;\n}\n.ui.menu ul li {\n  padding: 3px 16px;\n  cursor: pointer;\n  list-style-type: none;\n}\n.ui.menu.full {\n  width: 100%;\n}\n.ui.menu ._wrap {\n  width: 200px;\n  position: relative;\n}\n.ui.menu ._wrap ._content {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n  background: #ffffff;\n  border-radius: 3px;\n  border: 1px solid #cccccc;\n}\n.ui.menu ._item {\n  padding: 3px 16px;\n  cursor: pointer;\n}\n.ui.menu ._item.active {\n  background: #cccccc;\n}\n", ""]);
 
 	// exports
 
@@ -2763,7 +2773,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._arrow {\n  content: '';\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  border-width: 8px 6px;\n  border-color: #cccccc transparent transparent transparent;\n}\n.ui.popup ._wrap._left ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent transparent transparent #cccccc;\n}\n.ui.popup ._wrap._right ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent #cccccc transparent transparent;\n}\n.ui.popup ._wrap._bottom ._arrow {\n  border-color: transparent transparent #cccccc transparent;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
+	exports.push([module.id, ".ui.popup ._wrap {\n  position: relative;\n  overflow: visible;\n}\n.ui.popup ._wrap ._content {\n  position: absolute;\n  z-index: 100;\n  max-width: 300px;\n  min-width: 150px;\n  background: #ffffff;\n  border-radius: 3px;\n  text-align: center;\n  padding: 10px;\n  border: 1px solid #cccccc;\n}\n.ui.popup ._wrap ._content._hide {\n  visibility: hidden;\n}\n.ui.popup ._wrap ._arrow {\n  content: '';\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  border-width: 8px 6px;\n  border-color: #cccccc transparent transparent transparent;\n}\n.ui.popup ._wrap._left ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent transparent transparent #cccccc;\n}\n.ui.popup ._wrap._right ._arrow {\n  border-width: 6px 8px;\n  border-color: transparent #cccccc transparent transparent;\n}\n.ui.popup ._wrap._bottom ._arrow {\n  border-color: transparent transparent #cccccc transparent;\n}\n.ui.confirm-box ._action {\n  margin-top: 10px;\n  font-size: 80%;\n  text-align: center;\n}\n.ui.confirm-box ._action > a:first-child {\n  margin-right: 5px;\n}\n", ""]);
 
 	// exports
 
@@ -3090,7 +3100,7 @@
 
 
 	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.modal ._body {\n  z-index: 1000;\n  background: #ffffff;\n  position: relative;\n  min-width: 400px;\n  max-width: 600px;\n  position: fixed;\n  top: 25%;\n  left: 0;\n  right: 0;\n  margin: auto;\n  border: 1px solid #cccccc;\n  border-radius: 3px;\n}\n.ui.modal ._body ._title {\n  padding: 10px;\n  font-size: 120%;\n}\n.ui.modal ._body ._content {\n  padding: 10px;\n}\n.ui.modal ._body ._content ._action {\n  font-size: 90%;\n  overflow: hidden;\n}\n.ui.modal ._body ._content ._action ._wrap {\n  float: right;\n}\n.ui.modal ._body ._content ._action a + a {\n  margin-left: 5px;\n}\n.ui.modal ._body ._close {\n  cursor: pointer;\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n.ui.modal ._overlay {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: rgba(0, 0, 0, 0.8);\n}\n", ""]);
+	exports.push([module.id, ".ui.modal ._body {\n  z-index: 1000;\n  background: #ffffff;\n  position: relative;\n  min-width: 400px;\n  max-width: 600px;\n  position: fixed;\n  top: 25%;\n  left: 0;\n  right: 0;\n  margin: auto;\n  border: 1px solid #cccccc;\n  border-radius: 3px;\n}\n.ui.modal ._body ._title {\n  padding: 10px;\n  font-size: 120%;\n}\n.ui.modal ._body ._content {\n  padding: 10px;\n}\n.ui.modal ._body ._content ._action {\n  font-size: 90%;\n  overflow: hidden;\n}\n.ui.modal ._body ._content ._action ._wrap {\n  float: right;\n}\n.ui.modal ._body ._content ._action a + a {\n  margin-left: 5px;\n}\n.ui.modal ._body ._close {\n  cursor: pointer;\n  position: absolute;\n  right: 5px;\n  top: 5px;\n}\n.ui.modal ._overlay {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: rgba(0, 0, 0, 0.8);\n}\n", ""]);
 
 	// exports
 
@@ -4465,6 +4475,303 @@
 
 	// module
 	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.layout_h {\n  float: left;\n  display: inline-block;\n}\n.ui.tab {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.tab.top ._item {\n  float: left;\n  display: inline-block;\n  border-top: 1px solid transparent;\n}\n.ui.tab.bottom ._item {\n  float: left;\n  display: inline-block;\n  border-bottom: 1px solid transparent;\n}\n.ui.tab.left ._item {\n  border-right: 1px solid transparent;\n}\n.ui.tab.right ._item {\n  border-left: 1px solid transparent;\n}\n.ui.tab ._item {\n  padding: 5px 10px;\n}\n.ui.tab ._item.active {\n  border-color: #cccccc;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(9)['default'];
+
+	var _inherits = __webpack_require__(23)['default'];
+
+	var _createClass = __webpack_require__(34)['default'];
+
+	var _classCallCheck = __webpack_require__(37)['default'];
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _pindemoLess = __webpack_require__(109);
+
+	var _pindemoLess2 = _interopRequireDefault(_pindemoLess);
+
+	var _indexJs = __webpack_require__(38);
+
+	var PinDemo = (function (_React$Component) {
+	    _inherits(PinDemo, _React$Component);
+
+	    function PinDemo() {
+	        _classCallCheck(this, PinDemo);
+
+	        _get(Object.getPrototypeOf(PinDemo.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(PinDemo, [{
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'div',
+	                { style: { 'height': '1500' }, className: 'pin-demo' },
+	                React.createElement(
+	                    'ol',
+	                    null,
+	                    React.createElement(
+	                        'li',
+	                        null,
+	                        React.createElement(
+	                            'h4',
+	                            null,
+	                            'pin something'
+	                        ),
+	                        React.createElement(
+	                            _indexJs.Pin,
+	                            null,
+	                            React.createElement(
+	                                'div',
+	                                { className: 'pin-card' },
+	                                React.createElement(
+	                                    'h4',
+	                                    null,
+	                                    'title'
+	                                ),
+	                                React.createElement(
+	                                    'p',
+	                                    null,
+	                                    'pin at top'
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'li',
+	                        null,
+	                        React.createElement(
+	                            'h4',
+	                            null,
+	                            'pin with offset'
+	                        ),
+	                        React.createElement(
+	                            _indexJs.Pin,
+	                            { top: '200' },
+	                            React.createElement(
+	                                'div',
+	                                { className: 'pin-card' },
+	                                React.createElement(
+	                                    'h4',
+	                                    null,
+	                                    'title'
+	                                ),
+	                                React.createElement(
+	                                    'p',
+	                                    null,
+	                                    'pin at position top 200'
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return PinDemo;
+	})(React.Component);
+
+	exports['default'] = PinDemo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssPinLess = __webpack_require__(107);
+
+	var _cssPinLess2 = _interopRequireDefault(_cssPinLess);
+
+	var _mixinScrollMixin = __webpack_require__(106);
+
+	var _mixinScrollMixin2 = _interopRequireDefault(_mixinScrollMixin);
+
+	var Pin = React.createClass({
+	    displayName: 'Pin',
+
+	    mixins: [_mixinScrollMixin2['default']],
+	    getInitialState: function getInitialState() {
+	        return {
+	            fixed: false,
+	            baseTop: 0
+	        };
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        this.setState({
+	            baseTop: this.node2Top()
+	        });
+	    },
+
+	    node2Top: function node2Top() {
+	        var pinNode = ReactDOM.findDOMNode(this.refs.pinNode);
+	        return pinNode.offsetTop;
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            top: 0
+	        };
+	    },
+
+	    onScroll: function onScroll(e) {
+	        var _windowScrollOffset = this.windowScrollOffset();
+
+	        var _top = _windowScrollOffset._top;
+
+	        this.setState({
+	            fixed: _top >= this.state.baseTop
+	        });
+	    },
+
+	    render: function render() {
+	        var stat = this.state.fixed ? 'fixed' : '';
+	        return React.createElement(
+	            'div',
+	            { className: 'ui pin ' + stat, style: { 'top': this.props.top }, ref: 'pinNode' },
+	            this.props.children
+	        );
+	    }
+	});
+
+	exports['default'] = Pin;
+	module.exports = exports['default'];
+
+/***/ },
+/* 106 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var ScrollMixin = {
+	    componentDidMount: function componentDidMount() {
+	        document.addEventListener('scroll', this.onScroll);
+	    },
+
+	    componentWillUnmount: function componentWillUnmount() {
+	        document.removeEventListener('scroll', this.onScroll);
+	    },
+
+	    windowScrollOffset: function windowScrollOffset() {
+	        var doc = document.documentElement;
+	        var left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+	        var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+	        return {
+	            _left: left,
+	            _top: top
+	        };
+	    }
+
+	};
+
+	exports['default'] = ScrollMixin;
+	module.exports = exports['default'];
+
+/***/ },
+/* 107 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(108);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./pin.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./pin.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".ui.pin.fixed {\n  position: fixed;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(110);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pindemo.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pindemo.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".pin-demo ol .pin-card {\n  width: 200px;\n  padding: 0 30px;\n  border: 1px solid #ccc;\n  background: #f3f4f5;\n  padding: 10px;\n  margin-right: 30px;\n}\n", ""]);
 
 	// exports
 

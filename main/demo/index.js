@@ -9,6 +9,7 @@ import ConfirmBox from '../../component/ConfirmBox.jsx';
 import Tooltip from '../../component/Tooltip.jsx';
 import Modal from '../../component/Modal.jsx';
 import Tab from '../../component/Tab.jsx';
+import Pin from '../../component/Pin.jsx';
 
 export {
     CheckBox,
@@ -20,4 +21,5 @@ export {
     ConfirmBox,
     Tooltip,
     Tab,
+    Pin,
 }

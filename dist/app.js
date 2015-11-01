@@ -4651,9 +4651,9 @@
 	    value: true
 	});
 
-	var _pindemoLess = __webpack_require__(103);
+	var _pin_demoLess = __webpack_require__(109);
 
-	var _pindemoLess2 = _interopRequireDefault(_pindemoLess);
+	var _pin_demoLess2 = _interopRequireDefault(_pin_demoLess);
 
 	var _indexJs = __webpack_require__(38);
 
@@ -4688,7 +4688,7 @@
 	                            null,
 	                            React.createElement(
 	                                'div',
-	                                { className: 'pin-card' },
+	                                { className: 'card' },
 	                                React.createElement(
 	                                    'h4',
 	                                    null,
@@ -4715,7 +4715,7 @@
 	                            { top: '200' },
 	                            React.createElement(
 	                                'div',
-	                                { className: 'pin-card' },
+	                                { className: 'card' },
 	                                React.createElement(
 	                                    'h4',
 	                                    null,
@@ -4741,46 +4741,8 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 103 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(104);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pindemo.less", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pindemo.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 104 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".pin-demo ol .pin-card {\n  width: 200px;\n  padding: 0 30px;\n  border: 1px solid #ccc;\n  background: #f3f4f5;\n  padding: 10px;\n  margin-right: 30px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
+/* 103 */,
+/* 104 */,
 /* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -4794,9 +4756,15 @@
 
 	var _classCallCheck = __webpack_require__(37)['default'];
 
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
+
+	var _draggable_demoLess = __webpack_require__(111);
+
+	var _draggable_demoLess2 = _interopRequireDefault(_draggable_demoLess);
 
 	var _indexJs = __webpack_require__(38);
 
@@ -4813,20 +4781,64 @@
 	        key: 'render',
 	        value: function render() {
 	            return React.createElement(
-	                _indexJs.Draggable,
-	                null,
+	                'div',
+	                { className: 'draggable-demo' },
 	                React.createElement(
-	                    'div',
-	                    { style: { 'width': '300', 'padding': '10', 'border': '1px solid #222', 'background': '#fff' } },
+	                    'ol',
+	                    null,
 	                    React.createElement(
-	                        'h4',
+	                        'li',
 	                        null,
-	                        'title'
+	                        React.createElement(
+	                            'h4',
+	                            null,
+	                            'box can drag'
+	                        ),
+	                        React.createElement(
+	                            _indexJs.Draggable,
+	                            null,
+	                            React.createElement(
+	                                'div',
+	                                { className: 'card' },
+	                                React.createElement(
+	                                    'h4',
+	                                    null,
+	                                    'title'
+	                                ),
+	                                React.createElement(
+	                                    'p',
+	                                    null,
+	                                    'content contefjaiwefjiweajojilsjfl'
+	                                )
+	                            )
+	                        )
 	                    ),
 	                    React.createElement(
-	                        'p',
+	                        'li',
 	                        null,
-	                        'content contefjaiwefjiweajojilsjfl'
+	                        React.createElement(
+	                            'h4',
+	                            null,
+	                            'another drag box'
+	                        ),
+	                        React.createElement(
+	                            _indexJs.Draggable,
+	                            null,
+	                            React.createElement(
+	                                'div',
+	                                { className: 'card' },
+	                                React.createElement(
+	                                    'h4',
+	                                    null,
+	                                    'xxxxx'
+	                                ),
+	                                React.createElement(
+	                                    'p',
+	                                    null,
+	                                    'content afawfawfawfwaefawf'
+	                                )
+	                            )
+	                        )
 	                    )
 	                )
 	            );
@@ -4958,6 +4970,86 @@
 
 	// module
 	exports.push([module.id, ".ui.draggable {\n  cursor: move;\n  z-index: 2;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(110);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pin_demo.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pin_demo.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".pin-demo .card {\n  width: 200px;\n  border: 1px solid #ccc;\n  background: #f3f4f5;\n  padding: 10px;\n  margin-right: 30px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(112);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./draggable_demo.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./draggable_demo.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".draggable-demo .card {\n  width: 200px;\n  padding: 10px;\n  border: 1px solid #222;\n  background: #f3f4f5;\n  margin-right: 30px;\n}\n", ""]);
 
 	// exports
 

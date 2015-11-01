@@ -1,14 +1,32 @@
+import css from './draggable_demo.less'
+
 import {Draggable} from './index.js';
 
 export default class DraggableDemo extends React.Component {
     render() {
         return (
-            <Draggable>
-                <div style={{'width': '300', 'padding': '10', 'border': '1px solid #222', 'background': '#fff'}}>
-                    <h4>title</h4>
-                    <p>content contefjaiwefjiweajojilsjfl</p>
-                </div>
-            </Draggable>
+            <div className="draggable-demo">
+                <ol>
+                    <li>
+                        <h4>box can drag</h4>
+                        <Draggable>
+                            <div className='card'>
+                                <h4>title</h4>
+                                <p>content contefjaiwefjiweajojilsjfl</p>
+                            </div>
+                        </Draggable>
+                    </li>
+                    <li>
+                        <h4>another drag box</h4>
+                        <Draggable>
+                            <div className='card'>
+                                <h4>xxxxx</h4>
+                                <p>content afawfawfawfwaefawf</p>
+                            </div>
+                        </Draggable>
+                    </li>
+                </ol>
+            </div>
         );
     }
 }

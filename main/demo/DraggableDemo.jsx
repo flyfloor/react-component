@@ -1,5 +1,3 @@
-import css from './draggable_demo.less'
-
 import {Draggable} from './index.js';
 
 export default class DraggableDemo extends React.Component {

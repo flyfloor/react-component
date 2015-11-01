@@ -4756,15 +4756,9 @@
 
 	var _classCallCheck = __webpack_require__(37)['default'];
 
-	var _interopRequireDefault = __webpack_require__(3)['default'];
-
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-
-	var _draggable_demoLess = __webpack_require__(111);
-
-	var _draggable_demoLess2 = _interopRequireDefault(_draggable_demoLess);
 
 	var _indexJs = __webpack_require__(38);
 
@@ -4969,7 +4963,7 @@
 
 
 	// module
-	exports.push([module.id, ".ui.draggable {\n  cursor: move;\n  z-index: 2;\n}\n", ""]);
+	exports.push([module.id, ".ui.draggable {\n  cursor: move;\n  width: 200px;\n  padding: 10px;\n  border: 1px solid #222;\n  background: #f3f4f5;\n}\n", ""]);
 
 	// exports
 
@@ -5010,46 +5004,6 @@
 
 	// module
 	exports.push([module.id, ".pin-demo .card {\n  width: 200px;\n  border: 1px solid #ccc;\n  background: #f3f4f5;\n  padding: 10px;\n  margin-right: 30px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 111 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(112);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./draggable_demo.less", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./draggable_demo.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 112 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".draggable-demo .card {\n  width: 200px;\n  padding: 10px;\n  border: 1px solid #222;\n  background: #f3f4f5;\n  margin-right: 30px;\n}\n", ""]);
 
 	// exports
 

@@ -4882,7 +4882,6 @@
 	            originX: e.pageX,
 	            originY: e.pageY
 	        });
-	        console.log('begin');
 	    },
 
 	    handleDragging: function handleDragging(e) {
@@ -4909,7 +4908,6 @@
 	        this.setState({
 	            dragging: false
 	        });
-	        console.log('stop');
 	    },
 
 	    render: function render() {

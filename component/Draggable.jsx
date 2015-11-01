@@ -25,7 +25,6 @@ const Draggable = React.createClass({
             originX: e.pageX,
             originY: e.pageY
         });
-        console.log('begin')
     },
 
     handleDragging(e){
@@ -52,7 +51,6 @@ const Draggable = React.createClass({
         this.setState({
             dragging: false,
         });
-        console.log('stop')
     },
 
     render() {

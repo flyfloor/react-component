@@ -1,4 +1,3 @@
-
 import CheckBox from '../../component/CheckBox.jsx';
 import Radio from '../../component/Radio.jsx';
 import RadioGroup from '../../component/RadioGroup.jsx';
@@ -10,6 +9,7 @@ import Tooltip from '../../component/Tooltip.jsx';
 import Modal from '../../component/Modal.jsx';
 import Tab from '../../component/Tab.jsx';
 import Pin from '../../component/Pin.jsx';
+import Draggable from '../../component/Draggable.jsx';
 
 export {
     CheckBox,
@@ -22,4 +22,5 @@ export {
     Tooltip,
     Tab,
     Pin,
+    Draggable,
 }

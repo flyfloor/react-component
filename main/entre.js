@@ -11,6 +11,7 @@ import TooltipDemo from "./demo/TooltipDemo.jsx";
 import ModalDemo from "./demo/ModalDemo.jsx";
 import TabDemo from "./demo/TabDemo.jsx";
 import PinDemo from "./demo/PinDemo.jsx";
+import DraggableDemo from "./demo/DraggableDemo.jsx";
 
 // ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 // ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
@@ -23,3 +24,4 @@ import PinDemo from "./demo/PinDemo.jsx";
 // ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
 // ReactDOM.render(<TabDemo/>, document.getElementById('tab'));
 // ReactDOM.render(<PinDemo/>, document.getElementById('pin'));
+ReactDOM.render(<DraggableDemo/>, document.getElementById('draggable'));

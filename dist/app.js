@@ -56,45 +56,49 @@
 
 	var _demoCheckBoxDemoJsx2 = _interopRequireDefault(_demoCheckBoxDemoJsx);
 
-	var _demoRadioDemoJsx = __webpack_require__(85);
+	var _demoRadioDemoJsx = __webpack_require__(93);
 
 	var _demoRadioDemoJsx2 = _interopRequireDefault(_demoRadioDemoJsx);
 
-	var _demoRadioGroupDemoJsx = __webpack_require__(86);
+	var _demoRadioGroupDemoJsx = __webpack_require__(94);
 
 	var _demoRadioGroupDemoJsx2 = _interopRequireDefault(_demoRadioGroupDemoJsx);
 
-	var _demoCheckBoxGroupDemoJsx = __webpack_require__(87);
+	var _demoCheckBoxGroupDemoJsx = __webpack_require__(95);
 
 	var _demoCheckBoxGroupDemoJsx2 = _interopRequireDefault(_demoCheckBoxGroupDemoJsx);
 
-	var _demoDropDownDemoJsx = __webpack_require__(88);
+	var _demoDropDownDemoJsx = __webpack_require__(96);
 
 	var _demoDropDownDemoJsx2 = _interopRequireDefault(_demoDropDownDemoJsx);
 
-	var _demoMenuDemoJsx = __webpack_require__(89);
+	var _demoMenuDemoJsx = __webpack_require__(97);
 
 	var _demoMenuDemoJsx2 = _interopRequireDefault(_demoMenuDemoJsx);
 
-	var _demoConfirmBoxDemoJsx = __webpack_require__(90);
+	var _demoConfirmBoxDemoJsx = __webpack_require__(98);
 
 	var _demoConfirmBoxDemoJsx2 = _interopRequireDefault(_demoConfirmBoxDemoJsx);
 
-	var _demoTooltipDemoJsx = __webpack_require__(91);
+	var _demoTooltipDemoJsx = __webpack_require__(99);
 
 	var _demoTooltipDemoJsx2 = _interopRequireDefault(_demoTooltipDemoJsx);
 
-	var _demoModalDemoJsx = __webpack_require__(92);
+	var _demoModalDemoJsx = __webpack_require__(100);
 
 	var _demoModalDemoJsx2 = _interopRequireDefault(_demoModalDemoJsx);
 
-	var _demoTabDemoJsx = __webpack_require__(96);
+	var _demoTabDemoJsx = __webpack_require__(101);
 
 	var _demoTabDemoJsx2 = _interopRequireDefault(_demoTabDemoJsx);
 
-	var _demoPinDemoJsx = __webpack_require__(104);
+	var _demoPinDemoJsx = __webpack_require__(102);
 
 	var _demoPinDemoJsx2 = _interopRequireDefault(_demoPinDemoJsx);
+
+	var _demoDraggableDemoJsx = __webpack_require__(105);
+
+	var _demoDraggableDemoJsx2 = _interopRequireDefault(_demoDraggableDemoJsx);
 
 	// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 	// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
@@ -107,6 +111,7 @@
 	// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
 	// ReactDOM.render(<TabDemo/>, document.getElementById('tab'));
 	// ReactDOM.render(<PinDemo/>, document.getElementById('pin'));
+	ReactDOM.render(React.createElement(_demoDraggableDemoJsx2["default"], null), document.getElementById('draggable'));
 
 /***/ },
 /* 1 */,
@@ -1009,25 +1014,29 @@
 
 	var _componentMenuJsx2 = _interopRequireDefault(_componentMenuJsx);
 
-	var _componentConfirmBoxJsx = __webpack_require__(77);
+	var _componentConfirmBoxJsx = __webpack_require__(78);
 
 	var _componentConfirmBoxJsx2 = _interopRequireDefault(_componentConfirmBoxJsx);
 
-	var _componentTooltipJsx = __webpack_require__(81);
+	var _componentTooltipJsx = __webpack_require__(82);
 
 	var _componentTooltipJsx2 = _interopRequireDefault(_componentTooltipJsx);
 
-	var _componentModalJsx = __webpack_require__(82);
+	var _componentModalJsx = __webpack_require__(83);
 
 	var _componentModalJsx2 = _interopRequireDefault(_componentModalJsx);
 
-	var _componentTabJsx = __webpack_require__(95);
+	var _componentTabJsx = __webpack_require__(86);
 
 	var _componentTabJsx2 = _interopRequireDefault(_componentTabJsx);
 
-	var _componentPinJsx = __webpack_require__(105);
+	var _componentPinJsx = __webpack_require__(89);
 
 	var _componentPinJsx2 = _interopRequireDefault(_componentPinJsx);
+
+	var _componentDraggableJsx = __webpack_require__(106);
+
+	var _componentDraggableJsx2 = _interopRequireDefault(_componentDraggableJsx);
 
 	exports.CheckBox = _componentCheckBoxJsx2['default'];
 	exports.Radio = _componentRadioJsx2['default'];
@@ -1039,6 +1048,7 @@
 	exports.Tooltip = _componentTooltipJsx2['default'];
 	exports.Tab = _componentTabJsx2['default'];
 	exports.Pin = _componentPinJsx2['default'];
+	exports.Draggable = _componentDraggableJsx2['default'];
 
 /***/ },
 /* 39 */
@@ -2492,7 +2502,7 @@
 
 	var _cssMenuLess2 = _interopRequireDefault(_cssMenuLess);
 
-	var _ItemJsx = __webpack_require__(97);
+	var _ItemJsx = __webpack_require__(77);
 
 	var _ItemJsx2 = _interopRequireDefault(_ItemJsx);
 
@@ -2646,6 +2656,34 @@
 
 /***/ },
 /* 77 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var Item = React.createClass({
+	    displayName: 'Item',
+
+	    handleClick: function handleClick(e) {
+	        this.props.onItemClick(this.props.itemIndex);
+	    },
+	    render: function render() {
+	        var isActive = this.props.selected ? 'active' : '';
+	        return React.createElement(
+	            'div',
+	            { className: '_item ' + isActive, onClick: this.handleClick },
+	            this.props.children
+	        );
+	    }
+	});
+
+	exports['default'] = Item;
+	module.exports = exports['default'];
+
+/***/ },
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2656,7 +2694,7 @@
 	    value: true
 	});
 
-	var _cssPopupLess = __webpack_require__(78);
+	var _cssPopupLess = __webpack_require__(79);
 
 	var _cssPopupLess2 = _interopRequireDefault(_cssPopupLess);
 
@@ -2664,7 +2702,7 @@
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
-	var _mixinPopUpMixin = __webpack_require__(80);
+	var _mixinPopUpMixin = __webpack_require__(81);
 
 	var _mixinPopUpMixin2 = _interopRequireDefault(_mixinPopUpMixin);
 
@@ -2739,13 +2777,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(79);
+	var content = __webpack_require__(80);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -2765,7 +2803,7 @@
 	}
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -2779,7 +2817,7 @@
 
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2884,7 +2922,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2895,7 +2933,7 @@
 	    value: true
 	});
 
-	var _cssPopupLess = __webpack_require__(78);
+	var _cssPopupLess = __webpack_require__(79);
 
 	var _cssPopupLess2 = _interopRequireDefault(_cssPopupLess);
 
@@ -2903,7 +2941,7 @@
 
 	var _mixinDocumentClickMixin2 = _interopRequireDefault(_mixinDocumentClickMixin);
 
-	var _mixinPopUpMixin = __webpack_require__(80);
+	var _mixinPopUpMixin = __webpack_require__(81);
 
 	var _mixinPopUpMixin2 = _interopRequireDefault(_mixinPopUpMixin);
 
@@ -2950,7 +2988,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2961,7 +2999,7 @@
 	    value: true
 	});
 
-	var _cssModalLess = __webpack_require__(83);
+	var _cssModalLess = __webpack_require__(84);
 
 	var _cssModalLess2 = _interopRequireDefault(_cssModalLess);
 
@@ -3066,13 +3104,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 83 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(84);
+	var content = __webpack_require__(85);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -3092,7 +3130,7 @@
 	}
 
 /***/ },
-/* 84 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -3106,7 +3144,283 @@
 
 
 /***/ },
-/* 85 */
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(9)['default'];
+
+	var _inherits = __webpack_require__(23)['default'];
+
+	var _createClass = __webpack_require__(34)['default'];
+
+	var _classCallCheck = __webpack_require__(37)['default'];
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssTabLess = __webpack_require__(87);
+
+	var _cssTabLess2 = _interopRequireDefault(_cssTabLess);
+
+	var _ItemJsx = __webpack_require__(77);
+
+	var _ItemJsx2 = _interopRequireDefault(_ItemJsx);
+
+	var Tab = (function (_React$Component) {
+	    _inherits(Tab, _React$Component);
+
+	    function Tab(props) {
+	        _classCallCheck(this, Tab);
+
+	        _get(Object.getPrototypeOf(Tab.prototype), 'constructor', this).call(this, props);
+	        this.state = {
+	            index: this.props.selectedIndex
+	        };
+	    }
+
+	    _createClass(Tab, [{
+	        key: 'handleItemClick',
+	        value: function handleItemClick(index) {
+	            if (typeof this.props.onSelect === 'function') this.props.onSelect(index);
+	            this.setState({
+	                index: index
+	            });
+	        }
+	    }, {
+	        key: 'makeTabItems',
+	        value: function makeTabItems(content) {
+	            var _this = this;
+
+	            var NODES = content.props.children,
+	                INDEX = this.state.index;
+	            var itemNodes = [];
+	            if (NODES instanceof Array) {
+	                itemNodes = NODES.map(function (node, index) {
+	                    return React.createElement(
+	                        _ItemJsx2['default'],
+	                        { key: index, selected: index == INDEX, itemIndex: index, onItemClick: _this.handleItemClick.bind(_this) },
+	                        node.props.children
+	                    );
+	                });
+	            }
+	            return itemNodes;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var content = this.makeTabItems(this.props.items);
+	            return React.createElement(
+	                'div',
+	                { className: 'ui tab ' + this.props.position },
+	                content
+	            );
+	        }
+	    }]);
+
+	    return Tab;
+	})(React.Component);
+
+	exports['default'] = Tab;
+
+	Tab.defaultProps = {
+	    selectedIndex: 0,
+	    position: 'bottom'
+	};
+
+	Tab.Item = _ItemJsx2['default'];
+	module.exports = exports['default'];
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(88);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./tab.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./tab.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.layout_h {\n  float: left;\n  display: inline-block;\n}\n.ui.tab {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.tab.top ._item {\n  float: left;\n  display: inline-block;\n  border-top: 1px solid transparent;\n}\n.ui.tab.bottom ._item {\n  float: left;\n  display: inline-block;\n  border-bottom: 1px solid transparent;\n}\n.ui.tab.left ._item {\n  border-right: 1px solid transparent;\n}\n.ui.tab.right ._item {\n  border-left: 1px solid transparent;\n}\n.ui.tab ._item {\n  padding: 5px 10px;\n}\n.ui.tab ._item.active {\n  border-color: #cccccc;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssPinLess = __webpack_require__(90);
+
+	var _cssPinLess2 = _interopRequireDefault(_cssPinLess);
+
+	var _mixinScrollMixin = __webpack_require__(92);
+
+	var _mixinScrollMixin2 = _interopRequireDefault(_mixinScrollMixin);
+
+	var Pin = React.createClass({
+	    displayName: 'Pin',
+
+	    mixins: [_mixinScrollMixin2['default']],
+	    getInitialState: function getInitialState() {
+	        return {
+	            fixed: false,
+	            baseTop: 0
+	        };
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        this.setState({
+	            baseTop: this.node2Top()
+	        });
+	    },
+
+	    node2Top: function node2Top() {
+	        var pinNode = ReactDOM.findDOMNode(this.refs.pinNode);
+	        return pinNode.offsetTop;
+	    },
+
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            top: 0
+	        };
+	    },
+
+	    onScroll: function onScroll(e) {
+	        var _windowScrollOffset = this.windowScrollOffset();
+
+	        var _top = _windowScrollOffset._top;
+
+	        this.setState({
+	            fixed: _top >= this.state.baseTop
+	        });
+	    },
+
+	    render: function render() {
+	        var stat = this.state.fixed ? 'fixed' : '';
+	        return React.createElement(
+	            'div',
+	            { className: 'ui pin ' + stat, style: { 'top': this.props.top }, ref: 'pinNode' },
+	            this.props.children
+	        );
+	    }
+	});
+
+	exports['default'] = Pin;
+	module.exports = exports['default'];
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(91);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./pin.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./pin.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".ui.pin.fixed {\n  position: fixed;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 92 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var ScrollMixin = {
+	    componentDidMount: function componentDidMount() {
+	        document.addEventListener('scroll', this.onScroll);
+	    },
+
+	    componentWillUnmount: function componentWillUnmount() {
+	        document.removeEventListener('scroll', this.onScroll);
+	    },
+
+	    windowScrollOffset: function windowScrollOffset() {
+	        var doc = document.documentElement;
+	        var left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+	        var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+	        return {
+	            _left: left,
+	            _top: top
+	        };
+	    }
+
+	};
+
+	exports['default'] = ScrollMixin;
+	module.exports = exports['default'];
+
+/***/ },
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3198,7 +3512,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 86 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3283,7 +3597,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 87 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3359,7 +3673,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 88 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3511,7 +3825,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 89 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3661,7 +3975,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 90 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3819,7 +4133,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 91 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3947,7 +4261,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 92 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4124,101 +4438,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 93 */,
-/* 94 */,
-/* 95 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _get = __webpack_require__(9)['default'];
-
-	var _inherits = __webpack_require__(23)['default'];
-
-	var _createClass = __webpack_require__(34)['default'];
-
-	var _classCallCheck = __webpack_require__(37)['default'];
-
-	var _interopRequireDefault = __webpack_require__(3)['default'];
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	var _cssTabLess = __webpack_require__(98);
-
-	var _cssTabLess2 = _interopRequireDefault(_cssTabLess);
-
-	var _ItemJsx = __webpack_require__(97);
-
-	var _ItemJsx2 = _interopRequireDefault(_ItemJsx);
-
-	var Tab = (function (_React$Component) {
-	    _inherits(Tab, _React$Component);
-
-	    function Tab(props) {
-	        _classCallCheck(this, Tab);
-
-	        _get(Object.getPrototypeOf(Tab.prototype), 'constructor', this).call(this, props);
-	        this.state = {
-	            index: this.props.selectedIndex
-	        };
-	    }
-
-	    _createClass(Tab, [{
-	        key: 'handleItemClick',
-	        value: function handleItemClick(index) {
-	            if (typeof this.props.onSelect === 'function') this.props.onSelect(index);
-	            this.setState({
-	                index: index
-	            });
-	        }
-	    }, {
-	        key: 'makeTabItems',
-	        value: function makeTabItems(content) {
-	            var _this = this;
-
-	            var NODES = content.props.children,
-	                INDEX = this.state.index;
-	            var itemNodes = [];
-	            if (NODES instanceof Array) {
-	                itemNodes = NODES.map(function (node, index) {
-	                    return React.createElement(
-	                        _ItemJsx2['default'],
-	                        { key: index, selected: index == INDEX, itemIndex: index, onItemClick: _this.handleItemClick.bind(_this) },
-	                        node.props.children
-	                    );
-	                });
-	            }
-	            return itemNodes;
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var content = this.makeTabItems(this.props.items);
-	            return React.createElement(
-	                'div',
-	                { className: 'ui tab ' + this.props.position },
-	                content
-	            );
-	        }
-	    }]);
-
-	    return Tab;
-	})(React.Component);
-
-	exports['default'] = Tab;
-
-	Tab.defaultProps = {
-	    selectedIndex: 0,
-	    position: 'bottom'
-	};
-
-	Tab.Item = _ItemJsx2['default'];
-	module.exports = exports['default'];
-
-/***/ },
-/* 96 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4412,79 +4632,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 97 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	var Item = React.createClass({
-	    displayName: 'Item',
-
-	    handleClick: function handleClick(e) {
-	        this.props.onItemClick(this.props.itemIndex);
-	    },
-	    render: function render() {
-	        var isActive = this.props.selected ? 'active' : '';
-	        return React.createElement(
-	            'div',
-	            { className: '_item ' + isActive, onClick: this.handleClick },
-	            this.props.children
-	        );
-	    }
-	});
-
-	exports['default'] = Item;
-	module.exports = exports['default'];
-
-/***/ },
-/* 98 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(99);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./tab.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./tab.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".truncate {\n  max-width: 100%;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.truncate :after {\n  content: '';\n  background: #ffffff;\n  width: 16px;\n}\n.clearfix {\n  overflow: auto;\n  zoom: 1;\n}\n.layout_h {\n  float: left;\n  display: inline-block;\n}\n.ui.tab {\n  overflow: auto;\n  zoom: 1;\n}\n.ui.tab.top ._item {\n  float: left;\n  display: inline-block;\n  border-top: 1px solid transparent;\n}\n.ui.tab.bottom ._item {\n  float: left;\n  display: inline-block;\n  border-bottom: 1px solid transparent;\n}\n.ui.tab.left ._item {\n  border-right: 1px solid transparent;\n}\n.ui.tab.right ._item {\n  border-left: 1px solid transparent;\n}\n.ui.tab ._item {\n  padding: 5px 10px;\n}\n.ui.tab ._item.active {\n  border-color: #cccccc;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4503,7 +4651,7 @@
 	    value: true
 	});
 
-	var _pindemoLess = __webpack_require__(109);
+	var _pindemoLess = __webpack_require__(103);
 
 	var _pindemoLess2 = _interopRequireDefault(_pindemoLess);
 
@@ -4593,157 +4741,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 105 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _interopRequireDefault = __webpack_require__(3)['default'];
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	var _cssPinLess = __webpack_require__(107);
-
-	var _cssPinLess2 = _interopRequireDefault(_cssPinLess);
-
-	var _mixinScrollMixin = __webpack_require__(106);
-
-	var _mixinScrollMixin2 = _interopRequireDefault(_mixinScrollMixin);
-
-	var Pin = React.createClass({
-	    displayName: 'Pin',
-
-	    mixins: [_mixinScrollMixin2['default']],
-	    getInitialState: function getInitialState() {
-	        return {
-	            fixed: false,
-	            baseTop: 0
-	        };
-	    },
-
-	    componentDidMount: function componentDidMount() {
-	        this.setState({
-	            baseTop: this.node2Top()
-	        });
-	    },
-
-	    node2Top: function node2Top() {
-	        var pinNode = ReactDOM.findDOMNode(this.refs.pinNode);
-	        return pinNode.offsetTop;
-	    },
-
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            top: 0
-	        };
-	    },
-
-	    onScroll: function onScroll(e) {
-	        var _windowScrollOffset = this.windowScrollOffset();
-
-	        var _top = _windowScrollOffset._top;
-
-	        this.setState({
-	            fixed: _top >= this.state.baseTop
-	        });
-	    },
-
-	    render: function render() {
-	        var stat = this.state.fixed ? 'fixed' : '';
-	        return React.createElement(
-	            'div',
-	            { className: 'ui pin ' + stat, style: { 'top': this.props.top }, ref: 'pinNode' },
-	            this.props.children
-	        );
-	    }
-	});
-
-	exports['default'] = Pin;
-	module.exports = exports['default'];
-
-/***/ },
-/* 106 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	var ScrollMixin = {
-	    componentDidMount: function componentDidMount() {
-	        document.addEventListener('scroll', this.onScroll);
-	    },
-
-	    componentWillUnmount: function componentWillUnmount() {
-	        document.removeEventListener('scroll', this.onScroll);
-	    },
-
-	    windowScrollOffset: function windowScrollOffset() {
-	        var doc = document.documentElement;
-	        var left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
-	        var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
-	        return {
-	            _left: left,
-	            _top: top
-	        };
-	    }
-
-	};
-
-	exports['default'] = ScrollMixin;
-	module.exports = exports['default'];
-
-/***/ },
-/* 107 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(108);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./pin.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./pin.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 108 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".ui.pin.fixed {\n  position: fixed;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 109 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(110);
+	var content = __webpack_require__(104);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -4763,7 +4767,7 @@
 	}
 
 /***/ },
-/* 110 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -4772,6 +4776,190 @@
 
 	// module
 	exports.push([module.id, ".pin-demo ol .pin-card {\n  width: 200px;\n  padding: 0 30px;\n  border: 1px solid #ccc;\n  background: #f3f4f5;\n  padding: 10px;\n  margin-right: 30px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _get = __webpack_require__(9)['default'];
+
+	var _inherits = __webpack_require__(23)['default'];
+
+	var _createClass = __webpack_require__(34)['default'];
+
+	var _classCallCheck = __webpack_require__(37)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _indexJs = __webpack_require__(38);
+
+	var DraggableDemo = (function (_React$Component) {
+	    _inherits(DraggableDemo, _React$Component);
+
+	    function DraggableDemo() {
+	        _classCallCheck(this, DraggableDemo);
+
+	        _get(Object.getPrototypeOf(DraggableDemo.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(DraggableDemo, [{
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                _indexJs.Draggable,
+	                null,
+	                React.createElement(
+	                    'div',
+	                    { style: { 'width': '300', 'padding': '10', 'border': '1px solid #222', 'background': '#fff' } },
+	                    React.createElement(
+	                        'h4',
+	                        null,
+	                        'title'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'content contefjaiwefjiweajojilsjfl'
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DraggableDemo;
+	})(React.Component);
+
+	exports['default'] = DraggableDemo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssDraggableLess = __webpack_require__(107);
+
+	var _cssDraggableLess2 = _interopRequireDefault(_cssDraggableLess);
+
+	var Draggable = React.createClass({
+	    displayName: 'Draggable',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            dragging: false,
+	            originX: 0,
+	            originY: 0,
+	            offsetX: 0,
+	            offsetY: 0
+	        };
+	    },
+
+	    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+	        if (this.state.dragging) {
+	            document.addEventListener('mousemove', this.handleDragging);
+	        } else {
+	            document.removeEventListener('mousemove', this.handleDragging);
+	        }
+	    },
+
+	    beginDrag: function beginDrag(e) {
+	        this.setState({
+	            dragging: true,
+	            originX: e.pageX,
+	            originY: e.pageY
+	        });
+	        console.log('begin');
+	    },
+
+	    handleDragging: function handleDragging(e) {
+	        if (this.state.dragging) {
+	            var _x = e.pageX - this.state.originX + this.state.offsetX,
+	                _y = e.pageY - this.state.originY + this.state.offsetY;
+
+	            this.calcTranslate(_x, _y);
+	        };
+	    },
+
+	    calcTranslate: function calcTranslate(x, y) {
+	        var BASE_NODE = ReactDOM.findDOMNode(this);
+	        BASE_NODE.setAttribute("style", 'transform:translate(' + x + 'px, ' + y + 'px)');
+	    },
+
+	    stopDrag: function stopDrag(e) {
+	        if (this.state.dragging) {
+	            this.setState({
+	                offsetX: e.pageX - this.state.originX + this.state.offsetX,
+	                offsetY: e.pageY - this.state.originY + this.state.offsetY
+	            });
+	        };
+	        this.setState({
+	            dragging: false
+	        });
+	        console.log('stop');
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { className: 'ui draggable', onMouseDown: this.beginDrag, onMouseLeave: this.stopDrag, onMouseUp: this.stopDrag },
+	            this.props.children
+	        );
+	    }
+	});
+
+	exports['default'] = Draggable;
+	module.exports = exports['default'];
+
+/***/ },
+/* 107 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(108);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./draggable.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./draggable.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".ui.draggable {\n  cursor: move;\n  z-index: 2;\n}\n", ""]);
 
 	// exports
 

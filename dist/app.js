@@ -56,47 +56,47 @@
 
 	var _demoCheckBoxDemoJsx2 = _interopRequireDefault(_demoCheckBoxDemoJsx);
 
-	var _demoRadioDemoJsx = __webpack_require__(93);
+	var _demoRadioDemoJsx = __webpack_require__(96);
 
 	var _demoRadioDemoJsx2 = _interopRequireDefault(_demoRadioDemoJsx);
 
-	var _demoRadioGroupDemoJsx = __webpack_require__(94);
+	var _demoRadioGroupDemoJsx = __webpack_require__(97);
 
 	var _demoRadioGroupDemoJsx2 = _interopRequireDefault(_demoRadioGroupDemoJsx);
 
-	var _demoCheckBoxGroupDemoJsx = __webpack_require__(95);
+	var _demoCheckBoxGroupDemoJsx = __webpack_require__(98);
 
 	var _demoCheckBoxGroupDemoJsx2 = _interopRequireDefault(_demoCheckBoxGroupDemoJsx);
 
-	var _demoDropDownDemoJsx = __webpack_require__(96);
+	var _demoDropDownDemoJsx = __webpack_require__(99);
 
 	var _demoDropDownDemoJsx2 = _interopRequireDefault(_demoDropDownDemoJsx);
 
-	var _demoMenuDemoJsx = __webpack_require__(97);
+	var _demoMenuDemoJsx = __webpack_require__(100);
 
 	var _demoMenuDemoJsx2 = _interopRequireDefault(_demoMenuDemoJsx);
 
-	var _demoConfirmBoxDemoJsx = __webpack_require__(98);
+	var _demoConfirmBoxDemoJsx = __webpack_require__(101);
 
 	var _demoConfirmBoxDemoJsx2 = _interopRequireDefault(_demoConfirmBoxDemoJsx);
 
-	var _demoTooltipDemoJsx = __webpack_require__(99);
+	var _demoTooltipDemoJsx = __webpack_require__(102);
 
 	var _demoTooltipDemoJsx2 = _interopRequireDefault(_demoTooltipDemoJsx);
 
-	var _demoModalDemoJsx = __webpack_require__(100);
+	var _demoModalDemoJsx = __webpack_require__(103);
 
 	var _demoModalDemoJsx2 = _interopRequireDefault(_demoModalDemoJsx);
 
-	var _demoTabDemoJsx = __webpack_require__(101);
+	var _demoTabDemoJsx = __webpack_require__(104);
 
 	var _demoTabDemoJsx2 = _interopRequireDefault(_demoTabDemoJsx);
 
-	var _demoPinDemoJsx = __webpack_require__(102);
+	var _demoPinDemoJsx = __webpack_require__(105);
 
 	var _demoPinDemoJsx2 = _interopRequireDefault(_demoPinDemoJsx);
 
-	var _demoDraggableDemoJsx = __webpack_require__(105);
+	var _demoDraggableDemoJsx = __webpack_require__(108);
 
 	var _demoDraggableDemoJsx2 = _interopRequireDefault(_demoDraggableDemoJsx);
 
@@ -109,8 +109,8 @@
 	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
 	// ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
 	// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
-	// ReactDOM.render(<TabDemo/>, document.getElementById('tab'));
-	// ReactDOM.render(<PinDemo/>, document.getElementById('pin'));
+	ReactDOM.render(React.createElement(_demoTabDemoJsx2["default"], null), document.getElementById('tab'));
+	ReactDOM.render(React.createElement(_demoPinDemoJsx2["default"], null), document.getElementById('pin'));
 	ReactDOM.render(React.createElement(_demoDraggableDemoJsx2["default"], null), document.getElementById('draggable'));
 
 /***/ },
@@ -1034,7 +1034,7 @@
 
 	var _componentPinJsx2 = _interopRequireDefault(_componentPinJsx);
 
-	var _componentDraggableJsx = __webpack_require__(106);
+	var _componentDraggableJsx = __webpack_require__(93);
 
 	var _componentDraggableJsx2 = _interopRequireDefault(_componentDraggableJsx);
 
@@ -3423,6 +3423,129 @@
 /* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _interopRequireDefault = __webpack_require__(3)['default'];
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _cssDraggableLess = __webpack_require__(94);
+
+	var _cssDraggableLess2 = _interopRequireDefault(_cssDraggableLess);
+
+	var Draggable = React.createClass({
+	    displayName: 'Draggable',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            dragging: false,
+	            originX: 0,
+	            originY: 0,
+	            offsetX: 0,
+	            offsetY: 0
+	        };
+	    },
+
+	    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+	        if (this.state.dragging) {
+	            document.addEventListener('mousemove', this.handleDragging);
+	        } else {
+	            document.removeEventListener('mousemove', this.handleDragging);
+	        }
+	    },
+
+	    beginDrag: function beginDrag(e) {
+	        this.setState({
+	            dragging: true,
+	            originX: e.pageX,
+	            originY: e.pageY
+	        });
+	    },
+
+	    handleDragging: function handleDragging(e) {
+	        if (this.state.dragging) {
+	            var _x = e.pageX - this.state.originX + this.state.offsetX,
+	                _y = e.pageY - this.state.originY + this.state.offsetY;
+
+	            this.calcTranslate(_x, _y);
+	        };
+	    },
+
+	    calcTranslate: function calcTranslate(x, y) {
+	        var BASE_NODE = ReactDOM.findDOMNode(this);
+	        BASE_NODE.setAttribute("style", 'transform:translate(' + x + 'px, ' + y + 'px)');
+	    },
+
+	    stopDrag: function stopDrag(e) {
+	        if (this.state.dragging) {
+	            this.setState({
+	                offsetX: e.pageX - this.state.originX + this.state.offsetX,
+	                offsetY: e.pageY - this.state.originY + this.state.offsetY
+	            });
+	        };
+	        this.setState({
+	            dragging: false
+	        });
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { className: 'ui draggable', onMouseDown: this.beginDrag, onMouseLeave: this.stopDrag, onMouseUp: this.stopDrag },
+	            this.props.children
+	        );
+	    }
+	});
+
+	exports['default'] = Draggable;
+	module.exports = exports['default'];
+
+/***/ },
+/* 94 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(95);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./draggable.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./draggable.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".ui.draggable {\n  cursor: move;\n  touch-action: none;\n  width: 200px;\n  padding: 10px;\n  border: 1px solid #222;\n  background: #f3f4f5;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	var _get = __webpack_require__(9)["default"];
@@ -3512,7 +3635,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 94 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3597,7 +3720,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 95 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3673,7 +3796,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 96 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3825,7 +3948,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 97 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3975,7 +4098,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 98 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4133,7 +4256,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 99 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4261,7 +4384,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 100 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4438,7 +4561,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 101 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4632,7 +4755,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 102 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4651,7 +4774,7 @@
 	    value: true
 	});
 
-	var _pin_demoLess = __webpack_require__(109);
+	var _pin_demoLess = __webpack_require__(106);
 
 	var _pin_demoLess2 = _interopRequireDefault(_pin_demoLess);
 
@@ -4741,9 +4864,47 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 103 */,
-/* 104 */,
-/* 105 */
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(107);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pin_demo.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pin_demo.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 107 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".pin-demo .card {\n  width: 200px;\n  border: 1px solid #ccc;\n  background: #f3f4f5;\n  padding: 10px;\n  margin-right: 30px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4844,169 +5005,6 @@
 
 	exports['default'] = DraggableDemo;
 	module.exports = exports['default'];
-
-/***/ },
-/* 106 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _interopRequireDefault = __webpack_require__(3)['default'];
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	var _cssDraggableLess = __webpack_require__(107);
-
-	var _cssDraggableLess2 = _interopRequireDefault(_cssDraggableLess);
-
-	var Draggable = React.createClass({
-	    displayName: 'Draggable',
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            dragging: false,
-	            originX: 0,
-	            originY: 0,
-	            offsetX: 0,
-	            offsetY: 0
-	        };
-	    },
-
-	    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-	        if (this.state.dragging) {
-	            document.addEventListener('mousemove', this.handleDragging);
-	        } else {
-	            document.removeEventListener('mousemove', this.handleDragging);
-	        }
-	    },
-
-	    beginDrag: function beginDrag(e) {
-	        this.setState({
-	            dragging: true,
-	            originX: e.pageX,
-	            originY: e.pageY
-	        });
-	    },
-
-	    handleDragging: function handleDragging(e) {
-	        if (this.state.dragging) {
-	            var _x = e.pageX - this.state.originX + this.state.offsetX,
-	                _y = e.pageY - this.state.originY + this.state.offsetY;
-
-	            this.calcTranslate(_x, _y);
-	        };
-	    },
-
-	    calcTranslate: function calcTranslate(x, y) {
-	        var BASE_NODE = ReactDOM.findDOMNode(this);
-	        BASE_NODE.setAttribute("style", 'transform:translate(' + x + 'px, ' + y + 'px)');
-	    },
-
-	    stopDrag: function stopDrag(e) {
-	        if (this.state.dragging) {
-	            this.setState({
-	                offsetX: e.pageX - this.state.originX + this.state.offsetX,
-	                offsetY: e.pageY - this.state.originY + this.state.offsetY
-	            });
-	        };
-	        this.setState({
-	            dragging: false
-	        });
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: 'ui draggable', onMouseDown: this.beginDrag, onMouseLeave: this.stopDrag, onMouseUp: this.stopDrag },
-	            this.props.children
-	        );
-	    }
-	});
-
-	exports['default'] = Draggable;
-	module.exports = exports['default'];
-
-/***/ },
-/* 107 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(108);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./draggable.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./draggable.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 108 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".ui.draggable {\n  cursor: move;\n  width: 200px;\n  padding: 10px;\n  border: 1px solid #222;\n  background: #f3f4f5;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 109 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(110);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pin_demo.less", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./pin_demo.less");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 110 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(6)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".pin-demo .card {\n  width: 200px;\n  border: 1px solid #ccc;\n  background: #f3f4f5;\n  padding: 10px;\n  margin-right: 30px;\n}\n", ""]);
-
-	// exports
-
 
 /***/ }
 /******/ ]);

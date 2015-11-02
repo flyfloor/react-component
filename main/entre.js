@@ -22,6 +22,6 @@ import DraggableDemo from "./demo/DraggableDemo.jsx";
 // ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
 // ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
 // ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
-// ReactDOM.render(<TabDemo/>, document.getElementById('tab'));
-// ReactDOM.render(<PinDemo/>, document.getElementById('pin'));
+ReactDOM.render(<TabDemo/>, document.getElementById('tab'));
+ReactDOM.render(<PinDemo/>, document.getElementById('pin'));
 ReactDOM.render(<DraggableDemo/>, document.getElementById('draggable'));

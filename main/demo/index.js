@@ -17,6 +17,7 @@ export {
     RadioGroup,
     CheckBoxGroup,
     DropDown,
+    Modal,
     Menu,
     ConfirmBox,
     Tooltip,

@@ -100,15 +100,15 @@
 
 	var _demoDraggableDemoJsx2 = _interopRequireDefault(_demoDraggableDemoJsx);
 
-	// ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
-	// ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
-	// ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
-	// ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-	// ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
-	// ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
-	// ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
-	// ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
-	// ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
+	ReactDOM.render(React.createElement(_demoCheckBoxDemoJsx2["default"], null), document.getElementById('checkbox'));
+	ReactDOM.render(React.createElement(_demoRadioDemoJsx2["default"], null), document.getElementById('radio'));
+	ReactDOM.render(React.createElement(_demoRadioGroupDemoJsx2["default"], null), document.getElementById('radio-group'));
+	ReactDOM.render(React.createElement(_demoCheckBoxGroupDemoJsx2["default"], null), document.getElementById('checkbox-group'));
+	ReactDOM.render(React.createElement(_demoDropDownDemoJsx2["default"], null), document.getElementById('drop-down'));
+	ReactDOM.render(React.createElement(_demoMenuDemoJsx2["default"], null), document.getElementById('menu'));
+	ReactDOM.render(React.createElement(_demoConfirmBoxDemoJsx2["default"], null), document.getElementById('confirm-box'));
+	ReactDOM.render(React.createElement(_demoTooltipDemoJsx2["default"], null), document.getElementById('tooltip'));
+	ReactDOM.render(React.createElement(_demoModalDemoJsx2["default"], null), document.getElementById('modal'));
 	ReactDOM.render(React.createElement(_demoTabDemoJsx2["default"], null), document.getElementById('tab'));
 	ReactDOM.render(React.createElement(_demoPinDemoJsx2["default"], null), document.getElementById('pin'));
 	ReactDOM.render(React.createElement(_demoDraggableDemoJsx2["default"], null), document.getElementById('draggable'));
@@ -1043,6 +1043,7 @@
 	exports.RadioGroup = _componentRadioGroupJsx2['default'];
 	exports.CheckBoxGroup = _componentCheckBoxGroupJsx2['default'];
 	exports.DropDown = _componentDropDownJsx2['default'];
+	exports.Modal = _componentModalJsx2['default'];
 	exports.Menu = _componentMenuJsx2['default'];
 	exports.ConfirmBox = _componentConfirmBoxJsx2['default'];
 	exports.Tooltip = _componentTooltipJsx2['default'];

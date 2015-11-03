@@ -1,7 +1,7 @@
 # react-component
 >some everyday use component built with reactjs.
  
-###Components
+### Components
  
 * checkbox
 * radio
@@ -16,9 +16,9 @@
 * pin
 * draggable
 
-###Getting Started
+### Getting Started
 
-####install
+#### install
 
 install with npm
 
@@ -32,14 +32,14 @@ or install the latest version from github
 npm install https://github.com/jerryshew/react-component
 ```
 
-####in use
+#### with skill
 
 * ReactJs
 * ReactDOM
 * ES 6
 * Webpack
 
-####the hierarchy
+#### the hierarchy
 
 ```
 ├── component
@@ -51,11 +51,11 @@ npm install https://github.com/jerryshew/react-component
 └── util
 ```
 
-####usage  
+#### how to use  
 
 simply import as a module, then use it.
 
-####demo
+#### demo
 
 clone git repo, open **demo.html** in your browser to see more.
 

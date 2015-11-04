@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import resetCss from '../css/reset.less';
 
 import CheckBoxDemo from "./demo/CheckBoxDemo.jsx";

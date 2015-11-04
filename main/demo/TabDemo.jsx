@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {Tab} from './index.js';
 
 export default class TabDemo extends React.Component {

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {Radio} from './index.js';
 
 export default class RadioDemo extends React.Component {

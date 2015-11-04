@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Item = React.createClass({
     handleClick(e){
         this.props.onItemClick(this.props.itemIndex);

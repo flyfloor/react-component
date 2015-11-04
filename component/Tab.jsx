@@ -1,3 +1,5 @@
+import React from 'react';
+
 import css from '../css/tab.less';
 
 import Item from './Item.jsx';

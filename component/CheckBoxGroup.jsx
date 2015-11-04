@@ -1,3 +1,5 @@
+import React from 'react';
+
 import CheckBox from './CheckBox.jsx';
 
 export default class CheckBoxGroup extends React.Component {

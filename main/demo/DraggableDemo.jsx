@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {Draggable} from './index.js';
 
 export default class DraggableDemo extends React.Component {

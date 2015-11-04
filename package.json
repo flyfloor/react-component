@@ -40,5 +40,9 @@
     "webpack": "^1.12.1",
     "webpack-dev-server": "^1.10.1"
   },
-  "homepage": "https://github.com/jerryshew/react-component"
+  "homepage": "https://github.com/jerryshew/react-component",
+  "dependencies": {
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2"
+  }
 }

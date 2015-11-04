@@ -1,3 +1,5 @@
+import React from 'react';
+
 import css from '../css/modal.less';
 
 const Modal = React.createClass({

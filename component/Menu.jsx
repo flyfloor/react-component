@@ -1,3 +1,5 @@
+import React from 'react';
+
 import css from "../css/menu.less";
 
 import Item from './Item.jsx';

@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import css from '../css/dropdown.less';
 
 import DocumentClickMixin from '../mixin/DocumentClickMixin';

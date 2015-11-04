@@ -1,3 +1,5 @@
+import ReactDOM from 'react-dom';
+
 const DocumentClickMixin = {
     componentDidMount() {
         document.addEventListener('click', this.onClick);

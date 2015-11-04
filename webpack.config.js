@@ -8,10 +8,10 @@ module.exports = {
         filename: "app.js"
     },
     plugins: [
-        // new webpack.optimize.UglifyJsPlugin({
-        //     sourceMap: false,
-        //     mangle: false
-        // }),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            mangle: false
+        }),
     ],
     module: {
         loaders: [

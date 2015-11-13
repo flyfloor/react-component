@@ -10,6 +10,7 @@ import Modal from '../../component/Modal.jsx';
 import Tab from '../../component/Tab.jsx';
 import Pin from '../../component/Pin.jsx';
 import Draggable from '../../component/Draggable.jsx';
+import Carousel from '../../component/Carousel.jsx';
 
 export {
     CheckBox,
@@ -24,4 +25,5 @@ export {
     Tab,
     Pin,
     Draggable,
+    Carousel,
 }

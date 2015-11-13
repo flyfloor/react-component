@@ -2,7 +2,7 @@ import React from 'react';
 
 const Item = React.createClass({
     handleClick(e){
-        this.props.onItemClick(this.props.itemIndex);
+        if(typeof this.props.onItemClick === 'function') this.props.onItemClick(this.props.itemIndex);
     },
     render() {
         let isActive = this.props.selected ? 'active' : '';

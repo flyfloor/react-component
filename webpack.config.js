@@ -1,17 +1,26 @@
+var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: "./main/entre.js",
+
+    entry: [
+        'webpack-hot-middleware/client',
+        "./main/entre.js"
+    ],
     output: {
-        path: "dist/",
-        filename: "app.js"
+        path: path.join(__dirname, 'dist'),
+        filename: 'app.js',
+        publicPath: '/dist/'
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: false,
-            mangle: false
-        }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     sourceMap: false,
+        //     mangle: false
+        // })
     ],
     module: {
         loaders: [

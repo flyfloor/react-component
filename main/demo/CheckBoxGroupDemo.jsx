@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {CheckBoxGroup} from "./index.js";
 
 const options = [

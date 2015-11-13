@@ -1,8 +1,15 @@
 import React from 'react';
-
 import css from '../css/modal.less';
 
 const Modal = React.createClass({
+    propTypes: {
+        title: React.PropTypes.string,
+        confirmText: React.PropTypes.string,
+        cancelText: React.PropTypes.string,
+        onConfirm: React.PropTypes.func,
+        onCancel: React.PropTypes.func,
+    },
+
     getInitialState() {
         return {
             open: this.props.display, 

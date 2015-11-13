@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import css from '../css/dropdown.less';
-
 import DocumentClickMixin from '../mixin/DocumentClickMixin';
 import KeyCodeMixin from '../mixin/KeyCodeMixin';
 import DataAccessor from '../util/DataAccessor';
 
 const DropDown = React.createClass({
     mixins: [DocumentClickMixin],
+
+    propTypes: {
+        placeHolder: React.PropTypes.string,
+        options: React.PropTypes.array,
+        onSelect: React.PropTypes.func,
+        labelName: React.PropTypes.string,
+        valueName: React.PropTypes.string,
+    },
     
     getInitialState() {
         const DEFAULT_VALUE = this.props.multi ? [] : '';
@@ -148,7 +154,7 @@ const DropDown = React.createClass({
     },
 
     triggerDropValueChange(){
-        if (typeof this.props.onSelect === 'function') this.props.onSelect(this.state.value);
+        if (this.props.onSelect) this.props.onSelect(this.state.value);
     },
 
     toggleOpen(stat){
@@ -181,6 +187,7 @@ const DropDown = React.createClass({
 
 export default DropDown;
 
+// dropdown option
 DropDown.Option = React.createClass({
     handleClick(){
         this.props.onOptionSelect(this.props.storeValue);
@@ -197,6 +204,7 @@ DropDown.Option = React.createClass({
     }
 });
 
+// dropdown label
 DropDown.label = React.createClass({
     handleClick(e){
         this.props.onClick(e);
@@ -211,6 +219,7 @@ DropDown.label = React.createClass({
     }
 });
 
+// multi dropdown input field
 DropDown.multiInput = React.createClass({
 
     getInitialState() {
@@ -289,9 +298,9 @@ DropDown.multiInput = React.createClass({
     }
 });
 
-
-
+// dropdown search bar
 DropDown.SearchBar = React.createClass({
+
     getDefaultProps(){
         return {
             placeHolder: 'search...'

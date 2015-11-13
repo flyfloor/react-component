@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {Modal} from './index.js';
 
 export default class ModalDemo extends React.Component {

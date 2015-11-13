@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {Carousel} from "./index.js";
 
 export default class CheckBoxDemo extends React.Component {
@@ -19,10 +18,10 @@ export default class CheckBoxDemo extends React.Component {
                         </Carousel.Item>
                     </div>
         return (
-            <ol>
+            <ol style={{'width': '600'}}>
                 <li>
                     <h4>carousel</h4>
-                    <Carousel items={items}></Carousel>
+                    <Carousel items={items} index='1'></Carousel>
                 </li>
             </ol>
         );

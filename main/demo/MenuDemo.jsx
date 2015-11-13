@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {Menu} from './index.js';
 
 export default class MenuDemo extends React.Component {

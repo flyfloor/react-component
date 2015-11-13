@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {ConfirmBox} from './index.js';
 
 export default class ConfirmBoxDemo extends React.Component {

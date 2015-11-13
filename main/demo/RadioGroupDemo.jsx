@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {RadioGroup} from './index.js';
 
 const options = [

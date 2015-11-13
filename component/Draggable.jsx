@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import css from '../css/draggable.less';
 
 const Draggable = React.createClass({

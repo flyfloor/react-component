@@ -1,9 +1,14 @@
 import React from 'react';
 
 const Item = React.createClass({
-    handleClick(e){
-        if(typeof this.props.onItemClick === 'function') this.props.onItemClick(this.props.itemIndex);
+    propTypes: {
+        onItemClick: React.PropTypes.func,
     },
+
+    handleClick(e){
+        if(this.props.onItemClick) this.props.onItemClick(this.props.itemIndex);
+    },
+
     render() {
         let isActive = this.props.selected ? 'active' : '';
         return (

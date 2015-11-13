@@ -1,13 +1,14 @@
 import React from 'react';
-
 import css from "../css/menu.less";
-
 import Item from './Item.jsx';
-
 import DocumentClickMixin from '../mixin/DocumentClickMixin';
 
 const Menu = React.createClass ({
     mixins: [DocumentClickMixin],
+
+    propTypes: {
+        onSelect: React.PropTypes.func,
+    },
 
     getInitialState: function() {
         return {
@@ -35,7 +36,7 @@ const Menu = React.createClass ({
     },
 
     handleItemClick(index){
-        if (typeof this.props.onSelect === 'function') this.props.onSelect(index);
+        if (this.props.onSelect) this.props.onSelect(index);
         this.setState({
             open: false,
             index: index, 

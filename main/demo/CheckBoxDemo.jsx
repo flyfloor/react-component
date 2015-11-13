@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {CheckBox} from "./index.js";
 
 export default class CheckBoxDemo extends React.Component {

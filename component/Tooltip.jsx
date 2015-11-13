@@ -1,7 +1,5 @@
 import React from 'react';
-
 import css from '../css/popup.less';
-
 import DocumentClickMixin from '../mixin/DocumentClickMixin';
 import PopUpMixin from '../mixin/PopUpMixin';
 

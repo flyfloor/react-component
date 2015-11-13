@@ -18,3 +18,7 @@ export default class Radio extends React.Component {
         );
     }
 }
+
+Radio.propTypes = {
+    onChange: React.PropTypes.func,
+}

@@ -1,7 +1,5 @@
 import React from 'react';
-
 import css from '../css/tab.less';
-
 import Item from './Item.jsx';
 
 export default class Tab extends React.Component {
@@ -13,7 +11,7 @@ export default class Tab extends React.Component {
     }
 
     handleItemClick(index){
-        if (typeof this.props.onSelect === 'function') this.props.onSelect(index);
+        if (this.props.onSelect) this.props.onSelect(index);
         this.setState({
             index: index, 
         });
@@ -45,6 +43,11 @@ export default class Tab extends React.Component {
 Tab.defaultProps = {
     selectedIndex: 0,
     position: 'bottom',
+}
+
+Tab.propTypes = {
+    position: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    onSelect: React.PropTypes.func,
 }
 
 Tab.Item = Item;

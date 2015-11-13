@@ -1,8 +1,9 @@
+import css from '../css/carousel.less';
 import React from 'react';
-
 import Item from './Item.jsx';
 
 const Carousel = React.createClass({
+
     getInitialState() {
         return {
             index:this.props.index 
@@ -11,7 +12,8 @@ const Carousel = React.createClass({
 
     getDefaultProps() {
         return {
-            index: 0
+            index: 0,
+            showArrow: true
         };
     },
 

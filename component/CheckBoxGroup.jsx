@@ -1,5 +1,4 @@
 import React from 'react';
-
 import CheckBox from './CheckBox.jsx';
 
 export default class CheckBoxGroup extends React.Component {
@@ -41,7 +40,7 @@ export default class CheckBoxGroup extends React.Component {
     }
 
     valueChange(){
-        if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value)
+        if (this.props.onChange) this.props.onChange(this.state.value)
     }
 
     render() {
@@ -70,4 +69,12 @@ export default class CheckBoxGroup extends React.Component {
 CheckBoxGroup.defaultProps = {
     value: [],
     options: [], 
+}
+
+CheckBoxGroup.propTypes = {
+    vaule: React.PropTypes.string,
+    options: React.PropTypes.array,
+    labelName: React.PropTypes.string,
+    valueName: React.PropTypes.string,
+    onChange: React.PropTypes.func,
 }

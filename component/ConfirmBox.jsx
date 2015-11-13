@@ -1,12 +1,15 @@
 import React from 'react';
-
 import css from '../css/popup.less';
-
 import DocumentClickMixin from '../mixin/DocumentClickMixin';
 import PopUpMixin from '../mixin/PopUpMixin';
 
 const ConfirmBox = React.createClass({
     mixins: [DocumentClickMixin, PopUpMixin],
+
+    propTypes: {
+        onCancel: React.PropTypes.func,
+        onConfirm: React.PropTypes.func,
+    },
 
     closeConfirm(){
         this.setState({
@@ -19,12 +22,12 @@ const ConfirmBox = React.createClass({
     },
 
     handleCancel(){
-        if (typeof this.props.onCancel !== 'function') return this.closeConfirm();
+        if (!this.props.onCancel) return this.closeConfirm();
         if(this.props.onCancel()) this.closeConfirm();
     },
 
     handleConfirm(){
-        if (typeof this.props.onConfirm !== 'function') return this.closeConfirm();
+        if (!this.props.onConfirm) return this.closeConfirm();
         if (this.props.onConfirm()) this.closeConfirm();
     },
 

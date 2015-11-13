@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {Tooltip} from './index.js';
 
 export default class TooltipDemo extends React.Component {

@@ -24,3 +24,7 @@ export default class CheckBox extends React.Component {
         );
     }
 }
+
+CheckBox.propTypes = {
+    onChange: React.PropTypes.func,
+}

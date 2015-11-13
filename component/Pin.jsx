@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import css from '../css/pin.less';
-
 import ScrollMixin from '../mixin/ScrollMixin';
 
 const Pin = React.createClass({
     mixins: [ScrollMixin],
+
     getInitialState() {
         return {
             fixed: false,

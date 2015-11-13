@@ -1,6 +1,13 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 const DocumentClickMixin = {
+    propTypes: {
+        onBaseDomClick: React.PropTypes.func,
+        onBaseDomClick: React.PropTypes.func,
+        onOtherDomClick: React.PropTypes.func,
+    },
+    
     componentDidMount() {
         document.addEventListener('click', this.onClick);
     },
@@ -16,9 +23,9 @@ const DocumentClickMixin = {
     onDocumentClick(e) {
         const BASE_NODE = ReactDOM.findDOMNode(this);
         if(e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
-            if (typeof this.onBaseDomClick === 'function') this.onBaseDomClick(e);
+            if (this.onBaseDomClick) this.onBaseDomClick(e);
         } else {
-            if (typeof this.onOtherDomClick === 'function') this.onOtherDomClick(e);
+            if (this.onOtherDomClick) this.onOtherDomClick(e);
         }
         e.stopPropagation();
     }

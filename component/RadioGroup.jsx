@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Radio from './Radio.jsx';
 
 export default class RadioGroup extends React.Component {
@@ -15,7 +14,7 @@ export default class RadioGroup extends React.Component {
         this.setState({
             value: storeValue, 
         }, () => {
-            if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value);
+            if (this.props.onChange) this.props.onChange(this.state.value);
         });
     }
 
@@ -43,4 +42,12 @@ export default class RadioGroup extends React.Component {
             </div>
         );
     }
+}
+
+RadioGroup.propTypes = {
+    options: React.PropTypes.array,
+    value: React.PropTypes.string,
+    labelName: React.PropTypes.string,
+    valueName: React.PropTypes.string,
+    onChange: React.PropTypes.func,
 }

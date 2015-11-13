@@ -1,7 +1,5 @@
 import css from './pin_demo.less';
-
 import React from 'react';
-
 import {Pin} from './index.js';
 
 export default class PinDemo extends React.Component {

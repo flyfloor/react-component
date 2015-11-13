@@ -1,6 +1,11 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 const PopUpMixin = {
+    propTypes: {
+        position: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    },
+    
     getInitialState() {
         return {
             open: false, 

@@ -1,15 +1,13 @@
-@import url('share.less');
+@import url('meta.less');
 
 @{NS}.carousel {
-    .clearfix;
+    overflow: hidden;
     position: relative;
     ._content {
         ._item {
             display: block;
-            display: none;
             height: 100%;
             &.active {
-                display: block;
             }
         }
     }

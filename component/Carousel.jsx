@@ -48,17 +48,26 @@ const Carousel = React.createClass({
                 let _index = i;
                 if (_index === -1) _index = 0;
                 if (_index === _len) _index = _len - 1;
-                itemNodes.push(<Item key={i} selected={ this.state.index == i } style={{'width': this.state.baseWidth}} itemIndex={i}>{NODES[_index].props.children}</Item>);
+                itemNodes.push(<Item key={i} selected={ this.state.index == _index } style={{'width': this.state.baseWidth}} itemIndex={i}>{NODES[_index].props.children}</Item>);
             }
         }
         return itemNodes;
     },
 
+    componentWillUpdate(nextProps, nextState) {
+    },
+
     handleSlide(e){
         const DOT_INDEX = DataAccessor.getData(e.target, 'index');
         this.setState({
-            index: DOT_INDEX
+            index: parseInt(DOT_INDEX)
         });
+        this.addTransition();
+    },
+
+    addTransition(){
+        let contentDOM  = ReactDOM.findDOMNode(this.refs.contentDOM);
+        contentDOM.className += ' _slide';
     },
 
     render() {
@@ -71,9 +80,15 @@ const Carousel = React.createClass({
         for(let i = 0; i < this.state.count; i++){
             dotNodes.push(<a href="javascript:;" key={i} data-index={i} className={this.state.index == i ? 'active _item' : '_item'} onClick={this.handleSlide}>&middot;</a>)
         }
+
+        let contentCss = {
+            width: this.state.baseWidth * (this.state.count + 2),
+            transform: `translate(-${this.state.baseWidth * (this.state.index + 1)}px, 0)`,
+        }
+        console.log(this.state.baseWidth * (this.state.index - 1))
         return (
             <div className="ui carousel">
-                <div className="_content" ref='contentDOM' style={{'width': this.state.baseWidth * (this.state.count + 2)}}>{contentNodes}</div>
+                <div className="_content" ref='contentDOM' style={contentCss}>{contentNodes}</div>
                 <div className="_dot">
                     {dotNodes}
                 </div>

@@ -72,7 +72,7 @@ const Modal = React.createClass({
                                         <div className="_overlay" onClick={this.closeModal}></div>
                                     </div> : null;
         return (
-            <div className='ui modal'>
+            <div className='ui modal' style={this.props.style}>
                 {base}
             </div>
         );

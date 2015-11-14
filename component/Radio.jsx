@@ -11,7 +11,7 @@ export default class Radio extends React.Component {
 
     render() {
         return (
-            <label>
+            <label style={this.props.style} className={this.props.className}>
                 <input type="radio" ref="radioInput" disabled={this.props.disabled} checked={this.props.checked} onChange={this.checkedChange.bind(this)} />
                 {this.props.children}
             </label>

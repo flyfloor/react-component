@@ -63,13 +63,13 @@ const Menu = React.createClass ({
         let content = this.state.open ? <div className="_content">{this.makeMenuItems(this.props.items)}</div> : null;
         let triggerDOM = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
         let menuNode = this.props.triggerType === 'click' ? 
-                        <span className='ui menu'>
+                        <span className='ui menu' style={this.props.style}>
                             <span className="_trigger" onClick={this.toggleOpen.bind(null, this)}>{triggerDOM}</span>
                             <div className="_wrap">
                                 {content}
                             </div>
                         </span> :
-                        <span className='ui menu' onMouseOver={this.openMenu.bind(null, this)} onMouseLeave={this.closeMenu.bind(null, this)}>
+                        <span className='ui menu' style={this.props.style} onMouseOver={this.openMenu.bind(null, this)} onMouseLeave={this.closeMenu.bind(null, this)}>
                             <span className="_trigger">{triggerDOM}</span>
                             <div className="_wrap">
                                 {content}

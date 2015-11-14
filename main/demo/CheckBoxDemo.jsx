@@ -10,7 +10,7 @@ export default class CheckBoxDemo extends React.Component {
             <ol>
                 <li>
                     <h4>checkbox</h4>
-                    <CheckBox onChange={this.handleChange.bind(this)}>checkbox</CheckBox>
+                    <CheckBox style={{'cursor': 'text'}} className="user-gender" onChange={this.handleChange.bind(this)}>checkbox</CheckBox>
                 </li>
                 <li>
                     <h4>disabled</h4>

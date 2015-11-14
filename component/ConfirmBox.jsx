@@ -45,7 +45,7 @@ const ConfirmBox = React.createClass({
                                             </div>
                                         </div> : null;
         return (
-            <span className='ui confirm-box popup' onClick={this.onTrigger}>
+            <span className='ui confirm-box popup' style={this.props.style} onClick={this.onTrigger}>
                 <span className="_trigger" ref='trigger'>
                     {this.props.children}
                 </span>

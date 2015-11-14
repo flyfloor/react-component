@@ -22,7 +22,7 @@ const Tooltip = React.createClass({
                                             </div>
                                         </div> : null;
         return (
-            <span className='ui confirm-box popup' onMouseOver={this.onTrigger} onMouseLeave={this.onTrigger}>
+            <span className='ui confirm-box popup' style={this.props.style} onMouseOver={this.onTrigger} onMouseLeave={this.onTrigger}>
                 <span className="_trigger" ref='trigger'>
                     {this.props.children}
                 </span>

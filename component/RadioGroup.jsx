@@ -37,7 +37,7 @@ export default class RadioGroup extends React.Component {
         }
 
         return (
-            <div>
+            <div style={this.props.style} className={this.props.className}>
                 {optionNodes}
             </div>
         );

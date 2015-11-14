@@ -16,7 +16,7 @@ export default class CheckBoxDemo extends React.Component {
                         <Carousel.Item key='3'>
                             <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"/>
                         </Carousel.Item>
-                    </div>
+                    </div>;
         return (
             <ol style={{'width': '600'}}>
                 <li>

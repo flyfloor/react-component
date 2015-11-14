@@ -16,8 +16,9 @@ export default class CheckBox extends React.Component {
     }
 
     render() {
+        // let {disabled, storeValue, onChange, ...props} = this.props;
         return ( 
-            <label>
+            <label style={this.props.style} className={this.props.className}>
                 <input type="checkbox" disabled={this.props.disabled} checked={this.state.checked} onChange={this.checkedChange.bind(this)}/>
                 {this.props.children}
             </label>

@@ -32,7 +32,7 @@ export default class Tab extends React.Component {
     render() {
         let content = this.makeTabItems(this.props.items);
         return (
-            <div className={'ui tab ' + this.props.position}>
+            <div className={'ui tab ' + this.props.position} style={this.props.style}>
                 {content}
             </div>
         );

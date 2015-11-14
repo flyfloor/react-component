@@ -57,7 +57,7 @@ const Draggable = React.createClass({
 
     render() {
         return (
-            <div className='ui draggable' onMouseDown={this.beginDrag} onMouseLeave={this.stopDrag} onMouseUp={this.stopDrag}>
+            <div className='ui draggable' style={this.props.style} onMouseDown={this.beginDrag} onMouseLeave={this.stopDrag} onMouseUp={this.stopDrag}>
                 {this.props.children}
             </div>
         );

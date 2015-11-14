@@ -94,7 +94,7 @@ const DropDown = React.createClass({
             }
         }
 
-        return <div className='ui dropdown'>
+        return <div className='ui dropdown' style={this.props.style}>
                     { multi ? this.formatMultiInput(tags) : <DropDown.label onClick={this.toggleDropDown}>{placeHolder}</DropDown.label> }
                     { this.formatDropList(optionNodes) }
                 </div>

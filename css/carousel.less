@@ -6,9 +6,36 @@
     ._content {
         ._item {
             display: block;
+            float: left;
             height: 100%;
             &.active {
             }
+        }
+    }
+    ._dot {
+        text-align: center;
+        ._item {
+            margin: 10px;
+            font-size: 200%;
+            color: @gray_b;
+            &.active {
+                color: @black;
+            }
+        }
+    }
+    ._arrow {
+        a {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            overflow: hidden;
+            top: 50%;
+        }
+        ._left {
+            left: 10px;
+        }
+        ._right {
+            right: 10px;
         }
     }
 }

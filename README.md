@@ -58,6 +58,6 @@ simply import as a module, then use it.
 
 #### demo
 
-clone git repo, open **demo.html** in your browser to see more. or just check [here](http://imiao.in).
+clone git repo, open **index.html** in your browser to see more. or just check [here](http://imiao.in).
 
 

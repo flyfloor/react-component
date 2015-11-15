@@ -23,8 +23,16 @@ export default class CheckBoxDemo extends React.Component {
         return (
             <ol style={{'width': '600'}}>
                 <li>
-                    <h4>carousel</h4>
-                    <Carousel items={items} index='1'></Carousel>
+                    <h4>default carousel</h4>
+                    <Carousel items={items}></Carousel>
+                </li>
+                <li>
+                    <h4>auto play carousel</h4>
+                    <Carousel items={items} autoPlay="true" delay='5000'></Carousel>
+                </li>
+                <li>
+                    <h4>carousel with no control arrow links</h4>
+                    <Carousel items={items} showArrow="true"></Carousel>
                 </li>
             </ol>
         );

@@ -2,9 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import css from '../css/carousel.less';
 import Item from './Item.jsx';
+import IntervalMixin from '../mixin/IntervalMixin';
 import DataAccessor from '../util/DataAccessor';
 
 const Carousel = React.createClass({
+    mixins: [IntervalMixin],
+
     propTypes: {
         items: React.PropTypes.element.isRequired,
     },
@@ -19,7 +22,9 @@ const Carousel = React.createClass({
 
     getDefaultProps() {
         return {
-            showArrow: true,
+            showArrow: false,
+            autoPlay: false,
+            delay: 3000,
         };
     },
 
@@ -28,6 +33,18 @@ const Carousel = React.createClass({
         this.setState({
             baseWidth: BASE.offsetWidth,
         });
+        if (this.props.autoPlay) this.setInterval(this.handleAutoPlay, this.props.delay);
+    },
+
+    handleAutoPlay(){
+        if (this.state.index < this.state.count) {
+            this.setState({
+                index: this.state.index + 1 
+            }, () => {
+                this.addTransition(this.resetPosition);
+            });
+            
+        } 
     },
 
     componentWillMount() {

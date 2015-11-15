@@ -19,7 +19,7 @@ const Carousel = React.createClass({
 
     getDefaultProps() {
         return {
-            showArrow: true
+            showArrow: true,
         };
     },
 
@@ -63,7 +63,7 @@ const Carousel = React.createClass({
         });
     },
 
-    handleLeftArrow(){
+    handleRightArrow(){
         this.setState({
             index: this.state.index - 1 
         }, () => {
@@ -71,7 +71,7 @@ const Carousel = React.createClass({
         });
     },
 
-    handleRightArrow(){
+    handleLeftArrow(){
         this.setState({
             index: this.state.index + 1 
         }, () => {
@@ -111,13 +111,13 @@ const Carousel = React.createClass({
         for(let i = 0; i < this.state.count; i++){
             dotNodes.push(<a href="javascript:;" key={i} data-index={i} className={this.state.index == i ? 'active _item' : '_item'} onClick={this.handleSlide}>&middot;</a>)
         }
-
+        
         let contentCss = {
             width: this.state.baseWidth * (this.state.count + 2),
             transform: `translate(-${this.state.baseWidth * (this.state.index + 1)}px, 0)`,
         }
         return (
-            <div className="ui carousel">
+            <div className='ui carousel'>
                 <div className="_content" ref='contentDOM' style={contentCss}>{contentNodes}</div>
                 <div className="_dot">
                     {dotNodes}

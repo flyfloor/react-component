@@ -54,26 +54,57 @@ const Carousel = React.createClass({
         return itemNodes;
     },
 
-    componentWillUpdate(nextProps, nextState) {
-    },
-
     handleSlide(e){
         const DOT_INDEX = DataAccessor.getData(e.target, 'index');
         this.setState({
             index: parseInt(DOT_INDEX)
+        }, () => {
+            this.addTransition();
         });
-        this.addTransition();
     },
 
-    addTransition(){
+    handleLeftArrow(){
+        this.setState({
+            index: this.state.index - 1 
+        }, () => {
+            this.addTransition(this.resetPosition);
+        });
+    },
+
+    handleRightArrow(){
+        this.setState({
+            index: this.state.index + 1 
+        }, () => {
+            this.addTransition(this.resetPosition);
+        });
+    },
+
+    resetPosition(){
+        if (this.state.index === -1) {
+            this.setState({
+                index: this.state.count - 1 
+            })
+        }
+        if (this.state.index === this.state.count) {
+            this.setState({
+                index: 0 
+            });
+        };
+    },
+
+    addTransition(callback){
         let contentDOM  = ReactDOM.findDOMNode(this.refs.contentDOM);
         contentDOM.className += ' _slide';
+        setTimeout(() => {
+            contentDOM.className = '_content';
+            if (callback) callback();
+        }, 500)
     },
 
     render() {
         let arrowNode = this.props.showArrow ? <div className="_arrow">
-                                                    <a href="javascript:;" className="_left">&larr;</a>
-                                                    <a href="javascript:;" className="_right">&rarr;</a>
+                                                    <a href="javascript:;" onClick={this.handleLeftArrow} className="_left">&larr;</a>
+                                                    <a href="javascript:;" onClick={this.handleRightArrow} className="_right">&rarr;</a>
                                                 </div> : null;
         let contentNodes = this.makeCarouselItem(this.props.items);
         let dotNodes = [];
@@ -85,7 +116,6 @@ const Carousel = React.createClass({
             width: this.state.baseWidth * (this.state.count + 2),
             transform: `translate(-${this.state.baseWidth * (this.state.index + 1)}px, 0)`,
         }
-        console.log(this.state.baseWidth * (this.state.index - 1))
         return (
             <div className="ui carousel">
                 <div className="_content" ref='contentDOM' style={contentCss}>{contentNodes}</div>

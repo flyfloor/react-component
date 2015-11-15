@@ -46,8 +46,8 @@ const Carousel = React.createClass({
             let _len = NODES.length;
             for(let i = -1; i <= _len; i++){
                 let _index = i;
-                if (_index === -1) _index = 0;
-                if (_index === _len) _index = _len - 1;
+                if (_index === -1) _index = _len - 1;
+                if (_index === _len) _index = 0;
                 itemNodes.push(<Item key={i} selected={ this.state.index == _index } style={{'width': this.state.baseWidth}} itemIndex={i}>{NODES[_index].props.children}</Item>);
             }
         }

@@ -15,6 +15,7 @@
 * tab
 * pin
 * draggable
+* carousel
 
 ### Getting Started
 
@@ -32,7 +33,7 @@ or install the latest version from github
 npm install https://github.com/jerryshew/react-component
 ```
 
-#### with skill
+#### with:
 
 * ReactJs
 * ReactDOM
@@ -57,6 +58,6 @@ simply import as a module, then use it.
 
 #### demo
 
-clone git repo, open **demo.html** in your browser to see more.
+clone git repo, open **demo.html** in your browser to see more. or just check [here](http://imiao.in).
 
 

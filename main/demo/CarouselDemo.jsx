@@ -31,7 +31,7 @@ export default class CheckBoxDemo extends React.Component {
                     <Carousel items={items} autoPlay="true" delay='5000'></Carousel>
                 </li>
                 <li>
-                    <h4>carousel with no control arrow links</h4>
+                    <h4>carousel with control arrow links</h4>
                     <Carousel items={items} showArrow="true"></Carousel>
                 </li>
             </ol>

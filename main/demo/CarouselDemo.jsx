@@ -5,16 +5,19 @@ export default class CheckBoxDemo extends React.Component {
     render() {
         let items = <div>
                         <Carousel.Item key='0'>
-                            <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"/>
+                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/ambition-morty.png"/>
                         </Carousel.Item>
                         <Carousel.Item key='1'>
-                            <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"/>
+                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/awkward-morty.png"/>
                         </Carousel.Item>
                         <Carousel.Item key='2'>
-                            <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"/>
+                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/despise.png"/>
                         </Carousel.Item>
                         <Carousel.Item key='3'>
-                            <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"/>
+                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/pride-morty.png"/>
+                        </Carousel.Item>
+                        <Carousel.Item key='4'>
+                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/surprise-morty.png"/>
                         </Carousel.Item>
                     </div>;
         return (

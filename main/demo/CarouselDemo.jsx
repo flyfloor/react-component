@@ -1,7 +1,7 @@
 import React from 'react';
 import {Carousel} from "./index.js";
 
-export default class CheckBoxDemo extends React.Component {
+export default class CarouselDemo extends React.Component {
     render() {
         let items = <div>
                         <Carousel.Item key='0'>

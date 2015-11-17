@@ -24,7 +24,7 @@
 install with npm
 
 ```
-npm install react-ui-component
+npm install react-ui-component --save
 ```
 
 or install the latest version from github

@@ -81,19 +81,23 @@ const Carousel = React.createClass({
     },
 
     handleRightArrow(){
-        this.setState({
-            index: this.state.index - 1 
-        }, () => {
-            this.addTransition(this.resetPosition);
-        });
+        if (this.state.index >= 0) {
+            this.setState({
+                index: this.state.index - 1 
+            }, () => {
+                this.addTransition(this.resetPosition);
+            });
+        };
     },
 
     handleLeftArrow(){
-        this.setState({
-            index: this.state.index + 1 
-        }, () => {
-            this.addTransition(this.resetPosition);
-        });
+        if (this.state.index < this.state.count) {
+            this.setState({
+                index: this.state.index + 1 
+            }, () => {
+                this.addTransition(this.resetPosition);
+            });
+        };
     },
 
     resetPosition(){

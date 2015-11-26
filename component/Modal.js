@@ -1,5 +1,4 @@
 const React = require('react');
-const css = require('./css/modal.less');
 
 const Modal = React.createClass({
     propTypes: {

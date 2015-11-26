@@ -1,6 +1,5 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const css = require('./css/carousel.less');
 const Item = require('./Item.js');
 const IntervalMixin = require('./mixin/IntervalMixin');
 const Data = require('./util/Data');

@@ -1,6 +1,5 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const css = require('./css/draggable.less');
 
 const Draggable = React.createClass({
     getInitialState() {

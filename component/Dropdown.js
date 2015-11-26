@@ -1,6 +1,5 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const css = require('./css/dropdown.less');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 const KeyCodeMixin = require('./mixin/KeyCodeMixin');
 const Data = require('./util/Data');

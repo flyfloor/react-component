@@ -1,6 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import resetCss from '../component/css/reset.less';
+const carousel_css = require('../component/css/carousel.less');
+const popup_css = require('../component/css/popup.less');
+const draggable_css = require('../component/css/draggable.less');
+const dropdown_css = require('../component/css/dropdown.less');
+const menu_css = require("../component/css/menu.less");
+const modal_css = require('../component/css/modal.less');
+const pin_css = require('../component/css/pin.less');
+const tab_css = require('../component/css/tab.less');
 
 import CheckBoxDemo from "./demo/CheckBoxDemo.jsx";
 import RadioDemo from "./demo/RadioDemo.jsx";

@@ -17,10 +17,10 @@ const Pin = require("./lib/Pin.js");
 const Draggable = require("./lib/Draggable.js");
 const Carousel = require("./lib/Carousel.js");
 const Data = require("./util/Data.js");
-const DocumentClickMixin = require("./mixin/DocumentClickMixin.js");
-const IntervalMixin = require("./mixin/IntervalMixin.js");
-const PopUpMixin = require("./mixin/PopUpMixin.js");
-const ScrollMixin = require("./mixin/ScrollMixin.js");
+const DocumentClickMixin = require("./lib/mixin/DocumentClickMixin.js");
+const IntervalMixin = require("./lib/mixin/IntervalMixin.js");
+const PopUpMixin = require("./lib/mixin/PopUpMixin.js");
+const ScrollMixin = require("./lib/mixin/ScrollMixin.js");
 
 module.exports = {
     React,

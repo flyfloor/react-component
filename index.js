@@ -13,7 +13,7 @@ const Tab = require('./lib/Tab');
 const Pin = require('./lib/Pin');
 const Draggable = require('./lib/Draggable');
 const Carousel = require('./lib/Carousel');
-const DataAccessor = require('./lib/DataAccessor');
+const Data = require('./lib/Data');
 
 module.exports = {
     CheckBox,
@@ -29,5 +29,5 @@ module.exports = {
     Pin,
     Draggable,
     Carousel,
-    DataAccessor,
+    Data,
 }

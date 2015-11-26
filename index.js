@@ -1,18 +1,18 @@
 'use strict';
 
-const CheckBox = require('../../component/CheckBox');
-const Radio = require('../../component/Radio');
-const RadioGroup = require('../../component/RadioGroup');
-const CheckBoxGroup = require('../../component/CheckBoxGroup');
-const DropDown = require('../../component/DropDown');
-const Menu = require('../../component/Menu');
-const ConfirmBox = require('../../component/ConfirmBox');
-const Tooltip = require('../../component/Tooltip');
-const Modal = require('../../component/Modal');
-const Tab = require('../../component/Tab');
-const Pin = require('../../component/Pin');
-const Draggable = require('../../component/Draggable');
-const Carousel = require('../../component/Carousel');
+const CheckBox = require('../../build/CheckBox');
+const Radio = require('../../build/Radio');
+const RadioGroup = require('../../build/RadioGroup');
+const CheckBoxGroup = require('../../build/CheckBoxGroup');
+const DropDown = require('../../build/DropDown');
+const Menu = require('../../build/Menu');
+const ConfirmBox = require('../../build/ConfirmBox');
+const Tooltip = require('../../build/Tooltip');
+const Modal = require('../../build/Modal');
+const Tab = require('../../build/Tab');
+const Pin = require('../../build/Pin');
+const Draggable = require('../../build/Draggable');
+const Carousel = require('../../build/Carousel');
 const DataAccessor = require('../../util/DataAccessor');
 
 module.exports = {

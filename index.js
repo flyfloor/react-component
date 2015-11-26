@@ -16,6 +16,11 @@ const Tab = require("./lib/Tab.js");
 const Pin = require("./lib/Pin.js");
 const Draggable = require("./lib/Draggable.js");
 const Carousel = require("./lib/Carousel.js");
+const Data = require("./util/Data.js");
+const DocumentClickMixin = require("./mixin/DocumentClickMixin.js");
+const IntervalMixin = require("./mixin/IntervalMixin.js");
+const PopUpMixin = require("./mixin/PopUpMixin.js");
+const ScrollMixin = require("./mixin/ScrollMixin.js");
 
 module.exports = {
     React,
@@ -33,4 +38,9 @@ module.exports = {
     Pin,
     Draggable,
     Carousel,
+    Data,
+    DocumentClickMixin,
+    PopUpMixin,
+    ScrollMixin,
+    IntervalMixin,
 }

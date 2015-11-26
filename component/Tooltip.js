@@ -1,7 +1,7 @@
 const React = require('react');
-const css = require('../css/popup.less');
-const DocumentClickMixin = require('../mixin/DocumentClickMixin');
-const PopUpMixin = require('../mixin/PopUpMixin');
+const css = require('./css/popup.less');
+const DocumentClickMixin = require('./mixin/DocumentClickMixin');
+const PopUpMixin = require('./mixin/PopUpMixin');
 
 const Tooltip = React.createClass({
     mixins: [DocumentClickMixin, PopUpMixin],

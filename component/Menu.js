@@ -1,7 +1,7 @@
 const React = require('react');
-const css = require("../css/menu.less");
+const css = require("./css/menu.less");
 const Item = require('./Item.js');
-const DocumentClickMixin = require('../mixin/DocumentClickMixin');
+const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 
 const Menu = React.createClass ({
     mixins: [DocumentClickMixin],

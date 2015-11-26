@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const css = require('../css/pin.less');
-const ScrollMixin = require('../mixin/ScrollMixin');
+const css = require('./css/pin.less');
+const ScrollMixin = require('./mixin/ScrollMixin');
 
 const Pin = React.createClass({
     mixins: [ScrollMixin],

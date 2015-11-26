@@ -1,5 +1,5 @@
 const React = require('react');
-const css = require('../css/tab.less');
+const css = require('./css/tab.less');
 const Item = require('./Item');
 
 const Tab = React.createClass({

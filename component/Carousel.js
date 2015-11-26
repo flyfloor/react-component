@@ -3,7 +3,7 @@ const ReactDOM = require('react-dom');
 const css = require('../css/carousel.less');
 const Item = require('./Item.js');
 const IntervalMixin = require('../mixin/IntervalMixin');
-const DataAccessor = require('../util/DataAccessor');
+const Data = require('../util/Data');
 
 const Carousel = React.createClass({
     mixins: [IntervalMixin],
@@ -72,7 +72,7 @@ const Carousel = React.createClass({
     },
 
     handleSlide(e){
-        const DOT_INDEX = DataAccessor.getData(e.target, 'index');
+        const DOT_INDEX = Data.getData(e.target, 'index');
         this.setState({
             index: parseInt(DOT_INDEX)
         }, () => {

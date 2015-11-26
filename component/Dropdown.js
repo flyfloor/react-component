@@ -3,7 +3,7 @@ const ReactDOM = require('react-dom');
 const css = require('../css/dropdown.less');
 const DocumentClickMixin = require('../mixin/DocumentClickMixin');
 const KeyCodeMixin = require('../mixin/KeyCodeMixin');
-const DataAccessor = require('../util/DataAccessor');
+const Data = require('../util/Data');
 
 const DropDown = React.createClass({
     mixins: [DocumentClickMixin],
@@ -264,7 +264,7 @@ DropDown.multiInput = React.createClass({
     },
 
     removeSelected(e){
-        const TAG_INDEX = DataAccessor.getData(e.target, 'index');
+        const TAG_INDEX = Data.getData(e.target, 'index');
         this.props.onSelectChange(TAG_INDEX);
         this.inputFieldFocus();
     },

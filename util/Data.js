@@ -1,4 +1,4 @@
-const DataAccessor = {
+const Data = {
     getData(dom, attr){
         if (dom && attr) {
             try{
@@ -21,4 +21,4 @@ const DataAccessor = {
     }
 }
 
-module.exports = DataAccessor;
+module.exports = Data;

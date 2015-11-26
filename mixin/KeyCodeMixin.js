@@ -54,4 +54,4 @@ const KeyCodeMixin = {
     }
 }
 
-export default KeyCodeMixin;
+module.exports = KeyCodeMixin;

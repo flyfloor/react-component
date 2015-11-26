@@ -1,31 +1,31 @@
-import React from 'react';
+const React = require('react');
 
-export default class CheckBox extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            checked: props.checked,
+export const CheckBox = React.createClass({
+    propTypes: {
+        onChange: React.PropTypes.func,
+    },
+    getInitialState() {
+        return {
+            checked:this.props.checked, 
         };
-    }
-    
+    },
     checkedChange(e){
         this.setState({
             checked: e.target.checked
         });
         if(this.props.onChange) this.props.onChange(e, this.props.storeValue);
-    }
+    },
 
     render() {
         // let {disabled, storeValue, onChange, ...props} = this.props;
         return ( 
             <label style={this.props.style} className={this.props.className}>
-                <input type="checkbox" disabled={this.props.disabled} checked={this.state.checked} onChange={this.checkedChange.bind(this)}/>
+                <input type="checkbox" disabled={this.props.disabled} checked={this.state.checked} onChange={this.checkedChange}/>
                 {this.props.children}
             </label>
         );
     }
-}
+});
 
-CheckBox.propTypes = {
-    onChange: React.PropTypes.func,
-}
+module.exports = CheckBox;
+

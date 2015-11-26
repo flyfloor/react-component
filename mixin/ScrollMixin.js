@@ -19,4 +19,4 @@ const ScrollMixin = {
 
 }
 
-export default ScrollMixin;
+module.exports = ScrollMixin;

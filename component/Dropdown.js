@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import css from '../css/dropdown.less';
-import DocumentClickMixin from '../mixin/DocumentClickMixin';
-import KeyCodeMixin from '../mixin/KeyCodeMixin';
-import DataAccessor from '../util/DataAccessor';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const css = require('../css/dropdown.less');
+const DocumentClickMixin = require('../mixin/DocumentClickMixin');
+const KeyCodeMixin = require('../mixin/KeyCodeMixin');
+const DataAccessor = require('../util/DataAccessor');
 
 const DropDown = React.createClass({
     mixins: [DocumentClickMixin],
@@ -185,7 +185,6 @@ const DropDown = React.createClass({
     }
 });
 
-export default DropDown;
 
 // dropdown option
 DropDown.Option = React.createClass({
@@ -329,4 +328,6 @@ DropDown.SearchBar = React.createClass({
         );
     }
 });
+
+module.exports = DropDown;
 

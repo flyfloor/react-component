@@ -1,7 +1,7 @@
-import React from 'react';
-import css from '../css/popup.less';
-import DocumentClickMixin from '../mixin/DocumentClickMixin';
-import PopUpMixin from '../mixin/PopUpMixin';
+const React = require('react');
+const css = require('../css/popup.less');
+const DocumentClickMixin = require('../mixin/DocumentClickMixin');
+const PopUpMixin = require('../mixin/PopUpMixin');
 
 const ConfirmBox = React.createClass({
     mixins: [DocumentClickMixin, PopUpMixin],
@@ -55,4 +55,4 @@ const ConfirmBox = React.createClass({
     }
 });
 
-export default ConfirmBox;
+module.exports = ConfirmBox;

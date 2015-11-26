@@ -1,3 +1,5 @@
+'use strict';
+
 const CheckBox = require('../../component/CheckBox');
 const Radio = require('../../component/Radio');
 const RadioGroup = require('../../component/RadioGroup');
@@ -11,6 +13,7 @@ const Tab = require('../../component/Tab');
 const Pin = require('../../component/Pin');
 const Draggable = require('../../component/Draggable');
 const Carousel = require('../../component/Carousel');
+const DataAccessor = require('../../util/DataAccessor');
 
 module.exports = {
     CheckBox,
@@ -26,4 +29,5 @@ module.exports = {
     Pin,
     Draggable,
     Carousel,
+    DataAccessor,
 }

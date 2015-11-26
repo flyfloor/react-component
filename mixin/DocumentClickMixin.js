@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 const DocumentClickMixin = {
     propTypes: {
@@ -31,4 +31,4 @@ const DocumentClickMixin = {
     }
 }
 
-export default DocumentClickMixin;
+module.exports = DocumentClickMixin;

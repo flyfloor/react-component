@@ -1,21 +1,29 @@
-import React from 'react';
-import css from '../css/tab.less';
-import Item from './Item.jsx';
+const React = require('react');
+const css = require('../css/tab.less');
+const Item = require('./Item');
 
-export default class Tab extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
+const Tab = React.createClass({
+    propTypes: {
+        position: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+        onSelect: React.PropTypes.func,
+    },
+    getDefaultProps() {
+        return {
+            selectedIndex: 0,
+            position: 'bottom',
+        };
+    },
+    getInitialState() {
+        return {
             index: this.props.selectedIndex,
-        }
-    }
-
+        };
+    },
     handleItemClick(index){
         if (this.props.onSelect) this.props.onSelect(index);
         this.setState({
             index: index, 
         });
-    }
+    },
 
     makeTabItems(content){
         const NODES = content.props.children,
@@ -23,11 +31,11 @@ export default class Tab extends React.Component {
         let itemNodes = [];
         if (NODES instanceof Array) {
             itemNodes = NODES.map((node, index) => {
-                return <Item key={index} selected={ index == INDEX } itemIndex={index} onItemClick={this.handleItemClick.bind(this)}>{node.props.children}</Item>;
+                return <Item key={index} selected={ index == INDEX } itemIndex={index} onItemClick={this.handleItemClick}>{node.props.children}</Item>;
             })
         }
         return itemNodes;
-    }
+    },
 
     render() {
         let content = this.makeTabItems(this.props.items);
@@ -37,17 +45,8 @@ export default class Tab extends React.Component {
             </div>
         );
     }
-}
-
-
-Tab.defaultProps = {
-    selectedIndex: 0,
-    position: 'bottom',
-}
-
-Tab.propTypes = {
-    position: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-    onSelect: React.PropTypes.func,
-}
+});
 
 Tab.Item = Item;
+
+module.exports = Tab;

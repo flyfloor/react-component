@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import css from '../css/draggable.less';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const css = require('../css/draggable.less');
 
 const Draggable = React.createClass({
     getInitialState() {
@@ -64,4 +64,5 @@ const Draggable = React.createClass({
     }
 });
 
-export default Draggable;
+
+module.exports = Draggable;

@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import css from '../css/carousel.less';
-import Item from './Item.jsx';
-import IntervalMixin from '../mixin/IntervalMixin';
-import DataAccessor from '../util/DataAccessor';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const css = require('../css/carousel.less');
+const Item = require('./Item.js');
+const IntervalMixin = require('../mixin/IntervalMixin');
+const DataAccessor = require('../util/DataAccessor');
 
 const Carousel = React.createClass({
     mixins: [IntervalMixin],
@@ -149,6 +149,6 @@ const Carousel = React.createClass({
     }
 });
 
-export default Carousel;
-
 Carousel.Item = Item;
+
+module.exports = Carousel;

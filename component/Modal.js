@@ -1,5 +1,5 @@
-import React from 'react';
-import css from '../css/modal.less';
+const React = require('react');
+const css = require('../css/modal.less');
 
 const Modal = React.createClass({
     propTypes: {
@@ -79,4 +79,4 @@ const Modal = React.createClass({
     }
 });
 
-export default Modal;
+module.exports = Modal;

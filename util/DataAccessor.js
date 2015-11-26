@@ -1,9 +1,5 @@
-export default class DataAccessor  {
-    constructor() {
-        // code
-    };
-
-    static getData(dom, attr){
+const DataAccessor = {
+    getData(dom, attr){
         if (dom && attr) {
             try{
                 return dom.dataset[attr];
@@ -12,9 +8,9 @@ export default class DataAccessor  {
             }
         };
         return undefined;
-    };
+    },
 
-    static setData(dom, attr, value){
+    setData(dom, attr, value){
         if (dom) {
             try{
                 dom.dataset[attr] = value;
@@ -25,4 +21,4 @@ export default class DataAccessor  {
     }
 }
 
-export default DataAccessor;
+module.exports = DataAccessor;

@@ -1,18 +1,29 @@
-import React from 'react';
-import CheckBox from './CheckBox.jsx';
+const React = require('react');
+const CheckBox = require('./CheckBox');
 
-export default class CheckBoxGroup extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            value: props.value,
-            options: props.options,
-        }
-    }
-
+export const CheckBoxGroup = React.createClass({
+    getInitialState() {
+        return {
+            value: this.props.value,
+            options: this.props.options,
+        };
+    },
+    getDefaultProps() {
+        return {
+            value: [],
+            options: [], 
+        };
+    },
+    propTypes: {
+        vaule: React.PropTypes.string,
+        options: React.PropTypes.array,
+        labelName: React.PropTypes.string,
+        valueName: React.PropTypes.string,
+        onChange: React.PropTypes.func,
+    },
     handleChange(e, storeValue){
         e.target.checked ? this.addVal(storeValue) : this.removeVal(storeValue);
-    }
+    },
 
     addVal(val){
         let flag = false;
@@ -27,7 +38,7 @@ export default class CheckBoxGroup extends React.Component {
                 value: this.state.value.concat(val) 
             }, this.valueChange);
         };
-    }
+    },
 
     removeVal(val){
         let index = this.state.value.indexOf(val);
@@ -37,11 +48,11 @@ export default class CheckBoxGroup extends React.Component {
                 value: this.state.value 
             }, this.valueChange);
         };
-    }
+    },
 
     valueChange(){
         if (this.props.onChange) this.props.onChange(this.state.value)
-    }
+    },
 
     render() {
         const [labelName = 'name', valueName = 'value'] = [this.props.labelName, this.props.valueName];
@@ -54,7 +65,7 @@ export default class CheckBoxGroup extends React.Component {
                     break;
                 }
             }
-            itemNode = <CheckBox key={item[valueName]} storeValue={item[valueName]} checked={itemChecked} onChange={this.handleChange.bind(this)}>{item[labelName]}</CheckBox>;
+            itemNode = <CheckBox key={item[valueName]} storeValue={item[valueName]} checked={itemChecked} onChange={this.handleChange}>{item[labelName]}</CheckBox>;
             optionNodes.push(itemNode);
         }
 
@@ -64,17 +75,6 @@ export default class CheckBoxGroup extends React.Component {
             </div>
         );
     }
-}
+});
 
-CheckBoxGroup.defaultProps = {
-    value: [],
-    options: [], 
-}
-
-CheckBoxGroup.propTypes = {
-    vaule: React.PropTypes.string,
-    options: React.PropTypes.array,
-    labelName: React.PropTypes.string,
-    valueName: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-}
+module.exports = CheckBoxGroup;

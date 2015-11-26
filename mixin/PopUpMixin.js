@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 const PopUpMixin = {
     propTypes: {
@@ -85,4 +85,4 @@ const PopUpMixin = {
 
 }
 
-export default PopUpMixin;
+module.exports = PopUpMixin;

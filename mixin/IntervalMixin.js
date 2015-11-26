@@ -16,4 +16,4 @@ const IntervalMixin = {
     },
 }
 
-export default IntervalMixin;
+module.exports = IntervalMixin;

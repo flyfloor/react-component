@@ -1,7 +1,7 @@
-import React from 'react';
-import css from "../css/menu.less";
-import Item from './Item.jsx';
-import DocumentClickMixin from '../mixin/DocumentClickMixin';
+const React = require('react');
+const css = require("../css/menu.less");
+const Item = require('./Item.js');
+const DocumentClickMixin = require('../mixin/DocumentClickMixin');
 
 const Menu = React.createClass ({
     mixins: [DocumentClickMixin],
@@ -64,12 +64,12 @@ const Menu = React.createClass ({
         let triggerDOM = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
         let menuNode = this.props.triggerType === 'click' ? 
                         <span className='ui menu' style={this.props.style}>
-                            <span className="_trigger" onClick={this.toggleOpen.bind(null, this)}>{triggerDOM}</span>
+                            <span className="_trigger" onClick={this.toggleOpen}>{triggerDOM}</span>
                             <div className="_wrap">
                                 {content}
                             </div>
                         </span> :
-                        <span className='ui menu' style={this.props.style} onMouseOver={this.openMenu.bind(null, this)} onMouseLeave={this.closeMenu.bind(null, this)}>
+                        <span className='ui menu' style={this.props.style} onMouseOver={this.openMenu} onMouseLeave={this.closeMenu}>
                             <span className="_trigger">{triggerDOM}</span>
                             <div className="_wrap">
                                 {content}
@@ -82,6 +82,5 @@ const Menu = React.createClass ({
     }
 });
 
-export default Menu;
-
 Menu.Item = Item;
+module.exports = Menu;

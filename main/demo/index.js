@@ -11,6 +11,7 @@ const Tab = require('../../component/Tab');
 const Pin = require('../../component/Pin');
 const Draggable = require('../../component/Draggable');
 const Carousel = require('../../component/Carousel');
+const Pagination = require('../../component/Pagination');
 
 module.exports = {
     CheckBox,
@@ -26,4 +27,5 @@ module.exports = {
     Pin,
     Draggable,
     Carousel,
+    Pagination,
 }

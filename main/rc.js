@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import resetCss from '../component/css/reset.less';
 
 import CheckBox from "../component/CheckBox.js";
 import Radio from "../component/Radio.js";

@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import resetCss from './css/reset.less';
-const carousel_css = require('./css/carousel.less');
-const popup_css = require('./css/popup.less');
-const draggable_css = require('./css/draggable.less');
-const dropdown_css = require('./css/dropdown.less');
-const menu_css = require("./css/menu.less");
-const modal_css = require('./css/modal.less');
-const pin_css = require('./css/pin.less');
-const tab_css = require('./css/tab.less');
-const pagination_css = require('./css/pagination.less');
+import demoCss from './css/demo.less';
+import carousel_css from './css/carousel.less';
+import popup_css from './css/popup.less';
+import draggable_css from './css/draggable.less';
+import dropdown_css from './css/dropdown.less';
+import menu_css from "./css/menu.less";
+import modal_css from './css/modal.less';
+import pin_css from './css/pin.less';
+import tab_css from './css/tab.less';
+import pagination_css from './css/pagination.less';
 
 import CheckBoxDemo from "./demo/CheckBoxDemo.jsx";
 import RadioDemo from "./demo/RadioDemo.jsx";
@@ -26,17 +27,86 @@ import DraggableDemo from "./demo/DraggableDemo.jsx";
 import CarouselDemo from "./demo/CarouselDemo.jsx";
 import PaginationDemo from "./demo/PaginationDemo.jsx";
 
-ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
-ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
-ReactDOM.render(<RadioGroupDemo/>, document.getElementById('radio-group'));
-ReactDOM.render(<CheckBoxGroupDemo/>, document.getElementById('checkbox-group'));
-ReactDOM.render(<DropDownDemo/>, document.getElementById('drop-down'));
-ReactDOM.render(<MenuDemo/>, document.getElementById('menu'));
-ReactDOM.render(<ConfirmBoxDemo/>, document.getElementById('confirm-box'));
-ReactDOM.render(<TooltipDemo/>, document.getElementById('tooltip'));
-ReactDOM.render(<ModalDemo/>, document.getElementById('modal'));
-ReactDOM.render(<TabDemo/>, document.getElementById('tab'));
-ReactDOM.render(<PinDemo/>, document.getElementById('pin'));
-ReactDOM.render(<DraggableDemo/>, document.getElementById('draggable'));
-ReactDOM.render(<CarouselDemo/>, document.getElementById('carousel'));
-ReactDOM.render(<PaginationDemo/>, document.getElementById('pagination'));
+class Demo extends React.Component {
+    render() {
+        return ( 
+            <div>
+                <div className="header">
+                    <div className="container">
+                        <h2>React Component</h2>
+                        <blockquote>Some basic component,<b>barely no css</b>, <b>build with ReactJs</b></blockquote> 
+                        <ul>
+                            <li>Auther: <a target="_blank" href="http://braavos.me">落在深海</a></li>
+                            <li>Github repo: <a target="_blank" href="http://github.com/jerryshew/react-component">react-component</a></li>
+                            <li>Npm: <a href="https://www.npmjs.com/package/react-ui-component" target="_blank">react-ui-component</a></li>
+                            <li>Group: <a target="_blank" href="http://wecatch.me">wecatch</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <ol className="wrapper">
+                    <div className="container">
+                        <li>
+                            <h3>checkbox</h3>
+                            <CheckBoxDemo/>
+                        </li>
+                        <li>
+                            <h3>radio</h3>
+                            <RadioDemo/>
+                        </li>
+                        <li>
+                            <h3>radio group</h3>
+                            <RadioGroupDemo/>
+                        </li>
+                        <li>
+                            <h3>checkbox group</h3>
+                            <CheckBoxGroupDemo/>
+                        </li>
+                        <li>
+                            <h3>drop down</h3>
+                            <DropDownDemo/>
+                        </li>
+                        <li>
+                            <h3>menu</h3>
+                            <MenuDemo/>
+                        </li>
+                        <li>
+                            <h3>confirm box</h3>
+                            <ConfirmBoxDemo/>
+                        </li>
+                        <li>
+                            <h3>tooltip</h3>
+                            <TooltipDemo/>
+                        </li>
+                        <li>
+                            <h3>modal</h3>
+                            <ModalDemo/>
+                        </li>
+                        <li>
+                            <h3>tab</h3>
+                            <TabDemo/>
+                        </li>
+                        <li>
+                            <h3>pin, something fixed position</h3>
+                            <PinDemo/>
+                        </li>
+                        <li>
+                            <h3>something can drag</h3>
+                            <DraggableDemo/>
+                        </li>
+                        <li>
+                            <h3>carousel</h3>
+                            <CarouselDemo/>
+                        </li>
+                        <li>
+                            <h3>pagination</h3>
+                            <PaginationDemo/>
+                        </li>
+                    </div>
+                </ol>
+            </div>
+        );
+    }
+}
+
+
+ReactDOM.render(<Demo/> , document.getElementById('root'));

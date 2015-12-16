@@ -1,6 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import resetCss from '../css/reset.less';
+import resetCss from './css/reset.less';
+const carousel_css = require('./css/carousel.less');
+const popup_css = require('./css/popup.less');
+const draggable_css = require('./css/draggable.less');
+const dropdown_css = require('./css/dropdown.less');
+const menu_css = require("./css/menu.less");
+const modal_css = require('./css/modal.less');
+const pin_css = require('./css/pin.less');
+const tab_css = require('./css/tab.less');
+const pagination_css = require('./css/pagination.less');
 
 import CheckBoxDemo from "./demo/CheckBoxDemo.jsx";
 import RadioDemo from "./demo/RadioDemo.jsx";
@@ -15,6 +24,7 @@ import TabDemo from "./demo/TabDemo.jsx";
 import PinDemo from "./demo/PinDemo.jsx";
 import DraggableDemo from "./demo/DraggableDemo.jsx";
 import CarouselDemo from "./demo/CarouselDemo.jsx";
+import PaginationDemo from "./demo/PaginationDemo.jsx";
 
 ReactDOM.render(<CheckBoxDemo/>, document.getElementById('checkbox'));
 ReactDOM.render(<RadioDemo/>, document.getElementById('radio'));
@@ -29,3 +39,4 @@ ReactDOM.render(<TabDemo/>, document.getElementById('tab'));
 ReactDOM.render(<PinDemo/>, document.getElementById('pin'));
 ReactDOM.render(<DraggableDemo/>, document.getElementById('draggable'));
 ReactDOM.render(<CarouselDemo/>, document.getElementById('carousel'));
+ReactDOM.render(<PaginationDemo/>, document.getElementById('pagination'));

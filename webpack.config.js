@@ -4,13 +4,14 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
 
-    entry: [
-        'webpack-hot-middleware/client',
-        "./main/entre.js"
-    ],
+    entry: {
+        // 'webpack-hot-middleware/client',
+        rc: "./main/rc.js",
+        app: "./main/entre.js"
+    },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'app.js',
+        filename: '[name].js',
         publicPath: '/dist/'
     },
     plugins: [

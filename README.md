@@ -16,6 +16,7 @@
 * pin
 * draggable
 * carousel
+* pagination
 
 ### Getting Started
 

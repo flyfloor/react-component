@@ -16,6 +16,7 @@ var Tab = require("./lib/Tab.js");
 var Pin = require("./lib/Pin.js");
 var Draggable = require("./lib/Draggable.js");
 var Carousel = require("./lib/Carousel.js");
+var Pagination = require("./lib/Pagination.js");
 var Data = require("./lib/util/Data.js");
 var DocumentClickMixin = require("./lib/mixin/DocumentClickMixin.js");
 var IntervalMixin = require("./lib/mixin/IntervalMixin.js");
@@ -36,6 +37,7 @@ module.exports = {
     Pin: Pin,
     Draggable: Draggable,
     Carousel: Carousel,
+    Pagination: Pagination,
     Data: Data,
     DocumentClickMixin: DocumentClickMixin,
     PopUpMixin: PopUpMixin,

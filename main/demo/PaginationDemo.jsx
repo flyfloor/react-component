@@ -19,9 +19,9 @@ export default class PaginationDemo extends React.Component {
         return (
             <ol>
                 <li>
-                    <h4>default pagination</h4>
+                    <h4>default pagination with page change event</h4>
                     <p>now are on page {this.state.current}</p>
-                    <Pagination totalCount='1000' onChange={this.handlePageChange.bind(this)}/>
+                    <Pagination totalPage='10' onChange={this.handlePageChange.bind(this)}/>
                 </li>
                 <li>
                     <h4>no count pagination</h4>
@@ -29,7 +29,11 @@ export default class PaginationDemo extends React.Component {
                 </li>
                 <li>
                     <h4>with given current page</h4>
-                    <Pagination currentPage='6' totalCount='1000'/>
+                    <Pagination currentPage='6' totalPage='100'/>
+                </li>
+                <li>
+                    <h4>show full range</h4>
+                    <Pagination showRange='true' totalPage='100'/>
                 </li>
             </ol>
         );

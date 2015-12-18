@@ -13,6 +13,7 @@ const SlideMenu = React.createClass({
     },
     getDefaultProps() {
         return {
+            width: 300,
             display: false,
             position: 'right',
         };
@@ -20,28 +21,28 @@ const SlideMenu = React.createClass({
 
     calcPositionStyle(){
         let position = this.props.position, 
-            size = 300,
-            cord = this.state.display ? 0 : size;
+            width = this.props.width,
+            cord = this.state.display ? 0 : width;
 
         switch(position){
             case 'left':
                 return {transform: `translate(${-cord}px, 0)`,
-                        width: `${size}px`,
+                        width: `${width}px`,
                         left: 0,
                         top: 0}
             case 'top':
                 return {transform: `translate(0, ${-cord}px)`,
-                        height: `${size}px`,
+                        height: `${width}px`,
                         left: 0,
                         top: 0}
             case 'bottom':
                 return {transform: `translate(0, ${cord}px)`,
-                        height: `${size}px`,
+                        height: `${width}px`,
                         left: 0,
                         bottom: 0}
             default:
                 return {transform: `translate(${cord}px, 0)`,
-                        width: `${size}px`,
+                        width: `${width}px`,
                         right:0,
                         top:0}
         }
@@ -64,11 +65,6 @@ const SlideMenu = React.createClass({
 
     render() {
         let display = this.state.display;
-
-        // let contentCss = {
-        //     width: this.state.baseWidth * (this.state.count + 2),
-        //     transform: `translate(-${this.state.baseWidth * (this.state.index + 1)}px, 0)`,
-        // }
 
         return (
             <div className={`ui slide-menu ${display ? '_display': ''}`}>

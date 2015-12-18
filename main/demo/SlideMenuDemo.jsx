@@ -56,8 +56,8 @@ export default class SlideMenuDemo extends React.Component {
                 </li>
                     <li>
                         <h4>slide menu with position</h4>
-                        <a href="javascript:;" onClick={this.handleOpenSlide.bind(this)} data-state="positionLeft">left</a>
-                        <SlideMenu position="left" display={this.state.positionLeft} onSlideClose={this.handleAllSlideClose.bind(this)}>
+                        <a href="javascript:;" onClick={this.handleOpenSlide.bind(this)} data-state="positionLeft">left, with given width</a>
+                        <SlideMenu position="left" display={this.state.positionLeft} width="500" onSlideClose={this.handleAllSlideClose.bind(this)}>
                             <h4>this is header</h4>
                             <p>this is content, where have something here, fill in</p>
                             <a href="http://braavos.me" target="_blank">落在深海</a>
@@ -84,7 +84,7 @@ export default class SlideMenuDemo extends React.Component {
                     <li>
                         <h4>with close slide menu action</h4>
                         <a href="javascript:;" onClick={this.handleOpenSlide.bind(this)} data-state="slide1">open slide</a>
-                        <SlideMenu display={this.state.slide1} >
+                        <SlideMenu display={this.state.slide1} onSlideClose={this.handleAllSlideClose.bind(this)}>
                             <h4>this is header</h4>
                             <p>this is content, where have something here, fill in</p>
                             <a href="http://braavos.me" target="_blank">落在深海</a>

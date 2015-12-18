@@ -6,7 +6,7 @@ export default class PinDemo extends React.Component {
 
     render() {
         return (
-            <div style={{'height':'1500'}} className='pin-demo'>
+            <div className='pin-demo'>
                 <ol>
                     <li>
                         <h4>pin something</h4>

@@ -2,7 +2,8 @@
 
 
 @{NS}.slide-menu {
-    @motion: cubic-bezier(0.64, -0.01, 0.41, 1.15);
+    @motion: cubic-bezier(0.64, -0.01, 0.41, 1.05);
+    @basic_transition: background .5s @motion 0s, visibility .5s @motion 0s, opacity .5s @motion 0s;
     ._content {
         -webkit-transition: transform 0.5s @motion;
         -o-transition: transform 0.5s @motion;
@@ -24,9 +25,10 @@
         right: 0;
         bottom: 0;
         top: 0;
-        -webkit-transition: background .5s @motion 0s, visibility .5s @motion 0s, opacity .5s @motion 0s;
-        -o-transition: background .5s @motion 0s, visibility .5s @motion 0s, opacity .5s @motion 0s;
-        transition: background .5s @motion 0s, visibility .5s @motion 0s, opacity .5s @motion 0s;
+        z-index: -1;
+        -webkit-transition: @basic_transition, z-index .5s @motion .5s;
+        -o-transition: @basic_transition, z-index .5s @motion .5s;
+        transition: @basic_transition, z-index .5s @motion .5s;
     }
 
     &._display {
@@ -35,6 +37,9 @@
             visibility: visible;
             z-index: 999;
             background: rgba(0,0,0,.5);
+            -webkit-transition: @basic_transition;
+            -o-transition: @basic_transition;
+            transition: @basic_transition;
         }
     }
 }

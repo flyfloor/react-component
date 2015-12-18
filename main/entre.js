@@ -47,64 +47,62 @@ class Demo extends React.Component {
                 </div>
                 <div className="wrapper">
                     <ol className="container">
-                        {/*
-                            <li>
-                                <h3>checkbox</h3>
-                                <CheckBoxDemo/>
-                            </li>
-                            <li>
-                                <h3>radio</h3>
-                                <RadioDemo/>
-                            </li>
-                            <li>
-                                <h3>radio group</h3>
-                                <RadioGroupDemo/>
-                            </li>
-                            <li>
-                                <h3>checkbox group</h3>
-                                <CheckBoxGroupDemo/>
-                            </li>
-                            <li>
-                                <h3>drop down</h3>
-                                <DropDownDemo/>
-                            </li>
-                            <li>
-                                <h3>menu</h3>
-                                <MenuDemo/>
-                            </li>
-                            <li>
-                                <h3>confirm box</h3>
-                                <ConfirmBoxDemo/>
-                            </li>
-                            <li>
-                                <h3>tooltip</h3>
-                                <TooltipDemo/>
-                            </li>
-                            <li>
-                                <h3>modal</h3>
-                                <ModalDemo/>
-                            </li>
-                            <li>
-                                <h3>tab</h3>
-                                <TabDemo/>
-                            </li>
-                            <li>
-                                <h3>pin, something fixed position</h3>
-                                <PinDemo/>
-                            </li>
-                            <li>
-                                <h3>something can drag</h3>
-                                <DraggableDemo/>
-                            </li>
-                            <li>
-                                <h3>carousel</h3>
-                                <CarouselDemo/>
-                            </li>
-                            <li>
-                                <h3>pagination</h3>
-                                <PaginationDemo/>
-                            </li>
-                        */}
+                        <li>
+                            <h3>checkbox</h3>
+                            <CheckBoxDemo/>
+                        </li>
+                        <li>
+                            <h3>radio</h3>
+                            <RadioDemo/>
+                        </li>
+                        <li>
+                            <h3>radio group</h3>
+                            <RadioGroupDemo/>
+                        </li>
+                        <li>
+                            <h3>checkbox group</h3>
+                            <CheckBoxGroupDemo/>
+                        </li>
+                        <li>
+                            <h3>drop down</h3>
+                            <DropDownDemo/>
+                        </li>
+                        <li>
+                            <h3>menu</h3>
+                            <MenuDemo/>
+                        </li>
+                        <li>
+                            <h3>confirm box</h3>
+                            <ConfirmBoxDemo/>
+                        </li>
+                        <li>
+                            <h3>tooltip</h3>
+                            <TooltipDemo/>
+                        </li>
+                        <li>
+                            <h3>modal</h3>
+                            <ModalDemo/>
+                        </li>
+                        <li>
+                            <h3>tab</h3>
+                            <TabDemo/>
+                        </li>
+                        <li>
+                            <h3>pin, something fixed position</h3>
+                            <PinDemo/>
+                        </li>
+                        <li>
+                            <h3>something can drag</h3>
+                            <DraggableDemo/>
+                        </li>
+                        <li>
+                            <h3>carousel</h3>
+                            <CarouselDemo/>
+                        </li>
+                        <li>
+                            <h3>pagination</h3>
+                            <PaginationDemo/>
+                        </li>
                         <li>
                             <h3>slide bar</h3>
                             <SlideMenuDemo/>

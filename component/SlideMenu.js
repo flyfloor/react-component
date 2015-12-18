@@ -21,26 +21,30 @@ const SlideMenu = React.createClass({
     calcPositionStyle(){
         let position = this.props.position, 
             size = 300,
-            cord = this.state.display ? 0 : size,
-            style = {};
+            cord = this.state.display ? 0 : size;
 
         switch(position){
             case 'left':
-                style = {
-                            transform: `translate(${-cord}px, 0)`,
-                            width: `${size}px`,
-                            left: 0,
-                            top: 0
-                        }
+                return {transform: `translate(${-cord}px, 0)`,
+                        width: `${size}px`,
+                        left: 0,
+                        top: 0}
+            case 'top':
+                return {transform: `translate(0, ${-cord}px)`,
+                        height: `${size}px`,
+                        left: 0,
+                        top: 0}
+            case 'bottom':
+                return {transform: `translate(0, ${cord}px)`,
+                        height: `${size}px`,
+                        left: 0,
+                        bottom: 0}
             default:
-                style = {
-                            transform: `translate(${cord}px, 0)`,
-                            width: `${size}px`,
-                            right:0,
-                            top:0
-                        }
+                return {transform: `translate(${cord}px, 0)`,
+                        width: `${size}px`,
+                        right:0,
+                        top:0}
         }
-        return style;
     },
     
     handleCloseSide(){

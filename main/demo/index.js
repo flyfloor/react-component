@@ -12,6 +12,7 @@ const Pin = require('../../component/Pin');
 const Draggable = require('../../component/Draggable');
 const Carousel = require('../../component/Carousel');
 const Pagination = require('../../component/Pagination');
+const SlideMenu = require('../../component/SlideMenu');
 
 module.exports = {
     CheckBox,
@@ -28,4 +29,5 @@ module.exports = {
     Draggable,
     Carousel,
     Pagination,
+    SlideMenu,
 }

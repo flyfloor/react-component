@@ -1,0 +1,40 @@
+@import url('meta');
+
+
+@{NS}.slide-menu {
+    @motion: cubic-bezier(0.64, -0.01, 0.41, 1.15);
+    ._content {
+        -webkit-transition: transform 0.5s @motion;
+        -o-transition: transform 0.5s @motion;
+        transition: transform 0.5s @motion;
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        height: 100%;
+        background: @white;
+    }
+
+    ._overlay {
+        opacity: 0;
+        position: fixed;
+        visibility: hidden;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        -webkit-transition: background .5s @motion 0s, visibility .5s @motion 0s, opacity .5s @motion 0s;
+        -o-transition: background .5s @motion 0s, visibility .5s @motion 0s, opacity .5s @motion 0s;
+        transition: background .5s @motion 0s, visibility .5s @motion 0s, opacity .5s @motion 0s;
+    }
+
+    &._display {
+        ._overlay {
+            opacity: 1;
+            visibility: visible;
+            z-index: 999;
+            background: rgba(0,0,0,.5);
+        }
+    }
+}

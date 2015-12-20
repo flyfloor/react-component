@@ -15,6 +15,12 @@ const RadioGroup = React.createClass({
             value: this.props.value, 
         };
     },
+    getDefaultProps() {
+        return {
+            labelName: 'name',
+            valueName: 'value',
+        };
+    },
     toggleChange(e, storeValue){
         this.setState({
             value: storeValue, 
@@ -32,7 +38,7 @@ const RadioGroup = React.createClass({
     },
 
     render() {
-        const [labelName = 'name', valueName = 'value'] = [this.props.labelName, this.props.valueName];
+        const [labelName, valueName] = [this.props.labelName, this.props.valueName];
         let optionNodes = [], itemChecked, itemNode;
 
         for (let item of this.state.options){

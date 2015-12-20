@@ -11,6 +11,8 @@ export const CheckBoxGroup = React.createClass({
     getDefaultProps() {
         return {
             value: [],
+            labelName: 'name',
+            valueName: 'value',
             options: [], 
         };
     },
@@ -55,7 +57,7 @@ export const CheckBoxGroup = React.createClass({
     },
 
     render() {
-        const [labelName = 'name', valueName = 'value'] = [this.props.labelName, this.props.valueName];
+        const [labelName, valueName] = [this.props.labelName, this.props.valueName];
         let optionNodes = [], itemNode, valArr;
         for (let item of this.state.options){
             let itemChecked = false;

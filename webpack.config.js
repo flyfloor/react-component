@@ -14,10 +14,10 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: false,
-            mangle: false
-        })
+        // new webpack.optimize.UglifyJsPlugin({
+        //     sourceMap: false,
+        //     mangle: false
+        // })
     ],
     module: {
         loaders: [

@@ -27,6 +27,8 @@ const DropDown = React.createClass({
 
     getDefaultProps() {
         return {
+            labelName: 'name',
+            valueName: 'value',
             multi: false,
             placeHolder: 'click to select...',
         };
@@ -56,7 +58,7 @@ const DropDown = React.createClass({
     },
 
     formatDrop(){
-        const [LABEL_NAME = 'name', VALUE_NAME = 'value'] = [this.props.labelName, this.props.valueName];
+        const [LABEL_NAME, VALUE_NAME] = [this.props.labelName, this.props.valueName];
         let optionNodes = [], selected, node,
             placeHolder = this.props.placeHolder,
             filterText = this.state.filterText,

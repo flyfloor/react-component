@@ -47,19 +47,19 @@ class Demo extends React.Component {
                 </div>
                 <div className="wrapper">
                     <ol className="container">
-                        <li>
+                        {/*<li>
                             <h3>checkbox</h3>
                             <CheckBoxDemo/>
                         </li>
                         <li>
                             <h3>radio</h3>
                             <RadioDemo/>
-                        </li>
+                        </li>*/}
                         <li>
                             <h3>radio group</h3>
                             <RadioGroupDemo/>
                         </li>
-                        <li>
+                        {/*<li>
                             <h3>checkbox group</h3>
                             <CheckBoxGroupDemo/>
                         </li>
@@ -106,7 +106,7 @@ class Demo extends React.Component {
                         <li>
                             <h3>slide bar</h3>
                             <SlideMenuDemo/>
-                        </li>
+                        </li>*/}
                     </ol>
                 </div>
             </div>

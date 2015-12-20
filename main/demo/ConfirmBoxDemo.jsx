@@ -13,6 +13,8 @@ export default class ConfirmBoxDemo extends React.Component {
     }
 
     render() {
+        let confirmText = <p>√ yes</p>;
+        
         return (
             <ol>
                 <li>
@@ -23,7 +25,7 @@ export default class ConfirmBoxDemo extends React.Component {
                 </li>
                 <li>
                     <h4>default confirm box, with action handle</h4>
-                    <ConfirmBox title='confirm delete? realy you want delete this? are you sure?' onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
+                    <ConfirmBox title='confirm delete? realy you want delete this? are you sure?' confirmText={confirmText} onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>

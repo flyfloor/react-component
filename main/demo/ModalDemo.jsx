@@ -61,21 +61,21 @@ export default class ModalDemo extends React.Component {
                     <Modal title='confirm deleted' onClose={this.handleClose.bind(this)} display={this.state.display}>
                         <h4>this is content</h4>
                         <p>asdfhkjfkwlg mean no shit</p>
-                        <a href="javascript:;">delete user</a>
+                        <a href="http://braavos.me" target="_blank">hello</a>
                     </Modal>
                 </li>
                 <li>
                     <h4>default confirm box, with confirm cancel action handle</h4>
                     <a href="javascript:;" onClick={this.showModal1.bind(this)}>open another modal</a>
                     <Modal display={this.state.display1} onClose={this.handleClose.bind(this)} onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
-                        <a href='javascript:;'>delete</a>
+                        <a href='http://braavos.me' target="_blank">hello</a>
                     </Modal>
                 </li>
                 <li>
                     <h4>default confirm box, with confirm action handle</h4>
                     <a href="javascript:;" onClick={this.showModal2.bind(this)}>open another modal</a>
                     <Modal display={this.state.display2} onClose={this.handleClose.bind(this)} onConfirm={this.handleConfirm1.bind(this)}>
-                        <a href='javascript:;'>delete</a>
+                        <a href='http://braavos.me' target="_blank">hello</a>
                     </Modal>
                 </li>
             </ol>

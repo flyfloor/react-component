@@ -71,7 +71,7 @@ const Carousel = React.createClass({
     },
 
     handleSlide(e){
-        const DOT_INDEX = Data.getData(e.target, 'index');
+        const DOT_INDEX = Data.get(e.target, 'index');
         this.setState({
             index: parseInt(DOT_INDEX)
         }, () => {
@@ -133,7 +133,7 @@ const Carousel = React.createClass({
         let dotNodes = [];
 
         for(let i = 0; i < this.state.count; i++){
-            dotNodes.push(<a href="javascript:;" key={i} data-index={i} className={this.state.index == i ? 'active _item' : '_item'} onClick={this.handleSlide}>&middot;</a>)
+            dotNodes.push(<a href="javascript:;" key={i} data-index={i} className={this.state.index == i ? '_active _item' : '_item'} onClick={this.handleSlide}>&middot;</a>)
         }
         
         let contentCss = {

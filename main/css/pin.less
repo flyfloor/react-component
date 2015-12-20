@@ -1,6 +1,9 @@
 @import url('meta');
 
 @{NS}.pin {
+    -webkit-transition: position .5s ease-in-out 0s;
+    -o-transition: position .5s ease-in-out 0s;
+    transition: position .5s ease-in-out 0s;
     &.fixed {
         position: fixed;
         z-index: 999;

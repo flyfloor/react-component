@@ -19,7 +19,7 @@ const Pagination = React.createClass({
     },
     
     onPageChange(e){
-        let pageNum = Data.getData(e.target, 'page');
+        let pageNum = Data.get(e.target, 'page');
         this.setState({
             currentPage: pageNum
         });

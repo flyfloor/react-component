@@ -10,7 +10,7 @@ const Item = React.createClass({
     },
 
     render() {
-        let isActive = this.props.selected ? 'active' : '';
+        let isActive = this.props.selected ? '_active' : '';
         return (
             <div className={'_item ' + isActive} onClick={this.handleClick} {...this.props}>
                 {this.props.children}

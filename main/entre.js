@@ -67,7 +67,7 @@ class Demo extends React.Component {
                             <h3>drop down</h3>
                             <DropDownDemo/>
                         </li>
-                        {/*<li>
+                        <li>
                             <h3>menu</h3>
                             <MenuDemo/>
                         </li>
@@ -106,7 +106,7 @@ class Demo extends React.Component {
                         <li>
                             <h3>slide bar</h3>
                             <SlideMenuDemo/>
-                        </li>*/}
+                        </li>
                     </ol>
                 </div>
             </div>

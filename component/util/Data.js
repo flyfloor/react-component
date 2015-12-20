@@ -1,5 +1,5 @@
 const Data = {
-    getData(dom, attr){
+    get(dom, attr){
         if (dom && attr) {
             try{
                 return dom.dataset[attr];
@@ -10,7 +10,7 @@ const Data = {
         return undefined;
     },
 
-    setData(dom, attr, value){
+    set(dom, attr, value){
         if (dom) {
             try{
                 dom.dataset[attr] = value;

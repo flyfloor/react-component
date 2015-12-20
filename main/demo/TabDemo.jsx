@@ -23,7 +23,7 @@ export default class TabDemo extends React.Component {
                                 <a href="javascript:;">second</a>
                             </Tab.Item>
                             <Tab.Item key='2'>
-                                <a target='_blank' href="http://www.baidu.com">third</a>
+                                <a target='_blank' href="http://braavos.me">third</a>
                             </Tab.Item>
                             <Tab.Item key='3'>
                                 <a href="javascript:;">

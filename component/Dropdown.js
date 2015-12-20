@@ -263,7 +263,7 @@ DropDown.multiInput = React.createClass({
     },
 
     removeSelected(e){
-        const TAG_INDEX = Data.getData(e.target, 'index');
+        const TAG_INDEX = Data.get(e.target, 'index');
         this.props.onSelectChange(TAG_INDEX);
         this.inputFieldFocus();
     },

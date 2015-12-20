@@ -20,6 +20,9 @@ export default class CarouselDemo extends React.Component {
                             <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/surprise-morty.png"/>
                         </Carousel.Item>
                     </div>;
+
+        let leftArrow = <p>go left</p>;
+        let rightArrow = <p>go right</p>;
         return (
             <ol style={{'width': '600'}}>
                 <li>
@@ -31,8 +34,12 @@ export default class CarouselDemo extends React.Component {
                     <Carousel items={items} autoPlay="true" delay='5000'></Carousel>
                 </li>
                 <li>
-                    <h4>carousel with control arrow links</h4>
+                    <h4>carousel with default control arrow links</h4>
                     <Carousel items={items} showArrow="true"></Carousel>
+                </li>
+                <li>
+                    <h4>carousel with custom control arrow links</h4>
+                    <Carousel items={items} leftArrow={leftArrow} rightArrow={rightArrow} showArrow="true"></Carousel>
                 </li>
             </ol>
         );

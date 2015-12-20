@@ -4,24 +4,20 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
 
-    entry: {
-        // 'webpack-hot-middleware/client',
-        rc: "./main/rc.js",
-        app: "./main/entre.js"
-    },
+    entry: "./main/entre.js",
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: '[name].js',
+        filename: 'demo.js',
         publicPath: '/dist/'
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     sourceMap: false,
-        //     mangle: false
-        // })
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            mangle: false
+        })
     ],
     module: {
         loaders: [

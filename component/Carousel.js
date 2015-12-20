@@ -122,12 +122,16 @@ const Carousel = React.createClass({
     },
 
     render() {
-        let arrowNode = this.props.showArrow ? <div className="_arrow">
-                                                    <a href="javascript:;" onClick={this.handleLeftArrow} className="_left">&larr;</a>
-                                                    <a href="javascript:;" onClick={this.handleRightArrow} className="_right">&rarr;</a>
+        let leftArrow = this.props.leftArrow,
+            rightArrow = this.props.rightArrow,
+            arrowNode = this.props.showArrow ? <div className="_arrow">
+                                                    <a href="javascript:;" onClick={this.handleLeftArrow} className="_left">{leftArrow ? leftArrow :  '←'}</a>
+                                                    <a href="javascript:;" onClick={this.handleRightArrow} className="_right">{rightArrow ? rightArrow : '→'}</a>
                                                 </div> : null;
+
         let contentNodes = this.makeCarouselItem(this.props.items);
         let dotNodes = [];
+
         for(let i = 0; i < this.state.count; i++){
             dotNodes.push(<a href="javascript:;" key={i} data-index={i} className={this.state.index == i ? 'active _item' : '_item'} onClick={this.handleSlide}>&middot;</a>)
         }

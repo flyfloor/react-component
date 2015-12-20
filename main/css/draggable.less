@@ -7,4 +7,11 @@
     padding: 10px;
     border: 1px solid @gray_b;
     background: #f3f4f5;
+    opacity: 1;
+    &.dragging {
+        -webkit-transition: opacity 0s ease-in-out .01s;
+        -o-transition: opacity 0s ease-in-out .01s;
+        transition: opacity 0s ease-in-out .01s;
+        opacity: 0;
+    }
 }

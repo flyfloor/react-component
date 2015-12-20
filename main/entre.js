@@ -70,7 +70,7 @@ class Demo extends React.Component {
                         <li>
                             <h3>menu</h3>
                             <MenuDemo/>
-                        </li>*/}
+                        </li>
                         <li>
                             <h3>confirm box</h3>
                             <ConfirmBoxDemo/>
@@ -79,7 +79,7 @@ class Demo extends React.Component {
                             <h3>tooltip</h3>
                             <TooltipDemo/>
                         </li>
-                        {/*<li>
+                        <li>
                             <h3>modal</h3>
                             <ModalDemo/>
                         </li>
@@ -90,12 +90,12 @@ class Demo extends React.Component {
                         <li>
                             <h3>pin, something fixed position</h3>
                             <PinDemo/>
-                        </li>
+                        </li>*/}
                         <li>
                             <h3>something can drag</h3>
                             <DraggableDemo/>
                         </li>
-                        <li>
+                        {/*<li>
                             <h3>carousel</h3>
                             <CarouselDemo/>
                         </li>

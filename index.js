@@ -3,6 +3,11 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var Data = require("./lib/util/Data.js");
+var DocumentClickMixin = require("./lib/mixin/DocumentClickMixin.js");
+var IntervalMixin = require("./lib/mixin/IntervalMixin.js");
+var PopUpMixin = require("./lib/mixin/PopUpMixin.js");
+var ScrollMixin = require("./lib/mixin/ScrollMixin.js");
 var CheckBox = require("./lib/CheckBox.js");
 var Radio = require("./lib/Radio.js");
 var RadioGroup = require("./lib/RadioGroup.js");
@@ -17,13 +22,14 @@ var Pin = require("./lib/Pin.js");
 var Draggable = require("./lib/Draggable.js");
 var Carousel = require("./lib/Carousel.js");
 var Pagination = require("./lib/Pagination.js");
-var Data = require("./lib/util/Data.js");
-var DocumentClickMixin = require("./lib/mixin/DocumentClickMixin.js");
-var IntervalMixin = require("./lib/mixin/IntervalMixin.js");
-var PopUpMixin = require("./lib/mixin/PopUpMixin.js");
-var ScrollMixin = require("./lib/mixin/ScrollMixin.js");
+var SlideMenu = require("./lib/SlideMenu.js");
 
 module.exports = {
+    Data: Data,
+    DocumentClickMixin: DocumentClickMixin,
+    PopUpMixin: PopUpMixin,
+    ScrollMixin: ScrollMixin,
+    IntervalMixin: IntervalMixin,
     CheckBox: CheckBox,
     Radio: Radio,
     RadioGroup: RadioGroup,
@@ -38,9 +44,5 @@ module.exports = {
     Draggable: Draggable,
     Carousel: Carousel,
     Pagination: Pagination,
-    Data: Data,
-    DocumentClickMixin: DocumentClickMixin,
-    PopUpMixin: PopUpMixin,
-    ScrollMixin: ScrollMixin,
-    IntervalMixin: IntervalMixin,
+    SlideMenu: SlideMenu,
 }

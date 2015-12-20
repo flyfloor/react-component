@@ -194,11 +194,9 @@ DropDown.Option = React.createClass({
     },
 
     render(){
-        let node = this.props.selected ? <i>√</i> : null;
         return (
-            <div className={this.props.selected ? 'active _item' : '_item'} onClick={this.handleClick}>
+            <div className={this.props.selected ? '_active _item' : '_item'} onClick={this.handleClick}>
                 {this.props.children}
-                {node}
             </div>
         );
     }
@@ -282,7 +280,7 @@ DropDown.multiInput = React.createClass({
         const TAGS = this.props.selectedTags.map((tag, index) => {
             return <span className='_tag' key={index} onClick={this.removeSelected}>
                         <san className="_text">{tag}</san>
-                        <a href="javascript:;" data-index={index}>x</a>
+                        <a href="javascript:;" data-index={index} className="_delete"></a>
                     </span>;
         });
 

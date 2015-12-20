@@ -1,15 +1,19 @@
 @import url('meta.less');
 
-@border_radus: 3px;
-@line_height: 25px;
 
 @{NS}.dropdown {
+    @border_radus: 3px;
+    @line_height: 25px;
+    
     position: relative;
     ul {
         padding: 0;
         li {
             ._item {
                 padding: 3px 16px;
+                &._active {
+                    background: @gray_b;
+                }
             }
             cursor: pointer;
             list-style-type: none;
@@ -71,8 +75,11 @@
             border-radius: @border_radus;
             font-size: 14px;
             padding: 0 3px;
-            a {
-                color: @black;
+            ._delete {
+                color: @gray_a;
+                &:before {
+                    content: 'x';
+                }
             }
 
             ._text {

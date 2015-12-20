@@ -47,7 +47,7 @@ class Demo extends React.Component {
                 </div>
                 <div className="wrapper">
                     <ol className="container">
-                        {/*<li>
+                        <li>
                             <h3>checkbox</h3>
                             <CheckBoxDemo/>
                         </li>
@@ -67,7 +67,7 @@ class Demo extends React.Component {
                             <h3>drop down</h3>
                             <DropDownDemo/>
                         </li>
-                        <li>
+                        {/*<li>
                             <h3>menu</h3>
                             <MenuDemo/>
                         </li>
@@ -90,12 +90,12 @@ class Demo extends React.Component {
                         <li>
                             <h3>pin, something fixed position</h3>
                             <PinDemo/>
-                        </li>*/}
+                        </li>
                         <li>
                             <h3>something can drag</h3>
                             <DraggableDemo/>
                         </li>
-                        {/*<li>
+                        <li>
                             <h3>carousel</h3>
                             <CarouselDemo/>
                         </li>

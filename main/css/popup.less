@@ -1,15 +1,14 @@
 @import url('meta.less');
 
-@short: 6px;
-@long: 8px;
 
 @{NS}.popup {
+    @short: 6px;
+    @long: 8px;
+    @base: -16px;
 
     ._wrap {
         position: relative;
         overflow: visible;
-        
-
         ._content {
             position: absolute;
             z-index: 100;
@@ -36,17 +35,32 @@
             border-color: @gray_b transparent transparent transparent;
         }
 
+        &._top ._arrow {
+            left: 50%;
+            margin-left: -@short;
+            bottom: @base;
+        }
+
         &._left ._arrow {
             border-width: @short @long;
+            right: @base;
+            top: 50%;
+            margin-top: -@long;
             border-color: transparent transparent transparent @gray_b;
         }
 
         &._right ._arrow {
+            top: 50%;
+            left: @base;
+            margin-top: -@long;
             border-width: @short @long;
             border-color: transparent @gray_b transparent transparent;
         }
 
         &._bottom ._arrow {
+            left: 50%;
+            top: @base;
+            margin-left: -@short;
             border-color: transparent transparent @gray_b transparent;
         }
     }

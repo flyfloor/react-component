@@ -28,13 +28,17 @@ export default class RadioDemo extends React.Component {
         return (
             <ol>
                 <li>
-                    <h4>radio group</h4>
-                    <p>you selected value is {this.state.displayText}</p>
-                    <RadioGroup options={options} labelName='name' valueName='value' value={checkedVal} onChange={this.displayChange.bind(this)}/>
+                    <h4>default radio group</h4>
+                    <RadioGroup options={options} labelName='name' valueName='value'/>
                 </li>
                 <li>
-                    <h4>radio group with default first selected</h4>
+                    <h4>radio group with default checked</h4>
                     <RadioGroup options={options} labelName='name' valueName='value' defaultChecked='true' />
+                </li>
+                <li>
+                    <h4>radio group selected change</h4>
+                    <p>you selected value is {this.state.displayText}</p>
+                    <RadioGroup options={options} labelName='name' valueName='value' value={checkedVal} onChange={this.displayChange.bind(this)}/>
                 </li>
             </ol>
         );

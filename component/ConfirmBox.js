@@ -31,16 +31,18 @@ const ConfirmBox = React.createClass({
     },
 
     render() {
+        let confirmText = this.props.confirmText;
+        let cancelText = this.props.cancelText;
         let content = this.state.open ? <div className={'_wrap _' + this.props.position}>
-                                            <span className="_arrow" ref='arrow'></span>
                                             <div ref='content' className='_content'>
                                                 <div className="_title">
                                                     {this.props.title}
                                                 </div>
                                                 <div className="_action">
-                                                    <a href="javascript:;" className="_confirm" onClick={this.handleConfirm}>确认</a>
-                                                    <a href="javascript:;" className="_cancel" onClick={this.handleCancel}>取消</a>
+                                                    <a href="javascript:;" className="_confirm" onClick={this.handleConfirm}>{confirmText ? confirmText : 'ok'}</a>
+                                                    <a href="javascript:;" className="_cancel" onClick={this.handleCancel}>{cancelText ? cancelText : 'cancel'}</a>
                                                 </div>
+                                                <span className="_arrow" ref='arrow'></span>
                                             </div>
                                         </div> : null;
         return (

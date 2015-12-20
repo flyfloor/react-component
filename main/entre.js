@@ -54,12 +54,12 @@ class Demo extends React.Component {
                         <li>
                             <h3>radio</h3>
                             <RadioDemo/>
-                        </li>*/}
+                        </li>
                         <li>
                             <h3>radio group</h3>
                             <RadioGroupDemo/>
                         </li>
-                        {/*<li>
+                        <li>
                             <h3>checkbox group</h3>
                             <CheckBoxGroupDemo/>
                         </li>
@@ -70,7 +70,7 @@ class Demo extends React.Component {
                         <li>
                             <h3>menu</h3>
                             <MenuDemo/>
-                        </li>
+                        </li>*/}
                         <li>
                             <h3>confirm box</h3>
                             <ConfirmBoxDemo/>
@@ -79,7 +79,7 @@ class Demo extends React.Component {
                             <h3>tooltip</h3>
                             <TooltipDemo/>
                         </li>
-                        <li>
+                        {/*<li>
                             <h3>modal</h3>
                             <ModalDemo/>
                         </li>

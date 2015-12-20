@@ -6,7 +6,7 @@ const Data = {
             } catch(error){
                 return dom.getAttribute(`data-${attr}`);
             }
-        };
+        }
         return undefined;
     },
 
@@ -21,4 +21,4 @@ const Data = {
     }
 }
 
-module.exports = Data;
+export default Data;

@@ -4,7 +4,12 @@
 @{NS}.popup {
     @short: 6px;
     @long: 8px;
-    @base: -16px;
+    @base: -17px;
+
+    .border_base {
+        border-width: inherit;
+        border-color: inherit;
+    }
 
     ._wrap {
         position: relative;
@@ -33,12 +38,25 @@
             border-style: solid;
             border-width: @long @short;
             border-color: @gray_b transparent transparent transparent;
+            &:before {
+                content: '';
+                position: absolute;
+                border-style: solid;
+                border-width: @long @short;
+            }
         }
 
         &._top ._arrow {
             left: 50%;
             margin-left: -@short;
             bottom: @base;
+            &:before {
+                .border_base;
+                left: inherit;
+                margin-left: -@short;
+                bottom: -@short;
+                border-top-color: @white;
+            }
         }
 
         &._left ._arrow {
@@ -47,6 +65,13 @@
             top: 50%;
             margin-top: -@long;
             border-color: transparent transparent transparent @gray_b;
+            &:before {
+                .border_base;
+                top: inherit;
+                margin-top: -@short;
+                right: -@short;
+                border-left-color: @white;
+            }
         }
 
         &._right ._arrow {
@@ -55,6 +80,13 @@
             margin-top: -@long;
             border-width: @short @long;
             border-color: transparent @gray_b transparent transparent;
+            &:before {
+                .border_base;
+                top: inherit;
+                margin-top: -@short;
+                left: -@short;
+                border-right-color: @white;
+            }
         }
 
         &._bottom ._arrow {
@@ -62,6 +94,13 @@
             top: @base;
             margin-left: -@short;
             border-color: transparent transparent @gray_b transparent;
+            &:before {
+                .border_base;
+                left: inherit;
+                top: -@short;
+                margin-left: -@short;
+                border-bottom-color: @white;
+            }
         }
     }
 }

@@ -17,7 +17,8 @@
     "react component",
     "checkbox group",
     "drop down",
-    "draggable"
+    "pagination",
+    "carousel"
   ],
   "author": "wecatch",
   "license": "MIT",

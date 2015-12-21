@@ -9,7 +9,6 @@ const Tooltip = require('../../component/Tooltip');
 const Modal = require('../../component/Modal');
 const Tab = require('../../component/Tab');
 const Pin = require('../../component/Pin');
-const Draggable = require('../../component/Draggable');
 const Carousel = require('../../component/Carousel');
 const Pagination = require('../../component/Pagination');
 const SlideMenu = require('../../component/SlideMenu');
@@ -27,7 +26,6 @@ module.exports = {
     Tooltip,
     Tab,
     Pin,
-    Draggable,
     Carousel,
     Pagination,
     SlideMenu,

@@ -19,7 +19,6 @@ var Tooltip = require("./lib/Tooltip.js");
 var Modal = require("./lib/Modal.js");
 var Tab = require("./lib/Tab.js");
 var Pin = require("./lib/Pin.js");
-var Draggable = require("./lib/Draggable.js");
 var Carousel = require("./lib/Carousel.js");
 var Pagination = require("./lib/Pagination.js");
 var SlideMenu = require("./lib/SlideMenu.js");
@@ -41,7 +40,6 @@ module.exports = {
     Modal: Modal,
     Tab: Tab,
     Pin: Pin,
-    Draggable: Draggable,
     Carousel: Carousel,
     Pagination: Pagination,
     SlideMenu: SlideMenu,

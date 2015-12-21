@@ -4,7 +4,6 @@ import resetCss from './css/reset.less';
 import demoCss from './css/demo.less';
 import carousel_css from './css/carousel.less';
 import popup_css from './css/popup.less';
-import draggable_css from './css/draggable.less';
 import dropdown_css from './css/dropdown.less';
 import menu_css from "./css/menu.less";
 import modal_css from './css/modal.less';
@@ -24,7 +23,6 @@ import TooltipDemo from "./demo/TooltipDemo.jsx";
 import ModalDemo from "./demo/ModalDemo.jsx";
 import TabDemo from "./demo/TabDemo.jsx";
 import PinDemo from "./demo/PinDemo.jsx";
-import DraggableDemo from "./demo/DraggableDemo.jsx";
 import CarouselDemo from "./demo/CarouselDemo.jsx";
 import PaginationDemo from "./demo/PaginationDemo.jsx";
 import SlideMenuDemo from "./demo/SlideMenuDemo.jsx";
@@ -90,10 +88,6 @@ class Demo extends React.Component {
                         <li>
                             <h3>pin, something fixed position</h3>
                             <PinDemo/>
-                        </li>
-                        <li>
-                            <h3>something can drag</h3>
-                            <DraggableDemo/>
                         </li>
                         <li>
                             <h3>carousel</h3>

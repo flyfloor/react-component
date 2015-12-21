@@ -14,9 +14,9 @@
 * modal
 * tab
 * pin
-* draggable
 * carousel
 * pagination
+* slide menu
 
 ### Getting Started
 

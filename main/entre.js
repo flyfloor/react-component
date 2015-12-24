@@ -26,6 +26,7 @@ import PinDemo from "./demo/PinDemo.jsx";
 import CarouselDemo from "./demo/CarouselDemo.jsx";
 import PaginationDemo from "./demo/PaginationDemo.jsx";
 import SlideMenuDemo from "./demo/SlideMenuDemo.jsx";
+import TimePickerDemo from "./demo/TimePickerDemo.jsx";
 
 class Demo extends React.Component {
     render() {
@@ -45,7 +46,7 @@ class Demo extends React.Component {
                 </div>
                 <div className="wrapper">
                     <ol className="container">
-                        <li>
+                        {/*<li>
                             <h3>checkbox</h3>
                             <CheckBoxDemo/>
                         </li>
@@ -100,6 +101,10 @@ class Demo extends React.Component {
                         <li>
                             <h3>slide bar</h3>
                             <SlideMenuDemo/>
+                        </li>*/}
+                        <li>
+                            <h3>time picker</h3>
+                            <TimePickerDemo/>
                         </li>
                     </ol>
                 </div>

@@ -11,6 +11,7 @@ import pin_css from './css/pin.less';
 import tab_css from './css/tab.less';
 import slidemenu_css from './css/slide-menu.less';
 import pagination_css from './css/pagination.less';
+import timepicker_css from './css/time-picker.less';
 
 import CheckBoxDemo from "./demo/CheckBoxDemo.jsx";
 import RadioDemo from "./demo/RadioDemo.jsx";

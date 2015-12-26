@@ -28,7 +28,7 @@ export default class TimePickerDemo extends React.Component {
                 </li>
                 <li>
                     <h4>time picker with limit range</h4>
-                    <TimePicker maxHour="20" minHour="3" maxMin="40" minMin="10" minSec="20" maxSec="50"/>
+                    <TimePicker maxHour="20" minHour="3" maxMin="40" miniMin="10" miniSec="20" maxSec="50"/>
                 </li>
                 <li>
                     <h4>time picker onchange event</h4>

@@ -1,7 +1,26 @@
-export function validateTime(value="00:00:00") {
-    let arr = value.split(':');
-    arr = arr.slice(0, 3);
+export function validateTime(value="00:00:00", options = {
+    spacer: ':', 
+    simple: false, 
+    maxHour: 23, 
+    miniHour: 0, 
+    maxMin: 59, 
+    miniMin: 0, 
+    maxSec: 59, 
+    miniSec: 0
+}) {
+    let {
+        spacer,
+        simple,
+    } = options;
     
+    spacer = spacer || ':';
+    let arr = value.split(spacer);
+    arr = arr.slice(0, 3);
+
+    let {max: maxHour, mini: miniHour} = initMaxAndMiniByNum(options.maxHour, options.miniHour, 23);
+    let {max: maxMin, mini: miniMin} = initMaxAndMiniByNum(options.maxMin, options.miniMin, 59);
+    let {max: maxSec, mini: miniSec} = initMaxAndMiniByNum(options.maxSec, options.miniSec, 59);
+
     for (let i = 0; i < arr.length; i++) {
         let item = String(arr[i])
         if (item.length > 2) arr[i] = item.slice(0, 2)
@@ -10,17 +29,26 @@ export function validateTime(value="00:00:00") {
     };
 
     let [hour, min, sec] = arr;
-    if (hour > 23) hour = String(Math.floor(hour % 24));
-    if (isNaN(hour) || hour < 0) hour = "00";
+    if (hour > maxHour) hour = String(Math.floor(hour % (maxHour + 1)));
+    if (isNaN(hour) || hour < miniHour) hour = "00";
     if (hour.length === 1) hour = `0${hour}`;
 
-    if (isNaN(min) || min < 0) min = "00";
-    if (min > 59) min = String(Math.floor(min % 60));
+    if (isNaN(min) || min < miniMin) min = "00";
+    if (min > maxMin) min = String(Math.floor(min % 60));
     if (min.length === 1) min = `0${min}`;
     
-    if (sec > 59) sec = String(Math.floor(sec % 60));
-    if (isNaN(sec) || sec < 0) sec = "00";
+    if (sec > maxSec) sec = String(Math.floor(sec % 60));
+    if (options.simple) return `${hour}:${min}`;
+    if (isNaN(sec) || sec < miniSec) sec = "00";
     if (sec.length === 1) sec = `0${sec}`;
 
     return `${hour}:${min}:${sec}`;
+}
+
+export function initMaxAndMiniByNum(max, mini, num){
+    max = max || num;
+    mini = mini || 0;
+    max = max > num ? num : parseInt(max);
+    mini = mini > max ? max : parseInt(mini);
+    return {max, mini}
 }

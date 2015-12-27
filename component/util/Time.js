@@ -1,4 +1,4 @@
-export function validateTime(value="00:00:00", options = {
+export function validateTime(value, options = {
     spacer: ':', 
     simple: false, 
     maxHour: 23, 
@@ -14,6 +14,7 @@ export function validateTime(value="00:00:00", options = {
     } = options;
     
     spacer = spacer || ':';
+    value = value || `00${spacer}00${spacer}00`;
     let arr = value.split(spacer);
     arr = arr.slice(0, 3);
 
@@ -30,19 +31,28 @@ export function validateTime(value="00:00:00", options = {
 
     let [hour, min, sec] = arr;
     if (hour > maxHour) hour = String(Math.floor(hour % (maxHour + 1)));
-    if (isNaN(hour) || hour < miniHour) hour = "00";
+    if (isNaN(hour) || hour < miniHour) hour = String(miniHour);
     if (hour.length === 1) hour = `0${hour}`;
-
-    if (isNaN(min) || min < miniMin) min = "00";
+    
+    if (isNaN(min) || min < miniMin) min = String(miniMin);
     if (min > maxMin) min = String(Math.floor(min % 60));
     if (min.length === 1) min = `0${min}`;
     
     if (sec > maxSec) sec = String(Math.floor(sec % 60));
-    if (options.simple) return `${hour}:${min}`;
-    if (isNaN(sec) || sec < miniSec) sec = "00";
+    if (options.simple) {
+        return {
+            hour: hour,
+            min: min,
+        }
+    }
+    if (isNaN(sec) || sec < miniSec) sec = String(miniSec);
     if (sec.length === 1) sec = `0${sec}`;
 
-    return `${hour}:${min}:${sec}`;
+    return {
+        hour: hour,
+        min: min,
+        sec: sec,
+    }
 }
 
 export function initMaxAndMiniByNum(max, mini, num){

@@ -4,13 +4,13 @@
     position: relative;
     width: 150px;
     ._selector {
-        >._content {
+        ._content {
             width: 100%;
             z-index: 1000;
             background: @white;
             position: absolute;
             border: 1px solid @gray_b;
-            >ul {
+            ul {
                 width: 33.3%;
                 text-align: center;
                 margin: 0;
@@ -21,10 +21,14 @@
                 &+ul {
                     border-left: 1px solid @gray_c;
                 }
-                >li {
+                >._item {
+                    cursor: pointer;
                     line-height: 20px;
                     font-size: 13px;
                     list-style-type: none;
+                    &._active {
+                        background: @gray_b;
+                    }
                 }
             }
         }

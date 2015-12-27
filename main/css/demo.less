@@ -1,4 +1,5 @@
 @import url('meta');
+@import url('share');
 
 a {
     color: @blue;
@@ -29,4 +30,17 @@ body {
 
 .wrapper {
     background: @white;
+}
+
+#demo_list {
+    >ol>li {
+        padding: 10px 0;
+        >ol {
+            .clearfix;
+            list-style-type: square;
+            >li {
+                padding: 10px 0;
+            }
+        }
+    }
 }

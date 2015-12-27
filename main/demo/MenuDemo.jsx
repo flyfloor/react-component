@@ -37,21 +37,21 @@ export default class MenuDemo extends React.Component {
         const onNode = <a href="javascript:;">close menu</a>;
 
         return (
-            <ol>
+            <ul className="two">
                 <li>
-                    <h4>menu, default with mouse hover</h4>
+                    <h4>Default menu</h4>
                     <p>you selected item index is {this.state.index}</p>
                     <Menu onSelect={this.displayChange.bind(this)} selectedIndex={this.state.index} items={items} triggerOn={onNode}>
                         <a href="javascript:;">show menu</a>
                     </Menu>
                 </li>
                 <li>
-                    <h4>menu, with click to trigger menu open</h4>
+                    <h4>Menu, click to trigger</h4>
                     <Menu selectedIndex={this.state.index1} items={items} triggerOn={onNode} triggerType='click'>
                         <a href="javascript:;">show menu</a>
                     </Menu>
                 </li>
-            </ol>
+            </ul>
         );
     }
 }

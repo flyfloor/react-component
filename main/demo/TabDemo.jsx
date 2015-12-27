@@ -35,48 +35,46 @@ export default class TabDemo extends React.Component {
 
 
         return (
-            <ol>
+            <ul className="two">
                 <li>
-                    <h4>tab</h4>
+                    <h4>Default tab</h4>
                     <p>you selected item index is {this.state.index}</p>
                     <Tab onSelect={this.displayChange.bind(this)} selectedIndex={this.state.index} items={items}/>
                 </li>
                 <li>
-                    <h4>tab with selectedIndex</h4>
+                    <h4>Tab with given index</h4>
                     <Tab selectedIndex={this.state.index1} items={items}/>
                 </li>
                 <li>
-                    <h4>tabs with position</h4>
+                    <h4>Tab with position</h4>
                     <ol>
                         <li>
-                            <h5>bottom active(default)</h5>
-                            <br/>
+                            <h5>bottom(default)</h5>
                             <Tab items={items} position='bottom'/>
                             <br/>
                         </li>
                         <li>
-                            <h5>top active</h5>
-                            <br/>
+                            <h5>top</h5>
                             <Tab items={items} position='top'/>
                             <br/>
                         </li>
                         <li>
-                            <h5>left active</h5>
-                            <br/>
+                            <h5>left</h5>
                             <div style={{'width':'200px'}}>
                                 <Tab items={items} position='left'/>
+                                <br/>
                             </div>
                         </li>
                         <li>
-                            <h5>right active</h5>
-                            <br/>
+                            <h5>right</h5>
                             <div style={{'width':'200px'}}>
                                 <Tab items={items} position='right'/>
+                                <br/>
                             </div>
                         </li>
                     </ol>
                 </li>
-            </ol>
+            </ul>
         );
     }
 }

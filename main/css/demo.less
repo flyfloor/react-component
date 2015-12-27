@@ -11,8 +11,8 @@ body {
 }
 
 .container {
-    width: 760px;
-    padding: 1em;
+    width: 860px;
+    padding: 20px;
     margin: 0 auto;
 }
 
@@ -28,17 +28,39 @@ body {
     }
 }
 
+.footer {
+    text-align: right;
+    a {
+        color: @red;
+    }
+}
+
 .wrapper {
     background: @white;
 }
 
+ul {
+    ._display {
+        padding: 5px 0;
+        display: inline-block;
+    }
+    &.three>li {
+        width: 33.3%;
+        ._display;
+    }
+    &.two>li {
+        width: 50%;
+        ._display;
+    }
+}
+
 #demo_list {
-    >ol>li {
+    padding-bottom: 150px;
+    &>ol>li {
         padding: 10px 0;
-        >ol {
-            .clearfix;
+        &>ol {
             list-style-type: square;
-            >li {
+            &>li {
                 padding: 10px 0;
             }
         }

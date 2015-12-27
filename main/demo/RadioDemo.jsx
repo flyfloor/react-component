@@ -8,20 +8,20 @@ export default class RadioDemo extends React.Component {
 
     render() {
         return (
-            <ol>
+            <ul className="three">
                 <li>
-                    <h4>radio</h4>
+                    <h4>Default radio</h4>
                     <Radio onChange={this.handleChange.bind(this)}>radio</Radio>
                 </li>
                 <li>
-                    <h4>disabled</h4>
+                    <h4>Disabled radio</h4>
                     <Radio disabled="true">disabled radio</Radio>
                 </li>
                 <li>
-                    <h4>checked radio</h4>
+                    <h4>Checked radio</h4>
                     <Radio checked="true">checked radio</Radio>
                 </li>
-            </ol>
+            </ul>
         );
     }
 }

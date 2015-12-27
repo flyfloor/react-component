@@ -6,13 +6,13 @@ export default class TooltipDemo extends React.Component {
         return (
             <ol>
                 <li>
-                    <h4>default confirm box</h4>
+                    <h4>Default tooltip</h4>
                     <Tooltip title='confirm deleted, realy you want delete this? are you sure?'>
                         <a href='javascript:;'>delete</a>
                     </Tooltip>
                 </li>
                 <li>
-                    <h4>conform box with different position</h4>
+                    <h4>Tooltip with different position</h4>
                     <ul>
                         <li>
                             <Tooltip title='confirm delete?' position='left'>

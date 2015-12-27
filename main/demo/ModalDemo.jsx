@@ -22,7 +22,7 @@ export default class ModalDemo extends React.Component {
     }
 
     handleConfirm1(){
-        console.log('another medel confirmed');
+        alert('confirmed');
         return true;
     }
 
@@ -56,7 +56,7 @@ export default class ModalDemo extends React.Component {
         return (
             <ol>
                 <li>
-                    <h4>default modal</h4>
+                    <h4>Default modal</h4>
                     <a href="javascript:;" onClick={this.showModal.bind(this)}>open modal</a>
                     <Modal title='confirm deleted' onClose={this.handleClose.bind(this)} display={this.state.display}>
                         <h4>this is content</h4>
@@ -65,14 +65,14 @@ export default class ModalDemo extends React.Component {
                     </Modal>
                 </li>
                 <li>
-                    <h4>default confirm box, with confirm cancel action handle</h4>
+                    <h4>Modal with confirm, cancel action</h4>
                     <a href="javascript:;" onClick={this.showModal1.bind(this)}>open another modal</a>
                     <Modal display={this.state.display1} onClose={this.handleClose.bind(this)} onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
                         <a href='http://braavos.me' target="_blank">hello</a>
                     </Modal>
                 </li>
                 <li>
-                    <h4>default confirm box, with confirm action handle</h4>
+                    <h4>Modal with only confirm action</h4>
                     <a href="javascript:;" onClick={this.showModal2.bind(this)}>open another modal</a>
                     <Modal display={this.state.display2} onClose={this.handleClose.bind(this)} onConfirm={this.handleConfirm1.bind(this)}>
                         <a href='http://braavos.me' target="_blank">hello</a>

@@ -5,43 +5,51 @@ export default class CarouselDemo extends React.Component {
     render() {
         let items = <div>
                         <Carousel.Item key='0'>
-                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/ambition-morty.png"/>
+                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/ambition-morty.png"/>
                         </Carousel.Item>
                         <Carousel.Item key='1'>
-                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/awkward-morty.png"/>
+                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/awkward-morty.png"/>
                         </Carousel.Item>
                         <Carousel.Item key='2'>
-                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/despise.png"/>
+                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/despise.png"/>
                         </Carousel.Item>
                         <Carousel.Item key='3'>
-                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/pride-morty.png"/>
+                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/pride-morty.png"/>
                         </Carousel.Item>
                         <Carousel.Item key='4'>
-                            <img src="https://raw.githubusercontent.com/jerryshew/design/master/png/surprise-morty.png"/>
+                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/surprise-morty.png"/>
                         </Carousel.Item>
                     </div>;
 
-        let leftArrow = <p>go left</p>;
-        let rightArrow = <p>go right</p>;
+        let leftArrow = <p>left</p>;
+        let rightArrow = <p>right</p>;
         return (
-            <ol style={{'width': '600'}}>
+            <ul className="two carousel-demo">
                 <li>
-                    <h4>default carousel</h4>
-                    <Carousel items={items}></Carousel>
+                    <h4>Default carousel</h4>
+                    <div style={{'width': '300', 'height': '300'}}>
+                        <Carousel items={items}></Carousel>
+                    </div>
                 </li>
                 <li>
-                    <h4>auto play carousel</h4>
-                    <Carousel items={items} autoPlay="true" delay='5000'></Carousel>
+                    <h4>Auto play carousel</h4>
+                    <div style={{'width': '300', 'height': '300'}}>
+                        <Carousel items={items} autoPlay="true" delay='5000'></Carousel>
+                    </div>
                 </li>
                 <li>
-                    <h4>carousel with default control arrow links</h4>
-                    <Carousel items={items} showArrow="true"></Carousel>
+                    <h4>Carousel with control arrows</h4>
+                    <div style={{'width': '300', 'height': '300'}}>
+                        <Carousel items={items} showArrow="true"></Carousel>
+                    </div>
                 </li>
                 <li>
-                    <h4>carousel with custom control arrow links</h4>
-                    <Carousel items={items} leftArrow={leftArrow} rightArrow={rightArrow} showArrow="true"></Carousel>
+                    <h4>Carousel with custom control arrows</h4>
+                    <div style={{'width': '300'}}>
+                        <Carousel items={items} leftArrow={leftArrow} rightArrow={rightArrow} showArrow="true"></Carousel>
+                    </div>
                 </li>
-            </ol>
+            </ul>
         );
     }
 }

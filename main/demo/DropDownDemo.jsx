@@ -16,7 +16,7 @@ export default class DropDownDemo extends React.Component {
         this.state = {
             value: null,
             value1: 5,
-            value2: [],
+            value2: '',
             value3: [2, 4],
         }
     }
@@ -27,49 +27,54 @@ export default class DropDownDemo extends React.Component {
         });
     }
 
-    displayChange1(value){
-        this.setState({
-            value1: value, 
-        });
-    }
-
     displayChange2(value){
         this.setState({
-            value2: value, 
+            value2: value.join(','), 
         });
     }
 
     render() {
         return (
-            <ol style={{'width': '300'}}>
+            <ul className="two">
                 <li>
-                    <h4>drop down</h4>
+                    <h4>Default dropdown</h4>
                     <p>you selected option value is {this.state.value}</p>
-                    <DropDown options={options} labelName='name' valueName='value' onSelect={this.displayChange.bind(this)} />
+                    <div style={{'width': '300'}}>
+                        <DropDown options={options} labelName='name' valueName='value' onSelect={this.displayChange.bind(this)} />
+                    </div>
                 </li>
                 <li>
-                    <h4>drop down with default first item selected</h4>
-                    <DropDown options={options} labelName='name' valueName='value' defaultSelected='true'/>
+                    <h4>Dropdown with default selected</h4>
+                    <div style={{'width': '300'}}>
+                        <DropDown options={options} labelName='name' valueName='value' defaultSelected='true'/>
+                    </div>
                 </li>
                 <li>
-                    <h4>drop down got value, and selected</h4>
-                    <DropDown options={options} labelName='name' value={this.state.value1} defaultSelected="true" valueName='value'/>
+                    <h4>Dropdown received value</h4>
+                    <div style={{'width': '300'}}>
+                        <DropDown options={options} labelName='name' value={this.state.value1} defaultSelected="true" valueName='value'/>
+                    </div>
                 </li>
                 <li>
-                    <h4>drop down with search</h4>
-                    <p>you selected option value is {this.state.value1}</p>
-                    <DropDown options={options} ref='dropDown1' labelName='name'  valueName='value' searchable='true' onSelect={this.displayChange1.bind(this)}/>
+                    <h4>Dropdown with search field</h4>
+                    <div style={{'width': '300'}}>
+                        <DropDown options={options} ref='dropDown1' labelName='name'  valueName='value' searchable='true'/>
+                    </div>
                 </li>
                 <li>
-                    <h4>drop down with multiple, not selected</h4>
+                    <h4>Multiple dropdown</h4>
                     <p>you selected option value is {this.state.value2}</p>
-                    <DropDown options={options} ref='dropDown1' labelName='name' valueName='value' multi='true' onSelect={this.displayChange2.bind(this)}/>
+                    <div style={{'width': '300'}}>
+                        <DropDown options={options} ref='dropDown1' labelName='name' valueName='value' multi='true' onSelect={this.displayChange2.bind(this)}/>
+                    </div>
                 </li>
                 <li>
-                    <h4>drop down with multiple value selected</h4>
-                    <DropDown options={options} ref='dropDown1' labelName='name' value={this.state.value3} valueName='value' multi='true'/>
+                    <h4>Multiple dropdown</h4>
+                    <div style={{'width': '300'}}>
+                        <DropDown options={options} ref='dropDown1' labelName='name' value={this.state.value3} valueName='value' multi='true'/>
+                    </div>
                 </li>
-            </ol>
+            </ul>
         );
     }
 }

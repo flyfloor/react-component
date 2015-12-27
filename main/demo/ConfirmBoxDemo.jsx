@@ -18,19 +18,19 @@ export default class ConfirmBoxDemo extends React.Component {
         return (
             <ol>
                 <li>
-                    <h4>default confirm box</h4>
+                    <h4>Default confirmbox</h4>
                     <ConfirmBox title='default confirm'>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>
                 <li>
-                    <h4>default confirm box, with action handle</h4>
+                    <h4>Confirmbox with custom action, text</h4>
                     <ConfirmBox title='confirm delete? realy you want delete this? are you sure?' confirmText={confirmText} onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>
                 <li>
-                    <h4>conform box with different position</h4>
+                    <h4>Conformbox with different position</h4>
                     <ul>
                         <li>
                             <ConfirmBox title='confirm delete?' position='left'>

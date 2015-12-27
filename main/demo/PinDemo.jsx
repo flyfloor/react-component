@@ -7,9 +7,9 @@ export default class PinDemo extends React.Component {
     render() {
         return (
             <div className='pin-demo'>
-                <ol>
+                <ul className="two">
                     <li>
-                        <h4>pin something</h4>
+                        <h4>Default pin</h4>
                         <Pin>
                             <div className='card'>
                                 <h4>title</h4>
@@ -18,7 +18,7 @@ export default class PinDemo extends React.Component {
                         </Pin>
                     </li>
                     <li>
-                        <h4>pin with offset</h4>
+                        <h4>Pin with offset top</h4>
                         <Pin top='200'>
                             <div className='card'>
                                 <h4>title</h4>
@@ -26,7 +26,7 @@ export default class PinDemo extends React.Component {
                             </div>
                         </Pin>
                     </li>
-                </ol>
+                </ul>
             </div>
         );
     }

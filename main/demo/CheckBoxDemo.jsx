@@ -7,20 +7,20 @@ export default class CheckBoxDemo extends React.Component {
     }
     render() {
         return (
-            <ol>
+            <ul className="three">
                 <li>
-                    <h4>checkbox</h4>
-                    <CheckBox className="user-gender" onChange={this.handleChange.bind(this)}>checkbox</CheckBox>
+                    <h4>Default checkbox</h4>
+                    <CheckBox onChange={this.handleChange.bind(this)}>checkbox</CheckBox>
                 </li>
                 <li>
-                    <h4>disabled</h4>
+                    <h4>Disabled checkbox</h4>
                     <CheckBox disabled="true">disabled checkbox</CheckBox>
                 </li>
                 <li>
-                    <h4>checked checkbox</h4>
+                    <h4>Checked checkbox</h4>
                     <CheckBox checked="true">checked checkbox</CheckBox>
                 </li>
-            </ol>
+            </ul>
         );
     }
 }

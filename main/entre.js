@@ -109,6 +109,9 @@ class Demo extends React.Component {
                         </li>
                     </ol>
                 </div>
+                <div className="footer container">
+                    <a href="http://braavos.me" target="_blank">@落在深海</a>
+                </div>
             </div>
         );
     }

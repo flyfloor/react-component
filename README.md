@@ -17,6 +17,7 @@
 * carousel
 * pagination
 * slide menu
+* time picker
 
 ### Getting Started
 
@@ -45,20 +46,33 @@ npm install https://github.com/jerryshew/react-component
 
 ```
 ├── component
-├── css //basic style of some components 
+│   ├── mixin
+│   ├── util
+├── css //basic style of component demos
 ├── demo.html // demo page
 ├── dist 
 ├── main //include demo component
-├── mixin
-└── util
+
 ```
 
 #### how to use  
 
-simply import as a module, then use it.
+simply import as a module, then use it. just like:
+
+```javascript
+import {Tooltip} from 'react-ui-component';
+```
+
+or CMD way:
+
+```javascript
+const Tooltip = require('react-ui-component')
+```
+
+> hint: you should always write your own css :)
 
 #### demo
 
-clone git repo, open **index.html** in your browser to see more. or just check [here](http://imiao.in).
+clone git repo, open **index.html** in your browser to see more. or just check [http://imiao.in](http://imiao.in).
 
 

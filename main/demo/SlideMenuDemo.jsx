@@ -24,7 +24,6 @@ export default class SlideMenuDemo extends React.Component {
 
     handleOpenSlide(e){
         let value = Data.get(e.target, 'state');
-        console.log(value)
         this.setState({
             [value.toString()]: true 
         });

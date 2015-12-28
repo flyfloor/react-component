@@ -2,7 +2,6 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 const KeyCodeMixin = require('./mixin/KeyCodeMixin');
-const Data = require('./util/Data');
 
 const DropDown = React.createClass({
     mixins: [DocumentClickMixin],
@@ -136,7 +135,7 @@ const DropDown = React.createClass({
         let storeVal = this.state.value;
         
         // remove specific value
-        if (index) {
+        if (index != null) {
             if (index > -1) storeVal.splice(index, 1);
         } else {
             this.state.value.pop();
@@ -262,9 +261,8 @@ DropDown.multiInput = React.createClass({
         this.props.onUserInputFocus(e);
     },
 
-    removeSelected(e){
-        const TAG_INDEX = Data.get(e.target, 'index');
-        this.props.onSelectChange(TAG_INDEX);
+    removeSelected(index){
+        this.props.onSelectChange(index);
         this.inputFieldFocus();
     },
 
@@ -278,9 +276,9 @@ DropDown.multiInput = React.createClass({
 
     render() {
         const TAGS = this.props.selectedTags.map((tag, index) => {
-            return <span className='_tag' key={index} onClick={this.removeSelected}>
+            return <span className='_tag' key={index} onClick={() => this.removeSelected(index)}>
                         <san className="_text">{tag}</san>
-                        <a href="javascript:;" data-index={index} className="_delete"></a>
+                        <a href="javascript:;" className="_delete"></a>
                     </span>;
         });
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Data from './util/Data';
 
 const Pagination = React.createClass({
     propTypes: {
@@ -18,12 +17,11 @@ const Pagination = React.createClass({
         };
     },
     
-    onPageChange(e){
-        let pageNum = Data.get(e.target, 'page');
+    onPageChange(page){
         this.setState({
-            currentPage: pageNum
+            currentPage: page
         });
-        if (this.props.onChange) {this.props.onChange(pageNum)}
+        if (this.props.onChange) {this.props.onChange(page)}
     },
 
     render() {
@@ -47,20 +45,14 @@ const Pagination = React.createClass({
         }
 
         let firstNode = showRange && start != 1 ? <li className='_first' key={`first-page`} className={currentPage === 1 ? '_active _item': '_item'}>
-                                                        <a href="javascript:;" 
-                                                                onClick={this.onPageChange} 
-                                                                data-page='1'>
-                                                            1
-                                                        </a>
+                                                        <a href="javascript:;" onClick={() => this.onPageChange(1)}>1</a>
                                                         <span> ...</span>
                                                     </li>
                                                 : null;
 
         let lastNode =  showRange && end != totalPage ? <li className='_last' key={`last-page`} className={currentPage === totalPage ? '_active _item': '_item'}>
                                                             <span>... </span>
-                                                            <a href="javascript:;" 
-                                                                onClick={this.onPageChange} 
-                                                                data-page={totalPage}>
+                                                            <a href="javascript:;" onClick={() => this.onPageChange(totalPage)}>
                                                                 {totalPage}
                                                             </a>
                                                         </li>
@@ -68,7 +60,7 @@ const Pagination = React.createClass({
 
         for (let i = start; i <= end; i++) {
             nodes.push(<li key={`page-link-${i}`} className={currentPage === i ? '_active _item': '_item'}>
-                            <a href="javascript:;" onClick={this.onPageChange} data-page={i}>
+                            <a href="javascript:;" onClick={() => this.onPageChange(i)}>
                                 {i}
                             </a>
                         </li>);

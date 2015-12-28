@@ -17,7 +17,7 @@ export default class PaginationDemo extends React.Component {
 
     render() {
         return (
-            <ul className="two">
+            <ol>
                 <li>
                     <h4>Default pagination</h4>
                     <Pagination/>
@@ -34,7 +34,7 @@ export default class PaginationDemo extends React.Component {
                     <h4>Pagination with full range</h4>
                     <Pagination showRange='true' totalPage='100'/>
                 </li>
-            </ul>
+            </ol>
         );
     }
 }

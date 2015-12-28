@@ -2,7 +2,6 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Item = require('./Item.js');
 const IntervalMixin = require('./mixin/IntervalMixin');
-const Data = require('./util/Data');
 
 const Carousel = React.createClass({
     mixins: [IntervalMixin],
@@ -70,10 +69,9 @@ const Carousel = React.createClass({
         return itemNodes;
     },
 
-    handleSlide(e){
-        const DOT_INDEX = Data.get(e.target, 'index');
+    handleSlide(index){
         this.setState({
-            index: parseInt(DOT_INDEX)
+            index: parseInt(index)
         }, () => {
             this.addTransition();
         });
@@ -133,7 +131,7 @@ const Carousel = React.createClass({
         let dotNodes = [];
 
         for(let i = 0; i < this.state.count; i++){
-            dotNodes.push(<a href="javascript:;" key={i} data-index={i} className={this.state.index == i ? '_active _item' : '_item'} onClick={this.handleSlide}>&middot;</a>)
+            dotNodes.push(<a href="javascript:;" key={i} className={this.state.index == i ? '_active _item' : '_item'} onClick={() => this.handleSlide(i)}>&middot;</a>)
         }
         
         let contentCss = {

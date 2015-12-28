@@ -45,10 +45,7 @@ const KeyCodeMixin = {
 
     isFNKey(code){
         for(let item in FUNC_KEY){
-            if (code === FUNC_KEY[item]) {
-                return true;
-                break;
-            };
+            if (code === FUNC_KEY[item])  return true;
         }
         return false;
     }

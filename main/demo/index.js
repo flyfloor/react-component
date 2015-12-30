@@ -14,7 +14,6 @@ const Carousel = require('../../component/Carousel');
 const Pagination = require('../../component/Pagination');
 const SlideMenu = require('../../component/SlideMenu');
 const TimePicker = require('../../component/TimePicker');
-const DatePicker = require('../../component/DatePicker');
 
 module.exports = {
     Data,
@@ -33,5 +32,4 @@ module.exports = {
     Pagination,
     SlideMenu,
     TimePicker,
-    DatePicker,
 }

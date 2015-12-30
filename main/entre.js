@@ -28,7 +28,6 @@ import CarouselDemo from "./demo/CarouselDemo.jsx";
 import PaginationDemo from "./demo/PaginationDemo.jsx";
 import SlideMenuDemo from "./demo/SlideMenuDemo.jsx";
 import TimePickerDemo from "./demo/TimePickerDemo.jsx";
-import DatePickerDemo from "./demo/DatePickerDemo.jsx";
 
 class Demo extends React.Component {
     render() {
@@ -48,7 +47,7 @@ class Demo extends React.Component {
                 </div>
                 <div className="wrapper" id="demo_list">
                     <ol className="container">
-                        {/*<li>
+                        <li>
                             <h3>checkbox</h3>
                             <CheckBoxDemo/>
                         </li>
@@ -99,7 +98,7 @@ class Demo extends React.Component {
                         <li>
                             <h3>pagination</h3>
                             <PaginationDemo/>
-                        </li>*/}
+                        </li>
                         <li>
                             <h3>slide bar</h3>
                             <SlideMenuDemo/>
@@ -107,10 +106,6 @@ class Demo extends React.Component {
                         <li>
                             <h3>time picker</h3>
                             <TimePickerDemo/>
-                        </li>
-                        <li>
-                            <h3>date picker</h3>
-                            <DatePickerDemo/>
                         </li>
                     </ol>
                 </div>

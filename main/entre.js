@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import resetCss from './css/reset.less';
 import demoCss from './css/demo.less';
 import carousel_css from './css/carousel.less';
@@ -12,6 +13,7 @@ import tab_css from './css/tab.less';
 import slidemenu_css from './css/slide-menu.less';
 import pagination_css from './css/pagination.less';
 import timepicker_css from './css/time-picker.less';
+import datepicker_css from './css/date-picker.less';
 
 import CheckBoxDemo from "./demo/CheckBoxDemo.jsx";
 import RadioDemo from "./demo/RadioDemo.jsx";
@@ -28,6 +30,8 @@ import CarouselDemo from "./demo/CarouselDemo.jsx";
 import PaginationDemo from "./demo/PaginationDemo.jsx";
 import SlideMenuDemo from "./demo/SlideMenuDemo.jsx";
 import TimePickerDemo from "./demo/TimePickerDemo.jsx";
+import DatePickerDemo from "./demo/DatePickerDemo.jsx";
+import CalenderDemo from "./demo/CalenderDemo.jsx";
 
 class Demo extends React.Component {
     render() {
@@ -47,7 +51,7 @@ class Demo extends React.Component {
                 </div>
                 <div className="wrapper" id="demo_list">
                     <ol className="container">
-                        <li>
+                        {/*<li>
                             <h3>checkbox</h3>
                             <CheckBoxDemo/>
                         </li>
@@ -106,6 +110,14 @@ class Demo extends React.Component {
                         <li>
                             <h3>time picker</h3>
                             <TimePickerDemo/>
+                        </li>*/}
+                        <li>
+                            <h3>date picker</h3>
+                            <DatePickerDemo/>
+                        </li>
+                        <li>
+                            <h3>calender</h3>
+                            <CalenderDemo/>
                         </li>
                     </ol>
                 </div>

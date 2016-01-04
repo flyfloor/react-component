@@ -22,6 +22,7 @@ var Pin = require("./lib/Pin.js");
 var Carousel = require("./lib/Carousel.js");
 var Pagination = require("./lib/Pagination.js");
 var SlideMenu = require("./lib/SlideMenu.js");
+var TimePicker = require("./lib/TimePicker.js");
 
 module.exports = {
     Data: Data,
@@ -43,4 +44,5 @@ module.exports = {
     Carousel: Carousel,
     Pagination: Pagination,
     SlideMenu: SlideMenu,
+    TimePicker: TimePicker,
 }

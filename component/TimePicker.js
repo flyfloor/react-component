@@ -1,5 +1,6 @@
 import React from 'react';
-import {validateTime, initMaxAndMiniByNum} from './util/Time';
+import {validateTime} from './util/time';
+import {initMaxAndMiniByNum} from './util/util';
 import DocumentClickMixin from './mixin/DocumentClickMixin';
 
 const TimePicker = React.createClass({

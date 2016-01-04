@@ -1,4 +1,3 @@
-const Data = require('../../component/util/Data');
 const CheckBox = require('../../component/CheckBox');
 const Radio = require('../../component/Radio');
 const RadioGroup = require('../../component/RadioGroup');
@@ -14,9 +13,10 @@ const Carousel = require('../../component/Carousel');
 const Pagination = require('../../component/Pagination');
 const SlideMenu = require('../../component/SlideMenu');
 const TimePicker = require('../../component/TimePicker');
+const DatePicker = require('../../component/DatePicker');
+const Calender = require('../../component/Calender');
 
 module.exports = {
-    Data,
     CheckBox,
     Radio,
     RadioGroup,
@@ -32,4 +32,6 @@ module.exports = {
     Pagination,
     SlideMenu,
     TimePicker,
+    DatePicker,
+    Calender,
 }

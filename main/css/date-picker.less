@@ -1,0 +1,61 @@
+@import url('meta.less');
+
+@{NS}.date-picker {
+
+}
+
+@{NS}.calender {
+    >table {
+        background: @gray_c;
+        border: 1px solid @gray_c;
+        font-size: 13px;
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 3px;
+        }
+
+        ._week {
+            color: @gray_b;
+        }
+
+        ._nav {
+            border-width: 1px;
+            display: block;
+            width: 10px;
+            margin-left: 8px;
+            height: 10px;
+            border-style: solid;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        ._pre {
+            border-color: transparent transparent @blue @blue;
+        }
+        ._next {
+            border-color: @blue @blue transparent transparent;
+        }
+
+        td {
+            ._day {
+                border-radius: 50%;
+                display: block;
+                line-height: 26px;
+                height: 26px;
+                width: 26px;
+            }
+            ._today {
+                color: @gray_a;
+                border: 1px solid @gray_a;
+            }
+            ._active {
+                background: @gray_a;
+                color: @white;
+            }
+        }
+
+    }
+}

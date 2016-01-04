@@ -11,7 +11,15 @@ export default class DatePickerDemo extends React.Component {
                 </li>
                 <li>
                     <h4>DatePicker with time range</h4>
+                    <DatePicker value='2014-03-23'/>
+                </li>
+                <li>
+                    <h4>DatePicker with time range</h4>
                     <DatePicker begin='2013-03-08' end='2015-12-23'/>
+                </li>
+                <li>
+                    <h4>DatePicker with time range</h4>
+                    <DatePicker begin='2013-03-08' end='2015-15-23'/>
                 </li>
             </ul>
         );

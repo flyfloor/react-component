@@ -6,6 +6,9 @@ import Calender from './Calender';
 
 const DatePicker = React.createClass({
     mixins: [DocumentClickMixin],
+    propTypes: {
+        onChange: React.PropTypes.func
+    },
     getInitialState() {
         let value = this.initDate();
         return {
@@ -29,11 +32,9 @@ const DatePicker = React.createClass({
     handleValChange(value){
         this.setState({
             value,
-        }, () => {
-            this.setState({
-                showPicker: false
-            });
+            showPicker: false
         });
+        if (this.props.onChange) this.props.onChange(value);
     },
 
     onOtherDomClick(){
@@ -42,19 +43,12 @@ const DatePicker = React.createClass({
         });
     },
 
-    showPicker(){
-        console.log(this.state.value)
-        this.setState({
-            showPicker: true 
-        });
-    },
-
     render() {
         return (
             <div className="ui date-picker">
-                <input className="_input" onClick={this.showPicker} value={this.state.value}readOnly/>
+                <input className="_input" onClick={ () => {this.setState({ showPicker: true }) }} value={this.state.value}readOnly/>
                 {this.state.showPicker ? <div className="_picker">
-                                            <Calender value={this.state.value} onChange={this.handleValChange}></Calender>
+                                            <Calender begin={this.props.begin} end={this.props.end} value={this.state.value} onChange={this.handleValChange}></Calender>
                                         </div> : null
                 }
             </div>

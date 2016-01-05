@@ -111,14 +111,14 @@ class Demo extends React.Component {
                             <h3>time picker</h3>
                             <TimePickerDemo/>
                         </li>*/}
-                        <li>
+                        {/*<li>
                             <h3>date picker</h3>
                             <DatePickerDemo/>
-                        </li>
-                        {/*<li>
+                        </li>*/}
+                        <li>
                             <h3>calender</h3>
                             <CalenderDemo/>
-                        </li>*/}
+                        </li>
                     </ol>
                 </div>
                 <div className="footer container">

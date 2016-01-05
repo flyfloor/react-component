@@ -18,7 +18,7 @@ export default class CalenderDemo extends React.Component {
 
     render() {
         return (
-            <ol>
+            <ul className="two">
                 <li>
                     <h4>Default Calender</h4>
                     <Calender/>
@@ -36,7 +36,7 @@ export default class CalenderDemo extends React.Component {
                     <h4>Calender with begin and end</h4>
                     <Calender begin="2015-12-15" end="2016-03-08"/>
                 </li>
-            </ol>
+            </ul>
         );
     }
 }

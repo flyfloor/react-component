@@ -1,10 +1,15 @@
 import {initMaxAndMiniByNum} from './util';
 
+const BEGIN_YEAR = 1900;
+const BEGIN_MONTH = 1;
+const BEGIN_DAY = 1;
+const BEGIN_DATE = `${BEGIN_YEAR}-${BEGIN_MONTH}-${BEGIN_MONTH}`;
+
 export function validateDate(dateStr, options={
     begin: null,
     end: null,
 }){
-    let begin = options.begin,
+    let begin = options.begin || BEGIN_DATE,
         end = options.end;
 
     let date = dateStr ? new Date(dateStr) : new Date();
@@ -29,9 +34,9 @@ export function trimDate(date = new Date()){
 }
 
 function drawDate(date){
-    let year = date.getFullYear() || 1970;
-    let month = date.getMonth() + 1 || 1;
-    let day = date.getDate() || 1;
+    let year = date.getFullYear() || BEGIN_YEAR;
+    let month = date.getMonth() + 1 || BEGIN_MONTH;
+    let day = date.getDate() || BEGIN_DAY;
     return {year, month, day}
 }
 

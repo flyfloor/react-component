@@ -2,76 +2,145 @@
 
 @{NS}.date-picker {
     position: relative;
+    >._input {
+        width: 180px;
+        line-height: 25px;
+        height: 25px;
+        color: @black;
+    }
     >._picker {
         position: absolute;
         z-index: 1000;
+        left: 0;
+        top: 25px;
     }
 }
 
 @{NS}.calender {
+    border: 1px solid @gray_b;
+    position: relative;
     width: 250px;
+    overflow: hidden;
     >._label {
         background: @gray_b;
         color: @black_c;
-        padding: 10px;
+        padding: 15px 10px 5px;
+        >._year {
+            font-size: 30px;
+        }
+        >._date {
+            font-size: 14px;
+        }
     }
-    >table {
+
+    ._disabled {
+        color: @gray_b;
+    }
+
+    table {
         width: 100%;
-        background: @gray_c;
-        border: 1px solid @gray_c;
         font-size: 13px;
+
         th, td {
             text-align: center;
             vertical-align: middle;
             padding: 3px;
+        }
+    }
+
+    ._picker-label {
+        height: 30px;
+        position: relative;
+        background: @white;
+        overflow: hidden;
+        text-align: center;
+        vertical-align: middle;
+        ._nav, ._link {
+            display: block;
+            height: 100%;
+            float: left;
+            width: 10%;
+            line-height: 30px;
+        }
+
+        ._link {
+            width: 80%;
+        }
+
+        ._nav {
+            width: 10%;
+            padding-top: 10px;
+            >i {
+                line-height: 100%;
+                border-width: 1px;
+                display: block;
+                margin-left: 8px;
+                font-size: 13px;
+                width: 10px;
+                height: 10px;
+                border-style: solid;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+
+        ._pre {
+            >i {
+                border-color: transparent transparent @blue @blue;
+            }
+        }
+        ._next {
+            i {
+                border-color: @blue @blue transparent transparent;
+            }
+        }
+    }
+    
+    >._year-picker {
+        >ul {
+            overflow: hidden;
+            background: @gray_c;
+            padding: 0;
+
+            >li {
+                list-style-type: none;
+                float: left;
+                width: 25%;
+                padding: 15px 10px;
+                ._active {
+                    color: @black;
+                }
+            }
+        }
+    }
+
+    >._day-picker {
+        table {
+            background: @gray_c;
+            border: 1px solid @gray_c;
         }
 
         ._week {
             color: @gray_b;
         }
 
-        ._nav {
-            border-width: 1px;
+        ._day {
+            border-radius: 50%;
             display: block;
-            width: 10px;
-            margin-left: 8px;
-            height: 10px;
-            border-style: solid;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            -o-transform: rotate(45deg);
-            transform: rotate(45deg);
+            line-height: 26px;
+            height: 26px;
+            width: 26px;
         }
 
-        ._pre {
-            border-color: transparent transparent @blue @blue;
+        ._today {
+            color: @gray_a;
+            border: 1px solid @gray_a;
         }
-        ._next {
-            border-color: @blue @blue transparent transparent;
+        ._active {
+            background: @gray_a;
+            color: @white;
         }
-
-        td {
-            ._day {
-                border-radius: 50%;
-                display: block;
-                line-height: 26px;
-                height: 26px;
-                width: 26px;
-            }
-
-            ._disabled {
-                color: @gray_b;
-            }
-
-            ._today {
-                color: @gray_a;
-                border: 1px solid @gray_a;
-            }
-            ._active {
-                background: @gray_a;
-                color: @white;
-            }
-        }
-
     }
 }

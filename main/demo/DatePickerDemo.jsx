@@ -2,6 +2,19 @@ import React from 'react';
 import {DatePicker} from './index';
 
 export default class DatePickerDemo extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            value: null
+        }
+    }
+
+    handleValChange(value){
+        this.setState({
+            value
+        });
+    }
+
     render() {
         return (
             <ul className="two">
@@ -10,16 +23,17 @@ export default class DatePickerDemo extends React.Component {
                     <DatePicker/>
                 </li>
                 <li>
-                    <h4>DatePicker with time range</h4>
-                    <DatePicker value='2014-03-23'/>
+                    <h4>DatePicker with default value</h4>
+                    <DatePicker value='2014-10-05'/>
+                </li>
+                <li>
+                    <h4>DatePicker with onChange event</h4>
+                    <p>value has changed to {this.state.value}</p>
+                    <DatePicker onChange={this.handleValChange.bind(this)}/>
                 </li>
                 <li>
                     <h4>DatePicker with time range</h4>
-                    <DatePicker begin='2013-03-08' end='2015-12-23'/>
-                </li>
-                <li>
-                    <h4>DatePicker with time range</h4>
-                    <DatePicker begin='2013-03-08' end='2015-15-23'/>
+                    <DatePicker begin='2015-12-15' end='2016-11-23'/>
                 </li>
             </ul>
         );

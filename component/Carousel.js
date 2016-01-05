@@ -1,6 +1,5 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const Item = require('./Item.js');
 const IntervalMixin = require('./mixin/IntervalMixin');
 
 const Carousel = React.createClass({
@@ -56,15 +55,18 @@ const Carousel = React.createClass({
 
     makeCarouselItem(content){
         const NODES = content.props.children;
-        let itemNodes = [], nodeItem;
-        if (NODES instanceof Array) {
-            let _len = NODES.length;
-            for(let i = -1; i <= _len; i++){
-                let _index = i;
-                if (_index === -1) _index = _len - 1;
-                if (_index === _len) _index = 0;
-                itemNodes.push(<Item key={i} selected={ this.state.index == _index } style={{'width': this.state.baseWidth}} itemIndex={i}>{NODES[_index].props.children}</Item>);
-            }
+        let itemNodes = [], active = '';
+
+        let _len = React.Children.count(NODES);
+
+        for(let i = -1; i <= _len; i++){
+            let _index = i;
+            if (_index === -1) _index = _len - 1;
+            if (_index === _len) _index = 0;
+
+            itemNodes.push(<div key={`carousel-item-${i}`} style={{'width': this.state.baseWidth}} className={`_item ${active}`}>
+                                {NODES[_index]}
+                            </div>);
         }
         return itemNodes;
     },
@@ -149,7 +151,5 @@ const Carousel = React.createClass({
         );
     }
 });
-
-Carousel.Item = Item;
 
 module.exports = Carousel;

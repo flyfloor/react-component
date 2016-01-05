@@ -17,21 +17,13 @@ export default class MenuDemo extends React.Component {
 
     render() {
         const items  =  <div>
-                            <Menu.Item key='0'>
-                                <a href="javascript:;">one</a>
-                            </Menu.Item>
-                            <Menu.Item key='1'>
-                                <a href="javascript:;">two</a>
-                            </Menu.Item>
-                            <Menu.Item key='2'>
-                                <a href="javascript:;">three</a>
-                            </Menu.Item>
-                            <Menu.Item key='3'>
-                                <a href="javascript:;">
-                                    four
-                                    <i>^_^</i>
-                                </a>
-                            </Menu.Item>
+                            <a href="javascript:;">one</a>
+                            <a href="javascript:;">two</a>
+                            <a href="javascript:;">three</a>
+                            <a href="javascript:;">
+                                four
+                                <i> : )</i>
+                            </a>
                         </div>;
 
         const onNode = <a href="javascript:;">close menu</a>;

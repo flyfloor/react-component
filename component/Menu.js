@@ -1,5 +1,4 @@
 const React = require('react');
-const Item = require('./Item.js');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 
 const Menu = React.createClass ({
@@ -49,12 +48,15 @@ const Menu = React.createClass ({
     makeMenuItems(content){
         const NODES = content.props.children,
             INDEX = this.state.index;
-        let itemNodes = [];
-        if (NODES instanceof Array) {
-            itemNodes = NODES.map((node, index) => {
-                return <Item key={index} selected={ index == INDEX } itemIndex={index} onItemClick={this.handleItemClick}>{node.props.children}</Item>;
-            })
-        }
+        let active = '';
+        
+        let itemNodes = React.Children.map(NODES, (node, index) => {
+            active = index == INDEX ? '_active': '';
+            return <div className={`_item ${active}`} onClick={() => this.handleItemClick(index)}>
+                        {node}
+                    </div>
+        })
+
         return itemNodes;
     },
 
@@ -81,5 +83,4 @@ const Menu = React.createClass ({
     }
 });
 
-Menu.Item = Item;
 module.exports = Menu;

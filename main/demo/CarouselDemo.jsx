@@ -4,21 +4,11 @@ import {Carousel} from "./index.js";
 export default class CarouselDemo extends React.Component {
     render() {
         let items = <div>
-                        <Carousel.Item key='0'>
-                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/ambition-morty.png"/>
-                        </Carousel.Item>
-                        <Carousel.Item key='1'>
-                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/awkward-morty.png"/>
-                        </Carousel.Item>
-                        <Carousel.Item key='2'>
-                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/despise.png"/>
-                        </Carousel.Item>
-                        <Carousel.Item key='3'>
-                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/pride-morty.png"/>
-                        </Carousel.Item>
-                        <Carousel.Item key='4'>
-                            <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/surprise-morty.png"/>
-                        </Carousel.Item>
+                        <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/ambition-morty.png"/>
+                        <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/awkward-morty.png"/>
+                        <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/despise.png"/>
+                        <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/pride-morty.png"/>
+                        <img style={{'width': '100%'}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/surprise-morty.png"/>
                     </div>;
 
         let leftArrow = <p>left</p>;

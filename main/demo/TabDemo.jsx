@@ -16,21 +16,13 @@ export default class TabDemo extends React.Component {
 
     render() {
         const items  =  <div>
-                            <Tab.Item key='0'>
-                                <a href="javascript:;">first</a>
-                            </Tab.Item>
-                            <Tab.Item key='1'>
-                                <a href="javascript:;">second</a>
-                            </Tab.Item>
-                            <Tab.Item key='2'>
-                                <a target='_blank' href="http://braavos.me">third</a>
-                            </Tab.Item>
-                            <Tab.Item key='3'>
-                                <a href="javascript:;">
-                                    fourth
-                                    <i>^_^</i>
-                                </a>
-                            </Tab.Item>
+                            <a href="javascript:;">first</a>
+                            <a href="javascript:;">second</a>
+                            <a target='_blank' href="http://braavos.me">third</a>
+                            <a href="javascript:;">
+                                fourth
+                                <i>^_^</i>
+                            </a>
                         </div>;
 
 

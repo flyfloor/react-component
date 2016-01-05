@@ -1,5 +1,4 @@
-const React = require('react');
-const Item = require('./Item');
+import React from 'react';
 
 const Tab = React.createClass({
     propTypes: {
@@ -27,12 +26,12 @@ const Tab = React.createClass({
     makeTabItems(content){
         const NODES = content.props.children,
             INDEX = this.state.index;
-        let itemNodes = [];
-        if (NODES instanceof Array) {
-            itemNodes = NODES.map((node, index) => {
-                return <Item key={index} selected={ index == INDEX } itemIndex={index} onItemClick={this.handleItemClick}>{node.props.children}</Item>;
-            })
-        }
+        let itemNodes = React.Children.map(NODES, (node, index) => {
+            let active = index == INDEX ? '_active': '';
+            return <div className={`_item ${active}`} onClick={() => this.handleItemClick(index)}>
+                        {node}
+                    </div>
+        })
         return itemNodes;
     },
 
@@ -46,6 +45,4 @@ const Tab = React.createClass({
     }
 });
 
-Tab.Item = Item;
-
-module.exports = Tab;
+export default Tab;

@@ -1,10 +1,7 @@
 import React from 'react';
 import {timeStr2Obj} from './util/time';
-import {initMaxAndMiniByNum} from './util/util';
-import DocumentClickMixin from './mixin/DocumentClickMixin';
 
 const TimePicker = React.createClass({
-    mixins: [DocumentClickMixin],
     getInitialState() {
         let {hour, min, sec, value} = this.initTime();
         return {
@@ -12,7 +9,6 @@ const TimePicker = React.createClass({
             hour: hour,
             min: min,
             sec: sec,
-            showPicker: false,
         };
     },
 
@@ -24,12 +20,6 @@ const TimePicker = React.createClass({
 
     formatValue(hour, min, sec){
         return this.props.simple ? `${hour}:${min}` : `${hour}:${min}:${sec}`
-    },
-
-    onOtherDomClick(e){
-        this.setState({
-            showPicker: false,
-        });
     },
 
     getDefaultProps() {
@@ -57,12 +47,6 @@ const TimePicker = React.createClass({
         }
     },
 
-    handleFocus(){
-        this.setState({
-            showPicker: true 
-        });
-    },
-
     handleTimeChange(){
         if (this.props.onChange) this.props.onChange(this.state.value)
     },
@@ -88,12 +72,12 @@ const TimePicker = React.createClass({
         }, this.handleTimeChange);
     },
 
-
     render() {
         return (
             <div className="ui time-picker">
-                <input className="_input" onClick={this.refreshValue} onBlur={this.refreshValue} defaultValue={this.state.value} value={this.state.value} 
-                    onFocus={this.handleFocus} onChange={this.handleInputChange}/>
+                <input className="_input" onClick={this.refreshValue} 
+                    onBlur={this.refreshValue} defaultValue={this.state.value} value={this.state.value} 
+                    onChange={this.handleInputChange}/>
             </div>
         );
     }

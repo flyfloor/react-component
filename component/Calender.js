@@ -1,12 +1,12 @@
 import React from 'react';
 import {validateDate, formatDate, trimDate} from './util/date';
-import {WEEK_LABEL} from './util/constants';
+import {WEEK_LABEL, MONTH_LABEL} from './util/constants';
 
 
 const Calender = React.createClass({
     getInitialState() {
         let {year, month, day, value} = this.initDate();
-        return {year, month, day, value}
+        return {year, month, day, value, showYear: false, showMonth: false}
     },
 
     initDate(date=this.props.value){
@@ -65,19 +65,25 @@ const Calender = React.createClass({
         let displayW = WEEK_LABEL[new Date(displayY, displayM - 1, displayD).getDay()];
 
         return <div className="_label">
-                    <p className="_year">{displayY}</p>
+                    <a href="javascript:;" className="_year" onClick={this.pickYear}>{displayY}</a>
                     <p className="_date">
                         <span>{displayW}, </span>
-                        <span>{displayM}月 </span>
-                        <span>{displayD}日</span>
+                        <a href="javascript:;" onClick={this.pickMonth}>{displayM}月 {displayD}日</a>
                     </p>
                 </div>
     },
 
-    handleYearPicker(year){
+    handleYearPickerClick(year){
         this.setState({
             year,
             showYear: false,
+        });
+    },
+
+    handleMonthPickerClick(month){
+        this.setState({
+            month,
+            showMonth: false, 
         });
     },
 
@@ -93,6 +99,39 @@ const Calender = React.createClass({
         });
     },
 
+    pickYear(){
+        this.setState({
+            showYear: true,
+        });
+    },
+
+    pickMonth(){
+        this.setState({
+            showMonth: true, 
+        });
+    },
+
+    renderMonthPicker(){
+        let monthNodes = this.state.showMonth ? 
+                        <div className="_month-picker">
+                            <div className="_picker-label">
+                                <div className="_link">
+                                    <span>{this.state.year}年 {this.state.month}月</span>
+                                </div>
+                            </div>
+                            <ul>
+                                {MONTH_LABEL.map((label, index) => {
+                                    return <li key={`month-picker-${index + 1}`}>
+                                                <a href="javascript:;" onClick={() => this.handleMonthPickerClick(index + 1)}>{label}</a>
+                                            </li>
+                                })}
+                            </ul>
+                        </div>
+                        : null;
+
+        return monthNodes;
+    },
+
     renderYearPicker(){
         let beginY = this.state.year - 6;
         let endY = this.state.year + 5;
@@ -101,7 +140,7 @@ const Calender = React.createClass({
             let active = this.state.year === i ? '_active' : '';
             let isDisabled = i < 1900 ? '_disabled' : '';
             let yearItem = isDisabled ? <a href="javascript:;" className={isDisabled}>{i}</a>
-                                      : <a href="javascript:;" className={active} onClick={() => {this.handleYearPicker(i)}}>{i}</a>
+                                      : <a href="javascript:;" className={active} onClick={() => this.handleYearPickerClick(i)}>{i}</a>
             yearRangeNodes.push(<li key={`year-picker-${i}`}>
                                     {yearItem}
                                 </li>)
@@ -109,12 +148,11 @@ const Calender = React.createClass({
         let yearPickerNodes = this.state.showYear ? 
                             <div className="_year-picker">
                                 <div className="_picker-label">
-                                    <a href="javascript:;" className="_nav _pre" onClick={() => {this.handlePreYearRange(beginY)}}>
+                                    <a href="javascript:;" className="_nav _pre" onClick={() => this.handlePreYearRange(beginY)}>
                                         <i></i>
                                     </a>
                                     <div className="_link">
-                                        <span onClick={this.pickYear}>{beginY} ~ </span>
-                                        <span onClick={this.pickMonth}>{endY}</span>
+                                        <span>{beginY} ~ {endY}</span>
                                     </div>
                                     <a href="javascript:;" className="_nav _next" onClick={this.handleNextYearRange}>
                                         <i></i>
@@ -129,13 +167,7 @@ const Calender = React.createClass({
         return yearPickerNodes;
     },
 
-    pickYear(){
-        this.setState({
-            showYear: true,
-        });
-    },
-
-    render() {
+    renderDayPicker(){
         const TODAY = trimDate(new Date());
         let {year, month, day, value} = this.state;
         let dateCount = new Date(year, month, 0).getDate();
@@ -167,45 +199,50 @@ const Calender = React.createClass({
             }
         }
 
-        let dayNodes = this.state.showYear ? null 
-                                            : <div className="_day-picker">
-                                                <div className="_picker-label">
-                                                    <a href="javascript:;" className="_nav _pre" onClick={this.handlePreMonth}>
-                                                        <i></i>
-                                                    </a>
-                                                    <div className="_link">
-                                                        <span className="_year-link" onClick={this.pickYear}>{this.state.year}年 </span>
-                                                        <span className="_month-link" onClick={this.pickMonth}>{this.state.month}月</span>
-                                                    </div>
-                                                    <a href="javascript:;" className="_nav _next" onClick={this.handleNextMonth}>
-                                                        <i></i>
-                                                    </a>
-                                                </div>
-                                                <table>
-                                                    <tbody>
-                                                        <tr className="_week">
-                                                            <td>日</td>
-                                                            <td>一</td>
-                                                            <td>二</td>
-                                                            <td>三</td>
-                                                            <td>四</td>
-                                                            <td>五</td>
-                                                            <td>六</td>
-                                                        </tr>
-                                                        {matrixNodes.map((item, index) => {
-                                                            return  <tr key={`canlender-row-${index}`}>
-                                                                        {item}
-                                                                    </tr>
-                                                        })}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+        let dayNodes = this.state.showYear || this.state.showMonth ? null 
+                        : <div className="_day-picker">
+                            <div className="_picker-label">
+                                <a href="javascript:;" className="_nav _pre" onClick={this.handlePreMonth}>
+                                    <i></i>
+                                </a>
+                                <div className="_link">
+                                    <span className="_year-link" onClick={this.pickYear}>{this.state.year}年 </span>
+                                    <span className="_month-link" onClick={this.pickMonth}>{this.state.month}月</span>
+                                </div>
+                                <a href="javascript:;" className="_nav _next" onClick={this.handleNextMonth}>
+                                    <i></i>
+                                </a>
+                            </div>
+                            <table>
+                                <tbody>
+                                    <tr className="_week">
+                                        <td>日</td>
+                                        <td>一</td>
+                                        <td>二</td>
+                                        <td>三</td>
+                                        <td>四</td>
+                                        <td>五</td>
+                                        <td>六</td>
+                                    </tr>
+                                    {matrixNodes.map((item, index) => {
+                                        return  <tr key={`canlender-row-${index}`}>
+                                                    {item}
+                                                </tr>
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>;
 
+        return dayNodes;
+    },
+
+    render() {
         return (
             <div className="ui calender">
                 {this.renderDisplay()}
                 {this.renderYearPicker()}
-                {dayNodes}
+                {this.renderMonthPicker()}
+                {this.renderDayPicker()}
             </div>
         );
     }
@@ -226,7 +263,7 @@ Calender.Item = React.createClass({
         let active = this.props.active ? '_active': '';
         let today = this.props.isToday ? '_today': '';
         return (
-            <a href="javascript:;" className={`${active} ${disabled} ${today} _day`} onClick={() => {this.handleClick(value)}}>
+            <a href="javascript:;" className={`${active} ${disabled} ${today} _day`} onClick={() => this.handleClick(value)}>
                 {this.props.label}
             </a>
         );

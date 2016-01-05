@@ -1,3 +1,3 @@
-const _WEEK_LABEL = '星期'
+export const WEEK_LABEL = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
 
-export const WEEK_LABEL = [`${_WEEK_LABEL}日`, `${_WEEK_LABEL}一`, `${_WEEK_LABEL}二`, `${_WEEK_LABEL}三`, `${_WEEK_LABEL}四`, `${_WEEK_LABEL}五`, `${_WEEK_LABEL}六`]
+export const MONTH_LABEL = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']

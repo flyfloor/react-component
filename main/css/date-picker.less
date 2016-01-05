@@ -31,6 +31,9 @@
         >._date {
             font-size: 14px;
         }
+        a {
+            color: @black_c;
+        }
     }
 
     ._disabled {
@@ -64,6 +67,7 @@
         }
 
         ._link {
+            cursor: pointer;
             width: 80%;
         }
 
@@ -98,12 +102,13 @@
         }
     }
     
-    >._year-picker {
+    >._year-picker, >._month-picker {
+        font-size: 14px;
+        text-align: center;
         >ul {
             overflow: hidden;
             background: @gray_c;
             padding: 0;
-
             >li {
                 list-style-type: none;
                 float: left;
@@ -113,6 +118,12 @@
                     color: @black;
                 }
             }
+        }
+    }
+
+    >._month-picker {
+        ._picker-label ._link {
+            width: 100%;
         }
     }
 

@@ -1,7 +1,11 @@
 @import url('meta.less');
 
 @{NS}.date-picker {
-
+    position: relative;
+    >._picker {
+        position: absolute;
+        z-index: 1000;
+    }
 }
 
 @{NS}.calender {

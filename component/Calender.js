@@ -17,12 +17,10 @@ const Calender = React.createClass({
 
     handleClick(date){
         let value = trimDate(date);
-        if (this.state.value != value) {
-            this.setState({
-                value,
-            });
-            if (this.props.onChange) this.props.onChange(value)
-        }
+        this.setState({
+            value,
+        });
+        if (this.props.onChange) this.props.onChange(value)
     },
 
     dateParams(){

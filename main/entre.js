@@ -51,7 +51,7 @@ class Demo extends React.Component {
                 </div>
                 <div className="wrapper" id="demo_list">
                     <ol className="container">
-                        {/*<li>
+                        <li>
                             <h3>checkbox</h3>
                             <CheckBoxDemo/>
                         </li>
@@ -110,11 +110,11 @@ class Demo extends React.Component {
                         <li>
                             <h3>time picker</h3>
                             <TimePickerDemo/>
-                        </li>*/}
-                        {/*<li>
+                        </li>
+                        <li>
                             <h3>date picker</h3>
                             <DatePickerDemo/>
-                        </li>*/}
+                        </li>
                         <li>
                             <h3>calender</h3>
                             <CalenderDemo/>

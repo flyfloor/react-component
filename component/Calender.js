@@ -102,12 +102,14 @@ const Calender = React.createClass({
     pickYear(){
         this.setState({
             showYear: true,
+            showMonth: false,
         });
     },
 
     pickMonth(){
         this.setState({
             showMonth: true, 
+            showYear: false,
         });
     },
 
@@ -116,7 +118,8 @@ const Calender = React.createClass({
                         <div className="_month-picker">
                             <div className="_picker-label">
                                 <div className="_link">
-                                    <span>{this.state.year}年 {this.state.month}月</span>
+                                    <span onClick={this.pickYear}>{this.state.year}年 </span>
+                                    <span>{this.state.month}月</span>
                                 </div>
                             </div>
                             <ul>

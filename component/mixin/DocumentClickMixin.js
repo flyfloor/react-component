@@ -22,10 +22,11 @@ const DocumentClickMixin = {
 
     onDocumentClick(e) {
         const BASE_NODE = ReactDOM.findDOMNode(this);
+
         if(e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
             if (this.onBaseDomClick) this.onBaseDomClick(e);
         } else {
-            if (this.onOtherDomClick) this.onOtherDomClick(e);
+            if (document.contains(e.target) && this.onOtherDomClick) this.onOtherDomClick(e);
         }
         e.stopPropagation();
     }

@@ -10,14 +10,16 @@ export function validateDate(dateStr, options={
     let date = dateStr ? new Date(dateStr) : new Date();
 
     begin = new Date(begin);
-    end = end ? new Date(end) : new Date();
+    if (end) end = new Date(end)
 
     let beginY = begin.getFullYear();
-    let endY = begin.getFullYear();
+    let endY;
+    if (end) endY = end.getFullYear();
+
     if (beginY && endY && beginY > endY) begin = end;
     if (begin.getFullYear() && date < begin) date = begin;
     if (endY && date > end) date = end;
-    
+
     return drawDate(date)
 }
 
@@ -27,9 +29,9 @@ export function trimDate(date = new Date()){
 }
 
 function drawDate(date){
-    let year = date.getFullYear() || '1970';
-    let month = date.getMonth() + 1 || '01';
-    let day = date.getDate() || '01';
+    let year = date.getFullYear() || 1970;
+    let month = date.getMonth() + 1 || 1;
+    let day = date.getDate() || 1;
     return {year, month, day}
 }
 

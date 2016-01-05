@@ -5,7 +5,14 @@
 }
 
 @{NS}.calender {
+    width: 250px;
+    >._label {
+        background: @gray_b;
+        color: @black_c;
+        padding: 10px;
+    }
     >table {
+        width: 100%;
         background: @gray_c;
         border: 1px solid @gray_c;
         font-size: 13px;
@@ -47,6 +54,11 @@
                 height: 26px;
                 width: 26px;
             }
+
+            ._disabled {
+                color: @gray_b;
+            }
+
             ._today {
                 color: @gray_a;
                 border: 1px solid @gray_a;

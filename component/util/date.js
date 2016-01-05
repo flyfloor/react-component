@@ -1,11 +1,9 @@
-import {initMaxAndMiniByNum} from './util';
-
 const BEGIN_YEAR = 1900;
 const BEGIN_MONTH = 1;
 const BEGIN_DAY = 1;
 const BEGIN_DATE = `${BEGIN_YEAR}-${BEGIN_MONTH}-${BEGIN_MONTH}`;
 
-export function validateDate(dateStr, options={
+export function dateStr2Obj(dateStr, options={
     begin: null,
     end: null,
 }){
@@ -25,22 +23,22 @@ export function validateDate(dateStr, options={
     if (begin.getFullYear() && date < begin) date = begin;
     if (endY && date > end) date = end;
 
-    return drawDate(date)
+    return date2Obj(date)
 }
 
-export function trimDate(date = new Date()){
-    let {year, month, day} = drawDate(date);
-    return formatDate(year, month, day);
+export function date2DateStr(date = new Date()){
+    let {year, month, day} = date2Obj(date);
+    return obj2DateStr(year, month, day);
 }
 
-function drawDate(date){
+function date2Obj(date){
     let year = date.getFullYear() || BEGIN_YEAR;
     let month = date.getMonth() + 1 || BEGIN_MONTH;
     let day = date.getDate() || BEGIN_DAY;
     return {year, month, day}
 }
 
-export function formatDate(year, month, day){
+export function obj2DateStr(year, month, day){
     if (month < 10) month = `0${month}`;
     if (day < 10) day = `0${day}`;
     return `${year}-${month}-${day}`

@@ -1,5 +1,5 @@
 import React from 'react';
-import {validateDate, formatDate} from './util/date';
+import {dateStr2Obj, obj2DateStr} from './util/date';
 import {initMaxAndMiniByNum} from './util/util';
 import DocumentClickMixin from './mixin/DocumentClickMixin';
 import Calender from './Calender';
@@ -18,8 +18,8 @@ const DatePicker = React.createClass({
     },
 
     initDate(defaultValue=this.props.value){
-        let {year, month, day} = validateDate(defaultValue, this.dateParams());
-        return formatDate(year, month, day)
+        let {year, month, day} = dateStr2Obj(defaultValue, this.dateParams());
+        return obj2DateStr(year, month, day)
     },
 
     dateParams(){

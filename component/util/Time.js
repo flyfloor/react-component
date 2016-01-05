@@ -1,28 +1,14 @@
-import {initMaxAndMiniByNum} from './util';
+const MAX_HOUR = 23;
+const MAX_MIN = 59;
+const MAX_SEC = MAX_MIN;
 
-export function validateTime(value, options = {
-    spacer: ':', 
+export function timeStr2Obj(value='00:00:00', options = {
     simple: false, 
-    maxHour: 23, 
-    miniHour: 0, 
-    maxMin: 59, 
-    miniMin: 0, 
-    maxSec: 59, 
-    miniSec: 0
 }) {
-    let {
-        spacer,
-        simple,
-    } = options;
+    let {simple} = options;
     
-    spacer = spacer || ':';
-    value = value || `00${spacer}00${spacer}00`;
-    let arr = value.split(spacer);
+    let arr = value.split(':');
     arr = arr.slice(0, 3);
-
-    let {max: maxHour, mini: miniHour} = initMaxAndMiniByNum(options.maxHour, options.miniHour, 23);
-    let {max: maxMin, mini: miniMin} = initMaxAndMiniByNum(options.maxMin, options.miniMin, 59);
-    let {max: maxSec, mini: miniSec} = initMaxAndMiniByNum(options.maxSec, options.miniSec, 59);
 
     for (let i = 0; i < arr.length; i++) {
         let item = String(arr[i])
@@ -32,27 +18,19 @@ export function validateTime(value, options = {
     };
 
     let [hour, min, sec] = arr;
-    if (hour > maxHour) hour = String(Math.floor(hour % (maxHour + 1)));
-    if (isNaN(hour) || hour < miniHour) hour = String(miniHour);
-    if (hour.length === 1) hour = `0${hour}`;
+    hour = validateUnitByMax(hour, MAX_HOUR);
+    min = validateUnitByMax(min, MAX_MIN);
     
-    if (isNaN(min) || min < miniMin) min = String(miniMin);
-    if (min > maxMin) min = String(Math.floor(min % 60));
-    if (min.length === 1) min = `0${min}`;
-    
-    if (sec > maxSec) sec = String(Math.floor(sec % 60));
-    if (options.simple) {
-        return {
-            hour: hour,
-            min: min,
-        }
-    }
-    if (isNaN(sec) || sec < miniSec) sec = String(miniSec);
-    if (sec.length === 1) sec = `0${sec}`;
+    if (options.simple) return { hour, min }
 
-    return {
-        hour: hour,
-        min: min,
-        sec: sec,
-    }
+    sec = validateUnitByMax(sec, MAX_SEC);
+
+    return { hour, min, sec }
+}
+
+function validateUnitByMax(value, max){
+    if (value > max) value = String(Math.floor(value % (max + 1)));
+    if (isNaN(value) || value < 0) value = '00';
+    if (value.length === 1) value = `0${value}`;
+    return value;
 }

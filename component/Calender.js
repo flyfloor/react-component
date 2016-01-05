@@ -1,5 +1,5 @@
 import React from 'react';
-import {validateDate, formatDate, trimDate} from './util/date';
+import {dateStr2Obj, obj2DateStr, date2DateStr} from './util/date';
 import {WEEK_LABEL, MONTH_LABEL} from './util/constants';
 
 
@@ -10,13 +10,13 @@ const Calender = React.createClass({
     },
 
     initDate(date=this.props.value){
-        let {year, month, day} = validateDate(date, this.dateParams());
-        let value = formatDate(year, month, day);
+        let {year, month, day} = dateStr2Obj(date, this.dateParams());
+        let value = obj2DateStr(year, month, day);
         return {year, month, day, value}
     },
 
     handleClick(date){
-        let value = trimDate(date);
+        let value = date2DateStr(date);
         this.setState({
             value,
         });
@@ -61,7 +61,7 @@ const Calender = React.createClass({
     },
 
     renderDisplay(){
-        let { year: displayY, month: displayM, day: displayD} = validateDate(this.state.value);
+        let { year: displayY, month: displayM, day: displayD} = dateStr2Obj(this.state.value);
         let displayW = WEEK_LABEL[new Date(displayY, displayM - 1, displayD).getDay()];
 
         return <div className="_label">
@@ -171,7 +171,7 @@ const Calender = React.createClass({
     },
 
     renderDayPicker(){
-        const TODAY = trimDate(new Date());
+        const TODAY = date2DateStr(new Date());
         let {year, month, day, value} = this.state;
         let dateCount = new Date(year, month, 0).getDate();
         let index = new Date(year, month - 1, 1).getDay();
@@ -185,7 +185,7 @@ const Calender = React.createClass({
                 let _index = i - index + 1;
                 let row = Math.floor(i / 7);
                 let col = i % 7;
-                let itemDateStr = formatDate(year, month, _index);
+                let itemDateStr = obj2DateStr(year, month, _index);
                 if (!matrixNodes[row]) matrixNodes[row] = [];
                 
                 let isDisabled = itemDateStr < begin || itemDateStr > end;

@@ -42,10 +42,9 @@ class Demo extends React.Component {
                         <h2>React Component</h2>
                         <blockquote>Some basic component,<b>barely no css</b>, <b>build with ReactJs</b></blockquote> 
                         <ul>
-                            <li>Auther: <a target="_blank" href="http://braavos.me">落在深海</a></li>
-                            <li>Github repo: <a target="_blank" href="http://github.com/jerryshew/react-component">react-component</a></li>
-                            <li>Npm: <a href="https://www.npmjs.com/package/react-ui-component" target="_blank">react-ui-component</a></li>
-                            <li>Group: <a target="_blank" href="http://wecatch.me">wecatch</a></li>
+                            <li>Blog: <a target="_blank" href="http://braavos.me">落在深海</a></li>
+                            <li>Github: <a target="_blank" href="http://github.com/jerryshew/react-component">react-component</a></li>
+                            <li>Organization: <a target="_blank" href="http://wecatch.me">wecatch</a></li>
                         </ul>
                     </div>
                 </div>

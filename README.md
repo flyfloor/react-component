@@ -17,7 +17,9 @@
 * carousel
 * pagination
 * slide menu
-* time picker
+* time picker  
+* date picker  
+* calender
 
 ### Getting Started
 
@@ -26,7 +28,7 @@
 install with npm
 
 ```
-npm install react-ui-component --save
+npm install react-ui-component
 ```
 
 or install the latest version from github
@@ -38,8 +40,7 @@ npm install https://github.com/jerryshew/react-component
 #### with:
 
 * ReactJs
-* ReactDOM
-* ES 6
+* ES6 syntax
 * Webpack
 
 #### the hierarchy

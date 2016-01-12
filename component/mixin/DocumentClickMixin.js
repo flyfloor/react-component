@@ -4,7 +4,6 @@ const ReactDOM = require('react-dom');
 const DocumentClickMixin = {
     propTypes: {
         onBaseDomClick: React.PropTypes.func,
-        onBaseDomClick: React.PropTypes.func,
         onOtherDomClick: React.PropTypes.func,
     },
     

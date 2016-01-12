@@ -2,10 +2,6 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 const DocumentClickMixin = {
-    propTypes: {
-        onBaseDomClick: React.PropTypes.func,
-        onOtherDomClick: React.PropTypes.func,
-    },
     
     componentDidMount() {
         document.addEventListener('click', this.onClick);

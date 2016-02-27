@@ -2,9 +2,9 @@ const MAX_HOUR = 23;
 const MAX_MIN = 59;
 const MAX_SEC = MAX_MIN;
 
-export function timeStr2Obj(value='00:00:00', options = {
+const timeStr2Obj = (value='00:00:00', options = {
     simple: false, 
-}) {
+}) => {
     let {simple} = options;
     
     let arr = value.split(':');
@@ -28,9 +28,11 @@ export function timeStr2Obj(value='00:00:00', options = {
     return { hour, min, sec }
 }
 
-function validateUnitByMax(value, max){
+const validateUnitByMax = (value, max) => {
     if (value > max) value = String(Math.floor(value % (max + 1)));
     if (isNaN(value) || value < 0) value = '00';
     if (value.length === 1) value = `0${value}`;
     return value;
 }
+
+module.exports = { timeStr2Obj }

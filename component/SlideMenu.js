@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 const SlideMenu = React.createClass({
     propTypes: {
@@ -77,4 +77,4 @@ const SlideMenu = React.createClass({
     }
 });
 
-export default SlideMenu;
+module.exports = SlideMenu;

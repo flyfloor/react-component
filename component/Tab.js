@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 const Tab = React.createClass({
     propTypes: {
@@ -45,4 +45,4 @@ const Tab = React.createClass({
     }
 });
 
-export default Tab;
+module.exports = Tab;

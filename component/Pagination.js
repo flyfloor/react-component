@@ -1,4 +1,4 @@
-import React from 'react';
+const React = require('react');
 
 const Pagination = React.createClass({
     propTypes: {
@@ -75,4 +75,4 @@ const Pagination = React.createClass({
     }
 });
 
-export default Pagination;
+module.exports = Pagination;

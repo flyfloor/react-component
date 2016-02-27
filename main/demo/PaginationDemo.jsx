@@ -32,7 +32,7 @@ export default class PaginationDemo extends React.Component {
                 </li>
                 <li>
                     <h4>Pagination with full range</h4>
-                    <Pagination showRange='true' totalPage='100'/>
+                    <Pagination showRange={true} totalPage='100'/>
                 </li>
             </ol>
         );

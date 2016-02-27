@@ -16,6 +16,14 @@ const Pagination = React.createClass({
             currentPage: this.props.currentPage,
         };
     },
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.currentPage != this.props.currentPage) {
+            this.setState({
+                currentPage: nextProps.currentPage || 1,
+            });
+        }
+    },
     
     onPageChange(page){
         this.setState({

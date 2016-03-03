@@ -1,8 +1,8 @@
-import React from 'react';
-import {dateStr2Obj, obj2DateStr} from './util/date';
-import {initMaxAndMiniByNum} from './util/util';
-import DocumentClickMixin from './mixin/DocumentClickMixin';
-import Calender from './Calender';
+const React = require('react');
+const {dateStr2Obj, obj2DateStr} = require('./util/date');
+const {initMaxAndMiniByNum} = require('./util/util');
+const DocumentClickMixin = require('./mixin/DocumentClickMixin');
+const Calender = require('./Calender');
 
 const DatePicker = React.createClass({
     mixins: [DocumentClickMixin],
@@ -57,4 +57,4 @@ const DatePicker = React.createClass({
 });
 
 
-export default DatePicker;
+module.exports = DatePicker;

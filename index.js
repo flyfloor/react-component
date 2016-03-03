@@ -1,9 +1,5 @@
 'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-
-var Data = require("./lib/util/Data.js");
 var DocumentClickMixin = require("./lib/mixin/DocumentClickMixin.js");
 var IntervalMixin = require("./lib/mixin/IntervalMixin.js");
 var PopUpMixin = require("./lib/mixin/PopUpMixin.js");
@@ -23,9 +19,10 @@ var Carousel = require("./lib/Carousel.js");
 var Pagination = require("./lib/Pagination.js");
 var SlideMenu = require("./lib/SlideMenu.js");
 var TimePicker = require("./lib/TimePicker.js");
+var DatePicker = require("./lib/DatePicker.js");
+var Calender = require("./lib/Calender.js");
 
 module.exports = {
-    Data: Data,
     DocumentClickMixin: DocumentClickMixin,
     PopUpMixin: PopUpMixin,
     ScrollMixin: ScrollMixin,
@@ -45,4 +42,6 @@ module.exports = {
     Pagination: Pagination,
     SlideMenu: SlideMenu,
     TimePicker: TimePicker,
+    DatePicker: DatePicker,
+    Calender: Calender,
 }

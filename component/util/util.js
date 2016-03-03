@@ -1,4 +1,4 @@
-export function initMaxAndMiniByNum(max, mini, num){
+const initMaxAndMiniByNum = (max, mini, num) => {
     max = max || num;
     mini = mini || 0;
     max = max > num ? num : parseInt(max);

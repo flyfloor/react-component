@@ -1,5 +1,5 @@
-import React from 'react';
-import {timeStr2Obj} from './util/time';
+const React = require('react');
+const {timeStr2Obj} = require('./util/time');
 
 const TimePicker = React.createClass({
     getInitialState() {
@@ -84,4 +84,4 @@ const TimePicker = React.createClass({
 });
 
 
-export default TimePicker;
+module.exports = TimePicker;

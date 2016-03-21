@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
-const KeyCodeMixin = require('./mixin/KeyCodeMixin');
+const {BACKSPACE_KEYCODE} = require('./mixin/keyCode');
 
 const DropDown = React.createClass({
     mixins: [DocumentClickMixin],
@@ -237,13 +237,14 @@ DropDown.multiInput = React.createClass({
     },
 
     handleKeyDown(e){
-        const [CODE, TARGET, VALUE] = [e.keyCode, e.target, this.inputField().value];
+        const {keyCode, target} = e;
+        const value = this.inputField().value;
         this.setState({
             hasInput: true, 
         });        
-
-        if (KeyCodeMixin.isBackSpace(CODE) && VALUE === '') this.props.onSelectChange();
-        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
+        
+        if (keyCode === BACKSPACE_KEYCODE && value === '') this.props.onSelectChange();
+        e.target.style.width = (value.length + 1) * 12 + 'px';
     },
 
     handleInputChange(){

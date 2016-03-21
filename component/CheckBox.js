@@ -20,7 +20,8 @@ export const CheckBox = React.createClass({
         // let {disabled, storeValue, onChange, ...props} = this.props;
         return ( 
             <label style={this.props.style} className={this.props.className}>
-                <input type="checkbox" disabled={this.props.disabled} checked={this.state.checked} onChange={this.checkedChange}/>
+                <input type="checkbox" disabled={this.props.disabled} 
+                    checked={this.state.checked} onChange={this.checkedChange}/>
                 {this.props.children}
             </label>
         );

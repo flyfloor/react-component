@@ -67,7 +67,8 @@ export const CheckBoxGroup = React.createClass({
                     break;
                 }
             }
-            itemNode = <CheckBox key={item[valueName]} storeValue={item[valueName]} checked={itemChecked} onChange={this.handleChange}>{item[labelName]}</CheckBox>;
+            itemNode = <CheckBox key={item[valueName]} storeValue={item[valueName]} 
+                            checked={itemChecked} onChange={this.handleChange}>{item[labelName]}</CheckBox>;
             optionNodes.push(itemNode);
         }
 

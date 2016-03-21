@@ -23,16 +23,16 @@ const PopUpMixin = {
         return {
             tr_width: TRG.offsetWidth,
             tr_height: TRG.offsetHeight,
-        }
+        };
     },
 
     contentSize(){
         const CONTENT = ReactDOM.findDOMNode(this.refs.content); 
-        if (!CONTENT) return {width: 0, height: 0}
+        if (!CONTENT) return {width: 0, height: 0};
         return {
             c_width: CONTENT.offsetWidth,
             c_height: CONTENT.offsetHeight,
-        }
+        };
     },
 
     onTrigger(e, state){
@@ -40,7 +40,7 @@ const PopUpMixin = {
         if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {
             // 
         } else {
-            state = state != null ? state : !this.state.open;
+            state = state !== null ? state : !this.state.open;
             this.setState({
                 open: state
             }, () => {
@@ -78,6 +78,6 @@ const PopUpMixin = {
         return style;
     },
 
-}
+};
 
 module.exports = PopUpMixin;

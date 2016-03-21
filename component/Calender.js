@@ -182,10 +182,9 @@ const Calender = React.createClass({
             if (i < index) {
                 matrixNodes[0].push(<td key={`canlender-col-${i}`}></td>);
             } else {
-                let _index = i - index + 1;
-                let row = Math.floor(i / 7);
-                let col = i % 7;
-                let itemDateStr = obj2DateStr(year, month, _index);
+                const _index = i - index + 1;
+                const row = Math.floor(i / 7);
+                const itemDateStr = obj2DateStr(year, month, _index);
                 if (!matrixNodes[row]) matrixNodes[row] = [];
                 
                 let isDisabled = itemDateStr < begin || itemDateStr > end;
@@ -193,7 +192,7 @@ const Calender = React.createClass({
                 let isToday = TODAY == itemDateStr;
                 let active = value == itemDateStr && !isDisabled;
 
-                let itemVal = new Date(itemDateStr);
+                const itemVal = new Date(itemDateStr);
 
 
                 matrixNodes[row].push(<td key={`canlender-col-${i}`}>

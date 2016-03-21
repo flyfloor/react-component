@@ -5,18 +5,18 @@ const {WEEK_LABEL, MONTH_LABEL} = require('./util/constants');
 
 const Calender = React.createClass({
     getInitialState() {
-        let {year, month, day, value} = this.initDate();
+        const {year, month, day, value} = this.initDate();
         return {year, month, day, value, showYear: false, showMonth: false}
     },
 
     initDate(date=this.props.value){
-        let {year, month, day} = dateStr2Obj(date, this.dateParams());
-        let value = obj2DateStr(year, month, day);
+        const {year, month, day} = dateStr2Obj(date, this.dateParams());
+        const value = obj2DateStr(year, month, day);
         return {year, month, day, value}
     },
 
     handleClick(date){
-        let value = date2DateStr(date);
+        const value = date2DateStr(date);
         this.setState({
             value,
         });
@@ -24,39 +24,25 @@ const Calender = React.createClass({
     },
 
     dateParams(){
-        return {
-            begin: this.props.begin,
-            end: this.props.end
-        }
+        const {begin, end} = this.props;
+        return { begin, end };
     },
 
     handlePreMonth(){
-        let month = this.state.month;
+        let {month, year} = this.state;
         if (month - 1 <= 0) {
-            let year = this.state.year - 1;
-            this.setState({
-                month: 12,
-                year: year, 
-            });
+            this.setState({ month: 12, year: year - 1 });
         } else {
-            this.setState({
-                month: month - 1,
-            });
+            this.setState({  month: month - 1 });
         }
     },
 
     handleNextMonth(){
-        let month = this.state.month;
+        let {month, year} = this.state;
         if (month + 1 > 12) {
-            let year = this.state.year + 1;
-            this.setState({
-                month: 1,
-                year: year, 
-            });
+            this.setState({ month: 1, year: year + 1 });
         } else {
-            this.setState({
-                month: month + 1,
-            });
+            this.setState({ month: month + 1 });
         }
     },
 
@@ -114,18 +100,22 @@ const Calender = React.createClass({
     },
 
     renderMonthPicker(){
-        let monthNodes = this.state.showMonth ? 
+        const {showMonth, year, month} = this.state;
+        let monthNodes = showMonth ? 
                         <div className="_month-picker">
                             <div className="_picker-label">
                                 <div className="_link">
-                                    <span onClick={this.pickYear}>{this.state.year}年 </span>
-                                    <span>{this.state.month}月</span>
+                                    <span onClick={this.pickYear}>{year}年 </span>
+                                    <span>{month}月</span>
                                 </div>
                             </div>
                             <ul>
                                 {MONTH_LABEL.map((label, index) => {
                                     return <li key={`month-picker-${index + 1}`}>
-                                                <a href="javascript:;" onClick={() => this.handleMonthPickerClick(index + 1)}>{label}</a>
+                                                <a href="javascript:;" 
+                                                    onClick={() => this.handleMonthPickerClick(index + 1)}>
+                                                        {label}
+                                                </a>
                                             </li>
                                 })}
                             </ul>
@@ -136,19 +126,23 @@ const Calender = React.createClass({
     },
 
     renderYearPicker(){
-        let beginY = this.state.year - 6;
-        let endY = this.state.year + 5;
+        const { year, showYear } = this.state;
+        const beginY = year - 6;
+        const endY = year + 5;
+
         let yearRangeNodes = [];
         for (let i = beginY; i < endY; i++) {
-            let active = this.state.year === i ? '_active' : '';
+            let active = year === i ? '_active' : '';
             let isDisabled = i < 1900 ? '_disabled' : '';
-            let yearItem = isDisabled ? <a href="javascript:;" className={isDisabled}>{i}</a>
-                                      : <a href="javascript:;" className={active} onClick={() => this.handleYearPickerClick(i)}>{i}</a>
+            let yearItem = isDisabled ? 
+                    <a href="javascript:;" className={isDisabled}>{i}</a>
+                    : <a href="javascript:;" className={active} onClick={() => this.handleYearPickerClick(i)}>{i}</a>
+
             yearRangeNodes.push(<li key={`year-picker-${i}`}>
                                     {yearItem}
                                 </li>)
         };
-        let yearPickerNodes = this.state.showYear ? 
+        let yearPickerNodes = showYear ? 
                             <div className="_year-picker">
                                 <div className="_picker-label">
                                     <a href="javascript:;" className="_nav _pre" onClick={() => this.handlePreYearRange(beginY)}>
@@ -172,9 +166,9 @@ const Calender = React.createClass({
 
     renderDayPicker(){
         const TODAY = date2DateStr(new Date());
-        let {year, month, day, value} = this.state;
-        let dateCount = new Date(year, month, 0).getDate();
-        let index = new Date(year, month - 1, 1).getDay();
+        const {year, month, day, value, showYear, showMonth} = this.state;
+        const dateCount = new Date(year, month, 0).getDate();
+        const index = new Date(year, month - 1, 1).getDay();
         let matrixNodes = [[]];
         let { begin, end } = this.props;
 
@@ -188,28 +182,25 @@ const Calender = React.createClass({
                 if (!matrixNodes[row]) matrixNodes[row] = [];
                 
                 let isDisabled = itemDateStr < begin || itemDateStr > end;
-                
-                let isToday = TODAY == itemDateStr;
-                let active = value == itemDateStr && !isDisabled;
-
                 const itemVal = new Date(itemDateStr);
 
-
                 matrixNodes[row].push(<td key={`canlender-col-${i}`}>
-                                        <Calender.Item active={active} disabled={isDisabled} isToday={isToday} onClick={this.handleClick} value={itemVal} label={_index}/>
+                                        <Calender.Item active={value == itemDateStr && !isDisabled} 
+                                            disabled={isDisabled} isToday={TODAY == itemDateStr} 
+                                            onClick={this.handleClick} value={itemVal} label={_index}/>
                                       </td>)
             }
         }
 
-        let dayNodes = this.state.showYear || this.state.showMonth ? null 
+        let dayNodes = showYear || showMonth ? null 
                         : <div className="_day-picker">
                             <div className="_picker-label">
                                 <a href="javascript:;" className="_nav _pre" onClick={this.handlePreMonth}>
                                     <i></i>
                                 </a>
                                 <div className="_link">
-                                    <span className="_year-link" onClick={this.pickYear}>{this.state.year}年 </span>
-                                    <span className="_month-link" onClick={this.pickMonth}>{this.state.month}月</span>
+                                    <span className="_year-link" onClick={this.pickYear}>{year}年 </span>
+                                    <span className="_month-link" onClick={this.pickMonth}>{month}月</span>
                                 </div>
                                 <a href="javascript:;" className="_nav _next" onClick={this.handleNextMonth}>
                                     <i></i>
@@ -226,9 +217,9 @@ const Calender = React.createClass({
                                         <td>五</td>
                                         <td>六</td>
                                     </tr>
-                                    {matrixNodes.map((item, index) => {
-                                        return  <tr key={`canlender-row-${index}`}>
-                                                    {item}
+                                    {matrixNodes.map((n, i) => {
+                                        return  <tr key={`canlender-row-${i}`}>
+                                                    {n}
                                                 </tr>
                                     })}
                                 </tbody>
@@ -260,12 +251,13 @@ Calender.Item = React.createClass({
     },
 
     render() {
-        let value = this.props.value;
-        let disabled = this.props.disabled ? '_disabled' : '';
-        let active = this.props.active ? '_active': '';
-        let today = this.props.isToday ? '_today': '';
+        let {value, disabled, active, isToday} = this.props;
+        let today = isToday ? '_today': '';
+        disabled = disabled ? '_disabled' : '';
+        active = active ? '_active': '';
         return (
-            <a href="javascript:;" className={`${active} ${disabled} ${today} _day`} onClick={() => this.handleClick(value)}>
+            <a href="javascript:;" className={`${active} ${disabled} ${today} _day`} 
+                onClick={() => this.handleClick(value)}>
                 {this.props.label}
             </a>
         );

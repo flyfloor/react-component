@@ -3,10 +3,10 @@ import {Pagination} from './index.js';
 
 export default class PaginationDemo extends React.Component {
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             current: 1,
-        }
+        };
     }
 
     handlePageChange(page){

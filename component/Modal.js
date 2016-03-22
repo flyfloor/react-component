@@ -7,6 +7,7 @@ const Modal = React.createClass({
         cancelText: React.PropTypes.string,
         onConfirm: React.PropTypes.func,
         onCancel: React.PropTypes.func,
+        display: React.PropTypes.bool,
     },
 
     getInitialState() {
@@ -46,33 +47,44 @@ const Modal = React.createClass({
     },
 
     render() {
-        let actionDOM = [],
-            hasConfirm = this.props.onConfirm,
-            hasCancel = this.props.onCancel;
-        if (hasConfirm) actionDOM.push(<a href='javascript:;' key='confirm-action' onClick={this.handleConfirm}>{this.props.confirmText}</a>);
-        if (hasCancel) actionDOM.push(<a href='javascript:;' key='cancel-action' onClick={this.handleCancel}>{this.props.cancelText}</a>);
+        const {onConfirm, onCancel, confirmText, cancelText, title, children, style, force} = this.props;
+        const {open} = this.state;
+        let actionDOM = [];
+        if (onConfirm) actionDOM.push(<a href='javascript:;' key='confirm-action' 
+                                        onClick={this.handleConfirm}>{confirmText}</a>);
+        if (onCancel) actionDOM.push(<a href='javascript:;' key='cancel-action'
+                                        onClick={this.handleCancel}>{cancelText}</a>);
 
-        let footer = hasCancel || hasConfirm ? 
-                    <div className='_action'>
-                        <div className="_wrap">
-                            {actionDOM}
+        let footer = onCancel || onConfirm ? 
+                <div className='_action'>
+                    <div className="_wrap">
+                        {actionDOM}
+                    </div>
+                </div> 
+                : null; 
+
+        let node = open ? 
+                <div>
+                    <div className="_body">
+                        <div className="_title">{title}</div>
+                        <div className="_content">
+                            {children}
+                            {footer}
                         </div>
-                    </div> : null; 
-        
-        let base = this.state.open ? <div>
-                                        <div className="_body">
-                                            <div className="_title">{this.props.title}</div>
-                                            <div className="_content">
-                                                {this.props.children}
-                                                {footer}
-                                            </div>
-                                            <div className="_close" onClick={this.closeModal}>X</div>
-                                        </div>
-                                        <div className="_overlay" onClick={this.closeModal}></div>
-                                    </div> : null;
+                        {force ? 
+                            null
+                            : <div className="_close" onClick={this.closeModal}>x</div>}
+                    </div>
+                    {force ? 
+                        <div className="_overlay"></div>
+                        : <div className="_overlay" onClick={this.closeModal}></div>
+                    }
+                </div> 
+                : null;
+
         return (
-            <div className='ui modal' style={this.props.style}>
-                {base}
+            <div className='ui modal' style={style}>
+                {node}
             </div>
         );
     }

@@ -21,9 +21,9 @@ const RadioGroup = React.createClass({
             valueName: 'value',
         };
     },
-    toggleChange(e, storeValue){
+    toggleChange(e, val){
         this.setState({
-            value: storeValue, 
+            value: val, 
         }, () => {
             if (this.props.onChange) this.props.onChange(this.state.value);
         });
@@ -43,7 +43,7 @@ const RadioGroup = React.createClass({
 
         for (let item of this.state.options){
             itemChecked = item[valueName] === this.state.value;
-            itemNode = <Radio key={item[valueName]} storeValue={item[valueName]} checked={itemChecked} onChange={this.toggleChange}>{item[labelName]}</Radio>;
+            itemNode = <Radio key={item[valueName]} value={item[valueName]} checked={itemChecked} onChange={this.toggleChange}>{item[labelName]}</Radio>;
             optionNodes.push(itemNode);
         }
 

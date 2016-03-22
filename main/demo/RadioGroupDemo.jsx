@@ -6,7 +6,7 @@ const options = [
     {'name': 'B', 'value': 'b'},
     {'name': 'C', 'value': 'c'},
     {'name': 'D', 'value': 'd'},
-]
+];
 
 const checkedVal = 'b';
 
@@ -15,7 +15,7 @@ export default class RadioDemo extends React.Component {
         super(props);
         this.state = {
             displayText: checkedVal,
-        }
+        };
     }
 
     displayChange(value){

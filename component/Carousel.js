@@ -7,6 +7,9 @@ const Carousel = React.createClass({
 
     propTypes: {
         items: React.PropTypes.element.isRequired,
+        autoPlay: React.PropTypes.bool,
+        delay: React.PropTypes.number,
+        showArrow: React.PropTypes.bool,
     },
 
     getInitialState() {
@@ -27,20 +30,19 @@ const Carousel = React.createClass({
 
     componentDidMount() {
         const BASE = ReactDOM.findDOMNode(this);
+        const {autoPlay, delay} = this.props;
         this.setState({
             baseWidth: BASE.offsetWidth,
         });
-        if (this.props.autoPlay) this.setInterval(this.handleAutoPlay, this.props.delay);
+        if (autoPlay) this.setInterval(this.handleAutoPlay, delay);
     },
 
     handleAutoPlay(){
-        if (this.state.index < this.state.count) {
+        const {index, count} = this.state;
+        if (index < count) {
             this.setState({
-                index: this.state.index + 1 
-            }, () => {
-                this.addTransition(this.resetPosition);
-            });
-            
+                index: index + 1 
+            }, () => this.addTransition(this.resetPosition) );
         } 
     },
 
@@ -55,17 +57,21 @@ const Carousel = React.createClass({
 
     makeCarouselItem(content){
         const NODES = content.props.children;
-        let itemNodes = [], active = '';
+        const {baseWidth, index} = this.state;
+        let itemNodes = [];
 
         let _len = React.Children.count(NODES);
 
         for(let i = -1; i <= _len; i++){
             let _index = i;
+            let active = index === i ? '_active': '';
             if (_index === -1) _index = _len - 1;
             if (_index === _len) _index = 0;
 
-            itemNodes.push(<div key={`carousel-item-${i}`} style={{'width': this.state.baseWidth}} className={`_item ${active}`}>
-                                {NODES[_index]}
+            itemNodes.push(<div key={`carousel-item-${i}`} 
+                                style={{'width': baseWidth}} 
+                                className={`_item ${active}`}>
+                                    {NODES[_index]}
                             </div>);
         }
         return itemNodes;
@@ -74,42 +80,32 @@ const Carousel = React.createClass({
     handleSlide(index){
         this.setState({
             index: parseInt(index)
-        }, () => {
-            this.addTransition();
-        });
+        }, () => this.addTransition() );
     },
 
     handleRightArrow(){
-        if (this.state.index >= 0) {
+        const {index} = this.state;
+        if (index >= 0) {
             this.setState({
-                index: this.state.index - 1 
-            }, () => {
-                this.addTransition(this.resetPosition);
-            });
+                index: index - 1 
+            }, () => this.addTransition(this.resetPosition) );
         };
     },
 
     handleLeftArrow(){
-        if (this.state.index < this.state.count) {
+        const {index, count} = this.state;
+        if (index < count) {
             this.setState({
-                index: this.state.index + 1 
-            }, () => {
-                this.addTransition(this.resetPosition);
-            });
+                index: index + 1 
+            }, () => this.addTransition(this.resetPosition) );
         };
     },
 
     resetPosition(){
-        if (this.state.index === -1) {
-            this.setState({
-                index: this.state.count - 1 
-            })
-        }
-        if (this.state.index === this.state.count) {
-            this.setState({
-                index: 0 
-            });
-        };
+        const {index, count} = this.state;
+        if (index === -1) this.setState({ index: count - 1 });
+
+        if (index === count)  this.setState({ index: 0 });
     },
 
     addTransition(callback){
@@ -117,28 +113,33 @@ const Carousel = React.createClass({
         contentDOM.className += ' _slide';
         setTimeout(() => {
             contentDOM.className = '_content';
-            if (callback) callback();
+            if (callback) callback.call(this, null);
         }, 500)
     },
 
     render() {
-        let leftArrow = this.props.leftArrow,
-            rightArrow = this.props.rightArrow,
-            arrowNode = this.props.showArrow ? <div className="_arrow">
-                                                    <a href="javascript:;" onClick={this.handleLeftArrow} className="_left">{leftArrow ? leftArrow :  '←'}</a>
-                                                    <a href="javascript:;" onClick={this.handleRightArrow} className="_right">{rightArrow ? rightArrow : '→'}</a>
-                                                </div> : null;
+        const {leftArrow, rightArrow, showArrow} = this.props;
+        const {baseWidth, count, index} = this.state;
+        
+        let arrowNode = showArrow ? 
+                <div className="_arrow">
+                    <a href="javascript:;" onClick={this.handleLeftArrow} className="_left">{leftArrow ? leftArrow :  '←'}</a>
+                    <a href="javascript:;" onClick={this.handleRightArrow} className="_right">{rightArrow ? rightArrow : '→'}</a>
+                </div> : null;
 
-        let contentNodes = this.makeCarouselItem(this.props.items);
+        const contentNodes = this.makeCarouselItem(this.props.items);
         let dotNodes = [];
 
-        for(let i = 0; i < this.state.count; i++){
-            dotNodes.push(<a href="javascript:;" key={i} className={this.state.index == i ? '_active _item' : '_item'} onClick={() => this.handleSlide(i)}>&middot;</a>)
+        for(let i = 0; i < count; i++){
+            dotNodes.push(<a href="javascript:;" key={i} 
+                            className={index == i ? '_active _item' : '_item'} onClick={() => this.handleSlide(i)}>
+                                &middot;
+                        </a>);
         }
         
-        let contentCss = {
-            width: this.state.baseWidth * (this.state.count + 2),
-            transform: `translate(-${this.state.baseWidth * (this.state.index + 1)}px, 0)`,
+        const contentCss = {
+            width: baseWidth * (count + 2),
+            transform: `translate(-${baseWidth * (index + 1)}px, 0)`,
         }
         return (
             <div className='ui carousel'>

@@ -1,6 +1,5 @@
 const React = require('react');
 const {dateStr2Obj, obj2DateStr} = require('./util/date');
-const {initMaxAndMiniByNum} = require('./util/util');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 const Calender = require('./Calender');
 

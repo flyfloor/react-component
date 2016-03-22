@@ -3,14 +3,13 @@ import {Calender} from './index.js';
 
 export default class CalenderDemo extends React.Component {
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             value: ''
-        }
+        };
     }
 
     handleChange(value){
-        console.log('value changed')
         this.setState({
             value 
         });

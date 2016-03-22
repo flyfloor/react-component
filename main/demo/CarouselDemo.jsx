@@ -24,19 +24,19 @@ export default class CarouselDemo extends React.Component {
                 <li>
                     <h4>Auto play carousel</h4>
                     <div style={{'width': '300', 'height': '300'}}>
-                        <Carousel items={items} autoPlay="true" delay='5000'></Carousel>
+                        <Carousel items={items} autoPlay={true} delay={5000}></Carousel>
                     </div>
                 </li>
                 <li>
                     <h4>Carousel with control arrows</h4>
                     <div style={{'width': '300', 'height': '300'}}>
-                        <Carousel items={items} showArrow="true"></Carousel>
+                        <Carousel items={items} showArrow={true}></Carousel>
                     </div>
                 </li>
                 <li>
                     <h4>Carousel with custom control arrows</h4>
                     <div style={{'width': '300'}}>
-                        <Carousel items={items} leftArrow={leftArrow} rightArrow={rightArrow} showArrow="true"></Carousel>
+                        <Carousel items={items} leftArrow={leftArrow} rightArrow={rightArrow} showArrow={true}></Carousel>
                     </div>
                 </li>
             </ul>

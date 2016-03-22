@@ -3,7 +3,7 @@ import {CheckBox} from "./index.js";
 
 export default class CheckBoxDemo extends React.Component {
     handleChange(e){
-        console.log(e.target.checked)
+        console.log(e.target.checked);
     }
     render() {
         return (
@@ -13,12 +13,12 @@ export default class CheckBoxDemo extends React.Component {
                     <CheckBox onChange={this.handleChange.bind(this)}>checkbox</CheckBox>
                 </li>
                 <li>
-                    <h4>Disabled checkbox</h4>
-                    <CheckBox disabled="true">disabled checkbox</CheckBox>
+                    <h4>Checked checkbox</h4>
+                    <CheckBox checked={true}>checked checkbox</CheckBox>
                 </li>
                 <li>
-                    <h4>Checked checkbox</h4>
-                    <CheckBox checked="true">checked checkbox</CheckBox>
+                    <h4>Disabled checkbox</h4>
+                    <CheckBox disabled={true}>disabled checkbox</CheckBox>
                 </li>
             </ul>
         );

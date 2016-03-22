@@ -3,6 +3,8 @@ const React = require('react');
 export const CheckBox = React.createClass({
     propTypes: {
         onChange: React.PropTypes.func,
+        disabled: React.PropTypes.bool,
+        checked: React.PropTypes.bool,
     },
     getInitialState() {
         return {
@@ -10,19 +12,21 @@ export const CheckBox = React.createClass({
         };
     },
     checkedChange(e){
+        const {onChange, value} = this.props;
         this.setState({
             checked: e.target.checked
         });
-        if(this.props.onChange) this.props.onChange(e, this.props.storeValue);
+        if(onChange) onChange(e, value);
     },
 
     render() {
-        // let {disabled, storeValue, onChange, ...props} = this.props;
+        const {disabled, style, className, children} = this.props;
+        const {checked} = this.state;
         return ( 
-            <label style={this.props.style} className={this.props.className}>
-                <input type="checkbox" disabled={this.props.disabled} 
-                    checked={this.state.checked} onChange={this.checkedChange}/>
-                {this.props.children}
+            <label style={style} className={className}>
+                <input type="checkbox" disabled={disabled} 
+                    checked={checked} onChange={this.checkedChange}/>
+                {children}
             </label>
         );
     }

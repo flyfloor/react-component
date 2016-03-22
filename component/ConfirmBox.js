@@ -8,6 +8,7 @@ const ConfirmBox = React.createClass({
     propTypes: {
         onCancel: React.PropTypes.func,
         onConfirm: React.PropTypes.func,
+        force: React.PropTypes.bool,
     },
 
     closeConfirm(){
@@ -17,38 +18,42 @@ const ConfirmBox = React.createClass({
     },
 
     onOtherDomClick(e){
-        this.closeConfirm();
+        if (!this.props.force) this.closeConfirm();
     },
 
     handleCancel(){
-        if (!this.props.onCancel) return this.closeConfirm();
-        if(this.props.onCancel()) this.closeConfirm();
+        const {onCancel} = this.props;
+        if (!onCancel) return this.closeConfirm();
+        if(onCancel()) this.closeConfirm();
     },
 
     handleConfirm(){
-        if (!this.props.onConfirm) return this.closeConfirm();
-        if (this.props.onConfirm()) this.closeConfirm();
+        const {onConfirm} = this.props;
+        if (!onConfirm) return this.closeConfirm();
+        if (onConfirm()) this.closeConfirm();
     },
 
     render() {
-        let confirmText = this.props.confirmText;
-        let cancelText = this.props.cancelText;
-        let content = this.state.open ? <div className={'_wrap _' + this.props.position}>
-                                            <div ref='content' className='_content'>
-                                                <div className="_title">
-                                                    {this.props.title}
-                                                </div>
-                                                <div className="_action">
-                                                    <a href="javascript:;" className="_confirm" onClick={this.handleConfirm}>{confirmText ? confirmText : 'ok'}</a>
-                                                    <a href="javascript:;" className="_cancel" onClick={this.handleCancel}>{cancelText ? cancelText : 'cancel'}</a>
-                                                </div>
-                                                <span className="_arrow" ref='arrow'></span>
-                                            </div>
-                                        </div> : null;
+        const {confirmText, cancelText, position, title, style, children} = this.props;
+
+        let content = this.state.open ? 
+            <div className={'_wrap _' + position}>
+                <div ref='content' className='_content'>
+                    <div className="_title">
+                        {title}
+                    </div>
+                    <div className="_action">
+                        <a href="javascript:;" className="_confirm" onClick={this.handleConfirm}>{confirmText ? confirmText : 'ok'}</a>
+                        <a href="javascript:;" className="_cancel" onClick={this.handleCancel}>{cancelText ? cancelText : 'cancel'}</a>
+                    </div>
+                    <span className="_arrow" ref='arrow'></span>
+                </div>
+            </div> 
+            : null;
         return (
-            <span className='ui confirm-box popup' style={this.props.style} onClick={this.onTrigger}>
+            <span className='ui confirm-box popup' style={style} onClick={this.onTrigger}>
                 <span className="_trigger" ref='trigger'>
-                    {this.props.children}
+                    {children}
                 </span>
                 {content}
             </span>

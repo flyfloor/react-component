@@ -3,34 +3,32 @@ import {ConfirmBox} from './index.js';
 
 export default class ConfirmBoxDemo extends React.Component {
     handleConfirm(){
-        console.log('confirmed');
         return confirm('confirm?');
     }
 
     handleCancel(){
-        console.log('canceled');
         return true;
     }
 
     render() {
-        let confirmText = <p>√ yes</p>;
-        
+        const confirmText = <p>√yes</p>;
         return (
             <ol>
                 <li>
-                    <h4>Default confirmbox</h4>
+                    <h4>Default confirm box</h4>
                     <ConfirmBox title='default confirm'>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>
                 <li>
-                    <h4>Confirmbox with custom action, text</h4>
-                    <ConfirmBox title='confirm delete? realy you want delete this? are you sure?' confirmText={confirmText} onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
+                    <h4>Confirm box with custom action, text</h4>
+                    <ConfirmBox title='confirm delete? realy you want delete this? are you sure?' 
+                        confirmText={confirmText} onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>
                 <li>
-                    <h4>Conformbox with different position</h4>
+                    <h4>Confirm box with different position</h4>
                     <ul>
                         <li>
                             <ConfirmBox title='confirm delete?' position='left'>
@@ -53,6 +51,12 @@ export default class ConfirmBoxDemo extends React.Component {
                             </ConfirmBox>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <h4>Confirm box force to close</h4>
+                    <ConfirmBox force={true} title="force to close">
+                        <a href="javascript:;">force to close</a>
+                    </ConfirmBox>
                 </li>
             </ol>
         );

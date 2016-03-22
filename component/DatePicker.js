@@ -9,31 +9,27 @@ const DatePicker = React.createClass({
         onChange: React.PropTypes.func
     },
     getInitialState() {
-        let value = this.initDate();
-        return {
-            value,
-            showPicker: false,
-        };
+        const value = this.initDate();
+        return { value, showPicker: false };
     },
 
     initDate(defaultValue=this.props.value){
-        let {year, month, day} = dateStr2Obj(defaultValue, this.dateParams());
-        return obj2DateStr(year, month, day)
+        const {year, month, day} = dateStr2Obj(defaultValue, this.dateParams());
+        return obj2DateStr(year, month, day);
     },
 
     dateParams(){
-        return {
-            begin: this.props.begin,
-            end: this.props.end,
-        }
+        const {begin, end} = this.props;
+        return { begin, end };
     },
 
     handleValChange(value){
+        const {onChange} = this.props;
         this.setState({
             value,
             showPicker: false
         });
-        if (this.props.onChange) this.props.onChange(value);
+        if (onChange) onChange(value);
     },
 
     onOtherDomClick(e){
@@ -43,11 +39,15 @@ const DatePicker = React.createClass({
     },
 
     render() {
+        const {showPicker, value} = this.state;
+        const {begin, end} = this.props;
         return (
             <div className="ui date-picker">
-                <input className="_input" onClick={ () => {this.setState({ showPicker: true }) }} value={this.state.value}readOnly/>
-                {this.state.showPicker ? <div className="_picker">
-                                            <Calender begin={this.props.begin} end={this.props.end} value={this.state.value} onChange={this.handleValChange}></Calender>
+                <input className="_input" onClick={ () => {this.setState({ showPicker: true }) }} value={value} readOnly/>
+                {showPicker ? <div className="_picker">
+                                            <Calender begin={begin} end={end} 
+                                                value={value} onChange={this.handleValChange}>
+                                            </Calender>
                                         </div> : null
                 }
             </div>

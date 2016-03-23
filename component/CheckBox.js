@@ -5,12 +5,20 @@ export const CheckBox = React.createClass({
         onChange: React.PropTypes.func,
         disabled: React.PropTypes.bool,
         checked: React.PropTypes.bool,
+        className: React.PropTypes.string,
     },
     getInitialState() {
         return {
             checked:this.props.checked, 
         };
     },
+
+    getDefaultProps() {
+        return {
+            className: '',
+        };
+    },
+
     checkedChange(e){
         const {onChange, value} = this.props;
         this.setState({
@@ -20,10 +28,11 @@ export const CheckBox = React.createClass({
     },
 
     render() {
-        const {disabled, style, className, children} = this.props;
+        let {disabled, style, className, children} = this.props;
+        if (disabled) className = `${className} _disabled`;
         const {checked} = this.state;
         return ( 
-            <label style={style} className={className}>
+            <label style={style} className={`ui checkbox ${className}`}>
                 <input type="checkbox" disabled={disabled} 
                     checked={checked} onChange={this.checkedChange}/>
                 {children}

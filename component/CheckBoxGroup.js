@@ -62,9 +62,9 @@ export const CheckBoxGroup = React.createClass({
         let optionNodes = [];
 
         if (children) {
-            optionNodes = React.Children.map(children, node => {
+            optionNodes = React.Children.map(children, (node, i) => {
                 let checked = value.indexOf(node.props.value) > -1;
-                return <CheckBox checked={checked} {...node.props} onChange={this.handleChange} />;
+                return <CheckBox key={i} checked={checked} {...node.props} onChange={this.handleChange} />;
             })
         } else {
             let itemNode = null;

@@ -8,47 +8,61 @@ const RadioGroup = React.createClass({
         labelName: React.PropTypes.string,
         valueName: React.PropTypes.string,
         onChange: React.PropTypes.func,
+        defaultChecked: React.PropTypes.bool,
     },
     getInitialState() {
-        return {
-            options: this.props.options || [],
-            value: this.props.value, 
-        };
+        const {options, value} = this.props;
+        return { options, value };
     },
+
     getDefaultProps() {
         return {
             labelName: 'name',
             valueName: 'value',
+            options: [],
         };
     },
-    toggleChange(e, val){
-        this.setState({
-            value: val, 
-        }, () => {
+    
+    toggleChange(e, value){
+        this.setState({ value }, () => {
             if (this.props.onChange) this.props.onChange(this.state.value);
         });
     },
 
     componentDidMount() {
-        if (this.props.defaultChecked && !this.state.value && this.state.options.length > 0){
+        const {defaultChecked, valueName} = this.props;
+        const {value, options} = this.state;
+        if (defaultChecked && !value && options.length > 0){
             this.setState({
-                value: this.state.options[0][this.props.valueName] 
+                value: options[0][valueName] 
             });
         };
     },
 
     render() {
-        const [labelName, valueName] = [this.props.labelName, this.props.valueName];
-        let optionNodes = [], itemChecked, itemNode;
+        const {labelName, valueName, className, style, children} = this.props;
+        const {value, options} = this.state;
+        let optionNodes = [], itemChecked;
 
-        for (let item of this.state.options){
-            itemChecked = item[valueName] === this.state.value;
-            itemNode = <Radio key={item[valueName]} value={item[valueName]} checked={itemChecked} onChange={this.toggleChange}>{item[labelName]}</Radio>;
-            optionNodes.push(itemNode);
+        if (children) {
+            React.Children.map(children, (node, i) => {
+                itemChecked = node.props.value === value;
+                optionNodes.push(<Radio key={i} checked={itemChecked} {...node.props} onChange={this.toggleChange}>
+                                </Radio>);
+            })
+        } else {
+            for (let item of options){
+                itemChecked = item[valueName] === value;
+                optionNodes.push(<Radio key={item[valueName]} value={item[valueName]} 
+                                    checked={itemChecked} onChange={this.toggleChange}>
+                                        {item[labelName]}
+                                    </Radio>);
+            }
         }
 
+
         return (
-            <div style={this.props.style} className={this.props.className}>
+            <div style={style} className={className}>
                 {optionNodes}
             </div>
         );

@@ -1,19 +1,20 @@
 const React = require('react');
 const {timeStr2Obj} = require('./util/time');
 
-const TimePicker = React.createClass({
+const TimeInput = React.createClass({
+    propTypes: {
+        simple: React.PropTypes.bool,
+        value: React.PropTypes.string,
+    },
+
     getInitialState() {
         let {hour, min, sec, value} = this.initTime();
-        return {
-            value: value,
-            hour: hour,
-            min: min,
-            sec: sec,
-        };
+        return { value, hour, min, sec };
     },
 
     initTime(defaultVal = this.props.value){
-        let {hour, min, sec} = timeStr2Obj(defaultVal, { simple: this.props.simple });
+        const {simple} = this.props;
+        let {hour, min, sec} = timeStr2Obj(defaultVal, { simple });
         let value = this.formatValue(hour, min, sec);
         return {hour, min, sec, value}
     },
@@ -30,53 +31,52 @@ const TimePicker = React.createClass({
     },
 
     handleInputChange(e){
-        this.setState({
-            value: e.target.value,
-        });
+        const {value} = e.target;
+        this.setState({ value });
     },
 
     refreshValue(){
-        let {hour, min, sec, value} = this.initTime(this.state.value);
-        if (value != this.state.value) {
-            this.setState({
-                value: value,
-                hour: hour,
-                min: min,
-                sec: sec,
-            }, this.handleTimeChange);
+        const {hour, min, sec, value} = this.initTime(this.state.value);
+        if (value !== this.state.value) {
+            this.setState({ value, hour, min, sec }, this.handleTimeChange);
         }
     },
 
     handleTimeChange(){
-        if (this.props.onChange) this.props.onChange(this.state.value)
+        const {onChange} = this.props;
+        if (onChange) onChange(this.state.value)
     },
 
     handleHourChange(hour){
+        const {min, sec} = this.state;
         this.setState({
-            hour: hour,
-            value: this.formatValue(hour, this.state.min, this.state.sec)
+            hour,
+            value: this.formatValue(hour, min, sec)
         }, this.handleTimeChange);
     },
 
     handleMinChange(min){
+        const {hour, sec} = this.state;
         this.setState({
-            min: min,
-            value: this.formatValue(this.state.hour, min, this.state.sec)
+            min,
+            value: this.formatValue(hour, min, sec)
         }, this.handleTimeChange);
     },
 
     handleSecChange(sec){
+        const {hour, min} = this.state;
         this.setState({
             sec: sec,
-            value: this.formatValue(this.state.hour, this.state.min, sec)
+            value: this.formatValue(hour, min, sec)
         }, this.handleTimeChange);
     },
 
     render() {
+        const {value} = this.state;
         return (
-            <div className="ui time-picker">
+            <div className="ui time-input">
                 <input className="_input" onClick={this.refreshValue} 
-                    onBlur={this.refreshValue} defaultValue={this.state.value} value={this.state.value} 
+                    onBlur={this.refreshValue} defaultValue={value} value={value} 
                     onChange={this.handleInputChange}/>
             </div>
         );
@@ -84,4 +84,4 @@ const TimePicker = React.createClass({
 });
 
 
-module.exports = TimePicker;
+module.exports = TimeInput;

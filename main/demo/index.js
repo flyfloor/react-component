@@ -12,7 +12,7 @@ const Pin = require('../../component/Pin');
 const Carousel = require('../../component/Carousel');
 const Pagination = require('../../component/Pagination');
 const SlideMenu = require('../../component/SlideMenu');
-const TimePicker = require('../../component/TimePicker');
+const TimeInput = require('../../component/TimeInput');
 const DatePicker = require('../../component/DatePicker');
 const Calender = require('../../component/Calender');
 
@@ -31,7 +31,7 @@ module.exports = {
     Carousel,
     Pagination,
     SlideMenu,
-    TimePicker,
+    TimeInput,
     DatePicker,
     Calender,
 }

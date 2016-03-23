@@ -29,7 +29,7 @@ import PinDemo from "./demo/PinDemo.jsx";
 import CarouselDemo from "./demo/CarouselDemo.jsx";
 import PaginationDemo from "./demo/PaginationDemo.jsx";
 import SlideMenuDemo from "./demo/SlideMenuDemo.jsx";
-import TimePickerDemo from "./demo/TimePickerDemo.jsx";
+import TimeInputDemo from "./demo/TimeInputDemo.jsx";
 import DatePickerDemo from "./demo/DatePickerDemo.jsx";
 import CalenderDemo from "./demo/CalenderDemo.jsx";
 
@@ -50,7 +50,7 @@ class Demo extends React.Component {
                 </div>
                 <div className="wrapper" id="demo_list">
                     <ol className="container">
-                        {/*<li>
+                        <li>
                             <h3>checkbox</h3>
                             <CheckBoxDemo/>
                         </li>
@@ -85,12 +85,12 @@ class Demo extends React.Component {
                         <li>
                             <h3>modal</h3>
                             <ModalDemo/>
-                        </li>*/}
+                        </li>
                         <li>
                             <h3>tab</h3>
                             <TabDemo/>
                         </li>
-                        {/*<li>
+                        <li>
                             <h3>pin, something fixed position</h3>
                             <PinDemo/>
                         </li>
@@ -111,13 +111,13 @@ class Demo extends React.Component {
                             <DatePickerDemo/>
                         </li>
                         <li>
-                            <h3>time picker</h3>
-                            <TimePickerDemo/>
+                            <h3>time input</h3>
+                            <TimeInputDemo/>
                         </li>
                         <li>
                             <h3>calender</h3>
                             <CalenderDemo/>
-                        </li>*/}
+                        </li>
                     </ol>
                 </div>
                 <div className="footer container">

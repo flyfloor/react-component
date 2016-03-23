@@ -33,7 +33,7 @@ export default class CalenderDemo extends React.Component {
                 </li>
                 <li>
                     <h4>Calender with begin and end</h4>
-                    <Calender begin="2015-12-15" end="2016-03-08"/>
+                    <Calender begin="2015-12-15" end="2016-06-08"/>
                 </li>
             </ul>
         );

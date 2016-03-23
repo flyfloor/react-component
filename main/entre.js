@@ -107,12 +107,12 @@ class Demo extends React.Component {
                             <SlideMenuDemo/>
                         </li>
                         <li>
-                            <h3>date picker</h3>
-                            <DatePickerDemo/>
-                        </li>
-                        <li>
                             <h3>time input</h3>
                             <TimeInputDemo/>
+                        </li>
+                        <li>
+                            <h3>date picker</h3>
+                            <DatePickerDemo/>
                         </li>
                         <li>
                             <h3>calender</h3>

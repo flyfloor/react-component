@@ -44,12 +44,13 @@ const DatePicker = React.createClass({
         return (
             <div className="ui date-picker">
                 <input className="_input" onClick={ () => {this.setState({ showPicker: true }) }} value={value} readOnly/>
-                {showPicker ? <div className="_picker">
-                                            <Calender begin={begin} end={end} 
-                                                value={value} onChange={this.handleValChange}>
-                                            </Calender>
-                                        </div> : null
-                }
+                {showPicker ? 
+                        <div className="_picker">
+                            <Calender begin={begin} end={end} 
+                                value={value} onChange={this.handleValChange}>
+                            </Calender>
+                        </div> 
+                        : null}
             </div>
         );
     }

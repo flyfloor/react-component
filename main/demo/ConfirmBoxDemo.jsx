@@ -12,11 +12,11 @@ export default class ConfirmBoxDemo extends React.Component {
 
     render() {
         const contentNode = <p>Confrim delete?</p>;
-        const confirmText = <p>
+        const confirmBtn = <p>
                                 <span style={{'color': '#777'}}>√ </span>
                                 yes
                             </p>;
-        const cancelText = <p>
+        const cancelBtn = <p>
                                 <span style={{'color': '#777'}}>x </span>
                                 wrong
                             </p>;
@@ -31,8 +31,8 @@ export default class ConfirmBoxDemo extends React.Component {
                 <li>
                     <h4>Confirm box with custom action, text</h4>
                     <ConfirmBox content={<p>confirm delete? realy you want delete this? are you sure?</p>} 
-                        confirmText={confirmText} onConfirm={this.handleConfirm.bind(this)} 
-                        cancelText={cancelText}
+                        confirmBtn={confirmBtn} onConfirm={this.handleConfirm.bind(this)} 
+                        cancelBtn={cancelBtn}
                         onCancel={this.handleCancel.bind(this)}>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>

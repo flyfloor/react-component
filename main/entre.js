@@ -50,7 +50,7 @@ class Demo extends React.Component {
                 </div>
                 <div className="wrapper" id="demo_list">
                     <ol className="container">
-                        <li>
+                        {/*<li>
                             <h3>checkbox</h3>
                             <CheckBoxDemo/>
                         </li>
@@ -85,12 +85,12 @@ class Demo extends React.Component {
                         <li>
                             <h3>modal</h3>
                             <ModalDemo/>
-                        </li>
+                        </li>*/}
                         <li>
                             <h3>tab</h3>
                             <TabDemo/>
                         </li>
-                        <li>
+                        {/*<li>
                             <h3>pin, something fixed position</h3>
                             <PinDemo/>
                         </li>
@@ -117,7 +117,7 @@ class Demo extends React.Component {
                         <li>
                             <h3>calender</h3>
                             <CalenderDemo/>
-                        </li>
+                        </li>*/}
                     </ol>
                 </div>
                 <div className="footer container">

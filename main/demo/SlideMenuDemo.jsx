@@ -11,7 +11,7 @@ export default class SlideMenuDemo extends React.Component {
             positionLeft: false,
             positionRight: false,
             positionBottom: false,
-        }
+        };
     }
 
     handleCloseSlide1(){
@@ -59,7 +59,7 @@ export default class SlideMenuDemo extends React.Component {
                 <li>
                     <h4>slide menu with position</h4>
                     <a href="javascript:;" onClick={() => this.handleOpenSlide('positionLeft')}>left, with given width</a>
-                    <SlideMenu position="left" display={this.state.positionLeft} width="500" onSlideClose={this.handleAllSlideClose.bind(this)}>
+                    <SlideMenu position="left" display={this.state.positionLeft} width={500} onSlideClose={this.handleAllSlideClose.bind(this)}>
                         {contentNode}
                     </SlideMenu>
                     <a href="javascript:;" onClick={() => this.handleOpenSlide('positionRight')}>right</a>

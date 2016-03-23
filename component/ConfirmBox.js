@@ -9,6 +9,7 @@ const ConfirmBox = React.createClass({
         onCancel: React.PropTypes.func,
         onConfirm: React.PropTypes.func,
         force: React.PropTypes.bool,
+        content: React.PropTypes.element.isRequired,
     },
 
     closeConfirm(){
@@ -34,14 +35,12 @@ const ConfirmBox = React.createClass({
     },
 
     render() {
-        const {confirmText, cancelText, position, title, style, children} = this.props;
+        const {confirmText, cancelText, position, content, style, children} = this.props;
 
-        let content = this.state.open ? 
+        let contentNode = this.state.open ? 
             <div className={'_wrap _' + position}>
                 <div ref='content' className='_content'>
-                    <div className="_title">
-                        {title}
-                    </div>
+                    <div className="_title">{content}</div>
                     <div className="_action">
                         <a href="javascript:;" className="_confirm" onClick={this.handleConfirm}>{confirmText ? confirmText : 'ok'}</a>
                         <a href="javascript:;" className="_cancel" onClick={this.handleCancel}>{cancelText ? cancelText : 'cancel'}</a>
@@ -55,7 +54,7 @@ const ConfirmBox = React.createClass({
                 <span className="_trigger" ref='trigger'>
                     {children}
                 </span>
-                {content}
+                {contentNode}
             </span>
         );
     }

@@ -11,19 +11,29 @@ export default class ConfirmBoxDemo extends React.Component {
     }
 
     render() {
-        const confirmText = <p>√yes</p>;
+        const contentNode = <p>Confrim delete?</p>;
+        const confirmText = <p>
+                                <span style={{'color': '#777'}}>√ </span>
+                                yes
+                            </p>;
+        const cancelText = <p>
+                                <span style={{'color': '#777'}}>x </span>
+                                wrong
+                            </p>;
         return (
             <ol>
                 <li>
                     <h4>Default confirm box</h4>
-                    <ConfirmBox title='default confirm'>
+                    <ConfirmBox content={contentNode}>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>
                 <li>
                     <h4>Confirm box with custom action, text</h4>
-                    <ConfirmBox title='confirm delete? realy you want delete this? are you sure?' 
-                        confirmText={confirmText} onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
+                    <ConfirmBox content={<p>confirm delete? realy you want delete this? are you sure?</p>} 
+                        confirmText={confirmText} onConfirm={this.handleConfirm.bind(this)} 
+                        cancelText={cancelText}
+                        onCancel={this.handleCancel.bind(this)}>
                         <a href='javascript:;'>delete</a>
                     </ConfirmBox>
                 </li>
@@ -31,22 +41,22 @@ export default class ConfirmBoxDemo extends React.Component {
                     <h4>Confirm box with different position</h4>
                     <ul>
                         <li>
-                            <ConfirmBox title='confirm delete?' position='left'>
+                            <ConfirmBox content={<h2>Huge text</h2>} position='left'>
                                 <a href='javascript:;'>left</a>
                             </ConfirmBox>
                         </li>
                         <li>
-                            <ConfirmBox title='confirm delete?' position='right'>
+                            <ConfirmBox content={contentNode} position='right'>
                                 <a href='javascript:;'>right</a>
                             </ConfirmBox>
                         </li>
                         <li>
-                            <ConfirmBox title='confirm delete?' position='top'>
+                            <ConfirmBox content={contentNode} position='top'>
                                 <a href='javascript:;'>top</a>
                             </ConfirmBox>
                         </li>
                         <li>
-                            <ConfirmBox title='confirm delete?' position='bottom'>
+                            <ConfirmBox content={contentNode} position='bottom'>
                                 <a href='javascript:;'>bottom</a>
                             </ConfirmBox>
                         </li>
@@ -54,7 +64,7 @@ export default class ConfirmBoxDemo extends React.Component {
                 </li>
                 <li>
                     <h4>Confirm box force to close</h4>
-                    <ConfirmBox force={true} title="force to close">
+                    <ConfirmBox force={true} content={<p>force to close</p>}>
                         <a href="javascript:;">force to close</a>
                     </ConfirmBox>
                 </li>

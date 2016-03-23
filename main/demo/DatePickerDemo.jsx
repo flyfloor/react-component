@@ -3,10 +3,10 @@ import {DatePicker} from './index';
 
 export default class DatePickerDemo extends React.Component {
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             value: null
-        }
+        };
     }
 
     handleValChange(value){

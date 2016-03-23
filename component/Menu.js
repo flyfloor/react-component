@@ -34,7 +34,8 @@ const Menu = React.createClass ({
     },
 
     handleItemClick(index){
-        if (this.props.onSelect) this.props.onSelect(index);
+        const {onSelect} = this.props;
+        if (onSelect) onSelect(index);
         this.setState({
             open: false,
             index: index, 
@@ -46,31 +47,39 @@ const Menu = React.createClass ({
     },
 
     makeMenuItems(content){
-        const NODES = content.props.children,
-            INDEX = this.state.index;
+        const NODES = content.props.children;
+        const {index} = this.state;
         let active = '';
         
-        let itemNodes = React.Children.map(NODES, (node, index) => {
-            active = index == INDEX ? '_active': '';
-            return <div className={`_item ${active}`} onClick={() => this.handleItemClick(index)}>
+        let itemNodes = React.Children.map(NODES, (node, i) => {
+            active = i == index ? '_active': '';
+            return <div className={`_item ${active}`} onClick={() => this.handleItemClick(i)}>
                         {node}
-                    </div>
+                    </div>;
         })
 
         return itemNodes;
     },
 
     render() {
-        let content = this.state.open ? <div className="_content">{this.makeMenuItems(this.props.items)}</div> : null;
-        let triggerDOM = this.state.open && this.props.triggerOn ? this.props.triggerOn : this.props.children;
-        let menuNode = this.props.triggerType === 'click' ? 
-                        <span className='ui menu' style={this.props.style}>
+        const {open} = this.state;
+        const {items, triggerOn, children, triggerType, style} = this.props;
+        let content = open ? 
+            <div className="_content">
+                {this.makeMenuItems(items)}
+            </div> 
+            : null;
+        let triggerDOM = open && triggerOn ? 
+            triggerOn 
+            : children;
+        let menuNode = triggerType === 'click' ? 
+                        <span className='ui menu' style={style}>
                             <span className="_trigger" onClick={this.toggleOpen}>{triggerDOM}</span>
                             <div className="_wrap">
                                 {content}
                             </div>
                         </span> :
-                        <span className='ui menu' style={this.props.style} onMouseOver={this.openMenu} onMouseLeave={this.closeMenu}>
+                        <span className='ui menu' style={style} onMouseOver={this.openMenu} onMouseLeave={this.closeMenu}>
                             <span className="_trigger">{triggerDOM}</span>
                             <div className="_wrap">
                                 {content}

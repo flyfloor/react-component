@@ -17,29 +17,29 @@ const Tab = React.createClass({
         };
     },
     handleItemClick(index){
-        if (this.props.onSelect) this.props.onSelect(index);
+        const {onSelect} = this.props;
+        if (onSelect) onSelect(index);
         this.setState({
             index: index, 
         });
     },
 
-    makeTabItems(content){
-        const NODES = content.props.children,
-            INDEX = this.state.index;
-        let itemNodes = React.Children.map(NODES, (node, index) => {
-            let active = index == INDEX ? '_active': '';
-            return <div className={`_item ${active}`} onClick={() => this.handleItemClick(index)}>
+    makeTabItems(children){
+        const {index} = this.state;
+        let active;
+        return React.Children.map(children, (node, i) => {
+            active = i == index ? '_active': '';
+            return <div className={`_item ${active}`} onClick={() => this.handleItemClick(i)}>
                         {node}
-                    </div>
+                    </div>;
         })
-        return itemNodes;
     },
 
     render() {
-        let content = this.makeTabItems(this.props.items);
+        const {children, style, position} = this.props;
         return (
-            <div className={'ui tab ' + this.props.position} style={this.props.style}>
-                {content}
+            <div className={`ui tab ${position}`} style={style}>
+                {this.makeTabItems(children)}
             </div>
         );
     }

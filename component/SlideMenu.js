@@ -4,12 +4,13 @@ const ReactDOM = require('react-dom');
 const SlideMenu = React.createClass({
     propTypes: {
         position: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+        width: React.PropTypes.number,
+        onSlideClose: React.PropTypes.func.isRequired,
     },
 
     getInitialState() {
-        return {
-            display: this.props.display 
-        };
+        const {display} = this.props;
+        return { display };
     },
     getDefaultProps() {
         return {
@@ -20,9 +21,9 @@ const SlideMenu = React.createClass({
     },
 
     calcPositionStyle(){
-        let position = this.props.position, 
-            width = this.props.width,
-            cord = this.state.display ? 0 : width;
+        const {position, width} = this.props;
+        const {display} = this.state;
+        let cord = display ? 0 : width;
 
         switch(position){
             case 'left':
@@ -64,12 +65,13 @@ const SlideMenu = React.createClass({
     },
 
     render() {
-        let display = this.state.display;
+        const {display} = this.state;
+        const {children} = this.props;
 
         return (
             <div className={`ui slide-menu ${display ? '_display': ''}`}>
                 <div className='_content' ref='contentDOM' style={this.calcPositionStyle()}>
-                    {this.props.children}
+                    {children}
                 </div>
                 <div className="_overlay" onClick={this.handleCloseSide}></div>
             </div>

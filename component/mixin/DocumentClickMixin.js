@@ -25,6 +25,6 @@ const DocumentClickMixin = {
         }
         e.stopPropagation();
     }
-}
+};
 
 module.exports = DocumentClickMixin;

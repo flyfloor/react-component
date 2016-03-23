@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
-const KeyCodeMixin = require('./mixin/KeyCodeMixin');
+const {BACKSPACE_KEYCODE} = require('./mixin/keyCode');
 
 const DropDown = React.createClass({
     mixins: [DocumentClickMixin],
@@ -12,13 +12,17 @@ const DropDown = React.createClass({
         onSelect: React.PropTypes.func,
         labelName: React.PropTypes.string,
         valueName: React.PropTypes.string,
+        defaultSelected: React.PropTypes.bool,
+        searchable: React.PropTypes.bool,
+        multi: React.PropTypes.bool,
     },
     
     getInitialState() {
-        const DEFAULT_VALUE = this.props.multi ? [] : '';
+        let {multi, value, options} = this.props;
+        const DEFAULT_VALUE = multi ? [] : '';
+        value = value || DEFAULT_VALUE;
         return {
-            options: this.props.options,
-            value: this.props.value || DEFAULT_VALUE,
+            options, value,
             open: false,
             filterText: '',
         };
@@ -34,9 +38,11 @@ const DropDown = React.createClass({
     },
 
     componentDidMount() {
-        if (!this.props.multi && !this.state.value && this.props.defaultSelected && this.state.options.length > 0) {
+        const {multi, defaultSelected, valueName} = this.props;
+        const {options, value} = this.state;
+        if (!multi && !value && defaultSelected && options.length > 0) {
             this.setState({
-                value: this.state.options[0][this.props.valueName] 
+                value: options[0][valueName] 
             });
         };
     },
@@ -57,74 +63,90 @@ const DropDown = React.createClass({
     },
 
     formatDrop(){
-        const [LABEL_NAME, VALUE_NAME] = [this.props.labelName, this.props.valueName];
-        let optionNodes = [], selected, node,
-            placeHolder = this.props.placeHolder,
-            filterText = this.state.filterText,
-            compVal = this.state.value,
-            searchable = this.props.searchable,
-            multi = this.props.multi,
+        let {labelName, valueName, placeHolder, searchable, multi, style} = this.props;
+        const {filterText, value, options} = this.state;
+
+        let optionNodes = [], 
+            selected, node, 
             tags = [];
         
         if (multi) {
             // list node format(multi)
-            for (let pair of this.state.options){
-                for(let val of compVal){
-                    selected = val === pair[VALUE_NAME];
+            for (let pair of options){
+                for(let val of value){
+                    selected = val === pair[valueName];
                     if (selected) {
-                        const index = compVal.indexOf(pair[VALUE_NAME]);
-                        if(tags.indexOf([pair[LABEL_NAME]]) === -1) tags[index] = pair[LABEL_NAME];
+                        const index = value.indexOf(pair[valueName]);
+                        if(tags.indexOf([pair[labelName]]) === -1) tags[index] = pair[labelName];
                         break;
                     }
                 }
-                node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
-                if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
+                node = this.formatOptionCell({ label: pair[labelName], value: pair[valueName], selected });
+                if (String(pair[valueName]).indexOf(filterText) !== -1 || String(pair[labelName]).indexOf(filterText) !== -1) optionNodes.push(node);
             }
         } else {
             // list node format
-            for (let pair of this.state.options){
-                selected = compVal === pair[VALUE_NAME];
-                if(selected) placeHolder = pair[LABEL_NAME];
-                node = this.formatOptionCell({ label: pair[LABEL_NAME], value: pair[VALUE_NAME], selected: selected });
+            for (let pair of options){
+                selected = value === pair[valueName];
+                if(selected) placeHolder = pair[labelName];
+                node = this.formatOptionCell({ label: pair[labelName], value: pair[valueName], selected });
                 if (searchable) {
-                    if (pair[VALUE_NAME].toString().indexOf(filterText) !== -1 || pair[LABEL_NAME].toString().indexOf(filterText) !== -1) optionNodes.push(node);
+                    if (String(pair[valueName]).indexOf(filterText) !== -1 || String(pair[labelName]).indexOf(filterText) !== -1) optionNodes.push(node);
                     continue;
                 }
                 optionNodes.push(node);
             }
         }
 
-        return <div className='ui dropdown' style={this.props.style}>
-                    { multi ? this.formatMultiInput(tags) : <DropDown.label onClick={this.toggleDropDown}>{placeHolder}</DropDown.label> }
+        return <div className='ui dropdown' style={style}>
+                    { multi ? 
+                        this.formatMultiInput(tags) 
+                        : <DropDown.label onClick={this.toggleDropDown}>
+                            {placeHolder}
+                        </DropDown.label> }
                     { this.formatDropList(optionNodes) }
                 </div>
     },
     
     formatOptionCell({label, value, selected}){
         return <li key={value}>
-                    <DropDown.Option onOptionSelect={this.selectChange} selected={selected} storeValue={value}>{label}</DropDown.Option>
+                    <DropDown.Option onOptionSelect={this.selectChange} 
+                        selected={selected} storeValue={value}>{label}
+                    </DropDown.Option>
                 </li>;
     },
 
     formatSearchBar(){
-        return <DropDown.SearchBar onUserInputFocus={this.handleFocus} onUserInput={this.handleSearch}>this.props.placeHolder</DropDown.SearchBar>
+        return <DropDown.SearchBar onUserInputFocus={this.handleFocus} 
+                    onUserInput={this.handleSearch}>
+                    {this.props.placeHolder}
+                </DropDown.SearchBar>
     },
 
     formatDropList(nodes){
-        if (this.props.searchable) {
-            return this.state.open ? <div className='_list'>
-                                        {this.formatSearchBar()}
-                                        <ul>{nodes}</ul> 
-                                    </div> : null;
+        const {open} = this.state;
+        const {searchable} = this.props;
+        if (searchable) {
+            return open ? 
+                    <div className='_list'>
+                        {this.formatSearchBar()}
+                        <ul>{nodes}</ul> 
+                    </div> 
+                    : null;
         } else {
-            return this.state.open && nodes.length > 0 ? <div className='_list'>
-                                                            <ul>{nodes}</ul> 
-                                                        </div> : null;
+            return open && nodes.length > 0 ? 
+                    <div className='_list'>
+                        <ul>{nodes}</ul> 
+                    </div> 
+                    : null;
         }
     },
 
     formatMultiInput(tags){
-        return <DropDown.multiInput filterText={this.state.filterText} onSelectChange={this.multiBarValChangeByIndex} onUserInputFocus={this.handleFocus} onUserInput={this.handleSearch} onClick={this.toggleOpen} selectedTags={tags}></DropDown.multiInput>
+        return <DropDown.multiInput filterText={this.state.filterText} 
+                    onSelectChange={this.multiBarValChangeByIndex} onUserInputFocus={this.handleFocus} 
+                    onUserInput={this.handleSearch} onClick={this.toggleOpen} selectedTags={tags}>
+                </DropDown.multiInput>
     },
 
     onOtherDomClick(e){
@@ -149,7 +171,7 @@ const DropDown = React.createClass({
     selectChange(val){
         this.formatValue(val, () => {
             this.triggerDropValueChange();
-            this.toggleOpen(false);
+            this.toggleOpen(this.props.multi);
         });
     },
 
@@ -193,9 +215,10 @@ DropDown.Option = React.createClass({
     },
 
     render(){
+        const {selected, children} = this.props;
         return (
-            <div className={this.props.selected ? '_active _item' : '_item'} onClick={this.handleClick}>
-                {this.props.children}
+            <div className={selected ? '_active _item' : '_item'} onClick={this.handleClick}>
+                {children}
             </div>
         );
     }
@@ -237,13 +260,14 @@ DropDown.multiInput = React.createClass({
     },
 
     handleKeyDown(e){
-        const [CODE, TARGET, VALUE] = [e.keyCode, e.target, this.inputField().value];
+        const {keyCode, target} = e;
+        const value = this.inputField().value;
         this.setState({
             hasInput: true, 
         });        
-
-        if (KeyCodeMixin.isBackSpace(CODE) && VALUE === '') this.props.onSelectChange();
-        e.target.style.width = (VALUE.length + 1) * 12 + 'px';
+        
+        if (keyCode === BACKSPACE_KEYCODE && value === '') this.props.onSelectChange();
+        e.target.style.width = (value.length + 1) * 12 + 'px';
     },
 
     handleInputChange(){
@@ -275,19 +299,26 @@ DropDown.multiInput = React.createClass({
     },
 
     render() {
-        const TAGS = this.props.selectedTags.map((tag, index) => {
+        const {selectedTags, filterText} = this.props;
+        const {hasInput} = this.state;
+        const TAGS = selectedTags.map((tag, index) => {
             return <span className='_tag' key={index} onClick={() => this.removeSelected(index)}>
                         <san className="_text">{tag}</san>
                         <a href="javascript:;" className="_delete"></a>
                     </span>;
         });
 
-        let placeHolder = this.props.selectedTags.length === 0 && !this.state.hasInput ? <span className='_placeHolder'>search...</span> : <span className='_placeHolder'></span>;
+        let placeHolder = selectedTags.length === 0 && !hasInput ? 
+                <span className='_placeHolder'>search...</span> 
+                : <span className='_placeHolder'></span>;
 
         return (
             <div className='_multi' onClick={this.handleClick}>
                 {TAGS}
-                <input className='_input' ref='userInput' style={{'width': '9px'}} value={this.props.filterText} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleInputChange} type='text' onKeyDown={this.handleKeyDown}/>
+                <input className='_input' ref='userInput' style={{'width': '9px'}} 
+                    value={filterText} 
+                    onBlur={this.handleBlur} onFocus={this.handleFocus} 
+                    onChange={this.handleInputChange} type='text' onKeyDown={this.handleKeyDown}/>
                 {placeHolder}
             </div>
         );
@@ -319,7 +350,8 @@ DropDown.SearchBar = React.createClass({
         return (
             <div>
                 <div className='_search'>
-                    <input className='_searchbar' ref='userInput' onFocus={this.handleFocus} type='text' onChange={this.handleChange} placeholder={this.props.placeHolder}/>
+                    <input className='_searchbar' ref='userInput' onFocus={this.handleFocus} 
+                        type='text' onChange={this.handleChange} placeholder={this.props.placeHolder}/>
                 </div>
             </div>
         );

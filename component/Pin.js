@@ -5,6 +5,10 @@ const ScrollMixin = require('./mixin/ScrollMixin');
 const Pin = React.createClass({
     mixins: [ScrollMixin],
 
+    propTypes: {
+        top: React.PropTypes.number,
+    },
+
     getInitialState() {
         return {
             fixed: false,
@@ -19,7 +23,7 @@ const Pin = React.createClass({
     },
 
     node2Top(){
-        let pinNode = ReactDOM.findDOMNode(this.refs.pinNode);
+        const pinNode = ReactDOM.findDOMNode(this.refs.pinNode);
         return pinNode.offsetTop;
     },
 
@@ -30,17 +34,19 @@ const Pin = React.createClass({
     },
 
     onScroll(e){
-        let {_top} = this.windowScrollOffset();
+        const {_top} = this.windowScrollOffset();
         this.setState({
             fixed: _top >= this.state.baseTop
         });
     },
 
     render() {
-        let stat = this.state.fixed ? 'fixed': '';
+        const {fixed} = this.state;
+        const {top, children, className} = this.props;
+        let stat = fixed ? 'fixed': '';
         return (
-            <div className={'ui pin ' + stat} style={{'top': this.props.top}} ref='pinNode'>
-                {this.props.children}
+            <div className={`ui pin ${stat} ${className}`} style={{'top': top}} ref='pinNode'>
+                {children}
             </div>
         );
     }

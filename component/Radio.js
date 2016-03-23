@@ -3,17 +3,30 @@ const React = require('react');
 const Radio = React.createClass({
     propTypes: {
         onChange: React.PropTypes.func,
+        checked: React.PropTypes.bool,
+        disabled: React.PropTypes.bool,
+        value: React.PropTypes.string,
+        className: React.PropTypes.string,
+    },
+
+    getDefaultProps() {
+        return {
+            className: '',
+        };
     },
 
     checkedChange(e){
-        if(this.props.onChange) this.props.onChange(e, this.props.storeValue);
+        const {value, onChange} = this.props;
+        if(onChange) onChange(e, value);
     },
 
     render() {
+        let {className, checked, disabled, style, children} = this.props;
+        if (disabled) className = `${className} _disabled`;
         return (
-            <label style={this.props.style} className={this.props.className}>
-                <input type="radio" ref="radioInput" disabled={this.props.disabled} checked={this.props.checked} onChange={this.checkedChange} />
-                {this.props.children}
+            <label style={style} className={`ui radio ${className}`}>
+                <input type="radio" ref="radioInput" disabled={disabled} checked={checked} onChange={this.checkedChange} />
+                {children}
             </label>
         );
     }

@@ -7,7 +7,7 @@ export default class MenuDemo extends React.Component {
         this.state = {
             index: 1,
             index1: 0,
-        }
+        };
     }
     displayChange(index){
         this.setState({
@@ -16,15 +16,14 @@ export default class MenuDemo extends React.Component {
     }
 
     render() {
-        const items  =  <div>
-                            <a href="javascript:;">one</a>
-                            <a href="javascript:;">two</a>
-                            <a href="javascript:;">three</a>
-                            <a href="javascript:;">
-                                four
-                                <i> : )</i>
-                            </a>
-                        </div>;
+        const items = <div>
+                        <a href="javascript:;">one</a>
+                        <a href="javascript:;">two</a>
+                        <a href="javascript:;">three</a>
+                        <a href="javascript:;">
+                            four <i> : )</i>
+                        </a>
+                    </div>;
 
         const onNode = <a href="javascript:;">close menu</a>;
 

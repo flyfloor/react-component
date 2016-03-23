@@ -3,7 +3,7 @@ import {Radio} from './index.js';
 
 export default class RadioDemo extends React.Component {
     handleChange(e){
-        console.log(e.target.checked);
+        
     }
 
     render() {
@@ -14,12 +14,12 @@ export default class RadioDemo extends React.Component {
                     <Radio onChange={this.handleChange.bind(this)}>radio</Radio>
                 </li>
                 <li>
-                    <h4>Disabled radio</h4>
-                    <Radio disabled="true">disabled radio</Radio>
+                    <h4>Checked radio</h4>
+                    <Radio checked={true}>checked radio</Radio>
                 </li>
                 <li>
-                    <h4>Checked radio</h4>
-                    <Radio checked="true">checked radio</Radio>
+                    <h4>Disabled radio</h4>
+                    <Radio disabled={true}>disabled radio</Radio>
                 </li>
             </ul>
         );

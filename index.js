@@ -18,7 +18,7 @@ var Pin = require("./lib/Pin.js");
 var Carousel = require("./lib/Carousel.js");
 var Pagination = require("./lib/Pagination.js");
 var SlideMenu = require("./lib/SlideMenu.js");
-var TimePicker = require("./lib/TimePicker.js");
+var TimeInput = require("./lib/TimeInput.js");
 var DatePicker = require("./lib/DatePicker.js");
 var Calender = require("./lib/Calender.js");
 
@@ -41,7 +41,7 @@ module.exports = {
     Carousel: Carousel,
     Pagination: Pagination,
     SlideMenu: SlideMenu,
-    TimePicker: TimePicker,
+    TimeInput: TimeInput,
     DatePicker: DatePicker,
     Calender: Calender,
 }

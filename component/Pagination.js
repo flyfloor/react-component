@@ -32,11 +32,12 @@ const Pagination = React.createClass({
     },
     
     onPageChange(page){
-        if (page > this.props.totalPage) return;
+        const {totalPage, onChange} = this.props;
+        if (page > totalPage) return;
         this.setState({
             currentPage: page
         });
-        if (this.props.onChange) this.props.onChange(page)
+        if (onChange) onChange(page);
     },
 
     render() {

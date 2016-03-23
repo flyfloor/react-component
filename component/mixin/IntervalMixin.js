@@ -14,6 +14,6 @@ const IntervalMixin = {
     componentWillUnmount: function() {
         this.clearInterval();
     },
-}
+};
 
 module.exports = IntervalMixin;

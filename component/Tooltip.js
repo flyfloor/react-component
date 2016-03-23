@@ -5,6 +5,10 @@ const PopUpMixin = require('./mixin/PopUpMixin');
 const Tooltip = React.createClass({
     mixins: [DocumentClickMixin, PopUpMixin],
 
+    propTypes: {
+        content: React.PropTypes.element.isRequired,
+    },
+
     onOtherDomClick(e){
         this.setState({
             open: false, 
@@ -20,20 +24,25 @@ const Tooltip = React.createClass({
     },
 
     render() {
-        let content = this.state.open ? <div className={'_wrap _' + this.props.position}>
-                                            <div ref='content' className='_content'>
-                                                <div className="_title">
-                                                    {this.props.title}
-                                                </div>
-                                                <span className="_arrow" ref='arrow'></span>
-                                            </div>
-                                        </div> : null;
+        const {open} = this.state;
+        const {position, content, style, className, children} = this.props;
+        let contentNode = this.state.open ? 
+                <div className={`_wrap _${position}`}>
+                    <div ref='content' className='_content'>
+                        <div className="_title">
+                            {content}
+                        </div>
+                        <span className="_arrow" ref='arrow'></span>
+                    </div>
+                </div> 
+                : null;
         return (
-            <span className='ui confirm-box popup' style={this.props.style} onMouseOver={this.handleOpen} onMouseLeave={this.handleClose}>
+            <span className='ui confirm-box popup' style={style} 
+                onMouseOver={this.handleOpen} onMouseLeave={this.handleClose}>
                 <span className="_trigger" ref='trigger'>
-                    {this.props.children}
+                    {children}
                 </span>
-                {content}
+                {contentNode}
             </span>
         );
     }

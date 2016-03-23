@@ -8,16 +8,14 @@ export default class ModalDemo extends React.Component {
             display: false,
             display1: false,
             display2: false
-        }
+        };
     }
     
     handleConfirm(){
-        console.log('confirmed');
         return confirm('close modal?');
     }
 
     handleCancel(){
-        console.log('canceled');
         return true;
     }
 
@@ -26,21 +24,9 @@ export default class ModalDemo extends React.Component {
         return true;
     }
 
-    showModal(){
+    showModal(stat){
         this.setState({
-            display: true, 
-        });
-    }
-
-    showModal1(){
-        this.setState({
-            display1: true, 
-        });
-    }
-
-    showModal2(){
-        this.setState({
-            display2: true, 
+            [String(stat)]: true, 
         });
     }
 
@@ -49,6 +35,7 @@ export default class ModalDemo extends React.Component {
             display: false, 
             display1: false, 
             display2: false, 
+            display3: false
         });
     }
 
@@ -57,7 +44,7 @@ export default class ModalDemo extends React.Component {
             <ol>
                 <li>
                     <h4>Default modal</h4>
-                    <a href="javascript:;" onClick={this.showModal.bind(this)}>open modal</a>
+                    <a href="javascript:;" onClick={this.showModal.bind(this, 'display')}>open modal</a>
                     <Modal title='confirm deleted' onClose={this.handleClose.bind(this)} display={this.state.display}>
                         <h4>this is content</h4>
                         <p>asdfhkjfkwlg mean no shit</p>
@@ -66,15 +53,25 @@ export default class ModalDemo extends React.Component {
                 </li>
                 <li>
                     <h4>Modal with confirm, cancel action</h4>
-                    <a href="javascript:;" onClick={this.showModal1.bind(this)}>open another modal</a>
-                    <Modal display={this.state.display1} onClose={this.handleClose.bind(this)} onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
+                    <a href="javascript:;" onClick={this.showModal.bind(this, 'display1')}>open modal</a>
+                    <Modal display={this.state.display1} onClose={this.handleClose.bind(this)} 
+                        onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
                         <a href='http://braavos.me' target="_blank">hello</a>
                     </Modal>
                 </li>
                 <li>
                     <h4>Modal with only confirm action</h4>
-                    <a href="javascript:;" onClick={this.showModal2.bind(this)}>open another modal</a>
-                    <Modal display={this.state.display2} onClose={this.handleClose.bind(this)} onConfirm={this.handleConfirm1.bind(this)}>
+                    <a href="javascript:;" onClick={this.showModal.bind(this, 'display2')}>open modal</a>
+                    <Modal display={this.state.display2} onClose={this.handleClose.bind(this)}
+                        onConfirm={this.handleConfirm1.bind(this)}>
+                        <a href='http://braavos.me' target="_blank">hello</a>
+                    </Modal>
+                </li>
+                <li>
+                    <h4>Modal with only confirm action</h4>
+                    <a href="javascript:;" onClick={this.showModal.bind(this, 'display3')}>open modal</a>
+                    <Modal display={this.state.display3} force={true} onClose={this.handleClose.bind(this)}
+                        onConfirm={this.handleConfirm1.bind(this)}>
                         <a href='http://braavos.me' target="_blank">hello</a>
                     </Modal>
                 </li>

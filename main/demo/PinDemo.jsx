@@ -19,10 +19,10 @@ export default class PinDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Pin with offset top</h4>
-                        <Pin top='200'>
+                        <Pin top={100}>
                             <div className='card'>
                                 <h4>title</h4>
-                                <p>pin at position top 200</p>
+                                <p>pin at position top 100</p>
                             </div>
                         </Pin>
                     </li>

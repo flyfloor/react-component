@@ -29,7 +29,7 @@ import PinDemo from "./demo/PinDemo.jsx";
 import CarouselDemo from "./demo/CarouselDemo.jsx";
 import PaginationDemo from "./demo/PaginationDemo.jsx";
 import SlideMenuDemo from "./demo/SlideMenuDemo.jsx";
-import TimePickerDemo from "./demo/TimePickerDemo.jsx";
+import TimeInputDemo from "./demo/TimeInputDemo.jsx";
 import DatePickerDemo from "./demo/DatePickerDemo.jsx";
 import CalenderDemo from "./demo/CalenderDemo.jsx";
 
@@ -111,8 +111,8 @@ class Demo extends React.Component {
                             <DatePickerDemo/>
                         </li>
                         <li>
-                            <h3>time picker</h3>
-                            <TimePickerDemo/>
+                            <h3>time input</h3>
+                            <TimeInputDemo/>
                         </li>
                         <li>
                             <h3>calender</h3>

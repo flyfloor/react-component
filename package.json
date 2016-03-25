@@ -4,7 +4,7 @@
   "description": "some component build with ReactJs",
   "main": "main.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "babel --presets es2015,react --watch component/ --out-dir lib/ & node server.js"
   },
   "repository": {
     "type": "git",

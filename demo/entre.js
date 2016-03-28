@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, browserHistory, Route, IndexRoute, Link, History } from 'react-router';
+import { Router, Route, IndexRoute, Link, History } from 'react-router';
 
 import resetCss from './css/reset.less';
 import demoCss from './css/demo.less';
@@ -104,7 +104,7 @@ class App extends React.Component {
 }
 
 
-ReactDOM.render(<Router history={browserHistory}>
+ReactDOM.render(<Router>
                     <Route path="/" component={App}>
                         <IndexRoute component={CheckBoxDemo}></IndexRoute>
                         <Route path="/checkbox" component={CheckBoxDemo}/>

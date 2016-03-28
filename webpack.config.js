@@ -4,8 +4,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 
-console.log(autoprefixer)
-
 module.exports = {
     entry: "./demo/entre.js",
     output: {
@@ -38,10 +36,6 @@ module.exports = {
 	            test: /\.jsx?$/,
 	            exclude: /(node_modules|bower_components)/,
 	            loader: 'babel',
-                query: {
-                    optional: ['runtime'],
-                    stage: 0
-                }
             }
         ],
         postcss: function () {

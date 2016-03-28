@@ -12,9 +12,9 @@ const TimeInput = React.createClass({
         return { value, hour, min, sec };
     },
 
-    initTime(defaultVal = this.props.value){
+    initTime(val = this.props.value){
         const {simple} = this.props;
-        let {hour, min, sec} = timeStr2Obj(defaultVal, { simple });
+        let {hour, min, sec} = timeStr2Obj(val, { simple });
         let value = this.formatValue(hour, min, sec);
         return {hour, min, sec, value}
     },

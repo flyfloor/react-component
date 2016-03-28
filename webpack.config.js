@@ -1,6 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
+
+console.log(autoprefixer)
 
 module.exports = {
     entry: "./demo/entre.js",
@@ -22,10 +26,10 @@ module.exports = {
         loaders: [
         	{ 
             	test: /\.less$/,
-            	loader: "style!css!less" 
+            	loader: "style-loader!css-loader!postcss-loader!less-loader"
             }, { 
             	test: /\.css$/,
-            	loader: "style!css" 
+                loader: "style-loader!css-loader!postcss-loader"
             },	{ 
             	test: /\.js$/,
 	            exclude: /(node_modules|bower_components)/,
@@ -39,7 +43,10 @@ module.exports = {
                     stage: 0
                 }
             }
-        ]
+        ],
+        postcss: function () {
+            return [autoprefixer, precss];
+        }
     },
     
 };

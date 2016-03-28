@@ -65,7 +65,7 @@ export default class ModalDemo extends React.Component {
                         <h4>Modal with only confirm action</h4>
                         <a href="javascript:;" onClick={this.showModal.bind(this, 'display2')}>open modal</a>
                         <Modal display={this.state.display2} onClose={this.handleClose.bind(this)}
-                            onConfirm={this.handleConfirm1.bind(this)}>
+                            onConfirm={this.handleConfirm1.bind(this)} closeIcon={<p>关闭</p>}>
                             <a href='http://braavos.me' target="_blank">hello</a>
                         </Modal>
                     </li>

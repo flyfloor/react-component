@@ -8,6 +8,7 @@ const Modal = React.createClass({
         onConfirm: React.PropTypes.func,
         onCancel: React.PropTypes.func,
         display: React.PropTypes.bool,
+        closeIcon: React.PropTypes.element,
     },
 
     getInitialState() {
@@ -22,6 +23,7 @@ const Modal = React.createClass({
             title: 'modal title',
             confirmText: 'confirm',
             cancelText: 'cancel',
+            closeIcon: <span>x</span>,
         };
     },
 
@@ -47,7 +49,7 @@ const Modal = React.createClass({
     },
 
     render() {
-        const {onConfirm, onCancel, confirmText, cancelText, title, children, style, force} = this.props;
+        const {onConfirm, onCancel, confirmText, cancelText, title, children, style, force, closeIcon} = this.props;
         const {open} = this.state;
         let actionDOM = [];
         if (onConfirm) actionDOM.push(<a href='javascript:;' key='confirm-action' 
@@ -57,34 +59,35 @@ const Modal = React.createClass({
 
         let footer = onCancel || onConfirm ? 
                 <div className='_action'>
-                    <div className="_wrap">
-                        {actionDOM}
-                    </div>
+                    {actionDOM}
                 </div> 
                 : null; 
 
-        let node = open ? 
+        let className = ['ui', 'modal'];
+        if (open) className.push('_show');
+        if (force) className.push('_force');
+        className = className.join(' ');
+
+        return (
+            <div className='' style={style} className={className}>
                 <div>
                     <div className="_body">
-                        <div className="_title">{title}</div>
-                        <div className="_content">
-                            {children}
-                            {footer}
+                        <div className="_wrap">
+                            <div className="_title">{title}</div>
+                            <div className="_content">
+                                {children}
+                                {footer}
+                            </div>
+                            {force ? 
+                                null
+                                : <div className="_close" onClick={this.closeModal}>{closeIcon}</div>}
                         </div>
-                        {force ? 
-                            null
-                            : <div className="_close" onClick={this.closeModal}>x</div>}
                     </div>
                     {force ? 
                         <div className="_overlay"></div>
                         : <div className="_overlay" onClick={this.closeModal}></div>
                     }
                 </div> 
-                : null;
-
-        return (
-            <div className='ui modal' style={style}>
-                {node}
             </div>
         );
     }

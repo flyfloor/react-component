@@ -2,18 +2,23 @@
 
 @{NS}.modal {
     ._body {
-        z-index: 1000;
-        background: @white;
-        position: relative;
-        min-width: 400px;
-        max-width: 600px;
-        position: fixed;
-        top: 25%;
-        left: 0;
-        right: 0;
-        margin: auto;
-        border: 1px solid @gray_b;
-        border-radius: 3px;
+        visibility: hidden;
+        >._wrap {
+            z-index: 1000;
+            background: @white;
+            min-width: 400px;
+            max-width: 600px;
+            position: fixed;
+            top: 25%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            border: 1px solid @gray_b;
+            border-radius: 3px;
+            opacity: 0;
+            transform: scale(0.7);
+            transition: all .2s;
+        }
 
         ._title {
             padding: 10px;
@@ -25,10 +30,7 @@
             ._action {
                 font-size: 90%;
                 overflow: hidden;
-                ._wrap {
-                    float: right;
-                }
-
+                float: right;
                 a+a {
                     margin-left: 5px;
                 }
@@ -42,11 +44,35 @@
         }
     }
     ._overlay {
+        visibility: hidden;
         position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(0,0,0,.3);
+        background: transparent;
+    }
+    &._show {
+        ._body {
+            visibility: visible;
+            >._wrap {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        ._overlay {
+            visibility: visible;
+            background: rgba(0,0,0,.6);
+        }
+    }
+    &._force {
+        ._body {
+            ._wrap {
+                border: none;
+            }
+        }
+        ._overlay {
+            background: rgba(255,255,255,.95);
+        }
     }
 }

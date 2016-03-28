@@ -1,0 +1,105 @@
+@import url('meta');
+@import url('share');
+
+a {
+    color: @blue;
+}
+
+body {
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.table {
+    display: table;
+    width: 100%;
+    .row {
+        display: table-row;
+    }
+
+    .cell {
+        vertical-align: middle;
+        display: table-cell;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+.container {
+    width: 1080px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.header {
+    padding: 50px 0;
+    color: @white;
+    background: @black_b;
+    span {
+        font-size: 14px;
+        &+span{
+            margin-left: 20px;
+        }
+    }
+    a {
+        color: @yellow;
+    }
+}
+
+.footer {
+    a {
+        color: @red;
+    }
+}
+
+.wrapper {
+    background: @white;
+}
+
+ul {
+    ._display {
+        padding: 5px 0;
+        display: inline-block;
+    }
+}
+
+._disabled {
+    color: @gray_a;
+}
+
+#demo_list {
+    overflow: hidden;
+    >.nav {
+        a.active {
+            color: @black;
+        }
+    }
+    >ul {
+        padding: 20px;
+        width: 200px;
+        float: left;
+        >li {
+            list-style-type: none;
+        }
+    }
+    .children {
+        min-height: 700px;
+        overflow: auto;
+        padding: 30px 100px;
+        >div {
+            >ul, >ol {
+                >li {
+                    margin-bottom: 20px;
+                }
+                &.two {
+                    >li {
+                        width: 50%;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -7,6 +7,7 @@ export default class PinDemo extends React.Component {
     render() {
         return (
             <div className='pin-demo'>
+                <h3>Pin</h3>
                 <ul className="two">
                     <li>
                         <h4>Default pin</h4>
@@ -27,6 +28,7 @@ export default class PinDemo extends React.Component {
                         </Pin>
                     </li>
                 </ul>
+                <h3 style={{'textAlign': 'center'}}>↓↓ Scroll to bottom ↓↓</h3>
             </div>
         );
     }

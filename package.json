@@ -4,7 +4,8 @@
   "description": "some component build with ReactJs",
   "main": "main.js",
   "scripts": {
-    "start": "babel --presets es2015,react --watch component/ --out-dir lib/ & node server.js"
+    "start": "babel --presets es2015,react --watch component/ --out-dir lib/ & node server.js",
+    "build:demo": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -43,11 +44,13 @@
     "uglify-loader": "^1.2.0",
     "webpack": "^1.12.1",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.5.0"
+    "webpack-hot-middleware": "^2.5.0",
+    "react-router": "^2.0.1"
   },
   "homepage": "https://github.com/jerryshew/react-component",
   "dependencies": {
     "react": "^0.14.2",
+    "react-addons-css-transition-group": "^0.14.7",
     "react-dom": "^0.14.2"
   }
 }

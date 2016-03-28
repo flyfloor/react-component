@@ -1,10 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-
-    entry: "./main/entre.js",
+    entry: "./demo/entre.js",
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'demo.js',

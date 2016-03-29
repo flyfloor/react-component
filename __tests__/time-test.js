@@ -10,6 +10,14 @@ describe('timeStr2Obj', () => {
         });
     });
 
+    it('12:03:38 should be 12:03:38', () => {
+        expect(timeStr2Obj('12:03:38')).toEqual({
+            hour: '12',
+            min: '03',
+            sec: '38',
+        });
+    });
+
     it('undefined, null, xxx, [] all should be 00:00:00', () => {
         const value = {
             hour: '00',

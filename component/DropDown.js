@@ -9,12 +9,13 @@ const DropDown = React.createClass({
     propTypes: {
         placeHolder: React.PropTypes.string,
         options: React.PropTypes.array,
-        onSelect: React.PropTypes.func,
+        onSelect: React.PropTypes.func.isRequired,
         labelName: React.PropTypes.string,
         valueName: React.PropTypes.string,
         defaultSelected: React.PropTypes.bool,
         searchable: React.PropTypes.bool,
         multi: React.PropTypes.bool,
+        children: React.PropTypes.arrayOf(React.PropTypes.element),
     },
     
     getInitialState() {
@@ -48,8 +49,8 @@ const DropDown = React.createClass({
     },
 
     formatValue(val, callback){
-        let newVal = val, 
-            oldVal = this.state.value;
+        let newVal = val, oldVal = this.state.value;
+
         if (this.props.multi) {
             let index = oldVal.indexOf(val);
             if (index > -1) {
@@ -63,38 +64,60 @@ const DropDown = React.createClass({
     },
 
     formatDrop(){
-        let {labelName, valueName, placeHolder, searchable, multi, style} = this.props;
+        let {labelName, valueName, placeHolder, searchable, multi, style, children} = this.props;
         const {filterText, value, options} = this.state;
 
-        let optionNodes = [], 
-            selected, node, 
-            tags = [];
-        
-        if (multi) {
-            // list node format(multi)
-            for (let pair of options){
-                for(let val of value){
-                    selected = val === pair[valueName];
-                    if (selected) {
-                        const index = value.indexOf(pair[valueName]);
-                        if(tags.indexOf([pair[labelName]]) === -1) tags[index] = pair[labelName];
-                        break;
-                    }
+        let optionNodes = [], selected, node, tags = [];
+
+        if (children) {
+            React.Children.map(children, item => {
+                const props = item.props;
+                const _value = props[valueName];
+                const _label = props[labelName];
+                if (multi) {
+                    const _index = value.indexOf(_value);
+                    selected = _index !== -1;
+                    if(selected) tags[_index] = _label;
+                } else {
+                    selected = value === _value;
+                    placeHolder = _label;
                 }
-                node = this.formatOptionCell({ label: pair[labelName], value: pair[valueName], selected });
-                if (String(pair[valueName]).indexOf(filterText) !== -1 || String(pair[labelName]).indexOf(filterText) !== -1) optionNodes.push(node);
-            }
+                
+                node = this.formatOptionCell({ label: _label, value: _value, 
+                    selected, children: props.children });
+                if(this.getFilterStatus(filterText, _label, _value)) optionNodes.push(node);
+            });
         } else {
-            // list node format
-            for (let pair of options){
-                selected = value === pair[valueName];
-                if(selected) placeHolder = pair[labelName];
-                node = this.formatOptionCell({ label: pair[labelName], value: pair[valueName], selected });
-                if (searchable) {
-                    if (String(pair[valueName]).indexOf(filterText) !== -1 || String(pair[labelName]).indexOf(filterText) !== -1) optionNodes.push(node);
-                    continue;
+            if (multi) {
+                // list node format(multi)
+                for (let pair of options){
+                    const _value = pair[valueName];
+                    const _label = pair[labelName];
+                    for(let val of value){
+                        selected = val === _value;
+                        if (selected) {
+                            const index = value.indexOf(_value);
+                            if(tags.indexOf([_label]) === -1) tags[index] = _label;
+                            break;
+                        }
+                    }
+                    node = this.formatOptionCell({ label: _label, value: _value, selected, children: pair.children });
+                    if (this.getFilterStatus(filterText, _value, _label)) optionNodes.push(node);
                 }
-                optionNodes.push(node);
+            } else {
+                // list node format
+                for (let pair of options){
+                    const _value = pair[valueName];
+                    const _label = pair[labelName];
+                    selected = value === _value;
+                    if(selected) placeHolder = _label;
+                    node = this.formatOptionCell({ label: _label, value: _value, selected, children: pair.children });
+                    if (searchable) {
+                        if (this.getFilterStatus(filterText, _value, _label)) optionNodes.push(node);
+                        continue;
+                    }
+                    optionNodes.push(node);
+                }
             }
         }
 
@@ -104,14 +127,26 @@ const DropDown = React.createClass({
                         : <DropDown.label onClick={this.toggleDropDown}>
                             {placeHolder}
                         </DropDown.label> }
-                    { this.formatDropList(optionNodes) }
+                    {this.formatDropList(optionNodes)}
                 </div>
     },
+
+    getFilterStatus(text, ...fields){
+        let status = false;
+        for(let val of fields){
+            if (String(val).indexOf(text) !== -1) {
+                status = true;
+                break;
+            }
+        }
+        return status;
+    },
     
-    formatOptionCell({label, value, selected}){
+    formatOptionCell({ label, value, selected, children }){
+        const content = children ? children : label;
         return <li key={value}>
-                    <DropDown.Option onOptionSelect={this.selectChange} 
-                        selected={selected} storeValue={value}>{label}
+                    <DropDown.Option onOptionSelect={() => this.selectChange(value)}
+                        selected={selected}>{content}
                     </DropDown.Option>
                 </li>;
     },
@@ -126,20 +161,15 @@ const DropDown = React.createClass({
     formatDropList(nodes){
         const {open} = this.state;
         const {searchable} = this.props;
-        if (searchable) {
-            return open ? 
-                    <div className='_list'>
-                        {this.formatSearchBar()}
+        let node = null;
+
+        if (open) {
+            node = <div className='_list'>
+                        {searchable ? this.formatSearchBar() : null}
                         <ul>{nodes}</ul> 
-                    </div> 
-                    : null;
-        } else {
-            return open && nodes.length > 0 ? 
-                    <div className='_list'>
-                        <ul>{nodes}</ul> 
-                    </div> 
-                    : null;
+                    </div>
         }
+        return node;
     },
 
     formatMultiInput(tags){
@@ -154,17 +184,18 @@ const DropDown = React.createClass({
     },
 
     multiBarValChangeByIndex(index){
+        const {value} = this.state;
         let storeVal = this.state.value;
-        
+
         // remove specific value
-        if (index != null) {
-            if (index > -1) storeVal.splice(index, 1);
+        if (index !== undefined) {
+            if (index > -1) value.splice(index, 1);
         } else {
-            this.state.value.pop();
+            value.pop();
         }
 
         this.setState({
-            value: storeVal, 
+            value, 
         }, this.triggerDropValueChange());
     },
 
@@ -176,7 +207,7 @@ const DropDown = React.createClass({
     },
 
     triggerDropValueChange(){
-        if (this.props.onSelect) this.props.onSelect(this.state.value);
+        this.props.onSelect(this.state.value);
     },
 
     toggleOpen(stat){
@@ -200,6 +231,14 @@ const DropDown = React.createClass({
         this.toggleOpen(true);
     },
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.value !== nextProps.value) {
+            this.setState({
+                value: nextProps.value
+            });
+        }
+    },
+
     render() {
         return (
             this.formatDrop()
@@ -211,7 +250,7 @@ const DropDown = React.createClass({
 // dropdown option
 DropDown.Option = React.createClass({
     handleClick(){
-        this.props.onOptionSelect(this.props.storeValue);
+        this.props.onOptionSelect();
     },
 
     render(){

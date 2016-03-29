@@ -69,6 +69,16 @@ ul {
     color: @gray_a;
 }
 
+.gap-word {
+    span+span {
+        &:before {
+            content: ',';
+            margin-right: 3px;
+        }
+        margin-left: 3px;
+    }
+}
+
 #demo_list {
     overflow: hidden;
     >.nav {
@@ -85,7 +95,7 @@ ul {
         }
     }
     .children {
-        min-height: 700px;
+        min-height: 800px;
         overflow: auto;
         padding: 30px 100px;
         >div {

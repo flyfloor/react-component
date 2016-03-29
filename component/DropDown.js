@@ -207,7 +207,10 @@ const DropDown = React.createClass({
     },
 
     triggerDropValueChange(){
-        this.props.onSelect(this.state.value);
+        const {multi, onSelect} = this.props;
+        let {value} = this.state;
+        if (multi) value = Object.assign([], value);
+        onSelect(value);
     },
 
     toggleOpen(stat){

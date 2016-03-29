@@ -51,7 +51,7 @@ export default class DropDownDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Dropdown received value</h4>
-                        <p>but this will not change previous value</p>
+                        <p>will not change previous value</p>
                         <div style={{'width': '280'}}>
                             <DropDown options={options} labelName='name' value={this.state.value1} 
                                 onSelect={this.displayChange.bind(this, 'value1')}
@@ -77,6 +77,7 @@ export default class DropDownDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Multiple dropdown</h4>
+                        <p>change previous value</p>
                         <div style={{'width': '280'}}>
                             <DropDown options={options} ref='dropDown1' labelName='name' 
                                 value={this.state.value3} valueName='value' multi={true}

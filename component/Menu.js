@@ -1,4 +1,6 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
+const Item = require('./Item');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 
 const Menu = React.createClass ({
@@ -6,12 +8,23 @@ const Menu = React.createClass ({
 
     propTypes: {
         onSelect: React.PropTypes.func,
+        mutex: React.PropTypes.bool,
+        trigger: React.PropTypes.oneOf(['click', 'hover']),
+    },
+
+    getDefaultProps() {
+        return {
+            mutex: false,
+            className: '',
+        };
     },
 
     getInitialState: function() {
+        const {current} = this.props;
         return {
             open: false,
-            index: this.props.selectedIndex,
+            current,
+            trigger: 'hover',
         };
     },
 
@@ -33,61 +46,83 @@ const Menu = React.createClass ({
         });
     },
 
+    toggleSubMenu(index){
+        const {mutex} = this.props;
+        const node = ReactDOM.findDOMNode(this.refs[index]);
+        if (mutex) {
+            let base = ReactDOM.findDOMNode(this);
+            const subMenuNodes = base.querySelectorAll('.sub-menu');
+            const length = subMenuNodes.length;
+            for (let i = 0; i < length; i++) {
+                if (node === subMenuNodes[i]) continue;
+                subMenuNodes[i].className = subMenuNodes[i].className.replace(' _active', '');
+            }
+        }
+        let className = node.className;
+        className = className.indexOf(' _active') !== -1 ? 
+            className.replace(' _active', '') 
+            : `${className} _active`;
+
+        node.className = className;
+    },
+
     handleItemClick(index){
         const {onSelect} = this.props;
         if (onSelect) onSelect(index);
         this.setState({
             open: false,
-            index: index, 
+            current: index, 
         });
     },
 
-    onOtherDomClick(e){
-        this.closeMenu()
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.current !== this.props.current) {
+            this.setState({
+                current: nextProps.current
+            });
+        }
     },
 
-    makeMenuItems(content){
-        const NODES = content.props.children;
-        const {index} = this.state;
-        let active = '';
-        
-        let itemNodes = React.Children.map(NODES, (node, i) => {
-            active = i == index ? '_active': '';
-            return <div className={`_item ${active}`} onClick={() => this.handleItemClick(i)}>
-                        {node}
-                    </div>;
-        })
-
-        return itemNodes;
+    onOtherDomClick(e){
+        this.closeMenu();
     },
 
     render() {
-        const {open} = this.state;
-        const {items, triggerOn, children, triggerType, style} = this.props;
-        let content = open ? 
-            <div className="_content">
-                {this.makeMenuItems(items)}
-            </div> 
-            : null;
-        let triggerDOM = open && triggerOn ? 
-            triggerOn 
-            : children;
-        let menuNode = triggerType === 'click' ? 
-                        <span className='ui menu' style={style}>
-                            <span className="_trigger" onClick={this.toggleOpen}>{triggerDOM}</span>
-                            <div className="_wrap">
-                                {content}
-                            </div>
-                        </span> :
-                        <span className='ui menu' style={style} onMouseOver={this.openMenu} onMouseLeave={this.closeMenu}>
-                            <span className="_trigger">{triggerDOM}</span>
-                            <div className="_wrap">
-                                {content}
-                            </div>
-                        </span>;
+        const {open, current} = this.state;
+        const {children, style, className} = this.props;
+        let selected = false;
+
+        let menuNode = React.Children.map(children, (item, i) => {
+            let {sub, children, className, index, title, open} = item.props;
+            if (index === null || index === undefined) return console.error('index is needed for children of menu');
+
+            selected = index === current;
+            className = selected ? `${className} _active`: className;
+            className = [className];
+            className.push('_item');
+            if(sub) className.push('sub-menu');
+            className = className.join(' ');
+
+            if (sub) {
+                return <div className={className} key={`item-${i}`} ref={index}>
+                            {sub ? <div className="_title _item" onClick={() => this.toggleSubMenu(index)}>{title}</div> : null}
+                            <Menu {...children.props} current={current} onSelect={this.handleItemClick}>
+                                {children.props.children}
+                            </Menu>
+                        </div>;
+            }
+
+            className = `${className} _child`;
+
+            return <div className={className} key={`item-${i}`} onClick={() =>this.handleItemClick(index)}>
+                        {children}
+                    </div>;
+        })
 
         return (
-            menuNode
+            <div className={`ui menu ${className}`} style={style}>
+                {menuNode}
+            </div>
         );
     }
 });

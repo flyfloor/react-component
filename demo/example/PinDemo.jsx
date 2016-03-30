@@ -1,4 +1,3 @@
-import css from './pin_demo.less';
 import React from 'react';
 import {Pin} from './index.js';
 

@@ -9,29 +9,9 @@
 
 @{NS}.tab {
     .clearfix;
-    &.top {
-        ._item {
-            .layout_h;
-            border-top: @border; 
-        }
-    }
-
-    &.bottom {
-        ._item {
-            .layout_h;
-            border-bottom: @border;
-        }
-    }
-
-    &.left ._item {
-        border-right: @border;
-    }
-
-    &.right ._item {
-        border-left: @border;
-    }
-
     ._item {
+        .layout_h;
+        border-bottom: @border;
         padding: 5px 10px;
         &._active {
             border-color: @gray_b;

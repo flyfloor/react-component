@@ -2,13 +2,12 @@ const React = require('react');
 
 const Tab = React.createClass({
     propTypes: {
-        position: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
         onSelect: React.PropTypes.func,
     },
     getDefaultProps() {
         return {
+            className: '',
             selectedIndex: 0,
-            position: 'bottom',
         };
     },
     getInitialState() {
@@ -36,9 +35,9 @@ const Tab = React.createClass({
     },
 
     render() {
-        const {children, style, position} = this.props;
+        const {children, style, className} = this.props;
         return (
-            <div className={`ui tab ${position}`} style={style}>
+            <div className={`ui tab ${className}`} style={style}>
                 {this.makeTabItems(children)}
             </div>
         );

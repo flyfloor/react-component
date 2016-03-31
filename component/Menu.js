@@ -9,12 +9,14 @@ const Menu = React.createClass ({
     propTypes: {
         onSelect: React.PropTypes.func,
         mutex: React.PropTypes.bool,
+        popped: React.PropTypes.bool,
         trigger: React.PropTypes.oneOf(['click', 'hover']),
     },
 
     getDefaultProps() {
         return {
             mutex: false,
+            popped: false,
             className: '',
         };
     },
@@ -89,8 +91,9 @@ const Menu = React.createClass ({
 
     render() {
         const {open, current} = this.state;
-        const {children, style, className} = this.props;
+        let {children, style, className, popped} = this.props;
         let selected = false;
+        if (popped) className = `${className} _popped`;
 
         let menuNode = React.Children.map(children, (item, i) => {
             let {sub, children, className, index, title, open} = item.props;

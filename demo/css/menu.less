@@ -1,65 +1,56 @@
 @import url('meta.less');
 
 @{NS}.menu {
+    position: relative;
     border: 1px solid @gray_c;
-    @{NS}.menu {
+    .menu {
         border: none;
-    }
-    ._title {
-        position: relative;
-        background: @gray_d;
-        border: 1px solid @gray_c;
-        &:after {
-            -webkit-transition: transform .3s;
-            -o-transition: transform .3s;
-            transition: transform .3s;
-            -webkit-transform: rotate(180deg);
-            -ms-transform: rotate(180deg);
-            -o-transform: rotate(180deg);
-            transform: rotate(180deg);
-            content: '^';
-            position: absolute;
-            right: 10px;
-            top: 5px;
-        }
     }
 
     ._item {
-        cursor: pointer;
-        padding: 3px 10px;
-        &._child {
-            border: 1px solid @white;
-            &._active {
-                color: @gray;
-                border-color: @gray_c;
-                background: @gray_d;
-            }
+        padding: 3px 15px;
+    }
+
+    ._child {
+        &._active {
+            color: @gray;
+            background: @gray_c;
         }
+    }
+
+    .menu {
+        max-height: 0;
+        overflow: hidden;
+        -webkit-transition: max-height .3s;
+        -o-transition: max-height .3s;
+        transition: max-height .3s;
     }
 
     .sub-menu {
         padding: 0;
-        ._item:not(._title) {
-            display: none;
-        }
-
         &._active {
             >._title {
-                border-color: @gray_b;
-                background: @gray_c;
-                &:after {
-                    -webkit-transform: rotate(0);
-                    -ms-transform: rotate(0);
-                    -o-transform: rotate(0);
-                    transform: rotate(0);
-                    top: 10px;
-                }
+                font-weight: bold;
+                color: @black;
             }
             >.menu {
-                >._item {
-                   display: block;
-                }
+                -webkit-transition: max-height .3s;
+                -o-transition: max-height .3s;
+                transition: max-height .3s;
+                max-height: 500px;
+                overflow: hidden;
             }
+        }
+
+    }
+
+    ._title {
+        color: @gray;
+    }
+
+    &._poped {
+        .menu {
+            border: initial;
         }
     }
 }

@@ -34,7 +34,7 @@ export default class MenuDemo extends React.Component {
                     <li>
                         <h4>Default menu</h4>
                         <p>you selected item index is {this.state.index}</p>
-                        <Menu current={this.state.index} style={{'width': '200'}} mutex={true} onSelect={this.displayChange.bind(this)}>
+                        <Menu current={this.state.index} style={{'width': '200'}} popped={true} mutex={true} onSelect={this.displayChange.bind(this)}>
                             <Item index='sub0' sub={true} title={<p>Sub Menu</p>}>
                                 <Menu className="second-menu">
                                     <Item index="0">

@@ -24,34 +24,28 @@ const Menu = React.createClass ({
     getInitialState: function() {
         const {current} = this.props;
         return {
-            open: false,
             current,
             trigger: 'hover',
         };
     },
 
-    toggleOpen(){
-        this.setState({
-            open: !this.state.open 
-        });
-    },
-
-    openMenu(){
-        this.setState({
-            open: true, 
-        });
-    },
-
     closeMenu(){
-        this.setState({
-            open: false, 
-        });
+        const {popped} = this.props;
+        if (popped) {
+            const base = ReactDOM.findDOMNode(this);
+            const activeNodes = base.querySelectorAll('.sub-menu._active');
+            const length = activeNodes.length;
+            for (let i = 0; i < length; i++) {
+                activeNodes[i].className = activeNodes[i].className.replace('_active', '');
+            }
+        }
     },
 
     toggleSubMenu(index){
-        const {mutex} = this.props;
+        const {mutex, popped} = this.props;
         const node = ReactDOM.findDOMNode(this.refs[index]);
-        if (mutex) {
+        console.log(popped, mutex)
+        if (mutex || popped) {
             let base = ReactDOM.findDOMNode(this);
             const subMenuNodes = base.querySelectorAll('.sub-menu');
             const length = subMenuNodes.length;
@@ -72,9 +66,8 @@ const Menu = React.createClass ({
         const {onSelect} = this.props;
         if (onSelect) onSelect(index);
         this.setState({
-            open: false,
             current: index, 
-        });
+        }, () => this.closeMenu());
     },
 
     componentWillReceiveProps(nextProps) {
@@ -90,32 +83,34 @@ const Menu = React.createClass ({
     },
 
     render() {
-        const {open, current} = this.state;
-        let {children, style, className, popped} = this.props;
+        const {current} = this.state;
+        let {children, style, className, popped, mutex} = this.props;
         let selected = false;
         if (popped) className = `${className} _popped`;
 
         let menuNode = React.Children.map(children, (item, i) => {
-            let {sub, children, className, index, title, open} = item.props;
+            let {sub, children, className, index, title, active} = item.props;
             if (index === null || index === undefined) return console.error('index is needed for children of menu');
 
             selected = index === current;
-            className = selected ? `${className} _active`: className;
             className = [className];
             className.push('_item');
-            if(sub) className.push('sub-menu');
-            className = className.join(' ');
 
             if (sub) {
+                className.push('sub-menu');
+                if (active) className.push('_active');
+                className = className.join(' ');
                 return <div className={className} key={`item-${i}`} ref={index}>
                             {sub ? <div className="_title _item" onClick={() => this.toggleSubMenu(index)}>{title}</div> : null}
-                            <Menu {...children.props} current={current} onSelect={this.handleItemClick}>
+                            <Menu {...children.props} mutex={mutex} popped={popped} current={current} onSelect={this.handleItemClick}>
                                 {children.props.children}
                             </Menu>
                         </div>;
             }
 
-            className = `${className} _child`;
+            className.push(' _child');
+            if (selected) className.push(' _active');
+            className = className.join(' ');
 
             return <div className={className} key={`item-${i}`} onClick={() =>this.handleItemClick(index)}>
                         {children}

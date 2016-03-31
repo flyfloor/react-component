@@ -9,6 +9,7 @@
 
     ._item {
         padding: 3px 15px;
+        cursor: pointer;
     }
 
     ._child {
@@ -21,9 +22,9 @@
     .menu {
         max-height: 0;
         overflow: hidden;
-        -webkit-transition: max-height .3s;
-        -o-transition: max-height .3s;
-        transition: max-height .3s;
+        -webkit-transition: all .3s;
+        -o-transition: all .3s;
+        transition: all .3s;
     }
 
     .sub-menu {
@@ -34,9 +35,9 @@
                 color: @black;
             }
             >.menu {
-                -webkit-transition: max-height .3s;
-                -o-transition: max-height .3s;
-                transition: max-height .3s;
+                -webkit-transition: all .3s;
+                -o-transition: all .3s;
+                transition: all .3s;
                 max-height: 500px;
                 overflow: hidden;
             }
@@ -48,9 +49,23 @@
         color: @gray;
     }
 
-    &._poped {
-        .menu {
-            border: initial;
+    &._popped {
+        .sub-menu {
+            position: relative;
+            .menu {
+                background: @white;
+                top: 0;
+                position: absolute;
+                width: 100%;
+                left: 100%;
+                border: 1px solid transparent;
+            }
+            &._active {
+                >.menu {
+                    overflow: initial;
+                    border-color: @gray_c;
+                }
+            }
         }
     }
 }

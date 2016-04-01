@@ -53,8 +53,8 @@ const Calender = React.createClass({
         return <div className="_label">
                     <a href="javascript:;" className="_year" onClick={this.pickYear}>{displayY}</a>
                     <p className="_date">
+                        <span>{displayW}, </span>
                         <a href="javascript:;" onClick={this.pickMonth}>
-                            <span>{displayW}, </span>
                             {displayM}月 {displayD}日
                         </a>
                     </p>
@@ -201,8 +201,10 @@ const Calender = React.createClass({
                                     <i></i>
                                 </a>
                                 <div className="_link">
-                                    <span className="_year-link" onClick={this.pickYear}>{year}年 </span>
-                                    <span className="_month-link" onClick={this.pickMonth}>{month}月</span>
+                                    <span className="_year-link" onClick={this.pickYear}> {year} </span>
+                                    <span>年 </span>
+                                    <span className="_month-link" onClick={this.pickMonth}> {month} </span>
+                                    <span>月</span>
                                 </div>
                                 <a href="javascript:;" className="_nav _next" onClick={this.handleNextMonth}>
                                     <i></i>

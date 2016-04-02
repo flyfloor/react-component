@@ -15,16 +15,6 @@ export default class MenuDemo extends React.Component {
     }
 
     render() {
-        const items = <div>
-                        <a href="javascript:;">one</a>
-                        <a href="javascript:;">two</a>
-                        <a href="javascript:;">three</a>
-                        <a href="javascript:;">
-                            four <i> : )</i>
-                        </a>
-                    </div>;
-
-        const onNode = <a href="javascript:;">close menu</a>;
 
         return (
             <div id="menu_demo">
@@ -42,7 +32,7 @@ export default class MenuDemo extends React.Component {
                                     <Item index="1">
                                         <p>Sub item</p>
                                     </Item>
-                                    <Item index="2">
+                                    <Item index="2" disabled={true}>
                                         <p>Sub item</p>
                                     </Item>
                                     <Item sub={true} index="2-sub" title={<p>Third Menu</p>}>
@@ -89,7 +79,7 @@ export default class MenuDemo extends React.Component {
                             </Item>
                         </Menu>
                     </li>
-                    <li>
+                    {/*<li>
                         <h4>Only show one menu at a atime, mutex</h4>
                         <Menu current={this.state.index1} style={{'width': '200'}} mutex={true}>
                             <Item index='sub0' sub={true} title={<p>Sub Menu</p>}>
@@ -100,7 +90,7 @@ export default class MenuDemo extends React.Component {
                                     <Item index="1">
                                         <p>Sub item</p>
                                     </Item>
-                                    <Item index="2">
+                                    <Item index="2" disabled={true}>
                                         <p>Sub item</p>
                                     </Item>
                                     <Item sub={true} index="2-sub" title={<p>Third Menu</p>}>
@@ -166,7 +156,7 @@ export default class MenuDemo extends React.Component {
                                             <Item index="10">
                                                 <p>Third item</p>
                                             </Item>
-                                            <Item index="11">
+                                            <Item index="11" disabled={true}>
                                                 <p>Third item</p>
                                             </Item>
                                         </Menu>
@@ -177,7 +167,7 @@ export default class MenuDemo extends React.Component {
                                 <Menu className="second-menu">
                                     <Item index="3-sub" sub={true} title={<p>Third Menu</p>}>
                                         <Menu className="third-menu">
-                                            <Item index="6">
+                                            <Item index="6" disabled={true}>
                                                 <p>Third item</p>
                                             </Item>
                                             <Item index="7">
@@ -204,7 +194,7 @@ export default class MenuDemo extends React.Component {
                                 <p>Item <a target="_blank" href="http://braavos.me" style={{'color': '#f00'}}>blog</a></p>
                             </Item>
                         </Menu>
-                    </li>
+                    </li>*/}
                     <li>
                         <h4>Hover mode menu</h4>
                         <Menu style={{'width': '200'}} popped={true} mode='hover'>

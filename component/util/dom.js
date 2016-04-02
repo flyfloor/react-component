@@ -2,15 +2,11 @@ export function toggleClass(el, className){
     if (el && el instanceof Node && className) {
         let str = String(el.className);
         const index = str.indexOf(className);
-        if (index === -1) {
-            str = `${str} ${className}`;
-        } else {
-            str = str.slice(0, index) + str.slice(index, className.length);
-        }
-        el.className = str;
+        el.className = index === -1 ? 
+            `${str} ${className}` 
+            : str.slice(0, index) + str.slice(index, className.length);
     }
 }
-
 
 export function removeClass(el, className){
     if (!el || !className) return;
@@ -28,8 +24,7 @@ export function removeClass(el, className){
 
 export function hasClass(el, className){
     if (el && className && el instanceof Node) {
-        const str = el.className;
-        return str.indexOf(className) !== -1;
+        return el.className.indexOf(className) !== -1;
     }
     return false;
 }
@@ -45,6 +40,11 @@ export function addClass(el, className) {
         return;
     }
     if (el instanceof Node && !hasClass(el, className)) el.className = `${el.className} ${className}`;
+}
+
+export function getClassList(className){
+    if (className instanceof String)  return className.split(' ').filter(Boolean);
+    return [];
 }
 
 function removeSubStr(str, subStr){

@@ -86,17 +86,30 @@ const DropDown = React.createClass({
                 nodes.push(this.formatOptionCell({ label: item_label, value: item_val, selected, children: props.children }));
             }
         });
-        return <div className='ui dropdown' style={style}>
-                    {multi ? this.formatMultiInput(tags) 
-                            : <DropDown.label onClick={() => this.toggleOpen(!open)}>
-                                {placeHolder}
-                            </DropDown.label>}
-                    {this.formatDropList(nodes)}
+
+        let labelNode = null;
+        if (multi) {
+            labelNode = this.formatMultiInput(tags)
+        } else {
+            labelNode = searchable ? 
+                this.formatSearchBar(placeHolder)
+                : <DropDown.label onClick={() => this.toggleOpen(!open)}>
+                            {placeHolder}
+                        </DropDown.label>
+        }
+
+        if (open) className = `${className} _active`;
+
+        return <div className={`ui dropdown ${className}`} style={style}>
+                    {labelNode}
+                    <ul className="_list">
+                        {nodes}
+                    </ul>
                 </div>;
     },
 
     formatChildren(children){
-        const {labelName, valueName, searchable, multi, style} = this.props;
+        let {labelName, valueName, searchable, multi, style, className} = this.props;
         let {placeHolder} = this.props;
         const {filterText, value, options, open} = this.state;
         let tags = [], node = null, nodes = [];
@@ -124,13 +137,26 @@ const DropDown = React.createClass({
                 nodes.push(node);
             }
         }
-        return <div className='ui dropdown' style={style}>
-                    {multi ? this.formatMultiInput(tags) 
-                            : <DropDown.label onClick={() => this.toggleOpen(!open)}>
-                                {placeHolder}
-                            </DropDown.label>}
-                    {this.formatDropList(nodes)}
-                </div>
+        
+        let labelNode = null;
+        if (multi) {
+            labelNode = this.formatMultiInput(tags)
+        } else {
+            labelNode = searchable ? 
+                this.formatSearchBar(placeHolder)
+                : <DropDown.label onClick={() => this.toggleOpen(!open)}>
+                    {placeHolder}
+                </DropDown.label>;
+        }
+
+        if (open) className = `${className} _active`;
+
+        return <div className={`ui dropdown ${className}`} style={style}>
+                    {labelNode}
+                    <ul className="_list">
+                        {nodes}
+                    </ul>
+                </div>;
     },
 
     getFilterStatus(text, ...fields){
@@ -155,29 +181,14 @@ const DropDown = React.createClass({
         );
     },
 
-    formatSearchBar(){
-        const {filterText, open} = this.state;
-        const {placeHolder} = this.props;
+    formatSearchBar(text){
+        const {value, open, filterText} = this.state;
         return (
-            <div>
-                <div className='_search'>
-                    <input className='_searchbar' value={filterText} ref='userInput' 
-                        type='text' onChange={(e) => this.handleSearch(e.target.value)} placeholder={placeHolder}/>
-                </div>
-            </div>
-        );
-    },
-
-    formatDropList(nodes){
-        const {open} = this.state;
-        const {searchable} = this.props;
-        let className = '_list';
-        if (open) className = `${className} _active`;
-
-        return (
-            <div className={className}>
-                {searchable ? this.formatSearchBar() : null}
-                <ul>{nodes}</ul> 
+            <div className="_search" onClick={() => this.toggleOpen(true)}>
+                {filterText ? <div className="_text"></div>
+                    : <div className="_text">{text}</div>}
+                <input className='_input' ref='userInput' value={filterText}
+                    type='text' onChange={(e) => this.handleSearch(e.target.value)}/>
             </div>
         );
     },

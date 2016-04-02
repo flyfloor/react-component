@@ -26,8 +26,7 @@
         width: 100%;
     }
 
-    ._label {
-        cursor: pointer;
+    .__label {
         color: @black_c;
         padding: 0 8px;
         border-radius: @border_radius;
@@ -35,6 +34,11 @@
         height: @height;
         border: 1px solid @gray_b;
         margin-bottom: 1px;  
+    }
+
+    ._label {
+        .__label;
+        cursor: pointer;
     }
     ._list {
         opacity: 0;
@@ -45,28 +49,49 @@
         z-index: 100;
         background: @white;
         border: 1px solid @gray_b;
-        -webkit-transition: all @motion .3s;
-        -o-transition: all @motion .3s;
-        transition: all @motion .3s;
-        &._active {
+        -webkit-transition: opacity @motion .3s, max-height @motion .3s;
+        -o-transition: opacity @motion .3s, max-height @motion .3s;
+        transition: opacity @motion .3s, max-height @motion .3s;
+    }
+    &._active {
+        ._list {
             max-height: 500px;
-            -webkit-transition: all @motion .3s;
-            -o-transition: all @motion .3s;
-            transition: all @motion .3s;
+            -webkit-transition: opacity @motion .3s, max-height @motion .3s;
+            -o-transition: opacity @motion .3s, max-height @motion .3s;
+            transition: opacity @motion .3s, max-height @motion .3s;
             opacity: 1;
             visibility: visible;
+            &:empty {
+                border: none;
+            }
+        }
+        ._search ._text {
+            color: @gray_b;
         }
     }
 
     ._search {
-        padding: 5px;
-        ._searchbar {
-            padding: 0 5px;
-            width: 100%;
-            border: 1px solid @gray_b;
+        .__label;
+        position: relative;
+        ._text {
+            cursor: text;
+            position: relative;
+            background: none;
+            display: inline-block;
             line-height: @line_height;
-            height: @height;
-            border-radius: @border_radius;
+            z-index: 2;
+        }
+        ._input {
+            background: none;
+            padding: 0 5px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            border: none;
+            z-index: 3;
         }
     }
 
@@ -84,7 +109,8 @@
             max-width: 100%;
         }
         ._placeHolder {
-            color: @gray_a;
+            color: @gray_b;
+            margin-left: -6px;
         }
         ._tag {
             cursor: pointer;

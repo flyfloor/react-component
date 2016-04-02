@@ -2,7 +2,6 @@
 
 
 @{NS}.dropdown {
-    @border_radus: 3px;
     @line_height: 25px;
     @height: 30px;
     
@@ -31,7 +30,7 @@
         cursor: pointer;
         color: @black_c;
         padding: 0 8px;
-        border-radius: @border_radus;
+        border-radius: @border_radius;
         line-height: @line_height;
         height: @height;
         border: 1px solid @gray_b;
@@ -39,17 +38,18 @@
     }
     ._list {
         opacity: 0;
+        max-height: 0;
         visibility: hidden;
         position: absolute;
         width: 100%;
         z-index: 100;
         background: @white;
-        border-radius: @border_radus;
-        border: 1px solid @gray_c;
+        border: 1px solid @gray_b;
         -webkit-transition: all @motion .3s;
         -o-transition: all @motion .3s;
         transition: all @motion .3s;
         &._active {
+            max-height: 500px;
             -webkit-transition: all @motion .3s;
             -o-transition: all @motion .3s;
             transition: all @motion .3s;
@@ -66,13 +66,13 @@
             border: 1px solid @gray_b;
             line-height: @line_height;
             height: @height;
-            border-radius: @border_radus;
+            border-radius: @border_radius;
         }
     }
 
     ._multi {
         border: 1px solid @gray_b;
-        border-radius: @border_radus;
+        border-radius: @border_radius;
         line-height: @line_height;
         height: @height;
         width: 100%;
@@ -91,7 +91,7 @@
             margin-right: 3px;
             background: @gray_c;
             color: @black;
-            border-radius: @border_radus;
+            border-radius: @border_radius;
             font-size: 14px;
             padding: 0 3px;
 

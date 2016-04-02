@@ -30,6 +30,7 @@ const Pin = React.createClass({
     getDefaultProps() {
         return {
             top: 0,
+            className: '',
         };
     },
 

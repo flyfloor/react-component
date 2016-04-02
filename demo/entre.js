@@ -18,6 +18,8 @@ import pagination_css from './css/pagination.less';
 import timepicker_css from './css/time-picker.less';
 import datepicker_css from './css/date-picker.less';
 
+import Pin from '../component/Pin';
+
 import CheckBoxDemo from "./example/CheckBoxDemo.jsx";
 import RadioDemo from "./example/RadioDemo.jsx";
 import RadioGroupDemo from "./example/RadioGroupDemo.jsx";
@@ -40,25 +42,27 @@ class Nav extends React.Component {
     render(){
         const props = this.props;
         return (
-            <ul className="nav">
-                <li><h4><NavLink to="/checkbox">checkbox</NavLink></h4></li>
-                <li><h4><NavLink to="/radio">radio</NavLink></h4></li>
-                <li><h4><NavLink to="/radio-group">radio group</NavLink></h4></li>
-                <li><h4><NavLink to="/checkbox-group">checkbox group</NavLink></h4></li>
-                <li><h4><NavLink to="/dropdown">drop down</NavLink></h4></li>
-                <li><h4><NavLink to="/menu">menu</NavLink></h4></li>
-                <li><h4><NavLink to="/confirm-box">confirm box</NavLink></h4></li>
-                <li><h4><NavLink to="/tooltip">tooltip</NavLink></h4></li>
-                <li><h4><NavLink to="/modal">modal</NavLink></h4></li>
-                <li><h4><NavLink to="/tab">tab</NavLink></h4></li>
-                <li><h4><NavLink to="/pin">pin</NavLink></h4></li>
-                <li><h4><NavLink to="/carousel">carousel</NavLink></h4></li>
-                <li><h4><NavLink to="/pagination">pagination</NavLink></h4></li>
-                <li><h4><NavLink to="/slide-menu">slide menu</NavLink></h4></li>
-                <li><h4><NavLink to="/time-input">time input</NavLink></h4></li>
-                <li><h4><NavLink to="/date-picker">date picker</NavLink></h4></li>
-                <li><h4><NavLink to="/calender">calender</NavLink></h4></li>
-            </ul>
+            <Pin className="demo-nav">
+                <ul>
+                    <li><h4><NavLink to="/checkbox">checkbox</NavLink></h4></li>
+                    <li><h4><NavLink to="/radio">radio</NavLink></h4></li>
+                    <li><h4><NavLink to="/radio-group">radio group</NavLink></h4></li>
+                    <li><h4><NavLink to="/checkbox-group">checkbox group</NavLink></h4></li>
+                    <li><h4><NavLink to="/dropdown">drop down</NavLink></h4></li>
+                    <li><h4><NavLink to="/menu">menu</NavLink></h4></li>
+                    <li><h4><NavLink to="/confirm-box">confirm box</NavLink></h4></li>
+                    <li><h4><NavLink to="/tooltip">tooltip</NavLink></h4></li>
+                    <li><h4><NavLink to="/modal">modal</NavLink></h4></li>
+                    <li><h4><NavLink to="/tab">tab</NavLink></h4></li>
+                    <li><h4><NavLink to="/pin">pin</NavLink></h4></li>
+                    <li><h4><NavLink to="/carousel">carousel</NavLink></h4></li>
+                    <li><h4><NavLink to="/pagination">pagination</NavLink></h4></li>
+                    <li><h4><NavLink to="/slide-menu">slide menu</NavLink></h4></li>
+                    <li><h4><NavLink to="/time-input">time input</NavLink></h4></li>
+                    <li><h4><NavLink to="/date-picker">date picker</NavLink></h4></li>
+                    <li><h4><NavLink to="/calender">calender</NavLink></h4></li>
+                </ul>
+            </Pin>
         );
     }
 }

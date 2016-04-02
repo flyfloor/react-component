@@ -29,14 +29,10 @@ const Menu = React.createClass ({
     },
 
     closeSubMenu(node){
-        const {popped, mode} = this.props;
+        const {popped, mode, mutux} = this.props;
         if (popped || mode === 'hover') {
             let base = node || ReactDOM.findDOMNode(this.refs.base);
-            const activeNodes = base.querySelectorAll('.sub-menu._active');
-            const length = activeNodes.length;
-            for (let i = 0; i < length; i++) {
-                activeNodes[i].className = activeNodes[i].className.replace(' _active', '');
-            }
+            removeClass(base.querySelectorAll('.sub-menu._active'), '_active');
         }
     },
 
@@ -48,7 +44,8 @@ const Menu = React.createClass ({
             const baseNode = ReactDOM.findDOMNode(this.refs.base);
             removeClass(baseNode.querySelectorAll('.sub-menu'), '_active');
         }
-        active && !popped ? removeClass(node, '_active') : addClass(node, '_active');
+        active ? removeClass(node, '_active') : addClass(node, '_active');
+        return false;
     },
 
     handleItemClick(index, disabled){
@@ -98,7 +95,7 @@ const Menu = React.createClass ({
 
         if (mode === 'hover') {
             return <div className={className} key={`item-${i}`} ref={index}>
-                        <div className="_title _item" onMouseOver={() => this.toggleSubMenu(index)} 
+                        <div className="_title _item" onMouseEnter={() => this.toggleSubMenu(index)} 
                             onClick={() => this.toggleSubMenu(index)}>{title}</div>
                         {childNodes}
                     </div>;
@@ -123,9 +120,9 @@ const Menu = React.createClass ({
     render() {
         let {children, style, className, popped, mode} = this.props;
         if (popped) className = `${className} _popped`;
-        const menuNode = mode === 'hover' ?
+        const menuNode = mode === 'hover' && popped ?
             <div onMouseLeave={() => this.closeSubMenu()} ref="base" 
-                className={`ui menu ${className}`} style={style}>
+                className={`ui menu ${className} _hover`} style={style}>
                 {this.formatMenu(children)}
             </div>
             : <div ref="base" className={`ui menu ${className}`} style={style}>

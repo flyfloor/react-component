@@ -4,6 +4,7 @@
 @{NS}.dropdown {
     @border_radus: 3px;
     @line_height: 25px;
+    @height: 30px;
     
     position: relative;
     ul {
@@ -13,8 +14,8 @@
                 padding: 3px 16px;
                 border-bottom: 1px solid transparent;
                 &._active {
-                    background: @gray_b;
-                    border-color: @gray_c;
+                    background: @gray_c;
+                    border-color: @gray_d;
                 }
             }
             cursor: pointer;
@@ -32,34 +33,50 @@
         padding: 0 8px;
         border-radius: @border_radus;
         line-height: @line_height;
+        height: @height;
         border: 1px solid @gray_b;
         margin-bottom: 1px;  
     }
     ._list {
+        opacity: 0;
+        visibility: hidden;
         position: absolute;
         width: 100%;
         z-index: 100;
         background: @white;
         border-radius: @border_radus;
-        border: 1px solid @gray_b;
+        border: 1px solid @gray_c;
+        -webkit-transition: all @motion .3s;
+        -o-transition: all @motion .3s;
+        transition: all @motion .3s;
+        &._active {
+            -webkit-transition: all @motion .3s;
+            -o-transition: all @motion .3s;
+            transition: all @motion .3s;
+            opacity: 1;
+            visibility: visible;
+        }
     }
 
     ._search {
         padding: 5px;
-    }
-    ._searchbar {
-        width: 100%;
-        border: 1px solid @gray_b;
-        line-height: @line_height;
-        border-radius: @border_radus;
+        ._searchbar {
+            padding: 0 5px;
+            width: 100%;
+            border: 1px solid @gray_b;
+            line-height: @line_height;
+            height: @height;
+            border-radius: @border_radus;
+        }
     }
 
     ._multi {
-        border: 1px solid #ccc;
+        border: 1px solid @gray_b;
         border-radius: @border_radus;
         line-height: @line_height;
+        height: @height;
         width: 100%;
-        padding: 0 5px;
+        padding: 1px 5px;
         ._input {
             border: none;
             display: inline;
@@ -72,7 +89,7 @@
         ._tag {
             cursor: pointer;
             margin-right: 3px;
-            background: @gray_b;
+            background: @gray_c;
             color: @black;
             border-radius: @border_radus;
             font-size: 14px;
@@ -83,7 +100,7 @@
             }
 
             ._delete {
-                color: @gray_a;
+                color: @black;
                 &:before {
                     content: 'x';
                 }

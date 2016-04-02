@@ -3,9 +3,6 @@
 @{NS}.menu {
     position: relative;
     border: 1px solid @gray_c;
-    .menu {
-        border: none;
-    }
 
     ._item {
         padding: 3px 15px;
@@ -24,11 +21,13 @@
     }
 
     .menu {
+        border: none;
+        opacity: 0;
         max-height: 0;
         overflow: hidden;
-        -webkit-transition: all .3s;
-        -o-transition: all .3s;
-        transition: all .3s;
+        -webkit-transition: all .3s @motion;
+        -o-transition: all .3s @motion;
+        transition: all .3s @motion;
     }
 
     .sub-menu {
@@ -39,9 +38,10 @@
                 color: @black;
             }
             >.menu {
-                -webkit-transition: all .3s;
-                -o-transition: all .3s;
-                transition: all .3s;
+                opacity: 1;
+                -webkit-transition: all .4s @motion;
+                -o-transition: all .4s @motion;
+                transition: all .4s @motion;
                 max-height: 500px;
                 overflow: hidden;
             }
@@ -57,15 +57,18 @@
         .sub-menu {
             position: relative;
             .menu {
+                visibility: hidden;
+                overflow: hidden;
                 background: @white;
                 top: 0;
-                position: absolute;
-                width: 100%;
                 left: 100%;
+                width: 100%;
+                position: absolute;
                 border: 1px solid transparent;
             }
             &._active {
                 >.menu {
+                    visibility: visible;
                     overflow: initial;
                     border-color: @gray_c;
                 }

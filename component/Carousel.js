@@ -94,7 +94,7 @@ const Carousel = React.createClass({
             this.setState({
                 index: index - 1 
             }, () => this.addTransition(this.resetPosition) );
-        };
+        }
     },
 
     handlePrev(){
@@ -103,7 +103,7 @@ const Carousel = React.createClass({
             this.setState({
                 index: index + 1 
             }, () => this.addTransition(this.resetPosition) );
-        };
+        }
     },
 
     resetPosition(){

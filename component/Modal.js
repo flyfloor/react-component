@@ -70,7 +70,7 @@ const Modal = React.createClass({
         className = className.join(' ');
 
         return (
-            <div className='' style={style} className={className}>
+            <div style={style} className={className}>
                 <div>
                     <div className="_body">
                         <div className="_wrap">

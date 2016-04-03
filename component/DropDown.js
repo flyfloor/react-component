@@ -46,7 +46,7 @@ const DropDown = React.createClass({
             this.setState({
                 value: options[0][valueName] 
             });
-        };
+        }
     },
 
     formatValue(val, callback){

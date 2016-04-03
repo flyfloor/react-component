@@ -38,7 +38,7 @@ export const CheckBoxGroup = React.createClass({
             this.setState({
                 value: this.state.value.concat(val) 
             }, this.valueChange);
-        };
+        }
     },
 
     removeVal(val){
@@ -48,7 +48,7 @@ export const CheckBoxGroup = React.createClass({
             this.setState({
                 value: this.state.value 
             }, this.valueChange);
-        };
+        }
     },
 
     valueChange(){

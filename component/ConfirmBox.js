@@ -60,12 +60,12 @@ const ConfirmBox = React.createClass({
                             <div className="_confirm" onClick={this.handleConfirm}>
                                 {confirmBtn ?
                                     confirmBtn
-                                    : <a href="javascript:;">ok</a>}
+                                    : <div>ok</div>}
                             </div>
                             <div className="_cancel" onClick={this.handleCancel}>
                                 {cancelBtn ?
                                     cancelBtn
-                                    : <a href="javascript:;">cancel</a>}
+                                    : <div>cancel</div>}
                             </div>
                         </div>
                         <span className="_arrow" ref='arrow'></span>

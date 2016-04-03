@@ -143,7 +143,7 @@ const Calender = React.createClass({
             yearRangeNodes.push(<li key={`year-picker-${i}`}>
                                     {yearItem}
                                 </li>)
-        };
+        }
         let yearPickerNodes = showYear ? 
                             <div className="_year-picker">
                                 <div className="_picker-label">

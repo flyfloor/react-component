@@ -93,7 +93,7 @@ const Pagination = React.createClass({
                             className={current === i ? '_active _item': '_item'}>
                             <span>{i}</span>
                         </li>);
-        };
+        }
         return (
             <ul className="ui pagination">
                 {firstNode}

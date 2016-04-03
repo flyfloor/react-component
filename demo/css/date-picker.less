@@ -3,16 +3,18 @@
 @{NS}.date-picker {
     position: relative;
     >._input {
-        width: 180px;
+        width: 250px;
         line-height: 25px;
-        height: 25px;
+        height: 30px;
+        padding: 0 10px;
         color: @black;
+        border: 1px solid @gray_b;
     }
     >._picker {
         position: absolute;
         z-index: 1000;
         left: 0;
-        top: 25px;
+        top: 29px;
     }
 }
 
@@ -22,7 +24,7 @@
     width: 250px;
     overflow: hidden;
     >._label {
-        background: @gray_b;
+        background: @gray_c;
         color: @black_c;
         padding: 15px 10px 5px;
         >._year {
@@ -133,11 +135,11 @@
     >._day-picker {
         font-size: 14px;
         table {
-            background: @gray_d;
+            background: @white_a;
         }
 
         ._week {
-            color: @gray_c;
+            color: @gray_a;
         }
 
         ._day {
@@ -150,11 +152,11 @@
 
         ._today {
             color: @gray_a;
-            border: 1px solid @gray_a;
+            border: 1px solid @gray_b;
         }
         ._active {
-            background: @gray_a;
-            color: @white;
+            background: @gray_b;
+            color: @gray_a;
         }
     }
 }

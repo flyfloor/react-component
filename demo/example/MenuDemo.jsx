@@ -14,8 +14,8 @@ export default class MenuDemo extends React.Component {
         });
     }
 
-    formatChild({current, mutex=false, onSelect, style, popped=false, mode='click', activeFirst=false}) {
-        return <Menu current={current} mutex={mutex} onSelect={onSelect} style={style} popped={popped} mode={mode}>
+    formatChild({current, accordion=false, onSelect, style, popped=false, mode='click', horizontal=false, activeFirst=false}) {
+        return <Menu className="first-menu" current={current} accordion={accordion} onSelect={onSelect} horizontal={horizontal} style={style} popped={popped} mode={mode}>
                     <Item index='sub0' sub={true} active={activeFirst} title={<p>Sub Menu</p>}>
                         <Menu className="second-menu">
                             <Item index="0">
@@ -43,7 +43,7 @@ export default class MenuDemo extends React.Component {
                         <Menu className="second-menu">
                             <Item index="sub1_0" sub={true} title={<p>Third Menu</p>}>
                                 <Menu className="third-menu">
-                                    <Item index="6">
+                                    <Item index="6" disabled={true}>
                                         <p>Third item</p>
                                     </Item>
                                     <Item index="7">
@@ -88,9 +88,9 @@ export default class MenuDemo extends React.Component {
                         {this.formatChild({current: this.state.index, onSelect: this.displayChange.bind(this), style, activeFirst: true })}
                     </li>
                     <li>
-                        <h4>Menu, mutex </h4>
-                        <p>only show one menu at a atime, mutex</p>
-                        {this.formatChild({ mutex: true, style, activeFirst: true })}
+                        <h4>Accordion menu </h4>
+                        <p>only show one menu at a atime, accordion</p>
+                        {this.formatChild({ accordion: true, style})}
                     </li>
                     <li>
                         <h4>Popped out menu</h4>
@@ -99,6 +99,10 @@ export default class MenuDemo extends React.Component {
                     <li>
                         <h4>Hover mode menu</h4>
                         {this.formatChild({ mode: 'hover', popped: true, style })}
+                    </li>
+                    <li>
+                        <h4>Horizontal menu</h4>
+                        {this.formatChild({horizontal: true})}
                     </li>
                 </ul>
             </div>

@@ -60,38 +60,39 @@ const Pagination = React.createClass({
         // first node
         let firstNode = null;
         if (showRange && start != 1) {
-            firstNode = <li key='first-page' className={currentPage === 1 ? '_active _item': '_item'}>
-                            <a href="javascript:;" onClick={() => this.onPageChange(1)}>1</a>
+            firstNode = <li key='first-page' onClick={() => this.onPageChange(1)} 
+                            className={currentPage === 1 ? '_active _range _item': '_range _item'}>
+                            <span>1 </span>
                             <span> ...</span>
                         </li>
         } else if (showNav && start != 1) {
             firstNode = <li className="_item _nav _prev" key='previous-page' onClick={() => this.onPageChange(currentPage - 1)}>
-                            { prevNode ? prevNode : <a href="javascript:;">previous</a> }
+                            { prevNode ? prevNode : <span>prev</span> }
                         </li>
         }
 
         // last node
         let lastNode = null;
         if (showRange && end != totalPage) {
-            lastNode = <li key={`last-page`} className={currentPage === totalPage ? '_active _item': '_item'}>
-                            <span>... </span>
-                            <a href="javascript:;" onClick={() => this.onPageChange(totalPage)}>
+            lastNode = <li key={`last-page`} onClick={() => this.onPageChange(totalPage)}
+                            className={currentPage === totalPage ? '_active _range _item': '_range _item'}>
+                            <span>...  </span>
+                            <span>
                                 {totalPage}
-                            </a>
+                            </span>
                         </li>
         } else if(showNav && !isEnd && end !== totalPage){
             lastNode = <li className="_item _nav _prev" key="next-page" onClick={() => this.onPageChange(currentPage + 1)}>
-                            {nextNode ? nextNode : <a href="javascript:;">next</a>}
+                            {nextNode ? nextNode : <span>next</span>}
                         </li>
         }
 
         // node
         for (let i = start; i <= end; i++) {
             if (isEnd && currentPage === i - 1) break;
-            nodes.push(<li key={`page-link-${i}`} className={currentPage === i ? '_active _item': '_item'}>
-                            <a href="javascript:;" onClick={() => this.onPageChange(i)}>
-                                {i}
-                            </a>
+            nodes.push(<li key={`page-link-${i}`} onClick={() => this.onPageChange(i)}
+                            className={currentPage === i ? '_active _item': '_item'}>
+                            <span>{i}</span>
                         </li>);
         };
         return (

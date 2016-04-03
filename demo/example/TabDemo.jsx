@@ -5,7 +5,7 @@ export default class TabDemo extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            index: '3',
+            index: '2',
         };
     }
     displayChange(index){
@@ -70,7 +70,7 @@ export default class TabDemo extends React.Component {
                     <li>
                         <h4>Tab with given current tab</h4>
                         <p>your selected tab is {this.state.index}</p>
-                        {this.formatTab({current: this.state.index})}
+                        {this.formatTab({current: this.state.index, onSelect: this.displayChange.bind(this) })}
                     </li>
                 </ul>
             </div>

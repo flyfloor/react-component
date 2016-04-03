@@ -84,7 +84,7 @@ class App extends React.Component {
                         <div className="table">
                             <div className="row">
                                 <div className="cell">
-                                    <blockquote>Some basic component,<b>barely no css</b>, <b>build with ReactJs</b></blockquote> 
+                                    <blockquote>Some basic component, <b>barely no css</b>, <b>build with ReactJs</b></blockquote> 
                                 </div>
                                 <div className="cell">
                                     <span>

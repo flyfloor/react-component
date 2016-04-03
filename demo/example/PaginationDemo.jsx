@@ -5,7 +5,7 @@ export default class PaginationDemo extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            current: 1,
+            current: 6,
         };
     }
 
@@ -25,12 +25,14 @@ export default class PaginationDemo extends React.Component {
                         <Pagination/>
                     </li>
                     <li>
-                        <h4>Now on page {this.state.current}</h4>
+                        <h4>Change event</h4>
+                        <p>this will change next pagination</p>
                         <Pagination totalPage={10} onChange={this.handlePageChange.bind(this)}/>
                     </li>
                     <li>
                         <h4>Pagination with given current page</h4>
-                        <Pagination currentPage={6} totalPage={100}/>
+                        <p>now on page {this.state.current}</p>
+                        <Pagination currentPage={this.state.current} onChange={this.handlePageChange.bind(this)} totalPage={100}/>
                     </li>
                     <li>
                         <h4>Pagination with full range</h4>

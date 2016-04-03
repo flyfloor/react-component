@@ -1,9 +1,16 @@
 @import url('meta.less');
 
 @{NS}.modal {
+    @basic_motion: opacity .3s @motion, transform .3s @motion, background .3s @motion;
+    .__transition {
+        -webkit-transition: @basic_motion;
+        -o-transition: @basic_motion;
+        transition: @basic_motion;
+    }
     ._body {
-        visibility: hidden;
         >._wrap {
+            .__transition;
+            visibility: hidden;
             z-index: 1000;
             background: @white;
             min-width: 400px;
@@ -15,8 +22,10 @@
             margin: auto;
             border: 1px solid @gray_b;
             opacity: 0;
+            -webkit-transform: scale(0.7);
+            -ms-transform: scale(0.7);
+            -o-transform: scale(0.7);
             transform: scale(0.7);
-            transition: all .2s;
         }
 
         ._title {
@@ -43,6 +52,7 @@
         }
     }
     ._overlay {
+        .__transition;
         visibility: hidden;
         position: fixed;
         top: 0;
@@ -54,15 +64,20 @@
     }
     &._show {
         ._body {
-            visibility: visible;
             >._wrap {
+                .__transition;
+                visibility: visible;
+                -webkit-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
                 transform: scale(1);
                 opacity: 1;
             }
         }
         ._overlay {
+            .__transition;
             visibility: visible;
-            background: rgba(0,0,0,.6);
+            background: rgba(0,0,0,.5);
         }
     }
     &._force {
@@ -72,7 +87,7 @@
             }
         }
         ._overlay {
-            background: rgba(255,255,255,.95);
+            background: rgba(255,255,255,.9);
         }
     }
 }

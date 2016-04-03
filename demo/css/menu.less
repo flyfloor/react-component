@@ -7,12 +7,16 @@
     background: @white;
 
     ._item {
-        padding: 3px 15px;
+        padding: 5px 15px;
         cursor: pointer;
         &._disabled {
             color: @gray_b;
             cursor: not-allowed;
         }
+    }
+
+    ._title {
+        color: @black_c;
     }
 
     ._child {
@@ -36,8 +40,8 @@
         padding: 0;
         &._active {
             >._title {
-                font-weight: bold;
                 color: @black;
+                font-weight: 600;
             }
             >.menu {
                 opacity: 1;
@@ -48,12 +52,29 @@
                 overflow: hidden;
             }
         }
-
     }
 
-    ._title {
-        color: @gray;
+    &._default {
+        ._menu-2 {
+            @width: 20px;
+            ._child {
+                padding-left: @width;
+            }
+            >.sub-menu>._title {
+                padding-left: @width;
+            }
+        }
+        ._menu-3 {
+            @width: 40px;
+            ._child {
+                padding-left: @width;
+            }
+            >.sub-menu>._title {
+                padding-left: @width;
+            }
+        }
     }
+
 
     &._popped {
         .sub-menu {
@@ -71,6 +92,7 @@
             }
             &._active {
                 >.menu {
+                    z-index: 100;
                     width: 100%;
                     height: auto;
                     visibility: visible;
@@ -79,5 +101,85 @@
                 }
             }
         }
+    }
+
+    &._horizontal {
+        .sub-menu {
+            position: relative;
+            .menu {
+                visibility: hidden;
+                overflow: hidden;
+                background: @white;
+                width: 0;
+                top: 0;
+                left: 100%;
+                position: absolute;
+                border: 1px solid transparent;
+            }
+            &._active {
+                >.menu {
+                    z-index: 100;
+                    width: 150px;
+                    height: auto;
+                    visibility: visible;
+                    overflow: initial;
+                    border-color: @gray_b;
+                }
+            }
+        }
+        &._menu-1 {
+            height: 40px;
+            line-height: 30px;
+            >._item {
+                width: 120px;
+                height: 100%;
+                float: left;
+                line-height: 30px;
+                display: inline-block;
+            }
+            >.sub-menu {
+                >.menu {
+                    left: 0;
+                    top: 40px;
+                }
+                >._title {
+                    padding: 0 15px;
+                    line-height: 40px;
+                }
+            }
+        }
+        /*height: 40px;
+        line-height: 30px;
+        position: relative;
+        ._item {
+            text-align: center;
+            padding: 0;
+        }
+        >._item {
+            float: left;
+            height: 100%;
+            display: inline-block;
+        }
+        .sub-menu {
+            position: relative;
+            ._title {
+                padding: 0;
+            }
+            .menu {
+                min-width: 130px;
+                overflow: initial;
+                border: 1px solid @gray_b;
+                left: 0;
+                position: relative;
+                position: absolute;
+                width: 100%;
+            }
+
+            &._active {
+                ._item {
+                    display: block;
+                }
+            }
+        }*/
     }
 }

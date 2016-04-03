@@ -44,7 +44,7 @@ export default class SlideMenuDemo extends React.Component {
         let contentNode  =  <div style={{'padding': '20'}}>
                                 <h4>this is header</h4>
                                 <p>this is content, where have something here, fill in</p>
-                                <a href="http://braavos.me" target="_blank">落在深海</a>
+                                <a href="http://braavos.me" target="_blank">blog</a>
                             </div>;
 
         return (
@@ -83,7 +83,10 @@ export default class SlideMenuDemo extends React.Component {
                         <SlideMenu display={this.state.slide1} onSlideClose={this.handleAllSlideClose.bind(this)}>
                             {contentNode}
                             <div style={{'padding': '10'}}>
-                                <a href="javascript:;" onClick={this.handleCloseSlide1.bind(this)} style={{'color': 'red'}}>Click to close</a>
+                                <h3>
+                                    <a href="javascript:;" onClick={this.handleCloseSlide1.bind(this)} 
+                                    style={{'color': 'red'}}>Click to close</a>
+                                </h3>
                             </div>
                         </SlideMenu>
                     </li>

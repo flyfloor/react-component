@@ -9,7 +9,7 @@ const DropDown = React.createClass({
     propTypes: {
         placeHolder: React.PropTypes.string,
         options: React.PropTypes.array,
-        onSelect: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func.isRequired,
         labelName: React.PropTypes.string,
         valueName: React.PropTypes.string,
         defaultSelected: React.PropTypes.bool,
@@ -228,10 +228,10 @@ const DropDown = React.createClass({
     },
 
     triggerDropValueChange(){
-        const {multi, onSelect} = this.props;
+        const {multi, onChange} = this.props;
         let {value} = this.state;
         if (multi) value = Object.assign([], value);
-        onSelect(value);
+        onChange(value);
     },
 
     toggleOpen(stat){

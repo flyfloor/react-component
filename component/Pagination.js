@@ -3,8 +3,8 @@ const React = require('react');
 const Pagination = React.createClass({
     propTypes: {
         onChange: React.PropTypes.func,
-        totalPage: React.PropTypes.number,
-        currentPage: React.PropTypes.number,
+        total: React.PropTypes.number,
+        current: React.PropTypes.number,
         showRange: React.PropTypes.bool,
         showNav: React.PropTypes.bool,
         isEnd: React.PropTypes.bool,
@@ -12,86 +12,85 @@ const Pagination = React.createClass({
     },
     getDefaultProps() {
         return {
-            currentPage: 1,
+            current: 1,
             range: 7,
-            totalPage: 30,
+            total: 30,
         };
     },
     getInitialState() {
-        return {
-            currentPage: this.props.currentPage,
-        };
+        const {current} = this.props;
+        return { current };
     },
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.currentPage != this.props.currentPage) {
+        if (nextProps.current != this.props.current) {
             this.setState({
-                currentPage: nextProps.currentPage || 1,
+                current: nextProps.current || 1,
             });
         }
     },
     
     onPageChange(page){
-        const {totalPage, onChange} = this.props;
-        if (page > totalPage) return;
+        const {total, onChange} = this.props;
+        if (page > total) return;
         this.setState({
-            currentPage: page
+            current: page
         });
         if (onChange) onChange(page);
     },
 
     render() {
-        let {totalPage, range, showRange, showNav, prevNode, nextNode, isEnd} = this.props;
-        let { currentPage } = this.state;
+        let {total, range, showRange, showNav, prevNode, nextNode, isEnd} = this.props;
+        let { current } = this.state;
         let start = 1, end = 1, nodes = [],
             left_half = Math.ceil(range / 2);
 
         // current large than half
-        if (currentPage > left_half) start = currentPage - left_half;
+        if (current > left_half) start = current - left_half;
         
         // calc end
         end = start + range;
 
-        if (totalPage - start <= range) {
-            start = totalPage - range;
-            end = totalPage;
+        if (total - start <= range) {
+            start = total - range;
+            end = total;
         }
 
         // first node
         let firstNode = null;
         if (showRange && start != 1) {
             firstNode = <li key='first-page' onClick={() => this.onPageChange(1)} 
-                            className={currentPage === 1 ? '_active _range _item': '_range _item'}>
+                            className={current === 1 ? '_active _range _item': '_range _item'}>
                             <span>1 </span>
                             <span> ...</span>
                         </li>
         } else if (showNav && start != 1) {
-            firstNode = <li className="_item _nav _prev" key='previous-page' onClick={() => this.onPageChange(currentPage - 1)}>
+            firstNode = <li className="_item _nav _prev" key='previous-page' onClick={() => this.onPageChange(current - 1)}>
                             { prevNode ? prevNode : <span>prev</span> }
                         </li>
         }
 
         // last node
         let lastNode = null;
-        if (showRange && end != totalPage) {
-            lastNode = <li key={`last-page`} onClick={() => this.onPageChange(totalPage)}
-                            className={currentPage === totalPage ? '_active _range _item': '_range _item'}>
+        if (showRange && end != total) {
+            lastNode = <li key={`last-page`} onClick={() => this.onPageChange(total)}
+                            className={current === total ? '_active _range _item': '_range _item'}>
                             <span>...  </span>
                             <span>
-                                {totalPage}
+                                {total}
                             </span>
                         </li>
-        } else if(showNav && !isEnd && end !== totalPage){
-            lastNode = <li className="_item _nav _prev" key="next-page" onClick={() => this.onPageChange(currentPage + 1)}>
+        } else if(showNav && !isEnd && end !== total){
+            lastNode = <li className="_item _nav _prev" key="next-page" onClick={() => this.onPageChange(current + 1)}>
                             {nextNode ? nextNode : <span>next</span>}
                         </li>
         }
 
         // node
         for (let i = start; i <= end; i++) {
-            if (isEnd && currentPage === i - 1) break;
+            if (isEnd && current === i - 1) break;
             nodes.push(<li key={`page-link-${i}`} onClick={() => this.onPageChange(i)}
-                            className={currentPage === i ? '_active _item': '_item'}>
+                            className={current === i ? '_active _item': '_item'}>
                             <span>{i}</span>
                         </li>);
         };

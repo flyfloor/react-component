@@ -6,9 +6,7 @@ const prefix = 'https://raw.githubusercontent.com/jerryshew/design/master/png';
 const getImgs = function(){
     let rtn = [];
     for (let i of src){
-        rtn.push(
-            <img key={i} src={`${prefix}/${i}.png`} style={{'width': '100%'}}/>
-        );
+        rtn.push(<img key={i} src={`${prefix}/${i}.png`} style={{'width': '100%'}}/>);
     }
     return rtn;
 };
@@ -27,9 +25,7 @@ export default class CarouselDemo extends React.Component {
                 <ul className="two carousel-demo">
                     <li>
                         <h4>Default carousel</h4>
-                        <Carousel items={items}>
-                            {imgNodes}
-                        </Carousel>
+                        <Carousel>{imgNodes}</Carousel>
                     </li>
                     <li>
                         <h4>Auto play carousel</h4>

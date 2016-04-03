@@ -38,7 +38,7 @@ export default class DropDownDemo extends React.Component {
                         <p>you selected option value is <span className="gap-word">{this.state.value}</span></p>
                         <div style={{'width': '280'}}>
                             <DropDown options={options} labelName='name' valueName='value' 
-                                onSelect={this.displayChange.bind(this, 'value')} />
+                                onChange={this.displayChange.bind(this, 'value')} />
                         </div>
                     </li>
                     <li>
@@ -46,7 +46,7 @@ export default class DropDownDemo extends React.Component {
                         <p>this will change value of next dropdown</p>
                         <div style={{'width': '280'}}>
                             <DropDown options={options} labelName='name' valueName='value' 
-                                onSelect={this.displayChange.bind(this, 'value1')} defaultSelected={true}/>
+                                onChange={this.displayChange.bind(this, 'value1')} defaultSelected={true}/>
                         </div>
                     </li>
                     <li>
@@ -54,7 +54,7 @@ export default class DropDownDemo extends React.Component {
                         <p>will not change previous value</p>
                         <div style={{'width': '280'}}>
                             <DropDown options={options} labelName='name' value={this.state.value1} 
-                                onSelect={this.displayChange.bind(this, 'value1')}
+                                onChange={this.displayChange.bind(this, 'value1')}
                                 defaultSelected={true} valueName='value'/>
                         </div>
                     </li>
@@ -63,7 +63,7 @@ export default class DropDownDemo extends React.Component {
                         <p>this will change value of prev dropdown</p>
                         <div style={{'width': '280'}}>
                             <DropDown options={options} ref='dropDown1' labelName='name' 
-                                onSelect={this.displayChange.bind(this, 'value1')}
+                                onChange={this.displayChange.bind(this, 'value1')}
                                 valueName='value' searchable={true}/>
                         </div>
                     </li>
@@ -73,7 +73,7 @@ export default class DropDownDemo extends React.Component {
                         <div style={{'width': '280'}}>
                             <DropDown options={options} ref='dropDown1' labelName='name' 
                                 valueName='value' multi={true} value={this.state.value2}
-                                onSelect={this.displayChange.bind(this, 'value2')}/>
+                                onChange={this.displayChange.bind(this, 'value2')}/>
                         </div>
                     </li>
                     <li>
@@ -82,7 +82,7 @@ export default class DropDownDemo extends React.Component {
                         <div style={{'width': '280'}}>
                             <DropDown options={options} ref='dropDown1' labelName='name' 
                                 value={this.state.value3} valueName='value' multi={true}
-                                onSelect={this.displayChange.bind(this, 'value2')}/>
+                                onChange={this.displayChange.bind(this, 'value2')}/>
                         </div>
                     </li>
                     <li>
@@ -90,7 +90,7 @@ export default class DropDownDemo extends React.Component {
                         <p>value is <span className="gap-word">{this.state.value5}</span></p>
                         <div style={{'width': '280'}}>
                             <DropDown multi={true} labelName="name" valueName="value"
-                                value={this.state.value4} onSelect={this.displayChange.bind(this, 'value5')}>
+                                value={this.state.value4} onChange={this.displayChange.bind(this, 'value5')}>
                                 <div value={1} name="apple">
                                     <p>hate the show, love the animal</p>
                                     <img style={{ "width": "100"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>

@@ -10,6 +10,7 @@ var RadioGroup = require("./lib/RadioGroup.js");
 var CheckBoxGroup = require("./lib/CheckBoxGroup.js");
 var DropDown = require("./lib/DropDown.js");
 var Menu = require("./lib/Menu.js");
+var Item = require("./lib/Item.js");
 var ConfirmBox = require("./lib/ConfirmBox.js");
 var Tooltip = require("./lib/Tooltip.js");
 var Modal = require("./lib/Modal.js");
@@ -33,6 +34,7 @@ module.exports = {
     CheckBoxGroup: CheckBoxGroup,
     DropDown: DropDown,
     Menu: Menu,
+    Item: Item,
     ConfirmBox: ConfirmBox,
     Tooltip: Tooltip,
     Modal: Modal,
@@ -44,4 +46,4 @@ module.exports = {
     TimeInput: TimeInput,
     DatePicker: DatePicker,
     Calender: Calender,
-}
+};

@@ -14,9 +14,9 @@ export default class TabDemo extends React.Component {
         });
     }
 
-    formatTab({current=null, onSelect=null}){
+    formatTab({current=null, onChange=null}){
         return (
-            <Tab onSelect={onSelect} current={current} style={{'width': '350'}}>
+            <Tab onChange={onChange} current={current} style={{'width': '350'}}>
                 <Item index='0' title={<p>first</p>}>
                     <h4>This is the first tab content</h4>
                     <p>react is pretty awesome</p>
@@ -65,12 +65,12 @@ export default class TabDemo extends React.Component {
                     <li>
                         <h4>Default tab</h4>
                         <p>this will change next tab</p>
-                        {this.formatTab({ onSelect: this.displayChange.bind(this)})}
+                        {this.formatTab({ onChange: this.displayChange.bind(this)})}
                     </li>
                     <li>
                         <h4>Tab with given current tab</h4>
                         <p>your selected tab is {this.state.index}</p>
-                        {this.formatTab({current: this.state.index, onSelect: this.displayChange.bind(this) })}
+                        {this.formatTab({current: this.state.index, onChange: this.displayChange.bind(this) })}
                     </li>
                 </ul>
             </div>

@@ -5,7 +5,6 @@ const MAX_SEC = MAX_MIN;
 const timeStr2Obj = (value='00:00:00', options = {
     simple: false, 
 }) => {
-    value = String(value);
     const {simple} = options;
     let arr = value.split(':');
     arr = arr.slice(0, 3);

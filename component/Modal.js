@@ -7,6 +7,7 @@ const Modal = React.createClass({
         cancelText: React.PropTypes.string,
         onConfirm: React.PropTypes.func,
         onCancel: React.PropTypes.func,
+        onClose: React.PropTypes.func.isRequired,
         display: React.PropTypes.bool,
         closeIcon: React.PropTypes.element,
     },

@@ -2,7 +2,7 @@ const React = require('react');
 
 const Tab = React.createClass({
     propTypes: {
-        onSelect: React.PropTypes.func,
+        onChange: React.PropTypes.func,
     },
     getDefaultProps() {
         return {
@@ -15,8 +15,8 @@ const Tab = React.createClass({
     },
 
     handleItemClick(index){
-        const {onSelect} = this.props;
-        if (onSelect) onSelect(index);
+        const {onChange} = this.props;
+        if (onChange) onChange(index);
         this.setState({
             current: index, 
         });

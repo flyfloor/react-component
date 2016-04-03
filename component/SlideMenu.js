@@ -5,7 +5,7 @@ const SlideMenu = React.createClass({
     propTypes: {
         position: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
         width: React.PropTypes.number,
-        onSlideClose: React.PropTypes.func.isRequired,
+        onClose: React.PropTypes.func.isRequired,
     },
 
     getInitialState() {
@@ -53,7 +53,7 @@ const SlideMenu = React.createClass({
         this.setState({
             display: false
         });
-        this.props.onSlideClose();
+        this.props.onClose();
     },
     
     componentWillReceiveProps(nextProps) {

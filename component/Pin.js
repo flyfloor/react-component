@@ -16,6 +16,13 @@ const Pin = React.createClass({
             baseTop: 0, 
         };
     },
+    
+    getDefaultProps() {
+        return {
+            top: 0,
+            className: '',
+        };
+    },
 
     componentDidMount() {
         this.setState({
@@ -30,12 +37,6 @@ const Pin = React.createClass({
         return pinNode.offsetTop;
     },
 
-    getDefaultProps() {
-        return {
-            top: 0,
-            className: '',
-        };
-    },
 
     onScroll(e){
         const {_top} = this.windowScrollOffset();

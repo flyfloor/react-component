@@ -8,7 +8,7 @@ const Menu = React.createClass ({
     mixins: [DocumentClickMixin],
 
     propTypes: {
-        onSelect: React.PropTypes.func,
+        onChange: React.PropTypes.func,
         accordion: React.PropTypes.bool,
         popped: React.PropTypes.bool,
         horizontal: React.PropTypes.bool,
@@ -52,8 +52,8 @@ const Menu = React.createClass ({
 
     handleItemClick(index, disabled){
         if (disabled) return;
-        const {onSelect} = this.props;
-        if (onSelect) onSelect(index);
+        const {onChange} = this.props;
+        if (onChange) onChange(index);
         this.setState({
             current: index, 
         }, () => this.closeSubMenu());
@@ -92,7 +92,7 @@ const Menu = React.createClass ({
         className = className.join(' ');
         const childNodes = <Menu {...children.props} disabled={disabled} mode={mode} level={level}
                                 horizontal={horizontal} accordion={accordion} popped={popped} 
-                                current={current} onSelect={this.handleItemClick}>
+                                current={current} onChange={this.handleItemClick}>
                                 {children.props.children}
                             </Menu>;
 

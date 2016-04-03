@@ -14,8 +14,8 @@ export default class MenuDemo extends React.Component {
         });
     }
 
-    formatChild({current, accordion=false, onSelect, style, popped=false, mode='click', horizontal=false, activeFirst=false}) {
-        return <Menu className="first-menu" current={current} accordion={accordion} onSelect={onSelect} horizontal={horizontal} style={style} popped={popped} mode={mode}>
+    formatChild({current, accordion=false, onChange, style, popped=false, mode='click', horizontal=false, activeFirst=false}) {
+        return <Menu className="first-menu" current={current} accordion={accordion} onChange={onChange} horizontal={horizontal} style={style} popped={popped} mode={mode}>
                     <Item index='sub0' sub={true} active={activeFirst} title={<p>Sub Menu</p>}>
                         <Menu className="second-menu">
                             <Item index="0">
@@ -85,7 +85,7 @@ export default class MenuDemo extends React.Component {
                     <li>
                         <h4>Default menu</h4>
                         <p>you selected item index is {this.state.index}</p>
-                        {this.formatChild({current: this.state.index, onSelect: this.displayChange.bind(this), style, activeFirst: true })}
+                        {this.formatChild({current: this.state.index, onChange: this.displayChange.bind(this), style, activeFirst: true })}
                     </li>
                     <li>
                         <h4>Accordion menu </h4>

@@ -5,6 +5,7 @@ const TimeInput = React.createClass({
     propTypes: {
         simple: React.PropTypes.bool,
         value: React.PropTypes.string,
+        onChange: React.PropTypes.func,
     },
 
     getInitialState() {
@@ -37,9 +38,7 @@ const TimeInput = React.createClass({
 
     refreshValue(){
         const {hour, min, sec, value} = this.initTime(this.state.value);
-        if (value !== this.state.value) {
-            this.setState({ value, hour, min, sec }, this.handleTimeChange);
-        }
+        this.setState({ value, hour, min, sec }, this.handleTimeChange);
     },
 
     handleTimeChange(){

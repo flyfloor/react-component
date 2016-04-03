@@ -7,6 +7,7 @@ const Pin = React.createClass({
 
     propTypes: {
         top: React.PropTypes.number,
+        begin: React.PropTypes.number,
     },
 
     getInitialState() {
@@ -23,6 +24,8 @@ const Pin = React.createClass({
     },
 
     node2Top(){
+        const {begin} = this.props;
+        if (begin) return begin;
         const pinNode = ReactDOM.findDOMNode(this.refs.pinNode);
         return pinNode.offsetTop;
     },

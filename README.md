@@ -1,5 +1,10 @@
 # react-component
 >some everyday use component built with reactjs.
+
+### Demo
+
+[demo](http://imiao.in)
+
  
 ### Components
  
@@ -70,10 +75,5 @@ or CMD way:
 const Tooltip = require('react-ui-component')
 ```
 
-> hint: you should always write your own css :)
-
-#### demo
-
-clone git repo, open **index.html** in your browser to see more. or just check [http://imiao.in](http://imiao.in).
-
+> hint: need to write css.
 

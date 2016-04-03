@@ -45,11 +45,7 @@ const PopUpMixin = {
                 open: state
             }, () => {
                 contentDOM = ReactDOM.findDOMNode(this.refs.content);
-                let style = this.calcPosition();
-
-                if (contentDOM) {
-                    contentDOM.setAttribute("style", style);
-                }
+                if (contentDOM) contentDOM.setAttribute("style", this.calcPosition());
             });
         }
     },

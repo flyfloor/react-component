@@ -2,64 +2,100 @@
 
 
 @{NS}.dropdown {
-    @border_radus: 3px;
     @line_height: 25px;
+    @height: 30px;
     
     position: relative;
     ul {
         padding: 0;
         li {
+            cursor: pointer;
+            list-style-type: none;
             ._item {
                 padding: 3px 16px;
                 border-bottom: 1px solid transparent;
                 &._active {
-                    background: @gray_b;
-                    border-color: @gray_c;
+                    background: @gray_c;
+                    border-color: @gray_d;
                 }
             }
-            cursor: pointer;
-            list-style-type: none;
         }
     }
 
-    &.full {
-        width: 100%;
+    .__label {
+        color: @black_c;
+        padding: 0 8px;
+        line-height: @line_height;
+        height: @height;
+        border: 1px solid @gray_b;
     }
 
     ._label {
+        .__label;
         cursor: pointer;
-        color: @black_c;
-        padding: 0 8px;
-        border-radius: @border_radus;
-        line-height: @line_height;
-        border: 1px solid @gray_b;
-        margin-bottom: 2px;  
     }
     ._list {
+        margin-top: -1px;
+        opacity: 0;
+        max-height: 0;
+        visibility: hidden;
         position: absolute;
         width: 100%;
         z-index: 100;
         background: @white;
-        border-radius: @border_radus;
         border: 1px solid @gray_b;
+        -webkit-transition: opacity @motion .3s, max-height @motion .3s;
+        -o-transition: opacity @motion .3s, max-height @motion .3s;
+        transition: opacity @motion .3s, max-height @motion .3s;
+    }
+    &._active {
+        ._list {
+            max-height: 500px;
+            -webkit-transition: opacity @motion .3s, max-height @motion .3s;
+            -o-transition: opacity @motion .3s, max-height @motion .3s;
+            transition: opacity @motion .3s, max-height @motion .3s;
+            opacity: 1;
+            visibility: visible;
+            &:empty {
+                border: none;
+            }
+        }
+        ._search ._text {
+            color: @gray_b;
+        }
     }
 
     ._search {
-        padding: 5px;
-    }
-    ._searchbar {
-        width: 100%;
-        border: 1px solid @gray_b;
-        line-height: @line_height;
-        border-radius: @border_radus;
+        .__label;
+        position: relative;
+        ._text {
+            cursor: text;
+            position: relative;
+            background: none;
+            display: inline-block;
+            line-height: @line_height;
+            z-index: 2;
+        }
+        ._input {
+            background: none;
+            padding: 0 5px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            border: none;
+            z-index: 3;
+        }
     }
 
     ._multi {
-        border: 1px solid #ccc;
-        border-radius: @border_radus;
+        border: 1px solid @gray_b;
         line-height: @line_height;
+        height: @height;
         width: 100%;
-        padding: 0 5px;
+        padding: 1px 5px;
         ._input {
             border: none;
             display: inline;
@@ -67,14 +103,14 @@
             max-width: 100%;
         }
         ._placeHolder {
-            color: @gray_a;
+            color: @gray_b;
+            margin-left: -6px;
         }
         ._tag {
             cursor: pointer;
             margin-right: 3px;
-            background: @gray_b;
+            background: @gray_c;
             color: @black;
-            border-radius: @border_radus;
             font-size: 14px;
             padding: 0 3px;
 
@@ -83,7 +119,7 @@
             }
 
             ._delete {
-                color: @gray_a;
+                color: @black;
                 &:before {
                     content: 'x';
                 }

@@ -39,7 +39,7 @@ export default class CheckBoxGroupDemo extends React.Component {
                             onChange={this.displayChange.bind(this, 'displayText')} />
                     </li>
                     <li>
-                        <h4>Checkbox group with yield childrens</h4>
+                        <h4>Checkbox group yield childrens</h4>
                         <p>you selected value is {this.state.displayText1}</p>
                         <CheckBoxGroup value={checkedVal1} onChange={this.displayChange.bind(this, 'displayText1')}>
                             <CheckBox value="apple">apple</CheckBox>

@@ -5,8 +5,8 @@ const MAX_SEC = MAX_MIN;
 const timeStr2Obj = (value='00:00:00', options = {
     simple: false, 
 }) => {
-    let {simple} = options;
-    
+    value = String(value);
+    const {simple} = options;
     let arr = value.split(':');
     arr = arr.slice(0, 3);
 
@@ -29,6 +29,7 @@ const timeStr2Obj = (value='00:00:00', options = {
 };
 
 const validateUnitByMax = (value, max) => {
+    value = String(parseInt(value));
     if (value > max) value = String(Math.floor(value % (max + 1)));
     if (isNaN(value) || value < 0) value = '00';
     if (value.length === 1) value = `0${value}`;

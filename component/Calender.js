@@ -54,7 +54,9 @@ const Calender = React.createClass({
                     <a href="javascript:;" className="_year" onClick={this.pickYear}>{displayY}</a>
                     <p className="_date">
                         <span>{displayW}, </span>
-                        <a href="javascript:;" onClick={this.pickMonth}>{displayM}月 {displayD}日</a>
+                        <a href="javascript:;" onClick={this.pickMonth}>
+                            {displayM}月 {displayD}日
+                        </a>
                     </p>
                 </div>
     },
@@ -114,7 +116,7 @@ const Calender = React.createClass({
                                     return <li key={`month-picker-${index + 1}`}>
                                                 <a href="javascript:;" 
                                                     onClick={() => this.handleMonthPickerClick(index + 1)}>
-                                                        {label}
+                                                    {label}
                                                 </a>
                                             </li>
                                 })}
@@ -199,8 +201,10 @@ const Calender = React.createClass({
                                     <i></i>
                                 </a>
                                 <div className="_link">
-                                    <span className="_year-link" onClick={this.pickYear}>{year}年 </span>
-                                    <span className="_month-link" onClick={this.pickMonth}>{month}月</span>
+                                    <span className="_year-link" onClick={this.pickYear}> {year} </span>
+                                    <span>年 </span>
+                                    <span className="_month-link" onClick={this.pickMonth}> {month} </span>
+                                    <span>月</span>
                                 </div>
                                 <a href="javascript:;" className="_nav _next" onClick={this.handleNextMonth}>
                                     <i></i>

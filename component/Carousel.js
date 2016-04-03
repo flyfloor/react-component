@@ -6,10 +6,13 @@ const Carousel = React.createClass({
     mixins: [IntervalMixin],
 
     propTypes: {
-        items: React.PropTypes.element.isRequired,
+        children: React.PropTypes.node,
         autoPlay: React.PropTypes.bool,
         delay: React.PropTypes.number,
         showArrow: React.PropTypes.bool,
+        showDot: React.PropTypes.bool,
+        prev: React.PropTypes.element,
+        next: React.PropTypes.element,
     },
 
     getInitialState() {
@@ -23,16 +26,19 @@ const Carousel = React.createClass({
     getDefaultProps() {
         return {
             showArrow: false,
+            showDot: true,
             autoPlay: false,
             delay: 3000,
+            prev: <span>prev</span>,
+            next: <span>next</span>,
         };
     },
 
     componentDidMount() {
-        const BASE = ReactDOM.findDOMNode(this);
+        const base = ReactDOM.findDOMNode(this);
         const {autoPlay, delay} = this.props;
         this.setState({
-            baseWidth: BASE.offsetWidth,
+            baseWidth: base.offsetWidth
         });
         if (autoPlay) this.setInterval(this.handleAutoPlay, delay);
     },
@@ -47,20 +53,19 @@ const Carousel = React.createClass({
     },
 
     componentWillMount() {
-        let _child = this.props.items.props.children;
-        if (_child) {
+        const {children} = this.props;
+        if (children) {
             this.setState({
-                count: _child.length
+                count: children.length
             });
         }
     },
 
-    makeCarouselItem(content){
-        const NODES = content.props.children;
+    makeCarouselItem(children){
         const {baseWidth, index} = this.state;
         let itemNodes = [];
 
-        let _len = React.Children.count(NODES);
+        let _len = React.Children.count(children);
 
         for(let i = -1; i <= _len; i++){
             let _index = i;
@@ -71,7 +76,7 @@ const Carousel = React.createClass({
             itemNodes.push(<div key={`carousel-item-${i}`} 
                                 style={{'width': baseWidth}} 
                                 className={`_item ${active}`}>
-                                    {NODES[_index]}
+                                    {children[_index]}
                             </div>);
         }
         return itemNodes;
@@ -83,7 +88,7 @@ const Carousel = React.createClass({
         }, () => this.addTransition() );
     },
 
-    handleRightArrow(){
+    handleNext(){
         const {index} = this.state;
         if (index >= 0) {
             this.setState({
@@ -92,7 +97,7 @@ const Carousel = React.createClass({
         };
     },
 
-    handleLeftArrow(){
+    handlePrev(){
         const {index, count} = this.state;
         if (index < count) {
             this.setState({
@@ -114,27 +119,40 @@ const Carousel = React.createClass({
         setTimeout(() => {
             contentDOM.className = '_content';
             if (callback) callback.call(this, null);
-        }, 500)
+        }, 500);
     },
 
     render() {
-        const {leftArrow, rightArrow, showArrow} = this.props;
+        const {prev, next, showArrow, showDot, children} = this.props;
         const {baseWidth, count, index} = this.state;
-        
-        let arrowNode = showArrow ? 
-                <div className="_arrow">
-                    <a href="javascript:;" onClick={this.handleLeftArrow} className="_left">{leftArrow ? leftArrow :  '←'}</a>
-                    <a href="javascript:;" onClick={this.handleRightArrow} className="_right">{rightArrow ? rightArrow : '→'}</a>
-                </div> : null;
 
-        const contentNodes = this.makeCarouselItem(this.props.items);
+        let arrowNode = null;
+
+        if (showArrow) {
+            arrowNode = <div className="_arrow">
+                            <div className="_prev" onClick={this.handlePrev}>
+                                {prev}
+                            </div>
+                            <div className="_next" onClick={this.handleNext}>
+                                {next}
+                            </div>
+                        </div>;
+        }
+        
+        const contentNodes = this.makeCarouselItem(children);
         let dotNodes = [];
 
-        for(let i = 0; i < count; i++){
-            dotNodes.push(<a href="javascript:;" key={i} 
-                            className={index == i ? '_active _item' : '_item'} onClick={() => this.handleSlide(i)}>
-                                &middot;
-                        </a>);
+        if (showDot) {
+            for(let i = 0; i < count; i++){
+                dotNodes.push(<a href="javascript:;" key={i} 
+                                className={index == i ? '_active _item' : '_item'} 
+                                onClick={() => this.handleSlide(i)}>
+                                    &middot;
+                            </a>);
+            }
+            dotNodes = <div className="_dot">
+                            {dotNodes}
+                        </div>;
         }
         
         const contentCss = {
@@ -144,9 +162,7 @@ const Carousel = React.createClass({
         return (
             <div className='ui carousel'>
                 <div className="_content" ref='contentDOM' style={contentCss}>{contentNodes}</div>
-                <div className="_dot">
-                    {dotNodes}
-                </div>
+                {dotNodes}
                 {arrowNode}
             </div>
         );

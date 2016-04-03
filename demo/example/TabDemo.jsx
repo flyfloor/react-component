@@ -1,17 +1,60 @@
 import React from 'react';
-import {Tab} from './index.js';
+import {Tab, Item} from './index.js';
 
 export default class TabDemo extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            index1: 1,
+            index: '2',
         };
     }
     displayChange(index){
         this.setState({
-            index: index 
+            index 
         });
+    }
+
+    formatTab({current=null, onSelect=null}){
+        return (
+            <Tab onSelect={onSelect} current={current} style={{'width': '350'}}>
+                <Item index='0' title={<p>first</p>}>
+                    <h4>This is the first tab content</h4>
+                    <p>react is pretty awesome</p>
+                </Item>
+                <Item index='1' title={<p>second</p>}>
+                    <h4>This is the second tab content</h4>
+                    <p>vue is pretty awesome</p>
+                </Item>
+                <Item index='2' title={<p>third</p>}>
+                    <h4>This is the third tab content</h4>
+                    <p>ember is pretty awesome</p>
+                    <Tab>
+                        <Item index='4' title={<p>first</p>}>
+                            <h4>This is the first tab content</h4>
+                            <p>react is pretty awesome</p>
+                        </Item>
+                        <Item index='5' title={<p>second</p>}>
+                            <h4>This is the second tab content</h4>
+                            <p>vue is pretty awesome</p>
+                        </Item>
+                        <Item index='6' title={<p>third</p>}>
+                            <h4>This is the third tab content</h4>
+                            <p>ember is pretty awesome</p>
+                        </Item>
+                        <Item index='7' title={<p>fourth</p>}>
+                            <h4>This is the fourth tab content</h4>
+                            <p>angular is pretty awesome</p>
+                            <a target='_blank' href="http://braavos.me">blog</a>
+                        </Item>
+                    </Tab>
+                </Item>
+                <Item index='3' title={<p>fourth</p>}>
+                    <h4>This is the fourth tab content</h4>
+                    <p>angular is pretty awesome</p>
+                    <a target='_blank' href="http://braavos.me">blog</a>
+                </Item>
+            </Tab>
+        );
     }
 
     render() {
@@ -21,83 +64,13 @@ export default class TabDemo extends React.Component {
                 <ul className="two">
                     <li>
                         <h4>Default tab</h4>
-                        <p>you selected item index is {this.state.index}</p>
-                        <Tab onSelect={this.displayChange.bind(this)} selectedIndex={this.state.index}>
-                            <a href="javascript:;">first</a>
-                            <a href="javascript:;">second</a>
-                            <a target='_blank' href="http://braavos.me">third</a>
-                            <a href="javascript:;">
-                                fourth <i>:)</i>
-                            </a>
-                        </Tab>
+                        <p>this will change next tab</p>
+                        {this.formatTab({ onSelect: this.displayChange.bind(this)})}
                     </li>
                     <li>
-                        <h4>Tab with given index</h4>
-                        <Tab selectedIndex={this.state.index1}>
-                            <a href="javascript:;">first</a>
-                            <a href="javascript:;">second</a>
-                            <a target='_blank' href="http://braavos.me">third</a>
-                            <a href="javascript:;">
-                                fourth <i>:)</i>
-                            </a>
-                        </Tab>
-                    </li>
-                    <li>
-                        <h4>Tab with position</h4>
-                        <ol>
-                            <li>
-                                <h5>bottom(default)</h5>
-                                <Tab position="bottom">
-                                    <a href="javascript:;">first</a>
-                                    <a href="javascript:;">second</a>
-                                    <a target='_blank' href="http://braavos.me">third</a>
-                                    <a href="javascript:;">
-                                        fourth <i>:)</i>
-                                    </a>
-                                </Tab>
-                                <br/>
-                            </li>
-                            <li>
-                                <h5>top</h5>
-                                <Tab position="top">
-                                    <a href="javascript:;">first</a>
-                                    <a href="javascript:;">second</a>
-                                    <a target='_blank' href="http://braavos.me">third</a>
-                                    <a href="javascript:;">
-                                        fourth <i>:)</i>
-                                    </a>
-                                </Tab>
-                                <br/>
-                            </li>
-                            <li>
-                                <h5>left</h5>
-                                <div style={{'width':'200px'}}>
-                                    <Tab position="left">
-                                        <a href="javascript:;">first</a>
-                                        <a href="javascript:;">second</a>
-                                        <a target='_blank' href="http://braavos.me">third</a>
-                                        <a href="javascript:;">
-                                            fourth <i>:)</i>
-                                        </a>
-                                    </Tab>
-                                    <br/>
-                                </div>
-                            </li>
-                            <li>
-                                <h5>right</h5>
-                                <div style={{'width':'200px'}}>
-                                    <Tab position="right">
-                                        <a href="javascript:;">first</a>
-                                        <a href="javascript:;">second</a>
-                                        <a target='_blank' href="http://braavos.me">third</a>
-                                        <a href="javascript:;">
-                                            fourth <i>:)</i>
-                                        </a>
-                                    </Tab>
-                                    <br/>
-                                </div>
-                            </li>
-                        </ol>
+                        <h4>Tab with given current tab</h4>
+                        <p>your selected tab is {this.state.index}</p>
+                        {this.formatTab({current: this.state.index, onSelect: this.displayChange.bind(this) })}
                     </li>
                 </ul>
             </div>

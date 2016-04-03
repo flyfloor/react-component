@@ -2,12 +2,11 @@
 
 
 @{NS}.slide-menu {
-    @motion: cubic-bezier(0.64, -0.01, 0.41, 1.05);
-    @basic_transition: background .5s @motion 0s, visibility .5s @motion 0s, opacity .5s @motion 0s;
+    @basic_transition: background .4s @motion 0s, visibility .4s @motion 0s, opacity .4s @motion 0s;
     ._content {
-        -webkit-transition: transform 0.5s @motion;
-        -o-transition: transform 0.5s @motion;
-        transition: transform 0.5s @motion;
+        -webkit-transition: transform 0.4s @motion;
+        -o-transition: transform 0.4s @motion;
+        transition: transform 0.4s @motion;
         position: fixed;
         z-index: 1000;
         width: 100%;
@@ -26,9 +25,9 @@
         bottom: 0;
         top: 0;
         z-index: -1;
-        -webkit-transition: @basic_transition, z-index .5s @motion .5s;
-        -o-transition: @basic_transition, z-index .5s @motion .5s;
-        transition: @basic_transition, z-index .5s @motion .5s;
+        -webkit-transition: @basic_transition, z-index .4s @motion .4s;
+        -o-transition: @basic_transition, z-index .4s @motion .4s;
+        transition: @basic_transition, z-index .4s @motion .4s;
     }
 
     &._display {

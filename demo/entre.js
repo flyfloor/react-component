@@ -1,20 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, Link, History } from 'react-router';
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 
 import resetCss from './css/reset.less';
 import demoCss from './css/demo.less';
 import carousel_css from './css/carousel.less';
+import carousel_demo_css from './css/carousel_demo.less';
 import popup_css from './css/popup.less';
 import dropdown_css from './css/dropdown.less';
 import menu_css from "./css/menu.less";
+import menu_demo_css from './css/menu_demo.less';
 import modal_css from './css/modal.less';
 import pin_css from './css/pin.less';
+import pin_demo_css from './css/pin_demo.less';
 import tab_css from './css/tab.less';
 import slidemenu_css from './css/slide-menu.less';
 import pagination_css from './css/pagination.less';
 import timepicker_css from './css/time-picker.less';
 import datepicker_css from './css/date-picker.less';
+
+import Pin from '../component/Pin';
 
 import CheckBoxDemo from "./example/CheckBoxDemo.jsx";
 import RadioDemo from "./example/RadioDemo.jsx";
@@ -38,25 +43,27 @@ class Nav extends React.Component {
     render(){
         const props = this.props;
         return (
-            <ul className="nav">
-                <li><h4><NavLink to="/checkbox">checkbox</NavLink></h4></li>
-                <li><h4><NavLink to="/radio">radio</NavLink></h4></li>
-                <li><h4><NavLink to="/radio-group">radio group</NavLink></h4></li>
-                <li><h4><NavLink to="/checkbox-group">checkbox group</NavLink></h4></li>
-                <li><h4><NavLink to="/dropdown">drop down</NavLink></h4></li>
-                <li><h4><NavLink to="/menu">menu</NavLink></h4></li>
-                <li><h4><NavLink to="/confirm-box">confirm box</NavLink></h4></li>
-                <li><h4><NavLink to="/tooltip">tooltip</NavLink></h4></li>
-                <li><h4><NavLink to="/modal">modal</NavLink></h4></li>
-                <li><h4><NavLink to="/tab">tab</NavLink></h4></li>
-                <li><h4><NavLink to="/pin">pin</NavLink></h4></li>
-                <li><h4><NavLink to="/carousel">carousel</NavLink></h4></li>
-                <li><h4><NavLink to="/pagination">pagination</NavLink></h4></li>
-                <li><h4><NavLink to="/slide-menu">slide menu</NavLink></h4></li>
-                <li><h4><NavLink to="/time-input">time input</NavLink></h4></li>
-                <li><h4><NavLink to="/date-picker">date picker</NavLink></h4></li>
-                <li><h4><NavLink to="/calender">calender</NavLink></h4></li>
-            </ul>
+            <Pin className="demo-nav">
+                <ul>
+                    <li><h4><NavLink to="/checkbox">checkbox</NavLink></h4></li>
+                    <li><h4><NavLink to="/radio">radio</NavLink></h4></li>
+                    <li><h4><NavLink to="/radio-group">radio group</NavLink></h4></li>
+                    <li><h4><NavLink to="/checkbox-group">checkbox group</NavLink></h4></li>
+                    <li><h4><NavLink to="/dropdown">drop down</NavLink></h4></li>
+                    <li><h4><NavLink to="/menu">menu</NavLink></h4></li>
+                    <li><h4><NavLink to="/confirm-box">confirm box</NavLink></h4></li>
+                    <li><h4><NavLink to="/tooltip">tooltip</NavLink></h4></li>
+                    <li><h4><NavLink to="/modal">modal</NavLink></h4></li>
+                    <li><h4><NavLink to="/tab">tab</NavLink></h4></li>
+                    <li><h4><NavLink to="/pin">pin</NavLink></h4></li>
+                    <li><h4><NavLink to="/carousel">carousel</NavLink></h4></li>
+                    <li><h4><NavLink to="/pagination">pagination</NavLink></h4></li>
+                    <li><h4><NavLink to="/slide-menu">slide menu</NavLink></h4></li>
+                    <li><h4><NavLink to="/time-input">time input</NavLink></h4></li>
+                    <li><h4><NavLink to="/date-picker">date picker</NavLink></h4></li>
+                    <li><h4><NavLink to="/calender">calender</NavLink></h4></li>
+                </ul>
+            </Pin>
         );
     }
 }
@@ -77,7 +84,7 @@ class App extends React.Component {
                         <div className="table">
                             <div className="row">
                                 <div className="cell">
-                                    <blockquote>Some basic component,<b>barely no css</b>, <b>build with ReactJs</b></blockquote> 
+                                    <blockquote>Some basic component, <b>barely no css</b>, <b>build with ReactJs</b></blockquote> 
                                 </div>
                                 <div className="cell">
                                     <span>
@@ -104,7 +111,7 @@ class App extends React.Component {
 }
 
 
-ReactDOM.render(<Router>
+ReactDOM.render(<Router history={hashHistory}>
                     <Route path="/" component={App}>
                         <IndexRoute component={CheckBoxDemo}></IndexRoute>
                         <Route path="/checkbox" component={CheckBoxDemo}/>

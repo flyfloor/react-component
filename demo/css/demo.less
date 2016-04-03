@@ -69,25 +69,30 @@ ul {
     color: @gray_a;
 }
 
+.gap-word {
+    span+span {
+        &:before {
+            content: ',';
+            margin-right: 3px;
+        }
+        margin-left: 3px;
+    }
+}
+
 #demo_list {
     overflow: hidden;
-    >.nav {
+    .demo-nav {
+        padding: 10px;
+        width: 220px;
+        float: left;
         a.active {
             color: @black;
         }
     }
-    >ul {
-        padding: 20px;
-        width: 200px;
-        float: left;
-        >li {
-            list-style-type: none;
-        }
-    }
     .children {
-        min-height: 700px;
-        overflow: auto;
-        padding: 30px 100px;
+        min-height: 1000px;
+        margin-left: 240px;
+        padding: 10px;
         >div {
             >ul, >ol {
                 >li {
@@ -95,7 +100,15 @@ ul {
                 }
                 &.two {
                     >li {
+                        float: left;
                         width: 50%;
+                        display: inline-block;
+                    }
+                }
+                &.three {
+                    >li {
+                        float: left;
+                        width: 33.3%;
                         display: inline-block;
                     }
                 }

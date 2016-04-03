@@ -1,19 +1,32 @@
 @import url('meta.less');
 
 @{NS}.modal {
+    @basic_motion: opacity .3s @motion, transform .3s @motion, background .3s @motion;
+    .__transition {
+        -webkit-transition: @basic_motion;
+        -o-transition: @basic_motion;
+        transition: @basic_motion;
+    }
     ._body {
-        z-index: 1000;
-        background: @white;
-        position: relative;
-        min-width: 400px;
-        max-width: 600px;
-        position: fixed;
-        top: 25%;
-        left: 0;
-        right: 0;
-        margin: auto;
-        border: 1px solid @gray_b;
-        border-radius: 3px;
+        >._wrap {
+            .__transition;
+            visibility: hidden;
+            z-index: 1000;
+            background: @white;
+            min-width: 400px;
+            max-width: 600px;
+            position: fixed;
+            top: 25%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            border: 1px solid @gray_b;
+            opacity: 0;
+            -webkit-transform: scale(0.7);
+            -ms-transform: scale(0.7);
+            -o-transform: scale(0.7);
+            transform: scale(0.7);
+        }
 
         ._title {
             padding: 10px;
@@ -25,10 +38,7 @@
             ._action {
                 font-size: 90%;
                 overflow: hidden;
-                ._wrap {
-                    float: right;
-                }
-
+                float: right;
                 a+a {
                     margin-left: 5px;
                 }
@@ -42,11 +52,42 @@
         }
     }
     ._overlay {
+        .__transition;
+        visibility: hidden;
         position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(0,0,0,.3);
+        z-index: 100;
+        background: transparent;
+    }
+    &._show {
+        ._body {
+            >._wrap {
+                .__transition;
+                visibility: visible;
+                -webkit-transform: scale(1);
+                -ms-transform: scale(1);
+                -o-transform: scale(1);
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        ._overlay {
+            .__transition;
+            visibility: visible;
+            background: rgba(0,0,0,.5);
+        }
+    }
+    &._force {
+        ._body {
+            ._wrap {
+                border: none;
+            }
+        }
+        ._overlay {
+            background: rgba(255,255,255,.9);
+        }
     }
 }

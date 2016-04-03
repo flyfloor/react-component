@@ -1,14 +1,27 @@
 @import url('meta.less');
 
 @{NS}.pagination {
+    margin: 0;
+    padding: 10px 0 0;
     >._item {
         display: inline-block;
-        padding: .2em .5em;
+        color: @blue;
+        margin: 2px;
+        overflow: hidden;
+        cursor: pointer;
+        line-height: 28px;
+        height: 28px;
+        min-width: 28px;
+        font-size: 14px;
+        text-align: center;
         &._active {
-            text-decoration: underline;
-            a {
-                color: @black;
-            }
+            cursor: default;
+            background: @gray_c;
+            color: @gray_a;
+            border-radius: 15px;
         }
+    }
+    ._range, ._nav {
+        width: auto;
     }
 }

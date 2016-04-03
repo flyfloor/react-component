@@ -4,6 +4,7 @@ const RadioGroup = require('../../component/RadioGroup');
 const CheckBoxGroup = require('../../component/CheckBoxGroup');
 const DropDown = require('../../component/DropDown');
 const Menu = require('../../component/Menu');
+const Item = require('../../component/Item');
 const ConfirmBox = require('../../component/ConfirmBox');
 const Tooltip = require('../../component/Tooltip');
 const Modal = require('../../component/Modal');
@@ -24,6 +25,7 @@ module.exports = {
     DropDown,
     Modal,
     Menu,
+    Item,
     ConfirmBox,
     Tooltip,
     Tab,
@@ -34,4 +36,4 @@ module.exports = {
     TimeInput,
     DatePicker,
     Calender,
-}
+};

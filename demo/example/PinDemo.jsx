@@ -1,4 +1,3 @@
-import css from './pin_demo.less';
 import React from 'react';
 import {Pin} from './index.js';
 
@@ -8,7 +7,7 @@ export default class PinDemo extends React.Component {
         return (
             <div className='pin-demo'>
                 <h3>Pin</h3>
-                <ul className="two">
+                <ul className="three">
                     <li>
                         <h4>Default pin</h4>
                         <Pin>
@@ -23,7 +22,16 @@ export default class PinDemo extends React.Component {
                         <Pin top={100}>
                             <div className='card'>
                                 <h4>title</h4>
-                                <p>pin at position top 100</p>
+                                <p>pin at position top 100px</p>
+                            </div>
+                        </Pin>
+                    </li>
+                    <li>
+                        <h4>Scroll to given top</h4>
+                        <Pin begin={800}>
+                            <div className="card">
+                                <h4>title</h4>
+                                <p>pin when scroll to 800px</p>
                             </div>
                         </Pin>
                     </li>

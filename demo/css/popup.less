@@ -5,6 +5,7 @@
     @short: 6px;
     @long: 8px;
     @base: -17px;
+    @basic_motion: all .2s @motion;
 
     .border_base {
         border-width: inherit;
@@ -12,22 +13,25 @@
     }
 
     ._wrap {
+        opacity: 0;
+        height: 0;
+        max-height: 0;
+        visibility: hidden;
         position: relative;
-        overflow: visible;
+        overflow: hidden;
+        -webkit-transition: @basic_motion;
+        -o-transition: @basic_motion;
+        transition: @basic_motion;
         ._content {
             position: absolute;
             z-index: 100;
             max-width: 350px;
             min-width: 150px;
             background: @white;
-            border-radius: 3px;
+            border-radius: @border_radius;
             text-align: center;
             padding: 10px;
             border: 1px solid @gray_b;
-            &._hide {
-                visibility: hidden;
-            }
-            
         }
 
         ._arrow {
@@ -103,6 +107,19 @@
             }
         }
     }
+
+    &._active {
+        ._wrap {
+            -webkit-transition: @basic_motion;
+            -o-transition: @basic_motion;
+            transition: @basic_motion;
+            overflow: visible;
+            opacity: 1;
+            height: auto;
+            visibility: visible;
+            max-height: 500px;
+        }
+    }
 }
 
 @{NS}.confirm-box {
@@ -110,10 +127,11 @@
         margin-top: 10px;
         font-size: 80%;
         text-align: center;
-        >a {
+        ._cancel, ._confirm {
+            cursor: pointer;
             display: inline-block;
         }
-        >a:first-child {
+        ._confirm {
             margin-right:5px; 
         }
     }

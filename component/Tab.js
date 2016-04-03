@@ -2,43 +2,65 @@ const React = require('react');
 
 const Tab = React.createClass({
     propTypes: {
-        position: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
         onSelect: React.PropTypes.func,
     },
     getDefaultProps() {
         return {
-            selectedIndex: 0,
-            position: 'bottom',
+            className: '',
         };
     },
     getInitialState() {
-        return {
-            index: this.props.selectedIndex,
-        };
+        const {current} = this.props;
+        return {current};
     },
+
     handleItemClick(index){
         const {onSelect} = this.props;
         if (onSelect) onSelect(index);
         this.setState({
-            index: index, 
+            current: index, 
         });
     },
 
+    componentWillReceiveProps(nextProps) {
+        const {current} = this.props;
+        if (nextProps.current !== current) {
+            this.setState({
+                current: nextProps.current
+            });
+        }
+    },
+
     makeTabItems(children){
-        const {index} = this.state;
-        let active;
-        return React.Children.map(children, (node, i) => {
-            active = i == index ? '_active': '';
-            return <div className={`_item ${active}`} onClick={() => this.handleItemClick(i)}>
-                        {node}
-                    </div>;
+        const {current} = this.state;
+        let tabs = [], 
+            contents = [];
+
+        React.Children.map(children, (node, i) => {
+            let {index, title=index, children} = node.props;
+            if (index === null || index === undefined) return console.error('index is needed for children of menu');
+            let className = index === current ? `_item _active`: '_item';
+            if ((current === undefined || current === null) && i === 0) className += ' _active';
+            tabs.push(<div key={`tab_${i}`} className={className} onClick={() => this.handleItemClick(index)}>
+                        {title}
+                    </div>);
+            contents.push(<div key={`content_${i}`} className={className}>
+                            {children}
+                        </div>);
         })
+
+        return (
+            <div>
+                <div className="_tab">{tabs}</div>
+                <div className="_content">{contents}</div>
+            </div>
+        )
     },
 
     render() {
-        const {children, style, position} = this.props;
+        const {children, style, className} = this.props;
         return (
-            <div className={`ui tab ${position}`} style={style}>
+            <div className={`ui tab ${className}`} style={style}>
                 {this.makeTabItems(children)}
             </div>
         );

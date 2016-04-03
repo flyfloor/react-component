@@ -8,6 +8,13 @@ const DatePicker = React.createClass({
     propTypes: {
         onChange: React.PropTypes.func
     },
+
+    getDefaultProps() {
+        return {
+            className: '',
+        };
+    },
+
     getInitialState() {
         const value = this.initDate();
         return { value, showPicker: false };
@@ -40,17 +47,15 @@ const DatePicker = React.createClass({
 
     render() {
         const {showPicker, value} = this.state;
-        const {begin, end} = this.props;
+        let {begin, end, className} = this.props;
+        if (showPicker) className += ' _active';
         return (
-            <div className="ui date-picker">
+            <div className={`ui date-picker ${className}`}>
                 <input className="_input" onClick={ () => {this.setState({ showPicker: true }) }} value={value} readOnly/>
-                {showPicker ? 
-                        <div className="_picker">
-                            <Calender begin={begin} end={end} 
-                                value={value} onChange={this.handleValChange}>
-                            </Calender>
-                        </div> 
-                        : null}
+                <div className="_picker">
+                    <Calender begin={begin} end={end} 
+                        value={value} onChange={this.handleValChange}/>
+                </div> 
             </div>
         );
     }

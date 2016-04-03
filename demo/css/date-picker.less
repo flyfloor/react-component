@@ -1,8 +1,10 @@
 @import url('meta.less');
 
 @{NS}.date-picker {
+    @basic_motion: max-height .3s @motion, opacity .3s @motion, height .3s @motion, overflow .3s @motion;
     position: relative;
     >._input {
+        cursor: pointer;
         width: 250px;
         line-height: 25px;
         height: 30px;
@@ -11,10 +13,28 @@
         border: 1px solid @gray_b;
     }
     >._picker {
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        visibility: hidden;
         position: absolute;
         z-index: 1000;
         left: 0;
         top: 29px;
+        -webkit-transition: @basic_motion;
+        -o-transition: @basic_motion;
+        transition: @basic_motion;
+    }
+    &._active {
+        >._picker {
+            opacity: 1;
+            -webkit-transition: @basic_motion;
+            -o-transition: @basic_motion;
+            transition: @basic_motion;
+            height: auto;
+            visibility: visible;
+            overflow: initial;
+        }
     }
 }
 

@@ -26,7 +26,7 @@ export default class CalenderDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Calender with given value</h4>
-                        <Calender value="2015-12-20"/>
+                        <Calender value="2016-04-20"/>
                     </li>
                     <li>
                         <h4>Calender value change event</h4>

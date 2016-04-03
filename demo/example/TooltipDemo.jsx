@@ -11,7 +11,7 @@ export default class TooltipDemo extends React.Component {
                     <li>
                         <h4>Default tooltip</h4>
                         <Tooltip content={<p>Some component,build with ReactJs</p>}>
-                            <a href='javascript:;'>click</a>
+                            <a href='javascript:;'>hover</a>
                         </Tooltip>
                     </li>
                     <li>

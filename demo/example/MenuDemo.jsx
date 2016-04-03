@@ -88,7 +88,8 @@ export default class MenuDemo extends React.Component {
                         {this.formatChild({current: this.state.index, onSelect: this.displayChange.bind(this), style, activeFirst: true })}
                     </li>
                     <li>
-                        <h4>Only show one menu at a atime, mutex</h4>
+                        <h4>Menu, mutex </h4>
+                        <p>only show one menu at a atime, mutex</p>
                         {this.formatChild({ mutex: true, style, activeFirst: true })}
                     </li>
                     <li>

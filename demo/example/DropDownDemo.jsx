@@ -60,6 +60,7 @@ export default class DropDownDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Dropdown with search field</h4>
+                        <p>this will change value of prev dropdown</p>
                         <div style={{'width': '280'}}>
                             <DropDown options={options} ref='dropDown1' labelName='name' 
                                 onSelect={this.displayChange.bind(this, 'value1')}

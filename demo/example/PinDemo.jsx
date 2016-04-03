@@ -28,10 +28,10 @@ export default class PinDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Scroll to given top</h4>
-                        <Pin begin={600}>
+                        <Pin begin={800}>
                             <div className="card">
                                 <h4>title</h4>
-                                <p>pin when scroll to 600px</p>
+                                <p>pin when scroll to 800px</p>
                             </div>
                         </Pin>
                     </li>

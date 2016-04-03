@@ -4,6 +4,7 @@
     overflow: hidden;
     position: relative;
     ._content {
+        overflow: auto;
         ._item {
             overflow: hidden;
             display: block;
@@ -32,15 +33,21 @@
         }
     }
     ._arrow {
-        a {
+        .__arrow {
+            cursor: pointer;
+            color: @blue;
             position: absolute;
             overflow: hidden;
             top: 50%;
+            margin-top: -15px;
+            height: 30px;
         }
-        ._left {
+        ._prev {
+            .__arrow;
             left: 10px;
         }
-        ._right {
+        ._next {
+            .__arrow;
             right: 10px;
         }
     }

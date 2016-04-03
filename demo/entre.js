@@ -5,6 +5,7 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import resetCss from './css/reset.less';
 import demoCss from './css/demo.less';
 import carousel_css from './css/carousel.less';
+import carousel_demo_css from './css/carousel_demo.less';
 import popup_css from './css/popup.less';
 import dropdown_css from './css/dropdown.less';
 import menu_css from "./css/menu.less";

@@ -12,14 +12,8 @@ export default class ConfirmBoxDemo extends React.Component {
 
     render() {
         const contentNode = <p>Confrim delete?</p>;
-        const confirmBtn = <p>
-                                <span style={{'color': '#777'}}>√ </span>
-                                yes
-                            </p>;
-        const cancelBtn = <p>
-                                <span style={{'color': '#777'}}>x </span>
-                                wrong
-                            </p>;
+        const confirmBtn = <h3>√ yes</h3>
+        const cancelBtn = <p style={{'color': '#777'}}>cancel</p>;
         return (
             <div>
                 <h3>Confirm box</h3>

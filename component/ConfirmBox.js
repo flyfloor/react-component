@@ -20,6 +20,12 @@ const ConfirmBox = React.createClass({
         });
     },
 
+    getDefaultProps() {
+        return {
+            className: '',
+        };
+    },
+
     onOtherDomClick(e){
         if (!this.props.force) this.closeConfirm();
     },
@@ -37,34 +43,34 @@ const ConfirmBox = React.createClass({
     },
 
     render() {
-        const {confirmBtn, cancelBtn, position, content, style, children} = this.props;
+        let {confirmBtn, cancelBtn, position, className, content, style, children} = this.props;
+        const {open} = this.state;
+        className = `ui confirm-box popup ${className}`;
+        if (open) className = `${className} _active`;
 
-        let contentNode = this.state.open ? 
-            <div className={'_wrap _' + position}>
-                <div ref='content' className='_content'>
-                    <div className="_title">{content}</div>
-                    <div className="_action">
-                        <div className="_confirm" onClick={this.handleConfirm}>
-                            {confirmBtn ?
-                                confirmBtn
-                                : <a href="javascript:;">ok</a>}
-                        </div>
-                        <div className="_cancel" onClick={this.handleCancel}>
-                            {cancelBtn ?
-                                cancelBtn
-                                : <a href="javascript:;">cancel</a>}
-                        </div>
-                    </div>
-                    <span className="_arrow" ref='arrow'></span>
-                </div>
-            </div> 
-            : null;
         return (
-            <span className='ui confirm-box popup' style={style} onClick={this.onTrigger}>
+            <span className={className} style={style} onClick={this.onTrigger}>
                 <span className="_trigger" ref='trigger'>
                     {children}
                 </span>
-                {contentNode}
+                <div className={'_wrap _' + position}>
+                    <div ref='content' className='_content'>
+                        <div className="_title">{content}</div>
+                        <div className="_action">
+                            <div className="_confirm" onClick={this.handleConfirm}>
+                                {confirmBtn ?
+                                    confirmBtn
+                                    : <a href="javascript:;">ok</a>}
+                            </div>
+                            <div className="_cancel" onClick={this.handleCancel}>
+                                {cancelBtn ?
+                                    cancelBtn
+                                    : <a href="javascript:;">cancel</a>}
+                            </div>
+                        </div>
+                        <span className="_arrow" ref='arrow'></span>
+                    </div>
+                </div>
             </span>
         );
     }

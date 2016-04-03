@@ -1,6 +1,7 @@
 @import url('meta.less');
 
 @{NS}.menu {
+    @basic_motion: max-height .3s @motion, opacity .3s @motion, height .3s @motion, overflow .3s @motion;
     position: relative;
     border: 1px solid @gray_b;
 
@@ -25,9 +26,9 @@
         opacity: 0;
         max-height: 0;
         overflow: hidden;
-        -webkit-transition: all .3s @motion;
-        -o-transition: all .3s @motion;
-        transition: all .3s @motion;
+        -webkit-transition: @basic_motion;
+        -o-transition: @basic_motion;
+        transition: @basic_motion;
     }
 
     .sub-menu {
@@ -39,9 +40,9 @@
             }
             >.menu {
                 opacity: 1;
-                -webkit-transition: all .4s @motion;
-                -o-transition: all .4s @motion;
-                transition: all .4s @motion;
+                -webkit-transition: @basic_motion;
+                -o-transition: @basic_motion;
+                transition: @basic_motion;
                 max-height: 500px;
                 overflow: hidden;
             }
@@ -57,17 +58,20 @@
         .sub-menu {
             position: relative;
             .menu {
+                height: 0;
                 visibility: hidden;
                 overflow: hidden;
                 background: @white;
                 top: -1px;
+                width: 0;
                 left: 100%;
-                width: 100%;
                 position: absolute;
                 border: 1px solid transparent;
             }
             &._active {
                 >.menu {
+                    width: 100%;
+                    height: auto;
                     visibility: visible;
                     overflow: initial;
                     border-color: @gray_b;

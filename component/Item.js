@@ -2,7 +2,7 @@ const React = require('react');
 
 const Item = React.createClass({
     propTypes: {
-        children: React.PropTypes.element,
+        children: React.PropTypes.node,
     },
     getDefaultProps() {
         return {

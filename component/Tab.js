@@ -7,31 +7,54 @@ const Tab = React.createClass({
     getDefaultProps() {
         return {
             className: '',
-            selectedIndex: 0,
         };
     },
     getInitialState() {
-        return {
-            index: this.props.selectedIndex,
-        };
+        const {current} = this.props;
+        return {current};
     },
+
     handleItemClick(index){
         const {onSelect} = this.props;
         if (onSelect) onSelect(index);
         this.setState({
-            index: index, 
+            current: index, 
         });
     },
 
+    componentWillReceiveProps(nextProps) {
+        const {current} = this.props;
+        if (nextProps.current !== current) {
+            this.setState({
+                current: nextProps.current
+            });
+        }
+    },
+
     makeTabItems(children){
-        const {index} = this.state;
-        let active;
-        return React.Children.map(children, (node, i) => {
-            active = i == index ? '_active': '';
-            return <div className={`_item ${active}`} onClick={() => this.handleItemClick(i)}>
-                        {node}
-                    </div>;
+        const {current} = this.state;
+        let tabs = [], 
+            contents = [];
+
+        React.Children.map(children, (node, i) => {
+            let {index, title=index, children} = node.props;
+            if (index === null || index === undefined) return console.error('index is needed for children of menu');
+            let className = index === current ? `_item _active`: '_item';
+            if ((current === undefined || current === null) && i === 0) className += ' _active';
+            tabs.push(<div key={`tab_${i}`} className={className} onClick={() => this.handleItemClick(index)}>
+                        {title}
+                    </div>);
+            contents.push(<div key={`content_${i}`} className={className}>
+                            {children}
+                        </div>);
         })
+
+        return (
+            <div>
+                <div className="_tab">{tabs}</div>
+                <div className="_content">{contents}</div>
+            </div>
+        )
     },
 
     render() {

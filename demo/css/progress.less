@@ -3,7 +3,7 @@
 @{NS}.progress{
     position: relative;
     background: @gray_d;
-    border-radius: 10px;
+    border-radius: 5px;
     height: 10px;
     >._progress {
         -webkit-transition: all @motion .3s;
@@ -32,7 +32,9 @@
     }
     &._context {
         height: 16px;
+        border-radius: 8px;
         >._progress {
+            border-radius: 8px;
             font-size: 12px;
             line-height: 16px;
         }

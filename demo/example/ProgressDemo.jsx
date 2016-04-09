@@ -10,21 +10,21 @@ export default class ProgressDemo extends Component {
     }
 
     handleMinus(){
-        const {value} = this.state;
-        if (value >= 10) {
-            this.setState({
-                value: value - 10,
-            });
-        }
+        let {value} = this.state;
+        value -= 10;
+        if (value < 0) value = 0;
+        this.setState({
+            value,
+        });
     }
 
     handlePlus(){
-        const {value} = this.state;
-        if (value <= 110) {
-            this.setState({
-                value: value + 10
-            });
-        }
+        let {value} = this.state;
+        value += 10;
+        if (value > 100) value = 100;
+        this.setState({
+            value
+        });
     }
 
     render() {
@@ -32,7 +32,7 @@ export default class ProgressDemo extends Component {
         return (
             <div>
                 <h3>Progress</h3>
-                <ol>
+                <ol style={{'width': '80%'}}>
                     <li>
                         <h4>Default progress</h4>
                         <Progress value={value}/>

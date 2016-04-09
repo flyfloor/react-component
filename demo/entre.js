@@ -2,23 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 
-import resetCss from './css/reset.less';
-import checkbox_css from './css/checkbox.less';
-import carousel_css from './css/carousel.less';
-import carousel_demo_css from './css/carousel_demo.less';
-import popup_css from './css/popup.less';
-import dropdown_css from './css/dropdown.less';
-import menu_css from "./css/menu.less";
-import menu_demo_css from './css/menu_demo.less';
-import modal_css from './css/modal.less';
-import pin_css from './css/pin.less';
-import pin_demo_css from './css/pin_demo.less';
-import tab_css from './css/tab.less';
-import slidemenu_css from './css/slide-menu.less';
-import pagination_css from './css/pagination.less';
-import timepicker_css from './css/time-picker.less';
-import datepicker_css from './css/date-picker.less';
-import demoCss from './css/demo.less';
+import css from './css/demo.less';
 
 import Pin from '../component/Pin';
 
@@ -39,6 +23,7 @@ import SlideMenuDemo from "./example/SlideMenuDemo.jsx";
 import TimeInputDemo from "./example/TimeInputDemo.jsx";
 import DatePickerDemo from "./example/DatePickerDemo.jsx";
 import CalenderDemo from "./example/CalenderDemo.jsx";
+import ProgressDemo from "./example/ProgressDemo.jsx";
 
 class Nav extends React.Component {
     render(){
@@ -63,6 +48,7 @@ class Nav extends React.Component {
                     <li><h4><NavLink to="/time-input">time input</NavLink></h4></li>
                     <li><h4><NavLink to="/date-picker">date picker</NavLink></h4></li>
                     <li><h4><NavLink to="/calender">calender</NavLink></h4></li>
+                    <li><h4><NavLink to="/progress">progress</NavLink></h4></li>
                 </ul>
             </Pin>
         );
@@ -132,5 +118,6 @@ ReactDOM.render(<Router history={hashHistory}>
                         <Route path="/time-input" component={TimeInputDemo}/>
                         <Route path="/date-picker" component={DatePickerDemo}/>
                         <Route path="/calender" component={CalenderDemo}/>
+                        <Route path="/progress" component={ProgressDemo}/>
                     </Route>
                 </Router> , document.getElementById('root'));

@@ -1,17 +1,7 @@
 ###basic
 
-+ button
++ message
 
-+ checkbox
-
-+ radio
-
-+ radio group
-
-+ input
-
-+ label
-
-+ nav
++ progress
 
 ###inhence

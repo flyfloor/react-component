@@ -1,11 +1,17 @@
 @import url('meta.less');
 
 @{NS}.date-picker {
-    @basic_motion: max-height .3s @motion, opacity .3s @motion, height .3s @motion, overflow .3s @motion;
+    @basic_motion: all .3s;
+    ._transition {
+        -webkit-transition: @basic_motion;
+        -o-transition: @basic_motion;
+        transition: @basic_motion;
+    }
     position: relative;
+    width: 250px;
     >._input {
         cursor: pointer;
-        width: 250px;
+        width: 100%;
         line-height: 25px;
         height: 30px;
         padding: 0 10px;
@@ -13,6 +19,7 @@
         border: 1px solid @gray_b;
     }
     >._picker {
+        ._transition;
         height: 0;
         opacity: 0;
         overflow: hidden;
@@ -21,16 +28,11 @@
         z-index: 1000;
         left: 0;
         top: 29px;
-        -webkit-transition: @basic_motion;
-        -o-transition: @basic_motion;
-        transition: @basic_motion;
     }
     &._active {
         >._picker {
+            ._transition;
             opacity: 1;
-            -webkit-transition: @basic_motion;
-            -o-transition: @basic_motion;
-            transition: @basic_motion;
             height: auto;
             visibility: visible;
             overflow: initial;

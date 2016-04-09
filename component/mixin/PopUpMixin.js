@@ -20,6 +20,7 @@ const PopUpMixin = {
 
     triggerSize(){
         const TRG = ReactDOM.findDOMNode(this.refs.trigger);
+        console.log(TRG, TRG.offsetWidth, TRG.offsetHeight)
         return {
             tr_width: TRG.offsetWidth,
             tr_height: TRG.offsetHeight,

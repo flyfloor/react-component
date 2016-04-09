@@ -1,7 +1,12 @@
 @import url('meta.less');
 
 @{NS}.menu {
-    @basic_motion: max-height .3s @motion, opacity .3s @motion, height .3s @motion, overflow .3s @motion;
+    @basic_motion: max-height .3s @motion, opacity .3s @motion, height .3s @motion, overflow .3s @motion, visibility @motion .3s;
+    .__transition {
+        -webkit-transition: @basic_motion;
+        -o-transition: @basic_motion;
+        transition: @basic_motion;
+    }
     position: relative;
     border: 1px solid @gray_b;
     background: @white;
@@ -23,13 +28,11 @@
     }
 
     .menu {
+        .__transition;
         border: none;
         opacity: 0;
         max-height: 0;
         overflow: hidden;
-        -webkit-transition: @basic_motion;
-        -o-transition: @basic_motion;
-        transition: @basic_motion;
     }
 
     .sub-menu {
@@ -40,10 +43,8 @@
                 font-weight: 600;
             }
             >.menu {
+                .__transition;
                 opacity: 1;
-                -webkit-transition: @basic_motion;
-                -o-transition: @basic_motion;
-                transition: @basic_motion;
                 max-height: 500px;
                 overflow: hidden;
             }

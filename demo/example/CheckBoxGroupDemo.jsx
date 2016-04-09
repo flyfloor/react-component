@@ -2,13 +2,13 @@ import React from 'react';
 import {CheckBoxGroup, CheckBox} from "./index.js";
 
 const options = [
-    {'name': 'A', 'value': 'a'},
-    {'name': 'B', 'value': 'b'},
-    {'name': 'C', 'value': 'c'},
-    {'name': 'D', 'value': 'd'},
+    {'name': 'apple', 'value': 'a'},
+    {'name': 'banana', 'value': 'b', disabled: true},
+    {'name': 'cat', 'value': 'c'},
+    {'name': 'dog', 'value': 'd'},
 ];
 
-const checkedVal = ['b', 'd'];
+const checkedVal = ['a', 'd'];
 const checkedVal1 = ['banana'];
 
 export default class CheckBoxGroupDemo extends React.Component {
@@ -44,7 +44,7 @@ export default class CheckBoxGroupDemo extends React.Component {
                         <CheckBoxGroup value={checkedVal1} onChange={this.displayChange.bind(this, 'displayText1')}>
                             <CheckBox value="apple">apple</CheckBox>
                             <CheckBox value="banana">banana</CheckBox>
-                            <CheckBox value="cake" disabled={true}>cake</CheckBox>
+                            <CheckBox value="cat" disabled={true}>cat</CheckBox>
                         </CheckBoxGroup>
                     </li>
                 </ul>

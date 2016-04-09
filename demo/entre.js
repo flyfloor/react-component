@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 
 import resetCss from './css/reset.less';
-import demoCss from './css/demo.less';
+import checkbox_css from './css/checkbox.less';
 import carousel_css from './css/carousel.less';
 import carousel_demo_css from './css/carousel_demo.less';
 import popup_css from './css/popup.less';
@@ -18,6 +18,7 @@ import slidemenu_css from './css/slide-menu.less';
 import pagination_css from './css/pagination.less';
 import timepicker_css from './css/time-picker.less';
 import datepicker_css from './css/date-picker.less';
+import demoCss from './css/demo.less';
 
 import Pin from '../component/Pin';
 

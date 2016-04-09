@@ -256,11 +256,13 @@ Calender.Item = React.createClass({
 
     render() {
         let {value, disabled, active, isToday} = this.props;
-        let today = isToday ? '_today': '';
-        disabled = disabled ? '_disabled' : '';
-        active = active ? '_active': '';
+        let className = ['_day'];
+        if (isToday) className.push('_today');
+        if (disabled) className.push('_disabled');
+        if (active) className.push('_active');
+        className = className.join(' ');
         return (
-            <a href="javascript:;" className={`${active} ${disabled} ${today} _day`} 
+            <a href="javascript:;" className={className} 
                 onClick={() => this.handleClick(value)}>
                 {this.props.label}
             </a>

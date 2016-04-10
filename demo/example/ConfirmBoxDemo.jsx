@@ -26,7 +26,7 @@ export default class ConfirmBoxDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Confirm box with custom action, text</h4>
-                        <ConfirmBox content={<p>confirm? are you sure?</p>} 
+                        <ConfirmBox content={<div><p>confirm? check the <a href="http://braavos.me" target="_blank">blog</a></p></div>} 
                             confirmBtn={confirmBtn} onConfirm={this.handleConfirm.bind(this)} 
                             cancelBtn={cancelBtn}
                             onCancel={this.handleCancel.bind(this)}>
@@ -38,7 +38,10 @@ export default class ConfirmBoxDemo extends React.Component {
                         <ul>
                             <li>
                                 <ConfirmBox content={<h2>Huge text</h2>} position='left'>
-                                    <a href='javascript:;'>left</a>
+                                    <div style={{'border': '1px solid #eee', 'padding': '20', 'background': '#f8f8f8'}}>
+                                        <h3>click to show confirm at left</h3>
+                                        <p>this is the content</p>
+                                    </div>
                                 </ConfirmBox>
                             </li>
                             <li>

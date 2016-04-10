@@ -19,7 +19,10 @@ export default class TooltipDemo extends React.Component {
                         <ul>
                             <li>
                                 <Tooltip content={<h2>huge text</h2>} position='left'>
-                                    <a href='javascript:;'>left</a>
+                                    <div style={{'border': '1px solid #eee', 'padding': '20', 'background': '#f8f8f8'}}>
+                                        <h3>hover to show tooltip at left</h3>
+                                        <p>this is the content</p>
+                                    </div>
                                 </Tooltip>
                             </li>
                             <li>
@@ -38,6 +41,12 @@ export default class TooltipDemo extends React.Component {
                                 </Tooltip>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <h4>Click mode</h4>
+                        <Tooltip content={contentNode} mode="click">
+                            <a href='javascript:;'>click</a>
+                        </Tooltip>
                     </li>
                 </ol>
             </div>

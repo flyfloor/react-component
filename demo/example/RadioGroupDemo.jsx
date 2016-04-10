@@ -2,13 +2,13 @@ import React from 'react';
 import {RadioGroup, Radio} from './index.js';
 
 const options = [
-    {'name': 'A', 'value': 'a'},
-    {'name': 'B', 'value': 'b'},
-    {'name': 'C', 'value': 'c'},
-    {'name': 'D', 'value': 'd'},
+    {'name': 'apple', 'value': 'a'},
+    {'name': 'banana', 'value': 'b', disabled: true},
+    {'name': 'cat', 'value': 'c'},
+    {'name': 'dot', 'value': 'd'},
 ];
 
-const checkedVal = 'b';
+const checkedVal = 'c';
 
 export default class RadioDemo extends React.Component {
     constructor(props, refs){
@@ -45,10 +45,10 @@ export default class RadioDemo extends React.Component {
                     <li>
                         <h4>Radio group with yield children</h4>
                         <RadioGroup value={checkedVal}>
-                            <Radio value="a">A</Radio>
-                            <Radio value="b">B</Radio>
-                            <Radio value="c">C</Radio>
-                            <Radio value="d" disabled={true}>D</Radio>
+                            <Radio value="a">apple</Radio>
+                            <Radio value="b">banana</Radio>
+                            <Radio value="c">cat</Radio>
+                            <Radio value="d" disabled={true}>dog</Radio>
                         </RadioGroup>
                     </li>
                 </ul>

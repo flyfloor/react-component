@@ -16,6 +16,8 @@ const SlideMenu = require('../../component/SlideMenu');
 const TimeInput = require('../../component/TimeInput');
 const DatePicker = require('../../component/DatePicker');
 const Calender = require('../../component/Calender');
+const Progress = require('../../component/Progress');
+const Message = require('../../component/Message');
 
 module.exports = {
     CheckBox,
@@ -36,4 +38,6 @@ module.exports = {
     TimeInput,
     DatePicker,
     Calender,
+    Progress,
+    Message,
 };

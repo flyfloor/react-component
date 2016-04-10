@@ -83,7 +83,13 @@ const DropDown = React.createClass({
             }
             
             if(this.getFilterStatus(filterText, item_label, item_val)) {
-                nodes.push(this.formatOptionCell({ label: item_label, value: item_val, selected, children: props.children }));
+                nodes.push(this.formatOptionCell({ 
+                    label: item_label, 
+                    value: item_val, 
+                    selected, 
+                    children: props.children, 
+                    disabled: props.disabled 
+                }));
             }
         });
 
@@ -130,7 +136,14 @@ const DropDown = React.createClass({
                 if (selected) placeHolder = pair_label;
             }
 
-            node = this.formatOptionCell({ label: pair_label, value: pair_val, selected, children: pair.children });
+            node = this.formatOptionCell({ 
+                label: pair_label, 
+                value: pair_val, 
+                selected, 
+                children: pair.children, 
+                disabled: pair.disabled 
+            });
+
             if (multi || searchable) {
                 if (this.getFilterStatus(filterText, pair_val, pair_label)) nodes.push(node);
             } else {
@@ -170,13 +183,18 @@ const DropDown = React.createClass({
         return status;
     },
     
-    formatOptionCell({ label, value, selected, children }){
+    formatOptionCell({ label, value, selected, children, disabled }){
         const content = children ? children : label;
+        let node = disabled ? 
+            <DropDown.Option disabled={disabled} selected={selected}>
+                {content}
+            </DropDown.Option>
+            : <DropDown.Option disabled={disabled} selected={selected} onClick={() => this.handleChangeSelect(value)}>
+                {content}
+            </DropDown.Option>
         return (
             <li key={value}>
-                <DropDown.Option onClick={() => this.handleChangeSelect(value)}
-                    selected={selected}>{content}
-                </DropDown.Option>
+                {node}
             </li>
         );
     },
@@ -270,9 +288,12 @@ const DropDown = React.createClass({
 // dropdown option
 DropDown.Option = React.createClass({
     render(){
-        const {selected} = this.props;
+        const {selected, disabled} = this.props;
+        let className = '_item';
+        if (disabled) className += ' _disabled';
+        if (selected) className += ' _active';
         return (
-            <div className={selected ? '_active _item' : '_item'}
+            <div className={className}
                 {...this.props}>
             </div>
         );

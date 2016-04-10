@@ -4,7 +4,7 @@ import {DropDown} from './index.js';
 const options = [
     {name: 'apple', value: 1},
     {name: 'banana', value: 2},
-    {name: 'cat', value: 3},
+    {name: 'cat', value: 3, disabled: true},
     {name: 'dog', value: 4},
     {name: 'egg', value: 5},
 ];
@@ -101,7 +101,7 @@ export default class DropDownDemo extends React.Component {
                                 <div value={3} name="cat">
                                     <h4>this is cat</h4>
                                 </div>
-                                <div value={4} name="dog">
+                                <div value={4} name="dog" disabled={true}>
                                     blog site: <a href="http://braavos.me" target="_blank">lacuna</a>
                                 </div>
                                 <div value={5} name="egg">

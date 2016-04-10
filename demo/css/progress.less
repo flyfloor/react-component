@@ -1,0 +1,82 @@
+@import url('meta');
+
+@{NS}.progress{
+    position: relative;
+    background: @gray_d;
+    border-radius: 5px;
+    height: 10px;
+
+    @-webkit-keyframes progressbar {
+        0% { left: -100%;}
+        100% { left: 100%;}
+    }
+    @-o-keyframes progressbar {
+        0% { left: -100%;}
+        100% { left: 100%;}
+    }
+    @keyframes progressbar {
+        0% { left: -100%;}
+        100% { left: 100%;}
+    }
+
+    >._progress {
+        overflow: hidden;
+        -webkit-transition: all @motion .3s;
+        -o-transition: all @motion .3s;
+        transition: all @motion .3s;
+        text-align: center;
+        color: @white;
+        line-height: 10px;
+        background: @blue;
+        border-radius: 10px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+    }
+
+    &._completed {
+        >._progress {
+            background: @green;
+        }
+    }
+    &._failed {
+        >._progress {
+            background: @red;
+        }
+    }
+    &._context {
+        height: 20px;
+        border-radius: 8px;
+        >._progress {
+            border-radius: 8px;
+            font-size: 12px;
+            line-height: 20px;
+        }
+    }
+    &._disabled {
+        >._progress {
+            background: @gray_b;
+        }
+    }
+
+    &._active {
+        >._progress {
+            &:before {
+                content: '';
+                position: absolute;
+                border-radius: inherit;
+                top: 0;
+                bottom: 0;
+                width: 25%;
+                border-radius: inherit;
+                z-index: 1;
+                -webkit-transition: all .3s;
+                -o-transition: all .3s;
+                transition: all .3s;
+                background: rgba(255,255,255, .2);
+                animation: progressbar 2s linear infinite;
+            }
+        }
+    }
+}

@@ -44,16 +44,16 @@
         z-index: 100;
         background: @white;
         border: 1px solid @gray_b;
-        -webkit-transition: opacity @motion .3s, max-height @motion .3s;
-        -o-transition: opacity @motion .3s, max-height @motion .3s;
-        transition: opacity @motion .3s, max-height @motion .3s;
+        -webkit-transition: all @motion .3s;
+        -o-transition: all @motion .3s;
+        transition: all @motion .3s;
     }
     &._active {
         ._list {
             max-height: 500px;
-            -webkit-transition: opacity @motion .3s, max-height @motion .3s;
-            -o-transition: opacity @motion .3s, max-height @motion .3s;
-            transition: opacity @motion .3s, max-height @motion .3s;
+            -webkit-transition: all @motion .3s;
+            -o-transition: all @motion .3s;
+            transition: all @motion .3s;
             opacity: 1;
             visibility: visible;
             &:empty {

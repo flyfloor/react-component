@@ -1,7 +1,12 @@
 @import url('meta.less');
 
 @{NS}.menu {
-    @basic_motion: max-height .3s @motion, opacity .3s @motion, height .3s @motion, overflow .3s @motion;
+    @basic_motion: max-height .3s @motion, opacity .3s @motion, height .3s @motion, overflow .3s @motion, visibility @motion .3s;
+    .__transition {
+        -webkit-transition: @basic_motion;
+        -o-transition: @basic_motion;
+        transition: @basic_motion;
+    }
     position: relative;
     border: 1px solid @gray_b;
     background: @white;
@@ -9,10 +14,6 @@
     ._item {
         padding: 5px 15px;
         cursor: pointer;
-        &._disabled {
-            color: @gray_b;
-            cursor: not-allowed;
-        }
     }
 
     ._title {
@@ -27,13 +28,11 @@
     }
 
     .menu {
+        .__transition;
         border: none;
         opacity: 0;
         max-height: 0;
         overflow: hidden;
-        -webkit-transition: @basic_motion;
-        -o-transition: @basic_motion;
-        transition: @basic_motion;
     }
 
     .sub-menu {
@@ -44,10 +43,8 @@
                 font-weight: 600;
             }
             >.menu {
+                .__transition;
                 opacity: 1;
-                -webkit-transition: @basic_motion;
-                -o-transition: @basic_motion;
-                transition: @basic_motion;
                 max-height: 500px;
                 overflow: hidden;
             }
@@ -148,38 +145,5 @@
                 }
             }
         }
-        /*height: 40px;
-        line-height: 30px;
-        position: relative;
-        ._item {
-            text-align: center;
-            padding: 0;
-        }
-        >._item {
-            float: left;
-            height: 100%;
-            display: inline-block;
-        }
-        .sub-menu {
-            position: relative;
-            ._title {
-                padding: 0;
-            }
-            .menu {
-                min-width: 130px;
-                overflow: initial;
-                border: 1px solid @gray_b;
-                left: 0;
-                position: relative;
-                position: absolute;
-                width: 100%;
-            }
-
-            &._active {
-                ._item {
-                    display: block;
-                }
-            }
-        }*/
     }
 }

@@ -1,25 +1,26 @@
 @import url('meta.less');
 
 @{NS}.modal {
-    @basic_motion: opacity .3s @motion, transform .3s @motion, background .3s @motion;
     .__transition {
-        -webkit-transition: @basic_motion;
-        -o-transition: @basic_motion;
-        transition: @basic_motion;
+        -webkit-transition: all .3s;
+        -o-transition: all .3s;
+        transition: all .3s;
     }
     ._body {
+        -webkit-transform: translateX(-50%) translateY(-70%);
+        -ms-transform: translateX(-50%) translateY(-70%);
+        -o-transform: translateX(-50%) translateY(-70%);
+        transform: translateX(-50%) translateY(-70%);
+        z-index: 1000;
+        min-width: 400px;
+        max-width: 600px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        visibility: hidden;
         >._wrap {
             .__transition;
-            visibility: hidden;
-            z-index: 1000;
             background: @white;
-            min-width: 400px;
-            max-width: 600px;
-            position: fixed;
-            top: 25%;
-            left: 0;
-            right: 0;
-            margin: auto;
             border: 1px solid @gray_b;
             opacity: 0;
             -webkit-transform: scale(0.7);
@@ -34,6 +35,7 @@
         }
 
         ._content {
+            overflow: hidden;
             padding: 10px;
             ._action {
                 font-size: 90%;
@@ -64,9 +66,9 @@
     }
     &._show {
         ._body {
+            visibility: visible;
             >._wrap {
                 .__transition;
-                visibility: visible;
                 -webkit-transform: scale(1);
                 -ms-transform: scale(1);
                 -o-transform: scale(1);

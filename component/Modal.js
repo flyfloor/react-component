@@ -2,7 +2,7 @@ const React = require('react');
 
 const Modal = React.createClass({
     propTypes: {
-        title: React.PropTypes.string,
+        title: React.PropTypes.element,
         confirmText: React.PropTypes.string,
         cancelText: React.PropTypes.string,
         onConfirm: React.PropTypes.func,
@@ -21,7 +21,6 @@ const Modal = React.createClass({
     getDefaultProps() {
         return {
             display: false,
-            title: 'modal title',
             confirmText: 'confirm',
             cancelText: 'cancel',
             closeIcon: <span>x</span>,
@@ -74,7 +73,11 @@ const Modal = React.createClass({
                 <div>
                     <div className="_body">
                         <div className="_wrap">
-                            <div className="_title">{title}</div>
+                            {title ? 
+                                <div className="_title">
+                                    {title}
+                                </div>
+                                : null}
                             <div className="_content">
                                 {children}
                                 {footer}

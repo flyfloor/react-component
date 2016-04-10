@@ -42,6 +42,12 @@ export default class TooltipDemo extends React.Component {
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <h4>Click mode</h4>
+                        <Tooltip content={contentNode} mode="click">
+                            <a href='javascript:;'>click</a>
+                        </Tooltip>
+                    </li>
                 </ol>
             </div>
         );

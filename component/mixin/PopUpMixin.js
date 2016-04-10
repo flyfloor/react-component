@@ -20,7 +20,6 @@ const PopUpMixin = {
 
     triggerSize(){
         const TRG = ReactDOM.findDOMNode(this.refs.trigger);
-        console.log(TRG, TRG.offsetWidth, TRG.offsetHeight)
         return {
             tr_width: TRG.offsetWidth,
             tr_height: TRG.offsetHeight,
@@ -41,7 +40,7 @@ const PopUpMixin = {
         if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {
             // 
         } else {
-            state = state !== null ? state : !this.state.open;
+            state = state !== null && state !== undefined ? state : !this.state.open;
             this.setState({
                 open: state
             }, () => {

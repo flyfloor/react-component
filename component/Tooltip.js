@@ -7,11 +7,13 @@ const Tooltip = React.createClass({
 
     propTypes: {
         content: React.PropTypes.element.isRequired,
+        mode: React.PropTypes.oneOf(['hover', 'click'])
     },
 
     getDefaultProps() {
         return {
             className: '',
+            mode: 'hover'
         };
     },
 
@@ -23,13 +25,22 @@ const Tooltip = React.createClass({
 
     render() {
         const {open} = this.state;
-        let {position, content, style, className, children} = this.props;
+        let {position, content, style, className, children, mode} = this.props;
         className = `ui confirm-box popup ${className}`;
         if (open) className = `${className} _active`;
 
+        let onMouseLeave = null, onMouseEnter = null, onClick = null;
+
+        if (mode === 'click') {
+            onClick = (e) => this.onTrigger(e);
+        } else {
+            onMouseEnter = (e) => this.onTrigger(e, true);
+            onMouseLeave = (e) => this.onTrigger(e, false);
+        }
+
         return (
-            <span className={className} style={style} 
-                onMouseEnter={(e) => this.onTrigger(e, true)} onMouseLeave={(e) => this.onTrigger(e, false)}>
+            <span className={className} style={style} onClick={onClick}
+                onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                 <span className="_trigger" ref='trigger'>
                     {children}
                 </span>

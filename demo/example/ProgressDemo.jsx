@@ -36,11 +36,11 @@ export default class ProgressDemo extends Component {
                     <li>
                         <h4>Default progress</h4>
                         <Progress value={value}/>
-                        <h1>
+                        <h2>
                             <a href="javascript:;" onClick={this.handleMinus.bind(this)}>-</a>
                             <span>  </span>
                             <a href="javascript:;" onClick={this.handlePlus.bind(this)}>+</a>
-                        </h1>
+                        </h2>
                     </li>
                     <li>
                         <h4>Animated progress</h4>

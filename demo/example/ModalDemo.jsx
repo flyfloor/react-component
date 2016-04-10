@@ -40,6 +40,18 @@ export default class ModalDemo extends React.Component {
     }
 
     render() {
+        const content = <div>
+                            <h4>this is content</h4>
+                            <p>This is a modal window. You can do the following things with it:</p>
+                            <ul>
+                                <li>Read: modal windows will probably tell you something important so don't forget to read what they say.</li>
+                                <li>Look: a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                                <li>Close: click on the button to close the modal.</li>
+                                <li>
+                                    <a href="http://braavos.me" target="_blank">blog</a>
+                                </li>
+                            </ul>
+                        </div>
         return (
             <div>
                 <h3>Modal</h3>
@@ -47,10 +59,8 @@ export default class ModalDemo extends React.Component {
                     <li>
                         <h4>Default modal</h4>
                         <a href="javascript:;" onClick={this.showModal.bind(this, 'display')}>click</a>
-                        <Modal title='confirm deleted' onClose={this.handleClose.bind(this)} display={this.state.display}>
-                            <h4>this is content</h4>
-                            <p>asdfhkjfkwlg mean no shit</p>
-                            <a href="http://braavos.me" target="_blank">hello</a>
+                        <Modal title={<h4>Confirm deleted</h4>} onClose={this.handleClose.bind(this)} display={this.state.display}>
+                            {content}
                         </Modal>
                     </li>
                     <li>
@@ -58,7 +68,7 @@ export default class ModalDemo extends React.Component {
                         <a href="javascript:;" onClick={this.showModal.bind(this, 'display1')}>click</a>
                         <Modal display={this.state.display1} onClose={this.handleClose.bind(this)} 
                             onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
-                            <a href='http://braavos.me' target="_blank">hello</a>
+                            {content}
                         </Modal>
                     </li>
                     <li>
@@ -66,7 +76,7 @@ export default class ModalDemo extends React.Component {
                         <a href="javascript:;" onClick={this.showModal.bind(this, 'display2')}>click</a>
                         <Modal display={this.state.display2} onClose={this.handleClose.bind(this)}
                             onConfirm={this.handleConfirm1.bind(this)} closeIcon={<p>关闭</p>}>
-                            <a href='http://braavos.me' target="_blank">hello</a>
+                            {content}
                         </Modal>
                     </li>
                     <li>
@@ -74,7 +84,7 @@ export default class ModalDemo extends React.Component {
                         <a href="javascript:;" onClick={this.showModal.bind(this, 'display3')}>click</a>
                         <Modal display={this.state.display3} force={true} onClose={this.handleClose.bind(this)}
                             onConfirm={this.handleConfirm1.bind(this)}>
-                            <a href='http://braavos.me' target="_blank">hello</a>
+                            {content}
                         </Modal>
                     </li>
                 </ol>

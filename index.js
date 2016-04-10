@@ -23,6 +23,7 @@ var TimeInput = require("./lib/TimeInput.js");
 var DatePicker = require("./lib/DatePicker.js");
 var Calender = require("./lib/Calender.js");
 var Progress = require("./lib/Progress.js");
+var Message = require("./lib/Message.js");
 
 module.exports = {
     DocumentClickMixin: DocumentClickMixin,
@@ -48,4 +49,5 @@ module.exports = {
     DatePicker: DatePicker,
     Calender: Calender,
     Progress: Progress,
+    Message: Message,
 };

@@ -17,7 +17,7 @@ const Tooltip = React.createClass({
         };
     },
 
-    onOtherDomClick(e){
+    onOtherDomClick(){
         this.setState({
             open: false, 
         });

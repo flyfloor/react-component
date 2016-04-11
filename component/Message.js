@@ -28,7 +28,7 @@ const Message = React.createClass({
 
     handleDisplay(){
         const {display} = this.state;
-        const {delay, onClose} = this.props;
+        const {delay} = this.props;
         this.setState({
             display: !display
         });

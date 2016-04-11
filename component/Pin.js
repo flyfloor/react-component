@@ -38,7 +38,7 @@ const Pin = React.createClass({
     },
 
 
-    onScroll(e){
+    onScroll(){
         const {_top} = this.windowScrollOffset();
         this.setState({
             fixed: _top >= this.state.baseTop

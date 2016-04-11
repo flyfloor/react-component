@@ -30,7 +30,7 @@ const RadioGroup = React.createClass({
     },
 
     componentDidMount() {
-        const {defaultChecked, valueName, children} = this.props;
+        const {defaultChecked, valueName} = this.props;
         const {value, options} = this.state;
         if ((value === null || value === undefined) && defaultChecked) {
             if (options.length > 0) {
@@ -54,7 +54,8 @@ const RadioGroup = React.createClass({
                                 </Radio>);
             })
         } else {
-            for (let item of options){
+            for (let i = 0; i < options.length; i++) {
+                let item = options[i];
                 itemChecked = item[valueName] === value;
                 optionNodes.push(<Radio key={item[valueName]} value={item[valueName]} disabled={item.disabled}
                                     checked={itemChecked} onChange={this.toggleChange}>

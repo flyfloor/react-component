@@ -5,18 +5,18 @@ const MAX_SEC = MAX_MIN;
 const timeStr2Obj = (value='00:00:00', options = {
     simple: false, 
 }) => {
-    const {simple} = options;
-    let arr = value.split(':');
-    arr = arr.slice(0, 3);
+    let arr = value.split(':').slice(0, 3);
+    let new_arr = [];
 
     for (let i = 0; i < arr.length; i++) {
         let item = String(arr[i]);
-        if (item.length > 2) arr[i] = item.slice(0, 2);
-        if (item.length === 1) arr[i] = `0${item}`;
-        if (!item) arr[i] = '00';
+        if (item.length > 2) item = item.slice(0, 2);
+        if (item.length === 1) item = `0${item}`;
+        if (!item) item = '00';
+        new_arr.push(item);
     }
 
-    let [hour, min, sec] = arr;
+    let [hour, min, sec] = new_arr;
     hour = validateUnitByMax(hour, MAX_HOUR);
     min = validateUnitByMax(min, MAX_MIN);
     

@@ -39,7 +39,7 @@ const DatePicker = React.createClass({
         if (onChange) onChange(value);
     },
 
-    onOtherDomClick(e){
+    onOtherDomClick(){
         this.setState({
             showPicker: false
         });

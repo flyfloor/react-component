@@ -28,15 +28,16 @@ export const CheckBoxGroup = React.createClass({
 
     addVal(val){
         let flag = false;
-        for (let item of this.state.value){
-            if (item === val) {
+        const {value} = this.state;
+        for (let i = 0; i < value.length; i++) {
+            if (val === value[i]){
                 flag = true;
                 break;
             }
         }
         if (!flag) {
             this.setState({
-                value: this.state.value.concat(val) 
+                value: value.concat(val) 
             }, this.valueChange);
         }
     },
@@ -68,10 +69,11 @@ export const CheckBoxGroup = React.createClass({
             })
         } else {
             let itemNode = null;
-            for (let item of options){
+            for (let i = 0; i < options.length; i++) {
                 let itemChecked = false;
-                for (let val of value) {
-                    if(item[valueName] === val) {
+                let item = options[i];
+                for (let j = 0; j < value.length; j++) {
+                    if (value[j] === item[valueName]){
                         itemChecked = true;
                         break;
                     }

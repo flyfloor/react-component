@@ -1,7 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const Item = require('./Item');
-const {toggleClass, removeClass, hasClass, addClass, getClassList} = require('./util/dom');
+const {removeClass, hasClass, addClass, getClassList} = require('./util/dom');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 
 const Menu = React.createClass ({
@@ -31,7 +30,7 @@ const Menu = React.createClass ({
     },
 
     closeSubMenu(node){
-        const {popped, mode, mutux, horizontal} = this.props;
+        const {popped, mode, horizontal} = this.props;
         if (popped || mode === 'hover' || horizontal) {
             let base = node || ReactDOM.findDOMNode(this.refs.base);
             removeClass(base.querySelectorAll('.sub-menu._active'), '_active');
@@ -67,12 +66,12 @@ const Menu = React.createClass ({
         }
     },
 
-    onOtherDomClick(e){
+    onOtherDomClick(){
         this.closeSubMenu();
     },
 
     formatChild(node, i, {current}){
-        let {classList, disabled, index, children} = node.props;
+        let {disabled, index, children} = node.props;
         const selected = current === index;
         let className = getClassList(node.props);
         className.push('_child', '_item');
@@ -114,7 +113,9 @@ const Menu = React.createClass ({
         const {popped, accordion, mode, horizontal} = this.props;
         return React.Children.map(children, (item, i) => {
             const {index, sub} = item.props;
-            if (index === null || index === undefined) return console.error('index is needed for children of menu');
+            if (index === null || index === undefined) {
+                throw new Error('index is needed for children of menu');
+            }
             return sub ? this.formatSubMenu(item, i, { accordion, popped, mode, current, horizontal, level }) 
                         : this.formatChild(item, i, { current });
         });

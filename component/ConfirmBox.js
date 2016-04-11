@@ -26,7 +26,7 @@ const ConfirmBox = React.createClass({
         };
     },
 
-    onOtherDomClick(e){
+    onOtherDomClick(){
         if (!this.props.force) this.closeConfirm();
     },
 

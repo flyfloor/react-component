@@ -39,24 +39,10 @@ const Pagination = React.createClass({
         if (onChange) onChange(page);
     },
 
-    render() {
-        let {total, range, showRange, showNav, prevNode, nextNode, isEnd} = this.props;
-        let { current } = this.state;
-        let start = 1, end = 1, nodes = [],
-            left_half = Math.ceil(range / 2);
+    formatFirstNode(start){
+        const {showRange, showNav, prevNode} = this.props;
+        const {current} = this.state;
 
-        // current large than half
-        if (current > left_half) start = current - left_half;
-        
-        // calc end
-        end = start + range;
-
-        if (total - start <= range) {
-            start = total - range;
-            end = total;
-        }
-
-        // first node
         let firstNode = null;
         if (showRange && start != 1) {
             firstNode = <li key='first-page' onClick={() => this.onPageChange(1)} 
@@ -69,10 +55,15 @@ const Pagination = React.createClass({
                             { prevNode ? prevNode : <span>prev</span> }
                         </li>
         }
+        return firstNode;
+    },
 
-        // last node
+    formatLastNode(end){
+        const {showRange, showNav, nextNode, isEnd, total} = this.props;
+        const {current} = this.state;
+
         let lastNode = null;
-        if (showRange && end != total) {
+        if (showRange && end !== total) {
             lastNode = <li key={`last-page`} onClick={() => this.onPageChange(total)}
                             className={current === total ? '_active _range _item': '_range _item'}>
                             <span>...  </span>
@@ -85,8 +76,35 @@ const Pagination = React.createClass({
                             {nextNode ? nextNode : <span>next</span>}
                         </li>
         }
+        return lastNode;
+    },
 
-        // node
+    formatStartAndEnd(){
+        const {range, total} = this.props;
+        const { current } = this.state;
+        let start = 1, 
+            end = 1, 
+            left_half = Math.ceil(range / 2);
+
+        // current large than half
+        if (current > left_half) start = current - left_half;
+        
+        // calc end
+        end = start + range;
+        if (total - start <= range) {
+            start = total - range;
+            end = total;
+        }
+
+        return {
+            start, end
+        }
+    },
+
+    formatRange(start, end){
+        let {isEnd} = this.props;
+        const {current} = this.state;
+        let nodes = [];
         for (let i = start; i <= end; i++) {
             if (isEnd && current === i - 1) break;
             nodes.push(<li key={`page-link-${i}`} onClick={() => this.onPageChange(i)}
@@ -94,11 +112,16 @@ const Pagination = React.createClass({
                             <span>{i}</span>
                         </li>);
         }
+        return nodes;
+    },
+
+    render() {
+        let {start, end} = this.formatStartAndEnd();
         return (
             <ul className="ui pagination">
-                {firstNode}
-                {nodes}
-                {lastNode}
+                {this.formatFirstNode(start)}
+                {this.formatRange(start, end)}
+                {this.formatLastNode(end)}
             </ul>
         );
     }

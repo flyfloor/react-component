@@ -38,7 +38,9 @@ const Tab = React.createClass({
 
         React.Children.map(children, (node, i) => {
             let {index, title=index, children} = node.props;
-            if (index === null || index === undefined) return console.error('index is needed for children of menu');
+            if (index === null || index === undefined) {
+                throw new Error('index is needed for children of tab');
+            }
             let className = index === current ? `_item _active`: '_item';
             if ((current === undefined || current === null) && i === 0) className += ' _active';
             tabs.push(<div key={`tab_${i}`} className={className} onClick={() => this.handleItemClick(index)}>

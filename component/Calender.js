@@ -168,7 +168,7 @@ const Calender = React.createClass({
 
     renderDayPicker(){
         const TODAY = date2DateStr(new Date());
-        const {year, month, day, value, showYear, showMonth} = this.state;
+        const {year, month, value, showYear, showMonth} = this.state;
         const dateCount = new Date(year, month, 0).getDate();
         const index = new Date(year, month - 1, 1).getDay();
         let matrixNodes = [[]];

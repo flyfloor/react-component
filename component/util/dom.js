@@ -51,14 +51,13 @@ export function addClass(el, className) {
     if (el instanceof NodeList) {
         const length = el.length;
         for (let i = 0; i < length; i++) {
-            const str = el.className.trim();
+            let str = el.className.trim();
             el[i].className = `${str} ${className}`;
         }
         return;
     }
     if (el instanceof Node) {
-        const str = el.className.trim();
-        el.className = `${str} ${className}`;
+        el.className = `${el.className.trim()} ${className}`;
     }
 }
 

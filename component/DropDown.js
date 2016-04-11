@@ -65,7 +65,7 @@ const DropDown = React.createClass({
     },
 
     formatYieldChildren(children){
-        let {labelName, valueName, placeHolder, multi, style, className} = this.props;
+        let {labelName, searchable, valueName, placeHolder, multi, style, className} = this.props;
         const {filterText, value, open} = this.state;
         let nodes = [], tags = [];
         React.Children.map(children, item => {
@@ -114,68 +114,76 @@ const DropDown = React.createClass({
                 </div>;
     },
 
-    formatChildren(children){
-        let {labelName, valueName, searchable, multi, style, className} = this.props;
-        let {placeHolder} = this.props;
-        const {filterText, value, options, open} = this.state;
-        let tags = [], node = null, nodes = [];
-        for(let pair of options){
+    formatLabelNode(labels){
+        const {multi, searchable} = this.props;
+        const {open} = this.state;
+        let labelNode = null;
+        if (multi) {
+            labelNode = this.formatMultiInput(labels)
+        } else {
+            labelNode = searchable ? 
+                this.formatSearchBar(labels)
+                : <DropDown.label onClick={() => this.toggleOpen(!open)}>
+                    {labels}
+                </DropDown.label>;
+        }
+        return labelNode;
+    },
+
+    getNodesAndLabel(){
+        const {labelName, valueName, searchable, multi, placeHolder} = this.props;
+        const {filterText, value, options} = this.state;
+        let displayLabels = [], node = null, optionNodes = [];
+        if (!multi) displayLabels = placeHolder;
+
+        for (let i = 0; i < options.length; i++) {
+            const pair = options[i];
             const pair_val = pair[valueName];
-            const pair_label = pair[labelName]; 
+            const pair_label = pair[labelName];
             let selected = false;
             if (multi) {
-                for(let el of value){
-                    selected = el === pair_val;
+                for (let j = 0; j < value.length; j++) {
+                    selected = value[j] === pair_val;
                     if (selected) {
-                        if (tags.indexOf(pair_label) === -1) tags[value.indexOf(pair_val)] = pair_label;
+                        if (displayLabels.indexOf(pair_label) === -1) displayLabels[value.indexOf(pair_val)] = pair_label;
                         break;
                     }
                 }
             } else {
                 selected = value === pair_val;
-                if (selected) placeHolder = pair_label;
+                if (selected) displayLabels = pair_label;
             }
 
-            node = this.formatOptionCell({ 
-                label: pair_label, 
-                value: pair_val, 
-                selected, 
-                children: pair.children, 
-                disabled: pair.disabled 
-            });
+            node = this.formatOptionCell({ label: pair_label, value: pair_val, selected, children: pair.children, disabled: pair.disabled });
 
             if (multi || searchable) {
-                if (this.getFilterStatus(filterText, pair_val, pair_label)) nodes.push(node);
+                if (this.getFilterStatus(filterText, pair_val, pair_label)) optionNodes.push(node);
             } else {
-                nodes.push(node);
+                optionNodes.push(node);
             }
         }
-        
-        let labelNode = null;
-        if (multi) {
-            labelNode = this.formatMultiInput(tags)
-        } else {
-            labelNode = searchable ? 
-                this.formatSearchBar(placeHolder)
-                : <DropDown.label onClick={() => this.toggleOpen(!open)}>
-                    {placeHolder}
-                </DropDown.label>;
-        }
+        return {optionNodes, displayLabels};
+    },
 
-        if (open) className = `${className} _active`;
+    formatOptions(){
+        let {className, style} = this.props;
+        if (this.state.open) className = `${className} _active`;
 
-        return <div className={`ui dropdown ${className}`} style={style}>
-                    {labelNode}
-                    <ul className="_list">
-                        {nodes}
-                    </ul>
-                </div>;
+        const {optionNodes, displayLabels} = this.getNodesAndLabel();
+        return (
+            <div className={`ui dropdown ${className}`} style={style}>
+                {this.formatLabelNode(displayLabels)}
+                <ul className="_list">
+                    {optionNodes}
+                </ul>
+            </div>
+        );
     },
 
     getFilterStatus(text, ...fields){
         let status = false;
-        for(let val of fields){
-            if (String(val).indexOf(text) !== -1) {
+        for (let i = 0; i < fields.length; i++) {
+            if (String(fields[i]).indexOf(text) !== -1) {
                 status = true;
                 break;
             }
@@ -200,7 +208,7 @@ const DropDown = React.createClass({
     },
 
     formatSearchBar(text){
-        const {value, open, filterText} = this.state;
+        const {filterText} = this.state;
         return (
             <div className="_search" onClick={() => this.toggleOpen(true)}>
                 {filterText ? <div className="_text"></div>
@@ -220,7 +228,7 @@ const DropDown = React.createClass({
         );
     },
 
-    onOtherDomClick(e){
+    onOtherDomClick(){
         this.toggleOpen(false);
     },
 
@@ -277,7 +285,7 @@ const DropDown = React.createClass({
         const {children} = this.props;
         let node = children ? 
             this.formatYieldChildren(children) 
-            : this.formatChildren(children);
+            : this.formatOptions();
         return (
             node
         );
@@ -323,16 +331,16 @@ DropDown.multiInput = React.createClass({
     componentWillReceiveProps: function(nextProps) {
         if (nextProps.selectedTags.length !== this.props.selectedTags.length) {
             this.inputFieldFocus();
-        };
+        }
     },
 
-    handleClick(e){
+    handleClick(){
         this.inputFieldFocus();
         this.props.onClick(true);
     },
 
     handleKeyDown(e){
-        const {keyCode, target} = e;
+        const {keyCode} = e;
         const value = this.inputField().value;
         this.setState({
             hasInput: true, 
@@ -343,7 +351,7 @@ DropDown.multiInput = React.createClass({
     },
 
 
-    handleBlur(e){
+    handleBlur(){
         this.setState({
             hasInput: false, 
         });

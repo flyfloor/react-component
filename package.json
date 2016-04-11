@@ -6,7 +6,8 @@
   "scripts": {
     "start": "babel --presets es2015,react --watch component/ --out-dir lib/ & node server.js",
     "build:demo": "webpack -p",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint lib"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "babel-polyfill": "^6.7.4",
     "babel-runtime": "^6.0.0",
     "css-loader": "^0.17.0",
+    "eslint": "^2.7.0",
     "express": "^4.13.3",
     "html-webpack-plugin": "^1.6.1",
     "jest": "^0.1.40",

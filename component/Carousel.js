@@ -36,11 +36,10 @@ const Carousel = React.createClass({
 
     componentDidMount() {
         const base = ReactDOM.findDOMNode(this);
-        const {autoPlay, delay} = this.props;
         this.setState({
             baseWidth: base.offsetWidth
         });
-        if (autoPlay) this.setInterval(this.handleAutoPlay, delay);
+        this.resetAutoplay();
     },
 
     handleAutoPlay(){
@@ -50,6 +49,14 @@ const Carousel = React.createClass({
                 index: index + 1 
             }, () => this.addTransition(this.resetPosition) );
         } 
+    },
+
+    resetAutoplay(){
+        const {autoPlay, delay} = this.props;
+        if (autoPlay) {
+            this.clearInterval();
+            this.setInterval(this.handleAutoPlay, delay);
+        }
     },
 
     componentWillMount() {
@@ -83,12 +90,14 @@ const Carousel = React.createClass({
     },
 
     handleSlide(index){
+        this.resetAutoplay();
         this.setState({
             index: parseInt(index)
         }, () => this.addTransition() );
     },
 
     handleNext(){
+        this.resetAutoplay();
         const {index} = this.state;
         if (index >= 0) {
             this.setState({
@@ -98,6 +107,7 @@ const Carousel = React.createClass({
     },
 
     handlePrev(){
+        this.resetAutoplay();
         const {index, count} = this.state;
         if (index < count) {
             this.setState({

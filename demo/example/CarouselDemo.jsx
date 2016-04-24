@@ -29,7 +29,7 @@ export default class CarouselDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Auto play carousel</h4>
-                        <Carousel autoPlay={true} delay={5000}>
+                        <Carousel autoPlay={true} delay={3000}>
                             {imgNodes}
                         </Carousel>
                     </li>

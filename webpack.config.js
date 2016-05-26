@@ -3,13 +3,14 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
+var publicPath = process.env.NODE_ENV === 'dev' ? '/dist/' : '';
 
 module.exports = {
     entry: "./demo/entre.js",
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'demo.js',
-        publicPath: '/dist/'
+        publicPath: publicPath
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),

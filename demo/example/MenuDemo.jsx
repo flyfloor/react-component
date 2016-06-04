@@ -15,7 +15,7 @@ export default class MenuDemo extends React.Component {
     }
 
     formatChild({current, accordion=false, onChange, style, popped=false, mode='click', horizontal=false, activeFirst=false}) {
-        return <Menu className="first-menu" current={current} accordion={accordion} onChange={onChange} horizontal={horizontal} style={style} popped={popped} mode={mode}>
+        return <Menu current={current} accordion={accordion} onChange={onChange} horizontal={horizontal} style={style} popped={popped} mode={mode}>
                     <Item index='sub0' sub={true} active={activeFirst} title={<p>Sub Menu</p>}>
                         <Menu className="second-menu">
                             <Item index="0">
@@ -86,23 +86,87 @@ export default class MenuDemo extends React.Component {
                         <h4>Default menu</h4>
                         <p>you selected item index is {this.state.index}</p>
                         {this.formatChild({current: this.state.index, onChange: this.displayChange.bind(this), style, activeFirst: true })}
+                        <pre>
+                            <code>
+{`
+<Menu current={current} onChange={onChange}>
+    <Item index='sub0' sub={true} active={activeFirst} title={<p>Sub Menu</p>}>
+        <Menu className="second-menu">
+            <Item index="0">
+                <p>Sub item</p>
+            </Item>
+            ...
+            <Item sub={true} index="sub0_1" title={<p>Third Menu</p>}>
+                <Menu className="third-menu">
+                    <Item index="10">
+                        <p>Third item</p>
+                    </Item>
+                    ...
+                </Menu>
+            </Item>
+        </Menu>
+    </Item>
+    ...
+    <Item index="4">
+        <p>Item <a target="_blank" href="http://braavos.me" style={{'color': '#f00'}}>blog</a></p>
+    </Item>
+</Menu>
+`}                                
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Accordion menu </h4>
                         <p>only show one menu at a atime, accordion</p>
                         {this.formatChild({ accordion: true, style})}
+                        <pre>
+                            <code>
+{`
+<Menu current={current} accordion={true}>
+    ...
+</Menu>
+`}                                
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Popped out menu</h4>
                         {this.formatChild({ popped: true, style })}
+                        <pre>
+                            <code>
+{`
+<Menu current={current} popped={true}>
+    ...
+</Menu>
+`} 
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Hover mode menu</h4>
                         {this.formatChild({ mode: 'hover', popped: true, style })}
+                        <pre>
+                            <code>
+{`
+<Menu current={current} popped={true} mode="hover">
+    ...
+</Menu>
+`}                             
+                            </code>
+                        </pre>                        
                     </li>
                     <li>
                         <h4>Horizontal menu</h4>
                         {this.formatChild({horizontal: true})}
+                        <pre>
+                            <code>
+{`
+<Menu current={current} horizontal={true}>
+    ...
+</Menu>
+`}                                 
+                            </code>
+                        </pre>
                     </li>
                 </ul>
             </div>

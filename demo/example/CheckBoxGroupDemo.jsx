@@ -30,13 +30,22 @@ export default class CheckBoxGroupDemo extends React.Component {
         return (
             <div>
                 <h3>Checkbox group</h3>
-                <ul className="two">
+                <ul>
                     <li>
                         <h4>Checkbox group</h4>
                         <p>you selected value is {this.state.displayText}</p>
                         <CheckBoxGroup options={options} labelName='name' 
                             valueName='value' value={checkedVal} 
                             onChange={this.displayChange.bind(this, 'displayText')} />
+                        <pre>
+                            <code>
+                                {'<CheckBoxGroup options={options} labelName="name"'}
+                                <br/>
+                                {'  valueName="value" value={value}'}
+                                <br/>
+                                {'  onChange={displayChange} />'}
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Checkbox group yield childrens</h4>
@@ -46,6 +55,19 @@ export default class CheckBoxGroupDemo extends React.Component {
                             <CheckBox value="banana">banana</CheckBox>
                             <CheckBox value="cat" disabled={true}>cat</CheckBox>
                         </CheckBoxGroup>
+                        <pre>
+                            <code>
+                                {'<CheckBoxGroup value={checkedVal1} onChange={handleChange}>'}
+                                <br/>
+                                {'  <CheckBox value="apple">apple</CheckBox>'}
+                                <br/>
+                                {'  <CheckBox value="banana">banana</CheckBox>'}
+                                <br/>
+                                {'  <CheckBox value="cat" disabled={true}>cat</CheckBox>'}
+                                <br/>
+                                {'</CheckBoxGroup>'}
+                            </code>
+                        </pre>
                     </li>
                 </ul>
             </div>

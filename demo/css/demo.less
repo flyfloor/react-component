@@ -29,6 +29,10 @@ body {
     line-height: 22px;
 }
 
+ul {
+    padding: 0;
+}
+
 .table {
     display: table;
     width: 100%;
@@ -134,5 +138,24 @@ ul {
                 }
             }
         }
+    }
+}
+
+pre {
+    margin: 10px 0;
+    padding: 10px;
+    background: @white_a;
+    white-space: pre;
+    overflow-y: hidden;
+    display: block;
+    overflow-x: scroll;
+    code {
+        font-family: Monaco monospace;
+        font-size: 13px;
+        letter-spacing: 1px;
+        line-height: 20px;
+        overflow-y: hidden;
+        display: block;
+        color: @green;
     }
 }

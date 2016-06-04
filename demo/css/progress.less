@@ -3,8 +3,8 @@
 @{NS}.progress{
     position: relative;
     background: @gray_d;
-    border-radius: 5px;
-    height: 10px;
+    border-radius: 3px;
+    height: 6px;
 
     @-webkit-keyframes progressbar {
         0% { left: -100%;}
@@ -26,7 +26,7 @@
         transition: all @motion .3s;
         text-align: center;
         color: @white;
-        line-height: 10px;
+        line-height: 6px;
         background: @blue;
         border-radius: 10px;
         position: absolute;
@@ -46,12 +46,14 @@
         }
     }
     &._context {
-        height: 20px;
-        border-radius: 8px;
+        height: 15px;
+        line-height: 15px;
+        border-radius: 6px;
+        font-size: 12px;
         >._progress {
-            border-radius: 8px;
-            font-size: 12px;
-            line-height: 20px;
+            border-radius: inherit;
+            font-size: inherit;
+            line-height: inherit;
         }
     }
     &._disabled {

@@ -30,7 +30,7 @@ export default class DropDownDemo extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{"minHeight": 1800}}>
                 <h3>Dropdown</h3>
                 <ul>
                     <li>

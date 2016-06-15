@@ -79,7 +79,7 @@ class App extends React.Component {
                                     <span>
                                         <a target="_blank" href="http://braavos.me">落在深海</a>
                                     </span>
-                                    <span><a target="_blank" href="http://github.com/jerryshew/react-component">Github repo</a></span>
+                                    <span><a target="_blank" href="http://github.com/jerryshew/react-component">Github</a></span>
                                 </div>
                             </div>
                         </div>

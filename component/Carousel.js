@@ -167,7 +167,7 @@ const Carousel = React.createClass({
         
         const contentCss = {
             width: baseWidth * (count + 2),
-            transform: `translate(-${baseWidth * (index + 1)}px, 0)`,
+            transform: `translate3d(-${baseWidth * (index + 1)}px, 0, 0)`,
         }
         return (
             <div className='ui carousel'>

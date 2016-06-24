@@ -1,4 +1,8 @@
-# react-component
+# react-component  
+
+[![Downloads](https://img.shields.io/npm/dt/react-ui-component.svg)](https://www.npmjs.com/package/react-ui-component)
+[![Version](https://img.shields.io/npm/v/react-ui-component.svg)](https://www.npmjs.com/package/react-ui-component)
+
 >some everyday use component built with reactjs.
 
 ### Demo

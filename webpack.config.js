@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
+var ForceCaseSensitivityPlugin = require('force-case-sensitivity-webpack-plugin');
 var publicPath = process.env.NODE_ENV === 'dev' ? '/dist/' : '';
 
 module.exports = {
@@ -16,6 +17,7 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
+        new ForceCaseSensitivityPlugin(),
         // new webpack.optimize.UglifyJsPlugin({
         //     sourceMap: false,
         //     mangle: false

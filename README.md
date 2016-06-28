@@ -1,5 +1,6 @@
 # react-component
 
+[![Build Status](https://travis-ci.org/jerryshew/react-component.svg?branch=master)](https://travis-ci.org/jerryshew/react-component)
 [![Downloads](https://img.shields.io/npm/dt/react-ui-component.svg)](https://www.npmjs.com/package/react-ui-component)
 [![Version](https://img.shields.io/npm/v/react-ui-component.svg)](https://www.npmjs.com/package/react-ui-component)
 
@@ -72,13 +73,12 @@ npm install https://github.com/jerryshew/react-component
 simply import as a module, then use it. just like:
 
 ```javascript
-import {Tooltip} from 'react-ui-component';
+import {Tooltip} from 'react-ui-component'
 ```
 
-or CMD way:
-
+or  
 ```javascript
-const Tooltip = require('react-ui-component')
+const Tooltip = require('react-ui-component').Tooltip
 ```
 
 > hint: need to write css.

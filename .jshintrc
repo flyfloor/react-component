@@ -1,6 +1,6 @@
 {
   "esnext": true,
-  "asi": false,
+  "asi": true,
   "boss": false,
   "camelcase": false,
   "curly": false,

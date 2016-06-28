@@ -1,3 +1,5 @@
+import {isType} from './typeCheck';
+
 const MAX_HOUR = 23;
 const MAX_MIN = 59;
 const MAX_SEC = MAX_MIN;
@@ -5,7 +7,8 @@ const MAX_SEC = MAX_MIN;
 const timeStr2Obj = (value='00:00:00', options = {
     simple: false, 
 }) => {
-    let arr = value.split(':').slice(0, 3);
+    value = isType(value, 'String') ? value : '00:00:00'
+    let arr = value.split(':').slice(0, 3)
     let new_arr = [];
 
     for (let i = 0; i < arr.length; i++) {

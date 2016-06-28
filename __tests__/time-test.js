@@ -1,4 +1,5 @@
 jest.unmock('../component/util/time');
+jest.unmock('../component/util/typeCheck');
 const {timeStr2Obj} = require('../component/util/time');
 
 describe('timeStr2Obj', () => {

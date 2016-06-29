@@ -113,12 +113,12 @@ const Calender = React.createClass({
                             </div>
                             <ul>
                                 {MONTH_LABEL.map((label, index) => {
-                                    return <li key={`month-picker-${index + 1}`}>
+                                    return (<li key={`month-picker-${index + 1}`}>
                                                 <a href="javascript:;" 
                                                     onClick={() => this.handleMonthPickerClick(index + 1)}>
                                                     {label}
                                                 </a>
-                                            </li>
+                                            </li>)
                                 })}
                             </ul>
                         </div>

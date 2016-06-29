@@ -61,16 +61,46 @@ export default class TabDemo extends React.Component {
         return (
             <div>
                 <h3>Tab</h3>
-                <ul className="two">
+                <ul>
                     <li>
                         <h4>Default tab</h4>
                         <p>this will change next tab</p>
                         {this.formatTab({ onChange: this.displayChange.bind(this)})}
+                        <pre>
+                            <code>
+{`
+    <Tab onChange={onChange}>
+        <Item index='0' title={<p>first</p>}>
+            <h4>The first tab content</h4>
+        </Item>
+        ...
+        <Item index='2' title={<p>third</p>}>
+            <h4>The third tab content</h4>
+            <Tab>
+                <Item index='4' title={<p>first</p>}>
+                    <p>React.js is pretty awesome</p>
+                </Item>
+                ...
+            </Tab>
+        </Item>
+    </Tab>
+`}                                
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Tab with given current tab</h4>
                         <p>your selected tab is {this.state.index}</p>
                         {this.formatTab({current: this.state.index, onChange: this.displayChange.bind(this) })}
+                        <pre>
+                            <code>
+{`
+    <Tab current={current} onChange={onChange}>
+        ...
+    </Tab>
+`}                            
+                            </code>
+                        </pre>
                     </li>
                 </ul>
             </div>

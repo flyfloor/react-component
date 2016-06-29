@@ -20,13 +20,13 @@
         visibility: hidden;
         >._wrap {
             .__transition;
-            background: @white;
+            background-color: @white;
             border: 1px solid @gray_b;
             opacity: 0;
-            -webkit-transform: scale(0.7);
-            -ms-transform: scale(0.7);
-            -o-transform: scale(0.7);
-            transform: scale(0.7);
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transform: scale(1.1);
         }
 
         ._title {
@@ -62,13 +62,13 @@
         left: 0;
         right: 0;
         z-index: 100;
-        background: transparent;
+        opacity: 0;
+        background-color: rgba(0,0,0,.7);
     }
     &._show {
         ._body {
             visibility: visible;
             >._wrap {
-                .__transition;
                 -webkit-transform: scale(1);
                 -ms-transform: scale(1);
                 -o-transform: scale(1);
@@ -77,9 +77,8 @@
             }
         }
         ._overlay {
-            .__transition;
+            opacity: 1;
             visibility: visible;
-            background: rgba(0,0,0,.5);
         }
     }
     &._force {
@@ -89,7 +88,7 @@
             }
         }
         ._overlay {
-            background: rgba(255,255,255,.9);
+            background-color: rgba(255,255,255,.9);
         }
     }
 }

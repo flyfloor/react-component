@@ -62,6 +62,15 @@ export default class ModalDemo extends React.Component {
                         <Modal title={<h4>Confirm deleted</h4>} onClose={this.handleClose.bind(this)} display={this.state.display}>
                             {content}
                         </Modal>
+                        <pre>
+                            <code>
+{`
+<Modal title={<h4>Confirm deleted</h4>} onClose={handleClose} display={display}>
+    ...
+</Modal>
+`}                                
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Modal with confirm, cancel action</h4>
@@ -70,6 +79,17 @@ export default class ModalDemo extends React.Component {
                             onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
                             {content}
                         </Modal>
+                        <pre>
+                            <code>
+{`
+<a href="#" onClick={this.setState({display: !this.state.display});}>click</a>
+<Modal display={display} onClose={handleClose} 
+    onConfirm={handleConfirm} onCancel={handleCancel}>
+    {content}
+</Modal>
+`}                                 
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Modal with only confirm action</h4>
@@ -78,6 +98,17 @@ export default class ModalDemo extends React.Component {
                             onConfirm={this.handleConfirm1.bind(this)} closeIcon={<p>关闭</p>}>
                             {content}
                         </Modal>
+                        <pre>
+                            <code>
+{`
+<a href="#" onClick={this.setState({display: !this.state.display});}>click</a>
+<Modal display={display} onClose={handleClose}
+    onConfirm={handleConfirm} closeIcon={<p>关闭</p>}>
+    {content}
+</Modal>   
+`}                                
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Modal force to close</h4>
@@ -86,6 +117,17 @@ export default class ModalDemo extends React.Component {
                             onConfirm={this.handleConfirm1.bind(this)}>
                             {content}
                         </Modal>
+                        <pre>
+                            <code>
+{`
+<a href="#" onClick={this.setState({display: !this.state.display});}>click</a>
+<Modal display={display} force={true} onClose={handleClose}
+    onConfirm={handleConfirm}>
+    {content}
+</Modal>
+`}                                
+                            </code>
+                        </pre>
                     </li>
                 </ol>
             </div>

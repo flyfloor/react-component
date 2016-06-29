@@ -75,11 +75,17 @@ simply import as a module, then use it. just like:
 import {Tooltip} from 'react-ui-component';
 ```
 
-or CMD way:
+to use basic css:  
 
-```javascript
-const Tooltip = require('react-ui-component')
+```
+import style from 'react-ui-component/css/all.less';
+```
+or just use simple component css:
+
+```
+import pagination_css from 'react-ui-component/css/pagination.less'
 ```
 
-> hint: need to write css.
+
+> hint: only have basic style, need to write custom styles.
 

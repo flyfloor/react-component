@@ -26,24 +26,76 @@ export default class CarouselDemo extends React.Component {
                     <li>
                         <h4>Default carousel</h4>
                         <Carousel>{imgNodes}</Carousel>
+                        <pre>
+                            <code>
+                                {'<Carousel>'}
+                                <br/>
+                                {'  <img key={1} src=""/>'}
+                                <br/>
+                                {'  <img key={2} src=""/>'}
+                                <br/>
+                                {'  ...'}
+                                <br/>
+                                {'</Carousel>'}
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Auto play carousel</h4>
                         <Carousel autoPlay={true} delay={3000}>
                             {imgNodes}
                         </Carousel>
+                        <pre>
+                            <code>
+                                {'<Carousel> autoPlay={true} delay={3000}>'}
+                                <br/>
+                                {'  <img key={1} src=""/>'}
+                                <br/>
+                                {'  <img key={2} src=""/>'}
+                                <br/>
+                                {'  ...'}
+                                <br/>
+                                {'</Carousel>'}
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Carousel with control arrows</h4>
                         <Carousel showArrow={true}>
                             {imgNodes}
                         </Carousel>
+                        <pre>
+                            <code>
+                                {'<Carousel> showArrow={true}>'}
+                                <br/>
+                                {'  <img key={1} src=""/>'}
+                                <br/>
+                                {'  <img key={2} src=""/>'}
+                                <br/>
+                                {'  ...'}
+                                <br/>
+                                {'</Carousel>'}
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Carousel custom control arrows</h4>
                         <Carousel prev={prev} next={next} showArrow={true}>
                             {imgNodes}
                         </Carousel>
+                        <pre>
+                            <code>
+                                {'<Carousel> prev={<h4>&lt;&lt;</h4>}\n\t next={<h4>&gt;&gt;</h4>}\n\t showArrow={true}>'}
+                                <br/>
+                                {'  <img key={1} src=""/>'}
+                                <br/>
+                                {'  <img key={2} src=""/>'}
+                                <br/>
+                                {'  ...'}
+                                <br/>
+                                {'</Carousel>'}
+                            </code>
+                        </pre>
                     </li>
                 </ul>
             </div>

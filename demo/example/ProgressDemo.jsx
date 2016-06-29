@@ -41,28 +41,65 @@ export default class ProgressDemo extends Component {
                             <span>  </span>
                             <a href="javascript:;" onClick={this.handlePlus.bind(this)}>+</a>
                         </h2>
+                        <pre>
+                            <code>
+                                {`<Progress value={value}/>`}                                
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Animated progress</h4>
                         <Progress value={40} status="active"/>
+                        <pre>
+                            <code>
+                                {`<Progress value={40} status="active"/>`}   
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Completed progress</h4>
                         <Progress value={100}/>
+                        <pre>
+                            <code>
+                                {`<Progress value={100}/>`}
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Failed progress</h4>
                         <Progress value={30} status="failed"/>
+                        <pre>
+                            <code>
+                                {`<Progress value={30} status="failed"/>`}
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Disabled progress</h4>
                         <Progress value={30} disabled={true}/>
+                        <pre>
+                            <code>
+                                {`<Progress value={30} disabled={true}/>`}
+                            </code>
+                        </pre>
                     </li>
                     <li>
                         <h4>Yield context</h4>
                         <Progress value={30}>
                             <span>this progress now is <span style={{'color': 'yellow'}}>30%</span></span>
                         </Progress>
+                        <pre>
+                            <code>
+{`
+<Progress value={value}>
+    this progress now is 
+    <span style={{'color': 'yellow'}}>
+        {value}
+    </span>
+</Progress>
+`}                                
+                            </code>
+                        </pre>
                     </li>
                 </ol>
             </div>

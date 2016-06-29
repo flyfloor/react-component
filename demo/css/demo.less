@@ -1,24 +1,7 @@
-@import url('meta');
-@import url('share');
-
-@import url('reset.less');
-@import url('checkbox.less');
-@import url('carousel.less');
-@import url('carousel_demo.less');
-@import url('popup.less');
-@import url('dropdown.less');
-@import url("menu.less");
+@import url('../../css/all.less');
 @import url('menu_demo.less');
-@import url('modal.less');
-@import url('pin.less');
+@import url('carousel_demo.less');
 @import url('pin_demo.less');
-@import url('tab.less');
-@import url('slide-menu.less');
-@import url('pagination.less');
-@import url('time-picker.less');
-@import url('date-picker.less');
-@import url('progress.less');
-@import url('message.less');
 
 a {
     color: @blue;
@@ -27,6 +10,10 @@ a {
 body {
     font-size: 15px;
     line-height: 22px;
+}
+
+ul {
+    padding: 0;
 }
 
 .table {
@@ -134,5 +121,24 @@ ul {
                 }
             }
         }
+    }
+}
+
+pre {
+    margin: 10px 0;
+    padding: 10px;
+    background: @white_a;
+    white-space: pre;
+    overflow-y: hidden;
+    display: block;
+    overflow-x: auto;
+    code {
+        font-family: Monaco monospace;
+        font-size: 12px;
+        letter-spacing: 1px;
+        line-height: 20px;
+        overflow-y: hidden;
+        display: block;
+        color: @green;
     }
 }

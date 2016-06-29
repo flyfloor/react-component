@@ -1,5 +1,6 @@
 # react-component
 
+[![Build Status](https://travis-ci.org/jerryshew/react-component.svg?branch=master)](https://travis-ci.org/jerryshew/react-component)
 [![Downloads](https://img.shields.io/npm/dt/react-ui-component.svg)](https://www.npmjs.com/package/react-ui-component)
 [![Version](https://img.shields.io/npm/v/react-ui-component.svg)](https://www.npmjs.com/package/react-ui-component)
 
@@ -54,38 +55,45 @@ npm install https://github.com/jerryshew/react-component
 * ES6 syntax
 * Webpack
 
-#### the hierarchy
+#### Directory hierarchy
 
 ```
+├── __test__ // test
 ├── component
 │   ├── mixin
 │   ├── util
+│   ...
+├── lib // babel transformed dist
 ├── css //basic style of component demos
-├── demo.html // demo page
-├── dist 
-├── main //include demo component
+├── index.html // demo page
+├── demo // demo page
+├── dist // demo build dist 
 
 ```
 
 #### how to use  
 
-simply import as a module, then use it. just like:
+simply import as a module. just like:
 
 ```javascript
-import {Tooltip} from 'react-ui-component';
+import {Tooltip} from 'react-ui-component'
 ```
 
-to use basic css:  
+or  
+```javascript
+const Tooltip = require('react-ui-component').Tooltip
+```
+
+#### to use basic css:  
 
 ```
 import style from 'react-ui-component/css/all.less';
 ```
-or just use simple component css:
+or just use single component css:
 
 ```
 import pagination_css from 'react-ui-component/css/pagination.less'
 ```
-
 
 > hint: only have basic style, need to write custom styles.
 

@@ -1,6 +1,5 @@
 const React = require('react')
 const PropTypes = React.PropTypes
-const ReactDOM = require('react-dom')
 
 const Notice = React.createClass({
     propTypes: {
@@ -15,7 +14,7 @@ const Notice = React.createClass({
             content: null,
             delay: 5000,
             closeIcon: <i>x</i>,
-            onClose(){},
+            onClose(){return},
         }
     },
 

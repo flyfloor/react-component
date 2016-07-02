@@ -6,7 +6,7 @@ let __key = 0
 
 const generateNoticeKey = () => {
     let str = `notice_${__key}`
-    __key ++
+    __key += 1
     return str
 }
 
@@ -19,7 +19,7 @@ const NoticeCenter = React.createClass({
 
     addNotice(notice){
         notice.key = generateNoticeKey()
-        this.setState((state, props) => {
+        this.setState((state) => {
             return {
                 notices: state.notices.concat(notice)
             }
@@ -27,7 +27,7 @@ const NoticeCenter = React.createClass({
     },
 
     removeNotice(key){
-        this.setState((state, props) => {
+        this.setState((state) => {
             return {
                 notices: state.notices.filter(item => item.key !== key)
             }
@@ -40,7 +40,7 @@ const NoticeCenter = React.createClass({
             <div>
                 <ReactCssTransitionGroup className="ui notice-center" transitionName="notice"
                     transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-                    {notices.map((item, i) => {
+                    {notices.map((item) => {
                         return <Notice key={item.key} onClose={() => this.removeNotice(item.key)} onClick={item.onClick}
                             content={item.content} delay={item.delay} title={item.title}/>
                     })}

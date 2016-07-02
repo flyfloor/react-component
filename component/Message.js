@@ -1,7 +1,7 @@
 const React = require('react');
 
 const Message = React.createClass({
-    delayJob: null,
+    _timer: null,
 
     propTypes: {
         delay: React.PropTypes.number,
@@ -34,16 +34,23 @@ const Message = React.createClass({
         });
         
         if (!display ) {
-            this.delayJob = setTimeout(() => this.setState({ display: false}), delay);
+            this._timer = setTimeout(() => this.setState({ display: false}), delay);
         } else {
-            clearTimeout(this.delayJob);
+            this.clearTimer()
+        }
+    },
+
+    clearTimer(){
+        if (this._timer) {
+            clearTimeout(this._timer)
+            this._timer = null
         }
     },
 
     handleClose(){
         const {onClose} = this.props;
         onClose();
-        clearTimeout(this.delayJob);
+        this.clearTimer()
         this.setState({
             display: false
         });

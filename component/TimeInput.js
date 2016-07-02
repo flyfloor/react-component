@@ -75,7 +75,7 @@ const TimeInput = React.createClass({
         return (
             <div className="ui time-input">
                 <input className="_input" onClick={this.refreshValue} 
-                    onBlur={this.refreshValue} defaultValue={value} value={value} 
+                    onBlur={this.refreshValue} value={value} 
                     onChange={this.handleInputChange}/>
             </div>
         );

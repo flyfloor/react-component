@@ -75,7 +75,7 @@ export default class MenuDemo extends React.Component {
     render() {
 
         const style = {
-            'width': '200'
+            'width': '200px'
         }
 
         return (

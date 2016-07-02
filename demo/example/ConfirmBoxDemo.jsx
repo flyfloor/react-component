@@ -61,7 +61,7 @@ export default class ConfirmBoxDemo extends React.Component {
                         <ul>
                             <li>
                                 <ConfirmBox content={<h2>Huge text</h2>} position='left'>
-                                    <div style={{'border': '1px solid #eee', 'padding': '20', 'background': '#f8f8f8'}}>
+                                    <div style={{'border': '1px solid #eee', 'padding': '20px', 'background': '#f8f8f8'}}>
                                         <h3>click to show confirm at left</h3>
                                         <p>this is the content</p>
                                     </div>

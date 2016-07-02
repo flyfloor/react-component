@@ -3,7 +3,7 @@ import {CheckBox} from "./index.js";
 
 export default class CheckBoxDemo extends React.Component {
     handleChange(e){
-        console.log(e.target.checked);
+        console.log('changed', e.target.checked);
     }
     render() {
         return (

@@ -28,7 +28,7 @@ export default class TooltipDemo extends React.Component {
                         <ul>
                             <li>
                                 <Tooltip content={<h2>huge text</h2>} position='left'>
-                                    <div style={{'border': '1px solid #eee', 'padding': '20', 'background': '#f8f8f8'}}>
+                                    <div style={{'border': '1px solid #eee', 'padding': '20px', 'background': '#f8f8f8'}}>
                                         <h3>hover to show tooltip at left</h3>
                                         <p>this is the content</p>
                                     </div>

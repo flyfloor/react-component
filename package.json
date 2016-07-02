@@ -61,7 +61,7 @@
   },
   "homepage": "https://github.com/jerryshew/react-component",
   "dependencies": {
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2"
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0"
   }
 }

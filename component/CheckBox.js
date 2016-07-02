@@ -16,6 +16,7 @@ export const CheckBox = React.createClass({
     getDefaultProps() {
         return {
             className: '',
+            checked: false,
         };
     },
 

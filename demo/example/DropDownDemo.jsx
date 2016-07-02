@@ -36,7 +36,7 @@ export default class DropDownDemo extends React.Component {
                     <li>
                         <h4>Default dropdown</h4>
                         <p>you selected option value is <span className="gap-word">{this.state.value}</span></p>
-                        <div style={{'width': '280'}}>
+                        <div style={{'width': '280px'}}>
                             <DropDown options={options} labelName='name' valueName='value' 
                                 onChange={this.displayChange.bind(this, 'value')} />
                         </div>
@@ -50,7 +50,7 @@ export default class DropDownDemo extends React.Component {
                     <li>
                         <h4>Dropdown with default selected</h4>
                         <p>this will change value of next dropdown</p>
-                        <div style={{'width': '280'}}>
+                        <div style={{'width': '280px'}}>
                             <DropDown options={options} labelName='name' valueName='value' 
                                 onChange={this.displayChange.bind(this, 'value1')} defaultSelected={true}/>
                         </div>
@@ -65,7 +65,7 @@ export default class DropDownDemo extends React.Component {
                     <li>
                         <h4>Dropdown received value</h4>
                         <p>will not change previous value</p>
-                        <div style={{'width': '280'}}>
+                        <div style={{'width': '280px'}}>
                             <DropDown options={options} labelName='name' value={this.state.value1} 
                                 onChange={this.displayChange.bind(this, 'value1')}
                                 defaultSelected={true} valueName='value'/>
@@ -83,7 +83,7 @@ export default class DropDownDemo extends React.Component {
                     <li>
                         <h4>Dropdown with search field</h4>
                         <p>this will change value of prev dropdown</p>
-                        <div style={{'width': '280'}}>
+                        <div style={{'width': '280px'}}>
                             <DropDown options={options} labelName='name' 
                                 onChange={this.displayChange.bind(this, 'value1')}
                                 valueName='value' searchable={true}/>
@@ -101,7 +101,7 @@ export default class DropDownDemo extends React.Component {
                     <li>
                         <h4>Multiple dropdown</h4>
                         <p>selected value is <span className="gap-word">{this.state.value2}</span></p>
-                        <div style={{'width': '280'}}>
+                        <div style={{'width': '280px'}}>
                             <DropDown options={options} labelName='name' 
                                 valueName='value' multi={true} value={this.state.value2}
                                 onChange={this.displayChange.bind(this, 'value2')}/>
@@ -119,7 +119,7 @@ export default class DropDownDemo extends React.Component {
                     <li>
                         <h4>Multiple dropdown</h4>
                         <p>change previous value</p>
-                        <div style={{'width': '280'}}>
+                        <div style={{'width': '280px'}}>
                             <DropDown options={options} labelName='name' 
                                 value={this.state.value3} valueName='value' multi={true}
                                 onChange={this.displayChange.bind(this, 'value2')}/>
@@ -137,12 +137,12 @@ export default class DropDownDemo extends React.Component {
                     <li>
                         <h4>Yield children</h4>
                         <p>value is <span className="gap-word">{this.state.value5}</span></p>
-                        <div style={{'width': '280'}}>
+                        <div style={{'width': '280px'}}>
                             <DropDown multi={true} labelName="name" valueName="value"
                                 value={this.state.value4} onChange={this.displayChange.bind(this, 'value5')}>
                                 <Item value={1} name="apple">
                                     <p>hate the show, love the animal</p>
-                                    <img style={{ "width": "100"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
+                                    <img style={{ "width": "100px"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
                                 </Item>
                                 <Item value={2} name="banana">
                                     <h2>this is banana</h2>
@@ -165,7 +165,7 @@ export default class DropDownDemo extends React.Component {
     value={value} onChange={displayChange}>
     <Item value={1} name="apple">
         <p>hate the show, love the animal</p>
-        <img style={{ "width": "100"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
+        <img style={{ "width": "100px"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
     </Item>
     ...
 </DropDown>  

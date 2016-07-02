@@ -1,7 +1,7 @@
 ###basic
 
-+ message
++ ~~message~~
 
-+ progress
++ ~~progress~~
 
 ###inhence

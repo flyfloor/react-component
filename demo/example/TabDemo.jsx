@@ -16,7 +16,7 @@ export default class TabDemo extends React.Component {
 
     formatTab({current=null, onChange=null}){
         return (
-            <Tab onChange={onChange} current={current} style={{'width': '350'}}>
+            <Tab onChange={onChange} current={current} style={{'width': '350px'}}>
                 <Item index='0' title={<p>first</p>}>
                     <h4>The first tab content</h4>
                     <p>React.js is pretty awesome</p>

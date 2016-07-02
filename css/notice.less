@@ -9,29 +9,44 @@
     right: 10px;
     z-index: 100;
     >.notice {
+        position: relative;
         display: block;
         width: @_width;
         background: @gray_c;
         border: 1px solid @gray_b;
         padding: 5px 10px;
         margin-bottom: 10px;
+        ._title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        ._close {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            cursor: pointer;
+        }
     }
 
     .notice-enter {
-      opacity: 0.01;
+        transform: translate3d(@_width,0,0);
+        opacity: 0.01;
     }
 
     .notice-enter.notice-enter-active {
-      opacity: 1;
-      transition: opacity 500ms ease-in;
+        opacity: 1;
+        transform: translate3d(0,0,0);
+        transition: all 500ms @motion;
     }
 
     .notice-leave {
-      opacity: 1;
+        opacity: 1;
+        transform: translate3d(0,0,0);
     }
 
     .notice-leave.notice-leave-active {
-      opacity: 0.01;
-      transition: opacity 300ms ease-in;
+        opacity: 0.01;
+        transform: translate3d(@_width,0,0);
+        transition: all .3s @motion;
     }
 }

@@ -58,7 +58,7 @@ export default class ModalDemo extends React.Component {
                 <ol>
                     <li>
                         <h4>Default modal</h4>
-                        <a href="javascript:;" onClick={this.showModal.bind(this, 'display')}>click</a>
+                        <button onClick={this.showModal.bind(this, 'display')}>click</button>
                         <Modal title={<h4>Confirm deleted</h4>} onClose={this.handleClose.bind(this)} display={this.state.display}>
                             {content}
                         </Modal>
@@ -74,7 +74,7 @@ export default class ModalDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Modal with confirm, cancel action</h4>
-                        <a href="javascript:;" onClick={this.showModal.bind(this, 'display1')}>click</a>
+                        <button onClick={this.showModal.bind(this, 'display1')}>click</button>
                         <Modal display={this.state.display1} onClose={this.handleClose.bind(this)} 
                             onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
                             {content}
@@ -93,7 +93,7 @@ export default class ModalDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Modal with only confirm action</h4>
-                        <a href="javascript:;" onClick={this.showModal.bind(this, 'display2')}>click</a>
+                        <button onClick={this.showModal.bind(this, 'display2')}>click</button>
                         <Modal display={this.state.display2} onClose={this.handleClose.bind(this)}
                             onConfirm={this.handleConfirm1.bind(this)} closeIcon={<p>关闭</p>}>
                             {content}
@@ -112,7 +112,7 @@ export default class ModalDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Modal force to close</h4>
-                        <a href="javascript:;" onClick={this.showModal.bind(this, 'display3')}>click</a>
+                        <button onClick={this.showModal.bind(this, 'display3')}>click</button>
                         <Modal display={this.state.display3} force={true} onClose={this.handleClose.bind(this)}
                             onConfirm={this.handleConfirm1.bind(this)}>
                             {content}

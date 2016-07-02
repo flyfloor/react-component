@@ -8,16 +8,22 @@ const handleNoticeClick = (e) => {
 export default class NoticeDemo extends Component {
     showNotice(type = ''){
         let notice = {
-            content: <p>{type+' content'}</p>,
-            title: 'title' + type,
+            title: 'Notice: ' + type,
+            content: <div>
+                        <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. 
+                    </div>,
         }
         if (type === 'delay') {
-            notice.delay = 2000
+            notice.delay = 1000
         }
 
-        if (type === 'event') {
+        if (type === 'onClick') {
             notice.onClick = handleNoticeClick
         }
+        if (type === 'manually') {
+            notice.delay = 0;
+        }
+
         let node = this.refs.ncNode
         node.addNotice(notice)
     }
@@ -28,15 +34,19 @@ export default class NoticeDemo extends Component {
                 <ol>
                     <li>
                         <h4>Show Notice</h4>
-                        <button onClick={() => this.showNotice()}>show notice</button>
+                        <button onClick={() => this.showNotice('normal')}>click</button>
                     </li>
                     <li>
-                        <h4>Hotice Delay</h4>
-                        <button onClick={() => this.showNotice('delay')}>show notice</button>
+                        <h4>Notice Delay time</h4>
+                        <button onClick={() => this.showNotice('delay')}>delay: 1000 ms</button>
                     </li>
                     <li>
-                        <h4>Event</h4>
-                        <button onClick={() => this.showNotice('event')}>show notice</button>
+                        <h4>Manually close</h4>
+                        <button onClick={() => this.showNotice('manually')}>click</button>
+                    </li>
+                    <li>
+                        <h4>onClick</h4>
+                        <button onClick={() => this.showNotice('onClick')}>click</button>
                     </li>
                 </ol>
                 <NoticeCenter ref="ncNode"/>

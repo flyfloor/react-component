@@ -6,14 +6,15 @@ const Notice = React.createClass({
     propTypes: {
         delay: PropTypes.number,
         content: PropTypes.element,
-        onClose: PropTypes.func.isRequired
+        onClose: PropTypes.func.isRequired,
+        closeIcon: PropTypes.element,
     },
 
     getDefaultProps() {
         return {
-            title: '',
-            content: <div></div>,
-            delay: 3000,
+            content: null,
+            delay: 5000,
+            closeIcon: <i>x</i>,
             onClose(){},
         }
     },
@@ -40,11 +41,14 @@ const Notice = React.createClass({
     },
 
     render() {
-        const {title, content} = this.props
+        const {title, content, closeIcon, onClose} = this.props
         return (
             <div className="ui notice">
-                <div className="_title">{title}</div>
+                {title 
+                    ? <div className="_title">{title}</div>
+                    : null}
                 <div className="_content">{content}</div>
+                <div className="_close" onClick={onClose}>{closeIcon}</div>
             </div>
         );
     }

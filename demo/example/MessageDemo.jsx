@@ -11,13 +11,13 @@ export default class MessageDemo extends Component {
                     <li>
                         <h4>Default message</h4>
                         <Message content={content}>
-                            <a href="javascript:;">click</a>
+                            <button>click</button>
                         </Message>
                         <pre>
                             <code>
 {`
 <Message content={<p>message</p>}>
-    <a href="javascript:;">click</a>
+    <button>click</button>
 </Message>
 `}                                
                             </code>
@@ -28,13 +28,13 @@ export default class MessageDemo extends Component {
                         <ul>
                             <li>
                                 <Message position='center' content={content}>
-                                    <a href="javascript:;">center</a>
+                                    <button>center</button>
                                 </Message>
                                 <pre>
                                     <code>
 {`
 <Message position='center' content={<p>message</p>}>
-    <a href="javascript:;">center</a>
+    <button>center</button>
 </Message>
 `}                                        
                                     </code>
@@ -42,13 +42,13 @@ export default class MessageDemo extends Component {
                             </li>
                             <li>
                                 <Message content={content} position='bottom' delay={2000}>
-                                    <a href="javascript:;">bottom</a>
+                                    <button>bottom</button>
                                 </Message>
                                 <pre>
                                     <code>
 {`
 <Message position='bottom' content={<p>message</p>} delay={2000}>
-    <a href="javascript:;">bottom</a>
+    <button>bottom</button>
 </Message>
 `}                                             
                                     </code>
@@ -59,13 +59,13 @@ export default class MessageDemo extends Component {
                     <li>
                         <h4>Delay time</h4>
                         <Message content={content} delay={2000}>
-                            <a href="javascript:;">delay</a>
+                            <button>delay</button>
                         </Message>
                         <pre>
                             <code>
 {`
 <Message content={content} delay={2000}>
-    <a href="javascript:;">delay</a>
+    <button>delay</button>
 </Message>
 `}                                   
                             </code>
@@ -75,14 +75,14 @@ export default class MessageDemo extends Component {
                         <h4>OnClose event</h4>
                         <Message content={content} closeNode={<span>关闭</span>} 
                             onClose={() => alert('message closed')}>
-                            <a href="javascript:;">click</a>
+                            <button>click</button>
                         </Message>
                         <pre>
                             <code>
 {`
 <Message closeNode={<span>关闭</span>} content={<p>message</p>}
     onClose={onClose}>
-    <a href="javascript:;">center</a>
+    <button>center</button>
 </Message>
 `}                                     
                             </code>

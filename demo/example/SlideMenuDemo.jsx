@@ -54,7 +54,7 @@ export default class SlideMenuDemo extends React.Component {
                 <ol>
                     <li>
                         <h4>Default slidemenu</h4>
-                        <a href="javascript:;" onClick={() => this.handleOpenSlide('slide')}>click</a>
+                        <button onClick={() => this.handleOpenSlide('slide')}>click</button>
                         <SlideMenu display={this.state.slide} onClose={this.handleAllSlideClose.bind(this)}>
                             {contentNode}
                         </SlideMenu>
@@ -70,7 +70,7 @@ export default class SlideMenuDemo extends React.Component {
                     </li>
                     <li>
                         <h4>slide menu with position</h4>
-                        <a href="javascript:;" onClick={() => this.handleOpenSlide('positionLeft')}>left</a>
+                        <button onClick={() => this.handleOpenSlide('positionLeft')}>left</button>
                         <SlideMenu position="left" display={this.state.positionLeft} onClose={this.handleAllSlideClose.bind(this)}>
                             {contentNode}
                         </SlideMenu>
@@ -83,7 +83,7 @@ export default class SlideMenuDemo extends React.Component {
 `}                            
                             </code>
                         </pre>
-                        <a href="javascript:;" onClick={() => this.handleOpenSlide('positionRight')}>right</a>
+                        <button onClick={() => this.handleOpenSlide('positionRight')}>right</button>
                         <SlideMenu position="right" display={this.state.positionRight} onClose={this.handleAllSlideClose.bind(this)}>
                             {contentNode}
                         </SlideMenu>
@@ -96,7 +96,7 @@ export default class SlideMenuDemo extends React.Component {
 `}                                 
                             </code>
                         </pre>
-                        <a href="javascript:;" onClick={() => this.handleOpenSlide('positionTop')}>top</a>
+                        <button onClick={() => this.handleOpenSlide('positionTop')}>top</button>
                         <SlideMenu position="top" display={this.state.positionTop} onClose={this.handleAllSlideClose.bind(this)}>
                             {contentNode}
                         </SlideMenu>
@@ -109,7 +109,7 @@ export default class SlideMenuDemo extends React.Component {
 `}                                     
                             </code>
                         </pre>
-                        <a href="javascript:;" onClick={() => this.handleOpenSlide('positionBottom')}>bottom</a>
+                        <button onClick={() => this.handleOpenSlide('positionBottom')}>bottom</button>
                         <SlideMenu position="bottom" display={this.state.positionBottom} onClose={this.handleAllSlideClose.bind(this)}>
                             {contentNode}
                         </SlideMenu>
@@ -125,7 +125,7 @@ export default class SlideMenuDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Width</h4>
-                        <a href="javascript:;" onClick={() => this.handleOpenSlide('position1')}>click</a>
+                        <button onClick={() => this.handleOpenSlide('position1')}>click</button>
                         <SlideMenu display={this.state.position1} width={500} onClose={this.handleAllSlideClose.bind(this)}>
                             {contentNode}
                             <h4 style={{'textAlign': 'center'}}>width: 500px</h4>
@@ -142,13 +142,14 @@ export default class SlideMenuDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Close slidemenu action</h4>
-                        <a href="javascript:;" onClick={() => this.handleOpenSlide('slide1')}>click</a>
+                        <button onClick={() => this.handleOpenSlide('slide1')}>click</button>
                         <SlideMenu display={this.state.slide1} onClose={this.handleAllSlideClose.bind(this)}>
                             {contentNode}
                             <div style={{'padding': '10px'}}>
                                 <h3>
-                                    <a href="javascript:;" onClick={this.handleCloseSlide1.bind(this)} 
-                                    style={{'color': 'red'}}>Click to close</a>
+                                    <a href="javascript:;" onClick={this.handleCloseSlide1.bind(this)} style={{'color': 'red'}}>
+                                        Click to close
+                                    </a>
                                 </h3>
                             </div>
                         </SlideMenu>
@@ -157,7 +158,7 @@ export default class SlideMenuDemo extends React.Component {
 {`
 <SlideMenu width={500} display={display} onClose={handleClose}>
     ...
-    <a href="javascript:;" onClick={this.setState({display: false});}
+    <a href="#" onClick={this.setState({display: false});}>click to close</a>
 </SlideMenu>
 `}                                    
                             </code>

@@ -11,13 +11,13 @@ export default class TooltipDemo extends React.Component {
                     <li>
                         <h4>Default tooltip</h4>
                         <Tooltip content={<p>Some component,build with ReactJs</p>}>
-                            <a href='javascript:;'>hover</a>
+                            <button>hover</button>
                         </Tooltip>
                         <pre>
                             <code>
 {`
 <Tooltip content={<p>Some component,build with ReactJs</p>}>
-    <a href='#'>hover</a>
+    <button>hover</button>
 </Tooltip>
 `}                                
                             </code>
@@ -45,7 +45,7 @@ export default class TooltipDemo extends React.Component {
                             </li>
                             <li>
                                 <Tooltip content={contentNode} position='right'>
-                                    <a href='javascript:;'>right</a>
+                                    <button>hover</button>
                                 </Tooltip>
                                 <pre>
                                     <code>
@@ -59,7 +59,7 @@ export default class TooltipDemo extends React.Component {
                             </li>
                             <li>
                                 <Tooltip content={contentNode} position='top'>
-                                    <a href='javascript:;'>top</a>
+                                    <button>hover</button>
                                 </Tooltip>
                                 <pre>
                                     <code>
@@ -73,7 +73,7 @@ export default class TooltipDemo extends React.Component {
                             </li>
                             <li>
                                 <Tooltip content={contentNode} position='bottom'>
-                                    <a href='javascript:;'>bottom</a>
+                                    <button>hover</button>
                                 </Tooltip>
                                 <pre>
                                     <code>
@@ -90,7 +90,7 @@ export default class TooltipDemo extends React.Component {
                     <li>
                         <h4>Click mode</h4>
                         <Tooltip content={contentNode} mode="click">
-                            <a href='javascript:;'>click</a>
+                            <button>click</button>
                         </Tooltip>
                         <pre>
                             <code>

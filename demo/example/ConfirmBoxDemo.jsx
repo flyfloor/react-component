@@ -21,13 +21,13 @@ export default class ConfirmBoxDemo extends React.Component {
                     <li>
                         <h4>Default confirm box</h4>
                         <ConfirmBox content={contentNode}>
-                            <a href='javascript:;'>click</a>
+                            <button>click</button>
                         </ConfirmBox>
                         <pre>
                             <code>
                                 {'<ConfirmBox content={<div><h1>title</h1><p>content</p></div>}>'}
                                 <br/>
-                                {'  <a href="#">click</a>'}
+                                {'  <button>click</button>'}
                                 <br/>
                                 {'</ConfirmBox>'}
                             </code>
@@ -39,7 +39,7 @@ export default class ConfirmBoxDemo extends React.Component {
                             confirmBtn={confirmBtn} onConfirm={this.handleConfirm.bind(this)} 
                             cancelBtn={cancelBtn}
                             onCancel={this.handleCancel.bind(this)}>
-                            <a href='javascript:;'>click</a>
+                            <button>click</button>
                         </ConfirmBox>
                         <pre>
                             <code>
@@ -50,7 +50,7 @@ export default class ConfirmBoxDemo extends React.Component {
     confirmBtn={confirmBtn} onConfirm={handleConfirm} 
     cancelBtn={cancelBtn}
     onCancel={handleCancel}>
-    <a href="#">click</a>
+    <button>click</button>
 </ConfirmBox>
 `}                        
                             </code>
@@ -83,13 +83,13 @@ export default class ConfirmBoxDemo extends React.Component {
                             </li>
                             <li>
                                 <ConfirmBox content={contentNode} position='right'>
-                                    <a href='javascript:;'>right</a>
+                                    <button>click</button>
                                 </ConfirmBox>
                                 <pre>
                                     <code>
 {`
 <ConfirmBox content={<h>text</h>} position='right'>
-    <a href="#">right</a>
+    <button>click</button>
 </ConfirmBox>
 `}
                                     </code>
@@ -97,13 +97,13 @@ export default class ConfirmBoxDemo extends React.Component {
                             </li>
                             <li>
                                 <ConfirmBox content={contentNode} position='top'>
-                                    <a href='javascript:;'>top</a>
+                                    <button>click</button>
                                 </ConfirmBox>
                                 <pre>
                                     <code>
 {`
 <ConfirmBox content={<h>text</h>} position='top'>
-    <a href="#">right</a>
+    <button>click</button>
 </ConfirmBox>
 `}                                
                                     </code>
@@ -111,13 +111,13 @@ export default class ConfirmBoxDemo extends React.Component {
                             </li>
                             <li>
                                 <ConfirmBox content={contentNode} position='bottom'>
-                                    <a href='javascript:;'>bottom</a>
+                                    <button>click</button>
                                 </ConfirmBox>
                                 <pre>
                                     <code>
 {`
 <ConfirmBox content={<h>text</h>} position='bottom'>
-    <a href="#">right</a>
+    <button>click</button>
 </ConfirmBox>
 `}                                
                                     </code>
@@ -128,13 +128,13 @@ export default class ConfirmBoxDemo extends React.Component {
                     <li>
                         <h4>Confirm box force to close</h4>
                         <ConfirmBox force={true} content={<p>force to close</p>}>
-                            <a href="javascript:;">force to close</a>
+                            <button>click</button>
                         </ConfirmBox>
                         <pre>
                             <code>
 {`
     <ConfirmBox force={true} content={<p>force to close</p>}>
-        <a href="#">force to close</a>
+        <button>click</button>
     </ConfirmBox>
 `}                               
                             </code>

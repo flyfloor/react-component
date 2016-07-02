@@ -4,11 +4,6 @@ import {Modal} from './index.js';
 export default class ModalDemo extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            display: false,
-            display1: false,
-            display2: false
-        };
     }
     
     handleConfirm(){
@@ -24,19 +19,13 @@ export default class ModalDemo extends React.Component {
         return true;
     }
 
-    showModal(stat){
-        this.setState({
-            [String(stat)]: true, 
-        });
+    openModal(ref){
+        const node = this.refs[ref]
+        node.open()
     }
 
     handleClose(){
-        this.setState({
-            display: false, 
-            display1: false, 
-            display2: false, 
-            display3: false
-        });
+        return confirm('close')
     }
 
     render() {
@@ -55,17 +44,21 @@ export default class ModalDemo extends React.Component {
         return (
             <div>
                 <h3>Modal</h3>
+                <pre>
+                    <code>onConfirm, onCancel, onClose need a return value(Boolean) to decide whether to close modal</code>
+                </pre>
                 <ol>
                     <li>
                         <h4>Default modal</h4>
-                        <button onClick={this.showModal.bind(this, 'display')}>click</button>
-                        <Modal title={<h4>Confirm deleted</h4>} onClose={this.handleClose.bind(this)} display={this.state.display}>
+                        <button onClick={this.openModal.bind(this, 'modal0')}>click</button>
+                        <Modal ref="modal0" title={<h4>Confirm deleted</h4>}>
                             {content}
                         </Modal>
                         <pre>
                             <code>
 {`
-<Modal title={<h4>Confirm deleted</h4>} onClose={handleClose} display={display}>
+<a href="#" onClick={this.refs.modal.open}>click</a>
+<Modal title={<h4>Confirm deleted</h4>} ref="modal">
     ...
 </Modal>
 `}                                
@@ -74,17 +67,16 @@ export default class ModalDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Modal with confirm, cancel action</h4>
-                        <button onClick={this.showModal.bind(this, 'display1')}>click</button>
-                        <Modal display={this.state.display1} onClose={this.handleClose.bind(this)} 
-                            onConfirm={this.handleConfirm.bind(this)} onCancel={this.handleCancel.bind(this)}>
+                        <button onClick={this.openModal.bind(this, 'modal1')}>click</button>
+                        <Modal ref="modal1" onConfirm={this.handleConfirm.bind(this)} 
+                            onCancel={this.handleCancel.bind(this)}>
                             {content}
                         </Modal>
                         <pre>
                             <code>
 {`
-<a href="#" onClick={this.setState({display: !this.state.display});}>click</a>
-<Modal display={display} onClose={handleClose} 
-    onConfirm={handleConfirm} onCancel={handleCancel}>
+<a href="#" onClick={this.refs.modal.open}>click</a>
+<Modal ref="modal" onConfirm={handleConfirm} onCancel={handleCancel}>
     {content}
 </Modal>
 `}                                 
@@ -93,17 +85,32 @@ export default class ModalDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Modal with only confirm action</h4>
-                        <button onClick={this.showModal.bind(this, 'display2')}>click</button>
-                        <Modal display={this.state.display2} onClose={this.handleClose.bind(this)}
-                            onConfirm={this.handleConfirm1.bind(this)} closeIcon={<p>关闭</p>}>
+                        <button onClick={this.openModal.bind(this, 'modal2')}>click</button>
+                        <Modal ref="modal2" onConfirm={this.handleConfirm1.bind(this)} closeIcon={<p>关闭</p>}>
                             {content}
                         </Modal>
                         <pre>
                             <code>
 {`
-<a href="#" onClick={this.setState({display: !this.state.display});}>click</a>
-<Modal display={display} onClose={handleClose}
-    onConfirm={handleConfirm} closeIcon={<p>关闭</p>}>
+<a href="#" onClick={this.refs.modal.open}>click</a>
+<Modal ref="modal" onConfirm={handleConfirm}>
+    {content}
+</Modal>   
+`}                                
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>Modal with onClose action</h4>
+                        <button onClick={this.openModal.bind(this, 'modal3')}>click</button>
+                        <Modal ref="modal3" onClose={this.handleClose.bind(this)} closeIcon={<p>关闭</p>}>
+                            {content}
+                        </Modal>
+                        <pre>
+                            <code>
+{`
+<a href="#" onClick={this.refs.modal.open}>click</a>
+<Modal ref="modal" onClose={handleClose} closeIcon={<p>关闭</p>}>
     {content}
 </Modal>   
 `}                                
@@ -112,16 +119,15 @@ export default class ModalDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Modal force to close</h4>
-                        <button onClick={this.showModal.bind(this, 'display3')}>click</button>
-                        <Modal display={this.state.display3} force={true} onClose={this.handleClose.bind(this)}
-                            onConfirm={this.handleConfirm1.bind(this)}>
+                        <button onClick={this.openModal.bind(this, 'modal4')}>click</button>
+                        <Modal ref="modal4" force={true} onConfirm={this.handleConfirm1.bind(this)}>
                             {content}
                         </Modal>
                         <pre>
                             <code>
 {`
-<a href="#" onClick={this.setState({display: !this.state.display});}>click</a>
-<Modal display={display} force={true} onClose={handleClose}
+<a href="#" onClick={this.refs.modal.open}>click</a>
+<Modal ref="modal" force={true}
     onConfirm={handleConfirm}>
     {content}
 </Modal>

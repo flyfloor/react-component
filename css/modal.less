@@ -31,18 +31,21 @@
 
         ._title {
             padding: 10px;
-            font-size: 120%;
         }
 
         ._content {
             overflow: hidden;
             padding: 10px;
-            ._action {
+            ._actions {
                 font-size: 90%;
                 overflow: hidden;
                 float: right;
-                a+a {
-                    margin-left: 5px;
+                ._action-btn {
+                    cursor: pointer;
+                    display: inline-block;
+                    &:last-child {
+                        margin-left: 5px;
+                    }
                 }
             }
         }

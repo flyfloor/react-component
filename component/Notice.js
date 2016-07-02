@@ -4,7 +4,7 @@ const PropTypes = React.PropTypes
 const Notice = React.createClass({
     propTypes: {
         delay: PropTypes.number,
-        content: PropTypes.element,
+        content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
         onClose: PropTypes.func.isRequired,
         closeIcon: PropTypes.element,
     },

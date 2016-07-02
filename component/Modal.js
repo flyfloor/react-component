@@ -1,70 +1,74 @@
 const React = require('react');
+const PropTypes = React.PropTypes;
 
 const Modal = React.createClass({
     propTypes: {
-        title: React.PropTypes.element,
-        confirmText: React.PropTypes.string,
-        cancelText: React.PropTypes.string,
-        onConfirm: React.PropTypes.func,
-        onCancel: React.PropTypes.func,
-        onClose: React.PropTypes.func.isRequired,
-        display: React.PropTypes.bool,
-        closeIcon: React.PropTypes.element,
+        title: PropTypes.element,
+        confirmText: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+        cancelText: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+        onConfirm: PropTypes.func,
+        onCancel: PropTypes.func,
+        onClose: PropTypes.func,
+        closeIcon: PropTypes.element,
     },
 
     getInitialState() {
         return {
-            open: this.props.display, 
+            display: false, 
         };
     },
     
     getDefaultProps() {
         return {
-            display: false,
             confirmText: 'confirm',
             cancelText: 'cancel',
             closeIcon: <span>x</span>,
         };
     },
 
-    componentWillReceiveProps(nextProps) {
+    open(){
         this.setState({
-            open: nextProps.display 
+            display: true
+        });
+    },
+
+    close(){
+        const {onClose} = this.props
+        if (onClose && !onClose()) return
+        this.setState({
+            display: false
         });
     },
 
     handleConfirm(){
-        if (this.props.onConfirm()) this.closeModal();
+        if (this.props.onConfirm()) this.close();
     },
 
     handleCancel(){
-        if (this.props.onCancel()) this.closeModal();
-    },
-
-    closeModal(){
-        this.props.onClose();
-        this.setState({
-            open: false, 
-        });
+        if (this.props.onCancel()) this.close();
     },
 
     render() {
         const {onConfirm, onCancel, confirmText, cancelText, title, children, style, force, closeIcon} = this.props;
-        const {open} = this.state;
+        const {display} = this.state;
         let actionDOM = [];
-        if (onConfirm) actionDOM.push(<a href='javascript:;' key='confirm-action' 
-                                        onClick={this.handleConfirm}>{confirmText}</a>);
-        if (onCancel) actionDOM.push(<a href='javascript:;' key='cancel-action'
-                                        onClick={this.handleCancel}>{cancelText}</a>);
+        if (onConfirm) actionDOM.push(<div key='_confirm-action' className='_action-btn'
+                                        onClick={this.handleConfirm}>
+                                        {confirmText}
+                                    </div>);
+        if (onCancel) actionDOM.push(<div key='_cancel-action' className='_action-btn'
+                                        onClick={this.handleCancel}>
+                                        {cancelText}
+                                    </div>);
 
-        let footer = onCancel || onConfirm ? 
-                <div className='_action'>
+        let footer = onCancel || onConfirm 
+                ? <div className='_actions'>
                     {actionDOM}
                 </div> 
                 : null; 
 
         let className = ['ui', 'modal'];
-        if (open) className.push('_show');
+        if (display) className.push('_show');
         if (force) className.push('_force');
         className = className.join(' ');
 
@@ -74,22 +78,20 @@ const Modal = React.createClass({
                     <div className="_body">
                         <div className="_wrap">
                             {title ? 
-                                <div className="_title">
-                                    {title}
-                                </div>
+                                <div className="_title">{title}</div>
                                 : null}
                             <div className="_content">
                                 {children}
                                 {footer}
                             </div>
-                            {force ? 
-                                null
-                                : <div className="_close" onClick={this.closeModal}>{closeIcon}</div>}
+                            {force 
+                                ? null
+                                : <div className="_close" onClick={this.close}>{closeIcon}</div>}
                         </div>
                     </div>
-                    {force ? 
-                        <div className="_overlay"></div>
-                        : <div className="_overlay" onClick={this.closeModal}></div>
+                    {force 
+                        ? <div className="_overlay"></div>
+                        : <div className="_overlay" onClick={this.close}></div>
                     }
                 </div> 
             </div>

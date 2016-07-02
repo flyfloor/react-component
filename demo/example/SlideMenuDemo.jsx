@@ -4,42 +4,16 @@ import {SlideMenu} from './index.js';
 export default class SlideMenuDemo extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            slide: false,
-            slide1: false,
-            position1: false,
-            positionTop: false,
-            positionLeft: false,
-            positionRight: false,
-            positionBottom: false,
-        };
     }
 
-    handleCloseSlide1(){
-        if (confirm('close slide?')) {
-            this.setState({
-                slide1: false 
-            });
-        }
+    handleClose(){
+        return confirm('close slide?')
     }
 
-    handleOpenSlide(state){
-        this.setState({
-            [state.toString()]: true 
-        });
+    handleOpenSlide(ref){
+        const node = this.refs[ref]
+        node.open()
     }
-
-    handleAllSlideClose(){
-        this.setState({
-            slide: false,
-            slide1: false,
-            positionTop: false,
-            positionLeft: false,
-            positionRight: false,
-            positionBottom: false 
-        });
-    }
-
 
     render() {
         let contentNode  =  <div style={{'padding': '20px'}}>
@@ -51,17 +25,21 @@ export default class SlideMenuDemo extends React.Component {
         return (
             <div>
                 <h3>Slide menu</h3>
+                <pre>
+                    <code>onClose need a return value(Boolean), to decide whether close slide menu</code>
+                </pre>
                 <ol>
                     <li>
                         <h4>Default slidemenu</h4>
-                        <button onClick={() => this.handleOpenSlide('slide')}>click</button>
-                        <SlideMenu display={this.state.slide} onClose={this.handleAllSlideClose.bind(this)}>
+                        <button onClick={this.handleOpenSlide.bind(this, 'slide0')}>click</button>
+                        <SlideMenu ref="slide0" >
                             {contentNode}
                         </SlideMenu>
                         <pre>
                             <code>
 {`
-<SlideMenu display={display} onClose={handleClose}>
+<button onClick={this.refs.slide.open}>click</button>
+<SlideMenu ref="slide">
     ...
 </SlideMenu>    
 `}                                
@@ -70,70 +48,70 @@ export default class SlideMenuDemo extends React.Component {
                     </li>
                     <li>
                         <h4>slide menu with position</h4>
-                        <button onClick={() => this.handleOpenSlide('positionLeft')}>left</button>
-                        <SlideMenu position="left" display={this.state.positionLeft} onClose={this.handleAllSlideClose.bind(this)}>
+                        <button onClick={this.handleOpenSlide.bind(this, 'slide1')}>click</button>
+                        <SlideMenu position="left" ref="slide1" >
                             {contentNode}
                         </SlideMenu>
                         <pre>
                             <code>
 {`
-<SlideMenu position="left" display={display} onClose={handleClose}>
+<SlideMenu position="left" ref="slide">
     ...
-</SlideMenu>
-`}                            
+</SlideMenu>    
+`}                             
                             </code>
                         </pre>
-                        <button onClick={() => this.handleOpenSlide('positionRight')}>right</button>
-                        <SlideMenu position="right" display={this.state.positionRight} onClose={this.handleAllSlideClose.bind(this)}>
+                        <button onClick={this.handleOpenSlide.bind(this, 'slide2')}>click</button>
+                        <SlideMenu position="right" ref="slide2" >
                             {contentNode}
                         </SlideMenu>
                         <pre>
                             <code>
 {`
-<SlideMenu position="right" display={display} onClose={handleClose}>
+<SlideMenu position="right" ref="slide">
     ...
-</SlideMenu>
-`}                                 
+</SlideMenu>    
+`}                             
                             </code>
                         </pre>
-                        <button onClick={() => this.handleOpenSlide('positionTop')}>top</button>
-                        <SlideMenu position="top" display={this.state.positionTop} onClose={this.handleAllSlideClose.bind(this)}>
+                        <button onClick={this.handleOpenSlide.bind(this, 'slide3')}>click</button>
+                        <SlideMenu position="top" ref="slide3" >
                             {contentNode}
                         </SlideMenu>
                         <pre>
                             <code>
 {`
-<SlideMenu position="top" display={display} onClose={handleClose}>
+<SlideMenu position="top" ref="slide">
     ...
-</SlideMenu>
-`}                                     
+</SlideMenu>    
+`}                             
                             </code>
                         </pre>
-                        <button onClick={() => this.handleOpenSlide('positionBottom')}>bottom</button>
-                        <SlideMenu position="bottom" display={this.state.positionBottom} onClose={this.handleAllSlideClose.bind(this)}>
+                        <button onClick={this.handleOpenSlide.bind(this, 'slide4')}>click</button>
+                        <SlideMenu position="bottom" ref="slide4" >
                             {contentNode}
                         </SlideMenu>
                         <pre>
                             <code>
 {`
-<SlideMenu position="bottom" display={display} onClose={handleClose}>
+<SlideMenu position="bottom" ref="slide">
     ...
-</SlideMenu>
-`}                                   
+</SlideMenu>    
+`}                             
                             </code>
                         </pre>
                     </li>
                     <li>
                         <h4>Width</h4>
-                        <button onClick={() => this.handleOpenSlide('position1')}>click</button>
-                        <SlideMenu display={this.state.position1} width={500} onClose={this.handleAllSlideClose.bind(this)}>
+                        <button onClick={this.handleOpenSlide.bind(this, 'slide5')}>click</button>
+                        <SlideMenu ref="slide5" width={500}>
                             {contentNode}
                             <h4 style={{'textAlign': 'center'}}>width: 500px</h4>
                         </SlideMenu>
                         <pre>
                             <code>
 {`
-<SlideMenu width={500} display={display} onClose={handleClose}>
+<SlideMenu ref="slide" width={500}>
     ...
 </SlideMenu>
 `}                                   
@@ -142,23 +120,23 @@ export default class SlideMenuDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Close slidemenu action</h4>
-                        <button onClick={() => this.handleOpenSlide('slide1')}>click</button>
-                        <SlideMenu display={this.state.slide1} onClose={this.handleAllSlideClose.bind(this)}>
+                        <button onClick={this.handleOpenSlide.bind(this, 'slide6')}>click</button>
+                        <SlideMenu ref="slide6" onClose={this.handleClose.bind(this)}>
                             {contentNode}
                             <div style={{'padding': '10px'}}>
                                 <h3>
-                                    <a href="javascript:;" onClick={this.handleCloseSlide1.bind(this)} style={{'color': 'red'}}>
+                                    <button onClick={() => {this.refs.slide6.close()}}>
                                         Click to close
-                                    </a>
+                                    </button>
                                 </h3>
                             </div>
                         </SlideMenu>
                         <pre>
                             <code>
 {`
-<SlideMenu width={500} display={display} onClose={handleClose}>
+<SlideMenu ref="slide" onClose={closeFunc}>
     ...
-    <a href="#" onClick={this.setState({display: false});}>click to close</a>
+    <button onClick={this.refs.slide.close}>click to close</button>
 </SlideMenu>
 `}                                    
                             </code>

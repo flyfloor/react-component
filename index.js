@@ -24,7 +24,6 @@ var DatePicker = require("./lib/DatePicker.js");
 var Calender = require("./lib/Calender.js");
 var Progress = require("./lib/Progress.js");
 var Message = require("./lib/Message.js");
-var Notice = require("./lib/Notice.js");
 var NoticeCenter = require("./lib/NoticeCenter.js");
 
 module.exports = {
@@ -52,6 +51,5 @@ module.exports = {
     Calender: Calender,
     Progress: Progress,
     Message: Message,
-    Notice: Notice,
     NoticeCenter: NoticeCenter,
 };

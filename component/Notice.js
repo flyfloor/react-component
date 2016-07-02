@@ -5,6 +5,7 @@ const Notice = React.createClass({
     propTypes: {
         delay: PropTypes.number,
         content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+        onClick: PropTypes.func,
         onClose: PropTypes.func.isRequired,
         closeIcon: PropTypes.element,
     },
@@ -39,6 +40,14 @@ const Notice = React.createClass({
        } 
     },
 
+    handleContentClick(){
+        const {onClick, onClose} = this.props
+        if (onClick) {
+            onClick(this.props)
+            onClose()
+        }
+    },
+
     render() {
         const {title, content, closeIcon, onClose} = this.props
         return (
@@ -46,7 +55,7 @@ const Notice = React.createClass({
                 {title 
                     ? <div className="_title">{title}</div>
                     : null}
-                <div className="_content">{content}</div>
+                <div className="_content" onClick={this.handleContentClick}>{content}</div>
                 <div className="_close" onClick={onClose}>{closeIcon}</div>
             </div>
         );

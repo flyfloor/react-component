@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import {NoticeCenter} from './index';
 
-const handleNoticeClick = (e) => {
-    console.log(e)
+const handleNoticeClick = (props) => {
+    if (props.link) {
+        window.open(props.link)
+    }
 }
 
 export default class NoticeDemo extends Component {
     showNotice(type = ''){
         let notice = {
             title: 'Notice: ' + type,
+            link: 'http://braavos.me',
             content: <div>
                         <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. 
                     </div>,

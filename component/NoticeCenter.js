@@ -41,8 +41,7 @@ const NoticeCenter = React.createClass({
                 <ReactCssTransitionGroup className="ui notice-center" transitionName="notice"
                     transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                     {notices.map((item) => {
-                        return <Notice key={item.key} onClose={() => this.removeNotice(item.key)} onClick={item.onClick}
-                            content={item.content} delay={item.delay} title={item.title}/>
+                        return <Notice key={item.key} {...item} onClose={() => this.removeNotice(item.key)}/>
                     })}
                 </ReactCssTransitionGroup>
             </div>

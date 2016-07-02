@@ -62,6 +62,7 @@
   "homepage": "https://github.com/jerryshew/react-component",
   "dependencies": {
     "react": "^15.2.0",
+    "react-addons-css-transition-group": "^15.2.0",
     "react-dom": "^15.2.0"
   }
 }

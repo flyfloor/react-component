@@ -1,0 +1,37 @@
+@import url('meta');
+
+@{NS}.notice-center {
+    @_width: 300px;
+    position:fixed;
+    width: @_width;
+    overflow: hidden;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+    >.notice {
+        display: block;
+        width: @_width;
+        background: @gray_c;
+        border: 1px solid @gray_b;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+
+    .notice-enter {
+      opacity: 0.01;
+    }
+
+    .notice-enter.notice-enter-active {
+      opacity: 1;
+      transition: opacity 500ms ease-in;
+    }
+
+    .notice-leave {
+      opacity: 1;
+    }
+
+    .notice-leave.notice-leave-active {
+      opacity: 0.01;
+      transition: opacity 300ms ease-in;
+    }
+}

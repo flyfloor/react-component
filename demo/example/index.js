@@ -18,6 +18,8 @@ const DatePicker = require('../../component/DatePicker');
 const Calender = require('../../component/Calender');
 const Progress = require('../../component/Progress');
 const Message = require('../../component/Message');
+const Notice = require('../../component/Notice');
+const NoticeCenter = require('../../component/NoticeCenter');
 
 module.exports = {
     CheckBox,
@@ -40,4 +42,6 @@ module.exports = {
     Calender,
     Progress,
     Message,
+    Notice,
+    NoticeCenter
 };

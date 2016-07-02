@@ -25,6 +25,7 @@ import DatePickerDemo from "./example/DatePickerDemo.jsx";
 import CalenderDemo from "./example/CalenderDemo.jsx";
 import ProgressDemo from "./example/ProgressDemo.jsx";
 import MessageDemo from "./example/MessageDemo.jsx";
+import NoticeDemo from "./example/NoticeDemo.jsx";
 
 class Nav extends React.Component {
     render(){
@@ -51,6 +52,7 @@ class Nav extends React.Component {
                     <li><h4><NavLink to="/calender">calender</NavLink></h4></li>
                     <li><h4><NavLink to="/progress">progress</NavLink></h4></li>
                     <li><h4><NavLink to="/message">message</NavLink></h4></li>
+                    <li><h4><NavLink to="/notice">notice</NavLink></h4></li>
                 </ul>
             </Pin>
         );
@@ -122,5 +124,6 @@ ReactDOM.render(<Router history={hashHistory}>
                         <Route path="/calender" component={CalenderDemo}/>
                         <Route path="/progress" component={ProgressDemo}/>
                         <Route path="/message" component={MessageDemo}/>
+                        <Route path="/notice" component={NoticeDemo}/>
                     </Route>
                 </Router> , document.getElementById('root'));

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
-
 import css from './css/demo.less';
 
 import Pin from '../component/Pin';
@@ -29,7 +28,6 @@ import NoticeDemo from "./example/NoticeDemo.jsx";
 
 class Nav extends React.Component {
     render(){
-        const props = this.props;
         return (
             <Pin className="demo-nav">
                 <ul>

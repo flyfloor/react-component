@@ -32,6 +32,7 @@
 * calender
 * progress
 * message
+* notice
 
 ### Getting Started
 

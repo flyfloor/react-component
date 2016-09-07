@@ -1,6 +1,7 @@
 const React = require('react');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 const PopUpMixin = require('./mixin/PopUpMixin');
+const klassName = require('./util/className');
 
 const Tooltip = React.createClass({
     mixins: [DocumentClickMixin, PopUpMixin],
@@ -26,10 +27,14 @@ const Tooltip = React.createClass({
     render() {
         const {open} = this.state;
         let {position, content, style, className, children, mode} = this.props;
-        className = `ui confirm-box popup ${className}`;
-        if (open) className = `${className} _active`;
+        className = klassName('popup', className)
+        if (open) {
+            className = `${className} _active`;
+        }
 
-        let onMouseLeave = null, onMouseEnter = null, onClick = null;
+        let onMouseLeave = null, 
+            onMouseEnter = null, 
+            onClick = null;
 
         if (mode === 'click') {
             onClick = (e) => this.onTrigger(e);

@@ -1,6 +1,7 @@
 const React = require('react');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 const PopUpMixin = require('./mixin/PopUpMixin');
+const klassName = require('./util/className');
 
 const ConfirmBox = React.createClass({
     mixins: [DocumentClickMixin, PopUpMixin],
@@ -45,8 +46,10 @@ const ConfirmBox = React.createClass({
     render() {
         let {confirmBtn, cancelBtn, position, className, content, style, children} = this.props;
         const {open} = this.state;
-        className = `ui confirm-box popup ${className}`;
-        if (open) className = `${className} _active`;
+        className = klassName('confirm-box popup', className);
+        if (open) {
+            className = `${className} _active`;
+        }
 
         return (
             <span className={className} style={style} onClick={this.onTrigger}>

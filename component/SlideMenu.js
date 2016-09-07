@@ -1,4 +1,5 @@
 const React = require('react');
+const klassName = require('./util/className');
 
 const SlideMenu = React.createClass({
     propTypes: {
@@ -64,10 +65,11 @@ const SlideMenu = React.createClass({
     
     render() {
         const {display} = this.state;
-        const {children} = this.props;
+        let {className, children} = this.props;
+        className = klassName(className, 'slide-menu');
 
         return (
-            <div className={`ui slide-menu ${display ? '_display': ''}`}>
+            <div className={`${className} ${display ? '_display': ''}`}>
                 <div className='_content' ref='contentDOM' style={this.calcPositionStyle()}>
                     {children}
                 </div>

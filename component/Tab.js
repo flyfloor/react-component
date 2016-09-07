@@ -1,4 +1,5 @@
 const React = require('react');
+const klassName = require('./util/className');
 
 const Tab = React.createClass({
     propTypes: {
@@ -31,7 +32,9 @@ const Tab = React.createClass({
         }
     },
 
-    makeTabItems(children){
+    makeTab(){
+        let {children, style, className} = this.props;
+        className = klassName(className, 'tab');
         const {current} = this.state;
         let tabs = [], 
             contents = [];
@@ -41,18 +44,18 @@ const Tab = React.createClass({
             if (index === null || index === undefined) {
                 throw new Error('index is needed for children of tab');
             }
-            let className = index === current ? `_item _active`: '_item';
-            if ((current === undefined || current === null) && i === 0) className += ' _active';
-            tabs.push(<div key={`tab_${i}`} className={className} onClick={() => this.handleItemClick(index)}>
+            let cls = index === current ? `_item _active`: '_item';
+            if ((current === undefined || current === null) && i === 0) cls += ' _active';
+            tabs.push(<div key={`tab_${i}`} className={cls} onClick={() => this.handleItemClick(index)}>
                         {title}
                     </div>);
-            contents.push(<div key={`content_${i}`} className={className}>
+            contents.push(<div key={`content_${i}`} className={cls}>
                             {children}
                         </div>);
         })
 
         return (
-            <div>
+            <div className={className} style={style}>
                 <div className="_tab">{tabs}</div>
                 <div className="_content">{contents}</div>
             </div>
@@ -60,11 +63,8 @@ const Tab = React.createClass({
     },
 
     render() {
-        const {children, style, className} = this.props;
         return (
-            <div className={`ui tab ${className}`} style={style}>
-                {this.makeTabItems(children)}
-            </div>
+            this.makeTab()
         );
     }
 });

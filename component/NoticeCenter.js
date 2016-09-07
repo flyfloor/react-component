@@ -1,5 +1,6 @@
 const React = require('react')
 const Notice = require('./Notice')
+const klassName = require('./util/className')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 
 let __key = 0
@@ -36,9 +37,11 @@ const NoticeCenter = React.createClass({
 
     render() {
         const {notices} = this.state
+        let {className} = this.props
+        className = klassName(className, 'notice-center')
         return (
             <div>
-                <ReactCssTransitionGroup className="ui notice-center" transitionName="notice"
+                <ReactCssTransitionGroup className={className} transitionName="notice"
                     transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                     {notices.map((item) => {
                         return <Notice key={item.key} {...item} onClose={() => this.removeNotice(item.key)}/>

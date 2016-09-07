@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const {removeClass, hasClass, addClass, getClassList} = require('./util/dom');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
+const klassName = require('./util/className');
 
 const Menu = React.createClass ({
     mixins: [DocumentClickMixin],
@@ -125,17 +126,23 @@ const Menu = React.createClass ({
         let {children, style, className, horizontal, popped, mode, level=0} = this.props;
         // menu deep level
         level = level + 1;
-        className += ` _menu-${level}`;
-        if (popped) className += ' _popped';
-        if (horizontal) className += ' _horizontal';
-        if (!horizontal && !popped) className += ' _default';
+        className = klassName(className, `menu _menu-${level}`)
+        if (popped) {
+            className += ' _popped';
+        }
+        if (horizontal) {
+            className += ' _horizontal';
+        }
+        if (!horizontal && !popped) {
+            className += ' _default';
+        }
 
         const menuNode = (mode === 'hover' && popped) || horizontal ?
             <div onMouseLeave={() => this.closeSubMenu()} ref="base" 
-                className={`ui menu ${className} _hover`} style={style}>
+                className={`menu ${className} _hover`} style={style}>
                 {this.formatMenu(children, level)}
             </div>
-            : <div ref="base" className={`ui menu ${className}`} style={style}>
+            : <div ref="base" className={className} style={style}>
                 {this.formatMenu(children, level)}
             </div>
 

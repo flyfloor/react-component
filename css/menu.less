@@ -1,6 +1,6 @@
 @import url('meta.less');
 
-@{NS}.menu {
+.menu {
     @basic_motion: max-height .3s @motion, opacity .3s @motion, height .3s @motion, overflow .3s @motion, visibility @motion .3s;
     .__transition {
         -webkit-transition: @basic_motion;
@@ -136,8 +136,8 @@
             }
             >.sub-menu {
                 >.menu {
-                    left: 0;
-                    top: 40px;
+                    left: -1px;
+                    top: 38px;
                 }
                 >._title {
                     padding: 0 15px;

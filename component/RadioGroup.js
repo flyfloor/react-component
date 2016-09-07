@@ -1,5 +1,6 @@
 const React = require('react');
 const Radio = require('./Radio');
+const klassName = require('./util/className');
 
 const RadioGroup = React.createClass({
     propTypes: {
@@ -42,7 +43,8 @@ const RadioGroup = React.createClass({
     },
 
     render() {
-        const {labelName, valueName, className, style, children} = this.props;
+        let {labelName, valueName, className, style, children} = this.props;
+        className = klassName(className, 'radio-group');
         const {value, options} = this.state;
         let optionNodes = [], itemChecked;
 

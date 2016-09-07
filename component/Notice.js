@@ -1,5 +1,6 @@
 const React = require('react')
 const PropTypes = React.PropTypes
+const klassName = require('./util/className')
 
 const Notice = React.createClass({
     propTypes: {
@@ -49,9 +50,10 @@ const Notice = React.createClass({
     },
 
     render() {
-        const {title, content, closeIcon, onClose} = this.props
+        let {title, content, className, closeIcon, onClose} = this.props
+        className = klassName(className, 'notice')
         return (
-            <div className="ui notice">
+            <div className={className}>
                 {title 
                     ? <div className="_title">{title}</div>
                     : null}

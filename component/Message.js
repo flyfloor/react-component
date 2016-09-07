@@ -1,4 +1,5 @@
 const React = require('react');
+const klassName = require('./util/className');
 
 const Message = React.createClass({
     _timer: null,
@@ -59,8 +60,11 @@ const Message = React.createClass({
     render() {
         let {children, content, className, position, closeNode, style, onClose} = this.props;
         const {display} = this.state;
-        className += ` _${position}`;
-        if (display) className += ' _active';
+        className = klassName(className, `_${position}`);
+        if (display) {
+            className += ' _active';
+        }
+
         let msgNode = <div className="_message">
                         {content}
                     </div>

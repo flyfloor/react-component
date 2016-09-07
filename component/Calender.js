@@ -1,12 +1,23 @@
 const React = require('react');
 const {dateStr2Obj, obj2DateStr, date2DateStr} = require('./util/date');
 const {WEEK_LABEL, MONTH_LABEL} = require('./util/constants');
+const klassName = require('./util/className')
 
 
 const Calender = React.createClass({
     getInitialState() {
         const {year, month, day, value} = this.initDate();
         return {year, month, day, value, showYear: false, showMonth: false}
+    },
+
+    getDefaultProps() {
+        return {
+            className: ""
+        };
+    },
+
+    propTypes: {
+        className: React.PropTypes.string
     },
 
     initDate(date=this.props.value){
@@ -235,7 +246,7 @@ const Calender = React.createClass({
 
     render() {
         return (
-            <div className="ui calender">
+            <div className={klassName(this.props.className, 'calender')}>
                 {this.renderDisplay()}
                 {this.renderYearPicker()}
                 {this.renderMonthPicker()}

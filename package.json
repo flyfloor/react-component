@@ -1,6 +1,6 @@
 {
   "name": "react-ui-component",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "some component build with ReactJs",
   "main": "main.js",
   "scripts": {
@@ -9,7 +9,9 @@
     "test": "jest",
     "lint": "eslint lib"
   },
-  "pre-commit": [ "lint" ],
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/jerryshew/react-component.git"

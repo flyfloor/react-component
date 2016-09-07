@@ -1,6 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const IntervalMixin = require('./mixin/IntervalMixin');
+const klassName = require('./util/className');
 
 const Carousel = React.createClass({
     mixins: [IntervalMixin],
@@ -13,6 +14,7 @@ const Carousel = React.createClass({
         showDot: React.PropTypes.bool,
         prev: React.PropTypes.element,
         next: React.PropTypes.element,
+        className:  React.PropTypes.string,
     },
 
     getInitialState() {
@@ -169,8 +171,9 @@ const Carousel = React.createClass({
             width: baseWidth * (count + 2),
             transform: `translate3d(-${baseWidth * (index + 1)}px, 0, 0)`,
         }
+        
         return (
-            <div className='ui carousel'>
+            <div className={klassName(this.props.className, 'carousel')}>
                 <div className="_content" ref='contentDOM' style={contentCss}>{contentNodes}</div>
                 {dotNodes}
                 {arrowNode}

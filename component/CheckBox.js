@@ -1,4 +1,5 @@
 const React = require('react');
+const klassName = require('./util/className');
 
 export const CheckBox = React.createClass({
     propTypes: {
@@ -30,10 +31,13 @@ export const CheckBox = React.createClass({
 
     render() {
         let {disabled, style, className, children} = this.props;
-        if (disabled) className = `${className} _disabled`;
+        if (disabled) {
+            className = klassName('disabled', className);
+        }
+        className = klassName(className, 'checkbox');
         const {checked} = this.state;
         return ( 
-            <label style={style} className={`ui checkbox ${className}`}>
+            <label style={style} className={className}>
                 <input type="checkbox" disabled={disabled} 
                     checked={checked} onChange={this.checkedChange}/>
                 {children}

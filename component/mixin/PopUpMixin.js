@@ -38,7 +38,7 @@ const PopUpMixin = {
     onTrigger(e, state){
         let contentDOM = ReactDOM.findDOMNode(this.refs.content);
         if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {
-            // 
+            // do nothing
         } else {
             state = state !== null && state !== undefined ? state : !this.state.open;
             this.setState({

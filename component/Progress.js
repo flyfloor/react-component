@@ -1,4 +1,5 @@
 const React = require('react');
+const klassName = require('./util/className');
 
 const Progress = React.createClass({
     propTypes: {
@@ -18,13 +19,24 @@ const Progress = React.createClass({
         let {value, className, status, disabled, children} = this.props;
         if (value < 0) value = 0;
         if (value > 100) value = 100;
-        if (status) className += ` _${status}`;
-        if (disabled) className += ` _disabled`;
-        if (value === 100) className += ' _completed';
-        if (children) className += ' _context';
+        className = klassName(className, 'progress');
+
+        if (status) {
+            className += ` _${status}`;
+        }
+        if (disabled) {
+            className += ` _disabled`;
+        }
+        if (value === 100) {
+            className += ' _completed';
+        }
+        if (children) {
+            className += ' _context';
+        }
+
 
         return (
-            <div className={`ui progress ${className}`}>
+            <div className={className}>
                 <div className="_progress" style={{'width': `${value}%`}}>
                     {children}
                 </div>

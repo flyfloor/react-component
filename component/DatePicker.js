@@ -2,6 +2,7 @@ const React = require('react');
 const {dateStr2Obj, obj2DateStr} = require('./util/date');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 const Calender = require('./Calender');
+const klassName = require('./util/className');
 
 const DatePicker = React.createClass({
     mixins: [DocumentClickMixin],
@@ -50,7 +51,7 @@ const DatePicker = React.createClass({
         let {begin, end, className} = this.props;
         if (showPicker) className += ' _active';
         return (
-            <div className={`ui date-picker ${className}`}>
+            <div className={klassName('datepicker', className)}>
                 <input className="_input" onClick={ () => {this.setState({ showPicker: true }) }} value={value} readOnly/>
                 <div className="_picker">
                     <Calender begin={begin} end={end} 

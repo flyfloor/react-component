@@ -1,5 +1,6 @@
 const React = require('react');
 const PropTypes = React.PropTypes;
+const klassName = require('./util/className');
 
 const Modal = React.createClass({
     propTypes: {
@@ -49,7 +50,10 @@ const Modal = React.createClass({
     },
 
     render() {
-        const {onConfirm, onCancel, confirmText, cancelText, title, children, style, force, closeIcon} = this.props;
+        let {onConfirm, onCancel, confirmText, 
+            className, cancelText, title, children,
+             style, force, closeIcon} = this.props;
+
         const {display} = this.state;
         let actionDOM = [];
         if (onConfirm) actionDOM.push(<div key='_confirm-action' className='_action-btn'
@@ -67,10 +71,14 @@ const Modal = React.createClass({
                 </div> 
                 : null; 
 
-        let className = ['ui', 'modal'];
-        if (display) className.push('_show');
-        if (force) className.push('_force');
-        className = className.join(' ');
+        className = klassName('modal', className);
+
+        if (display) {
+            className += ' _show';
+        }
+        if (force) {
+            className += ' _force';
+        }
 
         return (
             <div style={style} className={className}>

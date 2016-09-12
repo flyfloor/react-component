@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const DocumentClickMixin = require('./mixin/DocumentClickMixin');
 const {BACKSPACE_KC} = require('./mixin/keyCode');
+const klassName = require('./util/className');
 
 const DropDown = React.createClass({
     mixins: [DocumentClickMixin],
@@ -100,13 +101,17 @@ const DropDown = React.createClass({
             labelNode = searchable ? 
                 this.formatSearchBar(placeHolder)
                 : <DropDown.label onClick={() => this.toggleOpen(!open)}>
-                            {placeHolder}
-                        </DropDown.label>
+                    {placeHolder}
+                </DropDown.label>
         }
 
-        if (open) className = `${className} _active`;
+        className = klassName('dropdown', className);
 
-        return <div className={`ui dropdown ${className}`} style={style}>
+        if (open) {
+            className = `${className} _active`;
+        }
+
+        return <div className={className} style={style}>
                     {labelNode}
                     <ul className="_list">
                         {nodes}
@@ -167,11 +172,15 @@ const DropDown = React.createClass({
 
     formatOptions(){
         let {className, style} = this.props;
-        if (this.state.open) className = `${className} _active`;
+        className = klassName('dropdown', className);
+        if (this.state.open) {
+            className += ' _active';
+        }
 
         const {optionNodes, displayLabels} = this.getNodesAndLabel();
+
         return (
-            <div className={`ui dropdown ${className}`} style={style}>
+            <div className={className} style={style}>
                 {this.formatLabelNode(displayLabels)}
                 <ul className="_list">
                     {optionNodes}
@@ -298,8 +307,12 @@ DropDown.Option = React.createClass({
     render(){
         const {selected, disabled} = this.props;
         let className = '_item';
-        if (disabled) className += ' _disabled';
-        if (selected) className += ' _active';
+        if (disabled) {
+            className += ' _disabled';
+        }
+        if (selected) {
+            className += ' _active';
+        }
         return (
             <div className={className}
                 {...this.props}>

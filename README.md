@@ -98,3 +98,5 @@ import pagination_css from 'react-ui-component/css/pagination.less'
 
 > hint: only have basic style, need to write custom styles.
 
+
+#### Fork repo, first you need to install cross-env, eslint, babel global. 

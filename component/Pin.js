@@ -1,6 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const ScrollMixin = require('./mixin/ScrollMixin');
+const klassName = require('./util/className');
 
 const Pin = React.createClass({
     mixins: [ScrollMixin],
@@ -47,10 +48,11 @@ const Pin = React.createClass({
 
     render() {
         const {fixed} = this.state;
-        const {top, children, className} = this.props;
+        let {top, children, className} = this.props;
+        className = klassName(className, 'pin');
         let stat = fixed ? 'fixed': '';
         return (
-            <div className={`ui pin ${stat} ${className}`} style={{'top': top}} ref='pinNode'>
+            <div className={`${className} ${stat}`} style={{'top': top}} ref='pinNode'>
                 {children}
             </div>
         );

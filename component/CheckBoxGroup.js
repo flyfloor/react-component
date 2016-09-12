@@ -1,5 +1,6 @@
 const React = require('react');
 const CheckBox = require('./CheckBox');
+const klassName = require('./util/className');
 
 export const CheckBoxGroup = React.createClass({
     getInitialState() {
@@ -88,7 +89,7 @@ export const CheckBoxGroup = React.createClass({
 
 
         return (
-            <div style={style} className={className}>
+            <div style={style} className={klassName(className, 'checkbox-group')}>
                 {optionNodes}
             </div>
         );

@@ -1,4 +1,5 @@
 const React = require('react');
+const klassName = require('./util/className');
 
 const Radio = React.createClass({
     propTypes: {
@@ -22,9 +23,12 @@ const Radio = React.createClass({
 
     render() {
         let {className, checked, disabled, style, children} = this.props;
-        if (disabled) className = `${className} _disabled`;
+        className = klassName(className, 'radio');
+        if (disabled) {
+            className = `${className} _disabled`;
+        }
         return (
-            <label style={style} className={`ui radio ${className}`}>
+            <label style={style} className={className}>
                 <input type="radio" ref="radioInput" disabled={disabled} checked={checked} onChange={this.checkedChange} />
                 {children}
             </label>

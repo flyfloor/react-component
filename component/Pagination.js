@@ -1,4 +1,5 @@
 const React = require('react');
+const klassName = require('./util/className');
 
 const Pagination = React.createClass({
     propTypes: {
@@ -117,8 +118,10 @@ const Pagination = React.createClass({
 
     render() {
         let {start, end} = this.formatStartAndEnd();
+        let {className} = this.props;
+        className = klassName(className, 'pagination')
         return (
-            <ul className="ui pagination">
+            <ul className={className}>
                 {this.formatFirstNode(start)}
                 {this.formatRange(start, end)}
                 {this.formatLastNode(end)}

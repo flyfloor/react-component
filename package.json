@@ -1,11 +1,11 @@
 {
   "name": "react-ui-component",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "some component build with ReactJs",
   "main": "main.js",
   "scripts": {
     "start": "babel --presets es2015,react --watch component/ --out-dir lib/ & cross-env NODE_ENV=dev node server.js",
-    "build:demo": "webpack -p",
+    "build": "webpack -p",
     "test": "jest",
     "lint": "eslint lib"
   },

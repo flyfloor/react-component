@@ -222,8 +222,8 @@ const DropDown = React.createClass({
             <div className="_search" onClick={() => this.toggleOpen(true)}>
                 {filterText ? <div className="_text"></div>
                     : <div className="_text">{text}</div>}
-                <input className='_input' ref='userInput' value={filterText}
-                    type='text' onChange={(e) => this.handleSearch(e.target.value)}/>
+                <input type='text' className='_input' ref='userInput' value={filterText}
+                     onChange={(e) => this.handleSearch(e.target.value)}/>
             </div>
         );
     },
@@ -401,10 +401,10 @@ DropDown.multiInput = React.createClass({
         return (
             <div className='_multi' onClick={this.handleClick}>
                 {tagNodes}
-                <input className='_input' ref='userInput' style={{'width': '9px'}} 
+                <input type="text" className='_input' ref='userInput' style={{'width': '9px'}} 
                     value={filterText} 
                     onBlur={this.handleBlur} onFocus={(e) => this.props.onUserInputFocus(e)} 
-                    onChange={(e) => this.props.onUserInput(e.target.value) } type='text' onKeyDown={this.handleKeyDown}/>
+                    onChange={(e) => this.props.onUserInput(e.target.value) } onKeyDown={this.handleKeyDown}/>
                 {placeHolder}
             </div>
         );

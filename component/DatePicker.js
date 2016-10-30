@@ -52,7 +52,8 @@ const DatePicker = React.createClass({
         if (showPicker) className += ' _active';
         return (
             <div className={klassName('datepicker', className)}>
-                <input className="_input" onClick={ () => {this.setState({ showPicker: true }) }} value={value} readOnly/>
+                <input type="text" className="_input" 
+                    onClick={() => {this.setState({ showPicker: true }) }} value={value} readOnly/>
                 <div className="_picker">
                     <Calender begin={begin} end={end} 
                         value={value} onChange={this.handleValChange}/>

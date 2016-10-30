@@ -40,7 +40,7 @@ export const CheckBox = React.createClass({
             <label style={style} className={className}>
                 <input type="checkbox" disabled={disabled} 
                     checked={checked} onChange={this.checkedChange}/>
-                {children}
+                <span>{children}</span>
             </label>
         );
     }

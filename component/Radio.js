@@ -30,7 +30,7 @@ const Radio = React.createClass({
         return (
             <label style={style} className={className}>
                 <input type="radio" ref="radioInput" disabled={disabled} checked={checked} onChange={this.checkedChange} />
-                {children}
+                <span>{children}</span>
             </label>
         );
     }

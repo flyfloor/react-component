@@ -407,6 +407,7 @@ DropDown.multiInput = React.createClass({
                     onBlur={this.handleBlur} onFocus={(e) => this.props.onUserInputFocus(e)} 
                     onChange={(e) => this.props.onUserInput(e.target.value) } onKeyDown={this.handleKeyDown}/>
                 {placeHolder}
+                <i></i>
             </div>
         );
     }

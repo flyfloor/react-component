@@ -224,6 +224,7 @@ const DropDown = React.createClass({
                     : <div className="_text">{text}</div>}
                 <input type='text' className='_input' ref='userInput' value={filterText}
                      onChange={(e) => this.handleSearch(e.target.value)}/>
+                <i></i>
             </div>
         );
     },

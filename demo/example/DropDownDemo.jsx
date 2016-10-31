@@ -165,7 +165,9 @@ export default class DropDownDemo extends React.Component {
     value={value} onChange={displayChange}>
     <Item value={1} name="apple">
         <p>hate the show, love the animal</p>
-        <img style={{ "width": "100px"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
+        <img style={{ "width": "100px"}} 
+            src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
+        ...
     </Item>
     ...
 </DropDown>  
@@ -203,8 +205,7 @@ export default class DropDownDemo extends React.Component {
 <DropDown multi={true} labelName="name" valueName="value"
     value={value} onChange={displayChange}>
     <Item value={1} name="apple">
-        <p>hate the show, love the animal</p>
-        <img style={{ "width": "100px"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
+        ...
     </Item>
     ...
 </DropDown>  

@@ -219,12 +219,16 @@ const DropDown = React.createClass({
     },
 
     formatSearchBar(text){
-        const {filterText} = this.state;
+        const {filterText, value} = this.state;
+        let className = '_input'
+        if (value === '') {
+            className += ' _placeHolder'
+        }
         return (
             <div className="_search" onClick={() => this.toggleOpen(true)}>
                 {filterText ? <div className="_text"></div>
                     : <div className="_text">{text}</div>}
-                <input type='text' className='_input' ref='userInput' value={filterText}
+                <input type='text' className={className} ref='userInput' value={filterText}
                      onChange={(e) => this.handleSearch(e.target.value)}/>
                 <i></i>
             </div>

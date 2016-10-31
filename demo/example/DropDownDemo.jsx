@@ -138,6 +138,45 @@ export default class DropDownDemo extends React.Component {
                         <h4>Yield children</h4>
                         <p>value is <span className="gap-word">{this.state.value5}</span></p>
                         <div style={{'width': '280px'}}>
+                            <DropDown labelName="name" valueName="value"
+                                value={this.state.value1} onChange={this.displayChange.bind(this, 'value5')}>
+                                <Item value={1} name="apple">
+                                    <p>hate the show, love the animal</p>
+                                    <img style={{ "width": "100px"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
+                                </Item>
+                                <Item value={2} name="banana">
+                                    <h2>this is banana</h2>
+                                </Item>
+                                <Item value={3} name="cat">
+                                    <h4>this is cat</h4>
+                                </Item>
+                                <Item value={4} name="dog" disabled={true}>
+                                    blog site: <a href="http://braavos.me" target="_blank">lacuna</a>
+                                </Item>
+                                <Item value={5} name="egg">
+                                    <i style={{'fontStyle': 'italic'}}>egg's gooood</i>
+                                </Item>
+                            </DropDown>
+                        </div>
+                        <pre>
+                            <code>
+{`
+<DropDown labelName="name" valueName="value"
+    value={value} onChange={displayChange}>
+    <Item value={1} name="apple">
+        <p>hate the show, love the animal</p>
+        <img style={{ "width": "100px"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
+    </Item>
+    ...
+</DropDown>  
+`}                                
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>Yield children(multi)</h4>
+                        <p>value is <span className="gap-word">{this.state.value5}</span></p>
+                        <div style={{'width': '280px'}}>
                             <DropDown multi={true} labelName="name" valueName="value"
                                 value={this.state.value4} onChange={this.displayChange.bind(this, 'value5')}>
                                 <Item value={1} name="apple">

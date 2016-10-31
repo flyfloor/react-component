@@ -4,6 +4,10 @@
 .dropdown {
     @line_height: 25px;
     @height: 30px;
+
+    ._placeHolder {
+        color: @gray_b;
+    }
     
     position: relative;
     ul {
@@ -104,10 +108,11 @@
             white-space: pre;
             max-width: 100%;
         }
+
         ._placeHolder {
-            color: @gray_b;
             margin-left: -6px;
         }
+        
         ._tag {
             cursor: pointer;
             margin-right: 3px;

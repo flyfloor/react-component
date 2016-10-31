@@ -331,12 +331,15 @@ DropDown.Option = React.createClass({
 // dropdown label
 DropDown.label = React.createClass({
     render() {
-        const {isPlaceHolder} = this.props
+        let _props = Object.assign({}, this.props)
+        let {isPlaceHolder} = _props
         let className = '_label'
+        if (isPlaceHolder) {
+            className += ' _placeHolder'
+        }
+        delete _props.isPlaceHolder
         return (
-            <div className={isPlaceHolder ? `${className} _placeHolder` : className} {...this.props}>
-                {this.props.children}
-            </div>
+            <div className={className} {..._props}></div>
         );
     }
 });

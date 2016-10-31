@@ -80,7 +80,9 @@ const DropDown = React.createClass({
                 if(selected) tags[_index] = item_label;
             } else {
                 selected = value === item_val;
-                placeHolder = item_label;
+                if (selected) {
+                    placeHolder = item_label;
+                }
             }
             
             if(this.getFilterStatus(filterText, item_label, item_val)) {
@@ -100,7 +102,7 @@ const DropDown = React.createClass({
         } else {
             labelNode = searchable ? 
                 this.formatSearchBar(placeHolder)
-                : <DropDown.label onClick={() => this.toggleOpen(!open)}>
+                : <DropDown.label isPlaceHolder={value === ''} onClick={() => this.toggleOpen(!open)}>
                     {placeHolder}
                 </DropDown.label>
         }
@@ -121,14 +123,14 @@ const DropDown = React.createClass({
 
     formatLabelNode(labels){
         const {multi, searchable} = this.props;
-        const {open} = this.state;
+        const {open, value} = this.state;
         let labelNode = null;
         if (multi) {
             labelNode = this.formatMultiInput(labels)
         } else {
             labelNode = searchable ? 
                 this.formatSearchBar(labels)
-                : <DropDown.label onClick={() => this.toggleOpen(!open)}>
+                : <DropDown.label isPlaceHolder={value === ''} onClick={() => this.toggleOpen(!open)}>
                     {labels}
                 </DropDown.label>;
         }
@@ -325,8 +327,10 @@ DropDown.Option = React.createClass({
 // dropdown label
 DropDown.label = React.createClass({
     render() {
+        const {isPlaceHolder} = this.props
+        let className = '_label'
         return (
-            <div className="_label" {...this.props}>
+            <div className={isPlaceHolder ? `${className} _placeHolder` : className} {...this.props}>
                 {this.props.children}
             </div>
         );

@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import DocumentClickMixin from './mixin/DocumentClickMixin'
-import {BACKSPACE_KC} from './mixin/keyCode'
-import klassName from './util/className'
+const React = require('react')
+const ReactDOM = require('react-dom')
+const DocumentClickMixin = require('./mixin/DocumentClickMixin')
+const BACKSPACE_KC = require('./mixin/keyCode').BACKSPACE_KC
+const klassName = require('./util/className')
 
 const DropDown = React.createClass({
     mixins: [DocumentClickMixin],
@@ -424,4 +424,4 @@ DropDown.multiInput = React.createClass({
     }
 });
 
-export default DropDown
+module.exports = DropDown

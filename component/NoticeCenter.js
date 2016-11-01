@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactCssTransitionGroup from 'react-addons-css-transition-group'
-import Notice from './Notice'
-import klassName from './util/className'
+const React = require('react')
+const ReactCssTransitionGroup = require('react-addons-css-transition-group')
+const Notice = require('./Notice')
+const klassName = require('./util/className')
 
 let __key = 0
 
@@ -52,4 +52,4 @@ const NoticeCenter = React.createClass({
     }
 })
 
-export default NoticeCenter
+module.exports = NoticeCenter

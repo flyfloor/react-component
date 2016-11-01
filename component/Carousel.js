@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import IntervalMixin from './mixin/IntervalMixin'
-import klassName from './util/className'
+const React = require('react')
+const ReactDOM = require('react-dom')
+const IntervalMixin = require('./mixin/IntervalMixin')
+const klassName = require('./util/className')
 
 const Carousel = React.createClass({
     mixins: [IntervalMixin],
@@ -182,4 +182,4 @@ const Carousel = React.createClass({
     }
 });
 
-export default Carousel;
+module.exports = Carousel;

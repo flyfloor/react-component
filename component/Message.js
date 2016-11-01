@@ -1,5 +1,5 @@
-import React from 'react'
-import klassName from './util/className'
+const React = require('react')
+const klassName = require('./util/className')
 
 const Message = React.createClass({
     _timer: null,
@@ -89,4 +89,4 @@ const Message = React.createClass({
     }
 });
 
-export default Message
+module.exports = Message

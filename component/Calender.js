@@ -1,7 +1,11 @@
-import React from 'react';
-import {dateStr2Obj, obj2DateStr, date2DateStr} from './util/date';
-import {WEEK_LABEL, MONTH_LABEL} from './util/constants';
-import klassName from './util/className';
+const React = require('react');
+const dateUtil = require('./util/date');
+const {dateStr2Obj, obj2DateStr, date2DateStr} = dateUtil
+
+const constants = require('./util/constants')
+const {WEEK_LABEL, MONTH_LABEL} = constants
+
+const klassName = require('./util/className');
 
 
 const Calender = React.createClass({
@@ -282,4 +286,4 @@ Calender.Item = React.createClass({
 });
 
 
-export default Calender
+module.exports = Calender

@@ -1,4 +1,4 @@
-import {isType} from './typeCheck';
+const isType = require('./typeCheck').isType
 
 const MAX_HOUR = 23;
 const MAX_MIN = 59;
@@ -38,6 +38,6 @@ const validateUnitByMax = (value, max) => {
     return value;
 };
 
-export { 
+module.exports = { 
     timeStr2Obj 
 }

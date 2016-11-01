@@ -1,5 +1,5 @@
-import React from 'react'
-import klassName from './util/className'
+const React = require('react')
+const klassName = require('./util/className')
 
 const Progress = React.createClass({
     propTypes: {
@@ -45,4 +45,4 @@ const Progress = React.createClass({
     }
 });
 
-export default Progress;
+module.exports = Progress;

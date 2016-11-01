@@ -1,8 +1,8 @@
-const React = require('react');
-const {dateStr2Obj, obj2DateStr} = require('./util/date');
-const DocumentClickMixin = require('./mixin/DocumentClickMixin');
-const Calender = require('./Calender');
-const klassName = require('./util/className');
+import React from 'react'
+import {dateStr2Obj, obj2DateStr} from './util/date'
+import DocumentClickMixin from './mixin/DocumentClickMixin'
+import Calender from './Calender'
+import klassName from './util/className'
 
 const DatePicker = React.createClass({
     mixins: [DocumentClickMixin],
@@ -65,5 +65,4 @@ const DatePicker = React.createClass({
     }
 });
 
-
-module.exports = DatePicker;
+export default DatePicker

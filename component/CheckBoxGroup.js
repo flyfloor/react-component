@@ -1,8 +1,8 @@
-const React = require('react');
-const CheckBox = require('./CheckBox');
-const klassName = require('./util/className');
+import React from 'react'
+import CheckBox from './CheckBox'
+import klassName from './util/className'
 
-export const CheckBoxGroup = React.createClass({
+const CheckBoxGroup = React.createClass({
     getInitialState() {
         const {value, options} = this.props;
         return { value, options };
@@ -96,4 +96,4 @@ export const CheckBoxGroup = React.createClass({
     }
 });
 
-module.exports = CheckBoxGroup;
+export default CheckBoxGroup

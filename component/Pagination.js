@@ -1,5 +1,5 @@
-const React = require('react');
-const klassName = require('./util/className');
+import React from 'react'
+import klassName from './util/className'
 
 const Pagination = React.createClass({
     propTypes: {
@@ -130,4 +130,4 @@ const Pagination = React.createClass({
     }
 });
 
-module.exports = Pagination;
+export default Pagination;

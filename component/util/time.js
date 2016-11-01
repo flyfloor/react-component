@@ -38,4 +38,6 @@ const validateUnitByMax = (value, max) => {
     return value;
 };
 
-module.exports = { timeStr2Obj };
+export default { 
+    timeStr2Obj 
+}

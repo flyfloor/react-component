@@ -1,7 +1,7 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const ScrollMixin = require('./mixin/ScrollMixin');
-const klassName = require('./util/className');
+import React from 'react'
+import ReactDOM from 'react-dom'
+import ScrollMixin from './mixin/ScrollMixin'
+import klassName from './util/className'
 
 const Pin = React.createClass({
     mixins: [ScrollMixin],
@@ -59,4 +59,4 @@ const Pin = React.createClass({
     }
 });
 
-module.exports = Pin;
+export default Pin;

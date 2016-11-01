@@ -6,4 +6,4 @@ const klassName = function() {
     return cls.filter(l => l).join(' ')
 }
 
-module.exports = klassName
+export default klassName

@@ -1,5 +1,5 @@
-import React from 'react'
-import klassName from './util/className'
+const React = require('react')
+const klassName = require('./util/className')
 
 const CheckBox = React.createClass({
     propTypes: {
@@ -46,4 +46,4 @@ const CheckBox = React.createClass({
     }
 });
 
-export default CheckBox
+module.exports = CheckBox

@@ -1,7 +1,7 @@
-import React from 'react'
-import DocumentClickMixin from './mixin/DocumentClickMixin'
-import PopUpMixin from './mixin/PopUpMixin'
-import klassName from './util/className'
+const React = require('react')
+const DocumentClickMixin = require('./mixin/DocumentClickMixin')
+const PopUpMixin = require('./mixin/PopUpMixin')
+const klassName = require('./util/className')
 
 const Tooltip = React.createClass({
     mixins: [DocumentClickMixin, PopUpMixin],
@@ -62,4 +62,4 @@ const Tooltip = React.createClass({
     }
 });
 
-export default Tooltip;
+module.exports = Tooltip;

@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react'
-import klassName from './util/className'
+const React = require('react')
+const klassName = require('./util/className')
+
+const PropTypes = React.PropTypes
 
 const Notice = React.createClass({
     propTypes: {
@@ -63,4 +65,4 @@ const Notice = React.createClass({
     }
 })
 
-export default Notice
+module.exports = Notice

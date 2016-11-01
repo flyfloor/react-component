@@ -1,5 +1,5 @@
-import React from 'react'
-import klassName from './util/className'
+const React = require('react')
+const klassName = require('./util/className')
 
 const Radio = React.createClass({
     propTypes: {
@@ -36,4 +36,4 @@ const Radio = React.createClass({
     }
 });
 
-export default Radio;
+module.exports = Radio;

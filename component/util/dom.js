@@ -1,4 +1,4 @@
-export function toggleClass(el, className){
+function toggleClass(el, className){
     if (el && el instanceof Node && className) {
         let str = el.className;
         const index = str.indexOf(className);
@@ -8,7 +8,7 @@ export function toggleClass(el, className){
     }
 }
 
-export function removeClass(el, className){
+function removeClass(el, className){
     if (!el || !className) return;
     if (el instanceof NodeList) {
         const length = el.length;
@@ -38,7 +38,7 @@ function _removeClass(el, className){
     if (changed) el.className = str;
 }
 
-export function hasClass(el, className){
+function hasClass(el, className){
     if (el && className && el instanceof Node) {
         return el.className.indexOf(className) !== -1;
     }
@@ -46,7 +46,7 @@ export function hasClass(el, className){
 }
 
 
-export function addClass(el, className) {
+function addClass(el, className) {
     if (!el || !className) return;
     if (el instanceof NodeList) {
         const length = el.length;
@@ -61,7 +61,11 @@ export function addClass(el, className) {
     }
 }
 
-export function getClassList(el){
+function getClassList(el){
     if (el && el instanceof Node) return el.className.split(/\s+/);
     return [];
+}
+
+module.exports = {
+    toggleClass, removeClass, hasClass, addClass, getClassList
 }

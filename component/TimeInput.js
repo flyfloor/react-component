@@ -1,6 +1,6 @@
-import React from 'react'
-import {timeStr2Obj} from './util/time'
-import klassName from './util/className'
+const React = require('react')
+const timeStr2Obj = require('./util/time').timeStr2Obj
+const klassName = require('./util/className')
 
 const TimeInput = React.createClass({
     propTypes: {
@@ -88,4 +88,4 @@ const TimeInput = React.createClass({
 });
 
 
-export default TimeInput;
+module.exports = TimeInput;

@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react'
 
 const Item = React.createClass({
     propTypes: {
@@ -19,4 +19,4 @@ const Item = React.createClass({
     }
 });
 
-module.exports = Item;
+export default Item

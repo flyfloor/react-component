@@ -1,7 +1,7 @@
-const React = require('react');
-const PropTypes = React.PropTypes;
-const klassName = require('./util/className');
+import React from 'react'
+import klassName from './util/className'
 
+const PropTypes = React.PropTypes;
 const Modal = React.createClass({
     propTypes: {
         title: PropTypes.element,
@@ -107,4 +107,4 @@ const Modal = React.createClass({
     }
 });
 
-module.exports = Modal;
+export default Modal

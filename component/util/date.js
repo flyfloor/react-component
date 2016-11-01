@@ -41,6 +41,6 @@ const obj2DateStr = (year, month, day) => {
     return `${year}-${month}-${day}`;
 };
 
-module.exports = {
+export default {
     dateStr2Obj, date2DateStr, date2Obj, obj2DateStr
 };

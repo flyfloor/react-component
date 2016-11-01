@@ -1,5 +1,5 @@
-const React = require('react');
-const klassName = require('./util/className');
+import React from 'react'
+import klassName from './util/className'
 
 const Tab = React.createClass({
     propTypes: {
@@ -69,4 +69,4 @@ const Tab = React.createClass({
     }
 });
 
-module.exports = Tab;
+export default Tab;

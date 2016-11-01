@@ -1,7 +1,7 @@
-const React = require('react');
-const klassName = require('./util/className');
+import React from 'react'
+import klassName from './util/className'
 
-export const CheckBox = React.createClass({
+const CheckBox = React.createClass({
     propTypes: {
         onChange: React.PropTypes.func,
         disabled: React.PropTypes.bool,
@@ -46,5 +46,4 @@ export const CheckBox = React.createClass({
     }
 });
 
-module.exports = CheckBox;
-
+export default CheckBox

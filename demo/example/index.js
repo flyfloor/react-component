@@ -1,27 +1,27 @@
-const CheckBox = require('../../component/CheckBox');
-const Radio = require('../../component/Radio');
-const RadioGroup = require('../../component/RadioGroup');
-const CheckBoxGroup = require('../../component/CheckBoxGroup');
-const DropDown = require('../../component/DropDown');
-const Menu = require('../../component/Menu');
-const Item = require('../../component/Item');
-const ConfirmBox = require('../../component/ConfirmBox');
-const Tooltip = require('../../component/Tooltip');
-const Modal = require('../../component/Modal');
-const Tab = require('../../component/Tab');
-const Pin = require('../../component/Pin');
-const Carousel = require('../../component/Carousel');
-const Pagination = require('../../component/Pagination');
-const SlideMenu = require('../../component/SlideMenu');
-const TimeInput = require('../../component/TimeInput');
-const DatePicker = require('../../component/DatePicker');
-const Calender = require('../../component/Calender');
-const Progress = require('../../component/Progress');
-const Message = require('../../component/Message');
-const Notice = require('../../component/Notice');
-const NoticeCenter = require('../../component/NoticeCenter');
+import CheckBox from '../../component/CheckBox'
+import Radio from '../../component/Radio'
+import RadioGroup from '../../component/RadioGroup'
+import CheckBoxGroup from '../../component/CheckBoxGroup'
+import DropDown from '../../component/DropDown'
+import Menu from '../../component/Menu'
+import Item from '../../component/Item'
+import ConfirmBox from '../../component/ConfirmBox'
+import Tooltip from '../../component/Tooltip'
+import Modal from '../../component/Modal'
+import Tab from '../../component/Tab'
+import Pin from '../../component/Pin'
+import Carousel from '../../component/Carousel'
+import Pagination from '../../component/Pagination'
+import SlideMenu from '../../component/SlideMenu'
+import TimeInput from '../../component/TimeInput'
+import DatePicker from '../../component/DatePicker'
+import Calender from '../../component/Calender'
+import Progress from '../../component/Progress'
+import Message from '../../component/Message'
+import Notice from '../../component/Notice'
+import NoticeCenter from '../../component/NoticeCenter'
 
-module.exports = {
+export {
     CheckBox,
     Radio,
     RadioGroup,

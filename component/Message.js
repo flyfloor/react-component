@@ -79,7 +79,7 @@ const Message = React.createClass({
                     </div>;
         }
         return (
-            <div className={`ui message ${className}`} style={style}>
+            <div className={`flash ${className}`} style={style}>
                 <div className="_trigger" onClick={this.handleDisplay}>
                     {children}
                 </div>

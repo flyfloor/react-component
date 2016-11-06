@@ -1,0 +1,89 @@
+@import url('meta');
+
+.flash-message {
+    position: fixed;
+    max-width: 300px;
+    border: 1px solid @gray_b;
+    background: @gray_d;
+    left: 0;
+    right: 0;
+    padding: 5px 10px;
+    overflow: hidden;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    border-radius: 3px;
+    margin: 0 auto 20px;
+    max-height: 0;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    >._content {
+        width: 80%;
+        >._close {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+    }
+
+    &._follow {
+        left: initial;
+        right: initial;
+        top: initial;
+        bottom: initial;
+    }
+
+    &._active {
+        max-height: 100px;
+        -webkit-transition: all .3s;
+        -o-transition: all .3s;
+        transition: all .3s;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &._top {
+        top: 20px;
+        -webkit-transform: translateY(-100px);
+        -ms-transform: translateY(-100px);
+        -o-transform: translateY(-100px);
+        transform: translateY(-100px);
+        &._active {
+            -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+            -o-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    &._bottom {
+        top: initial;
+        bottom: 20px;
+        -webkit-transform: translateY(100px);
+        -ms-transform: translateY(100px);
+        -o-transform: translateY(100px);
+        transform: translateY(100px);
+        &._active {
+            -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+            -o-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    &._center {
+        top: 45%;
+        -webkit-transform: scale(.7);
+        -ms-transform: scale(.7);
+        -o-transform: scale(.7);
+        transform: scale(.7);
+        &._active {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+}

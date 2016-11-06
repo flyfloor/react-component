@@ -34,6 +34,7 @@
             border: none;
         }
         >._item {
+            cursor: pointer;
             padding: 3px 16px;
             border-bottom: 1px solid transparent;
             &._active {
@@ -111,21 +112,5 @@
             }
         }
     }
-    &-enter {
-        opacity: 0.01;
-    }
-
-    &-enter&-enter-active {
-        opacity: 1;
-        transition: all 500ms;
-    }
-
-    &-leave {
-        opacity: 1;
-    }
-
-    &-leave&-leave-active {
-        opacity: 0.01;
-        transition: all .3s;
-    }
+    .basic_transition;
 }

@@ -17,7 +17,7 @@ import TimeInput from '../../component/TimeInput'
 import DatePicker from '../../component/DatePicker'
 import Calender from '../../component/Calender'
 import Progress from '../../component/Progress'
-import Message from '../../component/Message'
+import FlashMessage from '../../component/FlashMessage'
 import Notice from '../../component/Notice'
 import NoticeCenter from '../../component/NoticeCenter'
 
@@ -41,7 +41,7 @@ export {
     DatePicker,
     Calender,
     Progress,
-    Message,
+    FlashMessage,
     Notice,
     NoticeCenter
 };

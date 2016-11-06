@@ -1,0 +1,19 @@
+.basic_transition {
+    &-enter {
+        opacity: 0.01;
+    }
+
+    &-enter&-enter-active {
+        opacity: 1;
+        transition: all .3s;
+    }
+
+    &-leave {
+        opacity: 1;
+    }
+
+    &-leave&-leave-active {
+        opacity: 0.01;
+        transition: all .3s;
+    }
+}

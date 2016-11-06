@@ -19,7 +19,7 @@ const FlashMessage = React.createClass({
 
     getDefaultProps() {
         return {
-            delay: 50000,
+            delay: 5000,
             className: '',
             position: 'top',
             close: <i>x</i>,

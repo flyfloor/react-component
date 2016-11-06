@@ -5,7 +5,6 @@
     @short: 6px;
     @long: 8px;
     @base: -17px;
-    @basic_motion: all @motion .3s;
 
     .border_base {
         border-width: inherit;
@@ -18,15 +17,8 @@
     }
 
     ._wrap {
-        opacity: 0;
-        height: 0;
-        max-height: 0;
-        visibility: hidden;
+        display: block;
         position: relative;
-        overflow: hidden;
-        -webkit-transition: @basic_motion;
-        -o-transition: @basic_motion;
-        transition: @basic_motion;
         ._content {
             position: absolute;
             z-index: 100;
@@ -112,18 +104,22 @@
             }
         }
     }
+    &-enter {
+        opacity: 0.01;
+    }
 
-    &._active {
-        ._wrap {
-            overflow: visible;
-            opacity: 1;
-            height: auto;
-            visibility: visible;
-            max-height: 500px;
-            -webkit-transition: @basic_motion;
-            -o-transition: @basic_motion;
-            transition: @basic_motion;
-        }
+    &-enter&-enter-active {
+        opacity: 1;
+        transition: all 500ms;
+    }
+
+    &-leave {
+        opacity: 1;
+    }
+
+    &-leave&-leave-active {
+        opacity: 0.01;
+        transition: all .3s;
     }
 }
 

@@ -28,25 +28,25 @@
         }
     }
 
-    .notice-enter {
+    &-enter {
         transform: translate3d(@_width,0,0);
         opacity: 0.01;
     }
 
-    .notice-enter.notice-enter-active {
+    &-enter&-enter-active {
         opacity: 1;
         transform: translate3d(0,0,0);
-        transition: all 500ms @motion;
+        transition: all 500ms;
     }
 
-    .notice-leave {
+    &-leave {
         opacity: 1;
         transform: translate3d(0,0,0);
     }
 
-    .notice-leave.notice-leave-active {
+    &-leave&-leave-active {
         opacity: 0.01;
         transform: translate3d(@_width,0,0);
-        transition: all .3s @motion;
+        transition: all .3s;
     }
 }

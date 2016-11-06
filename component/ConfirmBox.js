@@ -1,4 +1,5 @@
 const React = require('react')
+const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const DocumentClickMixin = require('./mixin/DocumentClickMixin')
 const PopUpMixin = require('./mixin/PopUpMixin')
 const klassName = require('./util/className')
@@ -11,8 +12,8 @@ const ConfirmBox = React.createClass({
         onConfirm: React.PropTypes.func,
         force: React.PropTypes.bool,
         content: React.PropTypes.element.isRequired,
-        confirmBtn: React.PropTypes.element,
-        cancelBtn: React.PropTypes.element,
+        confirm: React.PropTypes.element,
+        cancel: React.PropTypes.element,
     },
 
     closeConfirm(){
@@ -44,7 +45,7 @@ const ConfirmBox = React.createClass({
     },
 
     render() {
-        let {confirmBtn, cancelBtn, position, className, content, style, children} = this.props;
+        let {confirm, cancel, position, className, content, style, children} = this.props;
         const {open} = this.state;
         className = klassName('confirm-box popup', className);
         if (open) {
@@ -56,24 +57,28 @@ const ConfirmBox = React.createClass({
                 <span className="_trigger" ref='trigger'>
                     {children}
                 </span>
-                <div className={'_wrap _' + position}>
-                    <div ref='content' className='_content'>
-                        <div className="_title">{content}</div>
-                        <div className="_action">
-                            <div className="_confirm" onClick={this.handleConfirm}>
-                                {confirmBtn ?
-                                    confirmBtn
-                                    : <div>ok</div>}
+                <ReactCssTransitionGroup className={'_wrap _' + position} transitionName="popup"
+                    transitionEnterTimeout={200} transitionLeaveTimeout={200}>
+                    {open ?
+                        <div ref='content' className='_content'>
+                            <div className="_title">{content}</div>
+                            <div className="_action">
+                                <div className="_confirm" onClick={this.handleConfirm}>
+                                    {confirm ?
+                                        confirm
+                                        : <div>ok</div>}
+                                </div>
+                                <div className="_cancel" onClick={this.handleCancel}>
+                                    {cancel ?
+                                        cancel
+                                        : <div>cancel</div>}
+                                </div>
                             </div>
-                            <div className="_cancel" onClick={this.handleCancel}>
-                                {cancelBtn ?
-                                    cancelBtn
-                                    : <div>cancel</div>}
-                            </div>
+                            <span className="_arrow" ref='arrow'></span>
                         </div>
-                        <span className="_arrow" ref='arrow'></span>
-                    </div>
-                </div>
+                        : null
+                    }
+                </ReactCssTransitionGroup>
             </span>
         );
     }

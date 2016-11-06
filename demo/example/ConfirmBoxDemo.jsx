@@ -12,8 +12,8 @@ export default class ConfirmBoxDemo extends React.Component {
 
     render() {
         const contentNode = <p>Confrim this?</p>;
-        const confirmBtn = <h3>√ yes</h3>
-        const cancelBtn = <p style={{'color': '#777'}}>cancel</p>;
+        const confirm = <h3>√ yes</h3>
+        const cancel = <p style={{'color': '#777'}}>cancel</p>;
         return (
             <div>
                 <h3>Confirm box</h3>
@@ -36,8 +36,8 @@ export default class ConfirmBoxDemo extends React.Component {
                     <li>
                         <h4>Confirm box with custom action, text</h4>
                         <ConfirmBox content={<div><p>confirm? check the <a href="http://braavos.me" target="_blank">blog</a></p></div>} 
-                            confirmBtn={confirmBtn} onConfirm={this.handleConfirm.bind(this)} 
-                            cancelBtn={cancelBtn}
+                            confirm={confirm} onConfirm={this.handleConfirm.bind(this)} 
+                            cancel={cancel}
                             onCancel={this.handleCancel.bind(this)}>
                             <button>click</button>
                         </ConfirmBox>
@@ -47,8 +47,8 @@ export default class ConfirmBoxDemo extends React.Component {
 <ConfirmBox content={<div>
         <p>confirm? check the <a href="http://braavos.me" target="_blank">blog</a></p>
         </div>} 
-    confirmBtn={confirmBtn} onConfirm={handleConfirm} 
-    cancelBtn={cancelBtn}
+    confirm={confirm} onConfirm={handleConfirm} 
+    cancel={cancel}
     onCancel={handleCancel}>
     <button>click</button>
 </ConfirmBox>

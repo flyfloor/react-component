@@ -2,11 +2,11 @@
 
 
 .slide-menu {
-    @basic_transition: background .4s @motion 0s, visibility .4s @motion 0s, opacity .4s @motion 0s;
+    @basic_transition: background .3s 0s, visibility .3s 0s, opacity .3s 0s;
     ._content {
-        -webkit-transition: transform 0.4s @motion;
-        -o-transition: transform 0.4s @motion;
-        transition: transform 0.4s @motion;
+        -webkit-transition: transform 0.3s;
+        -o-transition: transform 0.3s;
+        transition: transform 0.3s;
         position: fixed;
         z-index: 1000;
         width: 100%;
@@ -25,9 +25,9 @@
         bottom: 0;
         top: 0;
         z-index: -1;
-        -webkit-transition: @basic_transition, z-index .4s @motion .4s;
-        -o-transition: @basic_transition, z-index .4s @motion .4s;
-        transition: @basic_transition, z-index .4s @motion .4s;
+        -webkit-transition: @basic_transition, z-index .3s .3s;
+        -o-transition: @basic_transition, z-index .3s .3s;
+        transition: @basic_transition, z-index .3s .3s;
     }
 
     &._display {

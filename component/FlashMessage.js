@@ -1,41 +1,41 @@
 const React = require('react')
+const PropTypes = React.PropTypes
 const klassName = require('./util/className')
 
-const Message = React.createClass({
+const FlashMessage = React.createClass({
     _timer: null,
 
     propTypes: {
-        delay: React.PropTypes.number,
-        content: React.PropTypes.element.isRequired,
-        closeNode: React.PropTypes.element,
-        onClose: React.PropTypes.func,
-        position: React.PropTypes.oneOf(['top', 'center', 'bottom']),
+        delay: PropTypes.number,
+        close: PropTypes.element,
+        onClose: PropTypes.func,
+        position: PropTypes.oneOf(['top', 'center', 'bottom']),
     },
     getInitialState() {
         return {
-            display: false,
+            open: false,
         };
     },
 
     getDefaultProps() {
         return {
-            delay: 5000,
+            delay: 50000,
             className: '',
             position: 'top',
-            closeNode: <i>x</i>,
+            close: <i>x</i>,
         };
     },
 
 
-    handleDisplay(){
-        const {display} = this.state;
+    open(){
+        const {open} = this.state;
         const {delay} = this.props;
         this.setState({
-            display: !display
+            open: !open
         });
         
-        if (!display ) {
-            this._timer = setTimeout(() => this.setState({ display: false}), delay);
+        if (!open ) {
+            this._timer = setTimeout(() => this.setState({ open: false}), delay);
         } else {
             this.clearTimer()
         }
@@ -53,40 +53,38 @@ const Message = React.createClass({
         onClose();
         this.clearTimer()
         this.setState({
-            display: false
+            open: false
         });
     },
     
     render() {
-        let {children, content, className, position, closeNode, style, onClose} = this.props;
-        const {display} = this.state;
+        let {children, className, position, close, style, onClose} = this.props;
+        const {open} = this.state;
         className = klassName(className, `_${position}`);
-        if (display) {
+
+        if (open) {
             className += ' _active';
         }
 
-        let msgNode = <div className="_message">
-                        {content}
+        let msgNode = <div className="_content">
+                        {children}
                     </div>
         if (onClose) {
-            msgNode = <div className="_message">
+            msgNode = <div className="_content">
                         <div className="_wrap">
-                            {content}
+                            {children}
                         </div>
                         <div className="_close" onClick={this.handleClose}>
-                            {closeNode}
+                            {close}
                         </div>
                     </div>;
         }
         return (
-            <div className={`flash ${className}`} style={style}>
-                <div className="_trigger" onClick={this.handleDisplay}>
-                    {children}
-                </div>
+            <div className={`flash-message ${className}`} style={style}>
                 {msgNode}
             </div>
         );
     }
 });
 
-module.exports = Message
+module.exports = FlashMessage

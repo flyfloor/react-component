@@ -1,5 +1,6 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
+const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const DocumentClickMixin = require('./mixin/DocumentClickMixin')
 const BACKSPACE_KC = require('./mixin/keyCode').BACKSPACE_KC
 const klassName = require('./util/className')
@@ -115,9 +116,10 @@ const DropDown = React.createClass({
 
         return <div className={className} style={style}>
                     {labelNode}
-                    <ul className="_list">
-                        {nodes}
-                    </ul>
+                    <ReactCssTransitionGroup className="_list" transitionName="dropdown"
+                        transitionEnterTimeout={200} transitionLeaveTimeout={200}>
+                        {open ? nodes : null}
+                    </ReactCssTransitionGroup>
                 </div>;
     },
 
@@ -174,8 +176,9 @@ const DropDown = React.createClass({
 
     formatOptions(){
         let {className, style} = this.props;
+        const {open} = this.state
         className = klassName('dropdown', className);
-        if (this.state.open) {
+        if (open) {
             className += ' _active';
         }
 
@@ -184,9 +187,10 @@ const DropDown = React.createClass({
         return (
             <div className={className} style={style}>
                 {this.formatLabelNode(displayLabels)}
-                <ul className="_list">
-                    {optionNodes}
-                </ul>
+                <ReactCssTransitionGroup className="_list" transitionName="dropdown"
+                    transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+                    {open ? optionNodes : null}
+                </ReactCssTransitionGroup>
             </div>
         );
     },
@@ -205,16 +209,14 @@ const DropDown = React.createClass({
     formatOptionCell({ label, value, selected, children, disabled }){
         const content = children ? children : label;
         let node = disabled ? 
-            <DropDown.Option disabled={disabled} selected={selected}>
+            <DropDown.Option key={value} disabled={disabled} selected={selected}>
                 {content}
             </DropDown.Option>
-            : <DropDown.Option disabled={disabled} selected={selected} onClick={() => this.handleChangeSelect(value)}>
+            : <DropDown.Option key={value} disabled={disabled} selected={selected} onClick={() => this.handleChangeSelect(value)}>
                 {content}
             </DropDown.Option>
         return (
-            <li key={value}>
-                {node}
-            </li>
+            node
         );
     },
 

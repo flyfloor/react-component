@@ -1,4 +1,5 @@
 const React = require('react')
+const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const DocumentClickMixin = require('./mixin/DocumentClickMixin')
 const PopUpMixin = require('./mixin/PopUpMixin')
 const klassName = require('./util/className')
@@ -49,14 +50,18 @@ const Tooltip = React.createClass({
                 <span className="_trigger" ref='trigger'>
                     {children}
                 </span>
-                <div className={`_wrap _${position}`}>
-                    <div ref='content' className='_content'>
-                        <div className="_title">
-                            {content}
+                <ReactCssTransitionGroup className={'_wrap _' + position} transitionName="popup"
+                    transitionEnterTimeout={200} transitionLeaveTimeout={200}>
+                    {open ? 
+                        <div ref='content' className='_content'>
+                            <div className="_title">
+                                {content}
+                            </div>
+                            <span className="_arrow" ref='arrow'></span>
                         </div>
-                        <span className="_arrow" ref='arrow'></span>
-                    </div>
-                </div> 
+                        : null
+                    }
+                </ReactCssTransitionGroup>
             </span>
         );
     }

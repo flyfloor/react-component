@@ -5,30 +5,10 @@
     @line_height: 25px;
     @height: 30px;
 
+    position: relative;
+    
     ._placeHolder {
         color: @gray_b;
-    }
-    
-    position: relative;
-    ul {
-        padding: 0;
-        li {
-            cursor: pointer;
-            list-style-type: none;
-            ._item {
-                padding: 3px 16px;
-                border-bottom: 1px solid transparent;
-                &._active {
-                    background: @gray_c;
-                    border-color: @gray_d;
-                }
-            }
-        }
-    }
-    .__transition {
-        -webkit-transition: opacity @motion .3s, background @motion .3s, visibility @motion .3s, max-height @motion .3s;
-        -o-transition: opacity @motion .3s, background @motion .3s, visibility @motion .3s, max-height @motion .3s;
-        transition: opacity @motion .3s, background @motion .3s, visibility @motion .3s, max-height @motion .3s;
     }
 
     .__label {
@@ -44,27 +24,25 @@
         cursor: pointer;
     }
     ._list {
-        .__transition;
         margin-top: -1px;
-        opacity: 0;
-        max-height: 0;
-        visibility: hidden;
         position: absolute;
         width: 100%;
         z-index: 100;
         background: @white;
         border: 1px solid @gray_b;
-    }
-    &._active {
-        ._list {
-            .__transition;
-            max-height: 500px;
-            opacity: 1;
-            visibility: visible;
-            &:empty {
-                border: none;
+        &:empty {
+            border: none;
+        }
+        >._item {
+            padding: 3px 16px;
+            border-bottom: 1px solid transparent;
+            &._active {
+                background: @gray_c;
+                border-color: @gray_d;
             }
         }
+    }
+    &._active {
         ._search ._text {
             color: @gray_b;
         }
@@ -132,5 +110,22 @@
                 }
             }
         }
+    }
+    &-enter {
+        opacity: 0.01;
+    }
+
+    &-enter&-enter-active {
+        opacity: 1;
+        transition: all 500ms @motion;
+    }
+
+    &-leave {
+        opacity: 1;
+    }
+
+    &-leave&-leave-active {
+        opacity: 0.01;
+        transition: all .3s @motion;
     }
 }

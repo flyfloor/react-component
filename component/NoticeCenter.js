@@ -40,14 +40,12 @@ const NoticeCenter = React.createClass({
         let {className} = this.props
         className = klassName(className, 'notice-center')
         return (
-            <div>
-                <ReactCssTransitionGroup className={className} transitionName="notice"
-                    transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-                    {notices.map((item) => {
-                        return <Notice key={item.key} {...item} onClose={() => this.removeNotice(item.key)}/>
-                    })}
-                </ReactCssTransitionGroup>
-            </div>
+            <ReactCssTransitionGroup className={className} transitionName="notice"
+                transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+                {notices.map((item) => {
+                    return <Notice key={item.key} {...item} onClose={() => this.removeNotice(item.key)}/>
+                })}
+            </ReactCssTransitionGroup>
         );
     }
 })

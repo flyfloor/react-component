@@ -86,7 +86,7 @@ export default class ModalDemo extends React.Component {
                     <li>
                         <h4>Modal with only confirm action</h4>
                         <button onClick={this.openModal.bind(this, 'modal2')}>click</button>
-                        <Modal ref="modal2" onConfirm={this.handleConfirm1.bind(this)} closeIcon={<p>关闭</p>}>
+                        <Modal ref="modal2" onConfirm={this.handleConfirm1.bind(this)} close={<p>关闭</p>}>
                             {content}
                         </Modal>
                         <pre>
@@ -103,14 +103,14 @@ export default class ModalDemo extends React.Component {
                     <li>
                         <h4>Modal with onClose action</h4>
                         <button onClick={this.openModal.bind(this, 'modal3')}>click</button>
-                        <Modal ref="modal3" onClose={this.handleClose.bind(this)} closeIcon={<p>关闭</p>}>
+                        <Modal ref="modal3" onClose={this.handleClose.bind(this)} close={<p>关闭</p>}>
                             {content}
                         </Modal>
                         <pre>
                             <code>
 {`
 <a href="#" onClick={this.refs.modal.open}>click</a>
-<Modal ref="modal" onClose={handleClose} closeIcon={<p>关闭</p>}>
+<Modal ref="modal" onClose={handleClose} close={<p>关闭</p>}>
     {content}
 </Modal>   
 `}                                

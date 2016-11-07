@@ -42,7 +42,7 @@ const Notice = React.createClass({
        } 
     },
 
-    handleContentClick(){
+    handleClick(){
         const {onClick, onClose} = this.props
         if (onClick) {
             onClick(this.props)
@@ -56,9 +56,9 @@ const Notice = React.createClass({
         return (
             <div className={className}>
                 {title 
-                    ? <div className="_title">{title}</div>
+                    ? <div className="_title" onClick={this.handleClick}>{title}</div>
                     : null}
-                <div className="_content" onClick={this.handleContentClick}>{content}</div>
+                <div className="_content" onClick={this.handleClick}>{content}</div>
                 <div className="_close" onClick={onClose}>{close}</div>
             </div>
         );

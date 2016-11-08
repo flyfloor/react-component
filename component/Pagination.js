@@ -41,7 +41,7 @@ const Pagination = React.createClass({
     },
 
     formatFirstNode(start){
-        const {showRange, showNav, prevNode} = this.props;
+        const {showRange, showNav, prev} = this.props;
         const {current} = this.state;
 
         let firstNode = null;
@@ -53,14 +53,14 @@ const Pagination = React.createClass({
                         </li>
         } else if (showNav && start != 1) {
             firstNode = <li className="_item _nav _prev" key='previous-page' onClick={() => this.onPageChange(current - 1)}>
-                            { prevNode ? prevNode : <span>prev</span> }
+                            { prev ? prev : <span>prev</span> }
                         </li>
         }
         return firstNode;
     },
 
     formatLastNode(end){
-        const {showRange, showNav, nextNode, isEnd, total} = this.props;
+        const {showRange, showNav, next, isEnd, total} = this.props;
         const {current} = this.state;
 
         let lastNode = null;
@@ -74,7 +74,7 @@ const Pagination = React.createClass({
                         </li>
         } else if(showNav && !isEnd && end !== total){
             lastNode = <li className="_item _nav _prev" key="next-page" onClick={() => this.onPageChange(current + 1)}>
-                            {nextNode ? nextNode : <span>next</span>}
+                            {next ? next : <span>next</span>}
                         </li>
         }
         return lastNode;

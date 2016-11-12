@@ -1,13 +1,14 @@
 const React = require('react')
 const timeStr2Obj = require('./util/time').timeStr2Obj
 const klassName = require('./util/className')
+const PropTypes = React.PropTypes
 
 const TimeInput = React.createClass({
     propTypes: {
-        simple: React.PropTypes.bool,
-        value: React.PropTypes.string,
-        onChange: React.PropTypes.func,
-        className: React.PropTypes.string,
+        simple: PropTypes.bool,
+        value: PropTypes.string,
+        onChange: PropTypes.func,
+        className: PropTypes.string,
     },
 
     getInitialState() {
@@ -79,8 +80,7 @@ const TimeInput = React.createClass({
         className = klassName(className, 'timeinput');
         return (
             <div className={className}>
-                <input type="text" className="_input" onClick={this.refreshValue} 
-                    onBlur={this.refreshValue} value={value} 
+                <input type="text" className="_input" onBlur={this.refreshValue} value={value} 
                     onChange={this.handleInputChange}/>
             </div>
         );

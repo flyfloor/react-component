@@ -36,4 +36,52 @@
             }
         }
     }
+    &.vertical {
+        >._tab {
+            width: 200px;
+            float: left;
+            >._item {
+                float: none;
+            }
+            >._tab {
+                display: block;
+                border: 1px solid transparent;
+                margin-right: -1px;
+                border-radius: 3px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                &.active, &._active {
+                    border-color: @gray_b;
+                    border-right-color: transparent;
+                }
+            }
+        }
+        >._content {
+            border-top-right-radius: 3px;
+            margin-left: 200px;
+        }
+        &.bottom {
+            display: table;
+            table-layout: fixed;
+            width: 100%;
+            >.content, >._content {
+                margin-left: 0;
+                display: table-cell;
+                border-radius: 3px 0 3px 3px;
+            }
+            >.bar, >._tab {
+                vertical-align: top;
+                display: table-cell;
+                float: initial;
+                >.item, >._item {
+                    margin-left: -1px;
+                    border-radius: 0 3px 3px 0;
+                    &.active, &._active {
+                        border-color: @gray_c;
+                        border-left-color: transparent;
+                    }
+                }
+            }
+        }
+    }
 }

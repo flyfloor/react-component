@@ -14,9 +14,12 @@ export default class TabDemo extends React.Component {
         });
     }
 
-    formatTab({current=null, onChange=null}){
+    formatTab(options){
+        options = options || {}
+        let {current=null, bottom=false, section=false, vertical=false, onChange=null} = options
         return (
-            <Tab onChange={onChange} current={current} style={{'width': '350px'}}>
+            <Tab onChange={onChange} bottom={bottom} vertical={vertical} section={section}
+                current={current}>
                 <Item index='0' title={<p>first</p>}>
                     <h4>The first tab content</h4>
                     <p>React.js is pretty awesome</p>
@@ -96,6 +99,45 @@ export default class TabDemo extends React.Component {
                             <code>
 {`
     <Tab current={current} onChange={onChange}>
+        ...
+    </Tab>
+`}                            
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>Bottom tab</h4>
+                        {this.formatTab({bottom: true})}
+                        <pre>
+                            <code>
+{`
+    <Tab bottom={true}>
+        ...
+    </Tab>
+`}                            
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>vertical tab</h4>
+                        {this.formatTab({vertical: true})}
+                        <pre>
+                            <code>
+{`
+    <Tab vertical={true}>
+        ...
+    </Tab>
+`}                            
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>vertical bottom tab</h4>
+                        {this.formatTab({vertical: true, bottom: true})}
+                        <pre>
+                            <code>
+{`
+    <Tab vertical={true} bottom={true}>
         ...
     </Tab>
 `}                            

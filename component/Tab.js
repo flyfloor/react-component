@@ -1,13 +1,20 @@
 const React = require('react')
 const klassName = require('./util/className')
+const PropTypes = React.PropTypes
 
 const Tab = React.createClass({
     propTypes: {
-        onChange: React.PropTypes.func,
+        onChange: PropTypes.func,
+        bottom: PropTypes.bool,
+        section: PropTypes.bool,
+        vertical: PropTypes.bool,
     },
     getDefaultProps() {
         return {
             className: '',
+            bottom: false,
+            vertical: false,
+            section: false,
         };
     },
     getInitialState() {
@@ -33,8 +40,17 @@ const Tab = React.createClass({
     },
 
     makeTab(){
-        let {children, style, className} = this.props;
+        let {children, style, className, vertical, section, bottom} = this.props;
         className = klassName(className, 'tab');
+        if (vertical) {
+            className += ' vertical'
+        }
+        if (section) {
+            className += ' section'
+        }
+        if (bottom) {
+            className += ' bottom'
+        }
         const {current} = this.state;
         let tabs = [], 
             contents = [];
@@ -53,12 +69,19 @@ const Tab = React.createClass({
                             {children}
                         </div>);
         })
+        
+        let node = bottom ?
+                    <div className={className} style={style}>
+                        <div className="_content">{contents}</div>
+                        <div className="_tab">{tabs}</div>
+                    </div>
+                    : <div className={className} style={style}>
+                            <div className="_tab">{tabs}</div>
+                            <div className="_content">{contents}</div>
+                        </div>
 
         return (
-            <div className={className} style={style}>
-                <div className="_tab">{tabs}</div>
-                <div className="_content">{contents}</div>
-            </div>
+            node
         )
     },
 

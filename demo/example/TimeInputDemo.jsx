@@ -39,15 +39,6 @@ export default class TimeInputDemo extends React.Component {
                         </pre>
                     </li>
                     <li>
-                        <h4>Time input with limit range</h4>
-                        <TimeInput value="11:21:08" begin="8:30" end="16:45:08"/>
-                        <pre>
-                            <code>
-                                {`<TimeInput value="11:21:08" begin="8:30" end="16:45:08"/>`}
-                            </code>
-                        </pre>
-                    </li>
-                    <li>
                         <h4>Time input onchange event</h4>
                         <p>time you selected is {this.state.showTime}</p>
                         <TimeInput onChange={this.handleTimeChange.bind(this)} value={this.state.showTime}/>

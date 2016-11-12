@@ -84,6 +84,18 @@ export default class ProgressDemo extends Component {
                         </pre>
                     </li>
                     <li>
+                        <h4>Different size progress</h4>
+                        <h5>Large:</h5>
+                        <Progress value={30} size={'large'}/>
+                        <h5>Small:</h5>
+                        <Progress value={30} size={'small'}/>
+                        <pre>
+                            <code>
+                                {`<Progress value={30} size={'large'}/>`}
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
                         <h4>Yield context</h4>
                         <Progress value={30}>
                             <span>this progress now is <span style={{'color': 'yellow'}}>30%</span></span>

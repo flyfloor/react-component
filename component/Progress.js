@@ -1,11 +1,13 @@
 const React = require('react')
 const klassName = require('./util/className')
+const PropTypes = React.PropTypes
 
 const Progress = React.createClass({
     propTypes: {
-        value: React.PropTypes.number,
-        disabled: React.PropTypes.bool,
-        status: React.PropTypes.oneOf(['active', 'failed'])
+        value: PropTypes.number,
+        disabled: PropTypes.bool,
+        size: PropTypes.oneOf(['large', 'normal', 'small']),
+        status: PropTypes.oneOf(['warning', 'failed', 'success'])
     },
     
     getDefaultProps() {
@@ -16,7 +18,7 @@ const Progress = React.createClass({
     },
 
     render() {
-        let {value, className, status, disabled, children} = this.props;
+        let {value, className, status, size, disabled, children} = this.props;
         if (value < 0) value = 0;
         if (value > 100) value = 100;
         className = klassName(className, 'progress');
@@ -32,6 +34,10 @@ const Progress = React.createClass({
         }
         if (children) {
             className += ' _context';
+        }
+
+        if (size) {
+            className += ` _${size}`
         }
 
 

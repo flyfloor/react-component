@@ -6,11 +6,13 @@
 
 >some everyday use component built with reactjs.
 
-### Demo
+## Demo
 
 [demo](http://imiao.in)
 
 =====  
 
-### ========> React uikit is in progress: [React-uikit](https://github.com/jerryshew/react-uikit)  <========
+## Deprecated 
+
+## ========> React uikit is in progress: [React-uikits](https://github.com/jerryshew/react-uikits)  <========
 

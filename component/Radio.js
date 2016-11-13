@@ -1,13 +1,13 @@
 const React = require('react')
 const klassName = require('./util/className')
+const PropTypes = React.PropTypes
 
 const Radio = React.createClass({
     propTypes: {
-        onChange: React.PropTypes.func,
-        checked: React.PropTypes.bool,
-        disabled: React.PropTypes.bool,
-        value: React.PropTypes.string,
-        className: React.PropTypes.string,
+        onChange: PropTypes.func,
+        checked: PropTypes.bool,
+        disabled: PropTypes.bool,
+        className: PropTypes.string,
     },
 
     getDefaultProps() {

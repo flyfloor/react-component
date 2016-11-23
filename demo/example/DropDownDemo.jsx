@@ -19,6 +19,8 @@ export default class DropDownDemo extends React.Component {
             value2: '',
             value3: [2, 4],
             value4: [1, 3],
+            value5: null,
+            value6: [],
         };
     }
 
@@ -30,7 +32,7 @@ export default class DropDownDemo extends React.Component {
 
     render() {
         return (
-            <div style={{"minHeight": 1800}}>
+            <div style={{"minHeight": 2200}}>
                 <h3>Dropdown</h3>
                 <ul>
                     <li>
@@ -136,7 +138,6 @@ export default class DropDownDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Yield children</h4>
-                        <p>value is <span className="gap-word">{this.state.value5}</span></p>
                         <div style={{'width': '280px'}}>
                             <DropDown labelName="name" valueName="value"
                                 value={this.state.value1} onChange={this.displayChange.bind(this, 'value5')}>
@@ -177,10 +178,9 @@ export default class DropDownDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Yield children(multi)</h4>
-                        <p>value is <span className="gap-word">{this.state.value5}</span></p>
                         <div style={{'width': '280px'}}>
                             <DropDown multi={true} labelName="name" valueName="value"
-                                value={this.state.value4} onChange={this.displayChange.bind(this, 'value5')}>
+                                value={this.state.value4} onChange={this.displayChange.bind(this, 'value6')}>
                                 <Item value={1} name="apple">
                                     <p>hate the show, love the animal</p>
                                     <img style={{ "width": "100px"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>

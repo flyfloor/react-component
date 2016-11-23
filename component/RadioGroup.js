@@ -14,16 +14,23 @@ const RadioGroup = React.createClass({
         defaultChecked: React.PropTypes.bool,
     },
     getInitialState() {
-        const {options, value} = this.props;
-        return { options, value };
+        const { value } = this.props;
+        return { value };
     },
 
     getDefaultProps() {
         return {
             labelName: 'name',
             valueName: 'value',
-            options: [],
         };
+    },
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.value !== nextProps.value) {
+            this.setState({
+                value: nextProps.value
+            });
+        }
     },
     
     toggleChange(e, value){
@@ -33,8 +40,9 @@ const RadioGroup = React.createClass({
     },
 
     componentDidMount() {
-        const {defaultChecked, valueName} = this.props;
-        const {value, options} = this.state;
+        const {defaultChecked, options, valueName} = this.props;
+        const {value} = this.state;
+        // init defaultChecked status
         if ((value === null || value === undefined) && defaultChecked) {
             if (options.length > 0) {
                 this.setState({
@@ -45,9 +53,9 @@ const RadioGroup = React.createClass({
     },
 
     render() {
-        let {labelName, valueName, className, style, children} = this.props;
+        let {labelName, valueName, options, className, style, children} = this.props;
         className = klassName(className, 'radio-group');
-        const {value, options} = this.state;
+        const {value} = this.state;
         let optionNodes = [], itemChecked;
 
         if (children) {

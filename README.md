@@ -6,101 +6,13 @@
 
 >some everyday use component built with reactjs.
 
-### Demo
+## Demo
 
 [demo](http://imiao.in)
 
 =====  
 
-### ========> React uikit is in progress: [React-uikit](https://github.com/jerryshew/react-uikit)  <========
+## Deprecated 
 
- 
-### Components
- 
-* checkbox
-* radio
-* checkbox group
-* radio group
-* drop down(single | multi | search)
-* menu
-* confirm box
-* tooltip
-* modal
-* tab
-* pin
-* carousel
-* pagination
-* slide menu
-* time picker  
-* date picker  
-* calender
-* progress
-* message
-* notice
+## ========> React uikit is in progress: [React-uikits](https://github.com/jerryshew/react-uikits)  <========
 
-### Getting Started
-
-#### install
-
-install with npm
-
-```
-npm install react-ui-component
-```
-
-or install the latest version from github
-
-```
-npm install https://github.com/jerryshew/react-component
-```
-
-#### with:
-
-* ReactJs
-* ES6 syntax
-* Webpack
-
-#### Directory hierarchy
-
-```
-├── __test__ // test
-├── component
-│   ├── mixin
-│   ├── util
-│   ...
-├── lib // babel transformed dist
-├── css //basic style of component demos
-├── index.html // demo page
-├── demo // demo page
-├── dist // demo build dist 
-
-```
-
-#### how to use  
-
-simply import as a module. just like:
-
-```javascript
-import {Tooltip} from 'react-ui-component'
-```
-
-or  
-```javascript
-const Tooltip = require('react-ui-component').Tooltip
-```
-
-#### to use basic css:  
-
-```
-import style from 'react-ui-component/css/all.less';
-```
-or just use single component css:
-
-```
-import pagination_css from 'react-ui-component/css/pagination.less'
-```
-
-> hint: only have basic style, need to write custom styles.
-
-
-#### Fork repo, first you need to install cross-env, eslint, babel global. 

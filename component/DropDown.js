@@ -4,10 +4,10 @@ const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const DocumentClickMixin = require('./mixin/DocumentClickMixin')
 const BACKSPACE_KC = require('./mixin/keyCode').BACKSPACE_KC
 const klassName = require('./util/className')
+const UpdatePropsMixin = require('./mixin/UpdatePropsMixin')
 
 const DropDown = React.createClass({
-    mixins: [DocumentClickMixin],
-
+    mixins: [DocumentClickMixin, UpdatePropsMixin],
     propTypes: {
         placeHolder: React.PropTypes.string,
         options: React.PropTypes.array,

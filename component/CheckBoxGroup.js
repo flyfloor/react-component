@@ -1,8 +1,10 @@
 const React = require('react')
 const CheckBox = require('./CheckBox')
 const klassName = require('./util/className')
+const UpdatePropsMixin = require('./mixin/UpdatePropsMixin')
 
 const CheckBoxGroup = React.createClass({
+    mixins: [UpdatePropsMixin],
     getInitialState() {
         const {value, options} = this.props;
         return { value, options };

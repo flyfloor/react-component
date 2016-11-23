@@ -6,8 +6,8 @@ const UpdatePropsMixin = require('./mixin/UpdatePropsMixin')
 const CheckBoxGroup = React.createClass({
     mixins: [UpdatePropsMixin],
     getInitialState() {
-        const {value, options} = this.props;
-        return { value, options };
+        const { value } = this.props;
+        return { value };
     },
     getDefaultProps() {
         return {
@@ -61,8 +61,8 @@ const CheckBoxGroup = React.createClass({
     },
 
     render() {
-        const {labelName, valueName, className, style, children} = this.props;
-        const {options, value} = this.state;
+        const { labelName, valueName, className, options, style, children } = this.props;
+        const { value } = this.state;
         let optionNodes = [];
 
         if (children) {

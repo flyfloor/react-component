@@ -21,11 +21,11 @@ const DropDown = React.createClass({
     },
     
     getInitialState() {
-        let {multi, value, options} = this.props;
+        let { multi, value } = this.props;
         const default_val = multi ? [] : '';
         value = value || default_val;
         return {
-            options, value,
+            value,
             open: false,
             filterText: '',
         };
@@ -42,8 +42,8 @@ const DropDown = React.createClass({
     },
 
     componentDidMount() {
-        const {multi, defaultSelected, valueName} = this.props;
-        const {options, value} = this.state;
+        const { multi, defaultSelected, valueName, options } = this.props;
+        const { value } = this.state;
         if (!multi && !value && defaultSelected && options.length > 0) {
             this.setState({
                 value: options[0][valueName] 
@@ -140,8 +140,8 @@ const DropDown = React.createClass({
     },
 
     getNodesAndLabel(){
-        const {labelName, valueName, searchable, multi, placeHolder} = this.props;
-        const {filterText, value, options} = this.state;
+        const { labelName, valueName, searchable, multi, placeHolder, options } = this.props;
+        const { filterText, value } = this.state;
         let displayLabels = [], node = null, optionNodes = [];
         if (!multi) displayLabels = placeHolder;
 

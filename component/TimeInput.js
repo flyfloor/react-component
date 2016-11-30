@@ -35,6 +35,12 @@ const TimeInput = React.createClass({
         };
     },
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.setState(this.initTime(nextProps.value));
+        }
+    },
+
     handleInputChange(e){
         const {value} = e.target;
         this.setState({ value });

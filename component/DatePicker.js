@@ -28,6 +28,14 @@ const DatePicker = React.createClass({
         return obj2DateStr(year, month, day);
     },
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.setState({
+                value: this.initDate(nextProps.value)
+            });
+        }
+    },
+
     dateParams(){
         const {begin, end} = this.props;
         return { begin, end };

@@ -29,6 +29,14 @@ const CheckBox = React.createClass({
         if(onChange) onChange(e, value);
     },
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.checked !== this.props.checked) {
+            this.setState({
+                checked: nextProps.checked
+            });
+        }
+    },
+
     render() {
         let {disabled, style, className, children} = this.props;
         if (disabled) {

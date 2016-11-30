@@ -76,6 +76,12 @@ const Calender = React.createClass({
                 </div>
     },
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.setState(this.initDate(nextProps.value));
+        }
+    },
+
     handleYearPickerClick(year){
         this.setState({
             year,

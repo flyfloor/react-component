@@ -25,14 +25,6 @@ const RadioGroup = React.createClass({
         };
     },
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.value !== nextProps.value) {
-            this.setState({
-                value: nextProps.value
-            });
-        }
-    },
-    
     toggleChange(e, value){
         this.setState({ value }, () => {
             if (this.props.onChange) this.props.onChange(this.state.value);

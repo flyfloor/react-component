@@ -291,14 +291,6 @@ const DropDown = React.createClass({
         });
     },
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.value !== nextProps.value) {
-            this.setState({
-                value: nextProps.value
-            });
-        }
-    },
-
     render() {
         const {children} = this.props;
         let node = children ? 

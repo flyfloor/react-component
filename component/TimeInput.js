@@ -7,24 +7,9 @@ const TimeInput = React.createClass({
     propTypes: {
         simple: PropTypes.bool,
         value: PropTypes.string,
-        onChange: PropTypes.func,
+        onChange: PropTypes.func.isRequired,
         className: PropTypes.string,
-    },
-
-    getInitialState() {
-        let {hour, min, sec, value} = this.initTime();
-        return { value, hour, min, sec };
-    },
-
-    initTime(val = this.props.value){
-        const {simple} = this.props;
-        let {hour, min, sec} = timeStr2Obj(val, { simple });
-        let value = this.formatValue(hour, min, sec);
-        return {hour, min, sec, value}
-    },
-
-    formatValue(hour, min, sec){
-        return this.props.simple ? `${hour}:${min}` : `${hour}:${min}:${sec}`
+        placeHolder: PropTypes.string,
     },
 
     getDefaultProps() {
@@ -32,7 +17,30 @@ const TimeInput = React.createClass({
             simple: false,
             value: '',
             className: '',
+            placeHolder: 'input time',
         };
+    },
+
+    getInitialState() {
+        let {value=""} = this.initTime();
+        if (value !== this.props.value) {
+            this.props.onChange(value)
+        }
+        return { value };
+    },
+
+    initTime(val = this.props.value){
+        const {simple} = this.props;
+        let {hour, min, sec} = timeStr2Obj(val, { simple });
+        let value = this.formatValue(hour, min, sec);
+        if (!val) {
+            return {}
+        }
+        return {value}
+    },
+
+    formatValue(hour, min, sec){
+        return this.props.simple ? `${hour}:${min}` : `${hour}:${min}:${sec}`
     },
 
     componentWillReceiveProps(nextProps) {
@@ -42,51 +50,24 @@ const TimeInput = React.createClass({
     },
 
     handleInputChange(e){
-        const {value} = e.target;
-        this.setState({ value });
+        const {value} = e.target
+        this.setState({ value })
     },
 
-    refreshValue(){
-        const {hour, min, sec, value} = this.initTime(this.state.value);
-        this.setState({ value, hour, min, sec }, this.handleTimeChange);
-    },
-
-    handleTimeChange(){
-        const {onChange} = this.props;
-        if (onChange) onChange(this.state.value)
-    },
-
-    handleHourChange(hour){
-        const {min, sec} = this.state;
-        this.setState({
-            hour,
-            value: this.formatValue(hour, min, sec)
-        }, this.handleTimeChange);
-    },
-
-    handleMinChange(min){
-        const {hour, sec} = this.state;
-        this.setState({
-            min,
-            value: this.formatValue(hour, min, sec)
-        }, this.handleTimeChange);
-    },
-
-    handleSecChange(sec){
-        const {hour, min} = this.state;
-        this.setState({
-            sec: sec,
-            value: this.formatValue(hour, min, sec)
-        }, this.handleTimeChange);
+    handleOnBlur(){
+        const {value} = this.initTime(this.state.value);
+        if (value !== this.state.value) {
+            this.setState({ value }, () => this.props.onChange(value));
+        }
     },
 
     render() {
         const {value} = this.state;
-        let {className} = this.props;
+        let {className, placeHolder} = this.props;
         className = klassName(className, 'timeinput');
         return (
             <div className={className}>
-                <input type="text" className="_input" onBlur={this.refreshValue} value={value} 
+                <input type="text" className="_input" placeholder={placeHolder} onBlur={this.handleOnBlur} value={value} 
                     onChange={this.handleInputChange}/>
             </div>
         );

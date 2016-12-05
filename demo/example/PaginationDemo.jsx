@@ -59,11 +59,38 @@ export default class PaginationDemo extends React.Component {
                         </pre>
                     </li>
                     <li>
+                        <h4>Pagination with custom range</h4>
+                        <Pagination showRange={true} start={<span>首页</span>} end={<span>末页</span>} total={100}/>
+                        <pre>
+                            <code>
+                                {`<Pagination showRange={true} total={100} start={<span>首页</span>} end={<span>末页</span>} />`}
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
                         <h4>Pagination with navigation</h4>
                         <Pagination showNav={true} current={3}/>
                         <pre>
                             <code>
                                 {`<Pagination showNav={true} current={3}/>`}   
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>Pagination with custom navigation</h4>
+                        <Pagination showNav={true} current={3} prev={<span>上一页</span>} next={<span>下一页</span>}/>
+                        <pre>
+                            <code>
+                                {`<Pagination showNav={true} current={3} prev={<span>上一页</span>} next={<span>下一页</span>}/>`}   
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>Pagination with jump page navigation</h4>
+                        <Pagination showJump={true} current={3} />
+                        <pre>
+                            <code>
+                                {`<Pagination showJump={true} current={3} />`}   
                             </code>
                         </pre>
                     </li>

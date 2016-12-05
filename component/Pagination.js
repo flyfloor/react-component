@@ -1,26 +1,34 @@
 const React = require('react')
 const klassName = require('./util/className')
+const PropTypes = React.PropTypes
+const ENTER_KC = require('./mixin/keyCode').ENTER_KC
 
 const Pagination = React.createClass({
     propTypes: {
-        onChange: React.PropTypes.func,
-        total: React.PropTypes.number,
-        current: React.PropTypes.number,
-        showRange: React.PropTypes.bool,
-        showNav: React.PropTypes.bool,
-        isEnd: React.PropTypes.bool,
-        range: React.PropTypes.number,
+        onChange: PropTypes.func,
+        total: PropTypes.number,
+        current: PropTypes.number,
+        showRange: PropTypes.bool,
+        showNav: PropTypes.bool,
+        isEnd: PropTypes.bool,
+        range: PropTypes.number,
+        start: PropTypes.element,
+        end: PropTypes.element,
+        prev: PropTypes.element,
+        next: PropTypes.element,
+        showJump: PropTypes.bool,
     },
     getDefaultProps() {
         return {
             current: 1,
             range: 7,
             total: 30,
+            showJump: false,
         };
     },
     getInitialState() {
         const {current} = this.props;
-        return { current };
+        return { current }
     },
 
     componentWillReceiveProps(nextProps) {
@@ -40,18 +48,18 @@ const Pagination = React.createClass({
         if (onChange) onChange(page);
     },
 
-    formatFirstNode(start){
-        const {showRange, showNav, prev} = this.props;
+    formatFirstNode(begin){
+        const {showRange, showNav, prev, start} = this.props;
         const {current} = this.state;
 
         let firstNode = null;
-        if (showRange && start != 1) {
+        if (showRange && begin != 1) {
             firstNode = <li key='first-page' onClick={() => this.onPageChange(1)} 
                             className={current === 1 ? '_active _range _item': '_range _item'}>
-                            <span>1 </span>
+                            {start ? start : <span>1 </span>}
                             <span> ...</span>
                         </li>
-        } else if (showNav && start != 1) {
+        } else if (showNav && begin != 1) {
             firstNode = <li className="_item _nav _prev" key='previous-page' onClick={() => this.onPageChange(current - 1)}>
                             { prev ? prev : <span>prev</span> }
                         </li>
@@ -59,20 +67,18 @@ const Pagination = React.createClass({
         return firstNode;
     },
 
-    formatLastNode(end){
-        const {showRange, showNav, next, isEnd, total} = this.props;
+    formatLastNode(last){
+        const {showRange, showNav, next, end, isEnd, total} = this.props;
         const {current} = this.state;
 
         let lastNode = null;
-        if (showRange && end !== total) {
+        if (showRange && last !== total) {
             lastNode = <li key={`last-page`} onClick={() => this.onPageChange(total)}
                             className={current === total ? '_active _range _item': '_range _item'}>
                             <span>...  </span>
-                            <span>
-                                {total}
-                            </span>
+                            {end ? end : <span>{total}</span>}
                         </li>
-        } else if(showNav && !isEnd && end !== total){
+        } else if(showNav && !isEnd && last !== total){
             lastNode = <li className="_item _nav _prev" key="next-page" onClick={() => this.onPageChange(current + 1)}>
                             {next ? next : <span>next</span>}
                         </li>
@@ -116,6 +122,42 @@ const Pagination = React.createClass({
         return nodes;
     },
 
+    handlePageJump(e){
+        let {total} = this.props
+        // blur || keyDown
+        if (e.keyCode === undefined || e.keyCode === ENTER_KC) {
+            let value = parseInt(e.target)
+            if (value < 1) {
+                value = 1
+            }
+            if (value > total) {
+                value = total
+            }
+            this.setState({
+                current: value
+            });
+            let {onChange} = this.props
+            if (onChange) {
+                onChange(value)
+            }
+        }
+    },
+
+    formatJump(){
+        const {showJump} = this.props
+        const {current} = this.state
+        if (showJump) {
+            return (
+                <li key={'jump-page'} className="_item _jump">
+                    <span>Go </span>
+                    <input type="number" defaultValue={current + 1} 
+                        onBlur={this.handlePageJump} 
+                        onKeyDown={this.handlePageJump}/>
+                </li>
+            )
+        }
+    },
+
     render() {
         let {start, end} = this.formatStartAndEnd();
         let {className} = this.props;
@@ -125,6 +167,7 @@ const Pagination = React.createClass({
                 {this.formatFirstNode(start)}
                 {this.formatRange(start, end)}
                 {this.formatLastNode(end)}
+                {this.formatJump()}
             </ul>
         );
     }

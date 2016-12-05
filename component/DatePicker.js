@@ -9,21 +9,30 @@ const klassName = require('./util/className')
 const DatePicker = React.createClass({
     mixins: [DocumentClickMixin],
     propTypes: {
-        onChange: React.PropTypes.func
+        onChange: React.PropTypes.func.isRequired
     },
 
     getDefaultProps() {
         return {
             className: '',
+            placeHolder: 'select date',
+            defaultSelected: false
         };
     },
 
     getInitialState() {
         const value = this.initDate();
+        if (value !== this.props.value) {
+            this.props.onChange(value)
+        }
         return { value, open: false };
     },
 
     initDate(defaultValue=this.props.value){
+        const {defaultSelected} = this.props
+        if (!defaultValue && !defaultSelected) {
+            return 
+        }
         const {year, month, day} = dateStr2Obj(defaultValue, this.dateParams());
         return obj2DateStr(year, month, day);
     },
@@ -42,12 +51,11 @@ const DatePicker = React.createClass({
     },
 
     handleValChange(value){
-        const {onChange} = this.props;
         this.setState({
             value,
             open: false
         });
-        if (onChange) onChange(value);
+        this.props.onChange(value)
     },
 
     onOtherDomClick(){
@@ -58,12 +66,12 @@ const DatePicker = React.createClass({
 
     render() {
         const {open, value} = this.state;
-        let {begin, end, className} = this.props;
+        let {begin, end, className, placeHolder} = this.props;
         if (open) className += ' _active';
         return (
             <div className={klassName('datepicker', className)}>
                 <div className="input" onClick={() => {this.setState({ open: true }) }}>
-                    <input type="text" className="_input" value={value} readOnly/>
+                    <input type="text" className="_input" value={value} readOnly placeholder={placeHolder} />
                     <i></i>
                 </div>
                 <ReactCssTransitionGroup className="_picker" transitionName="datepicker"

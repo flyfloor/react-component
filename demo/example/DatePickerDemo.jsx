@@ -5,7 +5,8 @@ export default class DatePickerDemo extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value: null
+            value: undefined,
+            value1: '',
         };
     }
 
@@ -22,19 +23,19 @@ export default class DatePickerDemo extends React.Component {
                 <ul>
                     <li>
                         <h4>Default datepicker</h4>
-                        <DatePicker/>
+                        <DatePicker value={this.state.value} onChange={this.handleValChange.bind(this)}/>
                         <pre>
                             <code>
-                                {`<DatePicker/>`}
+                                {`<DatePicker onChange={onChangeFunction}/>`}
                             </code>
                         </pre>
                     </li>
                     <li>
                         <h4>DatePicker with default value</h4>
-                        <DatePicker value='2014-10-05'/>
+                        <DatePicker value='2014-10-05' onChange={(value) => console.log(value) } />
                         <pre>
                             <code>
-                                {`<DatePicker value='2014-10-05'/>`}
+                                {`<DatePicker value='2014-10-05' onChange={onChangeFunction} />`}
                             </code>
                         </pre>
                     </li>
@@ -44,16 +45,16 @@ export default class DatePickerDemo extends React.Component {
                         <DatePicker onChange={this.handleValChange.bind(this)}/>
                         <pre>
                             <code>
-                                {`<DatePicker onChange={handleValChange}/>`}
+                                {`<DatePicker onChange={onChangeFunction}/>`}
                             </code>
                         </pre>
                     </li>
                     <li>
                         <h4>DatePicker with time range</h4>
-                        <DatePicker begin='2015-12-15' end='2016-11-23'/>
+                        <DatePicker begin='2015-12-15' end='2016-11-23' onChange={value => console.log(value) }/>
                         <pre>
                             <code>
-                                {`<DatePicker begin='2015-12-15' end='2016-11-23'/>`}
+                                {`<DatePicker begin='2015-12-15' end='2016-11-23'/> onChange={onChangeFunction}`}
                             </code>
                         </pre>
                     </li>

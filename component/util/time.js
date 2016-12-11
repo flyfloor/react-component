@@ -4,6 +4,7 @@ const MAX_HOUR = 23;
 const MAX_MIN = 59;
 const MAX_SEC = MAX_MIN;
 
+// 时间字符串 => {小时，分钟，秒}
 const timeStr2Obj = (value='00:00:00', options = {
     simple: false, 
 }) => {
@@ -30,6 +31,19 @@ const timeStr2Obj = (value='00:00:00', options = {
     return { hour, min, sec };
 };
 
+// {小时, 分钟, 秒} => 时间字符串
+const obj2TimeStr = ({ hour = 0, min = 0, sec = 0}, options = {
+    simple: false,
+}) => {
+    hour = validateUnitByMax(hour, MAX_HOUR)
+    min = validateUnitByMax(min, MAX_MIN)
+    if (options.simple) {
+        return `${hour}:${min}`
+    }
+    sec = validateUnitByMax(sec, MAX_SEC)
+    return `${hour}:${min}:${sec}`
+}
+
 const validateUnitByMax = (value, max) => {
     value = String(parseInt(value));
     if (value > max) value = String(Math.floor(value % (max + 1)));
@@ -39,5 +53,6 @@ const validateUnitByMax = (value, max) => {
 };
 
 module.exports = { 
-    timeStr2Obj 
+    timeStr2Obj,
+    obj2TimeStr, 
 }

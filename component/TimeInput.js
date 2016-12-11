@@ -1,15 +1,13 @@
 const React = require('react')
-const timeStr2Obj = require('./util/time').timeStr2Obj
 const klassName = require('./util/className')
-const PropTypes = React.PropTypes
+const TimeInputMixin = require('./mixin/TimeInputMixin')
 
 const TimeInput = React.createClass({
-    propTypes: {
-        simple: PropTypes.bool,
-        value: PropTypes.string,
-        onChange: PropTypes.func.isRequired,
-        className: PropTypes.string,
-        placeHolder: PropTypes.string,
+    mixins: [TimeInputMixin],
+
+    handleInputChange(e){
+        const {value} = e.target
+        this.setState({ inputVal: value })
     },
 
     getDefaultProps() {
@@ -26,48 +24,50 @@ const TimeInput = React.createClass({
         if (value !== this.props.value) {
             this.props.onChange(value)
         }
-        return { value };
-    },
-
-    initTime(val = this.props.value){
-        const {simple} = this.props;
-        let {hour, min, sec} = timeStr2Obj(val, { simple });
-        let value = this.formatValue(hour, min, sec);
-        if (!val) {
-            return {}
-        }
-        return {value}
-    },
-
-    formatValue(hour, min, sec){
-        return this.props.simple ? `${hour}:${min}` : `${hour}:${min}:${sec}`
+        return { value, inputVal: value };
     },
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
-            this.setState(this.initTime(nextProps.value));
+            let {value} = this.initTime(nextProps.value)
+            this.setState({
+                value,
+                inputVal: value
+            });
         }
     },
 
-    handleInputChange(e){
-        const {value} = e.target
-        this.setState({ value })
+    handleOnFocus(e){
+        let {onFocus} = this.props
+        if (onFocus) {
+            onFocus(e)
+        }
     },
 
     handleOnBlur(){
-        const {value} = this.initTime(this.state.value);
+        const {value} = this.initTime(this.state.inputVal);
+        let {onBlur} = this.props
+        this.setState({
+            inputVal: value
+        });
         if (value !== this.state.value) {
             this.setState({ value }, () => this.props.onChange(value));
+        }
+
+        if (onBlur) {
+            onBlur(value)
         }
     },
 
     render() {
-        const {value} = this.state;
+        const {inputVal} = this.state;
         let {className, placeHolder} = this.props;
         className = klassName(className, 'timeinput');
         return (
             <div className={className}>
-                <input type="text" className="_input" placeholder={placeHolder} onBlur={this.handleOnBlur} value={value} 
+                <input type="text" className="_input" placeholder={placeHolder} 
+                onFocus={this.handleOnFocus}
+                onBlur={this.handleOnBlur} value={inputVal} 
                     onChange={this.handleInputChange}/>
             </div>
         );

@@ -1,8 +1,9 @@
 @import url('meta');
+@import url('transition.less');
 
 .timeinput {
     position: relative;
-    width: 200px;
+    width: 240px;
     ._input {
         border: 1px solid @gray_b;
         margin-top: 5px;
@@ -12,4 +13,44 @@
         height: 30px;
         font-size: 14px;
     }
+}
+
+.timepicker {
+    width: 240px;
+    position: relative;
+    overflow: hidden;
+    ul li {
+        list-style-type: none;
+    }
+    ._wrap {
+        display: block;
+    }
+    ._list {
+        position: relative;
+        width: 100/3%;
+        float: left;
+        max-height: 200px;
+        margin: 0;
+        overflow-y: scroll;
+        border: 1px solid @gray_c;
+        &+._list {
+            border-left: 0;
+        }
+        > ul {
+            padding: 0 0 100px 0;
+            display: block;
+        }
+        ._item {
+            text-align: center;
+            cursor: pointer;
+            padding: 2px 0;
+            color: @gray;
+            line-height: 30px;
+            &._active {
+                color: @black_a;
+                background-color: @gray_d;
+            }
+        }
+    }
+    .basic_transition;
 }

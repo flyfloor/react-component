@@ -1,4 +1,5 @@
 @import url('meta.less');
+@import url('transition.less');
 
 
 .dropdown {
@@ -30,6 +31,7 @@
         z-index: 100;
         background: @white;
         border: 1px solid @gray_b;
+        max-height: @line_height * 10;
         &:empty {
             border: none;
         }

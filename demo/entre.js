@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import css from './css/demo.less';
 
-import Pin from '../component/Pin';
-
 import CheckBoxDemo from "./example/CheckBoxDemo.jsx";
 import RadioDemo from "./example/RadioDemo.jsx";
 import RadioGroupDemo from "./example/RadioGroupDemo.jsx";
@@ -20,7 +18,9 @@ import CarouselDemo from "./example/CarouselDemo.jsx";
 import PaginationDemo from "./example/PaginationDemo.jsx";
 import SlideMenuDemo from "./example/SlideMenuDemo.jsx";
 import TimeInputDemo from "./example/TimeInputDemo.jsx";
+import TimePickerDemo from "./example/TimePickerDemo.jsx";
 import DatePickerDemo from "./example/DatePickerDemo.jsx";
+import DateTimePickerDemo from "./example/DateTimePickerDemo.jsx";
 import CalenderDemo from "./example/CalenderDemo.jsx";
 import ProgressDemo from "./example/ProgressDemo.jsx";
 import FlashMessageDemo from "./example/FlashMessageDemo.jsx";
@@ -29,7 +29,7 @@ import NoticeDemo from "./example/NoticeDemo.jsx";
 class Nav extends React.Component {
     render(){
         return (
-            <Pin className="demo-nav">
+            <div className="demo-nav">
                 <ul>
                     <li><h4><NavLink to="/calender">calender</NavLink></h4></li>
                     <li><h4><NavLink to="/carousel">carousel</NavLink></h4></li>
@@ -37,6 +37,7 @@ class Nav extends React.Component {
                     <li><h4><NavLink to="/checkbox-group">checkbox group</NavLink></h4></li>
                     <li><h4><NavLink to="/confirm-box">confirm box</NavLink></h4></li>
                     <li><h4><NavLink to="/date-picker">date picker</NavLink></h4></li>
+                    <li><h4><NavLink to="/datetime-picker">datetime picker</NavLink></h4></li>
                     <li><h4><NavLink to="/dropdown">drop down</NavLink></h4></li>
                     <li><h4><NavLink to="/menu">menu</NavLink></h4></li>
                     <li><h4><NavLink to="/flash-message">flash message</NavLink></h4></li>
@@ -50,9 +51,10 @@ class Nav extends React.Component {
                     <li><h4><NavLink to="/slide-menu">slide menu</NavLink></h4></li>
                     <li><h4><NavLink to="/tab">tab</NavLink></h4></li>
                     <li><h4><NavLink to="/time-input">time input</NavLink></h4></li>
+                    <li><h4><NavLink to="/time-picker">time picker</NavLink></h4></li>
                     <li><h4><NavLink to="/tooltip">tooltip</NavLink></h4></li>
                 </ul>
-            </Pin>
+            </div>
         );
     }
 }
@@ -118,7 +120,9 @@ ReactDOM.render(<Router history={hashHistory}>
                         <Route path="/pagination" component={PaginationDemo}/>
                         <Route path="/slide-menu" component={SlideMenuDemo}/>
                         <Route path="/time-input" component={TimeInputDemo}/>
+                        <Route path="/time-picker" component={TimePickerDemo}/>
                         <Route path="/date-picker" component={DatePickerDemo}/>
+                        <Route path="/datetime-picker" component={DateTimePickerDemo}/>
                         <Route path="/calender" component={CalenderDemo}/>
                         <Route path="/progress" component={ProgressDemo}/>
                         <Route path="/flash-message" component={FlashMessageDemo}/>

@@ -13,7 +13,7 @@ export default class TimeInputDemo extends React.Component {
         this.setState({
             showTime: value
         });
-        console.log(value)
+        console.log(value, 'update')
     }
 
     render() {

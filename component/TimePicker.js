@@ -46,8 +46,9 @@ const TimePicker = React.createClass({
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
             let {value} = this.initTime(nextProps.value)
+            let {hour, min, sec} = timeStr2Obj(value)
             this.setState({
-                value,
+                value, hour, min, sec,
             });
         }
     },
@@ -59,19 +60,23 @@ const TimePicker = React.createClass({
     handleFocus(){
         this.setState({
             open: true
-        }, () => {
-            this.initScrollTo('hour')
-            this.initScrollTo('min')
-            this.initScrollTo('sec')
-        });
+        }, this.handleInitScroll);
+    },
+
+    handleInitScroll(){
+        this.initScrollTo('hour')
+        this.initScrollTo('min')
+        this.initScrollTo('sec')
     },
 
     initScrollTo(type){
         let val = this.state[type]
         let dom = ReactDOM.findDOMNode(this.refs[type + 'List'])
-        let selected = dom.children[0].children[parseInt(val)]
-        let to = selected.offsetTop
-        dom.scrollTop = to
+        if (dom) {
+            let selected = dom.children[0].children[parseInt(val)]
+            let to = selected.offsetTop
+            dom.scrollTop = to
+        }
     },
 
     handleBlur(value){
@@ -90,6 +95,7 @@ const TimePicker = React.createClass({
             this.setState({
                 value
             });
+            this.props.onChange(value)
         });
     },
 

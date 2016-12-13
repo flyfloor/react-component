@@ -14,7 +14,6 @@ const timeStr2Obj = (value='00:00:00', options = {
 
     for (let i = 0; i < arr.length; i++) {
         let item = String(arr[i]);
-        if (item.length > 2) item = item.slice(0, 2);
         if (item.length === 1) item = `0${item}`;
         if (!item) item = '00';
         new_arr.push(item);

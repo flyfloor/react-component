@@ -3,7 +3,7 @@
 
 .datepicker {
     position: relative;
-    width: 250px;
+    width: 280px;
     ._input {
         cursor: pointer;
         width: 100%;
@@ -25,7 +25,7 @@
 .calender {
     border: 1px solid @gray_b;
     position: relative;
-    width: 250px;
+    width: 280px;
     overflow: hidden;
     >._label {
         background: @gray_c;
@@ -77,33 +77,50 @@
 
         ._nav {
             width: 10%;
-            padding-top: 10px;
-            >i {
+            padding-top: 8px;
+            i {
                 line-height: 100%;
                 border-width: 1px;
                 display: block;
                 margin-left: 8px;
                 font-size: 13px;
-                width: 10px;
-                height: 10px;
-                border-style: solid;
-                -webkit-transform: rotate(45deg);
-                -ms-transform: rotate(45deg);
-                -o-transform: rotate(45deg);
-                transform: rotate(45deg);
+                width: 16px;
+                height: 12px;
+            }
+            &._prev {
+                i:before {
+                    content: '<';
+                }
+            }
+            &._next {
+                i:before {
+                    content: '>';
+                }
+            }
+            &._year {
+                &._prev {
+                    i:before {
+                        content: '<<';
+                    }
+                }
+                &._next {
+                    i:before {
+                        content: '>>';
+                    }
+                }
             }
         }
 
-        ._pre {
-            >i {
+        /*._pre {
+            >i, >i:before {
                 border-color: transparent transparent @blue @blue;
             }
         }
         ._next {
-            i {
+            >i, >i:before {
                 border-color: @blue @blue transparent transparent;
             }
-        }
+        }*/
     }
     
     >._year-picker, >._month-picker {
@@ -141,12 +158,16 @@
             color: @gray_a;
         }
 
+        ._link {
+            width: 59%;
+        }
+
         ._day {
             border-radius: 50%;
             display: block;
-            line-height: 26px;
-            height: 26px;
-            width: 26px;
+            line-height: 30px;
+            height: 30px;
+            width: 30px;
         }
 
         ._today {

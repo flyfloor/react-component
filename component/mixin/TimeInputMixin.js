@@ -1,5 +1,6 @@
 const PropTypes = require('react').PropTypes
 const timeStr2Obj = require('../util/time').timeStr2Obj
+const obj2TimeStr = require('../util/time').obj2TimeStr
 
 const TimeInputMixin = {
     propTypes: {
@@ -14,17 +15,16 @@ const TimeInputMixin = {
 
     initTime(val = this.props.value){
         const {simple} = this.props;
-        let {hour, min, sec} = timeStr2Obj(val, { simple });
-        let value = this.formatValue(hour, min, sec);
+        let {hour, minute, second} = timeStr2Obj(val, { simple });
+
+        let value = obj2TimeStr({ hour, minute, second }, {
+            simple: this.props.simple
+        });
         if (!val) {
             return {}
         }
         return {value}
-    },
-    formatValue(hour, min, sec){
-        return this.props.simple ? `${hour}:${min}` : `${hour}:${min}:${sec}`
-    },
-    
+    }, 
 }
 
 module.exports = TimeInputMixin

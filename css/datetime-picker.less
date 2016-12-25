@@ -1,0 +1,36 @@
+@import url('meta');
+
+.datetime-picker {
+    position: relative;
+    width: 280px;
+    ._input {
+        cursor: pointer;
+        width: 100%;
+        line-height: 25px;
+        height: 30px;
+        padding: 0 10px;
+        color: @black;
+        border: 1px solid @gray_b;
+    }
+    >._wrap {
+        position: absolute;
+        left: 0;
+        top: 30px;
+        &:not(:empty) {
+            border: 1px solid @gray_c;
+        }
+        overflow: hidden;
+        ._datePicker .calender, ._timePicker ._section {
+            border-left: 0;
+            border-right: 0;
+        }
+        ._action {
+            padding: 20px;
+            text-align: right;
+            ._selector {
+                margin-right: 5px;
+                font-size: 13px;
+            }
+        }
+    }
+}

@@ -7,7 +7,6 @@ const RadioGroup = React.createClass({
     mixins: [UpdatePropsMixin],
     propTypes: {
         options: React.PropTypes.array,
-        value: React.PropTypes.string,
         labelName: React.PropTypes.string,
         valueName: React.PropTypes.string,
         onChange: React.PropTypes.func,

@@ -1,7 +1,7 @@
 const React = require('react')
+const PropTypes = React.PropTypes
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
-const dateUtil = require('./util/date')
-const {dateStr2Obj, obj2DateStr} = dateUtil
+const formatDate = require('./util/datetime').formatDate
 const DocumentClickMixin = require('./mixin/DocumentClickMixin')
 const Calender = require('./Calender')
 const klassName = require('./util/className')
@@ -9,14 +9,19 @@ const klassName = require('./util/className')
 const DatePicker = React.createClass({
     mixins: [DocumentClickMixin],
     propTypes: {
-        onChange: React.PropTypes.func.isRequired
+        onChange: PropTypes.func.isRequired,
+        showPreview: PropTypes.bool,
+        format: PropTypes.string.isRequired,
+        value: PropTypes.instanceOf(Date),
     },
 
     getDefaultProps() {
         return {
             className: '',
             placeHolder: 'select date',
-            defaultSelected: false
+            defaultSelected: false,
+            showPreview: true,
+            format: 'yyyy-MM-dd',
         };
     },
 
@@ -28,13 +33,15 @@ const DatePicker = React.createClass({
         return { value, open: false };
     },
 
-    initDate(defaultValue=this.props.value){
+    initDate(date=this.props.value){
         const {defaultSelected} = this.props
-        if (!defaultValue && !defaultSelected) {
+        if (!date && !defaultSelected) {
             return 
         }
-        const {year, month, day} = dateStr2Obj(defaultValue, this.dateParams());
-        return obj2DateStr(year, month, day);
+        date = date || new Date()
+        date.setHours(0,0,0,0)
+
+        return date
     },
 
     componentWillReceiveProps(nextProps) {
@@ -66,18 +73,19 @@ const DatePicker = React.createClass({
 
     render() {
         const {open, value} = this.state;
-        let {begin, end, className, placeHolder} = this.props;
+        let {begin, end, className, placeHolder, showPreview, format} = this.props;
+        let valueStr = value ? formatDate(value, format) : ''
         if (open) className += ' _active';
         return (
             <div className={klassName('datepicker', className)}>
                 <div className="input" onClick={() => {this.setState({ open: true }) }}>
-                    <input type="text" className="_input" value={value} readOnly placeholder={placeHolder} />
+                    <input type="text" className="_input" value={valueStr} readOnly placeholder={placeHolder} />
                     <i></i>
                 </div>
                 <ReactCssTransitionGroup className="_picker" transitionName="datepicker"
                     transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ?
-                        <Calender begin={begin} end={end} 
+                        <Calender begin={begin} end={end} showPreview={showPreview}
                             value={value} onChange={this.handleValChange}/>
                         : null
                     }

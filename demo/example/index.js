@@ -22,6 +22,7 @@ import Progress from '../../component/Progress'
 import FlashMessage from '../../component/FlashMessage'
 import Notice from '../../component/Notice'
 import NoticeCenter from '../../component/NoticeCenter'
+import Panel from '../../component/Panel'
 
 export {
     CheckBox,
@@ -47,5 +48,6 @@ export {
     Progress,
     FlashMessage,
     Notice,
-    NoticeCenter
+    NoticeCenter,
+    Panel,
 };

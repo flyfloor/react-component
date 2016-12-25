@@ -18,7 +18,6 @@ const CheckBoxGroup = React.createClass({
         };
     },
     propTypes: {
-        vaule: React.PropTypes.string,
         options: React.PropTypes.array,
         labelName: React.PropTypes.string,
         valueName: React.PropTypes.string,

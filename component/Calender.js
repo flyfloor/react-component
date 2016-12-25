@@ -1,11 +1,13 @@
 const React = require('react');
-const dateUtil = require('./util/date');
-const {dateStr2Obj, obj2DateStr, date2DateStr} = dateUtil
+const PropTypes = React.PropTypes
+const extractDate = require('./util/datetime').extractDate;
 
 const constants = require('./util/constants')
 const {WEEK_LABEL, MONTH_LABEL} = constants
-
 const klassName = require('./util/className');
+
+const TODAY = new Date();
+TODAY.setHours(0,0,0,0);
 
 
 const Calender = React.createClass({
@@ -16,31 +18,33 @@ const Calender = React.createClass({
 
     getDefaultProps() {
         return {
-            className: ""
+            className: "",
+            showPreview: true,
         };
     },
 
     propTypes: {
-        className: React.PropTypes.string
+        className: PropTypes.string,
+        showPreview: PropTypes.bool,
+        value: PropTypes.instanceOf(Date),
     },
 
     initDate(date=this.props.value){
-        const {year, month, day} = dateStr2Obj(date, this.dateParams());
-        const value = obj2DateStr(year, month, day);
-        return {year, month, day, value}
+        date = date || new Date()
+        date.setHours(0,0,0,0)
+
+        return Object.assign(extractDate(date), { value: date })
     },
 
-    handleClick(date){
-        const value = date2DateStr(date);
+    handleClick(value){
+        let {year, month, day} = extractDate(value)
         this.setState({
             value,
+            year,
+            month,
+            day,
         });
         if (this.props.onChange) this.props.onChange(value)
-    },
-
-    dateParams(){
-        const {begin, end} = this.props;
-        return { begin, end };
     },
 
     handlePreMonth(){
@@ -61,19 +65,18 @@ const Calender = React.createClass({
         }
     },
 
-    renderDisplay(){
-        let { year: displayY, month: displayM, day: displayD} = dateStr2Obj(this.state.value);
-        let displayW = WEEK_LABEL[new Date(displayY, displayM - 1, displayD).getDay()];
+    handlePreYear(){
+        let {year} = this.state
+        this.setState({
+            year: year - 1
+        });
+    },
 
-        return <div className="_label">
-                    <a href="javascript:;" className="_year" onClick={this.pickYear}>{displayY}</a>
-                    <p className="_date">
-                        <span>{displayW}, </span>
-                        <a href="javascript:;" onClick={this.pickMonth}>
-                            {displayM}月 {displayD}日
-                        </a>
-                    </p>
-                </div>
+    handleNextYear(){
+        let {year} = this.state
+        this.setState({
+            year: year + 1
+        });
     },
 
     componentWillReceiveProps(nextProps) {
@@ -81,14 +84,32 @@ const Calender = React.createClass({
             this.setState(this.initDate(nextProps.value));
         }
     },
+    
+    // show preview
+    renderPreview(){
+        let { year, month, day } = this.state
+        let displayW = WEEK_LABEL[new Date(year, month - 1, day).getDay()];
 
+        return <div className="_label">
+                    <a href="javascript:;" className="_year" onClick={this.pickYear}>{year}</a>
+                    <p className="_date">
+                        <span>{displayW}, </span>
+                        <a href="javascript:;" onClick={this.pickMonth}>
+                            {month}月 {day}日
+                        </a>
+                    </p>
+                </div>
+    },
+
+    // year picker toggle
     handleYearPickerClick(year){
         this.setState({
             year,
             showYear: false,
         });
     },
-
+    
+    // month picker toggle
     handleMonthPickerClick(month){
         this.setState({
             month,
@@ -96,18 +117,20 @@ const Calender = React.createClass({
         });
     },
 
+    // year picker range change
     handlePreYearRange(){
         this.setState({
             year: this.state.year - 12,
         });
     },
 
+    // year picker range change
     handleNextYearRange(){
         this.setState({
             year: this.state.year + 12,
         });
     },
-
+    
     pickYear(){
         this.setState({
             showYear: true,
@@ -168,7 +191,7 @@ const Calender = React.createClass({
         let yearPickerNodes = showYear ? 
                             <div className="_year-picker">
                                 <div className="_picker-label">
-                                    <a href="javascript:;" className="_nav _pre" onClick={() => this.handlePreYearRange(beginY)}>
+                                    <a href="javascript:;" className="_nav _prev" onClick={() => this.handlePreYearRange(beginY)}>
                                         <i></i>
                                     </a>
                                     <div className="_link">
@@ -188,9 +211,12 @@ const Calender = React.createClass({
     },
 
     renderDayPicker(){
-        const TODAY = date2DateStr(new Date());
         const {year, month, value, showYear, showMonth} = this.state;
-        const dateCount = new Date(year, month, 0).getDate();
+
+        // date count in every month
+        const dateCount = new Date(year, month - 1, 0).getDate();
+
+        // week index
         const index = new Date(year, month - 1, 1).getDay();
         let matrixNodes = [[]];
         let { begin, end } = this.props;
@@ -201,16 +227,15 @@ const Calender = React.createClass({
             } else {
                 const _index = i - index + 1;
                 const row = Math.floor(i / 7);
-                const itemDateStr = obj2DateStr(year, month, _index);
+                const itemDate = new Date(year, month - 1, _index);
                 if (!matrixNodes[row]) matrixNodes[row] = [];
-                
-                let isDisabled = itemDateStr < begin || itemDateStr > end;
-                const itemVal = new Date(itemDateStr);
+
+                let isDisabled = itemDate < begin || itemDate > end;
 
                 matrixNodes[row].push(<td key={`canlender-col-${i}`}>
-                                        <Calender.Item active={value == itemDateStr && !isDisabled} 
-                                            disabled={isDisabled} isToday={TODAY == itemDateStr} 
-                                            onClick={this.handleClick} value={itemVal} label={_index}/>
+                                        <Calender.Item active={value.getTime() == itemDate.getTime() && !isDisabled} 
+                                            disabled={isDisabled} isToday={TODAY.getDate() == itemDate.getDate()} 
+                                            onClick={this.handleClick} value={itemDate} label={_index}/>
                                       </td>)
             }
         }
@@ -218,7 +243,10 @@ const Calender = React.createClass({
         let dayNodes = showYear || showMonth ? null 
                         : <div className="_day-picker">
                             <div className="_picker-label">
-                                <a href="javascript:;" className="_nav _pre" onClick={this.handlePreMonth}>
+                                <a href="javascript:;" className="_nav _prev _year" onClick={this.handlePreYear}>
+                                    <i></i>
+                                </a>
+                                <a href="javascript:;" className="_nav _prev" onClick={this.handlePreMonth}>
                                     <i></i>
                                 </a>
                                 <div className="_link">
@@ -228,6 +256,9 @@ const Calender = React.createClass({
                                     <span>月</span>
                                 </div>
                                 <a href="javascript:;" className="_nav _next" onClick={this.handleNextMonth}>
+                                    <i></i>
+                                </a>
+                                <a href="javascript:;" className="_nav _next _year" onClick={this.handleNextYear}>
                                     <i></i>
                                 </a>
                             </div>
@@ -255,9 +286,10 @@ const Calender = React.createClass({
     },
 
     render() {
+        const {showPreview} = this.props
         return (
             <div className={klassName(this.props.className, 'calender')}>
-                {this.renderDisplay()}
+                {showPreview ? this.renderPreview() : null}
                 {this.renderYearPicker()}
                 {this.renderMonthPicker()}
                 {this.renderDayPicker()}

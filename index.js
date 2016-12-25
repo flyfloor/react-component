@@ -27,6 +27,7 @@ var Calender = require("./lib/Calender.js");
 var Progress = require("./lib/Progress.js");
 var FlashMessage = require("./lib/FlashMessage.js");
 var NoticeCenter = require("./lib/NoticeCenter.js");
+var Panel = require("./lib/Panel.js");
 
 module.exports = {
     DocumentClickMixin: DocumentClickMixin,
@@ -56,4 +57,5 @@ module.exports = {
     Progress: Progress,
     FlashMessage: FlashMessage,
     NoticeCenter: NoticeCenter,
+    Panel: Panel,
 };

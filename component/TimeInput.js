@@ -61,8 +61,9 @@ const TimeInput = React.createClass({
 
     render() {
         const {inputVal} = this.state;
-        let {className, placeHolder} = this.props;
-        className = klassName(className, 'timeinput');
+        let {className, placeHolder, simple} = this.props;
+        simple = simple ? '_simple' : ''
+        className = klassName(className, 'timeinput', simple);
         return (
             <div className={className}>
                 <input type="text" className="_input" placeholder={placeHolder} 

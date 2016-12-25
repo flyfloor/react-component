@@ -213,8 +213,8 @@ const Calender = React.createClass({
     renderDayPicker(){
         const {year, month, value, showYear, showMonth} = this.state;
 
-        // date count in every month
-        const dateCount = new Date(year, month - 1, 0).getDate();
+        // date count in that month
+        const dateCount = new Date(year, month, 0).getDate();
 
         // week index
         const index = new Date(year, month - 1, 1).getDay();

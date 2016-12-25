@@ -1,9 +1,10 @@
 const isType = require('./typeCheck').isType
 
 const MAX_HOUR = 23;
-const MAX_MIN = 59;
-const MAX_SEC = MAX_MIN;
+const MAX_MINUTE = 59;
+const MAX_SECOND = MAX_MINUTE;
 
+// 时间字符串 => {小时，分钟，秒}
 const timeStr2Obj = (value='00:00:00', options = {
     simple: false, 
 }) => {
@@ -13,31 +14,56 @@ const timeStr2Obj = (value='00:00:00', options = {
 
     for (let i = 0; i < arr.length; i++) {
         let item = String(arr[i]);
-        if (item.length > 2) item = item.slice(0, 2);
         if (item.length === 1) item = `0${item}`;
         if (!item) item = '00';
         new_arr.push(item);
     }
 
-    let [hour, min, sec] = new_arr;
+    let [hour, minute, second] = new_arr;
     hour = validateUnitByMax(hour, MAX_HOUR);
-    min = validateUnitByMax(min, MAX_MIN);
+    minute = validateUnitByMax(minute, MAX_MINUTE);
     
-    if (options.simple) return { hour, min };
+    if (options.simple) return { hour, minute };
 
-    sec = validateUnitByMax(sec, MAX_SEC);
+    second = validateUnitByMax(second, MAX_SECOND);
 
-    return { hour, min, sec };
+    return { hour, minute, second };
 };
 
+// {小时, 分钟, 秒} => 时间字符串
+const obj2TimeStr = ({ hour = 0, minute = 0, second = 0}, options = {
+    simple: false,
+}) => {
+    hour = validateUnitByMax(hour, MAX_HOUR)
+    minute = validateUnitByMax(minute, MAX_MINUTE)
+
+    if (hour < 10) {
+        hour = `0${hour}`
+    }
+    if (minute < 10) {
+        minute = `0${minute}`
+    }
+    
+    if (options.simple) {
+        return `${hour}:${minute}`
+    }
+    second = validateUnitByMax(second, MAX_SECOND)
+
+    if (second < 10) {
+        second = `0${second}`
+    }
+
+    return `${hour}:${minute}:${second}`
+}
+
 const validateUnitByMax = (value, max) => {
-    value = String(parseInt(value));
-    if (value > max) value = String(Math.floor(value % (max + 1)));
-    if (isNaN(value) || value < 0) value = '00';
-    if (value.length === 1) value = `0${value}`;
+    value = parseInt(value);
+    if (value > max) value = Math.floor(value % (max + 1));
+    if (isNaN(value) || value < 0) value = 0;
     return value;
 };
 
 module.exports = { 
-    timeStr2Obj 
+    timeStr2Obj,
+    obj2TimeStr, 
 }

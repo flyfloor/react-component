@@ -22,19 +22,19 @@ export default class TimeInputDemo extends React.Component {
                 <ul>
                     <li>
                         <h4>Default time input</h4>
-                        <TimeInput/>
+                        <TimeInput onChange={value => console.log(value)}/>
                         <pre>
                             <code>
-                                {`<TimeInput/>`}
+                                {`<TimeInput onChange={onChangeFunc}/>`}
                             </code>
                         </pre>
                     </li>
                     <li>
                         <h4>Time input with given value</h4>
-                        <TimeInput value="12:44:23"/>
+                        <TimeInput value="12:44:23" onChange={value => console.log(value)}/>
                         <pre>
                             <code>
-                                {`<TimeInput value="12:44:23"/>`}
+                                {`<TimeInput value="12:44:23" onChange={onChangeFunc}/>`}
                             </code>
                         </pre>
                     </li>
@@ -50,10 +50,10 @@ export default class TimeInputDemo extends React.Component {
                     </li>
                     <li>
                         <h4>simple</h4>
-                        <TimeInput simple={true} value="2:12"/>
+                        <TimeInput simple={true} value="02:12" onChange={value => console.log(value)}/>
                         <pre>
                             <code>
-                                {`<TimeInput simple={true} value="2:12"/>`}
+                                {`<TimeInput simple={true} value="02:12"/>`}
                             </code>
                         </pre>
                     </li>

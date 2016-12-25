@@ -20,11 +20,14 @@ var Carousel = require("./lib/Carousel.js");
 var Pagination = require("./lib/Pagination.js");
 var SlideMenu = require("./lib/SlideMenu.js");
 var TimeInput = require("./lib/TimeInput.js");
+var TimePicker = require("./lib/TimePicker.js");
 var DatePicker = require("./lib/DatePicker.js");
+var DateTimePicker = require("./lib/DateTimePicker.js");
 var Calender = require("./lib/Calender.js");
 var Progress = require("./lib/Progress.js");
 var FlashMessage = require("./lib/FlashMessage.js");
 var NoticeCenter = require("./lib/NoticeCenter.js");
+var Panel = require("./lib/Panel.js");
 
 module.exports = {
     DocumentClickMixin: DocumentClickMixin,
@@ -47,9 +50,12 @@ module.exports = {
     Pagination: Pagination,
     SlideMenu: SlideMenu,
     TimeInput: TimeInput,
+    TimePicker: TimePicker,
     DatePicker: DatePicker,
+    DateTimePicker: DateTimePicker,
     Calender: Calender,
     Progress: Progress,
     FlashMessage: FlashMessage,
     NoticeCenter: NoticeCenter,
+    Panel: Panel,
 };

@@ -1,11 +1,12 @@
 import React from 'react';
 import {Calender} from './index.js';
+import {formatDate} from '../../component/util/datetime';
 
 export default class CalenderDemo extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value: ''
+            value: undefined
         };
     }
 
@@ -31,16 +32,16 @@ export default class CalenderDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Calender with given value</h4>
-                        <Calender value="2016-04-20"/>
+                        <Calender value={new Date("2016-04-20")}/>
                         <pre>
                             <code>
-                                {'<Calender value="2016-04-20"/>'}
+                                {'<Calender value={new Date("2016-04-20")}/>'}
                             </code>
                         </pre>
                     </li>
                     <li>
                         <h4>Calender value change event</h4>
-                        <p>date changed to {this.state.value}</p>
+                        <p>date changed to {formatDate(this.state.value)}</p>
                         <Calender value={this.state.value} onChange={this.handleChange.bind(this)}/>
                         <pre>
                             <code>
@@ -50,10 +51,19 @@ export default class CalenderDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Calender with begin and end</h4>
-                        <Calender begin="2015-12-15" end="2016-11-08"/>
+                        <Calender begin={new Date("2015-12-15")} end={new Date("2016-11-08")}/>
                         <pre>
                             <code>
-                                {'<Calender begin="2015-12-15" end="2016-11-08"/>'}
+                                {'<Calender begin={new Date("2015-12-15")} end={new Date("2016-11-08")}/>'}
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>Calender with no preview</h4>
+                        <Calender showPreview={false}/>
+                        <pre>
+                            <code>
+                                {'<Calender showPreview={false} />'}
                             </code>
                         </pre>
                     </li>

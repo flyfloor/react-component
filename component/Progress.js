@@ -7,7 +7,7 @@ const Progress = React.createClass({
         value: PropTypes.number,
         disabled: PropTypes.bool,
         size: PropTypes.oneOf(['large', 'normal', 'small']),
-        status: PropTypes.oneOf(['warning', 'failed', 'success'])
+        status: PropTypes.oneOf(['warning', 'failed', 'success', 'active'])
     },
     
     getDefaultProps() {

@@ -1,15 +1,74 @@
 @import url('meta');
+@import url('transition.less');
 
 .timeinput {
     position: relative;
-    width: 200px;
+    width: 160px;
     ._input {
         border: 1px solid @gray_b;
-        margin-top: 5px;
         width: 100%;
         padding: 0 10px;
         line-height: 25px;
         height: 30px;
         font-size: 14px;
     }
+}
+
+.timepicker, .datetime-picker {
+    width: 160px;
+    position: relative;
+    .timeinput {
+        width: 100%;
+    }
+    ul li {
+        list-style-type: none;
+    }
+    ._wrap {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 30px;
+        width: 100%;
+        z-index: 100;
+        background-color: @white;
+    }
+    ._section {
+        overflow: hidden;
+        border: 1px solid @gray_c;
+    }
+    ._list {
+        position: relative;
+        width: 100/3%;
+        float: left;
+        max-height: 140px;
+        margin: 0;
+        overflow-y: scroll;
+        &+._list {
+            border-left: 1px solid @gray_c;
+        }
+        > ul {
+            padding: 0 0 120px 0;
+            display: block;
+        }
+        ._item {
+            text-align: center;
+            cursor: pointer;
+            padding: 2px 0;
+            color: @gray;
+            font-size: 13px;
+            line-height: 26px;
+            &._active {
+                color: @black_a;
+                background-color: @gray_d;
+            }
+        }
+    }
+    &._simple {
+        width: 120px;
+        ._list {
+            width: 50%;
+        }
+    }
+    
+    .basic_transition;
 }

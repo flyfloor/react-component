@@ -1,4 +1,5 @@
 const React = require('react')
+const ReactDOM = require('react-dom')
 const klassName = require('./util/className')
 const PropTypes = React.PropTypes
 const ENTER_KC = require('./mixin/keyCode').ENTER_KC
@@ -126,7 +127,7 @@ const Pagination = React.createClass({
         let {total} = this.props
         // blur || keyDown
         if (e.keyCode === undefined || e.keyCode === ENTER_KC) {
-            let value = parseInt(e.target)
+            let value = parseInt(e.target.value) || 1
             if (value < 1) {
                 value = 1
             }
@@ -140,6 +141,10 @@ const Pagination = React.createClass({
             if (onChange) {
                 onChange(value)
             }
+            if (value != e.target.value) {
+                let jumpInput = ReactDOM.findDOMNode(this.refs.jumpInput)
+                jumpInput.value = value
+            }
         }
     },
 
@@ -150,7 +155,7 @@ const Pagination = React.createClass({
             return (
                 <li key={'jump-page'} className="_item _jump">
                     <span>Go </span>
-                    <input type="number" defaultValue={current + 1} 
+                    <input type="number" ref="jumpInput" defaultValue={current + 1} 
                         onBlur={this.handlePageJump} 
                         onKeyDown={this.handlePageJump}/>
                 </li>

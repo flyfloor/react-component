@@ -92,7 +92,7 @@ const DateTimePicker = React.createClass({
         const {hour, second, minute, value, showDate, open} = this.state
         let date = formatDate(value, `${format} hh:mm:ss`)
         let pickerNode = showDate ? 
-                            <div className="_datePicker">
+                            <div className="_datepicker">
                                 <Calender showPreview={false} begin={begin} 
                                     end={end} value={new Date(value.getTime())} onChange={this.handleDateChange} />
                                 <div className="_action">
@@ -100,7 +100,7 @@ const DateTimePicker = React.createClass({
                                     <button className="_button" onClick={() => this.handleOpen(false)}>确认</button>
                                 </div>
                             </div>
-                            : <div className="_timePicker">
+                            : <div className="_timepicker">
                                 <SelectorList hour={hour} second={second} 
                                     minute={minute} onChange={this.handleTimeChange} />
                                 <div className="_action">

@@ -101,7 +101,7 @@ const TimePicker = React.createClass({
     render() {
         const {value, open, hour, second, minute} = this.state
         let {simple, className} = this.props
-        className = klassName('timepicker', simple ? '_simple': '')
+        className = klassName(className, 'timepicker', simple ? '_simple': '')
         return (
             <div className={className}>
                 <TimeInput simple={simple} onChange={this.handleValueChange} value={value} 

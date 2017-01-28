@@ -38,7 +38,7 @@ const DatePicker = React.createClass({
         if (!date && !defaultSelected) {
             return 
         }
-        date = date || new Date()
+        date = date ? new Date(date.getTime()) : new Date()
         date.setHours(0,0,0,0)
 
         return date
@@ -62,7 +62,7 @@ const DatePicker = React.createClass({
             value,
             open: false
         });
-        this.props.onChange(value)
+        this.props.onChange(new Date(value.getTime()))
     },
 
     onOtherDomClick(){

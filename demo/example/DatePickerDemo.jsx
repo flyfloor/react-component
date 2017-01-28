@@ -52,7 +52,7 @@ export default class DatePickerDemo extends React.Component {
                     <li>
                         <h4>DatePicker with onChange event</h4>
                         <p>value has changed to {formatDate(this.state.value)}</p>
-                        <DatePicker onChange={this.handleValChange.bind(this)}/>
+                        <DatePicker value={this.state.value} onChange={this.handleValChange.bind(this)}/>
                         <pre>
                             <code>
                                 {`<DatePicker onChange={onChangeFunction}/>`}

@@ -1,6 +1,6 @@
 const formatDate = (date, fmt="yyyy-MM-dd") => {
     if (!date) {
-        date = new Date()
+        return ''
     }
     let obj = {
         "M+": date.getMonth() + 1,

@@ -54,7 +54,7 @@ const TimePicker = React.createClass({
        this.props.onChange(value)
     },
 
-    handleFocus(){
+    handleInputClick(){
         this.setState({
             open: true
         });
@@ -105,7 +105,7 @@ const TimePicker = React.createClass({
         return (
             <div className={className}>
                 <TimeInput simple={simple} onChange={this.handleValueChange} value={value} 
-                    onFocus={this.handleFocus} onBlur={this.handleBlur} />
+                    onClick={this.handleInputClick} onBlur={this.handleBlur} />
                 <ReactCssTransitionGroup className="_wrap" transitionName="timepicker"
                     transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ? 

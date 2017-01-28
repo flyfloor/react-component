@@ -160,8 +160,8 @@ const DateTimePicker = React.createClass({
                             </div>
         return (
             <div className={klassName('datetime-picker', className)}>
-                <div className="_input">
-                    <input type="text" placeholder={placeHolder} readOnly value={date} onClick={() => this.handleOpen(true)} />
+                <div className="_input" onClick={() => this.handleOpen(true)}>
+                    <input type="text" placeholder={placeHolder} readOnly value={date} />
                     <i></i>
                 </div>
                 <ReactCssTransitionGroup className="_wrap" transitionName="datetime"

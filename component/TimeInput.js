@@ -40,6 +40,7 @@ const TimeInput = React.createClass({
     handleClick(e){
         let {onClick} = this.props
         if (onClick) {
+            this.refs.inputDOM.focus()
             onClick(e)
         }
     },
@@ -66,10 +67,10 @@ const TimeInput = React.createClass({
         className = klassName(className, 'timeinput', simple);
         return (
             <div className={className}>
-                <div className="_input">
+                <div className="_input" onClick={this.handleClick}>
                     <input type="text" className="_input" placeholder={placeHolder} 
-                    onClick={this.handleClick}
-                    onBlur={this.handleOnBlur} value={inputVal} 
+                        ref="inputDOM"
+                        onBlur={this.handleOnBlur} value={inputVal} 
                         onChange={this.handleInputChange}/>
                     <i></i>
                 </div>

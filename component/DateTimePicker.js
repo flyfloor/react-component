@@ -15,13 +15,13 @@ const DateTimePicker = React.createClass({
         format: PropTypes.string.isRequired,
         value: PropTypes.instanceOf(Date),
         onChange: PropTypes.func.isRequired,
-        conFirm: PropTypes.element,
+        confirm: PropTypes.element,
         placeHolder: PropTypes.string,
     },
     getDefaultProps() {
         return {
             format: 'yyyy-MM-dd',
-            conFirm: <button>confirm</button>,
+            confirm: <button>confirm</button>,
             placeHolder: 'select date',
         };
     },
@@ -134,7 +134,7 @@ const DateTimePicker = React.createClass({
     },
 
     render() {
-        let {className, begin, end, format, conFirm, placeHolder} = this.props
+        let {className, begin, end, format, confirm, placeHolder} = this.props
         const {hour, second, minute, value, showDate, open} = this.state
         let date = formatDate(value, `${format} hh:mm:ss`)
         let pickerNode = showDate ? 
@@ -147,7 +147,7 @@ const DateTimePicker = React.createClass({
                                 }
                                 <div className="_action">
                                     <a href="javascript:;" className="_selector" onClick={this.togglePicker}>选择时间</a>
-                                    <span className="_button" onClick={this.handleConfirm}>{conFirm}</span>
+                                    <span className="_button" onClick={this.handleConfirm}>{confirm}</span>
                                 </div>
                             </div>
                             : <div className="_timepicker">
@@ -155,7 +155,7 @@ const DateTimePicker = React.createClass({
                                     minute={minute} onChange={this.handleTimeChange} />
                                 <div className="_action">
                                     <a href="javascript:;" className="_selector" onClick={this.togglePicker}>选择日期</a>
-                                    <span className="_button" onClick={this.handleConfirm}>{conFirm}</span>
+                                    <span className="_button" onClick={this.handleConfirm}>{confirm}</span>
                                 </div>
                             </div>
         return (

@@ -21,7 +21,7 @@ const DateTimePicker = React.createClass({
     getDefaultProps() {
         return {
             format: 'yyyy-MM-dd',
-            conFirm: <button>close</button>,
+            conFirm: <button>confirm</button>,
             placeHolder: 'select date',
         };
     },

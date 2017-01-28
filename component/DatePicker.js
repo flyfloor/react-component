@@ -19,7 +19,6 @@ const DatePicker = React.createClass({
         return {
             className: '',
             placeHolder: 'select date',
-            defaultSelected: false,
             showPreview: true,
             format: 'yyyy-MM-dd',
         };
@@ -34,8 +33,7 @@ const DatePicker = React.createClass({
     },
 
     initDate(date=this.props.value){
-        const {defaultSelected} = this.props
-        if (!date && !defaultSelected) {
+        if (!date) {
             return 
         }
         date = date ? new Date(date.getTime()) : new Date()

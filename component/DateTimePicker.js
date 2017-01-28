@@ -15,11 +15,14 @@ const DateTimePicker = React.createClass({
         format: PropTypes.string.isRequired,
         value: PropTypes.instanceOf(Date),
         onChange: PropTypes.func.isRequired,
+        conFirm: PropTypes.element,
+        placeHolder: PropTypes.string,
     },
     getDefaultProps() {
         return {
             format: 'yyyy-MM-dd',
-            value: new Date(),
+            conFirm: <button>close</button>,
+            placeHolder: 'select date',
         };
     },
     getInitialState() {
@@ -38,15 +41,34 @@ const DateTimePicker = React.createClass({
     },
 
     initDateTime(date = this.props.value){
+        if (!date) {
+            // default value is undefined
+            let nowDateObj = extractDate(new Date(), { showTime: true })
+            let hour = nowDateObj.hour
+            let minute = nowDateObj.minute
+            let second = nowDateObj.second
+            return { minute, second, hour }
+        }
         return Object.assign(extractDate(date, { showTime: true }), { value: date })
     },
 
     handleDateChange(date){
         let {hour, minute, second} = this.state
+        // intialize default time
+        if (!hour || !minute || !second) {
+            let nowDateObj = extractDate(new Date(), { showTime: true })
+            hour = nowDateObj.hour
+            minute = nowDateObj.minute
+            second = nowDateObj.second
+            this.setState({ hour, minute, second })
+        }
         date.setHours(hour, minute, second)
         this.setState({
             value: date
-        }, () => this.props.onChange(date));
+        }, () => {
+            // onChange date
+            this.props.onChange(new Date(date.getTime()))
+        })
     },
 
     handleTimeChange(type='hour', val){
@@ -54,17 +76,26 @@ const DateTimePicker = React.createClass({
             [type]: val
         }, () => {
             let {hour, minute, second, value} = this.state
-            if (value) {
-                value.setHours(hour, minute, second)
-                this.setState({
-                    value
-                }, () => this.props.onChange(value));
+            if (!value) {
+                value = new Date()
             }
+
+            value.setHours(hour, minute, second)
+            this.setState({
+                value
+            }, () => {
+                // onChange date
+                this.props.onChange(new Date(value.getTime()))
+            })
         });
     },
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.value.getTime() !== this.props.value.getTime()) {
+        if (!nextProps.value) {
+            return
+        }
+        // not have value or value changed
+        if (!this.props.value || nextProps.value.getTime() !== this.props.value.getTime()) {
             this.setState(this.initDateTime(nextProps.value));
         }
     },
@@ -80,6 +111,21 @@ const DateTimePicker = React.createClass({
         });
     },
 
+    handleConfirm(){
+        let {value, minute, hour, second} = this.state
+        if (!value) {
+            value = new Date()
+            value.setHours(hour, minute, second)
+            this.setState({
+                value
+            }, () => {
+                // onChange date
+                this.props.onChange(new Date(value.getTime()))
+            });
+        }
+        this.handleOpen(false)
+    },
+
     togglePicker(){
         let {showDate} = this.state
         this.setState({
@@ -88,16 +134,20 @@ const DateTimePicker = React.createClass({
     },
 
     render() {
-        let {className, begin, end, format} = this.props
+        let {className, begin, end, format, conFirm, placeHolder} = this.props
         const {hour, second, minute, value, showDate, open} = this.state
         let date = formatDate(value, `${format} hh:mm:ss`)
         let pickerNode = showDate ? 
                             <div className="_datepicker">
-                                <Calender showPreview={false} begin={begin} 
-                                    end={end} value={new Date(value.getTime())} onChange={this.handleDateChange} />
+                                {value ? 
+                                    <Calender showPreview={false} begin={begin} 
+                                        end={end} value={new Date(value.getTime())} onChange={this.handleDateChange} />
+                                    : <Calender showPreview={false} begin={begin} 
+                                        end={end} onChange={this.handleDateChange} />
+                                }
                                 <div className="_action">
                                     <a href="javascript:;" className="_selector" onClick={this.togglePicker}>选择时间</a>
-                                    <button className="_button" onClick={() => this.handleOpen(false)}>确认</button>
+                                    <span className="_button" onClick={this.handleConfirm}>{conFirm}</span>
                                 </div>
                             </div>
                             : <div className="_timepicker">
@@ -105,12 +155,15 @@ const DateTimePicker = React.createClass({
                                     minute={minute} onChange={this.handleTimeChange} />
                                 <div className="_action">
                                     <a href="javascript:;" className="_selector" onClick={this.togglePicker}>选择日期</a>
-                                    <button className="_button" onClick={() => this.handleOpen(false)}>确认</button>
+                                    <span className="_button" onClick={this.handleConfirm}>{conFirm}</span>
                                 </div>
                             </div>
         return (
             <div className={klassName('datetime-picker', className)}>
-                <input type="text" className="_input" readOnly value={date} onClick={() => this.handleOpen(true)} />
+                <div className="_input">
+                    <input type="text" placeholder={placeHolder} readOnly value={date} onClick={() => this.handleOpen(true)} />
+                    <i></i>
+                </div>
                 <ReactCssTransitionGroup className="_wrap" transitionName="datetime"
                     transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ? 

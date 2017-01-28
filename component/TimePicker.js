@@ -21,9 +21,6 @@ const TimePicker = React.createClass({
 
     getInitialState() {
         let {value=""} = this.initTime();
-        if (value !== this.props.value) {
-            this.props.onChange(value)
-        }
         let {hour, minute, second} = timeStr2Obj(value)
         return { 
             open: false,

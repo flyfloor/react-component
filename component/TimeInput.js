@@ -21,9 +21,6 @@ const TimeInput = React.createClass({
 
     getInitialState() {
         let {value=""} = this.initTime();
-        if (value !== this.props.value) {
-            this.props.onChange(value)
-        }
         return { value, inputVal: value };
     },
 

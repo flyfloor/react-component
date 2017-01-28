@@ -4,13 +4,16 @@
     position: relative;
     width: 280px;
     ._input {
+        position: relative;
         cursor: pointer;
-        width: 100%;
-        line-height: 25px;
-        height: 30px;
-        padding: 0 10px;
-        color: @black;
-        border: 1px solid @gray_b;
+        >input {
+            width: 100%;
+            line-height: 25px;
+            height: 30px;
+            padding: 0 10px;
+            color: @black;
+            border: 1px solid @gray_b;
+        }
     }
     >._wrap {
         position: absolute;

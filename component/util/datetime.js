@@ -1,6 +1,7 @@
+// date => date string
 const formatDate = (date, fmt="yyyy-MM-dd") => {
     if (!date) {
-        date = new Date()
+        return ''
     }
     let obj = {
         "M+": date.getMonth() + 1,
@@ -22,7 +23,7 @@ const formatDate = (date, fmt="yyyy-MM-dd") => {
     return fmt;
 }
 
-
+// extract date to {year, month, day, hour, minute, second, miniSecond}
 const extractDate = (date, opt) => {
     opt = opt || {}
     if (!date) {

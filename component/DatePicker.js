@@ -19,7 +19,6 @@ const DatePicker = React.createClass({
         return {
             className: '',
             placeHolder: 'select date',
-            defaultSelected: false,
             showPreview: true,
             format: 'yyyy-MM-dd',
         };
@@ -34,11 +33,10 @@ const DatePicker = React.createClass({
     },
 
     initDate(date=this.props.value){
-        const {defaultSelected} = this.props
-        if (!date && !defaultSelected) {
+        if (!date) {
             return 
         }
-        date = date || new Date()
+        date = date ? new Date(date.getTime()) : new Date()
         date.setHours(0,0,0,0)
 
         return date
@@ -62,7 +60,7 @@ const DatePicker = React.createClass({
             value,
             open: false
         });
-        this.props.onChange(value)
+        this.props.onChange(new Date(value.getTime()))
     },
 
     onOtherDomClick(){

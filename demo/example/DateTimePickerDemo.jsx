@@ -7,7 +7,7 @@ export default class DateTimePickerDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: new Date(),
+            value: undefined,
         }
     }
     handleValueChange(value){
@@ -22,7 +22,7 @@ export default class DateTimePickerDemo extends Component {
                 <ul>
                     <li>
                         <h4>Default datetime picker</h4>
-                        <DateTimePicker onChange={val => {}} />
+                        <DateTimePicker onChange={val => console.log(val)} />
                         <pre>
                             <code>
                                 {`<DateTimePicker onChange={onChangeFunction} />`}
@@ -31,7 +31,7 @@ export default class DateTimePickerDemo extends Component {
                     </li>
                     <li>
                         <h4>Given value</h4>
-                        <DateTimePicker value={new Date('2015-08-22T03:23:34')} onChange={val => {} }/>
+                        <DateTimePicker value={new Date('2015-08-22T03:23:34')} onChange={val => console.log(val) }/>
                         <pre>
                             <code>
                                 {` <DateTimePicker value={new Date('2015-08-22T03:23:34')} onChange={onChangeFunction}/>`}
@@ -50,8 +50,8 @@ export default class DateTimePickerDemo extends Component {
                     </li>
                     <li>
                         <h4>begin and end</h4>
-                        <DateTimePicker begin={new Date('2015-12-23')} end={new Date('2016-12-07')}
-                             onChange={val => {} }/>
+                        <DateTimePicker value={this.state.value} begin={new Date('2015-12-23')} end={new Date('2016-12-07')}
+                             onChange={val => console.log(val) }/>
                         <pre>
                             <code>
                                 {`<DateTimePicker begin={new Date('2015-12-23')} end={new Date('2016-12-07')} onChange={onChangeFunction}/>`}

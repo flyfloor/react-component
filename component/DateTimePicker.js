@@ -27,9 +27,6 @@ const DateTimePicker = React.createClass({
     },
     getInitialState() {
         const {value, minute, second, hour } = this.initDateTime();
-        if (value !== this.props.value) {
-            this.props.onChange(value)
-        }
         return { 
             value, 
             minute, 
@@ -113,15 +110,28 @@ const DateTimePicker = React.createClass({
 
     handleConfirm(){
         let {value, minute, hour, second} = this.state
+        let {begin, end} = this.props
+        let _preventClose = false
         if (!value) {
             value = new Date()
             value.setHours(hour, minute, second)
+            if (begin && value < begin) {
+                value = new Date(begin.getTime())
+                _preventClose = true
+            }
+            if (end && value > end) {
+                value = new Date(end.getTime())
+                _preventClose = true
+            }
             this.setState({
                 value
             }, () => {
                 // onChange date
                 this.props.onChange(new Date(value.getTime()))
             });
+            if (_preventClose) {
+                return
+            }
         }
         this.handleOpen(false)
     },

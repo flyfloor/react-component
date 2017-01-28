@@ -23,7 +23,7 @@ const TimeInputMixin = {
         if (!val) {
             return {}
         }
-        return {value}
+        return { value }
     }, 
 }
 

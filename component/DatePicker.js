@@ -26,9 +26,6 @@ const DatePicker = React.createClass({
 
     getInitialState() {
         const value = this.initDate();
-        if (value !== this.props.value) {
-            this.props.onChange(value)
-        }
         return { value, open: false };
     },
 
@@ -36,10 +33,7 @@ const DatePicker = React.createClass({
         if (!date) {
             return 
         }
-        date = date ? new Date(date.getTime()) : new Date()
-        date.setHours(0,0,0,0)
-
-        return date
+        return new Date(date.getTime())
     },
 
     componentWillReceiveProps(nextProps) {

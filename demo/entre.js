@@ -87,6 +87,12 @@ class App extends React.Component {
                         </div>
                     </div>
                 </div>
+                <br/>
+                <h3 className="text-center">
+                    <span>Checkout this, new react components suites ===> </span>
+                    <a href="https://github.com/jerryshew/react-uikits">React UIKits</a>
+                </h3>
+                <br/>
                 <div className="container" id="demo_list">
                     <Nav/>
                     <div className="children">

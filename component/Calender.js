@@ -35,7 +35,16 @@ const Calender = React.createClass({
 
     initDate(date=this.props.value){
         date = date || new Date()
+        // initialize hour, minute, second
         date.setHours(0,0,0,0)
+        // date, month initialize by type
+        const {type} = this.props
+        if (type !== 'day') {
+            date.setDate(1)
+        }
+        if (type === 'year') {
+            date.setMonth(0)
+        }
 
         return Object.assign(extractDate(date), { value: date })
     },
@@ -94,15 +103,17 @@ const Calender = React.createClass({
         let { year, month, day } = this.state
         let displayW = WEEK_LABEL[new Date(year, month - 1, day).getDay()];
 
-        return <div className="_label">
-                    <a href="javascript:;" className="_year" onClick={this.pickYear}>{year}</a>
-                    <p className="_date">
-                        <span>{displayW}, </span>
-                        <a href="javascript:;" onClick={this.pickMonth}>
-                            {month}月 {day}日
-                        </a>
-                    </p>
-                </div>
+        return (
+            <div className="_label">
+                <a href="javascript:;" className="_year" onClick={this.pickYear}>{year}</a>
+                <p className="_date">
+                    <span>{displayW}, </span>
+                    <a href="javascript:;" onClick={this.pickMonth}>
+                        {month}月 {day}日
+                    </a>
+                </p>
+            </div>
+        )
     },
 
     // year picker toggle
@@ -110,16 +121,21 @@ const Calender = React.createClass({
         const {type} = this.props
         // if type is not year, set month picker display
         if (type !== 'year') {
-            this.setState({
+            return this.setState({
                 current: 'Month',
                 year,
             });
-            return
         }
+        // type is month, value change
+        let {value} = this.state
+        value.setYear(year)
 
         this.setState({
             year,
+            value,
         });
+
+        if (this.props.onChange) this.props.onChange(new Date(value.getTime()))
     },
     
     // month picker toggle
@@ -127,16 +143,21 @@ const Calender = React.createClass({
         const {type} = this.props
         // if type is day, set day picker display
         if (type === 'day') {
-            this.setState({
+            return this.setState({
                 current: 'Day',
                 month,
             });
-            return
         }
+        // type is month or year, value change
+        let {value, year} = this.state
+        value.setMonth(month - 1)
+        value.setYear(year)
 
         this.setState({
             month,
+            value,
         });
+        if (this.props.onChange) this.props.onChange(new Date(value.getTime()))
     },
 
     // year picker range change

@@ -6,13 +6,20 @@ const DocumentClickMixin = require('./mixin/DocumentClickMixin')
 const Calender = require('./Calender')
 const klassName = require('./util/className')
 
+const _DATE_FORMAT = {
+    day: 'yyyy-MM-dd',
+    month: 'yyyy-MM',
+    year: 'yyyy',
+}
+
 const DatePicker = React.createClass({
     mixins: [DocumentClickMixin],
     propTypes: {
         onChange: PropTypes.func.isRequired,
         showPreview: PropTypes.bool,
-        format: PropTypes.string.isRequired,
+        format: PropTypes.string,
         value: PropTypes.instanceOf(Date),
+        type: PropTypes.oneOf(['day', 'month', 'year']),
     },
 
     getDefaultProps() {
@@ -20,7 +27,7 @@ const DatePicker = React.createClass({
             className: '',
             placeHolder: 'select date',
             showPreview: true,
-            format: 'yyyy-MM-dd',
+            type: 'day',
         };
     },
 
@@ -65,7 +72,8 @@ const DatePicker = React.createClass({
 
     render() {
         const {open, value} = this.state;
-        let {begin, end, className, placeHolder, showPreview, format} = this.props;
+        let {begin, end, className, placeHolder, showPreview, format, type} = this.props;
+        format = format || _DATE_FORMAT[type]
         let valueStr = value ? formatDate(value, format) : ''
         if (open) className += ' _active';
         return (
@@ -77,7 +85,8 @@ const DatePicker = React.createClass({
                 <ReactCssTransitionGroup className="_picker" transitionName="datepicker"
                     transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ?
-                        <Calender begin={begin} end={end} showPreview={showPreview}
+                        <Calender begin={begin} end={end} 
+                            type={type} showPreview={showPreview}
                             value={value} onChange={this.handleValChange}/>
                         : null
                     }

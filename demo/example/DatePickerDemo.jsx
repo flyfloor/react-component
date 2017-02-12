@@ -70,6 +70,32 @@ export default class DatePickerDemo extends React.Component {
                             </code>
                         </pre>
                     </li>
+                    <li>
+                        <h4>DatePicker with type</h4>
+                        <p>month:</p>
+                        <DatePicker type='month' onChange={value => console.log(value) }/>
+                        <pre>
+                            <code>
+                                {`<DatePicker type='month' onChange={value => console.log(value) }/>`}
+                            </code>
+                        </pre>
+
+                        <p>year:</p>
+                        <DatePicker type='year' onChange={value => console.log(value) }/>
+                        <pre>
+                            <code>
+                                {`<DatePicker type='year' onChange={value => console.log(value) }/>`}
+                            </code>
+                        </pre>
+
+                        <p>day:</p>
+                        <DatePicker type='day' onChange={value => console.log(value) }/>
+                        <pre>
+                            <code>
+                                {`<DatePicker type='day' onChange={value => console.log(value) }/>`}
+                            </code>
+                        </pre>
+                    </li>
                 </ul>
             </div>
         );

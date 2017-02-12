@@ -67,6 +67,25 @@ export default class CalenderDemo extends React.Component {
                             </code>
                         </pre>
                     </li>
+                    <li>
+                        <h4>Calender with type</h4>
+                        <p>month:</p>
+                        <Calender type='month' />
+                        <pre>
+                            <code>
+                                {'<Calender type="month" />'}
+                            </code>
+                        </pre>
+                        <br/>
+                        <p>year:</p>
+                        <Calender type='year' />
+                        <pre>
+                            <code>
+                                {'<Calender type="year" />'}
+                            </code>
+                        </pre>
+                        <br/>
+                    </li>
                 </ul>
             </div>
         );

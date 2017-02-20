@@ -1,7 +1,9 @@
 const React = require('react')
+const ReactDOM = require('react-dom')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const Notice = require('./Notice')
 const klassName = require('./util/className')
+const DEFAULT_PREFIX = 'notice-center'
 
 let __key = 0
 
@@ -38,7 +40,7 @@ const NoticeCenter = React.createClass({
     render() {
         const {notices} = this.state
         let {className} = this.props
-        className = klassName(className, 'notice-center')
+        className = klassName(className || DEFAULT_PREFIX)
         return (
             <ReactCssTransitionGroup className={className} transitionName="notice"
                 transitionEnterTimeout={300} transitionLeaveTimeout={300}>
@@ -49,5 +51,25 @@ const NoticeCenter = React.createClass({
         );
     }
 })
+
+NoticeCenter.init = function(props){
+    props = props || {}
+    let prefix = props.prefix || DEFAULT_PREFIX
+    let domId = `dot_${prefix}_center`
+    if (!document.getElementById(domId)) {
+        let dom = document.createElement('div')
+        dom.setAttribute('id', domId)
+        document.body.appendChild(dom)
+    }
+    let notification = ReactDOM.render(<NoticeCenter {...props} />, document.getElementById(domId))
+    return {
+        addNotice(notice){
+            notification.addNotice(notice)
+        },
+        removeNotice(key){
+            notification.removeNotice(key)
+        }
+    }
+}
 
 module.exports = NoticeCenter

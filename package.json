@@ -1,6 +1,6 @@
 {
   "name": "react-ui-component",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "some component build with ReactJs",
   "main": "main.js",
   "scripts": {

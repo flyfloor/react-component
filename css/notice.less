@@ -1,32 +1,30 @@
 @import url('meta');
 
-.notice {
+.notice-center {
     @_width: 300px;
-    &-center {
-        position:fixed;
+    position:fixed;
+    width: @_width;
+    overflow: hidden;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+    >.notice {
+        position: relative;
+        display: block;
         width: @_width;
-        overflow: hidden;
-        top: 10px;
-        right: 10px;
-        z-index: 100;
-        >.notice {
-            position: relative;
-            display: block;
-            width: @_width;
-            background: @gray_c;
-            border: 1px solid @gray_b;
-            padding: 5px 10px;
+        background: @gray_c;
+        border: 1px solid @gray_b;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        ._title {
+            font-weight: bold;
             margin-bottom: 10px;
-            ._title {
-                font-weight: bold;
-                margin-bottom: 10px;
-            }
-            ._close {
-                position: absolute;
-                right: 5px;
-                top: 5px;
-                cursor: pointer;
-            }
+        }
+        ._close {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            cursor: pointer;
         }
     }
 

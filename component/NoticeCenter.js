@@ -42,10 +42,10 @@ const NoticeCenter = React.createClass({
         let {className} = this.props
         className = klassName(className || DEFAULT_PREFIX)
         return (
-            <ReactCssTransitionGroup className={className} transitionName="notice"
+            <ReactCssTransitionGroup className={className} transitionName={className}
                 transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                 {notices.map((item) => {
-                    return <Notice key={item.key} {...item} onClose={() => this.removeNotice(item.key)}/>
+                    return <Notice key={item.key} {...item} onClose={() => this.removeNotice(item.key, item)}/>
                 })}
             </ReactCssTransitionGroup>
         );
@@ -54,8 +54,8 @@ const NoticeCenter = React.createClass({
 
 NoticeCenter.init = function(props){
     props = props || {}
-    let prefix = props.prefix || DEFAULT_PREFIX
-    let domId = `dot_${prefix}_center`
+    let className = props.className || DEFAULT_PREFIX
+    let domId = `dot_${className}_center`
     if (!document.getElementById(domId)) {
         let dom = document.createElement('div')
         dom.setAttribute('id', domId)

@@ -17,7 +17,6 @@ const Notice = React.createClass({
             content: null,
             delay: 5000,
             close: <i>x</i>,
-            onClose(){return},
         }
     },
 

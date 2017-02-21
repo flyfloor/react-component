@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import {NoticeCenter} from './index';
 
 const handleNoticeClick = (props) => {
+    alert('onClick')
     if (props.link) {
         window.open(props.link)
     }
 }
+
+let nc = NoticeCenter.init()
 
 export default class NoticeDemo extends Component {
     showNotice(type = ''){
@@ -26,8 +29,7 @@ export default class NoticeDemo extends Component {
             notice.delay = 0;
         }
 
-        let node = this.refs.ncNode
-        node.addNotice(notice)
+        nc.addNotice(notice)
     }
 
     render() {
@@ -37,13 +39,31 @@ export default class NoticeDemo extends Component {
                     <li>
                         <h4>Show Notice</h4>
                         <pre>
-                            <code>{`<NoticeCenter ref="ncNode"/>`}</code>
+                            <code>
+{`
+import {NoticeCenter} from 'react-ui-component';
+
+let nc = NoticeCenter.init(options)
+// notice center component options
+options: {
+    className: '', // notice center className hook
+    ...
+}
+
+// show notice
+nc.addNotice(notice)
+
+// remove notice from index
+nc.removeNotice(index)
+`}
+</code>
                         </pre>
                         <button onClick={() => this.showNotice('normal')}>click</button>
                         <pre>
                             <code>
 {`
-this.refs.ncNode.addNotice({
+let nc = NoticeCenter.init()
+nc.addNotice({
     title: title,
     content: <p>content</p>,
     ...
@@ -58,7 +78,8 @@ this.refs.ncNode.addNotice({
                         <pre>
                             <code>
 {`
-this.refs.ncNode.addNotice({
+let nc = NoticeCenter.init()
+nc.addNotice({
     title: title,
     content: <p>content</p>,
     delay: 1000,
@@ -73,11 +94,11 @@ this.refs.ncNode.addNotice({
                         <pre>
                             <code>
 {`
-this.refs.ncNode.addNotice({
+let nc = NoticeCenter.init()
+nc.addNotice({
     title: title,
     content: <p>content</p>,
     delay: 0,
-    ...
 })
 `}                                 
                             </code>
@@ -89,18 +110,17 @@ this.refs.ncNode.addNotice({
                         <pre>
                             <code>
 {`
-this.refs.ncNode.addNotice({
+let nc = NoticeCenter.init()
+nc.addNotice({
     title: title,
     content: <p>content</p>,
-    onClick: onClickFunction,
-    ...
+    onClick: onClickFunc
 })
 `}                                 
                             </code>
                         </pre>
                     </li>
                 </ol>
-                <NoticeCenter ref="ncNode"/>
             </div>
         );
     }

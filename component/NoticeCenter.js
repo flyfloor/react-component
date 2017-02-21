@@ -2,8 +2,7 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const Notice = require('./Notice')
-const klassName = require('./util/className')
-const DEFAULT_PREFIX = 'notice-center'
+const DEFAULT_PREFIX = 'notice'
 
 let __key = 0
 
@@ -14,6 +13,12 @@ const generateNoticeKey = () => {
 }
 
 const NoticeCenter = React.createClass({
+    getDefaultProps() {
+        return {
+            prefix: DEFAULT_PREFIX,
+            className: 'notice-center',
+        };
+    },
     getInitialState() {
         return {
             notices: []
@@ -39,10 +44,9 @@ const NoticeCenter = React.createClass({
 
     render() {
         const {notices} = this.state
-        let {className} = this.props
-        className = klassName(className || DEFAULT_PREFIX)
+        let {className, prefix} = this.props
         return (
-            <ReactCssTransitionGroup className={className} transitionName={className}
+            <ReactCssTransitionGroup className={className} transitionName={prefix}
                 transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                 {notices.map((item) => {
                     return <Notice key={item.key} {...item} onClose={() => this.removeNotice(item.key, item)}/>
@@ -54,8 +58,8 @@ const NoticeCenter = React.createClass({
 
 NoticeCenter.init = function(props){
     props = props || {}
-    let className = props.className || DEFAULT_PREFIX
-    let domId = `dot_${className}_center`
+    let prefix = props.prefix || DEFAULT_PREFIX
+    let domId = `dot_${prefix}_center`
     if (!document.getElementById(domId)) {
         let dom = document.createElement('div')
         dom.setAttribute('id', domId)

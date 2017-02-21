@@ -12,6 +12,7 @@ const generateNotice = function({ content, position, delay, onClick, close }){
     delay = delay || DEFAULT_DELAY
     instance = instance || NoticeCenter.init({
         className: DEFAULT_PREFIX,
+        prefix: DEFAULT_PREFIX,
     })
     return instance.addNotice({
         content,

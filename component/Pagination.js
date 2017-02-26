@@ -88,20 +88,32 @@ const Pagination = React.createClass({
     },
 
     formatStartAndEnd(){
-        const {range, total} = this.props;
+        let {range, total} = this.props;
         const { current } = this.state;
         let start = 1, 
             end = 1, 
             left_half = Math.ceil(range / 2);
-
+        
         // current large than half
         if (current > left_half) start = current - left_half;
-        
+
         // calc end
         end = start + range;
         if (total - start <= range) {
             start = total - range;
             end = total;
+        }
+
+        if (start < 1) {
+            start = 1
+        }
+        
+        if (range >= total) {
+            range = total - 1
+        }
+
+        if (end > total) {
+            end = total
         }
 
         return {

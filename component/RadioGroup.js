@@ -30,14 +30,39 @@ const RadioGroup = React.createClass({
         });
     },
 
-    componentDidMount() {
-        const {defaultChecked, options, valueName} = this.props;
+    componentWillReceiveProps(nextProps) {
+        const {defaultChecked, valueName} = this.props;
+        const {options, children} = nextProps
         const {value} = this.state;
-        // init defaultChecked status
-        if ((value === null || value === undefined) && defaultChecked) {
-            if (options.length > 0) {
+        if (!value && defaultChecked) {
+            if (options && this.props.options && options.length > 0) {
                 this.setState({
                     value: options[0][valueName],
+                });
+                return
+            }
+            if (children && this.props.children && children.length > 0) {
+                this.setState({
+                    value: children[0].props[valueName]
+                });
+            }
+        }
+    },
+
+    componentDidMount() {
+        const {defaultChecked, options, children, valueName} = this.props;
+        const {value} = this.state;
+        // init defaultChecked status
+        if (!value && defaultChecked) {
+            if (options && options.length > 0) {
+                this.setState({
+                    value: options[0][valueName],
+                });
+                return
+            }
+            if (children && children.length > 0) {
+                this.setState({
+                    value: children[0].props[valueName]
                 });
             }
         }

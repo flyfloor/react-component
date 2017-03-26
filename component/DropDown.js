@@ -31,6 +31,27 @@ const DropDown = React.createClass({
         };
     },
 
+    componentWillReceiveProps(nextProps) {
+        const {defaultSelected, multi, valueName} = this.props
+        const {options, children} = nextProps
+        // not multi, have no value，defaultSelected
+        if (!multi && defaultSelected && !this.state.value) {
+            // options
+            if (options && this.props.options !== options && options.length > 0) {
+                this.setState({
+                    value: options[0][valueName]
+                });
+                return
+            }
+            // yield children
+            if (children && this.props.children !== children && children.length > 0) {
+                this.setState({
+                    value: children[0].props[valueName] 
+                });
+            }
+        }
+    },
+
     getDefaultProps() {
         return {
             labelName: 'name',
@@ -42,12 +63,19 @@ const DropDown = React.createClass({
     },
 
     componentDidMount() {
-        const { multi, defaultSelected, valueName, options } = this.props;
-        const { value } = this.state;
-        if (!multi && !value && defaultSelected && options.length > 0) {
-            this.setState({
-                value: options[0][valueName] 
-            });
+        const { multi, defaultSelected, valueName, options, children } = this.props;
+        if (!multi && !this.state.value && defaultSelected) {
+            if (options && options.length > 0) {
+                this.setState({
+                    value: options[0][valueName] 
+                });
+                return
+            }
+            if (children && children.length > 0) {
+                this.setState({
+                    value: children[0].props[valueName]
+                });
+            }
         }
     },
 

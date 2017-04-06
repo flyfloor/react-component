@@ -40,14 +40,14 @@ const DropDown = React.createClass({
             if (options && this.props.options !== options && options.length > 0) {
                 this.setState({
                     value: options[0][valueName]
-                });
+                }, () => this.props.onChange(this.state.value));
                 return
             }
             // yield children
             if (children && this.props.children !== children && children.length > 0) {
                 this.setState({
                     value: children[0].props[valueName] 
-                });
+                }, () => this.props.onChange(this.state.value));
             }
         }
     },
@@ -68,13 +68,13 @@ const DropDown = React.createClass({
             if (options && options.length > 0) {
                 this.setState({
                     value: options[0][valueName] 
-                });
+                }, () => this.props.onChange(this.state.value));
                 return
             }
             if (children && children.length > 0) {
                 this.setState({
                     value: children[0].props[valueName]
-                });
+                }, () => this.props.onChange(this.state.value));
             }
         }
     },

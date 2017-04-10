@@ -1,8 +1,8 @@
 import React from 'react';
-import {Calender} from './index.js';
+import {Calendar} from './index.js';
 import {formatDate} from '../../component/util/datetime';
 
-export default class CalenderDemo extends React.Component {
+export default class CalendarDemo extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -19,69 +19,69 @@ export default class CalenderDemo extends React.Component {
     render() {
         return (
             <div>
-                <h3>Calender</h3>
+                <h3>Calendar</h3>
                 <ul>
                     <li>
-                        <h4>Default Calender</h4>
-                        <Calender/>
+                        <h4>Default Calendar</h4>
+                        <Calendar/>
                         <pre>
                             <code>
-                                {'<Calender/>'}
+                                {'<Calendar/>'}
                             </code>
                         </pre>
                     </li>
                     <li>
-                        <h4>Calender with given value</h4>
-                        <Calender value={new Date("2016-04-20")}/>
+                        <h4>Calendar with given value</h4>
+                        <Calendar value={new Date("2016-04-20")}/>
                         <pre>
                             <code>
-                                {'<Calender value={new Date("2016-04-20")}/>'}
+                                {'<Calendar value={new Date("2016-04-20")}/>'}
                             </code>
                         </pre>
                     </li>
                     <li>
-                        <h4>Calender value change event</h4>
+                        <h4>Calendar value change event</h4>
                         <p>date changed to {formatDate(this.state.value)}</p>
-                        <Calender value={this.state.value} onChange={this.handleChange.bind(this)}/>
+                        <Calendar value={this.state.value} onChange={this.handleChange.bind(this)}/>
                         <pre>
                             <code>
-                                {'<Calender value={this.state.value} onChange={handleChange}/>'}
+                                {'<Calendar value={this.state.value} onChange={handleChange}/>'}
                             </code>
                         </pre>
                     </li>
                     <li>
-                        <h4>Calender with begin and end</h4>
-                        <Calender begin={new Date("2015-12-15")} end={new Date("2016-11-08")}/>
+                        <h4>Calendar with begin and end</h4>
+                        <Calendar begin={new Date("2015-12-15")} end={new Date("2016-11-08")}/>
                         <pre>
                             <code>
-                                {'<Calender begin={new Date("2015-12-15")} end={new Date("2016-11-08")}/>'}
+                                {'<Calendar begin={new Date("2015-12-15")} end={new Date("2016-11-08")}/>'}
                             </code>
                         </pre>
                     </li>
                     <li>
-                        <h4>Calender with no preview</h4>
-                        <Calender showPreview={false}/>
+                        <h4>Calendar with no preview</h4>
+                        <Calendar showPreview={false}/>
                         <pre>
                             <code>
-                                {'<Calender showPreview={false} />'}
+                                {'<Calendar showPreview={false} />'}
                             </code>
                         </pre>
                     </li>
                     <li>
-                        <h4>Calender with type</h4>
+                        <h4>Calendar with type</h4>
                         <p>month:</p>
-                        <Calender type='month' />
+                        <Calendar type='month' />
                         <pre>
                             <code>
-                                {'<Calender type="month" />'}
+                                {'<Calendar type="month" />'}
                             </code>
                         </pre>
                         <br/>
                         <p>year:</p>
-                        <Calender type='year' />
+                        <Calendar type='year' />
                         <pre>
                             <code>
-                                {'<Calender type="year" />'}
+                                {'<Calendar type="year" />'}
                             </code>
                         </pre>
                         <br/>

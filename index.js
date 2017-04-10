@@ -23,7 +23,7 @@ var TimeInput = require("./lib/TimeInput.js");
 var TimePicker = require("./lib/TimePicker.js");
 var DatePicker = require("./lib/DatePicker.js");
 var DateTimePicker = require("./lib/DateTimePicker.js");
-var Calender = require("./lib/Calender.js");
+var Calendar = require("./lib/Calendar.js");
 var Progress = require("./lib/Progress.js");
 var FlashMessage = require("./lib/FlashMessage.js");
 var NoticeCenter = require("./lib/NoticeCenter.js");
@@ -53,7 +53,7 @@ module.exports = {
     TimePicker: TimePicker,
     DatePicker: DatePicker,
     DateTimePicker: DateTimePicker,
-    Calender: Calender,
+    Calendar: Calendar,
     Progress: Progress,
     FlashMessage: FlashMessage,
     NoticeCenter: NoticeCenter,

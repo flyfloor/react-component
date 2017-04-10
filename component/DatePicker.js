@@ -3,7 +3,7 @@ const PropTypes = React.PropTypes
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const formatDate = require('./util/datetime').formatDate
 const DocumentClickMixin = require('./mixin/DocumentClickMixin')
-const Calender = require('./Calender')
+const Calendar = require('./Calendar')
 const klassName = require('./util/className')
 
 const _DATE_FORMAT = {
@@ -85,7 +85,7 @@ const DatePicker = React.createClass({
                 <ReactCssTransitionGroup className="_picker" transitionName="datepicker"
                     transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ?
-                        <Calender begin={begin} end={end} 
+                        <Calendar begin={begin} end={end} 
                             type={type} showPreview={showPreview}
                             value={value} onChange={this.handleValChange}/>
                         : null

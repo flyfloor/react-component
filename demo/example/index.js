@@ -17,7 +17,7 @@ import TimeInput from '../../component/TimeInput'
 import TimePicker from '../../component/TimePicker'
 import DatePicker from '../../component/DatePicker'
 import DateTimePicker from '../../component/DateTimePicker'
-import Calender from '../../component/Calender'
+import Calendar from '../../component/Calendar'
 import Progress from '../../component/Progress'
 import FlashMessage from '../../component/FlashMessage'
 import Notice from '../../component/Notice'
@@ -44,7 +44,7 @@ export {
     TimePicker,
     DatePicker,
     DateTimePicker,
-    Calender,
+    Calendar,
     Progress,
     FlashMessage,
     Notice,

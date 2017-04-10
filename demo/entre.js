@@ -21,7 +21,7 @@ import TimeInputDemo from "./example/TimeInputDemo.jsx";
 import TimePickerDemo from "./example/TimePickerDemo.jsx";
 import DatePickerDemo from "./example/DatePickerDemo.jsx";
 import DateTimePickerDemo from "./example/DateTimePickerDemo.jsx";
-import CalenderDemo from "./example/CalenderDemo.jsx";
+import CalendarDemo from "./example/CalendarDemo.jsx";
 import ProgressDemo from "./example/ProgressDemo.jsx";
 import FlashMessageDemo from "./example/FlashMessageDemo.jsx";
 import NoticeDemo from "./example/NoticeDemo.jsx";
@@ -31,7 +31,7 @@ class Nav extends React.Component {
         return (
             <div className="demo-nav">
                 <ul>
-                    <li><h4><NavLink to="/calender">calender</NavLink></h4></li>
+                    <li><h4><NavLink to="/calendar">calendar</NavLink></h4></li>
                     <li><h4><NavLink to="/carousel">carousel</NavLink></h4></li>
                     <li><h4><NavLink to="/checkbox">checkbox</NavLink></h4></li>
                     <li><h4><NavLink to="/checkbox-group">checkbox group</NavLink></h4></li>
@@ -129,7 +129,7 @@ ReactDOM.render(<Router history={hashHistory}>
                         <Route path="/time-picker" component={TimePickerDemo}/>
                         <Route path="/date-picker" component={DatePickerDemo}/>
                         <Route path="/datetime-picker" component={DateTimePickerDemo}/>
-                        <Route path="/calender" component={CalenderDemo}/>
+                        <Route path="/calendar" component={CalendarDemo}/>
                         <Route path="/progress" component={ProgressDemo}/>
                         <Route path="/flash-message" component={FlashMessageDemo}/>
                         <Route path="/notice" component={NoticeDemo}/>

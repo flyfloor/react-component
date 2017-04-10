@@ -2,7 +2,7 @@ const React = require('react')
 const PropTypes = React.PropTypes
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 
-const Calender = require('./Calender')
+const Calendar = require('./Calendar')
 const klassName = require('./util/className')
 const SelectorList = require('./time-picker/SelectorList')
 const DocumentClickMixin = require('./mixin/DocumentClickMixin')
@@ -150,9 +150,9 @@ const DateTimePicker = React.createClass({
         let pickerNode = showDate ? 
                             <div className="_datepicker">
                                 {value ? 
-                                    <Calender showPreview={false} begin={begin} 
+                                    <Calendar showPreview={false} begin={begin} 
                                         end={end} value={new Date(value.getTime())} onChange={this.handleDateChange} />
-                                    : <Calender showPreview={false} begin={begin} 
+                                    : <Calendar showPreview={false} begin={begin} 
                                         end={end} onChange={this.handleDateChange} />
                                 }
                                 <div className="_action">

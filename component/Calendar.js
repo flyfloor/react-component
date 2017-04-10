@@ -11,7 +11,7 @@ const TODAY = new Date();
 TODAY.setHours(0,0,0,0);
 
 
-const Calender = React.createClass({
+const Calendar = React.createClass({
     getInitialState() {
         const {year, month, day, value} = this.initDate();
         let {type} = this.props
@@ -278,7 +278,7 @@ const Calender = React.createClass({
                 let isDisabled = itemDate < begin || itemDate > end;
 
                 matrixNodes[row].push(<td key={`canlender-col-${i}`}>
-                                        <Calender.Item active={value.getTime() == itemDate.getTime() && !isDisabled} 
+                                        <Calendar.Item active={value.getTime() == itemDate.getTime() && !isDisabled} 
                                             disabled={isDisabled} isToday={TODAY.getDate() == itemDate.getDate()} 
                                             onClick={this.handleClick} value={itemDate} label={_index}/>
                                       </td>)
@@ -334,7 +334,7 @@ const Calender = React.createClass({
         const {current} = this.state
         let currentPicker = this[`render${current}Picker`]()
         return (
-            <div className={klassName(this.props.className, 'calender')}>
+            <div className={klassName(this.props.className, 'calendar')}>
                 {showPreview && type === 'day' ? this.renderPreview() : null}
                 {currentPicker}
             </div>
@@ -343,7 +343,7 @@ const Calender = React.createClass({
 });
 
 
-Calender.Item = React.createClass({
+Calendar.Item = React.createClass({
     propTypes: {
         onClick: React.PropTypes.func,
     },
@@ -368,4 +368,4 @@ Calender.Item = React.createClass({
 });
 
 
-module.exports = Calender
+module.exports = Calendar

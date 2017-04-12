@@ -26,43 +26,52 @@ const RadioGroup = React.createClass({
 
     toggleChange(e, value){
         this.setState({ value }, () => {
-            if (this.props.onChange) this.props.onChange(this.state.value);
+            const {onChange} = this.props
+            if (onChange) onChange(this.state.value)
         });
     },
 
     componentWillReceiveProps(nextProps) {
-        const {defaultChecked, valueName} = this.props;
+        const {defaultChecked, valueName, onChange} = this.props;
         const {options, children} = nextProps
         const {value} = this.state;
         if (!value && defaultChecked) {
             if (options && this.props.options && options.length > 0) {
                 this.setState({
                     value: options[0][valueName],
+                }, () => {
+                    if (onChange) onChange(this.state.value)
                 });
                 return
             }
             if (children && this.props.children && children.length > 0) {
                 this.setState({
                     value: children[0].props[valueName]
+                }, () => {
+                    if (onChange) onChange(this.state.value)
                 });
             }
         }
     },
 
     componentDidMount() {
-        const {defaultChecked, options, children, valueName} = this.props;
+        const {defaultChecked, options, children, valueName, onChange} = this.props;
         const {value} = this.state;
         // init defaultChecked status
         if (!value && defaultChecked) {
             if (options && options.length > 0) {
                 this.setState({
                     value: options[0][valueName],
+                }, () => {
+                    if (onChange) onChange(this.state.value)
                 });
                 return
             }
             if (children && children.length > 0) {
                 this.setState({
                     value: children[0].props[valueName]
+                }, () => {
+                    if (onChange) onChange(this.state.value)
                 });
             }
         }

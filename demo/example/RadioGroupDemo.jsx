@@ -40,7 +40,8 @@ export default class RadioDemo extends React.Component {
                     </li>
                     <li>
                         <h4>Radio group with default checked</h4>
-                        <RadioGroup options={options} labelName='name' valueName='value' defaultChecked={true} />
+                        <RadioGroup options={options} labelName='name' 
+                            valueName='value' defaultChecked={true} onChange={value => console.log(value)} />
                         <pre>
                             <code>
                                 {`<RadioGroup options={options} labelName='name' valueName='value' defaultChecked={true} />`}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import css from './css/demo.less';
@@ -26,7 +26,7 @@ import ProgressDemo from "./example/ProgressDemo.jsx";
 import FlashMessageDemo from "./example/FlashMessageDemo.jsx";
 import NoticeDemo from "./example/NoticeDemo.jsx";
 
-class Nav extends React.Component {
+class Nav extends Component {
     render(){
         return (
             <div className="demo-nav">
@@ -65,7 +65,7 @@ const NavLink = (props) => {
     );
 }
 
-class App extends React.Component {
+class App extends Component {
     render() {
         return ( 
             <div>

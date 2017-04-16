@@ -338,7 +338,7 @@ DropDown.propTypes = {
     defaultSelected: PropTypes.bool,
     searchable: PropTypes.bool,
     multi: PropTypes.bool,
-    children: PropTypes.arrayOf(React.PropTypes.element),
+    children: PropTypes.arrayOf(PropTypes.element),
 }
 
 DropDown.defaultProps = {

@@ -387,7 +387,7 @@ class CalendarItem extends Component {
 }
 
 CalendarItem.propTypes = {
-    onClick: React.PropTypes.func,
+    onClick: PropTypes.func,
 }
 
 module.exports = Calendar

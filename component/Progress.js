@@ -1,22 +1,9 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const klassName = require('./util/className')
-const PropTypes = React.PropTypes
 
-const Progress = React.createClass({
-    propTypes: {
-        value: PropTypes.number,
-        disabled: PropTypes.bool,
-        size: PropTypes.oneOf(['large', 'normal', 'small']),
-        status: PropTypes.oneOf(['warning', 'failed', 'success', 'active'])
-    },
-    
-    getDefaultProps() {
-        return {
-            value: 0,
-            className: '',
-        };
-    },
-
+class Progress extends Component {
     render() {
         let {value, className, status, size, disabled, children} = this.props;
         if (value < 0) value = 0;
@@ -49,6 +36,19 @@ const Progress = React.createClass({
             </div>
         );
     }
-});
+}
+
+
+Progress.propTypes = {
+    value: PropTypes.number,
+    disabled: PropTypes.bool,
+    size: PropTypes.oneOf(['large', 'normal', 'small']),
+    status: PropTypes.oneOf(['warning', 'failed', 'success', 'active'])
+}
+
+Progress.defaultProps = {
+    value: 0,
+    className: '',
+}
 
 module.exports = Progress;

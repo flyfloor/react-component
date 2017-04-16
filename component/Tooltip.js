@@ -20,9 +20,7 @@ const Tooltip = React.createClass({
     },
 
     onOtherDomClick(){
-        this.setState({
-            open: false, 
-        });
+        this.popUpClose()
     },
 
     render() {

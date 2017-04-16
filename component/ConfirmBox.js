@@ -9,30 +9,24 @@ const klassName = require('./util/className')
 class ConfirmBox extends Component {
     constructor(props) {
         super(props);
-        this.closeConfirm = this.closeConfirm.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
         this.handleConfirm = this.handleConfirm.bind(this)
     }
-    closeConfirm(){
-        this.setState({
-            open: false 
-        });
-    }
 
     onOtherDomClick(){
-        if (!this.props.force) this.closeConfirm();
+        if (!this.props.force) this.popUpClose();
     }
 
     handleCancel(){
         const {onCancel} = this.props;
-        if (!onCancel) return this.closeConfirm();
-        if(onCancel()) this.closeConfirm();
+        if (!onCancel) return this.popUpClose();
+        if(onCancel()) this.popUpClose();
     }
 
     handleConfirm(){
         const {onConfirm} = this.props;
-        if (!onConfirm) return this.closeConfirm();
-        if (onConfirm()) this.closeConfirm();
+        if (!onConfirm) return this.popUpClose();
+        if (onConfirm()) this.popUpClose();
     }
 
     render() {

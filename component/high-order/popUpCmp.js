@@ -30,6 +30,13 @@ module.exports = Cmp => {
                 c_height: CONTENT.offsetHeight,
             };
         }
+        
+        // popup close
+        popUpClose(){
+            this.setState({
+                open: false 
+            });
+        }
 
         onTrigger(e, state){
             let contentDOM = ReactDOM.findDOMNode(this.refs.content);

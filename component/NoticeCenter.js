@@ -1,4 +1,5 @@
 const React = require('react')
+const Component = React.Component
 const ReactDOM = require('react-dom')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const Notice = require('./Notice')
@@ -12,19 +13,16 @@ const generateNoticeKey = () => {
     return str
 }
 
-const NoticeCenter = React.createClass({
-    getDefaultProps() {
-        return {
-            prefix: DEFAULT_PREFIX,
-            className: 'notice-center',
-        };
-    },
-    getInitialState() {
-        return {
+class NoticeCenter extends Component {
+    constructor(props) {
+        super(props);
+        this.addNotice = this.addNotice.bind(this)
+        this.removeNotice = this.removeNotice.bind(this)
+
+        this.state = {
             notices: []
         }
-    },
-
+    }
     addNotice(notice){
         notice.key = generateNoticeKey()
         this.setState((state) => {
@@ -32,7 +30,7 @@ const NoticeCenter = React.createClass({
                 notices: state.notices.concat(notice)
             }
         })
-    },
+    }
 
     removeNotice(key){
         this.setState((state) => {
@@ -40,7 +38,7 @@ const NoticeCenter = React.createClass({
                 notices: state.notices.filter(item => item.key !== key)
             }
         })
-    },
+    }
 
     render() {
         const {notices} = this.state
@@ -54,7 +52,12 @@ const NoticeCenter = React.createClass({
             </ReactCssTransitionGroup>
         );
     }
-})
+}
+
+NoticeCenter.defaultProps = {
+    prefix: DEFAULT_PREFIX,
+    className: 'notice-center',
+}
 
 NoticeCenter.init = function(props){
     props = props || {}

@@ -15,8 +15,10 @@ module.exports = (Cmp) => {
         }
 
         componentWillUnmount () {
-            super.componentWillUnmount()
             this.clearInterval();
+            if (super.componentWillUnmount) {
+                super.componentWillUnmount()
+            }
         }
     }
 }

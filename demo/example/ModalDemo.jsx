@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Modal} from './index.js';
 
-export default class ModalDemo extends React.Component {
+export default class ModalDemo extends Component {
     constructor(props){
         super(props);
     }

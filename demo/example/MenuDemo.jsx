@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Menu, Item} from './index.js';
 
-export default class MenuDemo extends React.Component {
+export default class MenuDemo extends Component {
     constructor(props){
         super(props);
         this.state = {

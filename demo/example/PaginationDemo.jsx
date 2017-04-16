@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Pagination} from './index.js';
 
-export default class PaginationDemo extends React.Component {
+export default class PaginationDemo extends Component {
     constructor(props){
         super(props);
         this.state = {

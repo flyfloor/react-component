@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {DropDown, Item} from './index.js';
 
 const options = [
@@ -10,7 +10,7 @@ const options = [
 ];
 
 
-export default class DropDownDemo extends React.Component {
+export default class DropDownDemo extends Component {
     constructor(props){
         super(props);
         this.state = {

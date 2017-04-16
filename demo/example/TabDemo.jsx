@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Tab, Item} from './index.js';
 
-export default class TabDemo extends React.Component {
+export default class TabDemo extends Component {
     constructor(props){
         super(props);
         this.state = {

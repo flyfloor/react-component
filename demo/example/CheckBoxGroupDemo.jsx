@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {CheckBoxGroup, CheckBox} from "./index.js";
 
 const options = [
@@ -11,7 +11,7 @@ const options = [
 const checkedVal = ['a', 'd'];
 const checkedVal1 = ['banana'];
 
-export default class CheckBoxGroupDemo extends React.Component {
+export default class CheckBoxGroupDemo extends Component {
     constructor(props, refs){
         super(props);
         this.state = {

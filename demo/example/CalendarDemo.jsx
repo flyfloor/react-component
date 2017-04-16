@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Calendar} from './index.js';
 import {formatDate} from '../../component/util/datetime';
 
-export default class CalendarDemo extends React.Component {
+
+export default class CalendarDemo extends Component {
     constructor(props){
         super(props);
         this.state = {

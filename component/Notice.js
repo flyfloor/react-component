@@ -1,24 +1,13 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const klassName = require('./util/className')
 
-const PropTypes = React.PropTypes
-
-const Notice = React.createClass({
-    propTypes: {
-        delay: PropTypes.number,
-        content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-        onClick: PropTypes.func,
-        onClose: PropTypes.func.isRequired,
-        close: PropTypes.element,
-    },
-
-    getDefaultProps() {
-        return {
-            content: null,
-            delay: 5000,
-            close: <i>x</i>,
-        }
-    },
+class Notice extends Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this)
+    }
 
     componentDidMount() {
         const {delay, onClose} = this.props
@@ -28,18 +17,18 @@ const Notice = React.createClass({
                 onClose()
             }, delay)
         }
-    },
+    }
 
     componentWillUnmount() {
         this.clearTimer()
-    },
+    }
 
     clearTimer(){
        if (this._timer) {
            clearTimeout(this._timer)
            this._timer = null
        } 
-    },
+    }
 
     handleClick(){
         const {onClick, onClose} = this.props
@@ -47,7 +36,7 @@ const Notice = React.createClass({
             onClick(this.props)
             onClose()
         }
-    },
+    }
 
     render() {
         let {title, content, className, close, onClose} = this.props
@@ -62,6 +51,20 @@ const Notice = React.createClass({
             </div>
         );
     }
-})
+}
+
+Notice.propTypes = {
+    delay: PropTypes.number,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    onClick: PropTypes.func,
+    onClose: PropTypes.func.isRequired,
+    close: PropTypes.element,
+}
+
+Notice.defaultProps = {
+    content: null,
+    delay: 5000,
+    close: <i>x</i>,
+}
 
 module.exports = Notice

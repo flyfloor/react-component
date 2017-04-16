@@ -1,43 +1,32 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const ReactDOM = require('react-dom')
 const domUtil = require('./util/dom')
 const {removeClass, hasClass, addClass, getClassList} = domUtil
-const DocumentClickMixin = require('./mixin/DocumentClickMixin')
+const documentClickCmp = require('./high-order/documentClickCmp')
 const klassName = require('./util/className')
 
-const Menu = React.createClass ({
-    mixins: [DocumentClickMixin],
+class Menu extends Component {
+    constructor(props) {
+        super(props);
+        this.closeSubMenu = this.closeSubMenu.bind(this)
+        this.toggleSubMenu = this.toggleSubMenu.bind(this)
+        this.handleItemClick = this.handleItemClick.bind(this)
 
-    propTypes: {
-        onChange: React.PropTypes.func,
-        accordion: React.PropTypes.bool,
-        popped: React.PropTypes.bool,
-        horizontal: React.PropTypes.bool,
-        mode: React.PropTypes.oneOf(['click', 'hover']),
-    },
-
-    getDefaultProps() {
-        return {
-            accordion: false,
-            popped: false,
-            horizontal: false,
-            mode: 'click',
-            className: '',
-        };
-    },
-
-    getInitialState: function() {
-        const {current} = this.props;
-        return { current };
-    },
-
+        const {current} = props;
+        this.state = {
+            current
+        }
+    }
+    
     closeSubMenu(node){
         const {popped, mode, horizontal} = this.props;
         if (popped || mode === 'hover' || horizontal) {
             let base = node || ReactDOM.findDOMNode(this.refs.base);
             removeClass(base.querySelectorAll('.sub-menu._active'), '_active');
         }
-    },
+    }
 
     toggleSubMenu(index){
         let {accordion, popped, horizontal} = this.props;
@@ -49,7 +38,7 @@ const Menu = React.createClass ({
         }
         active ? removeClass(node, '_active') : addClass(node, '_active');
         return false;
-    },
+    }
 
     handleItemClick(index, disabled){
         if (disabled) return;
@@ -58,7 +47,7 @@ const Menu = React.createClass ({
         this.setState({
             current: index, 
         }, () => this.closeSubMenu());
-    },
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.current !== this.props.current) {
@@ -66,11 +55,12 @@ const Menu = React.createClass ({
                 current: nextProps.current
             });
         }
-    },
-
+    }
+    
+    // other place click, close submenu
     onOtherDomClick(){
         this.closeSubMenu();
-    },
+    }
 
     formatChild(node, i, {current}){
         let {disabled, index, children} = node.props;
@@ -83,8 +73,9 @@ const Menu = React.createClass ({
         return <div className={className} key={`item-${i}`} onClick={() =>this.handleItemClick(index, disabled)}>
                     {children}
                 </div>;
-    },
+    }
 
+    // generate submenu
     formatSubMenu(node, i, { popped, accordion, mode, current, horizontal, level }) {
         let {title, index, disabled, active, children} = node.props;
         let className = getClassList(node.props);
@@ -108,7 +99,7 @@ const Menu = React.createClass ({
                     <div className="_title _item" onClick={() => this.toggleSubMenu(index)}>{title}</div>
                     {childNodes}
                 </div>
-    },
+    }
 
     formatMenu(children, level){
         const {current} = this.state;
@@ -121,7 +112,7 @@ const Menu = React.createClass ({
             return sub ? this.formatSubMenu(item, i, { accordion, popped, mode, current, horizontal, level }) 
                         : this.formatChild(item, i, { current });
         });
-    },
+    }
 
     render() {
         let {children, style, className, horizontal, popped, mode, level=0} = this.props;
@@ -151,6 +142,22 @@ const Menu = React.createClass ({
             menuNode
         );
     }
-});
+}
 
-module.exports = Menu
+Menu.propTypes = {
+    onChange: PropTypes.func,
+    accordion: PropTypes.bool,
+    popped: PropTypes.bool,
+    horizontal: PropTypes.bool,
+    mode: PropTypes.oneOf(['click', 'hover']),
+}
+
+Menu.defaultProps = {
+    accordion: false,
+    popped: false,
+    horizontal: false,
+    mode: 'click',
+    className: '',
+}
+
+module.exports = documentClickCmp(Menu)

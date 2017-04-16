@@ -4,6 +4,9 @@ const PropTypes = require('prop-types')
 const klassName = require('./util/className')
 
 class Progress extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         let {value, className, status, size, disabled, children} = this.props;
         if (value < 0) value = 0;

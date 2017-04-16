@@ -1,28 +1,26 @@
 const React = require('react')
+const Component = React.Component
 const klassName = require('./util/className')
-const TimeInputMixin = require('./mixin/TimeInputMixin')
+const timeInputCmp = require('./high-order/timeInputCmp')
 
-const TimeInput = React.createClass({
-    mixins: [TimeInputMixin],
+class TimeInput extends Component {
+    constructor(props) {
+        super(props);
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleClick = this.handleClick.bind(this)
+        this.handleOnBlur = this.handleOnBlur.bind(this)
 
+        let {value=""} = this.initTime();
+        this.state = {
+            value,
+            inputVal: value,
+        }
+    }
+    
     handleInputChange(e){
         const {value} = e.target
         this.setState({ inputVal: value })
-    },
-
-    getDefaultProps() {
-        return {
-            simple: false,
-            value: '',
-            className: '',
-            placeHolder: 'input time',
-        };
-    },
-
-    getInitialState() {
-        let {value=""} = this.initTime();
-        return { value, inputVal: value };
-    },
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
@@ -32,7 +30,7 @@ const TimeInput = React.createClass({
                 inputVal: value
             });
         }
-    },
+    }
 
     handleClick(e){
         let {onClick} = this.props
@@ -40,7 +38,7 @@ const TimeInput = React.createClass({
             this.refs.inputDOM.focus()
             onClick(e)
         }
-    },
+    }
 
     handleOnBlur(){
         const {value} = this.initTime(this.state.inputVal);
@@ -55,7 +53,7 @@ const TimeInput = React.createClass({
         if (onBlur) {
             onBlur(value)
         }
-    },
+    }
 
     render() {
         const {inputVal} = this.state;
@@ -74,7 +72,13 @@ const TimeInput = React.createClass({
             </div>
         );
     }
-});
+}
 
+TimeInput.defaultProps = {
+    simple: false,
+    value: '',
+    className: '',
+    placeHolder: 'input time',
+}
 
-module.exports = TimeInput;
+module.exports = timeInputCmp(TimeInput);

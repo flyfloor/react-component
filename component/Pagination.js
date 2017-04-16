@@ -1,45 +1,30 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const ReactDOM = require('react-dom')
 const klassName = require('./util/className')
-const PropTypes = React.PropTypes
-const ENTER_KC = require('./mixin/keyCode').ENTER_KC
+const ENTER_KEYCODE = require('./util/constants').ENTER_KEYCODE
 
-const Pagination = React.createClass({
-    propTypes: {
-        onChange: PropTypes.func,
-        total: PropTypes.number,
-        current: PropTypes.number,
-        showRange: PropTypes.bool,
-        showNav: PropTypes.bool,
-        isEnd: PropTypes.bool,
-        range: PropTypes.number,
-        start: PropTypes.element,
-        end: PropTypes.element,
-        prev: PropTypes.element,
-        next: PropTypes.element,
-        showJump: PropTypes.bool,
-    },
-    getDefaultProps() {
-        return {
-            current: 1,
-            range: 7,
-            total: 30,
-            showJump: false,
-        };
-    },
-    getInitialState() {
-        const {current} = this.props;
-        return { current }
-    },
+class Pagination extends Component {
+    constructor(props) {
+        super(props);
+        this.onPageChange = this.onPageChange.bind(this)
+        this.handlePageJump = this.handlePageJump.bind(this)
 
+        const {current} = props;
+        this.state = {
+            current
+        }
+    }
+    
     componentWillReceiveProps(nextProps) {
         if (nextProps.current != this.props.current) {
             this.setState({
                 current: nextProps.current || 1,
             });
         }
-    },
-    
+    }
+
     onPageChange(page){
         const {total, onChange} = this.props;
         if (page > total) return;
@@ -47,7 +32,7 @@ const Pagination = React.createClass({
             current: page
         });
         if (onChange) onChange(page);
-    },
+    }
 
     formatFirstNode(begin){
         const {showRange, showNav, prev, start} = this.props;
@@ -66,7 +51,7 @@ const Pagination = React.createClass({
                         </li>
         }
         return firstNode;
-    },
+    }
 
     formatLastNode(last){
         const {showRange, showNav, next, end, isEnd, total} = this.props;
@@ -85,7 +70,7 @@ const Pagination = React.createClass({
                         </li>
         }
         return lastNode;
-    },
+    }
 
     formatStartAndEnd(){
         let {range, total} = this.props;
@@ -119,7 +104,7 @@ const Pagination = React.createClass({
         return {
             start, end
         }
-    },
+    }
 
     formatRange(start, end){
         let {isEnd} = this.props;
@@ -133,12 +118,12 @@ const Pagination = React.createClass({
                         </li>);
         }
         return nodes;
-    },
+    }
 
     handlePageJump(e){
         let {total} = this.props
         // blur || keyDown
-        if (e.keyCode === undefined || e.keyCode === ENTER_KC) {
+        if (e.keyCode === undefined || e.keyCode === ENTER_KEYCODE) {
             let value = parseInt(e.target.value) || 1
             if (value < 1) {
                 value = 1
@@ -158,7 +143,7 @@ const Pagination = React.createClass({
                 jumpInput.value = value
             }
         }
-    },
+    }
 
     formatJump(){
         const {showJump} = this.props
@@ -173,7 +158,7 @@ const Pagination = React.createClass({
                 </li>
             )
         }
-    },
+    }
 
     render() {
         let {start, end} = this.formatStartAndEnd();
@@ -188,6 +173,28 @@ const Pagination = React.createClass({
             </ul>
         );
     }
-});
+}
+
+Pagination.propTypes = {
+    onChange: PropTypes.func,
+    total: PropTypes.number,
+    current: PropTypes.number,
+    showRange: PropTypes.bool,
+    showNav: PropTypes.bool,
+    isEnd: PropTypes.bool,
+    range: PropTypes.number,
+    start: PropTypes.element,
+    end: PropTypes.element,
+    prev: PropTypes.element,
+    next: PropTypes.element,
+    showJump: PropTypes.bool,
+}
+
+Pagination.defaultProps = {
+    current: 1,
+    range: 7,
+    total: 30,
+    showJump: false,
+}
 
 module.exports = Pagination;

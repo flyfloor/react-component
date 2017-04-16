@@ -1,11 +1,12 @@
 const React = require('react')
-const PropTypes = React.PropTypes
+const Component = React.Component
+const PropTypes = require('prop-types')
 const klassName = require('./util/className')
 
-const Panel = React.createClass({
-    propTypes: {
-        title: PropTypes.oneOfType([PropTypes.element, PropTypes.string])
-    },
+class Panel extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         let {className, title} = this.props
         return (
@@ -21,6 +22,10 @@ const Panel = React.createClass({
             </div>
         );
     }
-})
+}
+
+Panel.propTypes = {
+    title: PropTypes.oneOfType([PropTypes.element, PropTypes.string])
+}
 
 module.exports = Panel

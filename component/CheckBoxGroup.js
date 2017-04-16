@@ -1,32 +1,27 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const CheckBox = require('./CheckBox')
 const klassName = require('./util/className')
-const UpdatePropsMixin = require('./mixin/UpdatePropsMixin')
+const updatePropsCmp = require('./high-order/updatePropsCmp')
 
-const CheckBoxGroup = React.createClass({
-    mixins: [UpdatePropsMixin],
-    getInitialState() {
-        const { value } = this.props;
-        return { value };
-    },
-    getDefaultProps() {
-        return {
-            value: [],
-            labelName: 'name',
-            valueName: 'value',
-            options: [], 
-        };
-    },
-    propTypes: {
-        options: React.PropTypes.array,
-        labelName: React.PropTypes.string,
-        valueName: React.PropTypes.string,
-        onChange: React.PropTypes.func,
-    },
+class CheckBoxGroup extends Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this)
+        this.addVal = this.addVal.bind(this)
+        this.removeVal = this.removeVal.bind(this)
+        this.valueChange = this.valueChange.bind(this)
+
+        const { value } = props;
+        this.state = {
+            value
+        }
+    }
 
     handleChange(e, val){
         e.target.checked ? this.addVal(val) : this.removeVal(val);
-    },
+    }
 
     addVal(val){
         let flag = false;
@@ -42,7 +37,7 @@ const CheckBoxGroup = React.createClass({
                 value: value.concat(val) 
             }, this.valueChange);
         }
-    },
+    }
 
     removeVal(val){
         let index = this.state.value.indexOf(val);
@@ -52,12 +47,12 @@ const CheckBoxGroup = React.createClass({
                 value: this.state.value 
             }, this.valueChange);
         }
-    },
+    }
 
     valueChange(){
         const {onChange} = this.props;
         if (onChange) onChange(this.state.value)
-    },
+    }
 
     render() {
         const { labelName, valueName, className, options, style, children } = this.props;
@@ -88,13 +83,26 @@ const CheckBoxGroup = React.createClass({
             }
         }
 
-
         return (
             <div style={style} className={klassName(className, 'checkbox-group')}>
                 {optionNodes}
             </div>
         );
     }
-});
+}
 
-module.exports = CheckBoxGroup
+CheckBoxGroup.defaultProps = {
+    value: [],
+    labelName: 'name',
+    valueName: 'value',
+    options: [], 
+}
+
+CheckBoxGroup.propTypes = {
+    options: PropTypes.array,
+    labelName: PropTypes.string,
+    valueName: PropTypes.string,
+    onChange: PropTypes.func,
+}
+
+module.exports = updatePropsCmp(CheckBoxGroup)

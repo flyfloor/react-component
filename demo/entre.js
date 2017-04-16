@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import css from './css/demo.less';
 
 import CheckBoxDemo from "./example/CheckBoxDemo.jsx";
@@ -59,12 +59,6 @@ class Nav extends Component {
     }
 }
 
-const NavLink = (props) => {
-    return (
-        <Link {...props} activeClassName="active"></Link>
-    );
-}
-
 class App extends Component {
     render() {
         return ( 
@@ -108,30 +102,32 @@ class App extends Component {
 }
 
 
-ReactDOM.render(<Router history={hashHistory}>
-                    <Route path="/" component={App}>
-                        <IndexRoute component={CheckBoxDemo}></IndexRoute>
-                        <Route path="/checkbox" component={CheckBoxDemo}/>
-                        <Route path="/checkbox-group" component={CheckBoxGroupDemo}/>
-                        <Route path="/radio" component={RadioDemo}/>
-                        <Route path="/radio-group" component={RadioGroupDemo}/>
-                        <Route path="/dropdown" component={DropDownDemo}/>
-                        <Route path="/menu" component={MenuDemo}/>
-                        <Route path="/confirm-box" component={ConfirmBoxDemo}/>
-                        <Route path="/tooltip" component={TooltipDemo}/>
-                        <Route path="/modal" component={ModalDemo}/>
-                        <Route path="/tab" component={TabDemo}/>
-                        <Route path="/pin" component={PinDemo}/>
-                        <Route path="/carousel" component={CarouselDemo}/>
-                        <Route path="/pagination" component={PaginationDemo}/>
-                        <Route path="/slide-menu" component={SlideMenuDemo}/>
-                        <Route path="/time-input" component={TimeInputDemo}/>
-                        <Route path="/time-picker" component={TimePickerDemo}/>
-                        <Route path="/date-picker" component={DatePickerDemo}/>
-                        <Route path="/datetime-picker" component={DateTimePickerDemo}/>
-                        <Route path="/calendar" component={CalendarDemo}/>
-                        <Route path="/progress" component={ProgressDemo}/>
-                        <Route path="/flash-message" component={FlashMessageDemo}/>
-                        <Route path="/notice" component={NoticeDemo}/>
-                    </Route>
+ReactDOM.render(<Router>
+                    <div>
+                        <App>
+                            <Route exact path="/" component={CheckBoxDemo}/>
+                            <Route path="/checkbox" component={CheckBoxDemo}/>
+                            <Route path="/checkbox-group" component={CheckBoxGroupDemo}/>
+                            <Route path="/radio" component={RadioDemo}/>
+                            <Route path="/radio-group" component={RadioGroupDemo}/>
+                            <Route path="/dropdown" component={DropDownDemo}/>
+                            <Route path="/menu" component={MenuDemo}/>
+                            <Route path="/confirm-box" component={ConfirmBoxDemo}/>
+                            <Route path="/tooltip" component={TooltipDemo}/>
+                            <Route path="/modal" component={ModalDemo}/>
+                            <Route path="/tab" component={TabDemo}/>
+                            <Route path="/pin" component={PinDemo}/>
+                            <Route path="/carousel" component={CarouselDemo}/>
+                            <Route path="/pagination" component={PaginationDemo}/>
+                            <Route path="/slide-menu" component={SlideMenuDemo}/>
+                            <Route path="/time-input" component={TimeInputDemo}/>
+                            <Route path="/time-picker" component={TimePickerDemo}/>
+                            <Route path="/date-picker" component={DatePickerDemo}/>
+                            <Route path="/datetime-picker" component={DateTimePickerDemo}/>
+                            <Route path="/calendar" component={CalendarDemo}/>
+                            <Route path="/progress" component={ProgressDemo}/>
+                            <Route path="/flash-message" component={FlashMessageDemo}/>
+                            <Route path="/notice" component={NoticeDemo}/>
+                        </App>
+                    </div>
                 </Router> , document.getElementById('root'));

@@ -1,26 +1,18 @@
-const React = require('react')
-const PropTypes = React.PropTypes
+const React = require('react');
+const Component = React.Component
+const PropTypes = require('prop-types')
 const ReactDOM = require('react-dom')
 
-const SelectorList = React.createClass({
-    getDefaultProps() {
-        return {
-            hour: 0,
-            minute: 0,
-            second: 0,
-            simple: false
-        };
-    },
-
-    propTypes: {
-        onChange: PropTypes.func.isRequired,
-    },
+class SelectorList extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     handleInitScroll(){
         this.initScrollTo('hour')
         this.initScrollTo('minute')
         this.initScrollTo('second')
-    },
+    }
 
     initScrollTo(type){
         let val = this.props[type]
@@ -30,15 +22,15 @@ const SelectorList = React.createClass({
             let to = selected.offsetTop
             dom.scrollTop = to
         }
-    },
+    }
 
     componentDidMount() {
         this.handleInitScroll()
-    },
+    }
 
     handleTimeChange(type='hour', val){
         this.props.onChange(type, val)
-    },
+    }
 
     formatSelectList(type='hour'){
         let val = this.props[type]
@@ -56,7 +48,7 @@ const SelectorList = React.createClass({
         return (
             <ul>{nodes}</ul>
         )
-    },
+    }
 
     render() {
         const {simple} = this.props
@@ -76,6 +68,17 @@ const SelectorList = React.createClass({
             </div>
         );
     }
-});
+}
+
+SelectorList.defaultProps = {
+    hour: 0,
+    minute: 0,
+    second: 0,
+    simple: false
+}
+
+SelectorList.propTypes = {
+    onChange: PropTypes.func.isRequired,
+}
 
 module.exports = SelectorList

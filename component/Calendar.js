@@ -1,5 +1,6 @@
 const React = require('react');
-const PropTypes = React.PropTypes
+const Component = React.Component
+const PropTypes = require('prop-types')
 const extractDate = require('./util/datetime').extractDate;
 const capitalize = require('./util/misc').capitalize
 
@@ -10,28 +11,32 @@ const klassName = require('./util/className');
 const TODAY = new Date();
 TODAY.setHours(0,0,0,0);
 
-
-const Calendar = React.createClass({
-    getInitialState() {
+class Calendar extends Component {
+    constructor(props) {
+        super(props);
         const {year, month, day, value} = this.initDate();
-        let {type} = this.props
-        return { year, month, day, value, current: capitalize(type) }
-    },
+        let {type} = props
 
-    getDefaultProps() {
-        return {
-            className: "",
-            showPreview: true,
-            type: 'day',
-        };
-    },
+        this.handleClick = this.handleClick.bind(this)
+        this.handlePreMonth = this.handlePreMonth.bind(this)
+        this.handleNextMonth = this.handleNextMonth.bind(this)
+        this.handlePreYear = this.handlePreYear.bind(this)
+        this.handleNextYear = this.handleNextYear.bind(this)
+        this.renderPreview = this.renderPreview.bind(this)
+        this.handleYearPickerClick = this.handleYearPickerClick.bind(this)
+        this.handleMonthPickerClick = this.handleMonthPickerClick.bind(this)
+        this.handlePreYearRange = this.handlePreYearRange.bind(this)
+        this.handleNextYearRange = this.handleNextYearRange.bind(this)
+        this.pickYear = this.pickYear.bind(this)
+        this.pickMonth = this.pickMonth.bind(this)
+        this.renderMonthPicker = this.renderMonthPicker.bind(this)
+        this.renderYearPicker = this.renderYearPicker.bind(this)
+        this.renderDayPicker = this.renderDayPicker.bind(this)
 
-    propTypes: {
-        className: PropTypes.string,
-        showPreview: PropTypes.bool,
-        value: PropTypes.instanceOf(Date),
-        type: PropTypes.oneOf(['day', 'month', 'year']),
-    },
+        this.state = {
+            year, month, day, value, current: capitalize(type)
+        }
+    }
 
     initDate(date=this.props.value){
         date = date || new Date()
@@ -47,7 +52,7 @@ const Calendar = React.createClass({
         }
 
         return Object.assign(extractDate(date), { value: date })
-    },
+    }
 
     handleClick(value){
         let {year, month, day} = extractDate(value)
@@ -58,7 +63,7 @@ const Calendar = React.createClass({
             day,
         });
         if (this.props.onChange) this.props.onChange(value)
-    },
+    }
 
     handlePreMonth(){
         let {month, year} = this.state;
@@ -67,7 +72,7 @@ const Calendar = React.createClass({
         } else {
             this.setState({  month: month - 1 });
         }
-    },
+    }
 
     handleNextMonth(){
         let {month, year} = this.state;
@@ -76,28 +81,22 @@ const Calendar = React.createClass({
         } else {
             this.setState({ month: month + 1 });
         }
-    },
+    }
 
     handlePreYear(){
         let {year} = this.state
         this.setState({
             year: year - 1
         });
-    },
+    }
 
     handleNextYear(){
         let {year} = this.state
         this.setState({
             year: year + 1
         });
-    },
+    }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.props.value) {
-            this.setState(this.initDate(nextProps.value));
-        }
-    },
-    
     // show preview
     renderPreview(){
         let { year, month, day } = this.state
@@ -114,7 +113,7 @@ const Calendar = React.createClass({
                 </p>
             </div>
         )
-    },
+    }
 
     // year picker toggle
     handleYearPickerClick(year){
@@ -136,8 +135,8 @@ const Calendar = React.createClass({
         });
 
         if (this.props.onChange) this.props.onChange(new Date(value.getTime()))
-    },
-    
+    }
+
     // month picker toggle
     handleMonthPickerClick(month){
         const {type} = this.props
@@ -158,33 +157,39 @@ const Calendar = React.createClass({
             value,
         });
         if (this.props.onChange) this.props.onChange(new Date(value.getTime()))
-    },
+    }
 
     // year picker range change
     handlePreYearRange(){
         this.setState({
             year: this.state.year - 12,
         });
-    },
+    }
 
     // year picker range change
     handleNextYearRange(){
         this.setState({
             year: this.state.year + 12,
         });
-    },
-    
+    }
+
     pickYear(){
         this.setState({
             current: 'Year',
         });
-    },
+    }
 
     pickMonth(){
         this.setState({
             current: 'Month',
         });
-    },
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.setState(this.initDate(nextProps.value));
+        }
+    }
 
     renderMonthPicker(){
         const { year, month } = this.state;
@@ -215,7 +220,7 @@ const Calendar = React.createClass({
                 </ul>
             </div>
         )
-    },
+    }
 
     renderYearPicker(){
         const { year } = this.state;
@@ -253,7 +258,7 @@ const Calendar = React.createClass({
                 </ul>
             </div>
         )
-    },
+    }
 
     renderDayPicker(){
         const { year, month, value } = this.state;
@@ -278,7 +283,7 @@ const Calendar = React.createClass({
                 let isDisabled = itemDate < begin || itemDate > end;
 
                 matrixNodes[row].push(<td key={`canlender-col-${i}`}>
-                                        <Calendar.Item active={value.getTime() == itemDate.getTime() && !isDisabled} 
+                                        <CalendarItem active={value.getTime() == itemDate.getTime() && !isDisabled} 
                                             disabled={isDisabled} isToday={TODAY.getDate() == itemDate.getDate()} 
                                             onClick={this.handleClick} value={itemDate} label={_index}/>
                                       </td>)
@@ -327,7 +332,7 @@ const Calendar = React.createClass({
                 </table>
             </div>
         )
-    },
+    }
 
     render() {
         const {showPreview, type} = this.props
@@ -340,32 +345,49 @@ const Calendar = React.createClass({
             </div>
         );
     }
-});
+}
 
+Calendar.defaultProps = {
+    className: "",
+    showPreview: true,
+    type: 'day',
+}
 
-Calendar.Item = React.createClass({
-    propTypes: {
-        onClick: React.PropTypes.func,
-    },
+Calendar.propTypes = {
+    className: PropTypes.string,
+    showPreview: PropTypes.bool,
+    value: PropTypes.instanceOf(Date),
+    type: PropTypes.oneOf(['day', 'month', 'year']),
+}
+
+class CalendarItem extends Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this)
+    }
+
     handleClick(value){
         if (!this.props.disabled) this.props.onClick(value);
-    },
+    }
 
     render() {
-        let {value, disabled, active, isToday} = this.props;
-        let className = ['_day'];
-        if (isToday) className.push('_today');
-        if (disabled) className.push('_disabled');
-        if (active) className.push('_active');
-        className = className.join(' ');
+        let {value, disabled, active, isToday} = this.props
+        let className = ['_day']
+        if (isToday) className.push('_today')
+        if (disabled) className.push('_disabled')
+        if (active) className.push('_active')
+        className = className.join(' ')
         return (
             <a href="javascript:;" className={className} 
                 onClick={() => this.handleClick(value)}>
                 {this.props.label}
             </a>
-        );
+        )
     }
-});
+}
 
+CalendarItem.propTypes = {
+    onClick: React.PropTypes.func,
+}
 
 module.exports = Calendar

@@ -149,7 +149,7 @@ module.exports = {
         ],
         "no-process-env": "error",
         "no-process-exit": "error",
-        "no-proto": "error",
+        "no-proto": "off",
         "no-restricted-globals": "error",
         "no-restricted-imports": "error",
         "no-restricted-modules": "error",

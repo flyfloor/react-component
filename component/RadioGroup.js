@@ -1,35 +1,28 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
+
 const Radio = require('./Radio')
 const klassName = require('./util/className')
-const UpdatePropsMixin = require('./mixin/UpdatePropsMixin')
+const updatePropsCmp = require('./high-order/updatePropsCmp')
 
-const RadioGroup = React.createClass({
-    mixins: [UpdatePropsMixin],
-    propTypes: {
-        options: React.PropTypes.array,
-        labelName: React.PropTypes.string,
-        valueName: React.PropTypes.string,
-        onChange: React.PropTypes.func,
-        defaultChecked: React.PropTypes.bool,
-    },
-    getInitialState() {
-        const { value } = this.props;
-        return { value };
-    },
+class RadioGroup extends Component {
+    constructor(props) {
+        super(props);
+        this.toggleChange = this.toggleChange.bind(this)
 
-    getDefaultProps() {
-        return {
-            labelName: 'name',
-            valueName: 'value',
-        };
-    },
+        const { value } = props;
+        this.state = {
+            value
+        }
+    }
 
     toggleChange(e, value){
         this.setState({ value }, () => {
             const {onChange} = this.props
             if (onChange) onChange(this.state.value)
         });
-    },
+    }
 
     componentWillReceiveProps(nextProps) {
         const {defaultChecked, valueName, onChange} = this.props;
@@ -52,7 +45,7 @@ const RadioGroup = React.createClass({
                 });
             }
         }
-    },
+    }
 
     componentDidMount() {
         const {defaultChecked, options, children, valueName, onChange} = this.props;
@@ -75,7 +68,7 @@ const RadioGroup = React.createClass({
                 });
             }
         }
-    },
+    }
 
     render() {
         let {labelName, valueName, options, className, style, children} = this.props;
@@ -108,6 +101,19 @@ const RadioGroup = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = RadioGroup;
+RadioGroup.propTypes = {
+    options: PropTypes.array,
+    labelName: PropTypes.string,
+    valueName: PropTypes.string,
+    onChange: PropTypes.func,
+    defaultChecked: PropTypes.bool,
+}
+
+RadioGroup.defaultProps = {
+    labelName: 'name',
+    valueName: 'value',
+}
+
+module.exports = updatePropsCmp(RadioGroup);

@@ -1,42 +1,35 @@
 const React = require('react')
-const PropTypes = React.PropTypes
+const Component = React.Component
+const PropTypes = require('prop-types')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 
 const Calendar = require('./Calendar')
 const klassName = require('./util/className')
 const SelectorList = require('./time-picker/SelectorList')
-const DocumentClickMixin = require('./mixin/DocumentClickMixin')
+const documentClickCmp = require('./high-order/documentClickCmp')
 const datetime = require('./util/datetime')
 const {formatDate, extractDate} = datetime
 
-const DateTimePicker = React.createClass({
-    mixins: [DocumentClickMixin],
-    propTypes: {
-        format: PropTypes.string.isRequired,
-        value: PropTypes.instanceOf(Date),
-        onChange: PropTypes.func.isRequired,
-        confirm: PropTypes.element,
-        placeHolder: PropTypes.string,
-    },
-    getDefaultProps() {
-        return {
-            format: 'yyyy-MM-dd',
-            confirm: <button>confirm</button>,
-            placeHolder: 'select date',
-        };
-    },
-    getInitialState() {
+class DateTimePicker extends Component {
+    constructor(props) {
+        super(props);
+        this.handleDateChange = this.handleDateChange.bind(this)
+        this.handleTimeChange = this.handleTimeChange.bind(this)
+        this.handleOpen = this.handleOpen.bind(this)
+        this.handleConfirm = this.handleConfirm.bind(this)
+        this.togglePicker = this.togglePicker.bind(this)
+
         const {value, minute, second, hour } = this.initDateTime();
-        return { 
+        this.state = { 
             value, 
             minute, 
             second, 
             hour, 
             open: false,
             showDate: true,
-        };
-    },
-
+        }
+    }
+    
     initDateTime(date = this.props.value){
         if (!date) {
             // default value is undefined
@@ -47,7 +40,7 @@ const DateTimePicker = React.createClass({
             return { minute, second, hour }
         }
         return Object.assign(extractDate(date, { showTime: true }), { value: date })
-    },
+    }
 
     handleDateChange(date){
         let {hour, minute, second} = this.state
@@ -66,7 +59,7 @@ const DateTimePicker = React.createClass({
             // onChange date
             this.props.onChange(new Date(date.getTime()))
         })
-    },
+    }
 
     handleTimeChange(type='hour', val){
         this.setState({
@@ -85,7 +78,7 @@ const DateTimePicker = React.createClass({
                 this.props.onChange(new Date(value.getTime()))
             })
         });
-    },
+    }
 
     componentWillReceiveProps(nextProps) {
         if (!nextProps.value) {
@@ -95,18 +88,18 @@ const DateTimePicker = React.createClass({
         if (!this.props.value || nextProps.value.getTime() !== this.props.value.getTime()) {
             this.setState(this.initDateTime(nextProps.value));
         }
-    },
+    }
 
     onOtherDomClick(){
         this.handleOpen(false)
-    },
+    }
 
     handleOpen(open){
         this.setState({
             open,
             showDate: open,
         });
-    },
+    }
 
     handleConfirm(){
         let {value, minute, hour, second} = this.state
@@ -134,14 +127,14 @@ const DateTimePicker = React.createClass({
             }
         }
         this.handleOpen(false)
-    },
+    }
 
     togglePicker(){
         let {showDate} = this.state
         this.setState({
             showDate: !showDate
         });
-    },
+    }
 
     render() {
         let {className, begin, end, format, confirm, placeHolder} = this.props
@@ -184,6 +177,20 @@ const DateTimePicker = React.createClass({
             </div>
         );
     }
-})
+}
 
-module.exports = DateTimePicker
+DateTimePicker.propTypes = {
+    format: PropTypes.string.isRequired,
+    value: PropTypes.instanceOf(Date),
+    onChange: PropTypes.func.isRequired,
+    confirm: PropTypes.element,
+    placeHolder: PropTypes.string,
+}
+
+DateTimePicker.defaultProps = {
+    format: 'yyyy-MM-dd',
+    confirm: <button>confirm</button>,
+    placeHolder: 'select date',
+}
+
+module.exports = documentClickCmp(DateTimePicker)

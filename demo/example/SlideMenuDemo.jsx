@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {SlideMenu} from './index.js';
 
-export default class SlideMenuDemo extends React.Component {
+export default class SlideMenuDemo extends Component {
     constructor(props){
         super(props);
     }

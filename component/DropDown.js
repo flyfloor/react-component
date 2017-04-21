@@ -1,36 +1,31 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const ReactDOM = require('react-dom')
+const updatePropsCmp = require('./high-order/updatePropsCmp')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
-const DocumentClickMixin = require('./mixin/DocumentClickMixin')
-const BACKSPACE_KC = require('./mixin/keyCode').BACKSPACE_KC
+const documentClickCmp = require('./high-order/documentClickCmp')
+const BACKSPACE_KEYCODE = require('./util/constants').BACKSPACE_KEYCODE
 const klassName = require('./util/className')
-const UpdatePropsMixin = require('./mixin/UpdatePropsMixin')
 
-const DropDown = React.createClass({
-    mixins: [DocumentClickMixin, UpdatePropsMixin],
-    propTypes: {
-        placeHolder: React.PropTypes.string,
-        options: React.PropTypes.array,
-        onChange: React.PropTypes.func.isRequired,
-        labelName: React.PropTypes.string,
-        valueName: React.PropTypes.string,
-        defaultSelected: React.PropTypes.bool,
-        searchable: React.PropTypes.bool,
-        multi: React.PropTypes.bool,
-        children: React.PropTypes.arrayOf(React.PropTypes.element),
-    },
-    
-    getInitialState() {
-        let { multi, value } = this.props;
+class DropDown extends Component {
+    constructor(props) {
+        super(props);
+        this.toggleOpen = this.toggleOpen.bind(this)
+        this.multiBarValChangeByIndex = this.multiBarValChangeByIndex.bind(this)
+        this.handleChangeSelect = this.handleChangeSelect.bind(this)
+        this.handleSearch = this.handleSearch.bind(this)
+
+        let { multi, value } = props;
         const default_val = multi ? [] : '';
         value = value || default_val;
-        return {
+        this.state = {
             value,
             open: false,
             filterText: '',
-        };
-    },
-
+        }
+    }
+    
     componentWillReceiveProps(nextProps) {
         const {defaultSelected, multi, valueName} = this.props
         const {options, children} = nextProps
@@ -50,17 +45,7 @@ const DropDown = React.createClass({
                 }, () => this.props.onChange(this.state.value));
             }
         }
-    },
-
-    getDefaultProps() {
-        return {
-            labelName: 'name',
-            valueName: 'value',
-            multi: false,
-            className: '',
-            placeHolder: 'click to select...',
-        };
-    },
+    }
 
     componentDidMount() {
         const { multi, defaultSelected, valueName, options, children } = this.props;
@@ -77,8 +62,8 @@ const DropDown = React.createClass({
                 }, () => this.props.onChange(this.state.value));
             }
         }
-    },
-
+    }
+    // format value judge if is multi
     formatValue(val, callback){
         let newVal = val, oldVal = this.state.value;
 
@@ -92,8 +77,9 @@ const DropDown = React.createClass({
             newVal = oldVal.concat(val);
         } 
         this.setState({ value: newVal}, callback);
-    },
-
+    }
+    
+    // yield child type dropdown
     formatYieldChildren(children){
         let {labelName, searchable, valueName, placeHolder, multi, style, className} = this.props;
         const {filterText, value, open} = this.state;
@@ -114,7 +100,7 @@ const DropDown = React.createClass({
                 }
             }
             
-            if(this.getFilterStatus(filterText, item_label, item_val)) {
+            if(this.filterTextMatched(filterText, item_label, item_val)) {
                 nodes.push(this.formatOptionCell({ 
                     label: item_label, 
                     value: item_val, 
@@ -131,9 +117,9 @@ const DropDown = React.createClass({
         } else {
             labelNode = searchable ? 
                 this.formatSearchBar(placeHolder)
-                : <DropDown.label isPlaceHolder={value === ''} onClick={() => this.toggleOpen(!open)}>
+                : <DropDownLabel isPlaceHolder={value === ''} onClick={() => this.toggleOpen(!open)}>
                     {placeHolder}
-                </DropDown.label>
+                </DropDownLabel>
         }
 
         className = klassName('dropdown', className);
@@ -149,8 +135,9 @@ const DropDown = React.createClass({
                         {open ? nodes : null}
                     </ReactCssTransitionGroup>
                 </div>;
-    },
-
+    }
+    
+    // dropdown label
     formatLabelNode(labels){
         const {multi, searchable} = this.props;
         const {open, value} = this.state;
@@ -160,13 +147,14 @@ const DropDown = React.createClass({
         } else {
             labelNode = searchable ? 
                 this.formatSearchBar(labels)
-                : <DropDown.label isPlaceHolder={value === ''} onClick={() => this.toggleOpen(!open)}>
+                : <DropDownLabel isPlaceHolder={value === ''} onClick={() => this.toggleOpen(!open)}>
                     {labels}
-                </DropDown.label>;
+                </DropDownLabel>;
         }
         return labelNode;
-    },
-
+    }
+    
+    // generate nodes and label by options prop
     getNodesAndLabel(){
         const { labelName, valueName, searchable, multi, placeHolder, options } = this.props;
         const { filterText, value } = this.state;
@@ -194,14 +182,15 @@ const DropDown = React.createClass({
             node = this.formatOptionCell({ label: pair_label, value: pair_val, selected, children: pair.children, disabled: pair.disabled });
 
             if (multi || searchable) {
-                if (this.getFilterStatus(filterText, pair_val, pair_label)) optionNodes.push(node);
+                if (this.filterTextMatched(filterText, pair_val, pair_label)) optionNodes.push(node);
             } else {
                 optionNodes.push(node);
             }
         }
         return {optionNodes, displayLabels};
-    },
-
+    }
+    
+    // options type dropdown
     formatOptions(){
         let {className, style} = this.props;
         const {open} = this.state
@@ -221,9 +210,10 @@ const DropDown = React.createClass({
                 </ReactCssTransitionGroup>
             </div>
         );
-    },
-
-    getFilterStatus(text, ...fields){
+    }
+    
+    // filter if text in fields, return true
+    filterTextMatched(text, ...fields){
         let status = false;
         for (let i = 0; i < fields.length; i++) {
             if (String(fields[i]).indexOf(text) !== -1) {
@@ -232,22 +222,24 @@ const DropDown = React.createClass({
             }
         }
         return status;
-    },
+    }
     
+    // format option each cell
     formatOptionCell({ label, value, selected, children, disabled }){
         const content = children ? children : label;
         let node = disabled ? 
-            <DropDown.Option key={value} disabled={disabled} selected={selected}>
+            <DropDownOption key={value} disabled={disabled} selected={selected}>
                 {content}
-            </DropDown.Option>
-            : <DropDown.Option key={value} disabled={disabled} selected={selected} onClick={() => this.handleChangeSelect(value)}>
+            </DropDownOption>
+            : <DropDownOption key={value} disabled={disabled} selected={selected} onClick={() => this.handleChangeSelect(value)}>
                 {content}
-            </DropDown.Option>
+            </DropDownOption>
         return (
             node
         );
-    },
-
+    }
+    
+    // searchable search bar
     formatSearchBar(text){
         const {filterText, value} = this.state;
         let className = '_text'
@@ -263,21 +255,24 @@ const DropDown = React.createClass({
                 <i></i>
             </div>
         );
-    },
-
+    }
+    
+    // multi dropdown's input
     formatMultiInput(tags){
         return (
-            <DropDown.multiInput filterText={this.state.filterText} 
+            <MultiInput filterText={this.state.filterText} 
                 onSelectChange={this.multiBarValChangeByIndex} onUserInputFocus={() => this.toggleOpen(true)} 
                 onUserInput={this.handleSearch} onClick={this.toggleOpen} selectedTags={tags}>
-            </DropDown.multiInput>
+            </MultiInput>
         );
-    },
-
+    }
+    
+    // other context click to close dropdown
     onOtherDomClick(){
         this.toggleOpen(false);
-    },
-
+    }
+    
+    // multi dropdown, select value change
     multiBarValChangeByIndex(index){
         let {value} = this.state;
         // remove specific value
@@ -290,34 +285,38 @@ const DropDown = React.createClass({
         this.setState({
             value, 
         }, this.triggerDropValueChange());
-    },
-
+    }
+    
+    // each option cell clicked handler
     handleChangeSelect(val){
         this.formatValue(val, () => {
             this.triggerDropValueChange();
             this.toggleOpen(this.props.multi);
         });
-    },
-
+    }
+    
+    // value change, trigger onChange event
     triggerDropValueChange(){
         const {multi, onChange} = this.props;
         let {value} = this.state;
         if (multi) value = Object.assign([], value);
         onChange(value);
-    },
-
+    }
+    
+    // dropdown open or close, clean filter text
     toggleOpen(stat){
         this.setState({
             open: stat,
             filterText: '', 
         });
-    },
-
+    }
+    
+    // search
     handleSearch(text){
         this.setState({
             filterText: text, 
         });
-    },
+    }
 
     render() {
         const {children} = this.props;
@@ -328,63 +327,82 @@ const DropDown = React.createClass({
             node
         );
     }
-});
+}
 
+DropDown.propTypes = {
+    placeHolder: PropTypes.string,
+    options: PropTypes.array,
+    onChange: PropTypes.func.isRequired,
+    labelName: PropTypes.string,
+    valueName: PropTypes.string,
+    defaultSelected: PropTypes.bool,
+    searchable: PropTypes.bool,
+    multi: PropTypes.bool,
+    children: PropTypes.arrayOf(PropTypes.element),
+}
 
-// dropdown option
-DropDown.Option = React.createClass({
-    render(){
-        const {selected, disabled} = this.props;
-        let className = '_item';
-        if (disabled) {
-            className += ' _disabled';
-        }
-        if (selected) {
-            className += ' _active';
-        }
-        return (
-            <div className={className}
-                {...this.props}>
-            </div>
-        );
+DropDown.defaultProps = {
+    labelName: 'name',
+    valueName: 'value',
+    multi: false,
+    className: '',
+    placeHolder: 'click to select...',
+}
+
+const DropDownOption = props => {
+    const {selected, disabled} = props;
+    let className = '_item';
+    if (disabled) {
+        className += ' _disabled';
     }
-});
+    if (selected) {
+        className += ' _active';
+    }
+    return (
+        <div className={className}
+            {...props}>
+        </div>
+    )
+}
 
 // dropdown label
-DropDown.label = React.createClass({
-    render() {
-        let _props = Object.assign({}, this.props)
-        let {isPlaceHolder} = _props
-        let className = '_label'
-        if (isPlaceHolder) {
-            className += ' _placeHolder'
-        }
-        delete _props.isPlaceHolder
-        return (
-            <div className={className} {..._props}></div>
-        );
+const DropDownLabel = props => {
+    let _props = Object.assign({}, props)
+    let {isPlaceHolder} = _props
+    let className = '_label'
+    if (isPlaceHolder) {
+        className += ' _placeHolder'
     }
-});
+    delete _props.isPlaceHolder
+    return (
+        <div className={className} {..._props}></div>
+    );
+}
 
 // multi dropdown input field
-DropDown.multiInput = React.createClass({
+class MultiInput extends Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this)
+        this.handleKeyDown = this.handleKeyDown.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
+        this.removeSelected = this.removeSelected.bind(this)
 
-    getInitialState() {
-        return {
-            hasInput: false, 
-        };
-    },
-
-    componentWillReceiveProps: function(nextProps) {
+        this.state = {
+            hasInput: false,
+        }
+    }
+    
+    componentWillReceiveProps(nextProps) {
         if (nextProps.selectedTags.length !== this.props.selectedTags.length) {
             this.inputFieldFocus();
         }
-    },
+    }
 
     handleClick(){
         this.inputFieldFocus();
         this.props.onClick(true);
-    },
+    }
 
     handleKeyDown(e){
         const {keyCode} = e;
@@ -393,30 +411,29 @@ DropDown.multiInput = React.createClass({
             hasInput: true, 
         });        
         
-        if (keyCode === BACKSPACE_KC && value === '') this.props.onSelectChange();
+        if (keyCode === BACKSPACE_KEYCODE && value === '') this.props.onSelectChange();
         e.target.style.width = (value.length + 1) * 12 + 'px';
-    },
-
+    }
 
     handleBlur(){
         this.setState({
             hasInput: false, 
         });
         this.inputField().style.width = '9px';
-    },
+    }
 
     removeSelected(index){
         this.props.onSelectChange(index);
         this.inputFieldFocus();
-    },
+    }
 
     inputField(){
         return ReactDOM.findDOMNode(this.refs.userInput);
-    },
+    }
 
     inputFieldFocus(){
         this.inputField().focus();
-    },
+    }
 
     render() {
         const {selectedTags, filterText} = this.props;
@@ -444,6 +461,6 @@ DropDown.multiInput = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = DropDown
+module.exports = documentClickCmp(updatePropsCmp(DropDown))

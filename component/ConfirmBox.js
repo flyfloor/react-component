@@ -1,48 +1,33 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
-const DocumentClickMixin = require('./mixin/DocumentClickMixin')
-const PopUpMixin = require('./mixin/PopUpMixin')
+const documentClickCmp = require('./high-order/documentClickCmp')
+const popUpCmp = require('./high-order/popUpCmp')
 const klassName = require('./util/className')
 
-const ConfirmBox = React.createClass({
-    mixins: [DocumentClickMixin, PopUpMixin],
-
-    propTypes: {
-        onCancel: React.PropTypes.func,
-        onConfirm: React.PropTypes.func,
-        force: React.PropTypes.bool,
-        content: React.PropTypes.element.isRequired,
-        confirm: React.PropTypes.element,
-        cancel: React.PropTypes.element,
-    },
-
-    closeConfirm(){
-        this.setState({
-            open: false 
-        });
-    },
-
-    getDefaultProps() {
-        return {
-            className: '',
-        };
-    },
+class ConfirmBox extends Component {
+    constructor(props) {
+        super(props);
+        this.handleCancel = this.handleCancel.bind(this)
+        this.handleConfirm = this.handleConfirm.bind(this)
+    }
 
     onOtherDomClick(){
-        if (!this.props.force) this.closeConfirm();
-    },
+        if (!this.props.force) this.popUpClose();
+    }
 
     handleCancel(){
         const {onCancel} = this.props;
-        if (!onCancel) return this.closeConfirm();
-        if(onCancel()) this.closeConfirm();
-    },
+        if (!onCancel) return this.popUpClose();
+        if(onCancel()) this.popUpClose();
+    }
 
     handleConfirm(){
         const {onConfirm} = this.props;
-        if (!onConfirm) return this.closeConfirm();
-        if (onConfirm()) this.closeConfirm();
-    },
+        if (!onConfirm) return this.popUpClose();
+        if (onConfirm()) this.popUpClose();
+    }
 
     render() {
         let {confirm, cancel, position, className, content, style, children} = this.props;
@@ -82,6 +67,19 @@ const ConfirmBox = React.createClass({
             </span>
         );
     }
-});
+}
 
-module.exports = ConfirmBox
+ConfirmBox.propTypes = {
+    onCancel: PropTypes.func,
+    onConfirm: PropTypes.func,
+    force: PropTypes.bool,
+    content: PropTypes.element.isRequired,
+    confirm: PropTypes.element,
+    cancel: PropTypes.element,
+}
+
+ConfirmBox.defaultProps = {
+    className: ''
+}
+
+module.exports = popUpCmp(documentClickCmp(ConfirmBox))

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Carousel} from "./index.js";
 
 const src = ['ambition-morty', 'awkward-morty', 'despise', 'pride-morty', 'surprise-morty'];
@@ -13,7 +13,7 @@ const getImgs = function(){
 
 const imgNodes = getImgs();
 
-export default class CarouselDemo extends React.Component {
+export default class CarouselDemo extends Component {
     render() {
         let items = [];
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {RadioGroup, Radio} from './index.js';
 
 const options = [
@@ -10,7 +10,7 @@ const options = [
 
 const checkedVal = 'c';
 
-export default class RadioDemo extends React.Component {
+export default class RadioDemo extends Component {
     constructor(props, refs){
         super(props);
         this.state = {

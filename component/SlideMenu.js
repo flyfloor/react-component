@@ -1,25 +1,19 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const klassName = require('./util/className')
 
-const SlideMenu = React.createClass({
-    propTypes: {
-        position: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-        width: React.PropTypes.number,
-        onClose: React.PropTypes.func,
-    },
+class SlideMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.open = this.open.bind(this)
+        this.close = this.close.bind(this)
 
-    getInitialState() {
-        return { 
-            display: false 
+        this.state = {
+            display: false,
         }
-    },
-    getDefaultProps() {
-        return {
-            width: 300,
-            position: 'right',
-        };
-    },
-
+    }
+    
     calcPositionStyle(){
         const {position, width} = this.props
         const {display} = this.state;
@@ -47,13 +41,13 @@ const SlideMenu = React.createClass({
                         right:0,
                         top:0}
         }
-    },
+    }
 
     open(){
         this.setState({
             display: true
         });
-    },
+    }
 
     close(){
         const {onClose} = this.props
@@ -61,8 +55,8 @@ const SlideMenu = React.createClass({
         this.setState({
             display: false
         });
-    },
-    
+    }
+
     render() {
         const {display} = this.state;
         let {className, children} = this.props;
@@ -77,6 +71,17 @@ const SlideMenu = React.createClass({
             </div>
         );
     }
-});
+}
+
+SlideMenu.propTypes = {
+    position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    width: PropTypes.number,
+    onClose: PropTypes.func,
+}
+
+SlideMenu.defaultProps = {
+    width: 300,
+    position: 'right',
+}
 
 module.exports = SlideMenu;

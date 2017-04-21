@@ -1,48 +1,27 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const ReactDOM = require('react-dom')
-const IntervalMixin = require('./mixin/IntervalMixin')
+const intervalCmp = require('./high-order/intervalCmp')
 const klassName = require('./util/className')
 
-const Carousel = React.createClass({
-    mixins: [IntervalMixin],
-
-    propTypes: {
-        children: React.PropTypes.node,
-        autoPlay: React.PropTypes.bool,
-        delay: React.PropTypes.number,
-        showArrow: React.PropTypes.bool,
-        showDot: React.PropTypes.bool,
-        prev: React.PropTypes.element,
-        next: React.PropTypes.element,
-        className:  React.PropTypes.string,
-    },
-
-    getInitialState() {
-        return {
+class Carousel extends Component {
+    constructor(props) {
+        super(props);
+        this.handleAutoPlay = this.handleAutoPlay.bind(this)
+        this.resetAutoplay = this.resetAutoplay.bind(this)
+        this.makeCarouselItem = this.makeCarouselItem.bind(this)
+        this.handleSlide = this.handleSlide.bind(this)
+        this.handleNext = this.handleNext.bind(this)
+        this.handlePrev = this.handlePrev.bind(this)
+        this.resetPosition = this.resetPosition.bind(this)
+        this.addTransition = this.addTransition.bind(this)
+        this.state = {
             index: 0,
             count: 0,
             baseWidth: 0,
-        };
-    },
-
-    getDefaultProps() {
-        return {
-            showArrow: false,
-            showDot: true,
-            autoPlay: false,
-            delay: 3000,
-            prev: <span>prev</span>,
-            next: <span>next</span>,
-        };
-    },
-
-    componentDidMount() {
-        const base = ReactDOM.findDOMNode(this);
-        this.setState({
-            baseWidth: base.offsetWidth
-        });
-        this.resetAutoplay();
-    },
+        }
+    }
 
     handleAutoPlay(){
         const {index, count} = this.state;
@@ -51,7 +30,7 @@ const Carousel = React.createClass({
                 index: index + 1 
             }, () => this.addTransition(this.resetPosition) );
         } 
-    },
+    }
 
     resetAutoplay(){
         const {autoPlay, delay} = this.props;
@@ -59,16 +38,7 @@ const Carousel = React.createClass({
             this.clearInterval();
             this.setInterval(this.handleAutoPlay, delay);
         }
-    },
-
-    componentWillMount() {
-        const {children} = this.props;
-        if (children) {
-            this.setState({
-                count: children.length
-            });
-        }
-    },
+    }
 
     makeCarouselItem(children){
         const {baseWidth, index} = this.state;
@@ -89,14 +59,31 @@ const Carousel = React.createClass({
                             </div>);
         }
         return itemNodes;
-    },
+    }
+
+    componentWillMount() {
+        const {children} = this.props;
+        if (children) {
+            this.setState({
+                count: children.length
+            });
+        }
+    }
+
+    componentDidMount() {
+        const base = ReactDOM.findDOMNode(this);
+        this.setState({
+            baseWidth: base.offsetWidth
+        });
+        this.resetAutoplay();
+    }
 
     handleSlide(index){
         this.resetAutoplay();
         this.setState({
             index: parseInt(index)
         }, () => this.addTransition() );
-    },
+    }
 
     handleNext(){
         this.resetAutoplay();
@@ -106,7 +93,7 @@ const Carousel = React.createClass({
                 index: index - 1 
             }, () => this.addTransition(this.resetPosition) );
         }
-    },
+    }
 
     handlePrev(){
         this.resetAutoplay();
@@ -116,14 +103,14 @@ const Carousel = React.createClass({
                 index: index + 1 
             }, () => this.addTransition(this.resetPosition) );
         }
-    },
+    }
 
     resetPosition(){
         const {index, count} = this.state;
         if (index === -1) this.setState({ index: count - 1 });
 
         if (index === count)  this.setState({ index: 0 });
-    },
+    }
 
     addTransition(callback){
         let contentDOM  = ReactDOM.findDOMNode(this.refs.contentDOM);
@@ -132,7 +119,7 @@ const Carousel = React.createClass({
             contentDOM.className = '_content';
             if (callback) callback.call(this, null);
         }, 500);
-    },
+    }
 
     render() {
         const {prev, next, showArrow, showDot, children} = this.props;
@@ -180,6 +167,26 @@ const Carousel = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = Carousel;
+Carousel.propTypes = {
+    children: PropTypes.node,
+    autoPlay: PropTypes.bool,
+    delay: PropTypes.number,
+    showArrow: PropTypes.bool,
+    showDot: PropTypes.bool,
+    prev: PropTypes.element,
+    next: PropTypes.element,
+    className:  PropTypes.string,
+}
+
+Carousel.defaultProps = {
+    showArrow: false,
+    showDot: true,
+    autoPlay: false,
+    delay: 3000,
+    prev: <span>prev</span>,
+    next: <span>next</span>,
+}
+
+module.exports = intervalCmp(Carousel);

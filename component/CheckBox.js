@@ -1,33 +1,24 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const klassName = require('./util/className')
 
-const CheckBox = React.createClass({
-    propTypes: {
-        onChange: React.PropTypes.func,
-        disabled: React.PropTypes.bool,
-        checked: React.PropTypes.bool,
-        className: React.PropTypes.string,
-    },
-    getInitialState() {
-        return {
-            checked:this.props.checked, 
-        };
-    },
-
-    getDefaultProps() {
-        return {
-            className: '',
-            checked: false,
-        };
-    },
-
+class CheckBox extends Component {
+    constructor(props) {
+        super(props);
+        this.checkedChange = this.checkedChange.bind(this)
+        this.state = {
+            checked: props.checked,
+        }
+    }
+    
     checkedChange(e){
         const {onChange, value} = this.props;
         this.setState({
             checked: e.target.checked
         });
         if(onChange) onChange(e, value);
-    },
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.checked !== this.props.checked) {
@@ -35,7 +26,7 @@ const CheckBox = React.createClass({
                 checked: nextProps.checked
             });
         }
-    },
+    }
 
     render() {
         let {disabled, style, className, children} = this.props;
@@ -50,8 +41,20 @@ const CheckBox = React.createClass({
                     checked={checked} onChange={this.checkedChange}/>
                 <span>{children}</span>
             </label>
-        );
+        )
     }
-});
+}
+
+CheckBox.propTypes = {
+    onChange: PropTypes.func,
+    disabled: PropTypes.bool,
+    checked: PropTypes.bool,
+    className: PropTypes.string,
+}
+
+CheckBox.defaultProps = {
+    className: '',
+    checked: false,
+}
 
 module.exports = CheckBox

@@ -1,25 +1,18 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const klassName = require('./util/className')
-const PropTypes = React.PropTypes
 
-const Radio = React.createClass({
-    propTypes: {
-        onChange: PropTypes.func,
-        checked: PropTypes.bool,
-        disabled: PropTypes.bool,
-        className: PropTypes.string,
-    },
-
-    getDefaultProps() {
-        return {
-            className: '',
-        };
-    },
+class Radio extends Component {
+    constructor(props) {
+        super(props);
+        this.checkedChange = this.checkedChange.bind(this)
+    }
 
     checkedChange(e){
         const {value, onChange} = this.props;
         if(onChange) onChange(e, value);
-    },
+    }
 
     render() {
         let {className, checked, disabled, style, children} = this.props;
@@ -34,6 +27,17 @@ const Radio = React.createClass({
             </label>
         );
     }
-});
+}
+
+Radio.propTypes = {
+    onChange: PropTypes.func,
+    checked: PropTypes.bool,
+    disabled: PropTypes.bool,
+    className: PropTypes.string,
+}
+
+Radio.defaultProps = {
+    className: '',
+}
 
 module.exports = Radio;

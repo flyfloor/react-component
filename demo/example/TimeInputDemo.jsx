@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {TimeInput} from './index.js';
 
-export default class TimeInputDemo extends React.Component {
+export default class TimeInputDemo extends Component {
     constructor(props){
         super(props);
         this.state = {

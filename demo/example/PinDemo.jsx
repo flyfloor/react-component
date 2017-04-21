@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Pin} from './index.js';
 
-export default class PinDemo extends React.Component {
+export default class PinDemo extends Component {
 
     render() {
         return (

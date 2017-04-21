@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {CheckBox} from "./index.js";
 
-export default class CheckBoxDemo extends React.Component {
+export default class CheckBoxDemo extends Component {
     handleChange(e){
         console.log('changed', e.target.checked);
     }

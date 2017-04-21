@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Radio} from './index.js';
 
-export default class RadioDemo extends React.Component {
+export default class RadioDemo extends Component {
     handleChange(e){
         
     }

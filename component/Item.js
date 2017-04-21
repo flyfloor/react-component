@@ -1,14 +1,11 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 
-const Item = React.createClass({
-    propTypes: {
-        children: React.PropTypes.node,
-    },
-    getDefaultProps() {
-        return {
-            className: '',
-        };
-    },
+class Item extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         const {children} = this.props;
         return (
@@ -17,6 +14,14 @@ const Item = React.createClass({
             </div>
         );
     }
-});
+}
+
+Item.propTypes = {
+    children: PropTypes.node,
+}
+
+Item.defaultProps = {
+    className: '',
+}
 
 module.exports = Item

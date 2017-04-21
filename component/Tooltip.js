@@ -1,30 +1,20 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
-const DocumentClickMixin = require('./mixin/DocumentClickMixin')
-const PopUpMixin = require('./mixin/PopUpMixin')
+const documentClickCmp = require('./high-order/documentClickCmp')
+const popUpCmp = require('./high-order/popUpCmp')
 const klassName = require('./util/className')
 
-const Tooltip = React.createClass({
-    mixins: [DocumentClickMixin, PopUpMixin],
-
-    propTypes: {
-        content: React.PropTypes.element.isRequired,
-        mode: React.PropTypes.oneOf(['hover', 'click'])
-    },
-
-    getDefaultProps() {
-        return {
-            className: '',
-            mode: 'hover'
-        };
-    },
+class Tooltip extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     onOtherDomClick(){
-        this.setState({
-            open: false, 
-        });
-    },
-
+        this.popUpClose()
+    }
+    
     render() {
         const {open} = this.state;
         let {position, content, style, className, children, mode} = this.props;
@@ -65,6 +55,16 @@ const Tooltip = React.createClass({
             </span>
         );
     }
-});
+}
 
-module.exports = Tooltip;
+Tooltip.defaultProps = {
+    className: '',
+    mode: 'hover',
+}
+
+Tooltip.propTypes = {
+    content: PropTypes.element.isRequired,
+    mode: PropTypes.oneOf(['hover', 'click'])
+}
+
+module.exports = popUpCmp(documentClickCmp(Tooltip));

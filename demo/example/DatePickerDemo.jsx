@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {DatePicker} from './index';
 
 import {formatDate} from '../../component/util/datetime';
 
-export default class DatePickerDemo extends React.Component {
+export default class DatePickerDemo extends Component {
     constructor(props){
         super(props);
         this.state = {

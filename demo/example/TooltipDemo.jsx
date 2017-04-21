@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Tooltip} from './index.js';
 
-export default class TooltipDemo extends React.Component {
+export default class TooltipDemo extends Component {
     render() {
         const contentNode = <p>Some basic component</p>;
         return (

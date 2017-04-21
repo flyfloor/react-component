@@ -1,37 +1,26 @@
 const React = require('react')
+const Component = React.Component
+const PropTypes = require('prop-types')
 const klassName = require('./util/className')
 
-const PropTypes = React.PropTypes;
-const Modal = React.createClass({
-    propTypes: {
-        title: PropTypes.element,
-        confirm: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-        cancel: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-        onConfirm: PropTypes.func,
-        onCancel: PropTypes.func,
-        onClose: PropTypes.func,
-        close: PropTypes.element,
-    },
+class Modal extends Component {
+    constructor(props) {
+        super(props);
+        this.handleConfirm = this.handleConfirm.bind(this)
+        this.handleCancel = this.handleCancel.bind(this)
+        this.close = this.close.bind(this)
+        this.open = this.open.bind(this)
 
-    getInitialState() {
-        return {
-            display: false, 
-        };
-    },
-    
-    getDefaultProps() {
-        return {
-            confirm: 'confirm',
-            cancel: 'cancel',
-            close: <span>x</span>,
-        };
-    },
+        this.state = {
+            display: false,
+        }
+    }
 
     open(){
         this.setState({
             display: true
         });
-    },
+    }
 
     close(){
         const {onClose} = this.props
@@ -39,15 +28,15 @@ const Modal = React.createClass({
         this.setState({
             display: false
         });
-    },
+    }
 
     handleConfirm(){
         if (this.props.onConfirm()) this.close();
-    },
+    }
 
     handleCancel(){
         if (this.props.onCancel()) this.close();
-    },
+    }
 
     render() {
         let {onConfirm, onCancel, confirm, 
@@ -103,6 +92,22 @@ const Modal = React.createClass({
             </div>
         );
     }
-});
+}
+
+Modal.propTypes = {
+    title: PropTypes.element,
+    confirm: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+    cancel: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+    onConfirm: PropTypes.func,
+    onCancel: PropTypes.func,
+    onClose: PropTypes.func,
+    close: PropTypes.element,
+}
+
+Modal.defaultProps = {
+    confirm: 'confirm',
+    cancel: 'cancel',
+    close: <span>x</span>,
+}
 
 module.exports = Modal

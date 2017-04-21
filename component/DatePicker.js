@@ -1,8 +1,9 @@
 const React = require('react')
-const PropTypes = React.PropTypes
+const Component = React.Component
+const PropTypes = require('prop-types')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const formatDate = require('./util/datetime').formatDate
-const DocumentClickMixin = require('./mixin/DocumentClickMixin')
+const documentClickCmp = require('./high-order/documentClickCmp')
 const Calendar = require('./Calendar')
 const klassName = require('./util/className')
 
@@ -12,49 +13,30 @@ const _DATE_FORMAT = {
     year: 'yyyy',
 }
 
-const DatePicker = React.createClass({
-    mixins: [DocumentClickMixin],
-    propTypes: {
-        onChange: PropTypes.func.isRequired,
-        showPreview: PropTypes.bool,
-        format: PropTypes.string,
-        value: PropTypes.instanceOf(Date),
-        type: PropTypes.oneOf(['day', 'month', 'year']),
-    },
+class DatePicker extends Component {
+    constructor(props) {
+        super(props);
+        this.handleValChange = this.handleValChange.bind(this)
 
-    getDefaultProps() {
-        return {
-            className: '',
-            placeHolder: 'select date',
-            showPreview: true,
-            type: 'day',
-        };
-    },
-
-    getInitialState() {
         const value = this.initDate();
-        return { value, open: false };
-    },
+        this.state = {
+            value, 
+            open: false,
+        }
+    }
 
     initDate(date=this.props.value){
         if (!date) {
             return 
         }
         return new Date(date.getTime())
-    },
+    }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.props.value) {
-            this.setState({
-                value: this.initDate(nextProps.value)
-            });
-        }
-    },
-
-    dateParams(){
-        const {begin, end} = this.props;
-        return { begin, end };
-    },
+    onOtherDomClick(){
+        this.setState({
+            open: false
+        });
+    }
 
     handleValChange(value){
         this.setState({
@@ -62,13 +44,15 @@ const DatePicker = React.createClass({
             open: false
         });
         this.props.onChange(new Date(value.getTime()))
-    },
+    }
 
-    onOtherDomClick(){
-        this.setState({
-            open: false
-        });
-    },
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.setState({
+                value: this.initDate(nextProps.value)
+            });
+        }
+    }
 
     render() {
         const {open, value} = this.state;
@@ -94,6 +78,21 @@ const DatePicker = React.createClass({
             </div>
         );
     }
-});
+}
 
-module.exports = DatePicker
+DatePicker.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    showPreview: PropTypes.bool,
+    format: PropTypes.string,
+    value: PropTypes.instanceOf(Date),
+    type: PropTypes.oneOf(['day', 'month', 'year']),
+}
+
+DatePicker.defaultProps = {
+    className: '',
+    placeHolder: 'select date',
+    showPreview: true,
+    type: 'day',
+}
+
+module.exports = documentClickCmp(DatePicker)

@@ -1,9 +1,5 @@
 'use strict';
 
-var DocumentClickMixin = require("./lib/mixin/DocumentClickMixin.js");
-var IntervalMixin = require("./lib/mixin/IntervalMixin.js");
-var PopUpMixin = require("./lib/mixin/PopUpMixin.js");
-var ScrollMixin = require("./lib/mixin/ScrollMixin.js");
 var CheckBox = require("./lib/CheckBox.js");
 var Radio = require("./lib/Radio.js");
 var RadioGroup = require("./lib/RadioGroup.js");
@@ -30,10 +26,6 @@ var NoticeCenter = require("./lib/NoticeCenter.js");
 var Panel = require("./lib/Panel.js");
 
 module.exports = {
-    DocumentClickMixin: DocumentClickMixin,
-    PopUpMixin: PopUpMixin,
-    ScrollMixin: ScrollMixin,
-    IntervalMixin: IntervalMixin,
     CheckBox: CheckBox,
     Radio: Radio,
     RadioGroup: RadioGroup,

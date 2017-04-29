@@ -27,39 +27,44 @@ class DropDown extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        const {defaultSelected, multi, valueName} = this.props
-        const {options, children} = nextProps
-        // not multi, have no value，defaultSelected
-        if (!multi && defaultSelected && !this.state.value) {
-            // options
-            if (options && this.props.options !== options && options.length > 0) {
+        const {defaultSelected, multi} = this.props
+        if (nextProps.options !== this.props.options) {
+            if (!defaultSelected) {
                 this.setState({
-                    value: options[0][valueName]
-                }, () => this.props.onChange(this.state.value));
-                return
-            }
-            // yield children
-            if (children && this.props.children !== children && children.length > 0) {
-                this.setState({
-                    value: children[0].props[valueName] 
-                }, () => this.props.onChange(this.state.value));
+                    value: multi ? [] : ''
+                });
+            } else {
+                this.handleDefaultSelected(nextProps)
             }
         }
     }
 
+    handleDefaultSelected(nextProps){
+        let {valueName, multi, options, onChange, children} = nextProps || this.props
+        let initVal = multi ? [] : ''
+        if (options && options.length > 0) {
+            initVal = options[0][valueName] 
+        }
+        if (children && children.length > 0) {
+            initVal = children[0].props[valueName]
+        }
+        this.setState({
+            value: multi ? [initVal] : initVal,
+        }, () => onChange(this.state.value));
+    }
+
     componentDidMount() {
-        const { multi, defaultSelected, valueName, options, children } = this.props;
-        if (!multi && !this.state.value && defaultSelected) {
-            if (options && options.length > 0) {
-                this.setState({
-                    value: options[0][valueName] 
-                }, () => this.props.onChange(this.state.value));
-                return
-            }
-            if (children && children.length > 0) {
-                this.setState({
-                    value: children[0].props[valueName]
-                }, () => this.props.onChange(this.state.value));
+        let {value} = this.state
+        let {defaultSelected, multi} = this.props
+        if (defaultSelected) {
+            if (multi) {
+                if (value.length === 0) {
+                    this.handleDefaultSelected()
+                }
+            } else {
+                if (!value) {
+                    this.handleDefaultSelected()
+                }
             }
         }
     }

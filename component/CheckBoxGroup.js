@@ -3,7 +3,7 @@ const Component = React.Component
 const PropTypes = require('prop-types')
 const CheckBox = require('./CheckBox')
 const klassName = require('./util/className')
-const updatePropsCmp = require('./high-order/updatePropsCmp')
+const defaultCheckedCmp = require('./high-order/defaultCheckedCmp')
 
 class CheckBoxGroup extends Component {
     constructor(props) {
@@ -23,32 +23,22 @@ class CheckBoxGroup extends Component {
         let {value} = this.state
         let {defaultChecked} = this.props
         if (value.length === 0 && defaultChecked) {
-            this.handleDefaultChecked()
-        }
-    }
-
-    handleDefaultChecked(nextProps){
-        let {valueName, options, onChange, children} = nextProps || this.props
-        if (options && options.length > 0) {
-            this.setState({
-                value: [options[0][valueName]],
-            }, () => onChange(this.state.value));
-        }
-        if (children && children.length > 0) {
-            this.setState({
-                value: [children[0].props[valueName]],
-            }, () => onChange(this.state.value));
+            this.initDefaultValue({ multi: true })
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.options !== this.props.options) {
-            if (!this.props.defaultChecked) {
+        const {options, defaultChecked} = this.props
+        if (nextProps.options !== options) {
+            if (!defaultChecked) {
                 this.setState({
                     value: []
-                });
+                }, () => this.props.onChange([]));
             } else {
-                this.handleDefaultChecked(nextProps)
+                this.initDefaultValue({ 
+                    multi: true,
+                    props: nextProps,
+                })
             }
         }
     }
@@ -139,4 +129,4 @@ CheckBoxGroup.propTypes = {
     defaultChecked: PropTypes.bool,
 }
 
-module.exports = updatePropsCmp(CheckBoxGroup)
+module.exports = defaultCheckedCmp(CheckBoxGroup)

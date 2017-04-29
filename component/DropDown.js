@@ -2,7 +2,7 @@ const React = require('react')
 const Component = React.Component
 const PropTypes = require('prop-types')
 const ReactDOM = require('react-dom')
-const updatePropsCmp = require('./high-order/updatePropsCmp')
+const defaultCheckedCmp = require('./high-order/defaultCheckedCmp')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const documentClickCmp = require('./high-order/documentClickCmp')
 const BACKSPACE_KEYCODE = require('./util/constants').BACKSPACE_KEYCODE
@@ -27,44 +27,30 @@ class DropDown extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        const {defaultSelected, multi} = this.props
-        if (nextProps.options !== this.props.options) {
+        const {defaultSelected, multi, options} = this.props
+        if (nextProps.options !== options) {
             if (!defaultSelected) {
                 this.setState({
                     value: multi ? [] : ''
-                });
+                }, () => this.props.onChange(this.state.value));
             } else {
-                this.handleDefaultSelected(nextProps)
+                this.initDefaultValue({ 
+                    multi, 
+                    props: nextProps
+                })
             }
         }
-    }
-
-    handleDefaultSelected(nextProps){
-        let {valueName, multi, options, onChange, children} = nextProps || this.props
-        let initVal = multi ? [] : ''
-        if (options && options.length > 0) {
-            initVal = options[0][valueName] 
-        }
-        if (children && children.length > 0) {
-            initVal = children[0].props[valueName]
-        }
-        this.setState({
-            value: multi ? [initVal] : initVal,
-        }, () => onChange(this.state.value));
     }
 
     componentDidMount() {
         let {value} = this.state
         let {defaultSelected, multi} = this.props
         if (defaultSelected) {
-            if (multi) {
-                if (value.length === 0) {
-                    this.handleDefaultSelected()
-                }
-            } else {
-                if (!value) {
-                    this.handleDefaultSelected()
-                }
+            if (!multi && !value) {
+                return this.initDefaultValue({ multi })
+            }
+            if (multi && value.length === 0) {
+                this.initDefaultValue({ multi })
             }
         }
     }
@@ -468,4 +454,4 @@ class MultiInput extends Component {
     }
 }
 
-module.exports = documentClickCmp(updatePropsCmp(DropDown))
+module.exports = documentClickCmp(defaultCheckedCmp(DropDown))

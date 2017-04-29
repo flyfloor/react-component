@@ -4,7 +4,7 @@ const PropTypes = require('prop-types')
 
 const Radio = require('./Radio')
 const klassName = require('./util/className')
-const updatePropsCmp = require('./high-order/updatePropsCmp')
+const defaultCheckedCmp = require('./high-order/defaultCheckedCmp')
 
 class RadioGroup extends Component {
     constructor(props) {
@@ -29,9 +29,9 @@ class RadioGroup extends Component {
             if (!this.props.defaultChecked) {
                 this.setState({
                     value: ''
-                });
+                }, () => this.props.onChange(''));
             } else {
-                this.handleDefaultChecked(nextProps)
+                this.initDefaultValue({ props: nextProps })
             }
         }
     }
@@ -40,21 +40,7 @@ class RadioGroup extends Component {
         let {value} = this.state
         let {defaultChecked} = this.props
         if (!value && defaultChecked) {
-            this.handleDefaultChecked()
-        }
-    }
-
-    handleDefaultChecked(nextProps){
-        let {valueName, options, onChange, children} = nextProps || this.props
-        if (options && options.length > 0) {
-            this.setState({
-                value: options[0][valueName],
-            }, () => onChange(this.state.value));
-        }
-        if (children && children.length > 0) {
-            this.setState({
-                value: children[0].props[valueName],
-            }, () => onChange(this.state.value));
+            this.initDefaultValue()
         }
     }
 
@@ -104,4 +90,4 @@ RadioGroup.defaultProps = {
     valueName: 'value',
 }
 
-module.exports = updatePropsCmp(RadioGroup);
+module.exports = defaultCheckedCmp(RadioGroup)

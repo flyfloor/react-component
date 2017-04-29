@@ -19,6 +19,40 @@ class CheckBoxGroup extends Component {
         }
     }
 
+    componentDidMount() {
+        let {value} = this.state
+        let {defaultChecked} = this.props
+        if (value.length === 0 && defaultChecked) {
+            this.handleDefaultChecked()
+        }
+    }
+
+    handleDefaultChecked(nextProps){
+        let {valueName, options, onChange, children} = nextProps || this.props
+        if (options && options.length > 0) {
+            this.setState({
+                value: [options[0][valueName]],
+            }, () => onChange(this.state.value));
+        }
+        if (children && children.length > 0) {
+            this.setState({
+                value: [children[0].props[valueName]],
+            }, () => onChange(this.state.value));
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.options !== this.props.options) {
+            if (!this.props.defaultChecked) {
+                this.setState({
+                    value: []
+                });
+            } else {
+                this.handleDefaultChecked(nextProps)
+            }
+        }
+    }
+
     handleChange(e, val){
         e.target.checked ? this.addVal(val) : this.removeVal(val);
     }
@@ -50,8 +84,7 @@ class CheckBoxGroup extends Component {
     }
 
     valueChange(){
-        const {onChange} = this.props;
-        if (onChange) onChange(this.state.value)
+        this.props.onChange(this.state.value)
     }
 
     render() {
@@ -102,7 +135,8 @@ CheckBoxGroup.propTypes = {
     options: PropTypes.array,
     labelName: PropTypes.string,
     valueName: PropTypes.string,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
+    defaultChecked: PropTypes.bool,
 }
 
 module.exports = updatePropsCmp(CheckBoxGroup)

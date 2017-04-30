@@ -1,4 +1,5 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 const Component = React.Component
 const klassName = require('./util/className')
 const timeInputCmp = require('./high-order/timeInputCmp')
@@ -57,14 +58,14 @@ class TimeInput extends Component {
 
     render() {
         const {inputVal} = this.state;
-        let {className, placeHolder, simple} = this.props;
+        let {className, placeHolder, simple, onFocus} = this.props;
         simple = simple ? '_simple' : ''
         className = klassName(className, 'timeinput', simple);
         return (
             <div className={className}>
                 <div className="_input" onClick={this.handleClick}>
                     <input type="text" className="_input" placeholder={placeHolder} 
-                        ref="inputDOM"
+                        ref="inputDOM" onFocus={onFocus}
                         onBlur={this.handleOnBlur} value={inputVal} 
                         onChange={this.handleInputChange}/>
                     <i></i>
@@ -79,6 +80,16 @@ TimeInput.defaultProps = {
     value: '',
     className: '',
     placeHolder: 'input time',
+}
+TimeInput.propTypes = {
+    simple: PropTypes.bool,
+    value: PropTypes.string,
+    className: PropTypes.string,
+    placeHolder: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
 }
 
 module.exports = timeInputCmp(TimeInput);

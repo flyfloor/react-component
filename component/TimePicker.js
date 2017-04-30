@@ -1,4 +1,5 @@
 const React = require('react')
+const PropTypes = require('prop-types')
 const Component = React.Component
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const klassName = require('./util/className')
@@ -49,16 +50,20 @@ class TimePicker extends Component {
     }
 
     handleInputClick(){
+        const {onClick} = this.props
         this.setState({
             open: true
         });
+        if (onClick) onClick()
     }
 
     handleBlur(value){
+        const {onBlur} = this.props
         let {hour, minute, second} = timeStr2Obj(value)
         this.setState({
             hour, minute, second, value
         });
+        if (onBlur) onBlur()
     }
 
     handleTimeChange(type='hour', val){
@@ -76,12 +81,16 @@ class TimePicker extends Component {
 
     render() {
         const {value, open, hour, second, minute} = this.state
-        let {simple, className} = this.props
+        let {simple, className, onFocus} = this.props
         className = klassName(className, 'timepicker', simple ? '_simple': '')
         return (
             <div className={className}>
-                <TimeInput simple={simple} onChange={this.handleValueChange} value={value} 
-                    onClick={this.handleInputClick} onBlur={this.handleBlur} />
+                <TimeInput simple={simple} 
+                    onChange={this.handleValueChange} 
+                    value={value} 
+                    onFocus={onFocus}
+                    onClick={this.handleInputClick} 
+                    onBlur={this.handleBlur} />
                 <ReactCssTransitionGroup className="_wrap" transitionName="timepicker"
                     transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ? 
@@ -98,6 +107,15 @@ TimePicker.defaultProps = {
     simple: false,
     className: '',
     placeHolder: 'input time',
+}
+TimePicker.propTypes = {
+    simple: PropTypes.bool,
+    className: PropTypes.string,
+    placeHolder: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
 }
 
 module.exports = timeInputCmp(documentClickCmp(TimePicker))

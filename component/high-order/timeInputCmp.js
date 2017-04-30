@@ -8,10 +8,15 @@ module.exports = Cmp => {
             super(props);
         }
 
-        initTime({ displayValue, value } = { value: 0 }){
+        initTime({ displayValue, value }){
             const {simple} = this.props;
-            let rtnObj = displayValue !== undefined ? timeStr2Obj(displayValue) : seconds2Obj(value)
+            if ([undefined, '', null].indexOf(displayValue) !== -1 && value === undefined) {
+                return {}
+            }
+            
+            let rtnObj = [undefined, '', null].indexOf(displayValue) === -1 ? timeStr2Obj(displayValue) : seconds2Obj(value)
             let {hour, minute, second} = rtnObj
+
             value = hour * 3600 + minute * 60 + second
 
             displayValue = obj2TimeStr({ 

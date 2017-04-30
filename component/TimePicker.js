@@ -104,7 +104,6 @@ class TimePicker extends Component {
 TimePicker.defaultProps = {
     simple: false,
     className: '',
-    value: 0,
     placeHolder: 'input time',
 }
 

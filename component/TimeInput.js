@@ -9,7 +9,7 @@ class TimeInput extends Component {
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.handleOnBlur = this.handleOnBlur.bind(this)
-
+        
         let {value, displayValue} = this.initTime({ value: props.value });
         this.state = {
             value,
@@ -75,7 +75,6 @@ class TimeInput extends Component {
 
 TimeInput.defaultProps = {
     simple: false,
-    value: 0,
     className: '',
     placeHolder: 'input time',
 }

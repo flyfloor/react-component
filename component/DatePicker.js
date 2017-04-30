@@ -56,14 +56,19 @@ class DatePicker extends Component {
 
     render() {
         const {open, value} = this.state;
-        let {begin, end, className, placeHolder, showPreview, format, type} = this.props;
+        let {begin, end, className, placeHolder, 
+            showPreview, format, type, onClick, onBlur, onFocus} = this.props;
         format = format || _DATE_FORMAT[type]
         let valueStr = value ? formatDate(value, format) : ''
         if (open) className += ' _active';
         return (
             <div className={klassName('datepicker', className)}>
-                <div className="input" onClick={() => {this.setState({ open: true }) }}>
-                    <input type="text" className="_input" value={valueStr} readOnly placeholder={placeHolder} />
+                <div className="input" onClick={() => {
+                    this.setState({ open: true }) 
+                    if (onClick) onClick()
+                }}>
+                    <input type="text" className="_input" onFocus={onFocus} onBlur={onBlur} 
+                        value={valueStr} readOnly placeholder={placeHolder} />
                     <i></i>
                 </div>
                 <ReactCssTransitionGroup className="_picker" transitionName="datepicker"
@@ -82,6 +87,9 @@ class DatePicker extends Component {
 
 DatePicker.propTypes = {
     onChange: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
     showPreview: PropTypes.bool,
     format: PropTypes.string,
     value: PropTypes.instanceOf(Date),

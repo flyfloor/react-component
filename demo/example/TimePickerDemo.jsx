@@ -5,7 +5,7 @@ export default class TimePickerDemo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '12:13:34'
+            value: 47551
         }
     }
     handleValueChange(value) {

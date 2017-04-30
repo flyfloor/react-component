@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {TimeInput} from './index.js';
+import {seconds2Obj, obj2TimeStr} from '../../component/util/time';
 
 export default class TimeInputDemo extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showTime: '13:12:31'
+            showTime: 47551
         };
     }
 
@@ -31,16 +32,16 @@ export default class TimeInputDemo extends Component {
                     </li>
                     <li>
                         <h4>Time input with given value</h4>
-                        <TimeInput value="12:44:23" onChange={value => console.log(value)}/>
+                        <TimeInput value={47551} onChange={value => console.log(value)}/>
                         <pre>
                             <code>
-                                {`<TimeInput value="12:44:23" onChange={onChangeFunc}/>`}
+                                {`<TimeInput value={47551} onChange={onChangeFunc}/>`}
                             </code>
                         </pre>
                     </li>
                     <li>
                         <h4>Time input onchange event</h4>
-                        <p>time you selected is {this.state.showTime}</p>
+                        <p>time you selected value is {this.state.showTime}, display is {obj2TimeStr(seconds2Obj(this.state.showTime))}</p>
                         <TimeInput onChange={this.handleTimeChange.bind(this)} value={this.state.showTime}/>
                         <pre>
                             <code>
@@ -50,10 +51,10 @@ export default class TimeInputDemo extends Component {
                     </li>
                     <li>
                         <h4>simple</h4>
-                        <TimeInput simple={true} value="02:12" onChange={value => console.log(value)}/>
+                        <TimeInput simple={true} value={7920} onChange={value => console.log(value)}/>
                         <pre>
                             <code>
-                                {`<TimeInput simple={true} value="02:12"/>`}
+                                {`<TimeInput simple={true} value={7920}/>`}
                             </code>
                         </pre>
                     </li>

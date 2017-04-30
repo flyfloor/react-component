@@ -56,6 +56,24 @@ const obj2TimeStr = ({ hour = 0, minute = 0, second = 0}, options = {
     return `${hour}:${minute}:${second}`
 }
 
+const seconds2Obj = value => {
+    value = value || 0
+    value = value % 86400
+    let hour = parseInt(value / 3600)
+    let minute = parseInt(value % 3600 / 60)
+    let second = value % 3600 % 60
+    return {
+        hour, minute, second
+    }
+}
+
+const obj2Seconds = ({ hour, minute, second}) => {
+    hour = hour || 0
+    minute = minute || 0
+    second = second || 0
+    return hour * 3600 + minute * 60 + second
+}
+
 const validateUnitByMax = (value, max) => {
     value = parseInt(value);
     if (value > max) value = Math.floor(value % (max + 1));
@@ -65,5 +83,7 @@ const validateUnitByMax = (value, max) => {
 
 module.exports = { 
     timeStr2Obj,
-    obj2TimeStr, 
+    obj2TimeStr,
+    seconds2Obj, 
+    obj2Seconds,
 }

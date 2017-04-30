@@ -137,7 +137,9 @@ class DateTimePicker extends Component {
     }
 
     render() {
-        let {className, begin, end, format, confirm, placeHolder} = this.props
+        let {className, begin, end, format, confirm, 
+            placeHolder, onClick, onBlur, onFocus} = this.props
+
         const {hour, second, minute, value, showDate, open} = this.state
         let date = formatDate(value, `${format} hh:mm:ss`)
         let pickerNode = showDate ? 
@@ -163,8 +165,12 @@ class DateTimePicker extends Component {
                             </div>
         return (
             <div className={klassName('datetime-picker', className)}>
-                <div className="_input" onClick={() => this.handleOpen(true)}>
-                    <input type="text" placeholder={placeHolder} readOnly value={date} />
+                <div className="_input" onClick={() => {
+                    this.handleOpen(true)
+                    if (onClick) onClick()
+                }}>
+                    <input type="text" placeholder={placeHolder} readOnly 
+                        value={date} onFocus={onFocus} onBlur={onBlur} />
                     <i></i>
                 </div>
                 <ReactCssTransitionGroup className="_wrap" transitionName="datetime"
@@ -183,6 +189,9 @@ DateTimePicker.propTypes = {
     format: PropTypes.string.isRequired,
     value: PropTypes.instanceOf(Date),
     onChange: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
     confirm: PropTypes.element,
     placeHolder: PropTypes.string,
 }

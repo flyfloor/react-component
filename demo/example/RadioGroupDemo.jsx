@@ -31,10 +31,10 @@ export default class RadioDemo extends Component {
                 <ul>
                     <li>
                         <h4>Default radio group</h4>
-                        <RadioGroup options={options} labelName='name' valueName='value'/>
+                        <RadioGroup options={options} onChange={val => console.log(val)}/>
                         <pre>
                             <code>
-                                {`<RadioGroup options={options} labelName='name' valueName='value'/>`}
+                                {`<RadioGroup options={options} onchange={onChangeFunction}/>`}
                             </code>
                         </pre>
                     </li>
@@ -44,7 +44,7 @@ export default class RadioDemo extends Component {
                             valueName='value' defaultChecked={true} onChange={value => console.log(value)} />
                         <pre>
                             <code>
-                                {`<RadioGroup options={options} labelName='name' valueName='value' defaultChecked={true} />`}
+                                {`<RadioGroup options={options} onChange={onChangeFunction} defaultChecked={true} />`}
                             </code>
                         </pre>
                     </li>
@@ -54,13 +54,13 @@ export default class RadioDemo extends Component {
                         <RadioGroup options={options} labelName='name' valueName='value' value={checkedVal} onChange={this.displayChange.bind(this)}/>
                         <pre>
                             <code>
-                                {`<RadioGroup options={options} value={value} onChange={handlcChange}/>`}
+                                {`<RadioGroup options={options} value={value} onChange={onChangeFunction}/>`}
                             </code>
                         </pre>
                     </li>
                     <li>
                         <h4>Radio group with yield children</h4>
-                        <RadioGroup value={checkedVal}>
+                        <RadioGroup value={checkedVal} onChange={val => console.log(val)}>
                             <Radio value="a">apple</Radio>
                             <Radio value="b">banana</Radio>
                             <Radio value="c">cat</Radio>
@@ -69,7 +69,7 @@ export default class RadioDemo extends Component {
                         <pre>
                             <code>
 {`
-<RadioGroup value={value}>
+<RadioGroup value={value} onChange={onChangeFunction}>
     <Radio value="a">apple</Radio>
     <Radio value="b">banana</Radio>
     <Radio value="c">cat</Radio>

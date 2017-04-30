@@ -4,7 +4,7 @@ const PropTypes = require('prop-types')
 
 const Radio = require('./Radio')
 const klassName = require('./util/className')
-const updatePropsCmp = require('./high-order/updatePropsCmp')
+const defaultCheckedCmp = require('./high-order/defaultCheckedCmp')
 
 class RadioGroup extends Component {
     constructor(props) {
@@ -25,48 +25,22 @@ class RadioGroup extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {defaultChecked, valueName, onChange} = this.props;
-        const {options, children} = nextProps
-        const {value} = this.state;
-        if (!value && defaultChecked) {
-            if (options && this.props.options && options.length > 0) {
+        if (nextProps.options !== this.props.options) {
+            if (!this.props.defaultChecked) {
                 this.setState({
-                    value: options[0][valueName],
-                }, () => {
-                    if (onChange) onChange(this.state.value)
-                });
-                return
-            }
-            if (children && this.props.children && children.length > 0) {
-                this.setState({
-                    value: children[0].props[valueName]
-                }, () => {
-                    if (onChange) onChange(this.state.value)
-                });
+                    value: ''
+                }, () => this.props.onChange(''));
+            } else {
+                this.initDefaultValue({ props: nextProps })
             }
         }
     }
 
     componentDidMount() {
-        const {defaultChecked, options, children, valueName, onChange} = this.props;
-        const {value} = this.state;
-        // init defaultChecked status
+        let {value} = this.state
+        let {defaultChecked} = this.props
         if (!value && defaultChecked) {
-            if (options && options.length > 0) {
-                this.setState({
-                    value: options[0][valueName],
-                }, () => {
-                    if (onChange) onChange(this.state.value)
-                });
-                return
-            }
-            if (children && children.length > 0) {
-                this.setState({
-                    value: children[0].props[valueName]
-                }, () => {
-                    if (onChange) onChange(this.state.value)
-                });
-            }
+            this.initDefaultValue()
         }
     }
 
@@ -107,7 +81,7 @@ RadioGroup.propTypes = {
     options: PropTypes.array,
     labelName: PropTypes.string,
     valueName: PropTypes.string,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
     defaultChecked: PropTypes.bool,
 }
 
@@ -116,4 +90,4 @@ RadioGroup.defaultProps = {
     valueName: 'value',
 }
 
-module.exports = updatePropsCmp(RadioGroup);
+module.exports = defaultCheckedCmp(RadioGroup)

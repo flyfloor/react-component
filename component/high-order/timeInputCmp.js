@@ -1,6 +1,6 @@
 const PropTypes = require('prop-types')
-const timeStr2Obj = require('../util/time').timeStr2Obj
-const obj2TimeStr = require('../util/time').obj2TimeStr
+const timeUtil = require('../util/time')
+const {timeStr2Obj, obj2TimeStr, seconds2Obj} = timeUtil
 
 module.exports = Cmp => {
     class TimeInputCmp extends Cmp {
@@ -8,28 +8,31 @@ module.exports = Cmp => {
             super(props);
         }
 
-        initTime(val = this.props.value){
+        initTime({ displayValue, value } = { value: 0 }){
             const {simple} = this.props;
-            let {hour, minute, second} = timeStr2Obj(val, { simple });
+            let rtnObj = displayValue !== undefined ? timeStr2Obj(displayValue) : seconds2Obj(value)
+            let {hour, minute, second} = rtnObj
+            value = hour * 3600 + minute * 60 + second
 
-            let value = obj2TimeStr({ hour, minute, second }, {
-                simple: this.props.simple
+            displayValue = obj2TimeStr({ 
+                hour, minute, second 
+            }, {
+                simple
             });
-            if (!val) {
-                return {}
-            }
-            return { value }
+
+            return { value, displayValue }
         }
     }
 
     TimeInputCmp.propTypes = {
         simple: PropTypes.bool,
-        value: PropTypes.string,
+        value: PropTypes.number,
         onChange: PropTypes.func.isRequired,
         onBlur: PropTypes.func,
         onFocus: PropTypes.func,
         className: PropTypes.string,
         placeHolder: PropTypes.string,
+        onClick: PropTypes.func,
     }
 
     return TimeInputCmp

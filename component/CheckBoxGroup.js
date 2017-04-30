@@ -3,7 +3,7 @@ const Component = React.Component
 const PropTypes = require('prop-types')
 const CheckBox = require('./CheckBox')
 const klassName = require('./util/className')
-const updatePropsCmp = require('./high-order/updatePropsCmp')
+const defaultCheckedCmp = require('./high-order/defaultCheckedCmp')
 
 class CheckBoxGroup extends Component {
     constructor(props) {
@@ -16,6 +16,30 @@ class CheckBoxGroup extends Component {
         const { value } = props;
         this.state = {
             value
+        }
+    }
+
+    componentDidMount() {
+        let {value} = this.state
+        let {defaultChecked} = this.props
+        if (value.length === 0 && defaultChecked) {
+            this.initDefaultValue({ multi: true })
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {options, defaultChecked} = this.props
+        if (nextProps.options !== options) {
+            if (!defaultChecked) {
+                this.setState({
+                    value: []
+                }, () => this.props.onChange([]));
+            } else {
+                this.initDefaultValue({ 
+                    multi: true,
+                    props: nextProps,
+                })
+            }
         }
     }
 
@@ -50,8 +74,7 @@ class CheckBoxGroup extends Component {
     }
 
     valueChange(){
-        const {onChange} = this.props;
-        if (onChange) onChange(this.state.value)
+        this.props.onChange(this.state.value)
     }
 
     render() {
@@ -102,7 +125,8 @@ CheckBoxGroup.propTypes = {
     options: PropTypes.array,
     labelName: PropTypes.string,
     valueName: PropTypes.string,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
+    defaultChecked: PropTypes.bool,
 }
 
-module.exports = updatePropsCmp(CheckBoxGroup)
+module.exports = defaultCheckedCmp(CheckBoxGroup)

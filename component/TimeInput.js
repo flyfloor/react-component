@@ -10,24 +10,23 @@ class TimeInput extends Component {
         this.handleClick = this.handleClick.bind(this)
         this.handleOnBlur = this.handleOnBlur.bind(this)
 
-        let {value=""} = this.initTime();
+        let {value, displayValue} = this.initTime({ value: props.value });
         this.state = {
             value,
-            inputVal: value,
+            displayValue,
         }
     }
     
     handleInputChange(e){
-        const {value} = e.target
-        this.setState({ inputVal: value })
+        this.setState({ displayValue: e.target.value })
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
-            let {value} = this.initTime(nextProps.value)
+            let { value, displayValue} = this.initTime({ value: nextProps.value })
             this.setState({
                 value,
-                inputVal: value
+                displayValue
             });
         }
     }
@@ -41,10 +40,10 @@ class TimeInput extends Component {
     }
 
     handleOnBlur(){
-        const {value} = this.initTime(this.state.inputVal);
+        const {value, displayValue} = this.initTime({ displayValue: this.state.displayValue});
         let {onBlur} = this.props
         this.setState({
-            inputVal: value
+            displayValue
         });
         if (value !== this.state.value) {
             this.setState({ value }, () => this.props.onChange(value));
@@ -56,16 +55,16 @@ class TimeInput extends Component {
     }
 
     render() {
-        const {inputVal} = this.state;
-        let {className, placeHolder, simple} = this.props;
+        const {displayValue} = this.state;
+        let {className, placeHolder, simple, onFocus} = this.props;
         simple = simple ? '_simple' : ''
         className = klassName(className, 'timeinput', simple);
         return (
             <div className={className}>
                 <div className="_input" onClick={this.handleClick}>
                     <input type="text" className="_input" placeholder={placeHolder} 
-                        ref="inputDOM"
-                        onBlur={this.handleOnBlur} value={inputVal} 
+                        ref="inputDOM" onFocus={onFocus}
+                        onBlur={this.handleOnBlur} value={displayValue} 
                         onChange={this.handleInputChange}/>
                     <i></i>
                 </div>
@@ -76,7 +75,7 @@ class TimeInput extends Component {
 
 TimeInput.defaultProps = {
     simple: false,
-    value: '',
+    value: 0,
     className: '',
     placeHolder: 'input time',
 }

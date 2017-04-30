@@ -6,8 +6,8 @@ const TimeInput = require('./TimeInput')
 const timeInputCmp = require('./high-order/timeInputCmp')
 const documentClickCmp = require('./high-order/documentClickCmp')
 const SelectorList = require('./time-picker/SelectorList')
-const timeStr2Obj = require('./util/time').timeStr2Obj
-const obj2TimeStr = require('./util/time').obj2TimeStr
+const timeUtil = require('./util/time')
+const {seconds2Obj, obj2Seconds} = timeUtil
 
 class TimePicker extends Component {
     constructor(props) {
@@ -17,14 +17,10 @@ class TimePicker extends Component {
         this.handleBlur = this.handleBlur.bind(this)
         this.handleTimeChange = this.handleTimeChange.bind(this)
 
-        let {value=""} = this.initTime();
-        let {hour, minute, second} = timeStr2Obj(value)
+        let {value} = this.initTime({value: props.value});
         this.state = { 
             open: false,
-            value, 
-            hour,
-            minute,
-            second,
+            value,
         }
     }
     
@@ -36,56 +32,67 @@ class TimePicker extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
-            let {value} = this.initTime(nextProps.value)
-            let {hour, minute, second} = timeStr2Obj(value)
+            let {value} = this.initTime({ value: nextProps.value })
             this.setState({
-                value, hour, minute, second,
-            });
+                value
+            }, () => this.props.onChange(value));
         }
     }
 
-    handleValueChange(value){
-       this.props.onChange(value)
-    }
-
-    handleInputClick(){
-        this.setState({
-            open: true
-        });
-    }
-
-    handleBlur(value){
-        let {hour, minute, second} = timeStr2Obj(value)
-        this.setState({
-            hour, minute, second, value
-        });
-    }
-
-    handleTimeChange(type='hour', val){
-        this.setState({
-            [type]: val
-        }, () => {
-            let {hour, minute, second} = this.state
-            let value = obj2TimeStr({hour, minute, second})
+    handleValueChange(val){
+        let {value} = this.initTime({ value: val })
+        if (value !== this.state.value) {
             this.setState({
                 value
             });
             this.props.onChange(value)
+        }
+    }
+
+    handleInputClick(){
+        const {onClick} = this.props
+        this.setState({
+            open: true
         });
+        if (onClick) onClick()
+    }
+
+    handleBlur(){
+        const {onBlur} = this.props
+        if (onBlur) onBlur()
+    }
+
+    handleTimeChange(type='hour', val){
+        let {value} = this.state
+        let valueObj = seconds2Obj(value)
+        valueObj[type] = val
+        value = obj2Seconds(valueObj)
+
+        this.setState({
+            value,
+        }, () => this.props.onChange(value));
     }
 
     render() {
-        const {value, open, hour, second, minute} = this.state
-        let {simple, className} = this.props
+        let {simple, className, onFocus} = this.props
+        const {value, open} = this.state
+        const {hour, second, minute} = seconds2Obj(value)
+
         className = klassName(className, 'timepicker', simple ? '_simple': '')
         return (
             <div className={className}>
-                <TimeInput simple={simple} onChange={this.handleValueChange} value={value} 
-                    onClick={this.handleInputClick} onBlur={this.handleBlur} />
+                <TimeInput simple={simple} 
+                    onChange={this.handleValueChange} 
+                    value={value} 
+                    onFocus={onFocus}
+                    onClick={this.handleInputClick} 
+                    onBlur={this.handleBlur} />
                 <ReactCssTransitionGroup className="_wrap" transitionName="timepicker"
                     transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ? 
-                        <SelectorList simple={simple} hour={hour} second={second} minute={minute} onChange={this.handleTimeChange} />
+                        <SelectorList simple={simple} hour={hour} 
+                         second={second} minute={minute} 
+                            onChange={this.handleTimeChange} />
                         : null
                     }
                 </ReactCssTransitionGroup>
@@ -97,6 +104,7 @@ class TimePicker extends Component {
 TimePicker.defaultProps = {
     simple: false,
     className: '',
+    value: 0,
     placeHolder: 'input time',
 }
 

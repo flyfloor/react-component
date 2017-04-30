@@ -72,7 +72,9 @@ class DropDown extends Component {
     
     // yield child type dropdown
     formatYieldChildren(children){
-        let {labelName, searchable, valueName, placeHolder, multi, style, className} = this.props;
+        let {labelName, valueName, 
+                placeHolder, multi, style, className} = this.props;
+
         const {filterText, value, open} = this.state;
         let nodes = [], tags = [];
         React.Children.map(children, item => {
@@ -102,16 +104,7 @@ class DropDown extends Component {
             }
         });
 
-        let labelNode = null;
-        if (multi) {
-            labelNode = this.formatMultiInput(tags)
-        } else {
-            labelNode = searchable ? 
-                this.formatSearchBar(placeHolder)
-                : <DropDownLabel isPlaceHolder={value === ''} onClick={() => this.toggleOpen(!open)}>
-                    {placeHolder}
-                </DropDownLabel>
-        }
+        let labelNode = this.formatLabelNode(multi ? tags : placeHolder)
 
         className = klassName('dropdown', className);
 
@@ -130,7 +123,7 @@ class DropDown extends Component {
     
     // dropdown label
     formatLabelNode(labels){
-        const {multi, searchable} = this.props;
+        const {multi, searchable, onClick, onBlur, onFocus} = this.props;
         const {open, value} = this.state;
         let labelNode = null;
         if (multi) {
@@ -138,7 +131,10 @@ class DropDown extends Component {
         } else {
             labelNode = searchable ? 
                 this.formatSearchBar(labels)
-                : <DropDownLabel isPlaceHolder={value === ''} onClick={() => this.toggleOpen(!open)}>
+                : <DropDownLabel onFocus={onFocus} onBlur={onBlur} isPlaceHolder={value === ''} onClick={() => {
+                    this.toggleOpen(!open)
+                    if (onClick) onClick()
+                }}>
                     {labels}
                 </DropDownLabel>;
         }
@@ -233,15 +229,20 @@ class DropDown extends Component {
     // searchable search bar
     formatSearchBar(text){
         const {filterText, value} = this.state;
+        const {onClick, onBlur, onFocus} = this.props
         let className = '_text'
         if (value === '') {
             className += ' _placeHolder'
         }
         return (
-            <div className="_search" onClick={() => this.toggleOpen(true)}>
+            <div className="_search" onClick={() => {
+                this.toggleOpen(true)
+                if (onClick) onClick()
+            }}>
                 {filterText ? <div className="_text"></div>
                     : <div className={className}>{text}</div>}
-                <input type='text' className='_input' ref='userInput' value={filterText}
+                <input type='text' className='_input' ref='userInput' value={filterText} 
+                    onBlur={onBlur} onFocus={onFocus}
                      onChange={(e) => this.handleSearch(e.target.value)}/>
                 <i></i>
             </div>
@@ -250,10 +251,19 @@ class DropDown extends Component {
     
     // multi dropdown's input
     formatMultiInput(tags){
+        const {onClick, onBlur, onFocus} = this.props
         return (
             <MultiInput filterText={this.state.filterText} 
-                onSelectChange={this.multiBarValChangeByIndex} onUserInputFocus={() => this.toggleOpen(true)} 
-                onUserInput={this.handleSearch} onClick={this.toggleOpen} selectedTags={tags}>
+                onSelectChange={this.multiBarValChangeByIndex} 
+                onUserInputFocus={() => {
+                    this.toggleOpen(true)
+                    if (onFocus) onFocus()
+                }} 
+                onBlur={onBlur} onFocus={onFocus}
+                onUserInput={this.handleSearch} onClick={() => {
+                    this.toggleOpen(true)
+                    if (onClick) onClick()
+                }} selectedTags={tags}>
             </MultiInput>
         );
     }
@@ -324,6 +334,9 @@ DropDown.propTypes = {
     placeHolder: PropTypes.string,
     options: PropTypes.array,
     onChange: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
     labelName: PropTypes.string,
     valueName: PropTypes.string,
     defaultSelected: PropTypes.bool,
@@ -364,9 +377,16 @@ const DropDownLabel = props => {
     if (isPlaceHolder) {
         className += ' _placeHolder'
     }
+    delete _props.onClick
+    delete _props.onBlur
+    delete _props.onFocus
     delete _props.isPlaceHolder
     return (
-        <div className={className} {..._props}></div>
+        <div className={className} {..._props}>
+            <input type="text" className="_transparent" readOnly onClick={props.onClick} 
+                onBlur={props.onBlur} onFocus={props.onFocus}/>
+            {_props.children}
+        </div>
     );
 }
 
@@ -407,10 +427,12 @@ class MultiInput extends Component {
     }
 
     handleBlur(){
+        const {onBlur} = this.props
         this.setState({
             hasInput: false, 
         });
         this.inputField().style.width = '9px';
+        if (onBlur) onBlur()
     }
 
     removeSelected(index){

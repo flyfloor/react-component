@@ -74,8 +74,8 @@ class DropDown extends Component {
     formatYieldChildren(children){
         let {labelName, valueName, 
                 placeHolder, multi, style, className} = this.props;
-
         const {filterText, value, open} = this.state;
+
         let nodes = [], tags = [];
         React.Children.map(children, item => {
             const props = item.props;
@@ -117,8 +117,19 @@ class DropDown extends Component {
                     <ReactCssTransitionGroup className="_list" transitionName="dropdown"
                         transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                         {open ? nodes : null}
+                        {this.formatLoading()}
                     </ReactCssTransitionGroup>
                 </div>;
+    }
+
+    // add loading to list
+    formatLoading(){
+        const { loading } = this.props
+        const { open } = this.state
+        if (!open) {
+            return null
+        }
+        return loading ? <div className="_overlay"><div className="loader"></div></div> : null
     }
     
     // dropdown label
@@ -194,6 +205,7 @@ class DropDown extends Component {
                 <ReactCssTransitionGroup className="_list" transitionName="dropdown"
                     transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                     {open ? optionNodes : null}
+                    {this.formatLoading()}
                 </ReactCssTransitionGroup>
             </div>
         );
@@ -317,6 +329,10 @@ class DropDown extends Component {
         this.setState({
             filterText: text, 
         });
+        const {onSearch} = this.props
+        if (onSearch) {
+            onSearch(text)
+        }
     }
 
     render() {
@@ -335,6 +351,7 @@ DropDown.propTypes = {
     options: PropTypes.array,
     onChange: PropTypes.func.isRequired,
     onClick: PropTypes.func,
+    onSearch: PropTypes.func,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     labelName: PropTypes.string,

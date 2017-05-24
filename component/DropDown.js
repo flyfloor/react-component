@@ -77,7 +77,7 @@ class DropDown extends Component {
         const {filterText, value, open} = this.state;
 
         let nodes = [], tags = [];
-        React.Children.map(children, item => {
+        React.Children.map(children, (item, index) => {
             const props = item.props;
             const item_val = props[valueName];
             const item_label = props[labelName];
@@ -94,13 +94,15 @@ class DropDown extends Component {
             }
             
             if(this.filterTextMatched(filterText, item_label, item_val)) {
-                nodes.push(this.formatOptionCell({ 
-                    label: item_label, 
-                    value: item_val, 
-                    selected, 
-                    children: props.children, 
-                    disabled: props.disabled 
-                }));
+                nodes.push(
+                    <DropDownOption key={index}
+                        value={item_val} 
+                        disabled={props.disabled}
+                        onClick={() => this.handleChangeSelect(item_val)}
+                        selected={selected}>
+                            {props.children}
+                    </DropDownOption>
+                )
             }
         });
 
@@ -129,7 +131,14 @@ class DropDown extends Component {
         if (!open) {
             return null
         }
-        return loading ? <div className="_overlay"><div className="loader"></div></div> : null
+        return (
+            loading ? 
+                <div className="_overlay">
+                    <div className="loader">
+                    </div>
+                </div> 
+                : null
+        )
     }
     
     // dropdown label
@@ -142,10 +151,13 @@ class DropDown extends Component {
         } else {
             labelNode = searchable ? 
                 this.formatSearchBar(labels)
-                : <DropDownLabel onFocus={onFocus} onBlur={onBlur} isPlaceHolder={value === ''} onClick={() => {
-                    this.toggleOpen(!open)
-                    if (onClick) onClick()
-                }}>
+                : <DropDownLabel onFocus={onFocus} 
+                    onBlur={onBlur} 
+                    isPlaceHolder={value === ''} 
+                    onClick={() => {
+                        this.toggleOpen(!open)
+                        if (onClick) onClick()
+                    }}>
                     {labels}
                 </DropDownLabel>;
         }
@@ -177,7 +189,14 @@ class DropDown extends Component {
                 if (selected) displayLabels = pair_label;
             }
 
-            node = this.formatOptionCell({ label: pair_label, value: pair_val, selected, children: pair.children, disabled: pair.disabled });
+            node = <DropDownOption key={i}
+                        label={pair_label} 
+                        value={pair_val} 
+                        selected={selected} 
+                        onClick={() => this.handleChangeSelect(pair_val)}
+                        disabled={pair.disabled}>
+                        {pair.children}
+                    </DropDownOption>
 
             if (multi || searchable) {
                 if (this.filterTextMatched(filterText, pair_val, pair_label)) optionNodes.push(node);
@@ -222,22 +241,7 @@ class DropDown extends Component {
         }
         return status;
     }
-    
-    // format option each cell
-    formatOptionCell({ label, value, selected, children, disabled }){
-        const content = children ? children : label;
-        let node = disabled ? 
-            <DropDownOption key={value} disabled={disabled} selected={selected}>
-                {content}
-            </DropDownOption>
-            : <DropDownOption key={value} disabled={disabled} selected={selected} onClick={() => this.handleChangeSelect(value)}>
-                {content}
-            </DropDownOption>
-        return (
-            node
-        );
-    }
-    
+        
     // searchable search bar
     formatSearchBar(text){
         const {filterText, value} = this.state;
@@ -248,12 +252,15 @@ class DropDown extends Component {
         }
         return (
             <div className="_search" onClick={() => {
-                this.toggleOpen(true)
-                if (onClick) onClick()
-            }}>
-                {filterText ? <div className="_text"></div>
+                    this.toggleOpen(true)
+                    if (onClick) onClick()
+                }}>
+
+                {filterText ? 
+                    <div className="_text"></div>
                     : <div className={className}>{text}</div>}
-                <input type='text' className='_input' ref='userInput' value={filterText} 
+                <input type='text' className='_input' 
+                    ref='userInput' value={filterText} 
                     onBlur={onBlur} onFocus={onFocus}
                      onChange={(e) => this.handleSearch(e.target.value)}/>
                 <i></i>
@@ -371,17 +378,20 @@ DropDown.defaultProps = {
 }
 
 const DropDownOption = props => {
-    const {selected, disabled} = props;
+    let newProps = Object.assign({}, props)
+    const {selected, disabled, children} = newProps;
     let className = '_item';
     if (disabled) {
         className += ' _disabled';
+        delete newProps.onClick
     }
     if (selected) {
         className += ' _active';
     }
+
     return (
-        <div className={className}
-            {...props}>
+        <div className={className} {...newProps}>
+            {children ? children : newProps.label}
         </div>
     )
 }
@@ -469,10 +479,12 @@ class MultiInput extends Component {
         const {selectedTags, filterText} = this.props;
         const {hasInput} = this.state;
         const tagNodes = selectedTags.map((tag, index) => {
-            return <span className='_tag' key={index} onClick={() => this.removeSelected(index)}>
-                        <san className="_text">{tag}</san>
-                        <a href="javascript:;" className="_delete"></a>
-                    </span>;
+            return (
+                <span className='_tag' key={index} onClick={() => this.removeSelected(index)}>
+                    <san className="_text">{tag}</san>
+                    <a href="javascript:;" className="_delete"></a>
+                </span>
+            )
         });
 
         let placeHolder = selectedTags.length === 0 && !hasInput ? 

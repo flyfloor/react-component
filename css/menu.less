@@ -17,14 +17,8 @@
     }
 
     ._title {
+        ._item;
         color: @black_c;
-    }
-
-    ._child {
-        &._active {
-            color: @gray;
-            background: @gray_c;
-        }
     }
 
     .menu {
@@ -51,29 +45,7 @@
         }
     }
 
-    &._default {
-        ._menu-2 {
-            @width: 20px;
-            ._child {
-                padding-left: @width;
-            }
-            >.sub-menu>._title {
-                padding-left: @width;
-            }
-        }
-        ._menu-3 {
-            @width: 40px;
-            ._child {
-                padding-left: @width;
-            }
-            >.sub-menu>._title {
-                padding-left: @width;
-            }
-        }
-    }
-
-
-    &._popped {
+    /*&._popped {
         .sub-menu {
             position: relative;
             .menu {
@@ -124,26 +96,5 @@
                 }
             }
         }
-        &._menu-1 {
-            height: 40px;
-            line-height: 30px;
-            >._item {
-                width: 120px;
-                height: 100%;
-                float: left;
-                line-height: 30px;
-                display: inline-block;
-            }
-            >.sub-menu {
-                >.menu {
-                    left: -1px;
-                    top: 38px;
-                }
-                >._title {
-                    padding: 0 15px;
-                    line-height: 40px;
-                }
-            }
-        }
-    }
+    }*/
 }

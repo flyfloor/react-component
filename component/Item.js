@@ -7,8 +7,10 @@ class Item extends Component {
         super(props);
     }
     render() {
+        const newProps = Object.assign({}, this.props)
+        delete newProps.index
         return (
-            <div {...this.props}></div>
+            <div {...newProps}></div>
         );
     }
 }

@@ -97,10 +97,11 @@ class DropDown extends Component {
                 nodes.push(
                     <DropDownOption key={index}
                         value={item_val} 
+                        label={item_label}
                         disabled={props.disabled}
                         onClick={() => this.handleChangeSelect(item_val)}
                         selected={selected}>
-                            {props.children}
+                        {props.children}
                     </DropDownOption>
                 )
             }

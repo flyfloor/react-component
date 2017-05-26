@@ -72,6 +72,9 @@ const MenuItem = (props, context) => {
     return (
         <div className={className} {...newProps} 
             onClick={() => {
+                if (newProps.disabled) {
+                    return
+                }
                 onMenuSelect(index)
                 if (props.onClick) {
                     props.onClick(index)

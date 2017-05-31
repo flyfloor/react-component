@@ -329,7 +329,7 @@ class DropDown extends Component {
         let params = {
             open: stat,
         }
-        if (this.props.multi || this.props.autoClearText) {
+        if (this.state.value || this.props.autoClearText) {
             params.filterText = ''
         }
         this.setState(params);

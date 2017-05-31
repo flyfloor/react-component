@@ -55,10 +55,34 @@
                 border-color: @gray_d;
             }
         }
+
     }
     &._active {
         ._search ._text {
             color: @gray_b;
+        }
+    }
+
+    ._overlay {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        z-index: 9;
+        background: rgba(250, 250, 250, 0.5);
+        .loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate3d(-50%, -50%, 0);
+            -ms-transform: translate3d(-50%, -50%, 0);
+            -o-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
         }
     }
 
@@ -125,5 +149,6 @@
             }
         }
     }
+
     .basic_transition;
 }

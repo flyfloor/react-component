@@ -62,7 +62,7 @@ class Calendar extends Component {
             month,
             day,
         });
-        if (this.props.onChange) this.props.onChange(value)
+        this.props.onChange(value)
     }
 
     handlePreMonth(){
@@ -134,7 +134,7 @@ class Calendar extends Component {
             value,
         });
 
-        if (this.props.onChange) this.props.onChange(new Date(value.getTime()))
+        this.props.onChange(new Date(value.getTime()))
     }
 
     // month picker toggle
@@ -156,7 +156,7 @@ class Calendar extends Component {
             month,
             value,
         });
-        if (this.props.onChange) this.props.onChange(new Date(value.getTime()))
+        this.props.onChange(new Date(value.getTime()))
     }
 
     // year picker range change
@@ -356,6 +356,7 @@ Calendar.defaultProps = {
 Calendar.propTypes = {
     className: PropTypes.string,
     showPreview: PropTypes.bool,
+    onChange: PropTypes.func.isRequired,
     value: PropTypes.instanceOf(Date),
     type: PropTypes.oneOf(['day', 'month', 'year']),
 }

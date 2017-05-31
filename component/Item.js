@@ -7,11 +7,8 @@ class Item extends Component {
         super(props);
     }
     render() {
-        const {children} = this.props;
         return (
-            <div {...this.props}>
-                {children}
-            </div>
+            <div {...this.props}></div>
         );
     }
 }

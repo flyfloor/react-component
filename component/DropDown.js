@@ -326,9 +326,18 @@ class DropDown extends Component {
     
     // dropdown open or close, clean filter text
     toggleOpen(stat){
-        this.setState({
+        let params = {
             open: stat,
-            filterText: '', 
+        }
+        if (this.state.value || this.props.autoClearText) {
+            params.filterText = ''
+        }
+        this.setState(params);
+    }
+
+    clearText(){
+        this.setState({
+            filterText: ''
         });
     }
     
@@ -357,6 +366,7 @@ class DropDown extends Component {
 DropDown.propTypes = {
     placeHolder: PropTypes.string,
     options: PropTypes.array,
+    autoClearText: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
     onClick: PropTypes.func,
     onSearch: PropTypes.func,
@@ -373,6 +383,7 @@ DropDown.propTypes = {
 DropDown.defaultProps = {
     labelName: 'name',
     valueName: 'value',
+    autoClearText: false,
     multi: false,
     className: '',
     placeHolder: 'click to select...',

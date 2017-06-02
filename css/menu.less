@@ -11,90 +11,32 @@
     border: 1px solid @gray_b;
     background: @white;
 
-    ._item {
+    ._item, ._title {
         padding: 5px 15px;
         cursor: pointer;
     }
 
-    ._title {
-        ._item;
-        color: @black_c;
-    }
-
-    .menu {
-        .__transition;
-        border: none;
-        opacity: 0;
-        max-height: 0;
-        overflow: hidden;
-    }
-
-    .sub-menu {
-        padding: 0;
+    ._item {
         &._active {
-            >._title {
-                color: @black;
-                font-weight: 600;
-            }
-            >.menu {
-                .__transition;
-                opacity: 1;
-                max-height: 500px;
-                overflow: hidden;
-            }
+            background: @gray_b;
         }
     }
 
-    /*&._popped {
-        .sub-menu {
-            position: relative;
-            .menu {
-                height: 0;
-                visibility: hidden;
-                overflow: hidden;
-                background: @white;
-                top: -1px;
-                width: 0;
-                left: 100%;
-                position: absolute;
-                border: 1px solid transparent;
-            }
-            &._active {
-                >.menu {
-                    z-index: 100;
-                    width: 100%;
-                    height: auto;
-                    visibility: visible;
-                    overflow: initial;
-                    border-color: @gray_b;
-                }
-            }
+    ._group {
+        ._title {
+            cursor: default;
+            color: @gray_b;
         }
     }
 
-    &._horizontal {
-        .sub-menu {
-            position: relative;
-            .menu {
-                visibility: hidden;
-                overflow: hidden;
-                background: @white;
-                width: 0;
-                top: 0;
-                left: 100%;
-                position: absolute;
-                border: 1px solid transparent;
-            }
-            &._active {
-                >.menu {
-                    z-index: 100;
-                    width: 150px;
-                    height: auto;
-                    visibility: visible;
-                    overflow: initial;
-                    border-color: @gray_b;
-                }
+    ._submenu {
+        >._content {
+            display: none;
+        }
+        &._active {
+            >._content {
+                display: block;
             }
         }
-    }*/
+    }
 }

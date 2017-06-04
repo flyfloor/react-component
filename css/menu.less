@@ -1,28 +1,40 @@
 @import url('meta.less');
 
 .menu {
-    @basic_motion: max-height .3s, opacity .3s, height .3s, overflow .3s, visibility .3s;
+    @basic_motion: max-height .3s, opacity .3s, height .3s, overflow .3s, visibility .3s, transform .15s;
     .__transition {
         -webkit-transition: @basic_motion;
         -o-transition: @basic_motion;
         transition: @basic_motion;
     }
+
+    &.fluid {
+        width: 100%;
+    }
+    
+    display: inline-block;
+    width: 220px;
+    list-style-type: none;
     position: relative;
     border: 1px solid @gray_b;
+    padding: 5px 0;
     background: @white;
 
     ._item, ._title {
-        padding: 5px 15px;
+        padding: 8px 16px;
         cursor: pointer;
+        list-style-type: none;
+        color: @black_c;
     }
 
     ._item {
         &._active {
-            background: @gray_b;
+            background: @gray_c;
         }
     }
 
     ._group {
+        list-style-type: none;
         ._title {
             cursor: default;
             color: @gray_b;
@@ -30,12 +42,69 @@
     }
 
     ._submenu {
+        list-style-type: none;
+        position: relative;
         >._content {
-            display: none;
+            .__transition;
+            visibility: hidden;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
         }
         &._active {
+            >._title {
+                color: @black;
+            }
             >._content {
-                display: block;
+                .__transition;
+                visibility: visible;
+                opacity: 1;
+                overflow: initial;
+                max-height: 800px;
+            }
+        }
+    }
+    
+    &.horizontal {
+        width: 100%;
+        padding: 0 10px;
+        border: 0;
+        border-bottom: 1px solid @gray_b;
+        >._item, >._submenu {
+            display: inline-block;
+        }
+        ._submenu {
+            >._content {
+                position: absolute;
+                z-index: 100;
+                border: 1px solid @gray_b;
+                width: 200px;
+                left: 100%;
+                background: @white;
+                top: 0;
+                transform-origin: 0 0;
+                -webkit-transform: scale(0);
+                -ms-transform: scale(0);
+                -o-transform: scale(0);
+                transform: scale(0);
+            }
+            &._active {
+                >._content {
+                    -webkit-transform: scale(1);
+                    -ms-transform: scale(1);
+                    -o-transform: scale(1);
+                    transform: scale(1);
+                }
+            }
+        }
+        >._submenu {
+            >._content {
+                left: 0;
+                -webkit-transform: none;
+                -ms-transform: none;
+                -o-transform: none;
+                transform: none;
+                top: initial;
             }
         }
     }

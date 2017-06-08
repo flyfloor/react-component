@@ -1,7 +1,7 @@
 @import url('meta.less');
 
 .menu {
-    @basic_motion: max-height .3s, opacity .3s, height .3s, overflow .3s, visibility .3s, transform .15s;
+    @basic_motion: max-height .3s, opacity .3s, height .3s, overflow .3s, visibility .3s, transform .15s, border-color .3s;
     .__transition {
         -webkit-transition: @basic_motion;
         -o-transition: @basic_motion;
@@ -21,7 +21,8 @@
     background: @white;
 
     ._item, ._title {
-        padding: 8px 16px;
+        padding: 0 16px;
+        line-height: 32px;
         cursor: pointer;
         list-style-type: none;
         color: @black_c;
@@ -30,6 +31,9 @@
     ._item {
         &._active {
             background: @gray_c;
+        }
+        >a {
+            display: block;
         }
     }
 
@@ -51,7 +55,7 @@
             max-height: 0;
             overflow: hidden;
         }
-        &._active {
+        &._open {
             >._title {
                 color: @black;
             }
@@ -73,6 +77,14 @@
         >._item, >._submenu {
             display: inline-block;
         }
+        >._item {
+            border-bottom: 2px solid transparent;
+            .__transition;
+            &._active {
+                background: initial;
+                border-color: @blue;
+            }
+        }
         ._submenu {
             >._content {
                 position: absolute;
@@ -88,7 +100,10 @@
                 -o-transform: scale(0);
                 transform: scale(0);
             }
-            &._active {
+            &._active>._title {
+                background: @gray_b;
+            }
+            &._open {
                 >._content {
                     -webkit-transform: scale(1);
                     -ms-transform: scale(1);
@@ -98,6 +113,14 @@
             }
         }
         >._submenu {
+            >._title {
+                .__transition;
+                border-bottom: 2px solid transparent;
+            }
+            &._active>._title {
+                border-color: @blue;
+                background: none;
+            }
             >._content {
                 left: 0;
                 -webkit-transform: none;

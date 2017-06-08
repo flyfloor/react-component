@@ -38,6 +38,9 @@ const generateMenu = (props) => {
                     </MenuItem>
                 </SubMenu>
             </SubMenu>
+            <MenuItem index="item3-disabled" disabled>
+                <p>item 3-disabled</p>
+            </MenuItem>
             <MenuItem index="item3">
                 <p>item 3</p>
             </MenuItem>
@@ -67,6 +70,9 @@ const generateMenu = (props) => {
                     </MenuGroup>
                 </SubMenu>
             </SubMenu>
+            <MenuItem index="item8">
+                <a href="//braavos.me" target="_blank">落在深海</a>
+            </MenuItem>
         </Menu>
     )
 }
@@ -81,8 +87,8 @@ export default class MenuDemo extends Component {
 
     render(){
         return (
-            <ul>
-                {/*<li>
+            <ul style={{'minHeight': '3000px'}}>
+                <li>
                     <h3>Default menu</h3>
                     <br/>
                     {generateMenu()}
@@ -111,7 +117,7 @@ export default class MenuDemo extends Component {
                     {generateMenu({ mode: 'accordion'})}
                     <br/>
                     <br/>
-                </li>*/}
+                </li>
                 <li>
                     <h3>Horizontal menu</h3>
                     <br/>

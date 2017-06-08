@@ -24,25 +24,40 @@ class Menu extends Component {
             mode,
             paddingLeft: this.props.paddingLeft,
             onMenuSelect: this.handleMenuSelect.bind(this),
-            mutexSubmenu: this.clearSubmenuSelection.bind(this),
+            mutexSubmenu: this.clearSubmenuOpenStatus.bind(this),
         }
     }
 
-    // submenu toggle
-    clearSubmenuSelection(ref){
-        const baseNode = ReactDOM.findDOMNode(ref || this).parentNode
-        removeClass(baseNode.querySelectorAll('._submenu'), '_active')
+    // submenu open status
+    clearSubmenuOpenStatus(ref){
+        const baseNode = ref ? ReactDOM.findDOMNode(ref).parentNode : ReactDOM.findDOMNode(this)
+        let submenus = baseNode.querySelectorAll('._submenu')
+        removeClass(submenus, '_open')
     }
 
-    handleMenuSelect(current){
+    // submenu active status
+    triggerSubmenuActiveStatus(selectNode){
+        let submenus = ReactDOM.findDOMNode(this).querySelectorAll('._submenu')
+        selectNode = ReactDOM.findDOMNode(selectNode)
+        submenus.forEach(dom => {
+            removeClass(dom, '_active')
+            if (dom.contains(selectNode)) {
+                addClass(dom, '_active')
+            }
+        })
+    }
+
+    handleMenuSelect(current, selectNode){
         this.setState({
             current
         });
+        
         const {onChange, mode} = this.props
         if (['horizontal'].indexOf(mode) !== -1) {
+            this.triggerSubmenuActiveStatus(selectNode)
             let that = this
             setTimeout(() => {
-                that.clearSubmenuSelection()
+                that.clearSubmenuOpenStatus()
             }, 200)
         }
         if (onChange) {
@@ -167,18 +182,18 @@ class SubMenu extends Component {
     toggleSubmenu(status){
         let node = ReactDOM.findDOMNode(this)
         const {mode} = this.context
-        let active = status !== undefined ? !status : hasClass(node, '_active')
+        let active = status !== undefined ? !status : hasClass(node, '_open')
 
         if (['accordion', 'horizontal'].indexOf(mode) !== -1) {
             this.context.mutexSubmenu(this)
         }
-        active ? removeClass(node, '_active') : addClass(node, '_active')
+        active ? removeClass(node, '_open') : addClass(node, '_open')
     }
     render() {
         let newProps = Object.assign({}, this.props)
         let {title, level, active, className} = newProps
         let {paddingLeft, mode} = this.context
-        className = klassName('_submenu', className, active ? '_active': '')
+        className = klassName('_submenu', className, active ? '_open': '')
 
         if (['popup', 'horizontal'].indexOf(mode) !== -1) {
             newProps.onMouseEnter = e => {
@@ -258,32 +273,34 @@ MenuGroup.defaultProps = {
     level: 1,
 }
 
-const MenuItem = (props, context) => {
-    const newProps = Object.assign({}, props)
-    let {index, className, disabled, level} = newProps
-    delete newProps.index
-    delete newProps.level
-    if (!index) {
-        throw Error('index is needed on MenuItem')
-    }
-    const { current, onMenuSelect, paddingLeft } = context
-    let active = index === current
-    className = klassName(className, active ? '_active _item' : '_item', disabled ? '_disabled' : '')
+class MenuItem extends Component {
+    render() {
+        const newProps = Object.assign({}, this.props)
+        let {index, className, disabled, level} = newProps
+        delete newProps.index
+        delete newProps.level
+        if (!index) {
+            throw Error('index is needed on MenuItem')
+        }
+        const { current, onMenuSelect, paddingLeft } = this.context
+        let active = index === current
+        className = klassName(className, active ? '_active _item' : '_item', disabled ? '_disabled' : '')
 
-    return (
-        <li {...newProps} className={className}
-            style={{'paddingLeft': `${paddingLeft * level}px`}}
-            onClick={() => {
-                if (disabled) {
-                    return
-                }
-                onMenuSelect(index)
-                if (props.onClick) {
-                    props.onClick(index)
-                }
-            }}>
-        </li>
-    )
+        return (
+            <li {...newProps} className={className}
+                style={{'paddingLeft': `${paddingLeft * level}px`}}
+                onClick={() => {
+                    if (disabled) {
+                        return
+                    }
+                    onMenuSelect(index, this)
+                    if (newProps.onClick) {
+                        newProps.onClick(index)
+                    }
+                }}>
+            </li>
+        )
+    }
 }
 
 MenuItem.propTypes = {

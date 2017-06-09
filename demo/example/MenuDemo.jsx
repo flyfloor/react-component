@@ -4,7 +4,7 @@ import {Menu, MenuItem, SubMenu, MenuGroup} from './index.js';
 const generateMenu = (props) => {
     return (
         <Menu {...props}>
-            <SubMenu title={<div>sub menu 0</div>} active>
+            <SubMenu title={<div>sub menu 0</div>} active={props && props.mode === undefined}>
                 <MenuGroup title={<div>group 1</div>}>
                     <MenuItem index="item1.1">
                         <p>item 1-1</p>
@@ -70,7 +70,7 @@ const generateMenu = (props) => {
                     </MenuGroup>
                 </SubMenu>
             </SubMenu>
-            <MenuItem index="item8">
+            <MenuItem index="item10">
                 <a href="//braavos.me" target="_blank">落在深海</a>
             </MenuItem>
         </Menu>
@@ -123,9 +123,12 @@ export default class MenuDemo extends Component {
                     <br/>
                     {generateMenu({ mode: 'horizontal'})}
                     <br/>
+                </li>
+                <li>
+                    <h3>Popup menu</h3>
                     <br/>
+                    {generateMenu({ mode: 'popup'})}
                     <br/>
-                    {generateMenu({ mode: 'horizontal'})}
                     <br/>
                 </li>
             </ul>

@@ -53,7 +53,7 @@ class Menu extends Component {
         });
         
         const {onChange, mode} = this.props
-        if (['horizontal'].indexOf(mode) !== -1) {
+        if (['horizontal', 'popup'].indexOf(mode) !== -1) {
             this.triggerSubmenuActiveStatus(selectNode)
             let that = this
             setTimeout(() => {
@@ -182,12 +182,12 @@ class SubMenu extends Component {
     toggleSubmenu(status){
         let node = ReactDOM.findDOMNode(this)
         const {mode} = this.context
-        let active = status !== undefined ? !status : hasClass(node, '_open')
+        let _open = status !== undefined ? !status : hasClass(node, '_open')
 
         if (['accordion', 'horizontal'].indexOf(mode) !== -1) {
             this.context.mutexSubmenu(this)
         }
-        active ? removeClass(node, '_open') : addClass(node, '_open')
+        _open ? removeClass(node, '_open') : addClass(node, '_open')
     }
     render() {
         let newProps = Object.assign({}, this.props)
@@ -213,7 +213,7 @@ class SubMenu extends Component {
         return (
             <li {...newProps} className={className}>
                 <div className="_title" style={{'paddingLeft': `${paddingLeft * level}px`}}
-                    onClick={this.toggleSubmenu}>
+                    onClick={() => this.toggleSubmenu()}>
                     {title}
                 </div>
                 <ul className="_content">

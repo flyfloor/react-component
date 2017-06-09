@@ -121,7 +121,7 @@ const generateMenuItemByChildren = (children, opt) => {
                     return (
                         <MenuItem key={index} 
                             {...item.props} level={level}
-                            className={`_${type}-item _item`}>
+                            className={`_${type}-item`}>
                             {item.props.children}
                         </MenuItem>
                     )
@@ -150,7 +150,7 @@ const generateMenuItemByChildren = (children, opt) => {
     if (children.type === MenuItem) {
         return (
             <MenuItem {...children.props} level={level}
-                className={`_${type}-item _item`}>
+                className={`_${type}-item`}>
             </MenuItem>
         )
     }
@@ -284,7 +284,7 @@ class MenuItem extends Component {
         }
         const { current, onMenuSelect, paddingLeft } = this.context
         let active = index === current
-        className = klassName(className, active ? '_active' : '', disabled ? '_disabled' : '')
+        className = klassName(className, active ? '_active _item' : '_item', disabled ? '_disabled' : '')
 
         return (
             <li {...newProps} className={className}

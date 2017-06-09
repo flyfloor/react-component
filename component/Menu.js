@@ -284,7 +284,7 @@ class MenuItem extends Component {
         }
         const { current, onMenuSelect, paddingLeft } = this.context
         let active = index === current
-        className = klassName(className, active ? '_active _item' : '_item', disabled ? '_disabled' : '')
+        className = klassName(className, active ? '_active' : '', disabled ? '_disabled' : '')
 
         return (
             <li {...newProps} className={className}

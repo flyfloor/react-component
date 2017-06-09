@@ -76,7 +76,7 @@ class Menu extends Component {
     render() {
         let newProps = Object.assign({}, this.props)
         let {className, mode} = this.props
-        className = klassName('menu', mode, className)
+        className = klassName('menu', mode || '_default', className)
         delete newProps.paddingLeft
         delete newProps.current
         return (

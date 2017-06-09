@@ -48,52 +48,52 @@
         transition: all .3s;
     }
 
-    >.center.notice {
+    >._center.notice {
         top: 45%;
     }
-    &-enter.center {
+    &-enter._center {
         transform: scale(.5);
         opacity: 0.01;
     }
 
-    &-enter&-enter-active.center {
+    &-enter&-enter-active._center {
         opacity: 1;
         transform: scale(1.02);
         transition: all .3s;
     }
 
-    &-leave.center {
+    &-leave._center {
         opacity: 1;
         transform: scale(1);
     }
 
-    &-leave&-leave-active.center {
+    &-leave&-leave-active._center {
         opacity: 0.01;
         transform: scale(.5);
         transition: all .3s;
     }
 
-    >.bottom.notice {
+    >._bottom.notice {
         top: initial;
         bottom: @_top;
     }
-    &-enter.bottom {
+    &-enter._bottom {
         transform: translate3d(0,@_width * 0.5,0);
         opacity: 0.01;
     }
 
-    &-enter&-enter-active.bottom {
+    &-enter&-enter-active._bottom {
         opacity: 1;
         transform: translate3d(0,0,0);
         transition: all .3s;
     }
 
-    &-leave.bottom {
+    &-leave._bottom {
         opacity: 1;
         transform: translate3d(0,0,0);
     }
 
-    &-leave&-leave-active.bottom {
+    &-leave&-leave-active._bottom {
         opacity: 0.01;
         transform: translate3d(0, @_width * 0.3,0);
         transition: all .3s;

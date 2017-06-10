@@ -46,8 +46,12 @@ class Notice extends Component {
                 {title 
                     ? <div className="_title" onClick={this.handleClick}>{title}</div>
                     : null}
-                <div className="_content" onClick={this.handleClick}>{content}</div>
-                <div className="_close" onClick={onClose}>{close}</div>
+                <div className="_content" onClick={this.handleClick}>
+                    {content}
+                    {close ? 
+                        <div className="_close" onClick={onClose}>{close}</div> 
+                        : null}
+                </div>
             </div>
         );
     }

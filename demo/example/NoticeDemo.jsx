@@ -25,6 +25,11 @@ export default class NoticeDemo extends Component {
         if (type === 'onClick') {
             notice.onClick = handleNoticeClick
         }
+        if (type === 'onClose') {
+            notice.onClose = (item) => {
+                alert('close ' + item.key)
+            }
+        }
         if (type === 'manually') {
             notice.delay = 0;
         }
@@ -114,7 +119,23 @@ let nc = NoticeCenter.init()
 nc.addNotice({
     title: title,
     content: <p>content</p>,
-    onClick: onClickFunc
+    onClick: onClickFunction
+})
+`}                                 
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>onClose</h4>
+                        <button onClick={() => this.showNotice('onClose')}>click</button>
+                        <pre>
+                            <code>
+{`
+let nc = NoticeCenter.init()
+nc.addNotice({
+    title: title,
+    content: <p>content</p>,
+    onClose: onCloseFunction
 })
 `}                                 
                             </code>

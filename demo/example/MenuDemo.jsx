@@ -1,175 +1,137 @@
 import React, { Component } from 'react';
-import {Menu, Item} from './index.js';
+import {Menu, MenuItem, SubMenu, MenuGroup} from './index.js';
+
+const generateMenu = (props) => {
+    return (
+        <Menu {...props}>
+            <SubMenu title={<div>sub menu 0</div>} active={props && props.mode === undefined}>
+                <MenuGroup title={<div>group 1</div>}>
+                    <MenuItem index="item1.1">
+                        <p>item 1-1</p>
+                    </MenuItem>
+                    <MenuItem index="item1.2">
+                        <p>item 1-2</p>
+                    </MenuItem>
+                </MenuGroup>
+                <MenuGroup title={<div>group 2</div>}>
+                    <MenuItem index="item2.1">
+                        <p>item 2-1</p>
+                    </MenuItem>
+                    <MenuItem index="item2.2" disabled>
+                        <p>item 2</p>
+                    </MenuItem>
+                </MenuGroup>
+                <SubMenu title={<p>third menu 0</p>}>
+                    <MenuItem index="item1.1.1">
+                        <p>item 1-1-1</p>
+                    </MenuItem>
+                    <MenuItem index="item1.1.2">
+                        <p>item 1-1-2</p>
+                    </MenuItem>
+                </SubMenu>
+                <SubMenu title={<p>third menu 2</p>}>
+                    <MenuItem index="item1.2.1">
+                        <p>item 1-2-1</p>
+                    </MenuItem>
+                    <MenuItem index="item1.2.2">
+                        <p>item 1-2-2</p>
+                    </MenuItem>
+                </SubMenu>
+            </SubMenu>
+            <MenuItem index="item3-disabled" disabled>
+                <p>item 3-disabled</p>
+            </MenuItem>
+            <MenuItem index="item3">
+                <p>item 3</p>
+            </MenuItem>
+            <SubMenu title={<p>sub menu 1</p>}>
+                <MenuItem index="item4">
+                    <p>item 4</p>
+                </MenuItem>
+                <MenuItem index="item5">
+                    <p>item 5</p>
+                </MenuItem>
+                <MenuGroup title={<p>group 4</p>}>
+                    <MenuItem index="item8">
+                        <p>item 8</p>
+                    </MenuItem>
+                    <MenuItem index="item9">
+                        <p>item 9</p>
+                    </MenuItem>
+                </MenuGroup>
+                <SubMenu title={<p>third menu</p>} active>
+                    <MenuItem index="item6">
+                        <p>item 6</p>
+                    </MenuItem>
+                    <MenuGroup title={<div>group 3</div>}>
+                        <MenuItem index="item7">
+                            <p>item 7</p>
+                        </MenuItem>
+                    </MenuGroup>
+                </SubMenu>
+            </SubMenu>
+            <MenuItem index="item10">
+                <a href="//braavos.me" target="_blank">落在深海</a>
+            </MenuItem>
+        </Menu>
+    )
+}
 
 export default class MenuDemo extends Component {
     constructor(props){
         super(props);
         this.state = {
-            index: "1",
+            current: "item1.1",
         };
     }
-    displayChange(index){
-        this.setState({
-            index: index 
-        });
-    }
 
-    formatChild({current, accordion=false, onChange, style, popped=false, mode='click', horizontal=false, activeFirst=false}) {
-        return <Menu current={current} accordion={accordion} onChange={onChange} horizontal={horizontal} style={style} popped={popped} mode={mode}>
-                    <Item index='sub0' sub={true} active={activeFirst} title={<p>Sub Menu</p>}>
-                        <Menu className="second-menu">
-                            <Item index="0">
-                                <p>Sub item</p>
-                            </Item>
-                            <Item index="1">
-                                <p>Sub item</p>
-                            </Item>
-                            <Item index="2" disabled={true}>
-                                <p>Sub item</p>
-                            </Item>
-                            <Item sub={true} index="sub0_1" title={<p>Third Menu</p>}>
-                                <Menu className="third-menu">
-                                    <Item index="10">
-                                        <p>Third item</p>
-                                    </Item>
-                                    <Item index="11">
-                                        <p>Third item</p>
-                                    </Item>
-                                </Menu>
-                            </Item>
-                        </Menu>
-                    </Item>
-                    <Item index="sub1" sub={true} title={<p>Sub Menu</p>}>
-                        <Menu className="second-menu">
-                            <Item index="sub1_0" sub={true} title={<p>Third Menu</p>}>
-                                <Menu className="third-menu">
-                                    <Item index="6" disabled={true}>
-                                        <p>Third item</p>
-                                    </Item>
-                                    <Item index="7">
-                                        <p>Third item</p>
-                                    </Item>
-                                </Menu>
-                            </Item>
-                            <Item index="sub1_1" sub={true} title={<p>Third Menu</p>}>
-                                <Menu className="third-menu">
-                                    <Item index="8">
-                                        <p>Third item</p>
-                                    </Item>
-                                    <Item index="9">
-                                        <p>Third item</p>
-                                    </Item>
-                                </Menu>
-                            </Item>
-                            <Item index="5">
-                                <p>Sub item</p>
-                            </Item>
-                        </Menu>
-                    </Item>
-                    <Item index="4">
-                        <p>Item <a target="_blank" href="http://braavos.me" style={{'color': '#f00'}}>blog</a></p>
-                    </Item>
-                </Menu>;
-    }
-
-    render() {
-
-        const style = {
-            'width': '200px'
-        }
-
+    render(){
         return (
-            <div id="menu_demo">
-                <h3>Menu</h3>
-                <ul>
-                    <li>
-                        <h4>Default menu</h4>
-                        <p>you selected item index is {this.state.index}</p>
-                        {this.formatChild({current: this.state.index, onChange: this.displayChange.bind(this), style, activeFirst: true })}
-                        <pre>
-                            <code>
-{`
-<Menu current={current} onChange={onChange}>
-    <Item index='sub0' sub={true} active={activeFirst} title={<p>Sub Menu</p>}>
-        <Menu className="second-menu">
-            <Item index="0">
-                <p>Sub item</p>
-            </Item>
-            ...
-            <Item sub={true} index="sub0_1" title={<p>Third Menu</p>}>
-                <Menu className="third-menu">
-                    <Item index="10">
-                        <p>Third item</p>
-                    </Item>
-                    ...
-                </Menu>
-            </Item>
-        </Menu>
-    </Item>
-    ...
-    <Item index="4">
-        <p>Item <a target="_blank" href="http://braavos.me" style={{'color': '#f00'}}>blog</a></p>
-    </Item>
-</Menu>
-`}                                
-                            </code>
-                        </pre>
-                    </li>
-                    <li>
-                        <h4>Accordion menu </h4>
-                        <p>only show one menu at a atime, accordion</p>
-                        {this.formatChild({ accordion: true, style})}
-                        <pre>
-                            <code>
-{`
-<Menu current={current} accordion={true}>
-    ...
-</Menu>
-`}                                
-                            </code>
-                        </pre>
-                    </li>
-                    <li>
-                        <h4>Popped out menu</h4>
-                        {this.formatChild({ popped: true, style })}
-                        <pre>
-                            <code>
-{`
-<Menu current={current} popped={true}>
-    ...
-</Menu>
-`} 
-                            </code>
-                        </pre>
-                    </li>
-                    <li>
-                        <h4>Hover mode menu</h4>
-                        {this.formatChild({ mode: 'hover', popped: true, style })}
-                        <pre>
-                            <code>
-{`
-<Menu current={current} popped={true} mode="hover">
-    ...
-</Menu>
-`}                             
-                            </code>
-                        </pre>                        
-                    </li>
-                    <li>
-                        <h4>Horizontal menu</h4>
-                        {this.formatChild({horizontal: true})}
-                        <pre>
-                            <code>
-{`
-<Menu current={current} horizontal={true}>
-    ...
-</Menu>
-`}                                 
-                            </code>
-                        </pre>
-                    </li>
-                </ul>
-            </div>
-        );
+            <ul style={{'minHeight': '3000px'}}>
+                <li>
+                    <h3>Default menu</h3>
+                    <br/>
+                    {generateMenu()}
+                    <br/>
+                    <br/>
+                </li>
+                <li>
+                    <h3>Menu with given current selected</h3>
+                    <br/>
+                    {generateMenu({current: this.state.current})}
+                    <br/>
+                    <br/>
+                </li>
+                <li>
+                    <h3>Menu with onChange event</h3>
+                    <br/>
+                    {generateMenu({
+                        onChange: value => alert(`selected menu item index is ${value}`)
+                    })}
+                    <br/>
+                    <br/>
+                </li>
+                <li>
+                    <h3>Accordion menu</h3>
+                    <br/>
+                    {generateMenu({ mode: 'accordion'})}
+                    <br/>
+                    <br/>
+                </li>
+                <li>
+                    <h3>Horizontal menu</h3>
+                    <br/>
+                    {generateMenu({ mode: 'horizontal'})}
+                    <br/>
+                </li>
+                <li>
+                    <h3>Popup menu</h3>
+                    <br/>
+                    {generateMenu({ mode: 'popup'})}
+                    <br/>
+                    <br/>
+                </li>
+            </ul>
+        )
     }
 }

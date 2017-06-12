@@ -3,7 +3,7 @@ import Radio from '../../component/Radio'
 import RadioGroup from '../../component/RadioGroup'
 import CheckBoxGroup from '../../component/CheckBoxGroup'
 import DropDown from '../../component/DropDown'
-import Menu from '../../component/Menu'
+import { Menu, MenuGroup, MenuItem, SubMenu } from '../../component/Menu'
 import Item from '../../component/Item'
 import ConfirmBox from '../../component/ConfirmBox'
 import Tooltip from '../../component/Tooltip'
@@ -32,6 +32,9 @@ export {
     DropDown,
     Modal,
     Menu,
+    SubMenu,
+    MenuGroup,
+    MenuItem,
     Item,
     ConfirmBox,
     Tooltip,

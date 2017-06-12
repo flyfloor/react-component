@@ -1,52 +1,68 @@
 const React = require('react')
-const Component = React.Component
-const PropTypes = require('prop-types')
 const ReactDOM = require('react-dom')
-const domUtil = require('./util/dom')
-const {removeClass, hasClass, addClass, getClassList} = domUtil
+const PropTypes = require('prop-types')
+
+const Component = React.Component
 const documentClickCmp = require('./high-order/documentClickCmp')
+const domUtil = require('./util/dom')
 const klassName = require('./util/className')
+const { hasClass, removeClass, addClass } = domUtil
 
 class Menu extends Component {
     constructor(props) {
         super(props);
-        this.closeSubMenu = this.closeSubMenu.bind(this)
-        this.toggleSubMenu = this.toggleSubMenu.bind(this)
-        this.handleItemClick = this.handleItemClick.bind(this)
-
-        const {current} = props;
         this.state = {
-            current
-        }
-    }
-    
-    closeSubMenu(node){
-        const {popped, mode, horizontal} = this.props;
-        if (popped || mode === 'hover' || horizontal) {
-            let base = node || ReactDOM.findDOMNode(this.refs.base);
-            removeClass(base.querySelectorAll('.sub-menu._active'), '_active');
+            current: props.current
         }
     }
 
-    toggleSubMenu(index){
-        let {accordion, popped, horizontal} = this.props;
-        const node = ReactDOM.findDOMNode(this.refs[index]);
-        const active = hasClass(node, '_active');
-        if (accordion || popped || horizontal) {
-            const baseNode = ReactDOM.findDOMNode(this.refs.base);
-            removeClass(baseNode.querySelectorAll('.sub-menu'), '_active');
+    getChildContext(){
+        const {current} = this.state
+        const {mode} = this.props
+        return {
+            current,
+            mode,
+            paddingLeft: this.props.paddingLeft,
+            onMenuSelect: this.handleMenuSelect.bind(this),
+            mutexSubmenu: this.clearSubmenuOpenStatus.bind(this),
         }
-        active ? removeClass(node, '_active') : addClass(node, '_active');
-        return false;
     }
 
-    handleItemClick(index, disabled){
-        if (disabled) return;
-        const {onChange} = this.props;
-        if (onChange) onChange(index);
+    // submenu open status
+    clearSubmenuOpenStatus(ref){
+        const baseNode = ref ? ReactDOM.findDOMNode(ref).parentNode : ReactDOM.findDOMNode(this)
+        let submenus = baseNode.querySelectorAll('._submenu')
+        removeClass(submenus, '_open')
+    }
+
+    // submenu active status
+    triggerSubmenuActiveStatus(selectNode){
+        let submenus = ReactDOM.findDOMNode(this).querySelectorAll('._submenu')
+        selectNode = ReactDOM.findDOMNode(selectNode)
+        submenus.forEach(dom => {
+            removeClass(dom, '_active')
+            if (dom.contains(selectNode)) {
+                addClass(dom, '_active')
+            }
+        })
+    }
+
+    handleMenuSelect(current, selectNode){
         this.setState({
-            current: index, 
-        }, () => this.closeSubMenu());
+            current
+        });
+        
+        const {onChange, mode} = this.props
+        if (['horizontal', 'popup'].indexOf(mode) !== -1) {
+            this.triggerSubmenuActiveStatus(selectNode)
+            let that = this
+            setTimeout(() => {
+                that.clearSubmenuOpenStatus()
+            }, 200)
+        }
+        if (onChange) {
+            onChange(current)
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -56,108 +72,255 @@ class Menu extends Component {
             });
         }
     }
-    
-    // other place click, close submenu
-    onOtherDomClick(){
-        this.closeSubMenu();
-    }
-
-    formatChild(node, i, {current}){
-        let {disabled, index, children} = node.props;
-        const selected = current === index;
-        let className = getClassList(node.props);
-        className.push('_child', '_item');
-        if (selected) className.push('_active');
-        if (disabled) className.push('_disabled');
-        className = className.join(' ');
-        return <div className={className} key={`item-${i}`} onClick={() =>this.handleItemClick(index, disabled)}>
-                    {children}
-                </div>;
-    }
-
-    // generate submenu
-    formatSubMenu(node, i, { popped, accordion, mode, current, horizontal, level }) {
-        let {title, index, disabled, active, children} = node.props;
-        let className = getClassList(node.props);
-        className.push('_item', 'sub-menu');
-        if (active) className.push('_active');
-        className = className.join(' ');
-        const childNodes = <Menu {...children.props} disabled={disabled} mode={mode} level={level}
-                                horizontal={horizontal} accordion={accordion} popped={popped} 
-                                current={current} onChange={this.handleItemClick}>
-                                {children.props.children}
-                            </Menu>;
-
-        if (mode === 'hover' || horizontal) {
-            return <div className={className} key={`item-${i}`} ref={index}>
-                        <div className="_title _item" onMouseEnter={() => this.toggleSubMenu(index)} 
-                            onClick={() => this.toggleSubMenu(index)}>{title}</div>
-                        {childNodes}
-                    </div>;
-        }
-        return <div className={className} key={`item-${i}`} ref={index}>
-                    <div className="_title _item" onClick={() => this.toggleSubMenu(index)}>{title}</div>
-                    {childNodes}
-                </div>
-    }
-
-    formatMenu(children, level){
-        const {current} = this.state;
-        const {popped, accordion, mode, horizontal} = this.props;
-        return React.Children.map(children, (item, i) => {
-            const {index, sub} = item.props;
-            if (index === null || index === undefined) {
-                throw new Error('index is needed for children of menu');
-            }
-            return sub ? this.formatSubMenu(item, i, { accordion, popped, mode, current, horizontal, level }) 
-                        : this.formatChild(item, i, { current });
-        });
-    }
 
     render() {
-        let {children, style, className, horizontal, popped, mode, level=0} = this.props;
-        // menu deep level
-        level = level + 1;
-        className = klassName(className, `menu _menu-${level}`)
-        if (popped) {
-            className += ' _popped';
-        }
-        if (horizontal) {
-            className += ' _horizontal';
-        }
-        if (!horizontal && !popped) {
-            className += ' _default';
-        }
-
-        const menuNode = (mode === 'hover' && popped) || horizontal ?
-            <div onMouseLeave={() => this.closeSubMenu()} ref="base" 
-                className={`menu ${className} _hover`} style={style}>
-                {this.formatMenu(children, level)}
-            </div>
-            : <div ref="base" className={className} style={style}>
-                {this.formatMenu(children, level)}
-            </div>
-
+        let newProps = Object.assign({}, this.props)
+        let {className, mode} = this.props
+        className = klassName('menu', mode ? `_${mode}` : '_default', className)
+        delete newProps.paddingLeft
+        delete newProps.current
         return (
-            menuNode
+            <ul {...newProps} className={className}></ul>
         );
     }
 }
 
+Menu.childContextTypes = {
+    current: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    mode: PropTypes.oneOf(['', 'accordion', 'horizontal', 'popup']),
+    onMenuSelect: PropTypes.func,
+    mutexSubmenu: PropTypes.func,
+    paddingLeft: PropTypes.number,
+}
+
 Menu.propTypes = {
+    current: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
-    accordion: PropTypes.bool,
-    popped: PropTypes.bool,
-    horizontal: PropTypes.bool,
-    mode: PropTypes.oneOf(['click', 'hover']),
+    paddingLeft: PropTypes.number,
+    mode: PropTypes.oneOf(['', 'accordion', 'horizontal', 'popup']),
 }
 
 Menu.defaultProps = {
-    accordion: false,
-    popped: false,
-    horizontal: false,
-    mode: 'click',
-    className: '',
+    paddingLeft: 16,
+    mode: '',
 }
 
-module.exports = documentClickCmp(Menu)
+const generateMenuItemByChildren = (children, opt) => {
+    opt = opt || {}
+    let type = opt.type || 'group'
+    let level = opt.level || 1
+
+    if (!children) {
+        return null
+    }
+
+    if (children instanceof Array) {
+        return (
+            children.map((item, index) => {
+                if (item.type === MenuItem) {
+                    return (
+                        <MenuItem key={index} 
+                            {...item.props} level={level}
+                            className={`_${type}-item`}>
+                            {item.props.children}
+                        </MenuItem>
+                    )
+                }
+                if (item.type === SubMenu) {
+                    return (
+                        <SubMenu
+                            key={`submenu-${index}`} 
+                            {...item.props} level={level}>
+                        </SubMenu>
+                    )
+                }
+                if (level !== 1 && item.type === MenuGroup) {
+                    return (
+                        <MenuGroup 
+                            key={`group-${index}`} 
+                            {...item.props} level={level}>
+                        </MenuGroup>
+                    )
+                }
+                return null
+            })
+        )
+    }
+
+    if (children.type === MenuItem) {
+        return (
+            <MenuItem {...children.props} level={level}
+                className={`_${type}-item`}>
+            </MenuItem>
+        )
+    }
+
+
+    if (children.type === SubMenu) {
+        return (
+            <SubMenu {...children.props} level={level}>
+            </SubMenu>
+        )
+    }
+
+    if (level !== 1 && children.type === MenuGroup) {
+        return (
+            <MenuGroup {...children.props} level={level}>
+            </MenuGroup>
+        )
+    }
+    return children
+}
+
+
+class SubMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.toggleSubmenu = this.toggleSubmenu.bind(this)
+    }
+
+    toggleSubmenu(status){
+        let node = ReactDOM.findDOMNode(this)
+        const {mode} = this.context
+        let _open = status !== undefined ? !status : hasClass(node, '_open')
+
+        if (['accordion', 'horizontal'].indexOf(mode) !== -1) {
+            this.context.mutexSubmenu(this)
+        }
+        _open ? removeClass(node, '_open') : addClass(node, '_open')
+    }
+    render() {
+        let newProps = Object.assign({}, this.props)
+        let {title, level, active, className} = newProps
+        let {paddingLeft, mode} = this.context
+        className = klassName('_submenu', className, active ? '_open': '')
+
+        if (['popup', 'horizontal'].indexOf(mode) !== -1) {
+            newProps.onMouseEnter = e => {
+                e.preventDefault()
+                this.toggleSubmenu(true)
+            }
+            newProps.onMouseLeave = e => {
+                e.preventDefault()
+                this.toggleSubmenu(false)
+            }
+        }
+        
+        delete newProps.title
+        delete newProps.level
+        delete newProps.active
+
+        return (
+            <li {...newProps} className={className}>
+                <div className="_title" style={{'paddingLeft': `${paddingLeft * level}px`}}
+                    onClick={() => this.toggleSubmenu()}>
+                    {title}
+                </div>
+                <ul className="_content">
+                    {generateMenuItemByChildren(newProps.children, { type: 'submenu', level: level + 1 })}
+                </ul>
+            </li>
+        )
+    }
+}
+
+SubMenu.propTypes = {
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]).isRequired,
+    active: PropTypes.bool,
+}
+
+SubMenu.contextTypes = {
+    paddingLeft: PropTypes.number,
+    mutexSubmenu: PropTypes.func,
+    mode: PropTypes.oneOf(['', 'accordion', 'popup', 'horizontal']),
+}
+
+SubMenu.defaultProps = {
+    level: 1,
+    active: false,
+}
+
+
+const MenuGroup = (props, context) => {
+    let newProps = Object.assign({}, props)
+    let {title, level} = newProps
+    delete newProps.title
+    delete newProps.level
+    return (
+        <li className="_group" {...newProps}>
+            <div className="_title" style={{'paddingLeft': `${context.paddingLeft * level}px`}}>
+                {title}
+            </div>
+            <ul className="_content">
+                {generateMenuItemByChildren(newProps.children, { level: level + 1 })}
+            </ul>
+        </li>
+    )
+}
+
+
+MenuGroup.propTypes = {
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]).isRequired
+}
+
+MenuGroup.contextTypes = {
+    paddingLeft: PropTypes.number,
+}
+
+MenuGroup.defaultProps = {
+    level: 1,
+}
+
+class MenuItem extends Component {
+    render() {
+        const newProps = Object.assign({}, this.props)
+        let {index, className, disabled, level} = newProps
+        delete newProps.index
+        delete newProps.level
+        if (!index) {
+            throw Error('index is needed on MenuItem')
+        }
+        const { current, onMenuSelect, paddingLeft } = this.context
+        let active = index === current
+        className = klassName(className, active ? '_active _item' : '_item', disabled ? '_disabled' : '')
+
+        return (
+            <li {...newProps} className={className}
+                style={{'paddingLeft': `${paddingLeft * level}px`}}
+                onClick={() => {
+                    if (disabled) {
+                        return
+                    }
+                    onMenuSelect(index, this)
+                    if (newProps.onClick) {
+                        newProps.onClick(index)
+                    }
+                }}>
+            </li>
+        )
+    }
+}
+
+MenuItem.propTypes = {
+    onClick: PropTypes.func,
+    level: PropTypes.number,
+}
+
+MenuItem.contextTypes = {
+    current: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    paddingLeft: PropTypes.number,
+    onMenuSelect: PropTypes.func,
+};
+
+MenuItem.defaultProps = {
+    level: 1,
+};
+
+module.exports = {
+    Menu: documentClickCmp(Menu), 
+    MenuGroup, 
+    MenuItem, 
+    SubMenu
+}

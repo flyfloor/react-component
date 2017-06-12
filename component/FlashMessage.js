@@ -18,7 +18,7 @@ const generateNotice = function({ content, position, delay, onClick, close }){
         content,
         delay,
         close,
-        className: position,
+        className: `_${position}`,
         onClick,
     })
 }

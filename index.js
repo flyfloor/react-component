@@ -5,7 +5,10 @@ var Radio = require("./lib/Radio.js");
 var RadioGroup = require("./lib/RadioGroup.js");
 var CheckBoxGroup = require("./lib/CheckBoxGroup.js");
 var DropDown = require("./lib/DropDown.js");
-var Menu = require("./lib/Menu.js");
+var Menu = require("./lib/Menu.js").Menu;
+var MenuGroup = require("./lib/Menu.js").MenuGroup;
+var MenuItem = require("./lib/Menu.js").MenuItem;
+var SubMenu = require("./lib/Menu.js").SubMenu;
 var Item = require("./lib/Item.js");
 var ConfirmBox = require("./lib/ConfirmBox.js");
 var Tooltip = require("./lib/Tooltip.js");
@@ -32,6 +35,9 @@ module.exports = {
     CheckBoxGroup: CheckBoxGroup,
     DropDown: DropDown,
     Menu: Menu,
+    MenuGroup: MenuGroup,
+    SubMenu: SubMenu,
+    MenuItem: MenuItem,
     Item: Item,
     ConfirmBox: ConfirmBox,
     Tooltip: Tooltip,

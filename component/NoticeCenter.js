@@ -47,7 +47,12 @@ class NoticeCenter extends Component {
             <ReactCssTransitionGroup className={className} transitionName={prefix}
                 transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                 {notices.map((item) => {
-                    return <Notice key={item.key} {...item} onClose={() => this.removeNotice(item.key, item)}/>
+                    return <Notice key={item.key} {...item} onClose={() => {
+                        this.removeNotice(item.key, item)
+                        if (typeof item.onClose === 'function') {
+                            item.onClose(item)
+                        }
+                    }}/>
                 })}
             </ReactCssTransitionGroup>
         );
@@ -70,7 +75,12 @@ NoticeCenter.init = function(props){
     }
     let notification = ReactDOM.render(<NoticeCenter {...props} />, document.getElementById(domId))
     return {
+        key: prefix,
         addNotice(notice){
+            // close icon
+            if (props.close) {
+                notice.close = props.close
+            }
             notification.addNotice(notice)
         },
         removeNotice(key){

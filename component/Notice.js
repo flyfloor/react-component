@@ -39,19 +39,23 @@ class Notice extends Component {
     }
 
     render() {
-        let {title, content, className, close, onClose} = this.props
+        let {title, content, className, close, onClose, icon} = this.props
         className = klassName(className, 'notice')
         return (
             <div className={className}>
-                {title 
-                    ? <div className="_title" onClick={this.handleClick}>{title}</div>
-                    : null}
-                <div className={`_content ${close ? '_showClose' : ''}`} onClick={this.handleClick}>
-                    {content}
-                    {close ? 
-                        <div className="_close" onClick={onClose}>{close}</div> 
+                {icon ? 
+                    icon : null}
+                <span className="_wrap">
+                    {title 
+                        ? <div className="_title" onClick={this.handleClick}>{title}</div>
                         : null}
-                </div>
+                    <div className={`_content ${close ? '_showClose' : ''}`} onClick={this.handleClick}>
+                        {content}
+                        {close ? 
+                            <div className="_close" onClick={onClose}>{close}</div> 
+                            : null}
+                    </div>
+                </span>
             </div>
         );
     }

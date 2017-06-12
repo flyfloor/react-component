@@ -43,13 +43,13 @@ class Notice extends Component {
         className = klassName(className, 'notice')
         return (
             <div className={className}>
-                {icon ? 
-                    icon : null}
-                <span className="_wrap">
-                    {title 
-                        ? <div className="_title" onClick={this.handleClick}>{title}</div>
-                        : null}
-                    <div className={`_content ${close ? '_showClose' : ''}`} onClick={this.handleClick}>
+                <span className={`_wrap ${close ? '_showClose' : ''}`}>
+                    {icon ? 
+                        icon : null}
+                    <div className='_content' onClick={this.handleClick}>
+                        {title 
+                            ? <div className="_title" onClick={this.handleClick}>{title}</div>
+                            : null}
                         {content}
                         {close ? 
                             <div className="_close" onClick={onClose}>{close}</div> 

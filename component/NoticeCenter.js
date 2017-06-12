@@ -75,6 +75,7 @@ NoticeCenter.init = function(props){
     }
     let notification = ReactDOM.render(<NoticeCenter {...props} />, document.getElementById(domId))
     return {
+        key: prefix,
         addNotice(notice){
             // close icon
             if (props.close) {

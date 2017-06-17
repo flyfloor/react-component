@@ -88,7 +88,7 @@ export default class DropDownDemo extends Component {
                         <div style={{'width': '280px'}}>
                             <DropDown options={options} labelName='name' 
                                 onChange={this.displayChange.bind(this, 'value1')}
-                                valueName='value' searchable={true}/>
+                                valueName='value' searchable={true} onSearch={text => console.log(text)}/>
                         </div>
                         <pre>
                             <code>

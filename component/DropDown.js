@@ -7,6 +7,7 @@ const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const documentClickCmp = require('./high-order/documentClickCmp')
 const BACKSPACE_KEYCODE = require('./util/constants').BACKSPACE_KEYCODE
 const klassName = require('./util/className')
+const debounce = require('./util/debounce')
 
 class DropDown extends Component {
     constructor(props) {
@@ -263,7 +264,7 @@ class DropDown extends Component {
                 <input type='text' className='_input' 
                     ref='userInput' value={filterText} 
                     onBlur={onBlur} onFocus={onFocus}
-                     onChange={(e) => this.handleSearch(e.target.value)}/>
+                     onChange={e => this.handleSearch(e.target.value)}/>
                 <i></i>
             </div>
         );
@@ -348,7 +349,7 @@ class DropDown extends Component {
         });
         const {onSearch} = this.props
         if (onSearch) {
-            onSearch(text)
+            debounce(onSearch)(text)
         }
     }
 

@@ -5,14 +5,15 @@ module.exports = Cmp => {
         }
 
         componentWillReceiveProps(nextProps) {
+            if (super.componentWillReceiveProps) {
+                super.componentWillReceiveProps(nextProps)
+            }
+
             // value change
             if (this.props.value !== nextProps.value) {
                 this.setState({
                     value: nextProps.value
-                });
-            }
-            if (super.componentWillReceiveProps) {
-                super.componentWillReceiveProps(nextProps)
+                }, () => this.props.onChange(this.state.value));
             }
         }
 

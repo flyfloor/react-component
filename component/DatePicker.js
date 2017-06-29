@@ -56,13 +56,16 @@ class DatePicker extends Component {
 
     render() {
         const {open, value} = this.state;
-        let {begin, end, className, placeHolder, 
-            showPreview, format, type, onClick, onBlur, onFocus} = this.props;
+        let {
+            begin, end, className, placeHolder, 
+            showPreview, format, type, position,
+            onClick, onBlur, onFocus,
+        } = this.props;
         format = format || _DATE_FORMAT[type]
         let valueStr = value ? formatDate(value, format) : ''
         if (open) className += ' _active';
         return (
-            <div className={klassName('datepicker', className)}>
+            <div className={klassName('datepicker', className, `_${position}`)}>
                 <div className="input" onClick={() => {
                     this.setState({ open: true }) 
                     if (onClick) onClick()
@@ -94,6 +97,7 @@ DatePicker.propTypes = {
     format: PropTypes.string,
     value: PropTypes.instanceOf(Date),
     type: PropTypes.oneOf(['day', 'month', 'year']),
+    position: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
 }
 
 DatePicker.defaultProps = {
@@ -101,6 +105,7 @@ DatePicker.defaultProps = {
     placeHolder: 'select date',
     showPreview: true,
     type: 'day',
+    position: 'bottom',
 }
 
 module.exports = documentClickCmp(DatePicker)

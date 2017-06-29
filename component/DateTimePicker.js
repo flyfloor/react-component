@@ -137,8 +137,11 @@ class DateTimePicker extends Component {
     }
 
     render() {
-        let {className, begin, end, format, confirm, 
-            placeHolder, onClick, onBlur, onFocus} = this.props
+        let {
+            className, begin, end, 
+            format, confirm, position,
+            placeHolder, onClick, onBlur, onFocus
+        } = this.props
 
         const {hour, second, minute, value, showDate, open} = this.state
         let date = formatDate(value, `${format} hh:mm:ss`)
@@ -164,7 +167,7 @@ class DateTimePicker extends Component {
                                 </div>
                             </div>
         return (
-            <div className={klassName('datetime-picker', className)}>
+            <div className={klassName('datetime-picker', className, `_${position}`)}>
                 <div className="_input" onClick={() => {
                     this.handleOpen(true)
                     if (onClick) onClick()
@@ -194,12 +197,14 @@ DateTimePicker.propTypes = {
     onFocus: PropTypes.func,
     confirm: PropTypes.element,
     placeHolder: PropTypes.string,
+    position: PropTypes.oneOf(['left', 'bottom', 'top', 'right']),
 }
 
 DateTimePicker.defaultProps = {
     format: 'yyyy-MM-dd',
     confirm: <button>confirm</button>,
     placeHolder: 'select date',
+    position: 'bottom',
 }
 
 module.exports = documentClickCmp(DateTimePicker)

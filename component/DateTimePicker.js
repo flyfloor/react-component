@@ -7,6 +7,7 @@ const Calendar = require('./Calendar')
 const klassName = require('./util/className')
 const SelectorList = require('./time-picker/SelectorList')
 const documentClickCmp = require('./high-order/documentClickCmp')
+const dropDownCmp = require('./high-order/dropDownCmp')
 const datetime = require('./util/datetime')
 const {formatDate, extractDate} = datetime
 
@@ -137,8 +138,11 @@ class DateTimePicker extends Component {
     }
 
     render() {
-        let {className, begin, end, format, confirm, 
-            placeHolder, onClick, onBlur, onFocus} = this.props
+        let {
+            className, begin, end, 
+            format, confirm,
+            placeHolder, onClick, onBlur, onFocus
+        } = this.props
 
         const {hour, second, minute, value, showDate, open} = this.state
         let date = formatDate(value, `${format} hh:mm:ss`)
@@ -202,4 +206,4 @@ DateTimePicker.defaultProps = {
     placeHolder: 'select date',
 }
 
-module.exports = documentClickCmp(DateTimePicker)
+module.exports = dropDownCmp(documentClickCmp(DateTimePicker))

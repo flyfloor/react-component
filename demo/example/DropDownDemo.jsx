@@ -213,6 +213,14 @@ export default class DropDownDemo extends Component {
                             </code>
                         </pre>
                     </li>
+                    <li>
+                        <h4>DropDown with position</h4>
+                        <p>top/bottom, default is bottom</p>
+                        <div style={{'width': '280px'}}>
+                            <DropDown options={options} position="top"
+                                onChange={value => console.log(value)}/>
+                        </div>
+                    </li>
                 </ul>
             </div>
         );

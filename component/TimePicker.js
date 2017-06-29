@@ -5,6 +5,7 @@ const klassName = require('./util/className')
 const TimeInput = require('./TimeInput')
 const timeInputCmp = require('./high-order/timeInputCmp')
 const documentClickCmp = require('./high-order/documentClickCmp')
+const dropDownCmp = require('./high-order/dropDownCmp')
 const SelectorList = require('./time-picker/SelectorList')
 const timeUtil = require('./util/time')
 const {seconds2Obj, obj2Seconds} = timeUtil
@@ -107,4 +108,4 @@ TimePicker.defaultProps = {
     placeHolder: 'input time',
 }
 
-module.exports = timeInputCmp(documentClickCmp(TimePicker))
+module.exports = dropDownCmp(timeInputCmp(documentClickCmp(TimePicker)))

@@ -80,10 +80,10 @@ class Modal extends Component {
                             {children}
                             {footer}
                         </div>
-                        {force 
-                            ? null
-                            : <div className="_close" onClick={this.close}>{close}</div>}
                     </div>
+                    {force 
+                        ? null
+                        : <div className="_close" onClick={this.close}>{close}</div>}
                 </div>
                 {force 
                     ? <div className="_overlay"></div>

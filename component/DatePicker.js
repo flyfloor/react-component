@@ -4,6 +4,7 @@ const PropTypes = require('prop-types')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const formatDate = require('./util/datetime').formatDate
 const documentClickCmp = require('./high-order/documentClickCmp')
+const dropDownCmp = require('./high-order/dropDownCmp')
 const Calendar = require('./Calendar')
 const klassName = require('./util/className')
 
@@ -56,8 +57,11 @@ class DatePicker extends Component {
 
     render() {
         const {open, value} = this.state;
-        let {begin, end, className, placeHolder, 
-            showPreview, format, type, onClick, onBlur, onFocus} = this.props;
+        let {
+            begin, end, className, placeHolder, 
+            showPreview, format, type,
+            onClick, onBlur, onFocus,
+        } = this.props;
         format = format || _DATE_FORMAT[type]
         let valueStr = value ? formatDate(value, format) : ''
         if (open) className += ' _active';
@@ -103,4 +107,4 @@ DatePicker.defaultProps = {
     type: 'day',
 }
 
-module.exports = documentClickCmp(DatePicker)
+module.exports = dropDownCmp(documentClickCmp(DatePicker))

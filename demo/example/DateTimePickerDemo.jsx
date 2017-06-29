@@ -58,6 +58,21 @@ export default class DateTimePickerDemo extends Component {
                             </code>
                         </pre>
                     </li>
+                    <li>
+                        <h4>DateTimePicker with position</h4>
+                        <p>top/left/right/bottom, default is bottom</p>
+                        <DateTimePicker position='top' onChange={value => console.log(value) }/>
+                        <br/>
+                        <DateTimePicker position='left' onChange={value => console.log(value) }/>
+                        <br/>
+                        <DateTimePicker position='right' onChange={value => console.log(value) }/>
+                        <br/>
+                        <pre>
+                            <code>
+                                {`<DateTimePicker position='top' onChange={value => console.log(value) }/>`}
+                            </code>
+                        </pre>
+                    </li>
                 </ul>
             </div>
         );

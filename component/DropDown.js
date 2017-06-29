@@ -5,6 +5,7 @@ const ReactDOM = require('react-dom')
 const defaultCheckedCmp = require('./high-order/defaultCheckedCmp')
 const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const documentClickCmp = require('./high-order/documentClickCmp')
+const dropDownCmp = require('./high-order/dropDownCmp')
 const BACKSPACE_KEYCODE = require('./util/constants').BACKSPACE_KEYCODE
 const klassName = require('./util/className')
 const debounce = require('./util/debounce')
@@ -518,4 +519,4 @@ class MultiInput extends Component {
     }
 }
 
-module.exports = documentClickCmp(defaultCheckedCmp(DropDown))
+module.exports = dropDownCmp(documentClickCmp(defaultCheckedCmp(DropDown)), ['top', 'bottom'])

@@ -7,6 +7,7 @@ const Calendar = require('./Calendar')
 const klassName = require('./util/className')
 const SelectorList = require('./time-picker/SelectorList')
 const documentClickCmp = require('./high-order/documentClickCmp')
+const dropDownCmp = require('./high-order/dropDownCmp')
 const datetime = require('./util/datetime')
 const {formatDate, extractDate} = datetime
 
@@ -139,7 +140,7 @@ class DateTimePicker extends Component {
     render() {
         let {
             className, begin, end, 
-            format, confirm, position,
+            format, confirm,
             placeHolder, onClick, onBlur, onFocus
         } = this.props
 
@@ -167,7 +168,7 @@ class DateTimePicker extends Component {
                                 </div>
                             </div>
         return (
-            <div className={klassName('datetime-picker', className, `_${position}`)}>
+            <div className={klassName('datetime-picker', className)}>
                 <div className="_input" onClick={() => {
                     this.handleOpen(true)
                     if (onClick) onClick()
@@ -197,14 +198,12 @@ DateTimePicker.propTypes = {
     onFocus: PropTypes.func,
     confirm: PropTypes.element,
     placeHolder: PropTypes.string,
-    position: PropTypes.oneOf(['left', 'bottom', 'top', 'right']),
 }
 
 DateTimePicker.defaultProps = {
     format: 'yyyy-MM-dd',
     confirm: <button>confirm</button>,
     placeHolder: 'select date',
-    position: 'bottom',
 }
 
-module.exports = documentClickCmp(DateTimePicker)
+module.exports = dropDownCmp(documentClickCmp(DateTimePicker))

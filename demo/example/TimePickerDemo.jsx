@@ -46,6 +46,14 @@ export default class TimePickerDemo extends Component {
                             <code>{`<TimePicker simple={true} onChange={onChangeFunction} />`}</code>
                         </pre>
                     </li>
+                    <li>
+                        <h4>TimePicker with position</h4>
+                        <p>top/bottom, default is bottom</p>
+                        <TimePicker position="top" onChange={value => value } />
+                        <pre>
+                            <code>{`<TimePicker position="top" onChange={onChangeFunction} />`}</code>
+                        </pre>
+                    </li>
                 </ul>
             </div>
         );

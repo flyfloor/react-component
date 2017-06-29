@@ -98,7 +98,7 @@ export default class DatePickerDemo extends Component {
                     </li>
                     <li>
                         <h4>DatePicker with position</h4>
-                        <p>top and bottom bottom, default is bottom</p>
+                        <p>top/left/right/bottom, default is bottom</p>
                         <DatePicker position='top' onChange={value => console.log(value) }/>
                         <br/>
                         <DatePicker position='left' onChange={value => console.log(value) }/>

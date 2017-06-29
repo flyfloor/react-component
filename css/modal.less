@@ -1,16 +1,28 @@
 @import url('meta.less');
 
 .modal {
+    &._show {
+        overflow: auto;
+        z-index: 999;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        width: 100%;
+        visibility: hidden;
+        visibility: visible;
+    }
     .__transition {
         -webkit-transition: background-color .3s, opacity .3s, transform .3s, visibility .3s;
         -o-transition: background-color .3s, opacity .3s, transform .3s, visibility .3s;
         transition: background-color .3s, opacity .3s, transform .3s, visibility .3s;
     }
     ._body {
-        -webkit-transform: translateX(-50%) translateY(-70%);
-        -ms-transform: translateX(-50%) translateY(-70%);
-        -o-transform: translateX(-50%) translateY(-70%);
-        transform: translateX(-50%) translateY(-70%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -o-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
         z-index: 1000;
         min-width: 400px;
         max-width: 600px;
@@ -20,6 +32,8 @@
         visibility: hidden;
         >._wrap {
             .__transition;
+            max-height: 500px;
+            overflow: auto;
             background-color: @white;
             border: 1px solid @gray_b;
             opacity: 0;

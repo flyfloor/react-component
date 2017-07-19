@@ -423,8 +423,8 @@ const DropDownLabel = props => {
     delete _props.onFocus
     delete _props.isPlaceHolder
     return (
-        <div className={className} {..._props}>
-            <input type="text" className="_transparent" readOnly onClick={props.onClick} 
+        <div className={className} {..._props} onClick={props.onClick} >
+            <input type="text" className="_transparent" readOnly
                 onBlur={props.onBlur} onFocus={props.onFocus}/>
             {_props.children}
         </div>

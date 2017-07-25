@@ -37,17 +37,23 @@ class Tooltip extends Component {
         return (
             <span className={className} style={style} onClick={onClick}
                 onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                <span className="_trigger" ref='trigger'>
+                <span className="_trigger" ref={ref => {
+                    this.trigger = ref
+                }}>
                     {children}
                 </span>
                 <ReactCssTransitionGroup className={'_wrap _' + position} transitionName="popup"
                     transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ? 
-                        <div ref='content' className='_content'>
+                        <div ref={ref => {
+                            this.content = ref
+                        }} className='_content'>
                             <div className="_title">
                                 {content}
                             </div>
-                            <span className="_arrow" ref='arrow'></span>
+                            <span className="_arrow" ref={ref => {
+                                this.arrow = ref
+                            }}></span>
                         </div>
                         : null
                     }

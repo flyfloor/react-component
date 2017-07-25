@@ -15,7 +15,7 @@ module.exports = Cmp => {
         }
 
         triggerSize(){
-            const TRG = ReactDOM.findDOMNode(this.refs.trigger);
+            const TRG = ReactDOM.findDOMNode(this.trigger);
             return {
                 tr_width: TRG.offsetWidth,
                 tr_height: TRG.offsetHeight,
@@ -23,7 +23,7 @@ module.exports = Cmp => {
         }
 
         contentSize(){
-            const CONTENT = ReactDOM.findDOMNode(this.refs.content); 
+            const CONTENT = ReactDOM.findDOMNode(this.content); 
             if (!CONTENT) return {width: 0, height: 0};
             return {
                 c_width: CONTENT.offsetWidth,
@@ -39,7 +39,7 @@ module.exports = Cmp => {
         }
 
         onTrigger(e, state){
-            let contentDOM = ReactDOM.findDOMNode(this.refs.content);
+            let contentDOM = ReactDOM.findDOMNode(this.content);
             if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {
                 // do nothing
             } else {
@@ -47,7 +47,7 @@ module.exports = Cmp => {
                 this.setState({
                     open: state
                 }, () => {
-                    contentDOM = ReactDOM.findDOMNode(this.refs.content);
+                    contentDOM = ReactDOM.findDOMNode(this.content);
                     if (contentDOM) contentDOM.setAttribute("style", this.calcPosition());
                 });
             }

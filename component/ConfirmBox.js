@@ -39,13 +39,13 @@ class ConfirmBox extends Component {
 
         return (
             <span className={className} style={style} onClick={this.onTrigger}>
-                <span className="_trigger" ref='trigger'>
+                <span className="_trigger">
                     {children}
                 </span>
                 <ReactCssTransitionGroup className={'_wrap _' + position} transitionName="popup"
                     transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ?
-                        <div ref='content' className='_content'>
+                        <div className='_content'>
                             <div className="_title">{content}</div>
                             <div className="_action">
                                 <div className="_confirm" onClick={this.handleConfirm}>
@@ -59,7 +59,7 @@ class ConfirmBox extends Component {
                                         : <div>cancel</div>}
                                 </div>
                             </div>
-                            <span className="_arrow" ref='arrow'></span>
+                            <span className="_arrow"></span>
                         </div>
                         : null
                     }

@@ -1,3 +1,4 @@
+require('babel-polyfill')
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';

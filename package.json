@@ -1,6 +1,6 @@
 {
   "name": "react-ui-component",
-  "version": "1.2.12",
+  "version": "1.2.13",
   "description": "some component build with ReactJs",
   "main": "main.js",
   "scripts": {
@@ -40,7 +40,7 @@
     "babel-loader": "^6.0.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-transform": "^1.1.1",
-    "babel-polyfill": "^6.7.4",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.5.0",
     "babel-runtime": "^6.0.0",

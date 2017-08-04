@@ -31,7 +31,7 @@ module.exports = Cmp => {
             if(e.target == BASE_NODE || BASE_NODE.contains(e.target)) {
                 if (this.onBaseDomClick) this.onBaseDomClick(e);
             } else {
-                if (document.contains(e.target) && this.onOtherDomClick) this.onOtherDomClick(e);
+                if (document.body.contains(e.target) && this.onOtherDomClick) this.onOtherDomClick(e);
             }
             e.stopPropagation();
         }

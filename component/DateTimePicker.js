@@ -46,7 +46,7 @@ class DateTimePicker extends Component {
     handleDateChange(date){
         let {hour, minute, second} = this.state
         // intialize default time
-        if (!hour || !minute || !second) {
+        if (hour === undefined || minute === undefined || second === undefined) {
             let nowDateObj = extractDate(new Date(), { showTime: true })
             hour = nowDateObj.hour
             minute = nowDateObj.minute

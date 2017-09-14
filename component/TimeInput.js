@@ -34,7 +34,7 @@ class TimeInput extends Component {
     handleClick(e){
         let {onClick} = this.props
         if (onClick) {
-            this.refs.inputDOM.focus()
+            this.inputDOM.focus()
             onClick(e)
         }
     }
@@ -63,7 +63,8 @@ class TimeInput extends Component {
             <div className={className}>
                 <div className="_input" onClick={this.handleClick}>
                     <input type="text" className="_input" placeholder={placeHolder} 
-                        ref="inputDOM" onFocus={onFocus}
+                        ref={ input => { this.inputDOM = input } }
+                        onFocus={onFocus}
                         onBlur={this.handleOnBlur} value={displayValue} 
                         onChange={this.handleInputChange}/>
                     <i></i>

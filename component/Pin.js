@@ -23,7 +23,7 @@ class Pin extends Component {
     node2Top(){
         const {begin} = this.props;
         if (begin) return begin;
-        const pinNode = ReactDOM.findDOMNode(this.refs.pinNode);
+        const pinNode = ReactDOM.findDOMNode(this.pinNode);
         return pinNode.offsetTop;
     }
 
@@ -40,7 +40,9 @@ class Pin extends Component {
         className = klassName(className, 'pin');
         let stat = fixed ? 'fixed': '';
         return (
-            <div className={`${className} ${stat}`} style={{'top': top}} ref='pinNode'>
+            <div className={`${className} ${stat}`} 
+                style={{'top': top}} 
+                ref={ ref => { this.pinNode = ref } }>
                 {children}
             </div>
         );

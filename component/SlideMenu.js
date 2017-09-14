@@ -64,7 +64,7 @@ class SlideMenu extends Component {
 
         return (
             <div className={`${className} ${display ? '_display': ''}`}>
-                <div className='_content' ref='contentDOM' style={this.calcPositionStyle()}>
+                <div className='_content' style={this.calcPositionStyle()}>
                     {children}
                 </div>
                 <div className="_overlay" onClick={this.close}></div>

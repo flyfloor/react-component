@@ -262,10 +262,13 @@ class DropDown extends Component {
                 {filterText ? 
                     <div className="_text"></div>
                     : <div className={className}>{text}</div>}
-                <input type='text' className='_input' 
-                    ref='userInput' value={filterText} 
-                    onBlur={onBlur} onFocus={onFocus}
-                     onChange={e => this.handleSearch(e.target.value)}/>
+                <input type='text' 
+                    className='_input' 
+                    ref={ ref => { this.userInput = ref } } 
+                    value={filterText} 
+                    onBlur={onBlur} 
+                    onFocus={onFocus}
+                    onChange={e => this.handleSearch(e.target.value)}/>
                 <i></i>
             </div>
         );
@@ -483,7 +486,7 @@ class MultiInput extends Component {
     }
 
     inputField(){
-        return ReactDOM.findDOMNode(this.refs.userInput);
+        return ReactDOM.findDOMNode(this.userInput);
     }
 
     inputFieldFocus(){
@@ -495,7 +498,8 @@ class MultiInput extends Component {
         const {hasInput} = this.state;
         const tagNodes = selectedTags.map((tag, index) => {
             return (
-                <span className='_tag' key={index} onClick={() => this.removeSelected(index)}>
+                <span className='_tag' key={index} 
+                    onClick={() => this.removeSelected(index)}>
                     <san className="_text">{tag}</san>
                     <a href="javascript:;" className="_delete"></a>
                 </span>
@@ -509,10 +513,14 @@ class MultiInput extends Component {
         return (
             <div className='_multi' onClick={this.handleClick}>
                 {tagNodes}
-                <input type="text" className='_input' ref='userInput' style={{'width': '9px'}} 
+                <input type="text" className='_input' 
+                    ref={ ref => { this.userInput = ref } } 
+                    style={{'width': '9px'}} 
                     value={filterText} 
-                    onBlur={this.handleBlur} onFocus={(e) => this.props.onUserInputFocus(e)} 
-                    onChange={(e) => this.props.onUserInput(e.target.value) } onKeyDown={this.handleKeyDown}/>
+                    onBlur={this.handleBlur} 
+                    onFocus={(e) => this.props.onUserInputFocus(e)} 
+                    onChange={(e) => this.props.onUserInput(e.target.value) } 
+                    onKeyDown={this.handleKeyDown}/>
                 {placeHolder}
                 <i></i>
             </div>

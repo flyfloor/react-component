@@ -22,7 +22,10 @@ class Radio extends Component {
         }
         return (
             <label style={style} className={className}>
-                <input type="radio" ref="radioInput" disabled={disabled} checked={checked} onChange={this.checkedChange} />
+                <input type="radio" 
+                    disabled={disabled} 
+                    checked={checked} 
+                    onChange={this.checkedChange} />
                 <span>{children}</span>
             </label>
         );

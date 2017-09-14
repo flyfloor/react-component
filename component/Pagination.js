@@ -139,7 +139,7 @@ class Pagination extends Component {
                 onChange(value)
             }
             if (value != e.target.value) {
-                let jumpInput = ReactDOM.findDOMNode(this.refs.jumpInput)
+                let jumpInput = ReactDOM.findDOMNode(this.jumpInput)
                 jumpInput.value = value
             }
         }
@@ -152,7 +152,9 @@ class Pagination extends Component {
             return (
                 <li key={'jump-page'} className="_item _jump">
                     <span>Go </span>
-                    <input type="number" ref="jumpInput" defaultValue={current + 1} 
+                    <input type="number" 
+                        ref={ ref => { this.jumpInput = ref } }
+                        defaultValue={current + 1} 
                         onBlur={this.handlePageJump} 
                         onKeyDown={this.handlePageJump}/>
                 </li>

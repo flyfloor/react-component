@@ -113,7 +113,7 @@ class Carousel extends Component {
     }
 
     addTransition(callback){
-        let contentDOM  = ReactDOM.findDOMNode(this.refs.contentDOM);
+        let contentDOM  = ReactDOM.findDOMNode(this.contentDOM);
         contentDOM.className += ' _slide';
         setTimeout(() => {
             contentDOM.className = '_content';
@@ -161,7 +161,11 @@ class Carousel extends Component {
         
         return (
             <div className={klassName(this.props.className, 'carousel')}>
-                <div className="_content" ref='contentDOM' style={contentCss}>{contentNodes}</div>
+                <div className="_content" 
+                    ref={ ref => { this.contentDOM = ref } } 
+                    style={contentCss}>
+                    {contentNodes}
+                </div>
                 {dotNodes}
                 {arrowNode}
             </div>

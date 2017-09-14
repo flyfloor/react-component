@@ -16,7 +16,7 @@ class SelectorList extends Component {
 
     initScrollTo(type){
         let val = this.props[type]
-        let dom = ReactDOM.findDOMNode(this.refs[type + 'List'])
+        let dom = ReactDOM.findDOMNode(this[type + 'List'])
         if (dom) {
             let selected = dom.children[0].children[parseInt(val)]
             let to = selected.offsetTop
@@ -54,15 +54,18 @@ class SelectorList extends Component {
         const {simple} = this.props
         return (
             <div className="_section">
-                <div className="_list _hour" ref="hourList">
+                <div className="_list _hour" 
+                    ref={ ref => { this.hourList = ref } }>
                     {this.formatSelectList('hour')}
                 </div>
-                <div className="_list _minute" ref="minuteList">
+                <div className="_list _minute" 
+                    ref={ ref => { this.minuteList = ref } }>
                     {this.formatSelectList('minute')}
                 </div>
                 {simple ? 
                     null
-                    : <div className="_list _second" ref="secondList">
+                    : <div className="_list _second" 
+                        ref={ ref => { this.secondList = ref } }>
                         {this.formatSelectList('second')}
                     </div>}
             </div>

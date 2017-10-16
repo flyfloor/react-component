@@ -20,7 +20,7 @@ class DropDown extends Component {
 
         let { multi, value } = props;
         const default_val = multi ? [] : '';
-        value = [undefined, null].indexOf(value) === -1 ? value : default_val;
+        value = [undefined, null, ''].indexOf(value) === -1 ? value : default_val;
         this.state = {
             value,
             open: false,

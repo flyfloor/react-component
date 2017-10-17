@@ -430,7 +430,7 @@ const DropDownLabel = props => {
             <input type="text" className="_transparent" readOnly
                 onBlur={props.onBlur} onFocus={props.onFocus}/>
             <i></i>
-            {_props.children}
+            <div className="_text">{_props.children}</div>
         </div>
     );
 }

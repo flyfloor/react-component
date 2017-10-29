@@ -11,10 +11,6 @@ const plugins = [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new ForceCaseSensitivityPlugin(),
-    // new webpack.optimize.UglifyJsPlugin({
-    //     sourceMap: false,
-    //     mangle: false
-    // })
 ]
 if (process.env.NODE_ENV !== 'dev') {
     plugins.push(
@@ -27,7 +23,12 @@ if (process.env.NODE_ENV !== 'dev') {
 }
 
 module.exports = {
-    entry: "./demo/entre.js",
+    entry: {
+        app: [
+            "./demo/entre.js",
+            "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&overlay=false"
+        ]
+    },
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'demo.js',

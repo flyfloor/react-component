@@ -102,6 +102,10 @@ class App extends Component {
     }
 }
 
+if (module.hot) {
+    module.hot.accept()
+}
+
 
 ReactDOM.render(<Router>
                     <div>

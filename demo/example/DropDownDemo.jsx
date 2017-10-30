@@ -39,13 +39,42 @@ export default class DropDownDemo extends Component {
                         <h4>Default dropdown</h4>
                         <p>you selected option value is <span className="gap-word">{this.state.value}</span></p>
                         <div style={{'width': '280px'}}>
-                            <DropDown options={options} labelName='name' valueName='value' 
+                            <DropDown 
+                                options={options} 
+                                labelName='name' 
+                                valueName='value' 
                                 onChange={this.displayChange.bind(this, 'value')} />
                         </div>
                         <pre>
                             <code>
-{`<DropDown options={options} labelName='name' 
-    valueName='value' onChange={displayChange} />`}
+{`<DropDown 
+    options={options} 
+    labelName='name' 
+    valueName='value' 
+    onChange={displayChange} 
+/>`}
+                            </code>
+                        </pre>
+                    </li>
+                    <li>
+                        <h4>Disabled dropdown</h4>
+                        <div style={{'width': '280px'}}>
+                            <DropDown 
+                                options={options} 
+                                labelName='name' 
+                                valueName='value' 
+                                disabled
+                                onChange={val => val} />
+                        </div>
+                        <pre>
+                            <code>
+{`<DropDown 
+    options={options} 
+    labelName='name' 
+    valueName='value' 
+    disabled
+    onChange={displayChange} 
+/>`}
                             </code>
                         </pre>
                     </li>
@@ -53,14 +82,21 @@ export default class DropDownDemo extends Component {
                         <h4>Dropdown with default selected</h4>
                         <p>this will change value of next dropdown</p>
                         <div style={{'width': '280px'}}>
-                            <DropDown options={options} labelName='name' valueName='value' 
+                            <DropDown 
+                                options={options} 
+                                labelName='name' 
+                                valueName='value' 
                                 onChange={this.displayChange.bind(this, 'value1')} defaultSelected={true}/>
                         </div>
                         <pre>
                             <code>
-{`<DropDown options={options} 
-    labelName='name' valueName='value' 
-    onChange={displayChange} defaultSelected={true}/>`}
+{`<DropDown 
+    options={options} 
+    labelName='name' 
+    valueName='value' 
+    onChange={displayChange} 
+    defaultSelected
+/>`}
                             </code>
                         </pre>
                     </li>
@@ -68,17 +104,24 @@ export default class DropDownDemo extends Component {
                         <h4>Dropdown received value</h4>
                         <p>will not change previous value</p>
                         <div style={{'width': '280px'}}>
-                            <DropDown options={options} labelName='name' value={this.state.value1} 
+                            <DropDown 
+                                options={options} 
+                                labelName='name' 
+                                valueName='value'
+                                value={this.state.value1} 
                                 onChange={this.displayChange.bind(this, 'value1')}
-                                defaultSelected={true} valueName='value'/>
+                            />
                         </div>
                         <pre>
                             <code>
 {`
-<DropDown options={options} labelName='name' 
-    value={value} onChange={displayChange}
-    defaultSelected={true} valueName='value'/>
-`}                                
+<DropDown 
+    options={options} 
+    labelName='name' 
+    value={value} 
+    onChange={displayChange}
+    valueName='value'
+/>`}                                
                             </code>
                         </pre>
                     </li>
@@ -86,17 +129,25 @@ export default class DropDownDemo extends Component {
                         <h4>Dropdown with search field</h4>
                         <p>this will change value of prev dropdown</p>
                         <div style={{'width': '280px'}}>
-                            <DropDown options={options} labelName='name' 
+                            <DropDown 
+                                options={options} 
+                                labelName='name' 
                                 onChange={this.displayChange.bind(this, 'value1')}
-                                valueName='value' searchable={true} onSearch={text => console.log(text)}/>
+                                valueName='value' 
+                                searchable
+                                onSearch={text => console.log(text)}
+                            />
                         </div>
                         <pre>
                             <code>
 {`
-<DropDown options={options} labelName='name' 
+<DropDown 
+    options={options} 
+    labelName='name' 
     onChange={displayChange}
-    valueName='value' searchable={true}/>
-`}                                
+    valueName='value' 
+    searchable
+/>`}                                
                             </code>
                         </pre>
                     </li>
@@ -104,17 +155,25 @@ export default class DropDownDemo extends Component {
                         <h4>Multiple dropdown</h4>
                         <p>selected value is <span className="gap-word">{this.state.value2}</span></p>
                         <div style={{'width': '280px'}}>
-                            <DropDown options={options} labelName='name' 
-                                valueName='value' multi={true} value={this.state.value2}
+                            <DropDown 
+                                options={options} 
+                                labelName='name' 
+                                valueName='value' 
+                                multi 
+                                value={this.state.value2}
                                 onChange={this.displayChange.bind(this, 'value2')}/>
                         </div>
                         <pre>
                             <code>
 {`
-<DropDown options={options} labelName='name' 
-    valueName='value' multi={true} value={value}
-    onChange={displayChange}/>
-`}                                
+<DropDown 
+    options={options} 
+    labelName='name' 
+    valueName='value' 
+    multi 
+    value={value}
+    onChange={displayChange}
+/>`}                                
                             </code>
                         </pre>
                     </li>
@@ -122,25 +181,36 @@ export default class DropDownDemo extends Component {
                         <h4>Multiple dropdown</h4>
                         <p>change previous value</p>
                         <div style={{'width': '280px'}}>
-                            <DropDown options={options} labelName='name' 
-                                value={this.state.value3} valueName='value' multi={true}
+                            <DropDown 
+                                options={options} 
+                                labelName='name' 
+                                value={this.state.value3} 
+                                valueName='value' 
+                                multi
                                 onChange={this.displayChange.bind(this, 'value2')}/>
                         </div>
                         <pre>
                             <code>
 {`
-<DropDown options={options} labelName='name' 
-    value={value} valueName='value' multi={true}
-    onChange={displayChange}/>
-`}                                
+<DropDown 
+    options={options} 
+    labelName='name' 
+    value={value} 
+    valueName='value' 
+    multi
+    onChange={displayChange}
+/>`}                                
                             </code>
                         </pre>
                     </li>
                     <li>
                         <h4>Yield children</h4>
                         <div style={{'width': '280px'}}>
-                            <DropDown labelName="name" valueName="value"
-                                value={this.state.value1} onChange={this.displayChange.bind(this, 'value5')}>
+                            <DropDown 
+                                labelName="name" 
+                                valueName="value"
+                                value={this.state.value1} 
+                                onChange={this.displayChange.bind(this, 'value5')}>
                                 <Item value={1} name="apple">
                                     <p>hate the show, love the animal</p>
                                     <img style={{ "width": "100px"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
@@ -162,25 +232,35 @@ export default class DropDownDemo extends Component {
                         <pre>
                             <code>
 {`
-<DropDown labelName="name" valueName="value"
-    value={value} onChange={displayChange}>
-    <Item value={1} name="apple">
+<DropDown 
+    labelName="name" 
+    valueName="value"
+    value={value} 
+    onChange={displayChange}>
+    <Item 
+        value={1} 
+        name="apple">
         <p>hate the show, love the animal</p>
         <img style={{ "width": "100px"}} 
-            src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
+            src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" 
+            alt=""
+        />
         ...
     </Item>
     ...
-</DropDown>  
-`}                                
+</DropDown>`}                                
                             </code>
                         </pre>
                     </li>
                     <li>
                         <h4>Yield children(multi)</h4>
                         <div style={{'width': '280px'}}>
-                            <DropDown multi={true} labelName="name" valueName="value"
-                                value={this.state.value4} onChange={this.displayChange.bind(this, 'value6')}>
+                            <DropDown 
+                                multi 
+                                labelName="name" 
+                                valueName="value"
+                                value={this.state.value4} 
+                                onChange={this.displayChange.bind(this, 'value6')}>
                                 <Item value={1} name="apple">
                                     <p>hate the show, love the animal</p>
                                     <img style={{ "width": "100px"}} src="https://raw.githubusercontent.com/jerryshew/design/master/png/sad-morty.png" alt=""/>
@@ -202,14 +282,19 @@ export default class DropDownDemo extends Component {
                         <pre>
                             <code>
 {`
-<DropDown multi={true} labelName="name" valueName="value"
-    value={value} onChange={displayChange}>
-    <Item value={1} name="apple">
+<DropDown 
+    multi 
+    labelName="name" 
+    valueName="value"
+    value={value} 
+    onChange={displayChange}>
+    <Item 
+        value={1} 
+        name="apple">
         ...
     </Item>
     ...
-</DropDown>  
-`}                                
+</DropDown>`}                                
                             </code>
                         </pre>
                     </li>
@@ -217,7 +302,9 @@ export default class DropDownDemo extends Component {
                         <h4>DropDown with position</h4>
                         <p>top/bottom, default is bottom</p>
                         <div style={{'width': '280px'}}>
-                            <DropDown options={options} position="top"
+                            <DropDown 
+                                options={options} 
+                                position="top"
                                 onChange={value => console.log(value)}/>
                         </div>
                     </li>

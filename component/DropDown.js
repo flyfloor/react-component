@@ -20,7 +20,7 @@ class DropDown extends Component {
 
         let { multi, value } = props;
         const default_val = multi ? [] : '';
-        value = [undefined, null].indexOf(value) === -1 ? value : default_val;
+        value = [undefined, null, ''].indexOf(value) === -1 ? value : default_val;
         this.state = {
             value,
             open: false,
@@ -109,7 +109,7 @@ class DropDown extends Component {
             }
         });
 
-        let labelNode = this.formatLabelNode(multi ? tags : placeHolder)
+        let labelNode = this.formatLabel(multi ? tags : placeHolder)
 
         className = klassName('dropdown', className);
 
@@ -145,28 +145,19 @@ class DropDown extends Component {
     }
     
     // dropdown label
-    formatLabelNode(labels){
-        const {multi, searchable, onClick, onBlur, onFocus} = this.props;
-        const {open, value} = this.state;
+    formatLabel(labels){
+        const { multi, searchable } = this.props;
         let labelNode = null;
         if (multi) {
             labelNode = this.formatMultiInput(labels)
         } else {
             labelNode = searchable ? 
                 this.formatSearchBar(labels)
-                : <DropDownLabel onFocus={onFocus} 
-                    onBlur={onBlur} 
-                    isPlaceHolder={value === ''} 
-                    onClick={() => {
-                        this.toggleOpen(!open)
-                        if (onClick) onClick()
-                    }}>
-                    {labels}
-                </DropDownLabel>;
+                : this.formatDefaultLabel(labels)
         }
         return labelNode;
     }
-    
+
     // generate nodes and label by options prop
     getNodesAndLabel(){
         const { labelName, valueName, searchable, multi, placeHolder, options } = this.props;
@@ -223,7 +214,7 @@ class DropDown extends Component {
 
         return (
             <div className={className} style={style}>
-                {this.formatLabelNode(displayLabels)}
+                {this.formatLabel(displayLabels)}
                 <ReactCssTransitionGroup className="_list" transitionName="dropdown"
                     transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                     {open ? optionNodes : null}
@@ -244,52 +235,94 @@ class DropDown extends Component {
         }
         return status;
     }
+
+    // default label for dropdown
+    formatDefaultLabel(text) {
+        const { disabled, onFocus, onBlur, onClick } = this.props
+        const { value, open } = this.state
+        return (
+            disabled ?
+                <DropDownLabel disabled>
+                    {text}
+                </DropDownLabel>
+                : <DropDownLabel 
+                    onFocus={onFocus} 
+                    onBlur={onBlur} 
+                    isPlaceHolder={value === ''} 
+                    onClick={
+                        () => {
+                            this.toggleOpen(!open)
+                            if (onClick) onClick()
+                        }
+                    }>
+                    {text}
+                </DropDownLabel>
+        )
+    }
         
     // searchable search bar
-    formatSearchBar(text){
-        const {filterText, value} = this.state;
-        const {onClick, onBlur, onFocus} = this.props
-        let className = '_text'
-        if (value === '') {
-            className += ' _placeHolder'
-        }
+    formatSearchBar(labels){
+        const { filterText, value } = this.state;
+        const { disabled, onClick, onBlur, onFocus } = this.props
         return (
-            <div className="_search" onClick={() => {
-                    this.toggleOpen(true)
-                    if (onClick) onClick()
-                }}>
-
-                {filterText ? 
-                    <div className="_text"></div>
-                    : <div className={className}>{text}</div>}
-                <input type='text' 
-                    className='_input' 
-                    ref={ ref => { this.userInput = ref } } 
-                    value={filterText} 
-                    onBlur={onBlur} 
+            disabled ?
+               <DropDownSearchBar
+                   placeHolder={labels}
+                   text={filterText}
+                   isPlaceHolder={value === ''}
+                   disabled={disabled}
+                   onUserInput={() => void 0 }
+               /> 
+               : <DropDownSearchBar
+                    placeHolder={labels}
+                    text={filterText}
+                    isPlaceHolder={value === ''}
+                    disabled={disabled}
+                    onClick={
+                        () => {
+                            this.toggleOpen(true)
+                            if (onClick) onClick()
+                        }
+                    }
+                    onBlur={onBlur}
                     onFocus={onFocus}
-                    onChange={e => this.handleSearch(e.target.value)}/>
-                <i></i>
-            </div>
-        );
+                    onUserInput={this.handleSearch}
+                />
+        )
     }
     
     // multi dropdown's input
     formatMultiInput(tags){
-        const {onClick, onBlur, onFocus} = this.props
+        const { onClick, onBlur, onFocus, disabled } = this.props
         return (
-            <MultiInput filterText={this.state.filterText} 
+            disabled ?
+                <MultiInput 
+                    disabled={disabled}
+                    filterText={this.state.filterText} 
+                    onClick={() => void 0 } 
+                    selectedTags={tags}
+                />
+            : <MultiInput 
+                disabled={disabled}
+                filterText={this.state.filterText} 
                 onSelectChange={this.multiBarValChangeByIndex} 
-                onUserInputFocus={() => {
-                    this.toggleOpen(true)
-                    if (onFocus) onFocus()
-                }} 
-                onBlur={onBlur} onFocus={onFocus}
-                onUserInput={this.handleSearch} onClick={() => {
-                    this.toggleOpen(true)
-                    if (onClick) onClick()
-                }} selectedTags={tags}>
-            </MultiInput>
+                onUserInputFocus={
+                    () => {
+                        this.toggleOpen(true)
+                        if (onFocus) onFocus()
+                    }
+                } 
+                onBlur={onBlur} 
+                onFocus={onFocus}
+                onUserInput={this.handleSearch} 
+                onClick={
+                    () => {
+                        this.toggleOpen(true)
+                        if (onClick) onClick()
+                    }
+                } 
+                selectedTags={tags}
+            />
         );
     }
     
@@ -382,6 +415,7 @@ DropDown.propTypes = {
     defaultSelected: PropTypes.bool,
     searchable: PropTypes.bool,
     multi: PropTypes.bool,
+    disabled: PropTypes.bool,
     children: PropTypes.arrayOf(PropTypes.element),
 }
 
@@ -390,6 +424,7 @@ DropDown.defaultProps = {
     valueName: 'value',
     autoClearText: false,
     multi: false,
+    disabled: false,
     className: '',
     placeHolder: 'click to select...',
 }
@@ -416,23 +451,85 @@ const DropDownOption = props => {
 // dropdown label
 const DropDownLabel = props => {
     let _props = Object.assign({}, props)
-    let {isPlaceHolder} = _props
-    let className = '_label'
-    if (isPlaceHolder) {
-        className += ' _placeHolder'
-    }
+    const { isPlaceHolder, disabled } = _props
+    const className = klassName(
+        '_label', 
+        isPlaceHolder ? '_placeHolder' : '',
+        disabled ? '_disabled' : '',
+    )
+
     delete _props.onClick
+    delete _props.disabled
     delete _props.onBlur
     delete _props.onFocus
     delete _props.isPlaceHolder
     return (
-        <div className={className} {..._props} onClick={props.onClick} >
-            <input type="text" className="_transparent" readOnly
-                onBlur={props.onBlur} onFocus={props.onFocus}/>
+        <div {..._props} 
+            className={className} 
+            onClick={props.onClick}>
+            <input type="text" 
+                className="_transparent" 
+                readOnly
+                disabled={disabled}
+                onBlur={props.onBlur} 
+                onFocus={props.onFocus}/>
             <i></i>
-            {_props.children}
+            <div className="_text">
+                {_props.children}
+            </div>
         </div>
     );
+}
+
+const DropDownSearchBar = props => {
+    const { onClick, onBlur, onFocus, text, isPlaceHolder, placeHolder, disabled } = props
+    const className = klassName(
+        '_text', 
+        isPlaceHolder ? '_placeHolder' : '',
+    )
+    return (
+        <div 
+            className={
+                klassName(
+                    '_search',
+                    disabled ? '_disabled' : ''
+                )
+            }
+            onClick={onClick}>
+            {
+                text ?
+                    <div className="_text"></div>
+                    : <div className={className}>
+                        {placeHolder}
+                    </div>
+            }
+            <input type='text' 
+                className='_input' 
+                value={text} 
+                disabled={disabled}
+                onBlur={onBlur} 
+                onFocus={onFocus}
+                onChange={e => props.onUserInput(e.target.value)}
+            />
+            <i></i>
+        </div>
+    )
+}
+
+DropDownSearchBar.propTypes = {
+    onClick: PropTypes.func,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
+    text: PropTypes.string,
+    placeHolder: PropTypes.string,
+    isPlaceHolder: PropTypes.bool,
+    onUserInput: PropTypes.func.isRequired,
+}
+
+DropDownSearchBar.defaultProps = {
+    text: '',
+    placeHolder: '',
+    isPlaceHolder: false,
 }
 
 // multi dropdown input field
@@ -494,15 +591,32 @@ class MultiInput extends Component {
     }
 
     render() {
-        const {selectedTags, filterText} = this.props;
-        const {hasInput} = this.state;
+        const { selectedTags, filterText, disabled } = this.props;
+        const { hasInput } = this.state;
         const tagNodes = selectedTags.map((tag, index) => {
             return (
-                <span className='_tag' key={index} 
-                    onClick={() => this.removeSelected(index)}>
-                    <san className="_text">{tag}</san>
-                    <a href="javascript:;" className="_delete"></a>
-                </span>
+                disabled ?
+                    <span 
+                        className='_tag _disabled' 
+                        key={index}>
+                        <san className="_text">
+                            {tag}
+                        </san>
+                        <a href="javascript:;" 
+                            className="_delete">
+                        </a>
+                    </span>
+                    : <span 
+                        className='_tag'
+                        key={index} 
+                        onClick={() => this.removeSelected(index)}>
+                        <san className="_text">
+                            {tag}
+                        </san>
+                        <a href="javascript:;" 
+                            className="_delete">
+                        </a>
+                    </span>
             )
         });
 
@@ -511,21 +625,48 @@ class MultiInput extends Component {
                 : <span className='_placeHolder'></span>;
 
         return (
-            <div className='_multi' onClick={this.handleClick}>
+            <div 
+                className={
+                    klassName(
+                        '_multi', 
+                        disabled ? '_disabled' : ''
+                    )
+                }
+                onClick={this.handleClick}>
                 {tagNodes}
-                <input type="text" className='_input' 
-                    ref={ ref => { this.userInput = ref } } 
-                    style={{'width': '9px'}} 
-                    value={filterText} 
-                    onBlur={this.handleBlur} 
-                    onFocus={(e) => this.props.onUserInputFocus(e)} 
-                    onChange={(e) => this.props.onUserInput(e.target.value) } 
-                    onKeyDown={this.handleKeyDown}/>
+                {
+                    disabled ? 
+                        <input 
+                            type="text"
+                            className="_input"
+                            ref={ ref => { this.userInput = ref } }
+                            style={{ 'width': '9px' }}
+                            value={ filterText }
+                            disabled
+                        />
+                        : <input type="text" 
+                            className="_input" 
+                            ref={ ref => { this.userInput = ref } } 
+                            style={{'width': '9px'}} 
+                            value={filterText} 
+                            onBlur={this.handleBlur} 
+                            onFocus={ e => this.props.onUserInputFocus(e)} 
+                            onChange={ e => this.props.onUserInput(e.target.value) } 
+                            onKeyDown={this.handleKeyDown}
+                        />
+                }
                 {placeHolder}
                 <i></i>
             </div>
         );
     }
+}
+
+MultiInput.propTypes = {
+    onUserInputFocus: PropTypes.func,
+    onUserInput: PropTypes.func,
+    filterText: PropTypes.string,
+    disabled: PropTypes.bool,
 }
 
 module.exports = dropDownCmp(documentClickCmp(defaultCheckedCmp(DropDown)), ['top', 'bottom'])

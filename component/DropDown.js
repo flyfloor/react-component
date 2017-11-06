@@ -29,18 +29,33 @@ class DropDown extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        const {defaultSelected, multi, options} = this.props
+        const {defaultSelected, multi, options, value, valueName} = this.props
         if (nextProps.options !== options) {
-            if (!defaultSelected) {
-                this.setState({
-                    value: multi ? [] : ''
-                }, () => this.props.onChange(this.state.value));
-            } else {
+            if (defaultSelected && (value === '' || value === [])) {                
                 this.initDefaultValue({ 
                     multi, 
                     props: nextProps
                 })
+                return
             }
+
+            // re-init value
+            const nextOptions = nextProps.options
+            for (let i = 0; i < nextOptions.length; i++) {
+                if (multi) {
+                    if (value.indexOf(nextOptions[i][valueName]) !== -1) {
+                        return
+                    }
+                } else {
+                    if (nextOptions[i][valueName] === value) {
+                        return
+                    }
+                }
+            }
+
+            this.setState({
+                value: multi ? [] : ''
+            }, () => this.props.onChange(this.state.value));
         }
     }
 
@@ -216,7 +231,7 @@ class DropDown extends Component {
             <div className={className} style={style}>
                 {this.formatLabel(displayLabels)}
                 <ReactCssTransitionGroup className="_list" transitionName="dropdown"
-                    transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+                    transitionEnterTimeout={200} transitionLeaveTimeout={200}>
                     {open ? optionNodes : null}
                     {this.formatLoading()}
                 </ReactCssTransitionGroup>

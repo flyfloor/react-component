@@ -3,7 +3,6 @@ const Component = React.Component
 const PropTypes = require('prop-types')
 const ReactDOM = require('react-dom')
 const defaultCheckedCmp = require('./high-order/defaultCheckedCmp')
-const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const documentClickCmp = require('./high-order/documentClickCmp')
 const dropDownCmp = require('./high-order/dropDownCmp')
 const BACKSPACE_KEYCODE = require('./util/constants').BACKSPACE_KEYCODE
@@ -134,11 +133,10 @@ class DropDown extends Component {
 
         return <div className={className} style={style}>
                     {labelNode}
-                    <ReactCssTransitionGroup className="_list" transitionName="dropdown"
-                        transitionEnterTimeout={200} transitionLeaveTimeout={200}>
+                    <span className="_list">
                         {open ? nodes : null}
                         {this.formatLoading()}
-                    </ReactCssTransitionGroup>
+                    </span>
                 </div>;
     }
 
@@ -230,11 +228,10 @@ class DropDown extends Component {
         return (
             <div className={className} style={style}>
                 {this.formatLabel(displayLabels)}
-                <ReactCssTransitionGroup className="_list" transitionName="dropdown"
-                    transitionEnterTimeout={200} transitionLeaveTimeout={200}>
+                <span className="_list">
                     {open ? optionNodes : null}
                     {this.formatLoading()}
-                </ReactCssTransitionGroup>
+                </span>
             </div>
         );
     }

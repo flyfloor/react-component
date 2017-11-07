@@ -30,7 +30,7 @@ class DropDown extends Component {
     componentWillReceiveProps(nextProps) {
         const {defaultSelected, multi, options, value, valueName} = this.props
         if (nextProps.options !== options) {
-            if (defaultSelected && (value === '' || value === [])) {                
+            if (defaultSelected && (['', [], undefined, null].indexOf(value) !== -1)) {
                 this.initDefaultValue({ 
                     multi, 
                     props: nextProps

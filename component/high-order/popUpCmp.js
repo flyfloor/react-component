@@ -38,25 +38,22 @@ module.exports = Cmp => {
             });
         }
 
-        onTrigger(e, state){
-            let contentDOM = ReactDOM.findDOMNode(this.content);
-            if (contentDOM && (e.target == contentDOM || contentDOM.contains(e.target))) {
-                // do nothing
-            } else {
-                state = state !== null && state !== undefined ? state : !this.state.open;
-                this.setState({
-                    open: state
-                }, () => {
-                    contentDOM = ReactDOM.findDOMNode(this.content);
-                    if (contentDOM) contentDOM.setAttribute("style", this.calcPosition());
-                });
+        onTrigger(e, open){
+            if (open === null || open === undefined) {
+                open = !this.state.open
             }
+            this.setState({
+                open
+            }, () => {
+                let contentDOM = ReactDOM.findDOMNode(this.content);
+                if (contentDOM) contentDOM.setAttribute("style", this.calcPosition());
+            });
         }
 
         calcPosition(){
-            let {tr_width, tr_height} = this.triggerSize(),
-                {c_width, c_height} = this.contentSize(),
-                style;
+            const {tr_width, tr_height} = this.triggerSize()
+            const {c_width, c_height} = this.contentSize()
+            let style = ''
 
 
             switch(this.props.position){

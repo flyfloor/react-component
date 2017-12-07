@@ -3,7 +3,6 @@ const Component = React.Component
 const PropTypes = require('prop-types')
 const ReactDOM = require('react-dom')
 const defaultCheckedCmp = require('./high-order/defaultCheckedCmp')
-const ReactCssTransitionGroup = require('react-addons-css-transition-group')
 const documentClickCmp = require('./high-order/documentClickCmp')
 const dropDownCmp = require('./high-order/dropDownCmp')
 const BACKSPACE_KEYCODE = require('./util/constants').BACKSPACE_KEYCODE
@@ -29,18 +28,33 @@ class DropDown extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        const {defaultSelected, multi, options} = this.props
+        const {defaultSelected, multi, options, value, valueName} = this.props
         if (nextProps.options !== options) {
-            if (!defaultSelected) {
-                this.setState({
-                    value: multi ? [] : ''
-                }, () => this.props.onChange(this.state.value));
-            } else {
+            if (defaultSelected && (['', [], undefined, null].indexOf(value) !== -1)) {
                 this.initDefaultValue({ 
                     multi, 
                     props: nextProps
                 })
+                return
             }
+
+            // re-init value
+            const nextOptions = nextProps.options
+            for (let i = 0; i < nextOptions.length; i++) {
+                if (multi) {
+                    if (value.indexOf(nextOptions[i][valueName]) !== -1) {
+                        return
+                    }
+                } else {
+                    if (nextOptions[i][valueName] === value) {
+                        return
+                    }
+                }
+            }
+
+            this.setState({
+                value: multi ? [] : ''
+            }, () => this.props.onChange(this.state.value));
         }
     }
 
@@ -119,11 +133,10 @@ class DropDown extends Component {
 
         return <div className={className} style={style}>
                     {labelNode}
-                    <ReactCssTransitionGroup className="_list" transitionName="dropdown"
-                        transitionEnterTimeout={200} transitionLeaveTimeout={200}>
+                    <span className="_list">
                         {open ? nodes : null}
                         {this.formatLoading()}
-                    </ReactCssTransitionGroup>
+                    </span>
                 </div>;
     }
 
@@ -215,11 +228,10 @@ class DropDown extends Component {
         return (
             <div className={className} style={style}>
                 {this.formatLabel(displayLabels)}
-                <ReactCssTransitionGroup className="_list" transitionName="dropdown"
-                    transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+                <span className="_list">
                     {open ? optionNodes : null}
                     {this.formatLoading()}
-                </ReactCssTransitionGroup>
+                </span>
             </div>
         );
     }
@@ -599,9 +611,9 @@ class MultiInput extends Component {
                     <span 
                         className='_tag _disabled' 
                         key={index}>
-                        <san className="_text">
+                        <span className="_text">
                             {tag}
-                        </san>
+                        </span>
                         <a href="javascript:;" 
                             className="_delete">
                         </a>
@@ -610,9 +622,9 @@ class MultiInput extends Component {
                         className='_tag'
                         key={index} 
                         onClick={() => this.removeSelected(index)}>
-                        <san className="_text">
+                        <span className="_text">
                             {tag}
-                        </san>
+                        </span>
                         <a href="javascript:;" 
                             className="_delete">
                         </a>

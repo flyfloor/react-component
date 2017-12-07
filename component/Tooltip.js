@@ -28,18 +28,24 @@ class Tooltip extends Component {
             onClick = null;
 
         if (mode === 'click') {
-            onClick = (e) => this.onTrigger(e);
+            onClick = this.onTrigger
         } else {
-            onMouseEnter = (e) => this.onTrigger(e, true);
-            onMouseLeave = (e) => this.onTrigger(e, false);
+            onMouseEnter = e => this.onTrigger(e, true)
+            onMouseLeave = e => this.onTrigger(e, false)
         }
 
         return (
-            <span className={className} style={style} onClick={onClick}
-                onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-                <span className="_trigger" ref={ref => {
-                    this.trigger = ref
-                }}>
+            <span 
+                className={className} 
+                style={style} 
+                onClick={onClick}
+                onMouseEnter={onMouseEnter} 
+                onMouseLeave={onMouseLeave}
+            >
+                <span 
+                    className="_trigger" 
+                    ref={ ref => { this.trigger = ref } }
+                >
                     {children}
                 </span>
                 <ReactCssTransitionGroup className={'_wrap _' + position} transitionName="popup"

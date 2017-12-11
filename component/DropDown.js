@@ -611,9 +611,9 @@ class MultiInput extends Component {
                     <span 
                         className='_tag _disabled' 
                         key={index}>
-                        <san className="_text">
+                        <span className="_text">
                             {tag}
-                        </san>
+                        </span>
                         <a href="javascript:;" 
                             className="_delete">
                         </a>
@@ -622,9 +622,9 @@ class MultiInput extends Component {
                         className='_tag'
                         key={index} 
                         onClick={() => this.removeSelected(index)}>
-                        <san className="_text">
+                        <span className="_text">
                             {tag}
-                        </san>
+                        </span>
                         <a href="javascript:;" 
                             className="_delete">
                         </a>

@@ -17,6 +17,42 @@ module.exports = Cmp => {
             }
         }
 
+        optionsChangeReInitValue ({ defaultChecked, multi, nextProps } = { defaultChecked: false, multi: false }) {
+            const {
+                value,
+                valueName,
+            } = this.props
+
+            if (nextProps.options !== this.props.options) {
+                if (defaultChecked && (['', [], undefined, null].indexOf(value) !== -1)) {
+                    this.initDefaultValue({ 
+                        multi, 
+                        props: nextProps
+                    })
+                    return
+                }
+
+                // re-init value
+                const newOptions = nextProps.options
+                for (let i = 0; i < newOptions.length; i++) {
+                    if (multi) {
+                        if (value.indexOf(newOptions[i][valueName]) !== -1) {
+                            return
+                        }
+                    } else {
+                        if (newOptions[i][valueName] === value) {
+                            return
+                        }
+                    }
+                }
+
+                this.setState({
+                    value: multi ? [] : ''
+                }, () => this.props.onChange(this.state.value));
+            }
+
+        }
+
         initDefaultValue({ multi, props} = { multi: false }){
             let {valueName, options, onChange, children} = props || this.props
             let initVal = multi ? [] : ''

@@ -28,19 +28,12 @@ class CheckBoxGroup extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {options, defaultChecked} = this.props
-        if (nextProps.options !== options) {
-            if (!defaultChecked) {
-                this.setState({
-                    value: []
-                }, () => this.props.onChange([]));
-            } else {
-                this.initDefaultValue({ 
-                    multi: true,
-                    props: nextProps,
-                })
-            }
-        }
+        const { defaultChecked } = this.props
+        this.optionsChangeReInitValue({
+            nextProps,
+            defaultChecked,
+            multi: true
+        })
     }
 
     handleChange(e, val){

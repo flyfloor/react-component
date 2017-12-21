@@ -25,15 +25,12 @@ class RadioGroup extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.options !== this.props.options) {
-            if (!this.props.defaultChecked) {
-                this.setState({
-                    value: ''
-                }, () => this.props.onChange(''));
-            } else {
-                this.initDefaultValue({ props: nextProps })
-            }
-        }
+        const { defaultChecked } = this.props
+        this.optionsChangeReInitValue({
+            defaultChecked,
+            nextProps,
+            multi: false
+        })
     }
 
     componentDidMount() {
@@ -88,6 +85,7 @@ RadioGroup.propTypes = {
 RadioGroup.defaultProps = {
     labelName: 'name',
     valueName: 'value',
+    options: [],
 }
 
 module.exports = defaultCheckedCmp(RadioGroup)

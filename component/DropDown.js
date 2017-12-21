@@ -28,34 +28,16 @@ class DropDown extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
-        const {defaultSelected, multi, options, value, valueName} = this.props
-        if (nextProps.options !== options) {
-            if (defaultSelected && (['', [], undefined, null].indexOf(value) !== -1)) {
-                this.initDefaultValue({ 
-                    multi, 
-                    props: nextProps
-                })
-                return
-            }
+        const {
+            defaultSelected,
+            multi
+        } = this.props
 
-            // re-init value
-            const nextOptions = nextProps.options
-            for (let i = 0; i < nextOptions.length; i++) {
-                if (multi) {
-                    if (value.indexOf(nextOptions[i][valueName]) !== -1) {
-                        return
-                    }
-                } else {
-                    if (nextOptions[i][valueName] === value) {
-                        return
-                    }
-                }
-            }
-
-            this.setState({
-                value: multi ? [] : ''
-            }, () => this.props.onChange(this.state.value));
-        }
+        this.optionsChangeReInitValue({
+            defaultChecked: defaultSelected,
+            nextProps,
+            multi
+        })
     }
 
     componentDidMount() {

@@ -9,51 +9,54 @@ module.exports = Cmp => {
                 super.componentWillReceiveProps(nextProps)
             }
 
-            // value change
-            if (this.props.value !== nextProps.value) {
+            if (this.props.value !== nextProps.value && ['', [], undefined, null].indexOf(nextProps.value) === -1) {
                 this.setState({
                     value: nextProps.value
                 }, () => this.props.onChange(this.state.value));
             }
         }
 
-        optionsChangeReInitValue ({ defaultChecked, multi, nextProps } = { defaultChecked: false, multi: false }) {
+        optionsChangeReInitValue({
+            defaultChecked,
+            multi,
+            nextProps
+        }) {
             const {
                 value,
                 valueName,
             } = this.props
 
             if (nextProps.options !== this.props.options) {
-                if (defaultChecked && (['', [], undefined, null].indexOf(value) !== -1)) {
-                    this.initDefaultValue({ 
-                        multi, 
-                        props: nextProps
-                    })
-                    return
-                }
-
-                // re-init value
-                const newOptions = nextProps.options
-                for (let i = 0; i < newOptions.length; i++) {
-                    if (multi) {
-                        if (value.indexOf(newOptions[i][valueName]) !== -1) {
-                            return
-                        }
-                    } else {
-                        if (newOptions[i][valueName] === value) {
-                            return
+                // re-init value if value exist, but not fit options value
+                if (['', [], undefined, null].indexOf(value) === -1) {
+                    const newOptions = nextProps.options
+                    for (let i = 0; i < newOptions.length; i++) {
+                        if (multi) {
+                            if (value.indexOf(newOptions[i][valueName]) !== -1) {
+                                return
+                            }
+                        } else {
+                            if (newOptions[i][valueName] === value) {
+                                return
+                            }
                         }
                     }
                 }
 
-                this.setState({
-                    value: multi ? [] : ''
-                }, () => this.props.onChange(this.state.value));
+                if (defaultChecked) {
+                    this.initDefaultCheckedValue({ 
+                        multi, 
+                        props: nextProps
+                    })
+                } else {
+                    this.setState({
+                        value: multi ? [] : ''
+                    }, this.props.onChange(this.state.value));
+                }
             }
-
         }
 
-        initDefaultValue({ multi, props} = { multi: false }){
+        initDefaultCheckedValue({ multi, props} = { multi: false }){
             let {valueName, options, onChange, children} = props || this.props
             let initVal = multi ? [] : ''
             if (options && options.length > 0) {

@@ -45,10 +45,10 @@ class DropDown extends Component {
         let {defaultSelected, multi} = this.props
         if (defaultSelected) {
             if (!multi && !value) {
-                return this.initDefaultValue({ multi })
+                return this.initDefaultCheckedValue({ multi })
             }
             if (multi && value.length === 0) {
-                this.initDefaultValue({ multi })
+                this.initDefaultCheckedValue({ multi })
             }
         }
     }

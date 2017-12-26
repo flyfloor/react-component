@@ -37,7 +37,7 @@ class RadioGroup extends Component {
         let {value} = this.state
         let {defaultChecked} = this.props
         if (!value && defaultChecked) {
-            this.initDefaultValue()
+            this.initDefaultCheckedValue()
         }
     }
 

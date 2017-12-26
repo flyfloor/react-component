@@ -23,7 +23,7 @@ class CheckBoxGroup extends Component {
         let {value} = this.state
         let {defaultChecked} = this.props
         if (value.length === 0 && defaultChecked) {
-            this.initDefaultValue({ multi: true })
+            this.initDefaultCheckedValue({ multi: true })
         }
     }
 

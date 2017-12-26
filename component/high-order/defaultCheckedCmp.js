@@ -24,6 +24,7 @@ module.exports = Cmp => {
             const {
                 value,
                 valueName,
+                onChange
             } = this.props
 
             if (nextProps.options !== this.props.options) {
@@ -51,7 +52,7 @@ module.exports = Cmp => {
                 } else {
                     this.setState({
                         value: multi ? [] : ''
-                    }, this.props.onChange(this.state.value));
+                    }, () => onChange(this.state.value));
                 }
             }
         }

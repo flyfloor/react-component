@@ -1,6 +1,6 @@
 # react-component
 
-[![Build Status](https://travis-ci.org/jerryshew/react-component.svg?branch=master)](https://travis-ci.org/jerryshew/react-component)
+[![Build Status](https://travis-ci.org/flyfloor/react-component.svg?branch=master)](https://travis-ci.org/flyfloor/react-component)
 [![Downloads](https://img.shields.io/npm/dt/react-ui-component.svg)](https://www.npmjs.com/package/react-ui-component)
 [![Version](https://img.shields.io/npm/v/react-ui-component.svg)](https://www.npmjs.com/package/react-ui-component)
 
@@ -8,11 +8,11 @@
 
 ## Demo
 
-[demo](http://braavos.me/react-component/#/?_k=pg3vqw)
+[demo](http://flyfloor.github.io/react-component/#/?_k=pg3vqw)
 
 =====  
 
 ## Deprecated 
 
-## ========> React uikit is in progress: [React-uikits](https://github.com/jerryshew/react-uikits)  <========
+## ========> React uikit is in progress: [React-uikits](https://github.com/flyfloor/react-uikits)  <========
 
